@@ -5,6 +5,7 @@
 \begin{document}
 \maketitle
 
+
 Il corso tratterà sostanzialmente due tematiche:
 \begin{itemize}[label = --]
     \item \textbf{Misura e Integrale di Lebesgue}
@@ -15,6 +16,10 @@ In particolare legati dagli \textbf{spazi \(L^{p}\)} che rientrano in entrambe
 le categorie.
 Purtroppo non c'è un testo che contiene tutti e soli gli argomenti del corso, ma
 sul kiro c'è molto materiale didattico che può essere utilizzato.
+
+
+\tableofcontents
+\newpage
 
 \section{Misura e integrazione di Lebesgue}
 Il libro era di Haim Brezis e si chiamava \emph{Analisi Funzionale e
@@ -863,7 +868,7 @@ Allora \(d = 0\) quasi ovunque in \(\mathbb{R}\).
 \subsection{Funzioni misurabili}
 Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e sia \(f: \Omega \to
 \mathbb{R} \cup \{-\infty, \infty\}\) 
-\begin{definition}
+\begin{definition}[Funzione misurabile]
     La funzione \(f : \Omega \to \mathbb{R} \cup \{-\infty, \infty \}\) si dice \textbf{misurabile} se \(\forall \alpha \in \mathbb{R}\) l'insieme
     \[
         f^{-1}((\alpha, +\infty]) = \{x \in \Omega : f(x) > \alpha\} \in \mathcal{M}
@@ -1170,7 +1175,7 @@ Dove per convenzione \(c_{i}\mu(E \cap E_{i}) = 0\) se \(c_{i} = 0\) e \(\mu(E
     Sia \(f: \Omega \to [0, +\infty]\) misurabile e non negativa. Allora per
     ogni \(E \in \mathcal{M}\) definiamo 
     \[
-        \int_E f \, d\mu = \sup \{I_{E}(s) : s \text{ semplice }, 0 \le s \le f
+        \int_E f \, d\mu = \sup \{I_{E}(s) : s \text{ semplice misurabile }, 0 \le s \le f
         \text{ in \(E\) }\}
     \]
 Se ora \(f\) è misurabile e di segno qualunque allora scrivendo \(f = f^{+} -
@@ -1219,17 +1224,23 @@ usarlo.
         è non crescente. Necessariamente ora \(\int_E f^{+} d\mu \le \int_E
         g^{+} d\mu\) per definizione col sup e similmente \(\int_E g^{-} d\mu
         \le \int_E f^{-} d\mu\) e infine dalle due diseguaglianze si ottiene
-        quella richiesta
+        quella richiesta.
     \end{proof}
     \item Se \(\mu(E) < +\infty\), \(f\)  è misurabile, e esistono \(a, b \in
         \mathbb{R}\) tali che \(a \le f(x) \le b\) per ogni \(x \in E\) allora
         \(f \in L^{1}(E)\) e \(a \mu(E) \le \int_E f d\mu \le b\mu(E)\) 
     \begin{proof}
-        \(f = f^{+} - f^{-}\) e abbiamo che \(a^+ \le f^{+} \le b^{+}\) e
-        \(a^{-} \ge f^{-} \ge b^{-}\). Le funzioni che valgono \(a^{+}, b^{+}, a^{-},
-        b^{-}\) su \(E\) sono funzioni semplici misurabili con integrale dato da
-        \(a^{+} \mu(E), b^{+} \mu(E), a^{-} \mu(E), b^{-} \mu(E)\)
-        rispettivamente. %TODO: finire
+        \(f = f^{+} - f^{-}\) e abbiamo che \(0 \le a^+ \le f^{+} \le b^{+}\) e
+        \(a^{-} \ge f^{-} \ge b^{-} \ge 0\). Le funzioni che valgono \(a^{+},
+        b^{+}, a^{-}, b^{-}\) su \(E\) sono funzioni semplici misurabili con
+        integrale dato da \(a^{+} \mu(E), b^{+} \mu(E), a^{-} \mu(E), b^{-}
+        \mu(E)\) rispettivamente. Ora per definizione con il \(\sup\) abbiamo
+        che \(\int_E f^{+} d\mu \ge a^{+} \mu(E)\) e \(\int_E f^{-} d\mu \ge
+        b^{-} \mu(E)\). Sempre pensando alla definizione col \(\sup\) notiamo
+        che se \(s\) è una funzione semplice misurabile tale che \(0 \le s \le
+        f^{+}\) allora \(s \le b^{+}\) e quindi necessariamente \(\int_E f^{+}
+        d\mu \le \int_E b^{+} d\mu = I_E(b^{+}) = b^{+} \mu(E)\). Similmente si
+        trova anche \(\int_E f^{-}d\mu \le a^{-} \mu(E)\). Il risultato segue.
     \end{proof}
     \item Se \(f \in L^{1}(E)\), \(A \in \mathcal{M}\) e \(A \subseteq E \)
         allora \(f \in L^{1}(A)\) 
@@ -1780,7 +1791,7 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
            \frac{1}{\cancel{n}}\int_{\mathbb{R}} \frac{2\cancel{n}
            \sqrt[3]{\frac{t}{n}}}{1+t^2} dt = \frac{2}{\sqrt[3]{n}}
            \int_{\mathbb{R}} \frac{\sqrt[3]{t} }{1+t^2} dt \to 0 \text{ per
-           $n->\infty$}
+           $n\to \infty$}
        \]
        poiché l'integrale è finito.
 
@@ -1812,7 +1823,7 @@ prodotto quindi ricorriamo alla seguente proposizione
 \end{proposition}
 Per la dimostrazione di questa proposizione si usano le \emph{famiglie
 monotone} di misure.
-\begin{definition}[lol]
+\begin{definition}[Famiglia monotona]
 Una collezione \(\mathcal{A}\) di sottoinsiemi di un
 insieme ambiente \(\Omega\) si dice \emph{famiglia monotona} se per ogni
 successione \(\{A_{n}\} \) crescente di insiemi in \(\mathcal{A}\) e per ogni
@@ -1821,8 +1832,6 @@ successione \(\{B_{n}\} \) decrescente di insiemi in \(\mathcal{A}\) si ha che
     \bigcup_{n=1}^{\infty} A_{n} \in \mathcal{A} \quad \text{ e } \quad
     \bigcap_{n=1}^{\infty} B_{n} \in \mathcal{A}
 \]
-Ossia è una famiglia chiusa rispetto all'unione crescente e all'intersezione
-decrescente.
 \end{definition}
 Data una collezione \(\mathcal{F}\) di sottoinsiemi di \(\Omega\), si definisce
 \(\nu(\mathcal{F})\) famiglia monotona generata da \(\mathcal{F}\) come la più
@@ -1991,6 +2000,7 @@ Notiamo che
     \not\in L^{1}(\mathbb{R})\).
 \end{eser}
 
+\newpage
 \subsection{Misure Relative}
 \begin{definition}[Misura Relativa]
 Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. Sia \(\phi: \mathcal{M} \to
@@ -2113,7 +2123,7 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
 \end{enumerate}
 \end{proof}
 
-\begin{definition}
+\begin{definition}[Insiemi positivi e negativi]
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e sia \(\varphi:
     \mathcal{M} \to  \mathbb{R}\) una misura relativa. Allora 
 \begin{itemize}[label = --]
@@ -2302,7 +2312,7 @@ E)\). Analogamente si dimostra che \(\varphi(A' \cap E) = \varphi(A \cap A \cap
 E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
 \end{proof}
 
-\begin{definition}
+\begin{definition}[Variazione superiore, inferiore, totale]
     Sia \((\Omega, \mathcal{M})\) uno spazio di misura e \(\varphi : \mathcal{M}
     \to \mathbb{R}\) una misura relativa. Sia \((A, B)\) una decomposizione di
     \(Hahn\). Allora
@@ -2361,7 +2371,7 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
 \end{enumerate}
 \end{proof}
 
-\begin{definition}
+\begin{definition}[\(\mu\)-Assoluta continuità]
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(\varphi\) una
     misura (o misura relativa) su \((\Omega, \mathcal{M})\). Allora \(\varphi\)
     si dice \(\mu\)-\textbf{assolutamente continua} (denotato \(\mu\)-a.c.) se
@@ -2520,7 +2530,7 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
 \end{proposition}
 \begin{proof}
     Sia \(\varphi \) \(\mu\)-assolutamente continua e \(\mu\)-singolare. Allora
-    esistono \(A, B \in \mathcal{M}\) decomposizione di \(\Omega\)  tali che
+    esistono \\ \(A, B \in \mathcal{M}\) decomposizione di \(\Omega\)  tali che
     \(\mu(A) = 0\) e \(|\varphi |(B) =
     0\). Preso ora \(E \in \mathcal{M}\) abbiamo che \(\varphi (E) = \varphi (E
     \cap A) + \varphi (E \cap B)\). Poiché \(\mu(E\cap B) \le \mu(A) = 0\)
@@ -2682,7 +2692,78 @@ esempi di norme diverse su \(\mathbb{R}^{N}\) e \(\mathbb{C}^{N}\):
     \quad p \in [1, +\infty) \\
 \end{align*}
 Come sono fatte le palle? Vedasi figura~\ref{fig:palle}
+\begin{figure}[ht]
+    \center
+\begin{tikzpicture}
+\begin{axis}[
+    axis equal,
+    axis lines = center,
+    xlabel = \(x\),
+    ylabel = \(y\) ,
+    xmin=-1.5, xmax=1.5,
+    ymin=-1.5, ymax=1.5,
+    legend style={%
+        legend pos=outer north east,
+        at = {(1.04, 0.75)},
+        draw=none},
+]
 
+% \frac{1}{2} ``norm''
+\addplot[
+    domain=0:360,
+    samples=100,
+    style=dashed
+    ]
+    ({sign(cos(x)) * abs(cos(x))^4}, {sign(sin(x)) * abs(sin(x))^4});
+
+% 1 norm
+\addplot[
+    thick,
+    color=blue,
+    ]
+    coordinates {(-1, 0) (0, 1) (1, 0) (0, -1) (-1, 0)};
+
+% \frac{4}{3} norm
+\addplot[
+    domain=0:360,
+    samples=100,
+    color=teal,
+    style=dashed
+    ]
+    ({sign(cos(x)) * abs(cos(x))^(3/2)}, {sign(sin(x)) * abs(sin(x))^(3/2)});
+
+% 2 norm
+\addplot[
+    domain=0:360,
+    samples=100,
+    thick,
+    color=orange,
+    ]
+    ({cos(x)}, {sin(x)});
+
+% 4 norm
+\addplot[
+    domain=0:360,
+    samples=100,
+    color=violet,
+    style=dashed
+    ]
+    ({sign(cos(x)) * sqrt(abs(cos(x)))}, {sign(sin(x)) * sqrt(abs(sin(x)))});
+
+% norma infinito
+\addplot[
+    color=yellow,
+    thick,
+    ]
+    coordinates {(-1, -1) (-1, 1) (1, 1) (1, -1) (-1, -1)};
+
+\legend{\(p = 0.5\), \(p = 1\), \(p = 4 / 3\), \(p = 2\), \(p = 4\), \(p =
+\infty\)}
+
+\end{axis}
+\end{tikzpicture}
+\caption{Palle \(\|x\|_p < 1\) in \(\mathbb{R}^{2}\)}\label{fig:palle}
+\end{figure}
 Data una coppia \((p, q)\) e fissata la palla \(\|x\|_p < 1\) esistono due palle
 \(\|x\|_q < r\) e \(\|x\|_q < R\) con \(R\) e \(r\) positivi, tali che la prima
 è contenuta in \(\|x\|_p < 1\) e l'altra contiene \(\|x\|_p <1\). 
