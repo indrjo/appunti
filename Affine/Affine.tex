@@ -1,0 +1,1493 @@
+\documentclass{article}
+\usepackage{layout}
+\usepackage[a4paper, total={5in,9in}]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+\newcommand*{\transp}[2][-3mu]{\ensuremath{\mskip1mu\prescript{\smash{\mathrm t\mkern#1}}{}{\mathstrut#2}}}%
+
+% newcommand for span with langle and rangle around
+\newcommand{\span}[1]{\left\langle #1 \right\rangle}
+
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
+
+\pdfsuppresswarningpagegroup=1
+
+\newcounter{theo}[section]\setcounter{theo}{0}
+\renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
+
+\newcounter{excounter}[section]\setcounter{excounter}{0}
+\renewcommand{\theexcounter}{\arabic{section}.\arabic{excounter}}
+
+\newenvironment{theorem}[1][]{
+    \refstepcounter{theo}
+     \ifstrempty{#1}
+    {\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=blue!20,rounded corners=5pt]
+            {\strut Teorema~\thetheo};}
+        }
+    }{\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=blue!20,rounded corners=5pt]
+            {\strut Teorema~\thetheo:~#1};}
+        }
+    }
+    \mdfsetup{
+        roundcorner=10pt,
+        innertopmargin=10pt,linecolor=blue!20,
+        linewidth=2pt,topline=true,
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+    }
+\begin{mdframed}[]\relax}{
+\end{mdframed}}
+
+\newenvironment{definition}[1][]{
+    \refstepcounter{theo}
+     \ifstrempty{#1}
+    {\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=violet!20,rounded corners=5pt]
+            {\strut Definizione~\thetheo};}
+        }
+    }{\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=violet!20,rounded corners=5pt]
+            {\strut Definizione~\thetheo:~#1};}
+        }
+    }
+    \mdfsetup{
+        roundcorner=10pt,
+        innertopmargin=10pt,linecolor=violet!20,
+        linewidth=2pt,topline=true,
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+    }
+\begin{mdframed}[]\relax}{
+\end{mdframed}}
+
+\theoremstyle{plain}
+\newtheorem{lemma}[theo]{Lemma}
+\newtheorem{corollary}{Corollario}[theo]
+\newtheorem{proposition}[theo]{Proposizione}
+
+\theoremstyle{definition}
+\newtheorem{example}[excounter]{Esempio}
+
+\theoremstyle{remark}
+\newtheorem*{note}{Nota}
+\newtheorem*{remark}{Osservazione}
+
+\newtcolorbox{notebox}{
+  colback=gray!10,
+  colframe=black,
+  arc=5pt,
+  boxrule=1pt,
+  left=15pt,
+  right=15pt,
+  top=15pt,
+  bottom=15pt,
+}
+
+\title{Appunti di Geometria Affine e Proiettiva}
+\author{Osea}
+\date{2023 \-- 2024 Secondo Semestre}
+
+\begin{document}
+
+\maketitle
+
+Testo di riferimento: E. Sernesi,  Geometria 1
+\section{Spazi Affini}
+
+\subsection{Definizioni}
+% \begin{example}[Piano Euclideo]
+%     \(\mathbb{E}^2 = \text{piano euclideo} \equiv \mathbb{R}^2\) 
+% \begin{figure}[ht]
+%     \centering
+%     \incfig{scelta-base}
+%     \caption{scelta base}
+%     \label{fig:scelta-base}
+% \end{figure}
+%     Per spiegare questa scelta, lo spazio non è \(\mathbb{R}^2\) ma uno spazio
+%     su cui \(\mathbb{R}^2\) ``agisce'', ed è lo spazio delle traslazioni,
+%     chiamato \(T\).
+%     Quindi si sceglie un punto ``origine'' e la traslazione applicata a tale
+%     punto scelto indica un punto. Quindi per ogni elemento \(t\) di \(\mathbb{E}
+%     ^2\), \(t : \mathbb{E}^2 \to  \mathbb{E}^2\) è una funzione bigettiva.
+%     
+%     L'insieme \(T\) ha una struttura di spazio vettoriale. È presente quindi
+%     un'operazione \(+\) e una \(\cdot \) così definite.
+% \begin{itemize}[label = --]
+%     \item[+ :] \(T \times  T \to T \quad;\quad (t_{1}, t_{2}) \mapsto t_{1}\circ t_{2} \)
+%     \item[$\cdot$ :] \(\mathbb{R} \times T \to T \quad ; \quad (\lambda, t) \mapsto \lambda t\) 
+% \end{itemize}
+%     È presente una trasformazione identità che funge da identità dello spazio
+%     vettoriale \(T\).
+% \end{example}
+% 
+% Generalizzando questo concetto ``intuitivo'':
+\begin{definition}[Spazio Affine 1]
+    Sia \(\mathbb{K}\) un campo (genericamente \(\mathbb{K} = \mathbb{R}, \mathbb{C}\) ) e sia \(V\) uno spazio vettoriale su
+    \(\mathbb{K}\). Uno spazio affine su \(V\) è un insieme non vuoto \(A\)
+    munito di un'operazione  \(\Phi : V \times A \to  A\) (che denoteremo come
+    \(\Phi(v, P) := P + v\)) tale che valgano le seguenti proprietà:
+\begin{enumerate}[label = \arabic*)]
+    \item \(\forall P \in A, \forall v, w \in V\quad (P+v)+w = P+(v+w)\) \\
+        Equivalentemente \(\Phi(w, \Phi(v, P)) = \Phi(v+w, P) \)  \\
+        (Buon comportamento della somma)
+    \item \(\forall P \in A\) la funzione \(\Phi(\cdot , P) := P + \cdot \) è biettiva e similmente \\
+        \(\forall v \in V\) la funzione \(\Phi(v, \cdot ) := \cdot + v\) è biettiva
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+    La \textbf{dimensione} di \(A\) spazio affine su \(V\) spazio vettoriale è
+    definita \(\text{dim}A = \text{dim}V\) 
+\end{definition}
+\begin{remark}
+    Se \(A\) è uno spazio vettoriale su \(V\) spazio vettoriale allora:
+    \(\forall P \in  A, P + O_V = P\) dove \(O_V\) è il vettore nullo di \(V\).
+\end{remark}
+\begin{proof}
+    \(P + O_V = P + (O_V + O_V) = (P + O_V) + O_V\). Dato per la definizione
+    \(\Phi(O_V, \cdot )\) è biunivoca, quindi \(P = P + O_V\) 
+\end{proof}
+
+\begin{remark}
+    Se \(P+v = Q\) allora \(Q + (-v) = P\) 
+\end{remark}
+\begin{proof}
+    \(Q + (-v) = (P+v) + (-v) = P + (v + (-v)) = P + O_V = P\)
+\end{proof}
+
+Questa tuttavia non è l'unica definizione di spazio affine. Infatti per quanto
+detto prima scelti due punti sul piano so che c'è un unico vettore la cui
+traslazione manda un punto nell'altro. Una maniera equivalente è quella di
+vedere lo spazio affine come insieme su cui è definita una differenza il cui
+codominio è uno spazio vettoriale. Formalmente:
+
+\begin{definition}[Spazio Affine 2]
+    Sia \(V\) un \(\mathbb{K}\)-spazio vettoriale. Uno spazio affine su \(V\) è
+    un insieme non vuoto \(A\)  munito di un'operazione di ``differenza''
+    \(\Psi: A \times A \to V\), che indicheremo con: \(\Psi(P, Q) =: Q - P =:
+    \overline{PQ}\) con le seguenti proprietà:
+\begin{enumerate}[label = \arabic*)]
+    \item \(\forall P, Q, R \in  A, \overline{PR} = \overline{PQ} + \overline{QR}\) 
+    \item \(\forall P \in A\) fissato, l'applicazione \(\Psi(P, \cdot)\) è
+        biettiva.
+\end{enumerate}
+\end{definition}
+
+% \begin{figure}[ht]
+%     \centering
+%     \incfig{psi}
+%     \caption{Illustrazione di \(1)\) }
+%     \label{fig:psi}
+% \end{figure}
+
+\begin{note}
+    Le due definizioni di spazio affine che abbiamo dato sono equivalenti, data
+    \(\Phi : V \times  A \to  A\) che verifica gli assiomi della prima
+    definizione definiamo \(\Psi : A \times  A \to  V\) come \(\Psi(P, Q) = v\)
+    dove \(v\) è l'unico vettore di \(V\) tale che \(\Phi(v, P) = Q\), che
+    esiste unico per la bigettività di \(\Phi(\cdot , P)\).
+
+    Viceversa data l'operazione di differenza \(\Psi\) che verifica gli assiomi
+    della seconda definizione definiamo \(\Phi : V \times  A -> A\) come
+    \(\Phi(v, P) = Q\) dove \(Q\) è l'unico punto di \(A\) tale che \(\Psi(P, Q)
+    = v\), che esiste unico per la bigettività di \(\Psi(P, \cdot )\).
+
+    Definendo in questo modo otteniamo
+    \(Q = \Phi(v, P) = P + v\) \(\iff\)  \(v = \Psi(P, Q) = Q - P\) 
+\end{note}
+\begin{proof}
+    Le proprietà delle definizioni sono rispettate in entrambi i casi:
+\end{proof}
+
+\begin{remark}
+    \(\forall P \in A\) si ha che \(P - P = \overline{PP} = O_V\) 
+\end{remark}
+\begin{remark}
+    \(\forall P, Q, \quad Q - P = \overline{PQ} = - \overline{QP} = - (P - Q)\) 
+\end{remark}
+\begin{proof}
+    Usando la Nota
+\end{proof}
+\begin{remark}
+    Dati \(P_{1}, P_{2}, \dots, P_n\) punti di \(A\) si ha che
+    \(\overline{P_{1}P_{2}} + \overline{P_{2}P_{3}} + \dots +
+    \overline{P_{n-1}P_n} + \overline{P_n P_{1}} = O_V\) 
+\end{remark}
+\begin{proof}
+    Usando la proprietà nella definizione fino a ottenere
+    \(\overline{P_{1}P_{1}}\), poi l'osservazione.
+\end{proof}
+
+\begin{example}
+    \(\mathbb{E}^{n}\) è uno spazio affine su \(T^{n}\) traslazioni di
+    \(\mathbb{E}^{n}\)
+\end{example}
+\begin{example}
+    Ogni spazio vettoriale \(V\) è uno spazio affine su sé stesso. Posto \(A =
+    V\) definisco \(\Phi : V\times  V \to  V\) come \(\Phi(v, w) = v+w\) o
+    equivalentemente \(\Psi(v, w) = w - v\). Vediamo che \(V\) è uno spazio
+    affine associato a \(V\). Le proprietà sono facilmente verificate.
+
+    Viceversa dato \(A\) spazio affine su \(V\), fissando un punto \(O\) in
+    \(A\) che chiameremo \textbf{origine} ottengo una corrispondenza biunivoca
+    \(\Psi_0 : A \to  V\) definita come \(\Psi_0(P) = \Psi(O, P) =
+    \overline{OP}\).\ \textbf{Questa corrispondenza \(\Phi_0\) preserva le
+    operazioni che rendono \(A\) e \(V\) spazi affini} sullo spazio vettoriale
+    \(V\).
+\end{example}
+
+Quindi informalmente possiamo ``vedere'' uno spazio affine come uno spazio
+vettoriale senza un'origine fissata.
+
+\subsection{Sottospazi Affini}
+\begin{definition}[Sottospazio Affine 1]
+    Dato uno spazio affine \((A, V, \Phi)\), un \textbf{sottospazio affine} di A
+    è il dato \[(B, W, \Phi_B)\] dove 
+\begin{enumerate}[label = \arabic*)]
+    \item \(W \subseteq V\) è un sottospazio vettoriale di \(V\)
+    \item \(\varnothing \neq B \subseteq A\)
+    \item \(\Phi(W \times  B) \subseteq  B\) e la restrizione \(\Phi_B\) di
+        \(\Phi\) a \(W \times  B\) rende \(B\) uno spazio affine sullo spazio
+        vettoriale \(W\) 
+\end{enumerate}
+    Lo spazio vettoriale \(W\) si dice \textbf{giacitura} del sottospazio affine
+    \(B\) 
+\end{definition}
+
+\begin{example}
+    Fissato un punto \(P\) in \(\mathbb{E}^2\), prendo come \(W\)  il
+    sottospazio di \(T\) dato dalle trasformazioni che hanno una stessa
+    direzione fissata (essenzialmente una retta) è un sottospazio affine
+\end{example}
+
+\begin{example}
+    Prese due rette parallele in \(\mathbb{E}^2\) è un sottoinsieme ma
+    \textbf{non} un sottospazio affine (manca la suriettività scelto un punto
+    fissato).
+\end{example}
+
+\begin{definition}
+    Sia \((A, V)\) uno spazio affine. Possiamo specificare un sottospazio affine
+    specificando un sottospazio vettoriale \(W \subseteq V \) e preso un punto
+    \(P \in  A\), definendo il sottospazio affine di \(A\) passante per \(P\)
+    con giacitura \(W\) 
+    \[
+        P + W := \{P + w :  w \in  W\} 
+    \]
+\end{definition}
+\begin{proof}[\(P + W\)  è un sottospazio affine su \(W\) ]
+\begin{enumerate}[label = \arabic*)]
+    \item Chiaramente \(W \subseteq V \) è un sottospazio vettoriale
+    \item Chiaramente \(\varnothing \neq \{P\} \subseteq  P + W \subseteq A \).
+    \item Sia \(Q \in  P + W\), quindi \(Q = P + w\) per qualche \(w \in  W\).
+        Sia ora \(w_{1} \in  W\). \(Q + w_{1} = (P + w) + w_{1} = P + (w +
+        w_{1}) \in P + W\).
+
+        Infine fissiamo un punto \(Q \in  P + W\) e dobbiamo dimostrare che \(w_{1}
+        \mapsto Q + w_{1}\) con \(w_{1} \in W\) è una bigezione: è suriettiva
+        perché preso un qualsiasi punto \(P' \in  P + W, P' = P + w_{2}\),
+        \(w_{2} \in  W\). Cerco un vettore \(w_{1}\) tale che \(Q + w_{1} = P =
+        w_{2}\), ma \(Q = P + w\) quindi \(P + w_{2} = P + w + w_{1}\) quindi
+        basta prendere \(w_{1} = w_{2} - w\). Per l'iniettività supponiamo
+        \(w_{1}, w_{2} \in  W\) tali che \(Q + w_{1} = Q + w_{2}\) ma allora per
+        l'iniettività della funzione sullo spazio originario \(w_{1} = w_{2}\).
+\end{enumerate}
+\end{proof}
+
+\begin{proof}[Tutti i sottospazi affini della forma \(P+W\) ]
+    Se \((A, V)\) spazio affine, \((B, W)\) sottospazio affine e \(P \in  B\)
+
+\begin{itemize}[label = --]
+    \item[\(\supseteq  \) ] \(P + Q \subseteq B \) ovvio perché \(B\) è
+        sottospazio
+    \item[\(\subseteq \) ] Sia \(Q \in  B\), allora \(\overline{PQ} \in  W\),
+        quindi \(Q = P + \overline{PQ} = P + (Q - P) \implies Q \in P + W\) 
+\end{itemize}
+\end{proof}
+
+Sia ora \((A, V)\) uno spazio affine e \((B, W)\) un sottospazio, \(v \in V\).
+Consideriamo l'insieme \(B + v = \{P + v : P \in  B\} \) 
+% \begin{figure}[ht]
+%     \centering
+%     \incfig{retta-esempio}
+%     \caption{retta esempio}
+%     \label{fig:retta-esempio}
+% \end{figure}
+
+\begin{proposition}
+    Per ogni sottospazio \(B, W\) e per ogni \(v \in  V\), \(B + v\) è un
+    sottospazio affine
+\end{proposition}
+\begin{proof}
+    \(B = P + W\) con \(P \in B\). Allora \(B + v = \{Q + v : Q \in  B\} = \{P +
+    w + v : w \in W \}  = \{P + v : v \in  W\}  = P + W\) perché anche \(w + v \in W\) 
+\end{proof}
+
+\begin{remark}
+\begin{enumerate}[label = \arabic*)]
+    \item \(B = B + v \iff v \in W\) 
+    \item Se \(B'\)  è sottospazio associato a \(W\) allora \(\exists v \in  V\) tale
+        che \(B' = B + v\) 
+
+        Sia \(P \in B, Q \in B', v = Q - P = \overline{PQ}\) allora \(B + v = (P
+        + v) + W = Q + W = B'\) 
+\end{enumerate}
+\end{remark}
+
+\begin{proposition}
+    Due sottospazi \(B\)  e \(B'\) con la stessa giacitura coincidono se e solo
+    se hanno intersezione non vuota.
+\end{proposition}
+\begin{proof}
+    \(B = B' \iff B \cap  B' \neq \varnothing\) 
+\begin{itemize}[label = --]
+    \item[\(\implies \) ] Ovvio
+    \item[\(\impliedby \) ] Sia \(P \in  B \cap B'\). Allora \(P + W = B\)
+        perché \(P \in  B\) e \(W\) è la giacitura di \(B\) ma anche \(P+W =
+        B'\) perché \(P \in B'\) e \(W\) è la giacitura di \(B'\) 
+\end{itemize}
+\end{proof}
+
+\begin{proposition}
+    Fissato \((B, W) \subseteq (A, V) \) sottospazio, i sottospazi di \((A, V)\)
+    con giacitura \(W\) sono in corrispondenza biunivoca con lo spazio
+    vettoriale \(V / W\) 
+\end{proposition}
+
+Se \((A, V)\) è uno spazio affine di dimensione \(\dim A = \dim V = n\)  allora
+si dicono:
+\begin{itemize}[label = --]
+    \item \textbf{Punti}: sottospazi affini di dimensione 0
+    \item \textbf{Rette}: sottospazi affini di dimensione 1
+    \item \textbf{Piani}: sottospazi affini di dimensione 2
+    \item \textbf{Iperpiani}: sottospazi affini di dimensione n-1
+\end{itemize}
+
+\begin{definition}[Coordinate Affini]
+    Sia \(A\) uno spazio affine su \(V\) tale che \(\dim A = \dim V = n < +
+    \infty\). Dati un punto \(O \in  A\) (origine) e una base
+    \(\mathcal{B} = \{v_{1},\dots,v_n\} \) dello spazio vettoriale \(V\) definiamo le
+    \textbf{coordinate affini}.
+    \[
+        X_{O, \mathcal{B}} : A \to  \mathbb{K}^{n} \quad Q \mapsto (x_{1}(Q),
+        \dots, x_{n}(Q)) \in \mathbb{K}^{n} \iff Q = O + \sum_{i=1}^{n} x_{i}
+        v_{i} 
+    \]
+\end{definition}
+In sostanza le coordinate affini \(X_{O, \mathcal{B}}(Q)\) sono le coordinate
+del vettore \(Q - O \in V\) rispetto alla base \(\mathcal{B}\). Questo
+``marchingegno'' ci consente di definire insiemi di punti indipendenti.
+
+\begin{definition}
+    Sia \((A, V)\) uno spazio affine. Dati \(k+1\) punti in \(A\), \((P_{0}, \dots, P_{k+1})\) questi si dicono
+    indipendenti se i \(k\) vettori \(v_{i} = \overline{P_{0} P_{i}}\) sono
+    linearmente indipendenti.
+\end{definition}
+Se \(\dim A = n\) allora dati \(n+1\) punti indipendenti otteniamo un sistema di
+coordinate affini prendendo uno dei punti come origine e i vettori delle
+differenze tra gli altri e l'origine come base. Ovviamente il punto origine avrà
+coordinate tutti zeri, e gli altri punti scelti per costruzione della base sono
+con coordinate come quelle della base canonica. Tuttavia per poter decidere così
+arbitrariamente è necessario che:
+\begin{remark}
+    L'essere indipendenti non dipende dall'ordine.
+\end{remark}
+\begin{proof}
+    Se tengo fermo l'origine e scambio gli altri vettori la nuova lista di
+    vettori è ancora linearmente indipendente, essendo una permutazione della
+    vecchia.
+
+    Supponiamo di scegliere una nuova lista da \((P_{0}, \dots, P_n)\), quindi
+    origine \(P_{0}\)  e base \(v_{i} = P_{i} - P_{0}\) a \((P_n,
+    P_{0}, \dots, P_{n-1})\) a questo punto prendendo \(P_{n}\) come origine e
+    gli altri in ordine ottengo i vettori \(w_i = P_{i-1} - P_n\). A questo
+    punto:
+    \begin{align*}
+        w_{1} &= P_{0} - P_n = -(P_n - P_{0}) = - v_n \\
+        w_{i} &= P_{i-1} - P_n = P_{i-1} - (P_{0} + v_n) = v_{i-1} - v_n &\forall i \in \{2, \dots, n\} 
+    \end{align*}
+    La matrice che rappresenta l'operatore lineare \(v_{i} \mapsto w_{i}\)
+    rispetto alla base \(\mathcal{B} = \{v_{i}\} \)  è
+    \[M = \begin{pmatrix}
+        0 & 1 & 0 & \dots & 0 \\
+        0 & 0 & 1 & \dots & 0\\
+        \dots & \dots & \dots & \dots & \dots \\
+        -1 & -1 & -1 & \dots & -1
+    \end{pmatrix}\] 
+    Che ha determinante diverso da 0 ed è quindi invertibile
+\end{proof}
+
+\begin{definition}[Prodotto di spazi affini]
+    Dati due spazi affini \((A, V, \Phi)\) e \((A', V', \Phi')\), dove \(V\) e
+    \(V'\) sono spazi vettoriali sullo stesso campo \(\mathbb{K}\). Definiamo il
+    prodotto dei due spazi affini
+    \[
+        (A \times  A', V \times V', \Phi \times  \Phi')
+    \]
+    Dove \[(\Phi \times \Phi') : (V \times V') \times (A \times A') \to A \times
+    A'\] \[((v, v'), (P, P')) \mapsto (\Phi(v, P), \Phi(v', P')) = (P + v,
+P' + v')\] 
+\end{definition}
+\begin{proof}[Il prodotto è uno spazio affine]
+    Chiaramente \(A \times A'\) è non vuoto in quanto prodotto di insiemi non
+    vuoti. Procediamo verificando le proprietà dell'operazione \(\Phi \times
+    \Phi'\) 
+\begin{enumerate}[label = \arabic*)]
+    \item \(\forall (P, P') \in (A \times A'), \, \forall (v, v'), (w, w') \in
+        (V \times V'), \,\,\, ((P, P') + (v, v')) + (w, w') = (P+v, P'+v') + (w,
+        w') = (P + v + w, P' +v'+w') = (P, P') + (v + w, v'+w') = (P, P') + ((v,
+        v') + (w, w'))\)
+    \item Fissato \((P, P') \in (A \times  A')\), l'operazione \((v, v') \mapsto
+        (P + v, P' + v')\) è biettiva, perché sia \(v \mapsto P + v\) che \(v'
+        \mapsto P' + v'\) sono biettive.
+
+        Similmente fissato \((v, v') \in (V \times V')\), l'operazione \((P, P')
+        \mapsto (P + v, P' + v')\) è biettiva, perché sia \(P \mapsto P+v\) che
+        \(P' \mapsto P' + v'\) sono biettive.
+\end{enumerate}
+
+\end{proof}
+
+\begin{example}
+    \(\mathbb{E}^{n} \times \mathbb{E}^{m} = \mathbb{E}^{n+m}\) 
+\end{example}
+
+\subsection{Intersezione}
+Supponiamo di avere uno spazio \((A, V)\) affine e due sottospazi affini di
+\(A\): \((B, W)\) e \((B', W')\). L'intersezione di \(B\) e \(B'\) è un
+sottospazio affine di \(A\) (se è non vuota) con giacitura \(W \cap  W'\). 
+\begin{proof}
+    Supponiamo \(P \in  B \cap  B'\). Ci basta dimostrare che vale la seguente:
+    \[
+        B \cap B' = P + (W \cap  W')
+    \]
+    Dove \(W \cap  W'\) è ovviamente un sottospazio vettoriale di \(V\) 
+
+    \begin{itemize}
+        \item[\(\subseteq \)] Sia \(Q \in  B \cap B'\) allora \(Q - P \in W \cap
+            W'\) perché appartiene sia alla giacitura di \(B\) che alla
+            giacitura di \(B'\), quindi \(Q = P + (Q - P) \in P = (W \cap  W')\) 
+        \item[\(\supseteq \)] Sia \(v \in  W \cap W'\). Ovviamente \(P+v \in B\)
+            perché \(P \in B, v \in W\) ma anche \(P+v \in B'\) perché \(P \in
+            B', v \in W'\) quindi \(P + v \in B \cap B'\) 
+    \end{itemize}
+\end{proof}
+\begin{remark}
+    Quanto visto precedentemente per intersezione di due sottoinsiemi vale anche
+    per intersezione arbitraria (anche infinita).
+
+    In altre parole data una famiglia
+    \(\{B_{i}\}_{i \in I}\) di sottospazi di \(A\) spazio affine, \(\bigcap_{i
+    \in  I} B_{i}\) è un sottospazio affine la cui giacitura è data
+    dall'intersezione delle giaciture dei sottospazi.
+\end{remark}
+
+\begin{definition}[Spazio generato]
+    Sia \((A, V)\) uno spazio affine. Sia \(S \subseteq A \) un sottoinsieme.
+    Definiamo lo \textbf{spazio affine generato} da \(S\), indicato con \(<S>\),
+    il più piccolo sottospazio affine contenente \(S\), ossia l'intersezione di
+    tutti i sottospazi affini di \(A\) contenenti \(S\):
+    \[
+        <S> = \bigcap \{\text{\(C \subseteq A \) sottospazio affine } : S
+        \subseteq C \} 
+    \]
+\end{definition}
+\begin{example}
+    \(S = \{P_{0}, \dots, P_{n}\} \). è un insieme costituito da \(n+1\) punti
+    di \(A\).
+
+    Poniamo \(v_{i} = P_{i} - P_{0} = \overline{P_{0} P_{i}},\, i = 1\dots n\).
+    Poniamo \(W = \text{span}\{v_{1}, \dots, v_n\} \). Allora \(<S> = P_{0}+W\) 
+\begin{enumerate}[label = \arabic*.]
+    \item[\(\subseteq \) ] Contiene certamente \(S\), perché contiene ovviamente \(P_{0}\), e
+        ogni punto \(P_{i} = P_{0} + v_{i}\), quindi \(<S> \subseteq P_{0}+W \) 
+    \item[\(\supseteq\) ] \(<S> \ni P_{0}\). Inoltre la giacitura di \(<S>\)
+        contiene \(W\), perché \(<S>\) contiene tutti i punti di \(S\), quindi
+        \(<S> \supseteq P_{0} + W \) 
+\end{enumerate}
+Quindi scritto in altro modo
+\[
+    <S> = \{P_{0} + \sum_{i=1}^{n} \lambda_i \overline{P_{0} p_{i}} : \lambda_i
+    \in \mathbb{R}\} 
+\]
+\end{example}
+\begin{example}
+    Se \((B, W)\) e \((B', W')\) sono sottospazi affini di \((A, V)\) allora
+    scelto un qualsiasi punto \(P \in  B \cup B'\) si ha che 
+    \[
+        P + (W + W') \subseteq <B \cup B'> 
+    \]
+    Inoltre se \(P \in  B \cap  B'\), allora 
+    \[
+        <B \cup  B'> = P + (W + W')
+    \]
+\end{example}
+% \begin{figure}[ht]
+%     \centering
+%     \incfig[.5]{rette-sghembe}
+%     \caption{Pensare a chi è \(<r_{1} \cup r_{2}>\) e chi è \(P +
+%     (W_{1} + W_{2})\) nei casi di rette incidenti e sghembe}\label{fig:rette-sghembe}
+% \end{figure}
+\begin{proof}
+    Sia \(C \subseteq A \) un sottospazio affine di \(A\) tale che \(C \supseteq
+    B \cup B'\). Allora \(P \in  C\), inoltre la giacitura di \(C\) contiene \(W
+    + W' \implies  P + (W + W') \subseteq C \), quindi \(P + (W + W') \subseteq
+    <B\cup B'>\). 
+
+    Sia ora \(P \in B \cap  B'\). Allora \(B = P + W \subseteq P + (W + W') \).
+    Similmente \(B' = P + W' \subseteq P + (W + W') \) di conseguenza \(B \cup
+    B' \subseteq P + (W + W') \) da cui segue (perché il RHS è uno sottospazio
+    affine) che \(<B \cup B'> \subseteq P + (W + W') \) 
+\end{proof}
+
+\begin{proposition}\label{prp:lemma_grassman}
+    Sia \((A, V)\) uno spazio affine. Siano \((B, W)\) e \((B', W')\) sottospazi
+    affini tali che \(B \cap B' = \varnothing\). Sia \(P \in  B\) e \(Q \in
+    B'\). Allora \(\overline{PP'} \not\in W + W'\) (Pensare a rette sghembe come
+    esempio)
+\end{proposition}
+\begin{proof}
+    Poniamo \(v = \overline{PP'} \in V\) e supponiamo per assurdo che \(v = w +
+    w'\) con \(w \in  W\) e \( w' \in  W\). Adesso consideriamo \(R = P + w \in
+    B\). Ma anche \(R = P + w = P + (v - w') = (P + v) - w' = P' - w' \in B'\)
+    che è assurdo perché \(B \cap B' = \varnothing\) 
+\end{proof}
+\begin{theorem}[Grassman per spazi affini]
+    Sia \((A, V)\) uno spazio affine. Siano \((B, W)\) e \((B', W')\) sottospazi
+    affini.
+\begin{enumerate}[label = \arabic*)]
+    \item Se \(B \cap B' \neq \varnothing\) allora
+        \[
+            \dim(<B \cup B'>) = \dim(B) + \dim(B') - \dim(B \cap B')
+        \]
+    \item (Grassman Sghembo) se \(B \cap B' = \varnothing\) 
+        \[
+            \dim(\langle B \cup B'\rangle) = \dim(B) + \dim(B') - \dim(W \cap W') + 1
+        \]
+\end{enumerate}
+\end{theorem}
+\begin{proof}\(\) 
+\begin{enumerate}[label = \arabic*)]
+    \item Sia \(P \in B \cap B', \, B = P + W, \, B' = P + W'\) Allora \(B \cap
+        B' = P + (W \cap W')\) e per la proposizione~\ref{prp:lemma_grassman}
+        \(<B \cup B'> + P + (W + W')\). Infine
+        \begin{align*}
+            \dim(<B \cup B'>) &= \dim(W + W') = \dim(W) + \dim(W') - \dim(W \cap
+            W') \\ &= \dim(B) + \dim(B') - \dim(B \cap B')
+        \end{align*}
+    \item Fisso \(P \in B\), \(P' \in B'\) e \(C = <B \cup \{P'\}> \). Posto \(v
+        = \overline{PP'}\) e la giacitura di \(C\) è \(W \oplus <v>\). Quindi
+        \(\dim C = \dim W + 1\).
+
+        A questo punto la giacitura di \(C \cap B'\) è \(W \oplus <v> \cap W' =
+        Z\). Sia \(z \in Z\), allora \(z = w + \lambda v = w'\), dove \(w \in W,
+        w'\in W', \lambda \in R\). Quindi \(\lambda v = w' - w \in W + W'\). Ma
+        poiché, per la proposizione~\ref{prp:lemma_grassman} \(v \not\in W + W'\),
+        allora \(\lambda = 0\). Ma allora \(z \in W \cap W'\). Poiché ovviamente
+        \(W \cap W' \in Z \implies Z = W \cap W'\).
+
+        Infine:
+        \[
+            \dim(<B \cap B'>) = \dim(C \cup B') = \dim B + 1 + \dim(B') -
+            \dim(W \cap W')
+        \]
+\end{enumerate}
+\end{proof}
+
+\begin{definition}[Combinazione convessa]
+    Sia \((A, V)\) uno spazio affine e \(P_{1}, \dots, P_n\) punti di \(A\).
+    Allora prendiamo \\ \(\lambda_{1}, \dots, \lambda_n \in \mathbb{K}\), tali che
+    \(\sum_{i=1}^{n} \lambda_i = 1\), e fissiamo \(O \in A\).
+
+    Allora la combinazione convessa di \(P_{1}, \dots, P_n\) a coefficienti
+    \(\lambda_i, i \in \{1, \dots, n\} \) è il punto
+    \[
+        Q(P_{i}, \lambda_i) = O + \sum_{i=1}^{n} \lambda_i \overline{OP_{i}} \in
+        A
+    \]
+\end{definition}
+\begin{remark}
+    \(Q(P, \lambda_i)\) non dipende dalla scelta di \(O \in A\).
+
+    Infatti se \(O' \in A\) e \(Q'(P_{i}, \lambda_i) = O' + \sum_{i=1}^{n}
+    \lambda_i \overline{O' P_{i}} \), sapendo che \(\overline{OP_{i}} =
+    \overline{OO'} + \overline{O'P_{i}}\) otteniamo:
+    \[
+        Q'(P, \lambda_i) = O + \overline{O O'} + \sum_{i=1}^{n} \lambda_i
+        (\overline{O'O} + \overline{OP_{i}}) 
+    \]
+    spezzando la sommatoria e raccogliendo i \(\lambda_i\) 
+    \[
+        Q'(P_i, \lambda_i) = O + \overline{O O'} + \overline{O'O}\sum_{i=1}^{n}
+        \lambda_i + \sum_{i=1}^{n} \lambda_i \overline{OP_{i}} =
+        Q(P_{i},\lambda_{i})
+    \]
+\end{remark}
+La conseguenza è che posso scrivere senza ambiguità \[
+    Q = \lambda_{1} P_{1} + \dots + \lambda_n P_n\quad \sum_{i=1}^{n} \lambda_i
+    = 1
+\]
+\begin{remark}
+    \[
+        <P_{1}, \dots, P_n> = P_{1} + \sum_{i=2}^{n} \overline{ \lambda_i P_{1} P_n}
+    \]
+    Adesso introduco  il coefficiente \(\lambda_1 = 1 - \sum_{i=2}^{n} \lambda_i
+    \).
+    \[
+        \text{Sia } Q = P_{1} + \sum_{i=1}^{n} \lambda_1 \overline{P_{1}P_i} 
+    \]
+    Che è una combinazione convessa, quindi
+    \[
+        <P_{1}, \dots, P_n> = \{\sum_{i=1}^{n} \lambda_i P_i : \sum_{i=1}^{n}
+        \lambda_i = 1  \} 
+    \]
+\end{remark}
+\begin{definition}
+    Se \(\mathbb{K} = \mathbb{R}\), \(P_{1}, \dots, P_n \in A\) definiamo
+    l'inviluppo convesso di \(P_{1}, \dots, P_n\) come
+    \[
+        C(P_{1}, \dots, P_n) = \{Q \in A : Q = \sum_{i=1}^{n} \lambda_i P_i :
+        \sum_{i=1}^{n} \lambda_i = 1, \lambda_i \ge 0 \,\,\forall i \in 1\dots n  \} 
+    \]
+\end{definition}
+\section{Funzioni Affini}
+\begin{definition}[Funzione Affine]
+    Siano \((A, V)\) e \((A', V')\) spazi affini sullo stesso campo. Una
+    funzione \(F: A \to A'\) si dice \textbf{affine} se esiste un'applicazione
+    lineare \(f: V \to V'\) tale che 
+    \[
+        \forall P \in A,\,\, \forall v \in V,\,\,F(P+v)=F(P) + f(v)
+    \]
+    Ossia la somma di \(A\) viene mandata nella somma di \(A'\). L'applicazione
+    \(f\) è detta associata a \(F\). 
+
+    Equivalentemente un'applicazione \(F:A \to A'\) è affine se esiste una
+    \(f:V\to V'\) tale che 
+    \[
+        \forall P, Q \in A,\,\, F(Q) = F(P) + f(\overline{PQ})
+    \]
+\end{definition}
+\begin{remark}
+    La seconda definizione vale per ogni coppia di punti \(P, Q \in A\) se e solo se
+    vale per ogni punto fissato \(O \in A\) e ogni altro punto \(P \in A\).
+
+    Infatti se vale la seconda (l'altra implicazione è ovvia) allora \(F(Q) =
+    F(O) + f(\overline{OQ}) = F(0) + f(\overline{OP} + \overline{PQ}) = F(O) +
+    f(\overline{OP}) + f(\overline{PQ}) = F(P) + f(\overline{PQ})\) 
+\end{remark}
+\begin{example}[\(A = V, A' = V'\) ]
+    Prendo \(O_V \in A\) il vettore nullo di \(A\) e ponendo \(F(O_V) = a' \in
+    V'\) allora \(F(v) = F(O_V) = f(v) = a' + f(v)\), con \(v \in V\). Questo ci
+    dice che nel caso particolare dello spazio affine che è uno spazio
+    vettoriale, una funzione affine è una composizione della funzione lineare
+    \(f: V \to  V'\) con la traslazione \(v \mapsto v+a'\).
+\end{example}
+Se abbiamo invece spazi affini di dimensione finita fissiamo due sistemi di
+coordinate su \(A\) e \(A'\), ossia \(O, v_{1}, \dots, v_n\) di \(A\) e \(O',
+v_{1}', \dots v_m'\) di \(A'\). Il tali coordinate \(F\) è rappresentata da una
+coppia \((M, y_{0})\), dove \(M\) è una matrice \(m \times n\) (la matrice
+associata alla funzione lineare \(f\) rispetto alle base \(\{v_{i}\}_{i \in
+\{1\dots n\} }\) e \(\{v_i'\}_{i \in \{1\dots m\} }\)  ) e \(y_{0} \in \mathbb{K}^{m}\) è il vettore delle
+coordinate di \(F(O)\). Quindi se \(\mathbf{x}_P \in \mathbb{K}^{n}\) è il vettore delle
+coordinate di \(P \in  A\), le coordinate di \(F(P) \in A'\) saranno
+\(M\mathbf{x}_P + y_{0}\) 
+\begin{proposition}
+    Siano \((A, V)\) e \((A', V')\) spazi affini con \(\dim A = n \in
+    \mathbb{N}\). Siano \(P_{0}, \dots, P_n\) punti linearmente indipendenti e
+    fissiamo \(Q_{0}, \dots, Q_n\) di \(A'\). Allora esiste un'unica
+    applicazione affine \(F: A \to A'\) tale che \(F(P_i) = Q_i\,\,\forall i \in
+    \{0\dots n\} \) 
+\end{proposition}
+\begin{proof}
+    Poniamo \(v_{i} = \overline{P_{0} P_{i}} \in V\,\,\forall i \in \{1\dots n\}
+    \). Allora \(\mathcal{B} = \{v_{i}\} \) è una base di \(V\). Similmente
+    poniamo \(w_{i} = \overline{Q_{0}Q_{i}} \in V'\). Ora sappiamo che esiste
+    unica un'applicazione \(f:V\to V'\) tale che \(f(v_{i}) = w_{i}\) per ogni
+    \(i\). Poniamo ora per ogni \(P \in A\) \(F(P) = F(P_{0}) +
+    f(\overline{P_{0} P}) = Q_{0} + f(\overline{P_{0} P})\), dove
+    \(\overline{P_{0} P} \in V\) 
+\end{proof}
+\begin{proposition}
+    Siano \((A, V), (A', V'), (A'', V'')\) spazi affini e siano \(F: A \to A'\)
+    e \(G: A' \to  A''\) mappe affini associate rispettivamente a \(f: V \to
+    V'\) e \(g : V' \to  V''\). Allora:
+\begin{enumerate}[label = \arabic*.]
+    \item \(G\circ F : A \to  A''\) è mappa affine associata a \(g \circ f : V
+        \to V''\) 
+    \item L'identità \(\text{\emph{id}}: A \to  A\) è una mappa affine associata a
+        \(\text{\emph{id}}: V \to
+        V\) l'identità.
+    \item Le mappe costanti \(C_a : A \to  A' ; P \mapsto a\) sono mappe affini
+        associate alla mappa nulla \(0: V \to V' ; v \mapsto O_{V'}\) 
+    \item \(F\) è bigettiva \(\iff\) \(f: V \to V'\) è bigettiva. In tal caso
+        l'inversa di \(F, F^{-1}: A' \to A\) è affine associata a \(f^{-1}: V'
+        \to V\) 
+    \item Sia \(F: A \to A\) affine. Allora l'insieme dei punti fissi di \(F\),
+        se non vuoto, è un sottospazio affine di \(A\)
+    \item Fissato un punto \(P \in A\) e un punto \(P' \in  A'\) allora la
+        funzione \(f \mapsto F \) dove \(F(x) = P' + f(\overline{PX})\)
+        definisce una corrispondenza biunivoca tra l'insieme delle applicazioni
+        lineari da \(V\) a \(V'\) e le applicazioni affini da \(A\) ad \(A'\)
+        tali che \(F(P) = P'\) 
+\end{enumerate}
+\end{proposition}
+\begin{proof} Molte sono ovvie, cominciamo a dimostrare la 5, le altre sono
+    lasciate per esercizio. % TODO
+\begin{enumerate}[label = \arabic*.]
+    \item[5.] Sia \(P \in A\) tale che \(F(P) = P\). Allora \(\text{Fix}(F) =
+        P+V_{1}\), dove \(V_{1} = \{v \in V : f(v) = v\} \) 
+\end{enumerate}
+\end{proof}
+\begin{proposition}
+    Supponiamo che \(\mathbb{K}\) abbia caratteristica diversa da 2. Siano \(A,
+    A'\) spazi affini. Una funzione \(F: A \to A'\) è affine se e solo se per
+    ogni collezione di \(k\) punti di \(A\) \(\{P_{1}, \dots, P_k\} \) e per
+    ogni combinazione convessa \(\sum_{i=1}^{k} \lambda_i P_i \,\sum_{i=1}^{k}
+    \lambda_i = 1 \) si ha che \(F(\sum_{i=1}^{k} \lambda_i ) = \sum_{i=1}^{k}
+    \lambda_i F(P_i) \).
+\end{proposition}
+\begin{proposition}
+    Sia \(F: A \to  A'\) affine con applicazione lineare associata \(f: V \to
+    V'\) e siano \((B, W) \subseteq (A, V) \) e \((B', W') \subseteq (A', V')
+    \) sottospazi affini. Allora
+\begin{enumerate}[label = \arabic*.]
+    \item \(F(B)\) è sottospazio affine di \(A'\) con giacitura \(f(W) \subseteq
+        V'\) 
+    \item Se \(F^{-1}(B')\) è non vuota, con \(B' \subseteq A' \) un
+        sottospazio, allora \(F^{-1}(B')\) è un sottospazio affine di \(A\) con
+        giacitura \(f^{-1}(W')\) 
+    \item Se \(P \in A\) e \(Q = F(P)\) allora \(F^{-1}(Q)\) è uno spazio affine
+        con giacitura \(\ker f\) 
+    \item Se \(\dim A < +\infty\) allora \(\dim A = \dim F(A) + \dim\ker f\) 
+\end{enumerate}
+
+\end{proposition}
+\begin{proof} \(\)
+\begin{enumerate}[label = \arabic*.]
+    \item Sia \(P \in B\), \(B = P + W\), allora \(F(B) = F(P) + f(W)\) 
+    \item Essendo la controimmagine non vuota, sia \(P\in A\) tale che \(F(P)
+        \in B'\). A questo punto \(B' = F(P) + W'\). A questo punto \(F^{-1}(B')
+        = P + f^{-1}(W')\) 
+    \item Caso particolare del punto 2.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}[Caso part. 3]
+    Sia \(f : V \to V'\) lineare e \(v' \in V'\).
+    Se non vuoto, l'insieme \(S\)  delle soluzioni del problema lineare \(S =
+    f^{-1}(v')\) è un sottospazio affine di \(V\) con giacitura data da \(\ker
+    f\).
+\end{remark}
+
+\subsection{Equazioni}
+Sia \((A, V)\) uno spazio affine, dove \(V\) è \(\mathbb{K}\)-spazio vettoriale.
+Indichiamo con \(E\) l'insieme delle applicazioni affini \(\lambda : A \to
+\mathbb{K}\). Allora \(E\) è uno spazio vettoriale, con le operazioni
+\begin{align*}
+    (\lambda_{1}, \lambda_{2}) &\mapsto \lambda_{1} + \lambda_{2}\,\,\,;\,\,
+    (\lambda_{1} + lkj_{2})(P) = \lambda_{1}(P) + \lambda_{2}(P) \\
+    \alpha \in \mathbb{K},\,\,(\alpha, \lambda) &\mapsto \alpha\cdot \lambda\,\,\,;\,\,(\alpha \lambda)(P) =
+    \alpha \cdot \lambda(P)
+\end{align*}
+inoltre \(\dim E = n+1\) 
+
+Dato \(B \subseteq A \) sottospazio, un'equazione affine per \(B\) è
+un'applicazione affine \(\lambda: A \to \mathbb{K}\) tale che \(\lambda(B) = \{0\} \) 
+\[
+    E(B) = \{(\lambda : A \to \mathbb{K}) : \lambda(P) = 0 \,\, \forall P \in
+    B\}  \subseteq E 
+\]
+Che è un sottospazio vettoriale di \(E\), detto spazio delle equazioni per \(B\) 
+
+Viceversa, se io considero \(E' \subseteq E \) un sottospazio, poniamo
+\[
+    Z(E') = \{P \in A : \lambda(P) = 0\,\, \forall \lambda \in E'\} 
+\]
+è un sottospazio affine di \(A\), perché intersezione di sottospazi affini di
+\(A\), uno per ogni funzione di \(E'\).
+\begin{proposition}
+    Supponiamo che \(\dim A = n < + \infty\). Allora per ogni sottospazio \(B
+    \subseteq A \) si ha che 
+    \[
+        Z(E(B)) = B
+    \]
+    ovvero le equazioni di \(B\) determinano \(B\)
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\supseteq  \)] Ovvio per costruzione.
+    \item[\(\subseteq \)] Supponiamo che \(A \ni Q \not\in B\), costruiamo
+        \(\lambda : A \to \mathbb{K}\) tale che \(\lambda(P) = 0\,\, \forall P
+        \in B\) e tale che \(\lambda(Q) \neq 0\). Supponiamo che \(\dim(B) = k\)
+        e prendiamo \(k+1\) punti indipendenti in \(B\), \(P_{0}, \dots, P_k\).
+        Poiché \(Q \not\in B\), \(P_{0}, \dots, P_k, Q\) sono \(k+2\) punti
+        linearmente indipendenti. Poi prendo una lista \(P_{0}, \dots, P_k, Q,
+        S_{1}, \dots, S_{s-k-1}\). Definisco quindi \(\lambda: A \to
+        \mathbb{K}\) in modo che \(\lambda(Q) = 0\,\,\forall i = 0,\dots, k\),
+        \(\lambda(Q) = 1\) e per il resto non è importante ma diciamo
+        \(\lambda(S_j) = 0\,\,\forall j = 1, \dots, n-k-1\).
+        Ma allora \(\lambda(P) = 0\,\,\forall P \in B\) ma \(\lambda(Q) = 1 \neq
+        0\) 
+\end{itemize}
+\end{proof}
+
+Sia \(A\) uno spazio affine di dimensione 2 su \(\mathbb{K}\) di almeno tre
+elementi (es.~\(\mathbb{K} = \mathbb{Q}, \mathbb{R}, \mathbb{C}\)). Ricordiamo
+che le rette sono sottospazi affini di \(A\) di dimensione 1. Due rette \(\ell,
+\ell' \subseteq A \) si dicono \textbf{parallele} se hanno la stessa giacitura
+(\(\ell // \ell'\)). Dati \(P, Q \in A\) con \(P \neq Q\) indichiamo con
+\(\overline{PQ}\) l'unica retta passante per \(P\) e \(Q\) 
+
+% \begin{figure}[ht]
+%     \centering
+%     \incfig{teorema-di-talete}
+%     \caption{Teorema di Talete}
+%     \label{fig:teorema-di-talete}
+% \end{figure}
+\begin{theorem}[Teorema di Talete]
+    Siano \(H, H', H''\) tre rette parallele distinte in \(A\), siano
+    \(\ell_{1}\) e \(\ell_{2}\) due rette non parallele alle precedenti. Posti
+    \(P_{i} = H \cap \ell_{i}\), \(P_{i}' = H' \cap  \ell_{i}\), \(P''_i = H''
+    \cap \ell_{i}\), con \(i = 1, 2\). Siano \(k_{1}, k_{2} \in \mathbb{K}\)
+    t.c. \(\overline{P_{1}P_{1}'} = k_{1}\overline{P_{1}P_{1}''}\) e
+    \(\overline{P_{2}P_{2}'} = k_{2}\overline{P_{2}P_{2}''}\).\newline Allora
+    \(k_{1} = k_{2}\) 
+\end{theorem}
+\begin{proof}
+    Ci vogliamo ricondurre al caso in cui \(P_{1} = P_{2} = P\). Se \(P_{1}' =
+    P_{2}' \) oppure \(P_{1}'' = P_{2}''\) posso ``Scambiare'' \(H, H', H''\) e
+    ci riconduciamo al caso \(P_{1} = P_{2}\). Altrimenti se \(P_{1} \neq
+    P_{2}\) considero \(\ell_{3} = \overline{P_{1}P_{2}}\). Se Talete vale per
+    \(\ell_{1}, \ell_{3}\) e vale per \(\ell_{2}, \ell_{3}\) allora vale per \(\ell_{1},
+    \ell_{3}\). Inoltre per \(\ell_{1}, \ell_{3}\) e \(\ell_{2}, \ell_{3}\)
+    verificano l'ipotesi \(P_{1} = P_{2}\) 
+
+    Ora procediamo con la dimostrazione. Per ipotesi \(\overline{PP_{1}''} =
+    k_{1}\overline{PP_{1}'}\) e \(\overline{PP_{2}''} =
+    k_{2}\overline{PP_{2}'}\). Inoltre \(\overline{P_{1}'P_{2}'} =
+    \overline{PP_{2}'} - \overline{PP_{1}'}\) e \(\overline{P_{1}''P_{2}''} =
+    \overline{PP_{2}''} - \overline{PP_{1}''} = k_{2}\overline{PP_{2}'} -
+    k_{1}\overline{PP_{1}'}\). Poiché \(H'' // H'\) segue che \(\exists \alpha
+    \in \mathbb{K}\) tale che \(\overline{P_{1}''P_{2}''} = \alpha
+    \overline{P_{1}'P_{2}'}\). Quindi \(\overline{k}\overline{PP_{2}'} -
+k_{1}\overline{PP_{1}'} = \alpha(\overline{PP_{2}'} - \overline{PP_{1}'})\),
+    da cui \[(k_{2} - \alpha)\overline{PP_{2}'} + (\alpha -
+    k_{1})\overline{PP_{1}'} = \mathbf{0}\] Ma ora poiché \(\ell_{1}\) e
+    \(\ell_{2}\) non sono parallele, segue che \(PP_{2}'\) e \(PP_{1}'\) sono
+    indipendenti, per cui \(k_{1} = \alpha\) e \(k_{2} = \alpha\) 
+\end{proof}
+\begin{theorem}[Teorema di Pappo]
+    Siano \(H\) e \(H'\) due rette distinte nel piano affine \(A\). Siano
+    \(P, Q, R \in H\) e \(P', Q', R' \in H'\) punti distinti non in comune tra
+    \(H\) e \(H'\).
+    Se \(\overline{PQ'} \| \overline{P'Q}\) e \(\overline{QR'} \|
+    \overline{Q'R}\) allora \(\overline{PR'} \| \overline{P'R}\) 
+
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \incfig[.7]{pappo}
+    \caption{Pappo}
+    \label{fig:pappo}
+\end{figure}
+\begin{proof}\(\) 
+\begin{itemize}[label = --]
+    \item Se \(H \parallel H'\) allora \(Q'R' = \alpha QR\) e \(Q'R = \beta
+        QR'\) per qualche \(\alpha, \beta \in \mathbb{K}\). Otteniamo
+        \[
+            RR = \mathbf{0} = RQ + QR' + R'Q' + Q'R = (\alpha + 1)RQ + (\beta +
+            1)QR'
+        \]
+        Che essendo indipendenti (per ipotesi \(H\) e \(H'\) sono distinte)
+        otteniamo \(Q'R' = -QR\) e \(Q'R = -QR'\). Similmente si ottiene anche
+        \(PQ = -P'Q'\). Infine \(RP' = \cancel{RQ} \cancel{+ QP} + PR' +
+        \cancel{R'Q'} \cancel{+ Q'P'} = PR'\) 
+    \item Se invece \(O \in H \cap H'\) allora per talete
+        \begin{align*}
+            OP &= kOQ &OQ&= \lambda OR \\
+            OQ' &= k OP' &OR'&= \lambda OQ'
+        \end{align*}
+        Ora \(PR' = PO + OR' = kQO + \lambda OQ' = k\lambda RO + \lambda k OP' =
+        k\lambda RP'\) 
+\end{itemize}
+
+
+\end{proof}
+\begin{theorem}[Teorema di Desargues affine]
+    Siano \(A, B, C\) e \(A', B', C'\) due terne di punti non allineati del
+    piano affine tali che \(\overline{AB} \parallel \overline{A'B'}\),
+    \(\overline{AC} \parallel \overline{A'C'}\) e \(\overline{BC} \parallel
+    \overline{B'C'} \).
+
+    Allora le tre rette \(\overline{A A'}, \overline{B B'}, \overline{C C'}\)
+    sono parallele oppure hanno un punto in comune.
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \incfig{désargues}
+    \caption{Teorema di Désargues, in rosso le costruzioni della
+    dimostrazione}
+    \label{fig:désargues}
+\end{figure}
+\begin{proof}
+    Supponiamo che le rette non siano parallele. A meno di rinominare le rette
+    possiamo supporre che \(\overline{A A'} \cap \overline{B B'} = \{O\} \).
+    Mostriamo che \(O \in  \overline{C C'}\).
+    Applicando Talete a \(\overline{AB} \parallel \overline{A'B'}\) otteniamo
+    \(OA' = kOA\) e \(OB' = kOB\).
+    Ora poniamo \(C'' = \overline{OC} \cap \overline{A'C'}\) e applichiamo
+    talete a \(\overline{AC} \parallel \overline{A'C'}\), ottenendo \(OC'' =
+    kOC\).
+    Ripetiamo il procedimento con \(\overline{BC} \parallel \overline{B'C'}\)
+    ottenendo \(OC''' = kOC\), dove \(C''' = \overline{OC} \cap
+    \overline{B'C'}\).
+Ma allora \(C'' = C''' \in \overline{B'C'} \cap \overline{A'C'} = \{C'\} \)
+quindi \(C' = C'' = C'''\), la retta \(\overline{OC}\) passa per \(C'\) e i
+punti \(O\), \(C\), \(C'\) sono allineati.
+\end{proof}
+
+\newpage
+\section{Assiomatizzazione del concetto di piano}
+Definiamo il piano grafico \(\Pi\) come un insieme i cui elementi sono detti
+\textbf{punti}, con dei sottoinsiemi non vuoti detti rette in modo che valgano i
+seguenti assiomi:
+\begin{enumerate}[label = \arabic*.]
+    \item \(\Pi\) contiene almeno 4 punti a 3 a 3 non allineati.
+    \item \(\forall P, Q \in \Pi,\,P\neq Q,\,\,\, \exists!\text{ retta } \overline{PQ} \ni P, Q\) 
+    \item Date due rette distinte \(\ell, \ell'\), o \(\ell \cap \ell' =
+        \varnothing\) (parallele), oppure \(\ell \cap \ell' = \{P\} \)
+        (incidenti)
+    \item Data una retta \(r\) e un punto \(P \not\in r\), \(\exists!\,\, r'
+        \parallel r\) tale che \(P \in r'\) 
+\end{enumerate}
+
+Supponiamo ora che \(\Pi\) verifichi i precedenti assiomi. La domanda è se
+esista un campo \(\mathbb{K}\) tale che \(\Pi\) è \emph{isomorfo} a
+\(\mathbb{K}^2\) (ossia esiste una corrispondenza biunivoca tra i punti del
+piano \(\Pi\)  e di \(\mathbb{K}^2\) che preserva rette e allineamenti). La
+risposta è \textbf{no}.
+Esistono infatti dei piani grafici dove non valgono Pappo e Desargues, ma se noi
+imponiamo come assiomi
+\begin{enumerate}[label = \arabic*.]
+    \item[5.] Vale il teorema di Pappo
+    \item[6.] Vale il teorema di Desargues
+\end{enumerate}
+Allora ogni piano grafico \(\Pi\) è isomorfo a un piano affine \(\mathbb{K}^2\)
+su un qualche campo \(\mathbb{K}\) 
+
+\section{Spazi Euclidei}
+\begin{definition}
+    Fissiamo \(\mathbb{K}=\mathbb{R}\). Uno \textbf{spazio euclideo} è il dato
+    \(E = (A, V, (\cdot , \cdot ))\) dove \(V\) è uno spazio vettoriale su
+    \(\mathbb{K}=\mathbb{R}\), \(A\) è uno spazio affine su \(V\) e \((\cdot
+    ,\cdot ) : V \times V \to \mathbb{R}\) è un prodotto scalare (bilineare,
+    simmetrica e definita positiva)
+\end{definition}
+Supponiamo che il nostro spazio abbia dimensione finita, quindi \(\dim V = n\).
+Fissiamo un riferimento, ossia un punto \(O \in A\) e \(\{u_{1}, \dots, u_n\} \)
+una base ortonormale per \(V\) rispetto al prodotto scalare. Le coordinate
+\(\phi_{O, \mathcal{B}} : A \to \mathbb{R}^{n}\) identificato \((\cdot ,\cdot
+)\) al prodotto scalare standard in \(\mathbb{R}^{n}\).
+
+Denotiamo con \(\mathbb{E}^{n} = (\mathbb{R}^{n}, \mathbb{R}^{n}, (\cdot ,\cdot
+))\). 
+
+\begin{remark}
+    Poiché la restrizione di un prodotto scalare a un sottospazio è ancora un
+
+    prodotto scalare, i sottospazi affini di uno spazio euclideo \(E\) sono in
+    modo naturale spazi euclidei.
+\end{remark}
+
+\begin{definition}
+    Dati due punti \(P, Q \in E\) spazio euclideo \(E = (A, V, (\cdot ,\cdot
+    ))\) definiamo la \textbf{distanza} tra \(P\) e \(Q\) come \(d(P, Q) :=
+    \|\overline{PQ}\| := \sqrt{(\overline{PQ}, \overline{PQ})} \in
+    \mathbb{R}_{\ge 0}\) 
+
+    Con questa distanza \(E\) diventa uno \textbf{spazio metrico}
+\end{definition}
+
+\begin{definition}[Angoli]
+    Dati \(O, P, Q \in E\) spazio euclideo, \(P \neq O \neq Q\). Poniamo
+    \(\theta = \widehat{POQ}\) l'angolo tra i vettori \(v = \overline{OP}\) e
+    \(w = \overline{OQ}\). Definiamo
+    \[
+        \cos \theta = \frac{(v, w)}{\|v\|, \|w\|}
+    \]
+\end{definition}
+
+\begin{definition}[Orientazione]
+    Sia \(V\) uno spazio vettoriale reale di dimensione finita, con \(\dim V = n
+    < +\infty\). Due basi orientate \(\{v_{i}\} \) e \(\{w_{i}\} \)  con \(i =
+    1\dots n\) si dicono \textbf{equivalenti per orientazione} se la matrice di
+    cambiamento di base da \(\{v_{i}\} \) a \(\{w_{i}\} \) ha determinante
+    positivo.
+\end{definition}
+
+\begin{remark}
+    Semplice notare che essere equivalenti per orientazione è una relazione di
+    equivalenza infatti 
+\begin{itemize}[label = --]
+    \item \(\mathcal{B} \sim \mathcal{B}\) perché la matrice di cambio base è
+        l'identità
+    \item Se \(\mathcal{B} \sim \mathcal{B'}\) allora \(\mathcal{B'} \sim
+        \mathcal{B}\) perché il determinante della matrice inversa è l'inverso
+        moltiplicativo, quindi ha lo stesso segno.
+    \item se \(\mathcal{B} \sim \mathcal{B'}\) e \(\mathcal{B'} \sim
+        \mathcal{B''}\) allora \(\mathcal{B} \sim \mathcal{B''}\) perché il
+        determinante del prodotto di matrici è il prodotto dei determinanti
+\end{itemize}
+    Inoltre Ci sono solo due classi di equivalenza rappresentate, presa una base
+    a caso da \(\{v_{1}, \dots, v_n\} \) e \(\{-v_{1}, v_{2}, \dots, v_n\} \).
+    Infine un'orientazione per \(V\) è la scelta di una classe di equivalenza e
+    un'orientazione per \((A, v)\) è la scelta di un'orientazione per \(V\).
+\end{remark}
+
+\begin{proposition}
+Sia \((E, V)\) uno spazio euclideo di \(\dim V = 2\).
+Fissiamo \(\{u, w\}\) un'orientazione per \(V\). Pongo \(v_{1} =
+\frac{v}{\|v\|}\) e \(w_{1} = \frac{w}{\|w\|}\). Notiamo che esiste un'unica
+vettore \(u_{1} \in V\) t.c. 
+\begin{itemize}[label = --]
+    \item \(\|u_{1}\| = 1\) 
+    \item \((u_{1}, v_{1}) = 0\) 
+    \item \(\{v_{1},u_{1}\} \) sia equivalente per orientazione a \(\{u,w\} \) 
+\end{itemize}
+\end{proposition}
+    Fissiamo il riferimento \(O, \{v_{1}, u_{1}\} \). A questo punto le
+    coordinate di \(O\) sono \((0,0)\), \(\phi(O + v_{1}) = (1,0)\), \(\phi(O +
+    u_{1}) = (0, 1)\) e \(\phi(O + w_{1}) = (\cos\theta, \sin\theta)\).
+    Definiamo \(\widehat{POQ}:=\theta\) 
+    \begin{remark}
+        Se cambio orientazione, l'angolo cambia segno
+    \end{remark}
+
+\begin{proposition}
+    Fissata un'orientazione su \(E\) spazio euclideo con \(\dim E = 2\), posso
+    misurare gli angoli
+\end{proposition}
+
+\begin{definition}[Isometria]
+    Sia \((X, d)\) uno spazio metrico. Un'isometria di \(X\) è una bigezione \(F
+    : X \to X\) che preserva le distanze, ossia 
+    \[
+        \forall P, Q, \in X,\,\, d(P, Q) = d(F(P), F(Q))
+    \]
+\end{definition}
+
+\begin{example}
+    Supponiamo di avere uno spazio euclideo \(E\). Le traslazioni sono
+    isometrie, le rotazioni attorno a un punto fissato sono isometrie, le
+    riflessioni rispetto a una retta sono isometrie
+\end{example}
+\begin{proposition}
+    Sia \(E\) uno spazio euclideo di \(\dim E = n < + \infty\), allora
+\begin{enumerate}[label = \arabic*.]
+    \item Le isometrie di \(E\) sono affinità di \(E\) (se \(F: E \to  E\)) è
+        un'isometria allora \(F \in \text{Aff}(E)\)
+    \item  \(F \in \text{Aff}(E)\) è un'isometria di \(E\) \(\iff\)
+        l'applicazione lineare associata \(f: V\to V\) preserva il prodotto
+        scalare, ossia \(\forall v \in V\,\, (f(v), f(v)) = (v, v)\) (notare
+        che basta verificare che preservi la norma).
+    \item Se \(A = \mathbb{E}^{n} = (\mathbb{R}^{n}, \mathbb{R}^{n}, (\cdot
+        ,\cdot ))\), \(F: \mathbb{E}^{n} \to \mathbb{E}^{n}\) è un'isometria
+        \(\iff\) \(F(x) = Mx + y\), con \(M\) matrice ortogonale
+\end{enumerate}
+\end{proposition}
+\begin{definition}
+    Il gruppo delle isometrie di \(E\) spazio euclideo è denotato \(G(E) <
+    \text{Aff}(E)\) 
+\end{definition}
+
+\begin{definition}
+    Se \(E\) è uno spazio euclideo e \(S, S' \subseteq E \) sono sottoinsiemi
+    \textbf{equivalenti in senso euclideo} se esiste un'isometria \(F \in G(E)\)
+    tale che \(F(S) = S'\) 
+\end{definition}
+
+\subsection{Proiezioni}
+% \begin{figure}[ht]
+%     \centering
+%     \incfig[.5]{proiezione}
+% \end{figure}
+\begin{proposition}
+    Sia \((E, V)\) uno spazio euclideo, \(B \subseteq E \) un sottospazio con
+    giacitura \(W \subseteq V \).
+    Allora \(\forall P \in E\, \exists! P_B \in B\) tale che \(\overline{P_B P}
+    = P - P_B \in W^{\bot}\). Inoltre \(P = P_B \iff P \in B\) 
+\end{proposition}
+\begin{proof}
+    \(V = W \otimes W^{\bot}\), dove \(W^{\bot} = \{v \in V : (v, w) = 0 \forall v
+    \in W\} \).
+    Sia \(B_P^{\bot} = P + W^{\bot} = \{Q \in E : Q = P + w,\,w \in W^{\bot}\}
+    \).
+    Poiché \(B_P^{\top}\) ha giacitura \(W^{\bot}\), B ha giacitura \(W\) segue
+    che \(B \cap B_P^{\bot} \neq \varnothing\). Ora per Grassman affine segue
+    che 
+    \(
+        \dim (B \cap B_P^{\bot}) = 0
+    \)
+    quindi \(B \cap B_P^{\bot} = \{B_P\} \). Notiamo che \(P_B \in B\) e
+    \(\overline{P_B P} \in W^{\bot}\) 
+\end{proof}
+\begin{definition}
+    Definiamo la proiezione su \(B\) come la mappa affine \(F: E \to B\) tale
+    che \(F(P) = P_B\) per ogni \(P \in E\) 
+\end{definition}
+Ora vogliamo definire la riflessione che intuitivamente manda ogni punto al
+punto equidistante dal sottospazio e sulla stessa retta che contiene \(P\) e
+\(P_B\), ma ``dall'altro lato'' del sottospazio
+\begin{definition}
+    Dato \(E\) spazio euclideo e \(B \subseteq E \) un sottospazio, definiamo la
+    riflessione rispetto a \(B\) come \(r_B : E \to E\) nel modo seguente:
+    poniamo \(v = \overline{P_B P} = P - P_B, \, P = P_B + v\) e quindi
+    \(r_B(P) = P_B - v = P - 2v\) 
+\end{definition}
+\begin{remark}
+    La riflessione rispetto a \(B\) verifica le seguenti:
+\begin{enumerate}[label = \arabic*.]
+    \item \(r_B^2 = \text{Id}\)
+    \item \(r_B(P) = P \iff P \in B\) ossia i punti fissi di \(r_B\) sono
+        esattamente i punti del sottospazio \(B\) 
+\end{enumerate}
+\end{remark}
+\begin{proof}
+    Sia \(V\) lo spazio vettoriale associato a \(E\). Abbiamo il prodotto
+    scalare \((\cdot ,\cdot ) : V \times V \to \mathbb{R}\) e sia \(W \subseteq
+    V\) la gicitura di \(B\). \(V = W \otimes W^{\bot}\). Allora, posta \(f: V \to
+    V\) l'applicazione lineare associata a \(r_B\), \(f(w) = w, \,\, \forall w \in W\)
+    e \(f(w') = -w', \,\,\forall w'\in W^{\bot}\).
+    A questo punto \[(f(v), f(v)) = (f(w + w'), f(w + w')) = (w - w', w - w') =
+    (w, w) + (w', w') = (v, v)\] 
+\end{proof}
+\begin{proposition}
+    La riflessione \(r_B : E \to E\) è l'unica isometria che verifica le
+    precedenti proprietà, ossia tale che \(r_B^2 = \text{Id}\) e
+    \(\text{Fix}(r_B) = B\) 
+\end{proposition}
+\begin{proposition}
+    Se \(f : E \to  E\), con \(\dim E = n < +\infty\) è tale che \(f^2 =
+    \text{Id}\) allora \(f\) ha necessariamente almeno un punto fisso, quindi è
+    una riflessione rispetto al sottospazio \(B = \text{Fix}(f)\) 
+\end{proposition}
+\begin{proof}
+    Fisssiamo un riferimento dato da \(O \in E\) e una base \(\mathcal{B}\) di
+    \(V\). Identifichiamo \(E\) con \(\mathbb{E}^{n} = (\mathbb{R}^{n},
+    \mathbb{R}^{n}, (\cdot , \cdot ))\) e \(F(x) = Ax + b\). Quindi \(\text{Id} = F^2 = (A,
+    b) \cdot (A, b) = (A^2, Ab + b) = (I, 0)\). Da \(A^2 = \text{Id}\) otteniamo
+    che \(\mathbb{R}^{n} = E(A, 1) \otimes E(A, -1)\). Da \(Ab = -b\) otteniamo
+    \(Ax_{0} - x_{0} = -b\), con \(x_{0} = \frac{b}{2}\), ma dunque \(Ax_{0} + b
+    = x_{0}\), ma quindi \(x_{0}\) è un punto fisso. Poiché \(F\) è l'identità
+    su \(E(A, 1)\) e \(-I\) su \(E(A, -1)\), quindi \(\text{Fix}(F) =: B = x_{0}
+    + E(A, 1)\) 
+\end{proof}
+
+\begin{definition}
+    Sia \(E\) uno spazio euclideo su \(V\), con \(\dim E = n < +\infty\). Un
+    \textbf{iperpiano}è un sottospazio \(H \subseteq E \) con \(\dim H = n-1\).
+\end{definition}
+
+    Sia \(W\) la gicitura di \(H\) iperpiano, \(W \subseteq V \) è sottospazio e \(\dim W
+    = n-1\). Sia \(W^{\bot} = \text{span} \{u\} \). \(W = \{x \in V: (x, u) = 0\} \).
+    Fissiamo \(P_{0} \in H\), allora \(H = P_{0} + W\). Fissiamo un sistema di
+    riferimento, in modo come prima di identificare \(E\) a \(\mathbb{E}^{n}\),
+    quindi \(X(P_{0}) = v_{0} \in \mathbb{R}^{n}\), allora \[H = \{x \in
+    \mathbb{R}^{n} : (u, x) = (u, v_{0})\} = \{x \in \mathbb{R}^{n} : (u, x -
+v_{0}) = 0\} \] 
+
+    Infatti \(x - v_{0} = \lambda u + w\), con \(w \in W\) e noto che \(x - (v_{0}
+    + w) = \lambda u \in W^{\bot}\). Inoltre \(v_{0}+w \in H\) perché \(v_{0}
+    \in H, w \in W\). Segue che \(y = v_{0} + w\) è la proiezione id \(x\) su
+    \(H\).
+
+    Ora \(x \in H \iff x = P_H(x) \iff \lambda = 0\), in tal caso \(x = v_{0} +
+        w\) e \((u, x) = (u, v_{0}) + (u, w) = (u, v_{0})\) 
+
+    Concludiamo che l'equazione di \(H\) ha la forma \((u, x) = \sum_{i=1}^{n}
+    u_{i} x_{i} = c = (u, v_{0}) \) 
+
+\begin{figure}[ht]
+    \centering
+    \incfig{disegno}
+    \caption{disegno}
+    \label{fig:disegno}
+\end{figure}
+
+Inoltre ora \(r_H(x) = x - 2(x - y) = x - 2\lambda u\). \((u, x-v_{0}) = (u,
+\lambda u + w) = \lambda (u, u) + (u,w)\) da cui ottengo che 
+\[
+    \lambda = \frac{(u, x-v_{0})}{(u, u)} \implies r_H(x) = x - 2 \frac{(u, x-
+    v_{0})}{(u, u)} u
+\]
+
+\begin{theorem}[Cartan-Dieudonné]
+    Sia \(V\) uno spazio vettoriale su \(\mathbb{R}\) tale che \(\dim V = n\).
+    Sia \((\cdot , \cdot ): V \times  V \to \mathbb{R}\) un prodotto scalare.
+    Sia \(f: V \to V\)  ortogonale (quindi isometria)
+    Sia \(d = \dim (\text{Ker}(f - \text{Id}_V))\) sia \(k = n-d\).
+
+    Allora \(f\) si scrive come composizione di \(k\) riflessioni rispetto a
+    iperpiani di \(V\).
+\end{theorem}
+\begin{proof}
+    Dimostriamo per induzione su \(k\).
+\begin{itemize}[label = --]
+    \item Per \(k = 0\) \(f = \text{Id}_V\) poiché \(d = n\), quindi \(f\) è
+        composizione di \(0\) riflessioni
+    \item Supponiamo che \(k > 0\), quindi \(d < n\), ossia \(\exists v \in V :
+    f(v) = v' \neq v\). Poniamo \(H = {(v - f(v))}^{\bot}\), quindi \(\dim H =
+    n-1\)  ( \(H < V\) è iperpiano). Sia \(r_H\) la riflessione rispetto ad
+    \(H\). Sia ora \(f' = r_H \circ f\). Notiamo che \(f'(v) = v\). Infatti
+    \(f(v) = \frac{1}{2} ( v + f(v) ) + \frac{1}{2} (f(v) - v)\) dove \(f(v) - v
+    \in H^{\bot}\) e \(v + f(v) \in H\), perché \((v + f(v), v - f(v)) = (v, v)
+    - (f(v), f(v)) = 0\). Quindi \(r_H(f(v)) = \frac{1}{2}(v + f(v) + v - f(v))
+    = v\) 
+
+    Con questo abbiamo mostrato che \(\exists v \in V : v \in \text{Fix}(f'), v
+    \not\in \text{Fix}(f)\) 
+
+    Ora dobbiamo mostrare che \(\text{Ker}(F - \text{Id}_V) = \text{Fix}(f)
+    \subseteq H \). Se \(w\) è t.c. \(f(w) = w\), abbiamo che \((w, v - f(v)) =
+    (w, v) - (w, f(v)) = (w, v) - (w, v) = 0\) quindi \(w \in H\).
+    
+    Otteniamo quindi che \(\text{Ker}(f - \text{Id}_V) < Ker(f - \text{Id}_V) +
+    <v> < \text{Ker}(f' - \text{Id}_V)\). Inoltre se prendo \(\text{Ker}(f' -
+    \text{Id}_V) \cap H \subseteq \text{Ker}(f - \text{Id}_V) \) 
+
+    Infine \(\dim(H + \text{Ker}(f' - \text{Id}_V)) - \dim H + \dim ( \ker(f' -
+    \text{Id}_V)) - \dim (H \cap \ker(f' - \text{Id}_V))\) da cui \(n = n-1 +
+    \dim (\ker (f' - \text{Id}_V)) - d\) da cui \(\dim \text{Fix}(f') = d + 1\).
+    Per ipotesi induttiva \(f'\) si scrive come composizione di \(k-1\)
+    riflessioni in iperpiani, e poiché \(f = r_H \circ f'\), \(f\) si scrive
+    come composizione di \(k\) riflessioni in iperpiani.
+\end{itemize}
+\end{proof}
+
+\begin{theorem}
+    Sia \(E\) uno spazio euclideo di dimensione \(n\) finito e sia \(F: E \to
+    E\) un'isometria.
+
+    Allora \(F\) si scrive come composizione di al più \(n+1\) riflessioni in
+    iperpiani.
+\end{theorem}
+\begin{proof}
+    Distinguiamo due casi:
+\begin{enumerate}[label = \arabic*.]
+    \item \(F\) ha punti fissi. Sia allora \(P \in E\) t.c. \(F(P) = P\) quindi
+        \(F(Q) = F(P) + f(PQ) = P + f(PQ)\). Per C.D. \(f\) si scrive come
+        composizione di al più \(n\) composizioni in iperpiani. Segue che \(F\)
+        si scrive come composizione di al più \(n\) riflessioni in iperpiani
+        passanti per il punto \(P\) 
+    \item Se \(F\) non ha punti fissi, sia allora \(P \in E, Q := F(P) \neq P\).
+        Allora chiamo \(M\) il punto medio tra \(P\) e \(Q\), ossia \(M :=
+        \frac{1}{2}P + \frac{1}{2}Q\). Successivamente preso \(H = M +
+        (PQ)^{\bot}\), \(F' = r_H \circ F\) ha un punto fisso \(P\), poiché
+        \(F'(P) = r_H(F(P)) = r_H(Q) = P\) per cui si può applicare il primo caso, in tutto
+        ottenendo al più \(n+1\) riflessioni in iperpiani.
+\end{enumerate}
+
+
+\end{proof}
+
+\section{Coniche}
+Consideriamo un polinomio di grado 2 nelle variabili \(x_{1}, x_{2}\).
+Allora ad esempio
+\[
+    Q(x_{1}, x_{2}) = a_{11}x_{1}^2 + 2a_{12}x_{1}x_{2} + a_{22}x_{2}^2 +
+    2b_{1}x_{1} + 2b_{2}x_{2} + c
+\]
+Gli associo ora due matrici:
+\[
+    A = \begin{pmatrix}
+        a_{11} & a_{12} & b_{1} \\
+        a_{12} & a_{22} & b_{2} \\
+        b_{1} & b_{2} & c
+
+    \end{pmatrix}
+    \in \mathcal{M}^{3}(\mathbb{K})\,\,;\,\,
+    B = \begin{pmatrix}
+        a_{11} & a_{12} \\
+        a_{12} & b_{22}
+    \end{pmatrix}
+    \in \mathcal{M}^{2}(\mathbb{K})
+\]
+E supponiamo di avere sempre \(B \neq \mathbf{0}\) 
+Abbiamo ora quindi la \textbf{parte quadratica} \(q(\mathbf{x}) = q(x_{1}, x_{2}) =
+\transp[-1mu]{\mathbf{x}} B \mathbf{x}\) e \textbf{parte lineare} \(L(\mathbf{x}) =
+L(x_{1}, x_{2}) = 2b_{1}x_{1} + 2b_{2}x_{2}\). A questo punto quindi otteniamo
+\[
+    Q(\mathbf{x}) = Q(x_{1}, x_{2}) = q(\mathbf{x}) + L(\mathbf{x}) =
+    \transp[-1mu]{\mathbf{x}} B \mathbf{x} + L(\mathbf{x}) + c = \transp{v} A v
+\]
+dove \(v = (x_{1}, x_{2}, 1)\). E posto \(w = (x_{1}, x_{2}, z)\) possiamo
+considerare la forma quadratica in 3 variabili
+\[
+    \widetilde{Q}(w) = \transp{w} A w = a_{11}x^2 + 2a_{12}x_{1}x_{2} + a_{22}x_{2}^2 +
+    2b_{1}x_{1}z + 2b_{2}x_{2}z + cz^2
+\]
+Ora quindi abbiamo che \(Q(x_{1}, x_{2}) = \widetilde{Q}(x_{1}, x_{2}, 1)\) 
+
+\begin{definition}
+Vogliamo studiare il luogo degli zeri \(\{Q(\mathbf{x}) = 0\} \subseteq
+\mathbb{K}^2  \). Tale luogo viene chiamato \textbf{conica}
+\end{definition}
+\begin{remark}
+    Se \(\lambda \in \mathbb{K}^{*} = \mathbb{K} \smallsetminus \{0\} \) e
+    \(Q' = \lambda Q\) allora \(Q\) e \(Q'\) hanno lo stesso luogo di zeri e
+    definiscono la stessa conica. In particolare \(Q\) e \(-Q\) definiscono la
+    stessa conica.
+\end{remark}
+\begin{definition}
+    \(Q\) è una conica degenere se \(\det A = 0\).
+\end{definition}
+Cerchiamo di iniziare la caratterizzazione delle conice degeneri. Supponiamo
+quindi \(Q\) con \(\det A = 0\). Supponiamo \(\mathbb{K} = \mathbb{R}\) o \(\mathbb{C}\). Poiché \(B\neq 0\)
+allora \(1 \le \text{rk} A \le 2\).
+
+Per Sylvester \(\exists M \in GL_3(\mathbb{K})\) tale che \(\transp{M} A M = D\)
+diagonale. \(D\) ha almeno un autovalore nullo e almeno un autovalore non nullo,
+poiché \(Q\) e \(-Q\) definiscono la stessa conica possiamo assumere che abbia
+un autovalore positivo.
+
+Possiamo scrivere \(\widetilde Q = aL_{1}(x_{1}, x_{2}, z)^2 + bL_{2}(x_{1}, x_{2},
+z)^2\), dove \(L_{1}\) e \(L_{2}\) sono lineari e \(a > 0\). Ora studiamo il
+luogo degli zeri di \(\widetilde{Q}\).
+\begin{itemize}[label = --]
+    \item Supponiamo \(a > 0, b > 0\). Allora \(\widetilde{Q}(x_{1}, x_{2}, z) =
+        0)\) se e solo se entrambe le equazioni sono \(0\), ossia
+        \begin{align*}
+            L_{1}(x_{1}, x_{2}, z) = 0 \\
+            L_{2}(x_{1}, x_{2}, z) = 0
+        \end{align*}
+        Quindi \(Q\) è intersezione di tre piani affini (anche \(z = 1\)), quindi abbiamo le
+        seguenti possibilità (notare che gli autospazi relativi ad \(a\) e \(b\)
+        devono essere linarmente indipendenti)
+\begin{itemize}[label = --]
+    \item \(Q = \varnothing\) se \(L_{1}(x_{1}, x_{2}, z)\) o \(L_{2}(x_{1},
+        x_{2}, z)\) è dellta forma \(\lambda z = 0\), ad esempio \(x^2 + 1 =
+        0\); oppure se \(L_{1} = 0\) e \(L_{2}= 0\) definiscono due rette
+        parallele in \(\mathbb{K}^2\) quando intersecate con \(z=1\). 
+    \item \(Q = \{P\} \) se l'intersezione tra \(L_{1} = 0, L_{2} = 0, z=1\) è
+        un punto. Ad esempio \(x^2+y^2 = 0\).
+\end{itemize}
+    \item \(a > 0, b = 0\). Allora \(Q = \{L_{1}(x_{1}, x_{2}, 1) = 0\} \) per
+        cui
+\begin{itemize}[label = --]
+\item \(Q = \varnothing\) se \(L_{1} = \lambda z\) oppure
+\item \(Q =\) retta altrimenti
+\end{itemize}
+\item \(a > 0, b < 0\) allora
+    \[
+        0 = aL_{1}^2 + bL_{2}^2 = \left( \sqrt{a}L_{1} + \sqrt{-b}L_{2} \right)
+        \left( \sqrt{a}L_{1} - \sqrt{-b}L_{2} \right) = M_{1}M_{2}
+    \]
+    Che però è il prodotto di due espressioni lineari \(M_{1}\) e \(M_{2}\) di
+    \(x_{1}, x_{2}, z\). Quindi poiché il luogo degli zeri è in questo caso
+    l'unione dei luoghi degli zeri di \(M_{1}\) e \(M_{2}\) risultano due
+    possibilità:
+\begin{itemize}[label = --]
+    \item \(Q\) è una retta se \(M_{1}\) o \(M_{2}\) sono della forma \(\lambda
+        z = 0\). 
+    \item \(Q\) è unione di due rette altrimenti. Ad esempio \(x^2- y^2 =
+        (x+y)(x-y) = 0 \iff x = y \lor x = -y\) quindi è le due diagonali.
+\end{itemize}
+\end{itemize}
+Concludiamo che in ogni caso le coniche degeneri sono contenute nell'unione di
+due rette.
+
+\subsection{Caratterizzazione affine coniche non degeneri}
+Procediamo ora studiando le coniche non degeneri, qui differenziamo tra
+\(\mathbb{K} = \mathbb{R}\) e \(\mathbb{K} = \mathbb{C}\). Iniziamo con
+\(\mathbb{K} = \mathbb{R}\) e ovviamente supponiamo \(\det A \neq 0\) 
+\begin{lemma}
+    Sia \(\mathcal{Q} = \{(x_{1}, x_{2}) : Q(x_{1}, x_{2}) = 0\} \) una conica
+    non degenere (\(\det A \neq 0\)). Se la matrice \(A\) è definita positiva o
+    negativa allora \(Q = \varnothing\) 
+\end{lemma}
+\begin{proof}
+    \(Q(x_{1}, x_{2}) = \widetilde{Q}(x_{1}, x_{2}, 1)\) ma poiché \(\widetilde{Q}\) è
+    definita, si annulla solo nell'origine, per cui \(\widetilde{Q}(x_{1}, x_{2},
+    1)\) è sempre diverso da \(0\) 
+\end{proof}
+Viene comunque chiamata \emph{non degenere senza punti reali} poiché in
+\(\mathbb{K} = \mathbb{C}\) è una ``normale'' conica non degenere.
+
+Ora supponiamo (a meno di moltiplicare per \(-1\)) che \(A\) abbia segnatura (2, 1). 
+Sia ora \(s = (p, q)\) la segnatura di \(B\).
+\begin{enumerate}[label = \arabic*.]
+    \item Se \(s = (2, 0)\), quindi \(\det B > 0\),  allora \(\mathcal{Q}\) è equivalente in senso
+        affine a \(x^2 + y^2 - 1 = 0\), ossia è un ellisse.
+    \item Se \(s = (1, 1)\), quindi \(\det B < 0\), allora \(\mathcal{Q}\) è equivalente in senso affine
+        a \(x^2 - y^2 - 1 = 0\), ossia è un'iperbole.
+    \item Se \(s = (1, 0)\), quindi \(\det B = 0\), allora \(\mathcal{Q}\) è
+        equivalente in senso affine a \(x^2 + 2y = 0\), ossia è una parabola
+\end{enumerate}
+\begin{proof}
+    Supponiamo di essere nel caso 1., quindi \(s = (2, 0)\). Per il teorema
+    di Sylvester \(\exists M \in GL_{2}(\mathbb{R})\) tale che \(\transp{M} B M =
+    I\). Allora pongo \(\begin{pmatrix}
+        x \\
+        y
+    \end{pmatrix} = M \begin{pmatrix}
+        x' \\
+        y' 
+    \end{pmatrix}\) (e \(z = z'\)). Quindi \(Q(x, y) = \transp[-1mu]{\mathbf{x}} B
+    \mathbf{x} + L(\mathbf{x}) + c = \transp[-1mu]{\mathbf{x}}' \transp{M} B M \mathbf{x}' +
+    L(M \mathbf{x'}) + c = x'^2 + y'^2 + b_{1} x' + b_{2} y' + c\). Quindi
+    tramite un cambiamento di coordinate affini abbiamo mostrato che ogni conica
+    del tipo \(s = (2, 0)\) è affinemente equivalente a \(Q(x, y) = x^2 + y^2 +
+    2b_{1}x + 2 b_{2}y + c\). Adesso pongo \(x' = x_{1} + b_{1}\) e \(y'= x_{2} +
+    b_{2}\) compiendo una trasformazione affine (traslazione). Quindi ottengo
+    che \(Q(x, y) = x_{1}^2 - \cancel{2b_{1}x_{1}} + b_{1}^2 + x_{2}^2 - \cancel{2b_{2}x_{2}} +
+    b_{2}^2 + \cancel{2b_{1}x_{1}} + \cancel{2b_{2}x_{2}} + c = x_{1}^2 +
+    x_{2}^2 - r^2 \), dove \(r^2\) è la costante risultante (e assumo \(r =
+    \sqrt{r^2} > 0\)). Inoltre so che
+    \(r^2 > 0\) perché il polinomio ottenuto \(Q(x_{1}, x_{2})\) deve avere
+    matrice \(A\) con segnatura \((2, 1)\) e sappiamo che la segnatura di \(B\)
+    è (2, 0). Infine pongo \(x_{1} = r x_{1}'\) e \(x_{2} = r x_{2}'\) trovando
+    quindi che il luogo degli zeri è definito da \(\mathcal{Q} = \{(x_{1}',
+    x_{2}') : \cancel{r^2}(x_{1}'^2 + x_{2}'^2 - 1) = 0\}\) 
+
+    In modo simile si procede nel caso \(s = (1, 1)\) con la sola eccezione di
+    trovare un segno meno, e alla fine ottenere quindi che la conica è
+    affinemente equivalente a \(\mathcal{Q} = \{(x, y) : x^2 - y^2 - 1 = 0\} \) 
+\end{proof}
+\begin{figure}[ht]
+    \centering
+    \incfig{figura_nuova}
+    \caption{figura_nuova}
+    \label{fig:figura_nuova}
+\end{figure}
+
+
+
+\end{document}

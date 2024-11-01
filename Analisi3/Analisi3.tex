@@ -1,0 +1,1651 @@
+\input{~/.config/nvim/templates/preamble_appunti.tex}
+\title{Appunti di Analisi 3 \-- Equazioni Differenziali}
+\author{Osea}
+\date{Primo semestre A.A. 2024 \-- 2025, prof. Enrico Vitali}
+
+\begin{document}
+
+\maketitle
+Libro suggerito: \emph{Hirsch, Smale, Devaney}
+
+
+\setcounter{section}{-1}
+\section{Esempi}
+Sia abbia una ``popolazione'' la quantità $x(t)$ evolva nel tempo. Allora il
+rapporto \(x'(t) / x(t)\) è il tasso di variazione della popolazione.
+L'equazione
+\[
+    \frac{x'(t)}{x(t)} = r(t, x(t))
+\]
+è un'equazione differenziale. Tipicamente si considera il problema ai valori
+iniziali (di Cauchy) dove è aggiunta anche una condizione \(x(0) = x_{0}\) 
+
+\begin{example}[Malthus]
+    Se \(r\) è costante abbiamo la cosiddetta legge di Malthus.
+    \begin{align*}
+        \frac{x'(t)}{x(t)} &= r \quad x(t) > 0 \\
+        \log x(t) &= rt + c \quad c \in \mathbb{R} \\
+        x(t) &= e^{c} \cdot e^{rt}
+    \end{align*}
+    dove se \(x(0) = e^{c} = x_{0}\) si ottiene \(x(t) = x_{0} e^{rt}\) 
+
+    Un esempio dove questo si potrebbe verificare è il decadimento radioattivo.
+\end{example}
+
+\begin{example}[Logistica]
+    Non si può invece applicare in una situazione realistica di uno studio di
+    una popolazione l'esempio della crescita esponenziale, non essendo
+    ragionevole in quanto non considera la capacità di carico ambientale. La si
+    introduce quindi. Allora possiamo modellizzare il fatto con:
+    \[
+        \frac{x'(t)}{x(t)} = r\left(1 - \frac{x(t)}{K}\right)
+    \]
+    Da cui si ottiene dopo qualche calcolo
+    \[
+        x(t) = k \frac{Ce^{rt}}{1 + Ce^{rt}}
+    \]
+    con \(C \in \mathbb{R}\), in particolare scriviamo \(C = e^{-rt_{0}}\) con
+    \(t_{0}\) definito opportunamente. Allora le soluzioni sono 
+    \[
+        x(t) = k \frac{e^{r(t-t_{0})}}{1 + e^{r(t-t_{0})}}
+    \]
+    Questo rende evidente che i grafici sono tutti uno traslato temporale
+    dell'altro. Si può quindi studiare solo una soluzione, ad esempio per
+    \(t_{0}=0\) essendo le altre semplici traslazioni temporali di questa.
+    \[
+        x(t) = k \frac{e^{rt}}{1 + e^{rt}} = \frac{k}{1 + e^{-rt}}
+    \]
+\begin{figure}[ht]
+    \centering
+    \incfig{logistica}
+    \caption{logistica}\label{fig:logistica}
+\end{figure}
+\end{example}
+
+Ciò che abbiamo ottenuto riguardo alle soluzioni, dove ogni soluzione è una
+traslazione temporale di un'altra, è un caso generale delle equazioni
+differenziali non dipendenti dal tempo. Il che è una facile osservazione del
+fatto che se \(x'(t) = f(x(t))\) e \(x_\tau(t) := x(t - \tau)\) allora anche
+\(x_\tau\) è soluzione poiché \(x_\tau'(t) = x'(t-\tau) = f(x(t-\tau)) =
+f(x_\tau(x))\).
+
+\begin{example}
+Le equazioni precedenti modellizzano anche fenomeni differenti. Ad esempio in
+chimica se considero la reazione chimica \(H_{2}+I_{2} \to 2HI\) posso
+considerare la velocità di cambiamento della concentrazione nella soluzione
+della reazione e quindi in questo caso ottenere
+\[
+    -\frac{1}{2} \frac{d[HI]}{dt} = \frac{d[H_{2}]}{dt} = \frac{d[I_{2}]}{dt}
+\]
+dove la prima derivata è definita essere la ``velocità'' \(v(t)\) della
+reazione. La legge cinetica dice che \(v\) è proporzionale al prodotto delle
+concentrazioni di \(H_{2}\) e \(I_{2}\) quindi 
+\begin{align*}
+    v(t) =  k {[H_{2}]}_t {[I_{2}]}_t = \frac{d{[HI]}_t}{dt} \\
+\end{align*}
+E il resto è lasciato come esercizio
+con l'obiettivo di mostrare che la reazione ha uno sviluppo logistico.
+
+La reazione inversa invece si modellizza con \(x'(t) = -r{x(t)}^2\). Proviamo a
+risolverla e otteniamo che
+\begin{align*}
+    x' = rx^2 \implies \int \frac{1}{x^2} dx = rt + c \\
+    -\frac{1}{x(t)} = rt + c \implies x(t) = -\frac{1}{rt + c}
+\end{align*}
+Se poniamo \(x(0) = x_{0}\) otteniamo \(x_{0} = -\frac{1}{c}\) da cui \(c =
+-\frac{1}{x_{0}}\) quindi 
+\[
+    x(t) = -\frac{1}{rt - \frac{1}{x_{0}}}
+\]
+\begin{figure}[ht]
+    \centering
+    \incfig{xpisxsr}
+\caption{\(x'(t) = rx{(t)}^2\) per \(r = 1\) }\label{fig:xpisxsr}
+\end{figure}
+\end{example}
+
+\begin{example}[Oscillatore armonico]
+\begin{figure}[ht]
+    \centering
+    \incfig{oscillatore_armonico}
+    \caption{oscillatore armonico}
+    \label{fig:oscillatore_armonico}
+\end{figure}
+    Sia \(m\) una massa vincolata in modo elastico ad una posizione fissa. Sia
+    \(x=0\) l'ascissa quando la molla è a riposo. Se la massa è nella posizione
+    di ascissa \(x(t)\) al tempo \(t\) allora subisca la forza di richiamo
+    (Hooke) \(F = -kx(t)\). Allora dalla seconda legge della dinamica
+    \[
+        m \ddot{x} = -kx^2 \iff \ddot{x}(t) + \omega^2 x(t) = 0, \quad \omega^2
+        = \frac{k}{m}
+    \]
+    È un'equazione differenziale del secondo ordine lineare a coefficienti
+    costanti, omogenea. Allora le soluzioni sono della forma
+    \[
+        x(t) = c_{1}\cos(\omega t) + c_{2}\sin(\omega t), \quad c_{1}, c_{2} \in
+        \mathbb{R}
+    \]
+    Ho due costanti poiché devo definire posizione e velocità iniziale, e
+    infatti il problema tipico ai valori iniziali per un'equazione del secondo
+    ordine è 
+    \[
+        \begin{cases}
+            \ddot{x} + \omega^2x = 0 \\
+            x(0) = x_{0} \\
+            \dot{x}(x) = v_{0}
+        \end{cases}
+    \]
+    Posso riscrivere la precedente soluzione nella forma 
+    \[
+        x(t) =
+        \sqrt{c_{1}^2+c_{2}^2}(\frac{c_{1}}{\sqrt{c_{1}^2+c_{2}^2}}\cos(\omega
+        t) + \frac{c_{2}}{\sqrt{c_{1}^2+c_{2}^2}}\sin(\omega t))
+    \]
+    dove i coefficienti di seno e coseno sono le coordinate di un punto sulla
+    circonferenza unitaria, quindi sono coseno e seno di un angolo \(\varphi\),
+    da cui otteniamo che \(x(t) = A\cos(\omega t + \varphi)\) 
+\end{example}
+\begin{example}[Varianti dell'oscillatore armonico]
+    In presenza di attrito viscoso le precedenti diventano
+    \begin{align*}
+        m\ddot{x} = -kx - h\dot{x} \\
+        \ddot{x} + \gamma \dot{x} + \omega^2x = 0
+    \end{align*}
+    E se aggiungiamo anche una forza esterna costante 
+    \begin{align*}
+        m\ddot{x} = -kx - h\dot{x} + \psi \\
+        \ddot{x} + \gamma \dot{x} + \omega^2x = f
+    \end{align*}
+    che è non omogenea
+\end{example}
+\begin{example}[Corrente elettrica]
+    Preso un circuito \(RC\) abbiamo una forza elettromotrice che crea una
+    differenza di potenziale \(\mathcal{E}\), un condensatore
+    di capacità \(C\) e una resistenza \(R\). Sia \(q(t)\) la carica sulle
+    piastre del condensatore. Allora risulta che in ogni momento
+    \(\frac{q(t)}{V} = C\) costante. La resistenza invece per la legge di ohm
+    \(V = i(t)R\), allora otteniamo una legge
+    \[
+       \mathcal{E} = Ri + \frac{q}{C} = Rq' + \frac{q}{C} 
+    \]
+    che è una equazione lineare del primo ordine.
+
+    In un circuito reale invece è presente un terzo termine legato
+    all'induttanza del filo, creando un circuito \(RLC\), consideriamo quindi di
+    aggiungere al circuito precedentemente analizzato un'induttanza \(L\).
+    Allora abbiamo
+    \[
+        \mathcal{E} - \mathcal{E}_L = Ri + \frac{q}{C}
+    \]
+    dove \(\mathcal{E}_L = Li'\) è l'inerzia elettrica del sistema, l'equazione
+    diventa
+    \[
+        L\ddot{q} + R\dot{q} + \frac{q}{C} = \mathcal{E}
+    \]
+    Ossia un'ODE lineare a coefficienti costanti del secondo ordine non omogenea.
+\end{example}
+
+\begin{example}[Equazione di Schrödinger]
+    \[
+        -\frac{\hbar}{2m} \nabla^2_x \psi(x, t) + U(x, t)\psi(x, t) = i
+        \frac{\partial \psi}{\partial t}
+    \]
+    Supponiamo che il potenziale \(U\) sia indipendente dal tempo \(t\), ossia
+    \(U = U(x)\) e cerchiamo soluzioni della forma a variabili separate, cioè
+    \(\psi(x, t) = u(x) \varphi(t)\), inoltre poniamoci in una sola dimensione,
+    otteniamo:
+    \[
+        -\frac{\hbar}{2m} u''(x)\varphi(t) + U(x)u(x) \varphi(t) =
+        iu(x)\varphi'(t)
+    \]
+    Da cui dividendo per \(u(x)\varphi(t)\) 
+    \[
+        -\frac{\hbar}{2m}\frac{u''(x)}{u(x)} + U(x) =
+        i\frac{\varphi'(t)}{\varphi(t)}
+    \]
+    E poiché abbiamo che un'equazione in \(x\) è uguale ad una in \(t\) deve
+    essere che entrambi i membri sono costanti, diciamo \(E\).
+    \[
+        \begin{cases}
+            \frac{\hbar^2}{2m}u''(x) = (U(x) - E)u(x) \\
+            \frac{\varphi'(t)}{\varphi(t)} = -iE
+        \end{cases}
+    \]
+    La prima è un'equazione differenziale lineare del secondo ordine a
+    coefficienti non costanti (in generale) e si può riscrivere come 
+    \[
+        Lu := -\frac{\hbar^2}{2m} u''(x) + U(x)u(x)
+    \]
+    è un operatore lineare su \(u\) e allora l'equazione diventa
+    \[
+        Lu = Eu
+    \]
+    ossia un'equazione agli autovalori per l'operatore \(L\).
+
+    Ad esempio nel caso \(U(x) = \frac{1}{2}k x^2\) e con opportuni cambi di
+    variabile si arriva alla cosiddetta \emph{equazione di Hermite}
+    \[
+        H''(\xi) - 2\xi H' + \cos t H = 0
+    \]
+    che dà luogo ai cosiddetti \emph{polinomi di Hermite}
+\end{example}
+Altri due esempi importanti sono, nel caso dei sistemi (tra cui l'esempio famoso
+del preda-predatore di Lotka-Volterra) e le elastiche piane.
+Ulteriore esempio è il moto di un pendolo, che si può modellizzare con un'ODE di
+secondo ordine non lineare.
+\begin{example}[Elastiche piane]
+    Sia abbia una verga elastica (barra) che supponiamo in una posizione di
+    equilibrio della forma grafico \(y = u(x)\) 
+\begin{figure}[ht]
+    \centering
+    \incfig{elastica_piana}
+    \caption{Elastica Piana}\label{fig:elastica_piana}
+\end{figure}
+    Con ipotesi modellistica, ossia \textbf{il momento flettente è proporzionale
+    alla curvatura}, dove la curvatura in un punto \(x\) si può calcolare con
+    \[
+        \kappa(x) = \frac{u''(x)}{{(1 + {u'(x)}^2)}^{3/2}}
+    \]
+    e il momento flettente si può immaginare intuitivamente come la forza locale
+    sulla verga ed è proporzionale al valore di \(u(x)\). Allora si ottiene
+    l'equazione
+    \[
+        \kappa(x) = -\lambda u(x) \iff u''(x) + \lambda u(x){(1 +
+        {u'(x)}^2)}^{3/2} = 0
+    \]
+    dove \(\lambda \in \mathbb{R}\) è una costante.
+\begin{remark}
+    La costante \(\lambda\) e la lunghezza della verga sono legate (significato
+    modellistico)
+\end{remark}
+\end{example} 
+\begin{example}[Equazioni di Lotka-Volterra]
+    Siano \(x_{1}(t)\) e \(x_{2}(t)\) le popolazioni di due specie che interagiscono
+    tra loro. Allora si può modellizzare il fatto che la popolazione di una
+    specie è proporzionale alla sua popolazione e alla popolazione dell'altra
+    specie. Sia allora \(\frac{x_{i}'(t)}{x_{i}(t)}\) il tasso di variazione
+    della popolazione \(x_{i}\). Supponiamo adesso che \(x_{1}\) sia la
+    ``preda'' e \(x_{2}\) il ``predatore''. Allora si può modellizzare
+    l'evoluzione del sistema esprimendo il tasso di variazione delle
+    popolazioni. In particolare per la preda abbiamo
+    \[
+        \frac{x_{1}'(t)}{x_{1}(t)} = \alpha - \beta x_{2}(t)
+    \]
+    dove \(\alpha\) è il tasso in assenza di predatori e \(b\) è il tasso di
+    morte causato dai predatori. Per il predatore invece si ha
+    \[
+        \frac{x_{2}'(t)}{x_{2}(t)} = \delta x_{1}(t) - \gamma
+    \]
+    In conclusione, il sistema di equazioni differenziali è
+    \[
+        \begin{cases}
+            x_{1}'(t) &= (\alpha - \beta x_{2}(t))\,x_{1}(t) \\
+            x_{2}'(t) &= (\delta x_{1}(t) - \gamma)\,x_{2}(t)
+        \end{cases}
+    \]
+    che è un sistema non lineare di due equazioni differenziali. Il problema ai
+    valori iniziali naturalmente associato è quello che si ottiene aggiungendo i
+    dati \(x_{1}(t_{0}) = x_{1}^{0}\) e \(x_{2}(t_{0}) = x_{2}^{0}\).
+
+    Anche questo sistema può essere trasformato ad una versione logistica,
+    cambiando i fattori \(\alpha \) in \(\alpha(1 - \frac{x_{1}}{k_{1}})\) e
+    analogamente per \(x_{2}\), ottenendo il sistema
+    \[
+        \begin{cases}
+            x_{1}' = x_{1}(\alpha - \lambda x_{1} - \beta x_{2}) \\
+            x_{2}' = x_{2} (-\gamma + \delta x_{1} - \mu x_{2})
+        \end{cases}
+    \]
+\end{example}
+
+\section{Equazioni differenziali ordinarie}
+In generale quindi abbiamo diversi esempi (\(x' = rx\), \(x' = rx(1-x)\), \(Rq'
++ \frac{1}{C} q = \mathcal{E}\)) di equazioni della forma \(x' = f(t, x)\).
+Anche in Lotka-Volterra abbiamo una forma simile ma con due variabili, infatti
+considerando \(\mathbf{x}(t) = (x_{1}(t), x_{2}(t))\) abbiamo che possiamo
+riscrivere il sistema come un sistema vettoriale della forma \(\mathbf{x}'(t) =
+\mathbf{f}(t, \mathbf{x}(t))\).
+\begin{definition}[soluzione di un'equazione differenziale]
+    Sia \(D \subseteq \mathbb{R} \times \mathbb{R}^{n} \), con \(n \ge 1\)
+    aperto. Sia \(f : D \to \mathbb{R}^{n}\) continua. Consideriamo l'equazione
+    differenziale \(x'(t) = f(t, x(t))\), che è detta quindi in \emph{forma
+    normale}.
+
+    Diciamo \textbf{soluzione} dell'equazione differenziale ogni funzione \(x :
+    J \to \mathbb{R}^{n}\) con \(J\) intervallo, di classe \(C^{1}\) e tale che 
+    \[
+        \forall t \in J, (t, x(t)) \in D
+    \]
+    e su \(D\) è verificata l'uguaglianza 
+    \[
+        x'(t) = f(t, x(t))
+    \]
+\end{definition}
+Nel caso scalare (ossia \(n=1\)) dunque abbiamo che \(x(\cdot )\) è soluzione se ogni punto
+\((t, x(t))\) del grafico ha pendenza pari al valore di \(f(t, x(t))\).
+\begin{figure}[ht]
+    \centering
+    \incfig{pendenzagrafico}
+    \caption{Soluzione di un'equazione differenziale nel caso \(n=1\) }\label{fig:pendenzagrafico}
+\end{figure}
+
+Nel caso invece di equazioni differenziali del secondo ordine (come il moto
+armonico, il pendolo, l'elastica piana, il circuito RLC ecc\dots) si ha che 
+\[
+    x''(t) = f(t, x(t), x'(t))
+\]
+con \(x(\cdot )\) incognita. Questa forma è detta \emph{forma normale} per
+un'equazione del secondo ordine.
+In generale se \(\mathbf{x}(t) = (x_{1}(t), x_{2}(t), x_{3}(t)) \) è un punto
+mobile in \(\mathbb{R}^{3}\) sotto l'azione di un campo di forza \(\mathbf{F}(t,
+\mathbf{x}(t), \mathbf{x}'(t))\) allora per la seconda legge della dinamica si
+ottiene il sistema del secondo ordine
+\[
+    m\mathbf{x}''(t) = \mathbf{F}(t, \mathbf{x}(t), \mathbf{x}'(t)) 
+\]
+Un'equazione del secondo ordine in forma normale può essere ricondotta a un
+sistema del primo ordine in forma normale, come
+\[
+    x''(t) = f(t, x(t), x'(t)) \iff
+    \begin{cases}
+        x'(t) &= v(t) \\
+        v'(t) &= f(t, x(t), v(t))
+    \end{cases}
+\]
+Dove abbiamo introdotto la variabile \(v(t) = x'(t)\). A questo punto il sistema
+può essere scritto in forma vettoriale come \(\mathbf{x}(t) = (x(t), v(t))\), e
+quindi \(\mathbf{x}'(t) = \mathbf{f}(t, \mathbf{x}) = (v(t), f(t, x(t), v(t)))\) 
+
+Analogalmente equazioni di ordine superiore possono essere ricondotte a sistemi
+di primo ordine introducendo le variabili \(x_{i} = x^{(i)}\) dove \(x^{(i)}\) è
+la \(i\)-esima derivata di \(x\). Il sistema che analizzeremo sarà quindi
+\[
+    \begin{cases}
+        x_{1}'(t) &= x_{2}(t) \\
+        x_{2}'(t) &= x_{3}(t) \\
+        &\vdots \\
+        x_{n}'(t) &= f(t, x_{1}(t), x_{2}(t), \ldots, x_{n}(t))
+    \end{cases}
+\]
+dove \(n\) è il grado dell'equazione differenziale.
+
+Il problema ai valori iniziali associato al sistema del primo ordine
+\(\mathbf{x}'(t) = \mathbf{f}(t, \mathbf{x}(t))\) si ha aggiungendo il requisito
+\(\mathbf{x}(0) = \mathbf{y}_0\), per cui ovviamente nel caso di un'equazione di
+ordine superiore il problema ai valori iniziali è dato dal richiedere, per ogni
+derivata \(x^{(i)}\), il valore iniziale \(x^{(i)}(0) = y_{i}\).
+
+È particolare il caso in cui \(f\) non dipende da \(t\) e viene detto
+\textbf{caso autonomo} allora se \(\Omega \subseteq \mathbb{R}^{n} \) è aperto e
+\(f: \Omega \to \mathbb{R}^{n}\) è continua allora l'equazione è \(x' = f(x)\)
+dove la soluzione è una funzione \(x : J \to \Omega\) con \(J\) intervallo.
+\begin{example}[Logistica]
+    L'equazione, come visto in precedenza è 
+    \[
+        x' = rx(1- \frac{x}{k}) = f(x)
+    \]
+    Allora il campo di pendenza non dipende da \(t\), vedasi
+    figura~\ref{fig:pendenza_logistica}
+\begin{figure}[ht]
+    \centering
+    \incfig{pendenza_logistica}
+    \caption{Pendenza della logistica}\label{fig:pendenza_logistica}
+\end{figure}
+
+Allora abbiamo un'invarianza delle soluzioni per traslazione temporali, infatti
+se \(x\) è soluzione e \(x_\tau(t) := x(t - \tau)\) allora \(x_\tau'(t) =
+f(x(t-\tau)) = f(x_\tau(t))\).
+In tal modo possiamo creare uno ``Spazio degli stati'' ossia un'immagine in cui
+raffiguriamo soltanto le posizioni di \(x\), come si evolve il sistema in quei
+punti, poiché rappresentare \(t\) è ridondante, otteniamo per la logistica il
+seguente schema:
+
+\begin{figure}[ht]
+    \centering
+    \incfig{logistica_stati}
+    \caption{Spazio degli stati dell'equazione logistica}\label{fig:logistica_stati}
+\end{figure}
+\end{example}
+
+Possiamo espandere l'idea dello spazio degli stati a equazioni vettoriali
+autonome del primo ordine, dove rappresentiamo in ogni punto \(\mathbf{x}\) dello spazio
+\(\mathbb{R}^{n}\) la pendenza, data dal vettore \(\mathbf{f}(\mathbf{x})\),
+successivamente possiamo rappresentare l'evoluzione del sistema in questo
+spazio, ottenendo le \emph{orbite} (cercare su internet ``campo di pendenza
+Lotka-Volterra'' oppure ``orbite Lotka-Volterra'' per vedere esempi, in tal caso
+in \(\mathbb{R}^2\)). Le orbite quindi in generale (anche nel caso non autonomo)
+sono \textbf{la proiezione della curva della soluzione su uno spazio degli
+stati, che è dato dalle coordinate che non sono quella del tempo}.
+
+\subsection{Alcuni esempi di risoluzione esplicita}
+\begin{example}[Equazioni a variabili separabili]
+    Si tratta di equazione differenziale della forma
+    \[
+        x'(t) = g(t) \, h(x)
+    \]
+    con \(g\) e \(h\) funzioni continue su un intervallo (ad esempio). Se
+    \(\overline{x}\) è uno zero di \(h\) allora \(x(t) = \overline{x}\) è una
+    soluzione costante. Un esempio chiaro è la logistica
+    (figura~\ref{fig:logistica}) in cui se \(h(x) = x\left( 1- \frac{x}{K}
+    \right) \) allora \(x(t) = 0\) e \(x(t) = K\) sono soluzioni costanti.
+
+    Sia \(x: J \to \mathbb{R}\) una soluzione che non assume mai come valore uno
+    degli zeri di \(h\). Allora possiamo scrivere
+    \[
+        \frac{x'(t)}{ h(x(t)) } = g(t) \quad \text{(su \(J\))}
+    \]
+    Da cui integrndo entrambi i membri
+    \[
+        \int \frac{x'(t)}{h(x(t))} dt = \int g(t) dt \iff \int \frac{1}{h(\xi)}
+        d\xi = \int g(t) dt 
+    \] 
+    Dove si è fatto il cambio di variabile \(\xi = x(t)\). Allora se \(H\) e
+    \(G\) sono primitive di \(\frac{1}{h}\) e di \(g\) rispettivamente si ha che
+    \[
+        H(x(t)) = G(t) + c
+    \]
+    che è un'equazione che definisce implicitamente la soluzione.
+    \begin{example}
+        Si consideri l'equazione \(x' = rt \left( x^2 - x \right) \) con \(r \in
+        \mathbb{R}\). Allora si ha che \(h(x) = x^2 - x\) e \(g(t) = rt\).
+        Gli zeri di \(h\) sono \(0\) e \(1\) per cui \(x(t) = 1\) e \(x(t) = 0\)
+        sono le soluzioni costanti.
+
+        Se invece \(x(t) \neq 0, 1\) allora si ha
+        \[
+            \frac{x'}{x^2 - x} = 2t \iff \int \frac{1}{x^2 - x} dx = \int 2t dt
+            \iff \log \left| \frac{x-1}{x} \right| = t^2 + c
+        \]
+        quindi abbiamo che, elevando entrambi i membri alla base \(e\), e
+        sostituendo \(e^{c} \in \mathbb{R}\) con \(C > 0\).
+        \[
+            \left|\frac{x-1}{x}\right| = Ce^{t^2}
+        \]
+        Poiché in questo caso il segno di \(\frac{x-1}{x}\) è costante su \(J\)
+        (infatti \(x(J)\) è connesso e non contiene né \(0\) né \(1\)).
+        Scegliendo quindi \(K \in \mathbb{R} \sminus \{0\}\) abbiamo
+        \[
+            x(t) = \frac{1}{1 - Ke^{t^2}} \quad K \neq 0
+        \]
+        Notiamo che invece per \(K = 0\) si recupera la soluzione costante \(x(t)
+        = 1\).
+    \end{example}
+\end{example}
+
+\begin{example}[Equazioni lineari del primo ordine]
+    \[
+        x'(t) + p(t)\,x(t) = q(t)
+    \]
+    con \(p, q\) funzioni continue su un intervallo \(I\).
+
+    Sia \(P(t)\) una primitiva di \(p(t)\). Moltiplichiamo per \(e^{P(t)}\).
+    \[
+        e^{P(t)}x'(t) + e^{P(t)}p(t)x(t) = e^{P(t)}q(t)
+    \]
+    Dove il primo membro è evidentemente la derivata di \((e^{P(t)}x(t))\),
+    quindi integrando entrambi i membri si ottiene
+    \[
+        e^{P(t)}x(t) = \int e^{P(t)}q(t) dt
+    \]
+    (Cioè \(e^{P(t)} x(t)\) è una primitiva di \(e^{P(t)} q(t)\)). Esplicitando
+    \(x(t)\) otteniamo
+    \[
+        x(t) = e^{-P(t)} \int e^{P(t)}q(t) dt
+    \]
+    Se consideriamo il problema con dato \(x(t_{0}) = x_{0}\) la soluzione si
+    può ottenere direttamente integrando tra \(t_{0}\) e \(t\), ossia
+    \[
+        \begin{cases}
+            \displaystyle
+            P(t) = \int_{t_{0}}^{t} p(s) ds \\
+            \displaystyle
+            x(t) = e^{-P(t)} \left( x_{0} + \int_{t_{0}}^{t} e^{P(s)}q(s) ds
+                \right)
+        \end{cases}
+    \]
+    Nel caso particolare dell'equazione \(x' = ax\), con \(a \in \mathbb{R}\)
+    otteniamo (anche con variabili separabili) che \(x(t) = Ce^{at}\). In modo
+    analogo si vede che le soluzioni di \(\varphi' = a\varphi\) con \(a \in
+    \mathbb{C}\) e \(\varphi : J \to \mathbb{C}\) sono della forma \(\varphi(t)
+    = C e ^{a t}\) con \(C \in \mathbb{C}\) 
+    
+    Per \emph{esercizio}, 
+        Sapendo che la derivata \(\varphi'\) di \(\varphi : t \mapsto
+        \varphi_{1} + i\varphi_{2}\) con \(\varphi_{1}, \varphi_{2} : J \to
+        \mathbb{R} \) è \(\varphi' : t \mapsto \varphi_{1}' + i\varphi_{2}'\)
+        mostrare che \(\frac{d}{dt}e^{at} = a e^{at}\), con \(a \in
+        \mathbb{C}\).
+\end{example}
+
+\begin{example}[Equazioni lineari del secondo ordine a coefficienti costanti]
+    \[
+        ax'' + bx' + cx = 0
+    \]
+\begin{remark}
+\begin{itemize}[label = --]
+    \item L'insieme \(V\) delle soluzioni è uno spazio vettoriale
+    \item La modellistica suggerisce che \(\dim V = 2\) 
+\end{itemize}
+    Ipotizziamo un tentativo di soluzione della forma \(x(t) = e^{\lambda t}\) 
+    allora abbiamo \(x'(t) = \lambda e^{\lambda t}\) e \(x''(t) = \lambda^2
+    e^{\lambda t}\). Sostituendo nella equazione e dividendo per \(e^{\lambda
+    t} \neq 0\) otteniamo
+    \[
+        a\lambda^2 + b\lambda + c = 0 \quad \quad (A)
+    \]
+    Se \(\Delta = b^2 - 4ac > 0\) allora \((A)\) ha due soluzioni \(\lambda_{1},
+    \lambda_{2}\) distinte, quindi \(e^{\lambda_{1} t}\) e \(e^{\lambda_{2} t}\)
+    sono due soluzioni linearmente indipendenti.
+
+    Se \(\Delta = 0\) (A) ha una soluzione \(\lambda\), per cui \(e^{\lambda
+    t}\) è una soluzione e si verifica che anche \(te^{\lambda t}\) è soluzione
+    linearmente indipendente con la precedente.
+
+    Se \(\Delta < 0\) passiamo in campo complesso e cerchiamo \(u(t) = x(t) +
+    iy(t)\) con \(x, y : J \to \mathbb{R}\) e \(u : J \to \mathbb{C}\), tale che
+    anche \(u\) sia soluzione dell'equazione differenziale. Considereremo poi
+    \(x(t) = Re(u(t))\). Come sopra ipotizziamo \(t \mapsto e^{\lambda t}\)
+    soluzione e otteniamo la stessa equazione \((A)\), allora esistono due
+    soluzioni \(\lambda_{1, 2} = \alpha \pm i\beta \), poiché i coefficienti di
+    \((A)\) sono reali. Allora otteniamo le due soluzioni dell'equazione
+    differenziale
+    \[
+        e^{(\alpha + i\beta)t} \quad e^{(\alpha - i\beta)t}
+    \]
+    che sono linearmente indipendenti. Ma lo spazio delle soluzioni generato da
+    queste equazioni ammette anche la base \textbf{reale} data da 
+    \[
+        \frac{u + \overline{u}}{2} \text{ e } \frac{u - \overline{u}}{2i}
+    \]
+    che in questo caso sono \(e^{\alpha t}\cos(\beta t)\) e \(e^{\alpha t}
+    \sin(\beta t)\).
+
+    In tutti e tre i casi, se \(x_{1}(t)\) e \(x_{2}(t)\) sono due soluzioni
+    linearmente indipendenti, allora una generica soluzione \(x(t)\) è della
+    forma 
+    \[
+        x(t) = c_{1}x_{1}(t) + c_{2}x_{2}(t) \quad c_{1}, c_{2} \in \mathbb{R}
+    \]
+
+    Nel caso completo l'equazione è del tipo 
+    \[
+        ax'' + bx' + cx = f(t)
+    \]
+    Sia allora \(\overline{x}(\cdot )\) una soluzione (``nota''). L'integrale
+    generale è dato dalle funzioni della forma 
+    \[
+        x(t) = x_{o}(t) + \overline{x}(t)
+    \]
+    al variare di \(x_{o} \) tra le soluzioni dell'equazione omogenea associata,
+    ossia \(ax'' + bx' + cx = 0\).
+    Questo perché se \(L : C^{2}(\mathbb{R}) \to C^{0}(\mathbb{R})\) un
+    operatore lineare, ad esempio proprio \(Lx = (t \mapsto ax''(t) + bx'(t) +
+    cx(t))\), allora il problema \(Lx = f\)  ha soluzione \(L^{-1}(f) =
+    \overline{x} + \ker L\) con \(\overline{x}\) tale che \(L\overline{x} = f\)
+    e \(\ker L\) lo spazio delle soluzioni dell'equazione omogenea associata
+    \(Lx = 0\).
+
+    In alcuni casi è particolarmente facile trovare una soluzione
+    \(\overline{x}\) particolare, ad esempio ipotizzando ne esista una della
+    forma di un polinomio di \(t\), e cercando i coefficienti per cui funzioni.
+    In altri casi ha più senso cercare una soluzione particolare di forme
+    diverse, ad esempio con esponenziali o seni e coseni o come ti pare, alla
+    fine se il problema ti chiede di trovare una soluzione particolare è perché
+    si può fare e allora ci pensi un attimo a occhio si vede facilmente.
+\end{remark}
+\end{example}
+
+Sia \(D \subseteq \mathbb{R} \times \mathbb{R}^{n} \) aperto e \(f : D \to
+\mathbb{R}^{ n } \) continua. Fissato \((t_{0}, x_{0}) \in D\) consideriamo il
+problema ai valori iniziali
+\[
+    \begin{cases}
+        x' = f(t, x) \\
+        x(t_{0}) = x_{0}
+    \end{cases}
+\]
+\begin{proposition}\label{proposition:equivalenza_pvi}
+    Sia \(x : J \to  \mathbb{R}^{n}\) funzione continua tale che \((t, x(t)) \in
+    D\)  per ogni \(t \in J\), ossia ha grafico in \(D\).
+    Allora sono equivalenti:
+\begin{enumerate}[label = \alph*)]
+    \item \(x\) è soluzione del problema ai valori iniziali
+    \item \(\displaystyle x(t) = x_{0} + \int_{t_{0}}^{t} f(s, x(s)) ds\) per ogni \(t \in J\) 
+\end{enumerate}
+\end{proposition}
+
+Per quanto la proposizione~\ref{proposition:equivalenza_pvi} sia abbastanza
+ovvia, ci serve per poter dimostrare il problema di esistenza e unicità delle
+soluzioni, poiché permette di trasformare il problema di trovare una soluzione
+in un problema del punto fisso.
+
+\begin{definition}
+Una funzione \(g: G \subseteq \mathbb{R}^{m} \to \mathbb{R}^{k} \) è detta
+\textbf{lipschiitziana} se esiste una costante \(L > 0\) tale che 
+\[
+    \|g(x) - g(y)\| \le L \|x - y\| \quad \forall x, y \in G
+\]
+\end{definition}
+\begin{proposition}
+    Sia \(G\) un aperto convesso limitato e \(g \in C^{1}(\overline{G},
+    \mathbb{R}^{k})\). Allora \(g\) è lipschitziana.
+\end{proposition}
+\begin{proof}
+    Siano \(x_{1}, x_{2} \in G\) aperto convesso limitato.
+    Per ogni \(t \in [0, 1]\) Sia
+    \[
+        \varphi(t) = g(x_{1} + t(x_{2} - x_{1}))
+    \]
+    Allora si ha che
+    \begin{align*}
+        g(x_{2}) - g(x_{1}) = \varphi(1) - \varphi(0) =
+        \int_{0}^{1}\varphi'(t)dt = \int_{0}^{1} (Dg)(x_{1} +
+        t(x_{2}-x_{1}))(x_{2}-x_{1})dt \\
+        \le \int_{0}^{1} |Dg(x_{1} + t(x_{2}-x_{1}))| |x_{2}-x_{1}| dt \le
+        \left(\max_{\overline{G}} |Dg|\right) |x_{2}-x_{1}|
+    \end{align*}
+\end{proof}
+\begin{proposition}
+    Sia \(G \in \mathbb{R}^{m}\) aperto e \(g \in C^{1}(G, \mathbb{R}^{k})\).
+    Allora \(g\) è lipschitziana su ogni compatto \(K \subseteq G\) (anche detto
+    \emph{localmente lipschitziana}).
+\end{proposition}
+\begin{example}
+    La funzione \(x \mapsto x^2\) non è ovviamente lipschitziana su
+    \(\mathbb{R}\). Eppure per ogni compatto \(K \subseteq \mathbb{R}\) (ad
+    esempio \([-M, M]\)) la funzione è lipschitziana su \(K\), infatti 
+    \[
+        |x^2 - y^2| = |x+y||x-y| \le 2M|x-y|
+    \]
+\end{example}
+
+\begin{definition}
+    Sia \(D \subseteq \mathbb{R}^{N + 1} \) aperto e \(f : D \to
+    \mathbb{R}^{N}\) (con \(f(t, \mathbf{x})\)). Diciamo che \(f\) è localmente lipschitziana nella seconda
+    variabile, uniformemente rispetto alla prima se per ogni compatto \(K
+    \subseteq D\) esiste una costante \(L_K >0\) tali che:
+    \[
+        \forall (t, \mathbf{x}), (t, \mathbf{y}) \in K, \quad \|f(t, \mathbf{x})
+        - f(t, \mathbf{y})\| \le L_K \|\mathbf{x} - \mathbf{y}\|
+    \]
+\end{definition}
+\begin{remark}
+    Se ho una funzione \(C^{1}(D, \mathbb{R}^{N})\) allora è per la proposizione
+    precedente localmente lipschitziana in entrambe le variabile, quindi per
+    ogni \(K\subseteq D  \) compatto esiste \(L_K > 0\) tale che
+    \[
+        \forall (t_{1}, \mathbf{x}), (t_{2}, \mathbf{y}) \in K \quad \|f(t_{1},
+        \mathbf{x}) - f(t_{2}, \mathbf{y})\| \le L_K \|(t_{1}, \mathbf{x}) - (t_{2},
+        \mathbf{y})\|
+    \]
+    quindi in particolare se \(t_{1}=t_{2}=t\) abbiamo la locale lipschitzianità
+    nella seconda variabile uniformemente rispetto alla prima
+\end{remark}
+
+\subsection{Esistenza e unicità delle soluzioni}
+Sia \(D \subseteq \mathbb{R}^{N+1} \) aperto e \(f : D\to \mathbb{R}^{N}\) e
+\((t_{0}, x_{0}) \in D\) e consideriamo il problema
+\[
+    (P) \quad
+    \begin{cases}
+        x' = f(t, x) \\
+        x(t_{0}) = x_{0}
+    \end{cases}
+\]
+\begin{figure}[ht]
+    \centering
+    \incfig[.6]{problema}
+    \caption{Problema ai valori iniziali}\label{fig:problema}
+\end{figure}
+Siano \(a, b > 0\) tali che 
+\[
+    R_{a, b}  = [t_{0} - a, t_{0} + a] \times \overline{B}_{b}(x_{0}) \subseteq
+    D
+\]
+
+\begin{theorem}[Esistenza e Unicità]
+Sia \(f\) localmente lipschitziana nella seconda variabile uniformemente
+rispetto alla prima. Allora
+\begin{enumerate}[label = \alph*)]
+    \item Esiste una soluzione di \((P)\) definita in \([t_{0} - \alpha, t_{0} +
+        \alpha]\), con \(\alpha = \min\left(a, \frac{b}{M}\right)\), dove \(M = \max_{R_{a,
+        b}}|f| \) 
+    \item Nell'intervallo \([t_{0} - \alpha, t_{0} + \alpha]\) la soluzione,
+        ossia se \(\varphi_{1} : J_{1} \to \mathbb{R}^{N}\) e \(\varphi_{2} :
+        J_{2} \to \mathbb{R}^{N}\) sono soluzioni di \((P)\) allora
+        \(x_{1}(t) = x_{2}(t) \forall t \in J_{1} \cap J_{2} \subseteq [t_{0} -
+        \alpha, t_{0} + \alpha]\) 
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+    Abbiamo visto che se \(x : J \to \mathbb{R}^{N}\) con \(J\) intervallo è una
+    funzione continua con graico in \(D\), allora \(x\) è soluzione di \((P)\)
+    se e solo se 
+    \[
+        x(t) = x_{0} + \int_{t_{0}}^{t} f(s, x(s)) ds \quad \forall t \in J
+    \]
+    Sia \(x : [t_{0} - \alpha , t_{0} + \alpha] \to \overline{B}_b(x_{0})\).
+    Poniamo ora
+    \[
+        (Tx)(t) = x_{0} + \int_{t_{0}}^{t} f(s, x(s)) ds \quad \forall t \in
+        [t_{0} - \alpha, t_{0} + \alpha]
+    \]
+    Dove risolvere \((P)\) diventa mostrare che esiste un punto fisso di \(T\).
+    Verifichiamo che \((Tx)(\cdot )\) assume valori in
+    \(\overline{B}_b(x_{0})\). Infatti 
+    \[
+        |(Tx)(t) - x_{0}| = \left| \int_{t_{0}}^{t} f(s, x(s)) ds \right| \le
+        \left|\int_{t_{0}}^{t} |f(s, x(s))| ds \right| \le M|t - t_{0}| \le M\alpha \le b
+    \]
+    Allora otteniamo che \(T : C^{0}([t_{0}-\alpha, t_{0} + \alpha];
+    \overline{B}_b(x_{0})) \to C^{0}([t_{0}-\alpha, t_{0} + \alpha];
+    \overline{B}_b(x_{0}))\). Possiamo quindi iterare l'applicazione di \(T\),
+    quindi abbiamo la successione 
+    \[
+        x_{0}, x_{1} = Tx_{0}, x_{2} = Tx_{1}, \ldots, x_{n} = Tx_{n-1}
+    \]
+    Ora quindi mostriamo che la successione \(x_{n}\) converge uniformemente con
+    il criterio di Cauchy
+    \begin{align*}
+        |x_{1}(t) - x_{0}(t)| = \left| \int_{t_{0}}^{t} f(s, x_{0}(s))\right|
+        \le M|t - t_{0}| \\
+        |x_{2}(t) - x_{1}(t)| = \left| \int_{t_{0}}^{t} f(s, x_{1}(s)) - f(s,
+        x_{0}(s))\right| ds \le \left| \int_{t_{0}}^{t} |f(s, x_{1}(s)) - f(s,
+        x_{0}(s))| ds \right| \\
+        \le L_R \left|\int_{t_{0}}^{t} |x_{1}(s) - x_{0}(s)| ds\right| \le ML_R
+        |\int_{t_{0}}^{t}|s-t_{0}| ds| = \frac{ML_R}{2} |t - t_{0}|^2 \\
+        |x_{3}(t) - x_{2}(t)| = \left| \int_{t_{0}}^{t} f(s, x_{2}(s)) - f(s,
+        x_{1}(s))\right| ds \le \left| \int_{t_{0}}^{t} |f(s, x_{2}(s)) - f(s,
+        x_{1}(s))| ds \right| \\
+        \le L_R \left|\int_{t_{0}}^{t} |x_{2}(s) - x_{1}(s)| ds\right| \le
+        \frac{ML_R^2}{2}
+        \left|\int_{t_{0}}^{t}|s-t_{0}|^2 ds\right| = \frac{ML_R^2}{6} |t - t_{0}|^3
+        \vdots
+    \end{align*}
+    E in generale abbiamo 
+    \[
+        |x_{k+1}(t) - x_{k}(t)| \le \frac{ML_R^{k}}{(k+1)!} |t - t_{0}|^{k+1}
+    \]
+    Quindi abbiamo che se fissiamo \(n, m \in \mathbb{N}\) con \(m > n\) 
+    \[
+        |x_{m}(t) - x_{n}(t)| \le \sum_{k=n}^{m-1} |x_{k+1}(t) - x_{k}(t)| \le 
+        \sum_{k=n}^{m-1} \frac{ML_R^{k}}{(n+1)!} |t - t_{0}|^{n+1} \le
+        \frac{M}{L_R}
+    \sum_{k=m}^{\infty} \frac{{(L_R \alpha)}^{k+1}}{(k+1)!}
+    \]
+    Che è il resto di una serie esponenziale, quindi per \(m, n\)
+    sufficientemente grandi la serie converge a zero, per cui abbiamo mostrato
+    la convergenza uniforme di \(x_{k}\). Ora sappiamo 
+    \[
+        x_k \longrightarrow x \in C^{0}([t_{0} - \alpha, t_{0} + \alpha];
+        \overline{B}_b(x_{0})) \quad \text{uniformemente}
+    \]
+    Ora semplicemente possiamo portare il limite sotto il segno di integrale
+    perché \(f(\cdot, x_k(\cdot )) \to f(\cdot, x(\cdot ))\) uniformemente in
+    \([t_{0}-\alpha, t_{0}+\alpha]\) e
+    quindi otteniamo che \(x\) è soluzione di \((P)\).
+
+    Ora procediamo con l'unicità. Sia \(z : J \to \mathbb{R}^{N}\) una soluzione
+    di \((P)\). Considieriamo i valori di \(t \in J \cap [t_{0}, t_{0} +
+    \alpha]\) e analogalmente per \(t \le  t0\) e vogliamo mostrare che \(z(t) =
+    x(t)\) con \(x(\cdot )\) la soluzione costruita primala soluzione costruita
+    prima. Allora abbiamo per ipotesi che
+    \[
+        z(t) = x_{0} + \int_{t_{0}}^{t} f(s, z(s)) ds
+    \]
+    E valutiamo quindi
+    \[
+        |z(t) - x_{0}| \le \int_{t_{0}}^{t} |f(s, z(s))| ds
+    \]
+    Fissiamo ora un valora \(\overline{t} \in [t_{0}, t_{0}+ \alpha]\)
+    arbitrario in \(J\) i \(t \in [t_{0}, \overline{t}]\). Allora \((s, z(s))\)
+    per \(s in [t_{0}, t]\) è in un compatto di \(D\). Sia \(M_{1}\) il massimo di
+    \(f\) su tale compatto. Allora 
+    \[
+        |z(t) - x_{0}| \le M_{1} |t - t_{0}| \quad \forall t \in [t_{0},
+        \overline{t}]
+    \]
+    Ora procediamo con 
+    \begin{align*}
+        |z(t) - x_{1}(t)| &\le \int_{t_{0}}^{t} |f(s, z(s)) - f(s, x_{0})| ds \le
+        L_{1} \int_{t_{0}}^{t} |z(s) - x_{0}| ds \le \\ &\le  L_{1} M_{1}
+        \int_{t_{0}}^{t} |s - t_{0}| ds = \frac{L_{1}M_{1}}{2} |t - t_{0}|^2
+    \end{align*}
+    Con \(L_{1}\) una costante di Lipschitz per \(f\) relativa a un compatto che
+    contiene sia \(R\) che il grafico di \(z\) 
+    Procedendo in questo modo nuovamente si ottiene in generale
+    \[
+        |z(t) - x_{k}(t)| \le \frac{M_{1}L_{1}^{k}}{(k+1)!} |t - t_{0}|^{k+1}
+        \longrightarrow 0 \text{ per \(k \to \infty\)}
+    \]
+\end{proof}
+\begin{remark}[Unicità ``globale'']
+    Sia \(x' = f(t, x)\) localmente lipschitziana in \(x\) uniformemente in
+    \(t\). Siano \(x_{1}: J_{1} \to \mathbb{R}^{N}\) e \(x_{2}: J_{2} \to
+    \mathbb{R}^{N}\) due soluzioni tali che esista \(t_{0} \in J := J_{1}\cap
+    J_{2}\) con \(x_{1}(t_{0}) = x_{2}(t_{0})\) allora \(x_{1} = x_{2}\) su
+    \(J\).
+    Quindi la funzione 
+    \[
+        x(t) = \begin{cases}
+            x_{1}(t) & t \in J_{1} \\
+            x_{2}(t) & t \in J_{2}
+        \end{cases}
+    \]
+    è soluzione sud \(J_{1} \cup J_{2}\) 
+\end{remark}
+\begin{proof}
+    Consideriamo \(t > t_{0}\) Allora sia 
+    \[
+        \overline{t} := \sup \{ t \in J \mid x_{1}(t) = x_{2}(t) \text{ su }
+        [t_{0}, t] \}
+    \]
+    Allora se \(\overline{t} = \sup J\) abbiamo finito, altrimenti consideriamo
+    \(\overline{t} < \sup J\). Per continuità quindi \(x_{1}(\overline{t}) =
+    x_{2}(\overline{t})\). Considerando ora il problama di Cauchy
+    \[
+        \begin{cases}
+            x' = f(t, x) \\
+            x(\overline{t}) = x_{1}(\overline{t}) = x_{2}(\overline{t})
+        \end{cases}
+    \]
+    e ora per il teorema di esistenza e unicità esiste un intorno destro di
+    \(\overline{t}\) si ha \(x_{1}(t) = x_{2}(t)\), che è in contraddizione con
+    la definizione di \(\overline{t}\).
+\end{proof}
+
+Se manca l'ipotesi di lipschitzianità di \(f\) allora può cadere l'unicità.
+Costruiamo un famoso esempio.
+\begin{example}
+    \(N = 1\), \(f(x) = \sqrt{|x|}\). È evidente non lipschitziana in quanto la
+    derivata non è limitata.
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                xmin= -10, xmax= 10,
+                ymin= -10, ymax = 10,
+                axis lines = middle,
+            ]
+            \addplot[domain=-10:10, samples=100]{sqrt(abs(x))};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Grafico di \(f(x) = \sqrt{|x|}\)}\label{fig:grafico_di_sqrt}
+    \end{figure}
+    Consideriamo il problema di Cauchy
+    \[
+        \begin{cases}
+            x' = \sqrt{|x|} \\
+            x(0) = 0
+        \end{cases}
+    \]
+   Sia ora \(x : J \to \mathbb{R}\) una soluzione, con \(0 \in J\). Allora
+   \(x(\cdot )\) è monotona non decrescente; consideriamo \(t \in J, t \ge 0\) e
+   sia
+   \[
+       c_+ = \sup \{t\ge 0 : x(\cdot )= 0 \text{ su } [0, t]\} 
+   \]
+   Ora se \(c_+ = +\infty\) allora \(x(\cdot ) = 0\) su \([0, +\infty]\).
+   Altrimenti, per \(t > c_+\) si ha che \(x(t) > 0\) quindi otteniamo
+   \[
+       \frac{x'(t)}{\sqrt{|x(t)|}} = 1 \iff \int
+       \frac{x'(s)}{\sqrt{|x(s)|}} ds = t + c \iff
+       2\sqrt{|x(t)|} = t + c
+   \]
+   Allora \(\displaystyle x(t) = \frac{1}{4} {(t + c)}^2\) e poiché \(x(c_+) =
+   0\) allora \(c = -c_+\) quindi 
+   \[
+       x(t) = \frac{1}{4} {(t - c_+)}^2 \quad \forall t \ge c_+ 
+   \]
+   Similmente per \(t < 0 \) definendo similmente \(c_-\) abbiamo che le
+   soluzioni del problema sono del tipo
+   \[
+       x(t) = \begin{cases}
+           \frac{1}{4} {(t - c_+)}^2 & t \ge c_- \\
+           0 & t \in [c_-, c_+] \\
+           -\frac{1}{4} {(t - c_-)}^2 & t > c_+
+       \end{cases}
+   \]
+   Dove \(c_-, c_+ \ge 0\) arbitrari (eventualmente anche \(+\infty\)). Quindi
+   abbiamo infinite soluzioni. 
+\begin{figure}[ht]
+    \centering
+    \incfig{pennellopeano}
+    \caption{pennelloPeano}
+    \label{fig:pennellopeano}
+\end{figure}
+\end{example}
+    Comunque abbiamo l'esistenza della soluzione. Esiste anche un teorema a
+    riguardo
+\begin{theorem}[Peano]
+    Sia \(f : D \to \mathbb{R}^{N}\) continua e \((t_{0}, x_{0}) \in D\). Sia
+    \(R_{a, b} \) come nel teorema di esistenza e unicità. Allora il problema
+    \[
+        \begin{cases}
+            x' = f(t, x) \\
+            x(t_{0}) = x_{0}
+        \end{cases}
+    \]
+    ammette almeno una soluzione definita in \([ t_{0} - \alpha, t_{0} + \alpha
+    ]\), dove \(\alpha = \min(a, \frac{b}{M})\) con \(M = \max_{R_{a, b}}|f|\).
+\end{theorem}
+Dimostreremo questo risultato usando un teorema di compattezza abbastanza
+potente, che invece non dimostriamo. Procediamo con della terminologia.
+
+    Sia \(\varphi_n : [a_{0}, b_{0}] \to \mathbb{R}\) continua. Diciamo che
+\begin{itemize}[label = --]
+    \item La successione \(\varphi_n\) è \textbf{equilimitata} se esiste \(M \in
+        \mathbb{R}\) tale che
+        \[
+            \forall n \in \mathbb{N} \,\, \forall x \in [a_{0}, b_{0}] \quad
+            |\varphi_n(x)| \le M
+        \]
+    \item La successione \(\varphi_n\) è \textbf{equicontinua} se 
+        \[
+            \forall \varepsilon > 0 \,\, \exists \delta > 0 \,\, \forall n \in
+            \mathbb{N} \,\, \forall t',
+            t'' \in [a_{0}, b_{0}] \quad |t' - t''| < \delta \implies
+            |\varphi_n(t') - \varphi_n(t'')| < \varepsilon
+        \]
+\end{itemize}
+\begin{theorem}[Ascoli \-- Arzelà]
+    Sia \(\varphi_n\) una successione di funzioni equicontinue ed equilimitate
+    su \([a_{0}, b_{0}]\). Allora esiste una sottosuccessione uniformemente
+    convergente in \([a_{0}, b_{0}]\) 
+\end{theorem}
+\begin{proof}[Dimostrazione del teorema di Peano]
+    Sia \(N = 1\) 
+\begin{figure}[ht]
+    \centering
+    \incfig[.4]{teo_peano}
+    \caption{Costruzione successione \(x_{n}\)}\label{fig:teo_peano}
+\end{figure}
+Fissato \(n \in \mathbb{N}\) suddividiamo \([t_{0}, t_{0}+\alpha]\) in \(n\)
+parti. Definiamo poi \(x_{n} : [t_{0}, t_{0} + \alpha] \to  \mathbb{R}\) come
+segue (affine a tratti).
+\begin{align*}
+    x_{n}(t) &:= x_{0} + f(t_{0}, x_{0})(t - t_{0}) \quad \forall t \in [t_{0},
+    t_{1}] \\
+    x_n(t) &:= x_{n}(t_{1}) + f(t_{1}, x_{n}(t_{1}))(t - t_{1}) \quad \forall t
+    \in [t_{1}, t_{2}] \\
+    \vdots \\
+    x_{n}(t) &:= x_{n}(t_{n-1}) + f(t_{n-1}, x_{n}(t_{n-1}))(t - t_{n-1}) \quad
+    \forall t \in [t_{n-1}, t_{n}]
+\end{align*} 
+Notare che la pendenza di ogni tratto non supera, in valore assoluto, \(M\),
+quindi \(M\alpha \le M \frac{b}{M} =b\) 
+
+Ora vogliamo mostrare che la successione \(\{x_{n}\}\) soddisfa le iptesi del
+teorema di Ascoli \-- Arzelà, infatti
+\begin{itemize}[label = --]
+    \item \emph{equilimitatezza} I valori sono in \([x_{0} - b, x_{0} + b]\) 
+    \item \emph{equicontinuità} Sia \(\gamma_n = f(t_k, x_{n}(t_k))\) per \(t
+        \in [t_k, t_{k+1}]\) costante a tratti. Allora comunque presi \(t', t''
+        \in [t_{0}, t_{0}+\alpha]\) si ha che 
+        \[
+            (\star) \quad x_{n}(t') - x_{n}(t'') = \int_{t'}^{t''} \gamma_n ds
+            \implies 
+            |x_{n}(t') - x_{n}(t'')| \le M|t' - t''|
+        \]
+\end{itemize}
+Allora esiste una sottosuccessione uniformemente convergnte \(x_{n_k} \to x\) in
+\([t_{0}, t_{0}+\alpha]\). Per semplicità notazionale supponiamo che \(n_k = n\)
+quindi abbiamo \(x_{n}\to x\). Ora da \((\star)\) otteniamo che per \(t'=t, t''
+= t_{0}\)
+\[
+    x_{n}(t) = x_{0} + \int_{t_{0}}^{t} \gamma_n(s) ds
+\]
+Ora vorremmo poter passare al limite sotto il segno di integrale e ottenere la
+soluzione del problema di cauchy, ma necessitiamo di convergenza uniforme di
+\(\gamma_n(\cdot )\) a \(f(\cdot , x(\cdot ))\). Infatti abbiamo che, fissando
+\(\varepsilon>0\) esiste per continuità uniforme di \(f\) un \(\delta > 0\) tale che
+\[
+    \forall (t_{1}, x_{1}), (t_{2}, x_{2}) \in R_{a, b} \quad |(t_{1}, x_{1}) -
+    (t_{2}, x_{2})| \le \delta \implies |f(t_{1}, x_{1}) - f(t_{2}, x_{2})| \le
+    \varepsilon
+\]
+Ora se \(s \in [t_k, t_{k+1} ]\) 
+\begin{align*}
+    |\gamma_n(s) - f(s, x(s))| = |f(t_k, x_{n}(t_k)) - f(s, x(s))| \le \\ \le |f(t_k,
+    x_{n}(t_k)) - f(s, x_{n}(s))| + |f(s, x_{n}(s)) - f(s, x(s))|
+\end{align*}
+Ricordando ora che \(|x_{n}(t') - x_{n}(t'')| \le M |t' - t''\) abbiamo che se
+\(n\) è sufficiente grande si ha che \(M / \frac{\alpha}{n} \le \delta\) e
+allora \(|x_{n}(t_k) - x_{n}(s)| \le \delta\) e quindi \(|f(t_k, x_{n}(t_k)) -
+f(s, x_{n}(s))| \le \varepsilon\). Inoltre per la convergenza uniforme di
+\(x_n\) a \(x\) si ha che \(|f(s, x_{n}(s)) - f(s, x(s))| \le \varepsilon\).
+Mettendo assieme i pezzi abbiamo quindi la convergenza uniforme di \(\gamma\) e
+quindi possiamo passare al limite sotto il segno di integrale e ottenere che
+\(x\) è soluzione del problema di Cauchy in \([t_{0}, t_{0} + \alpha]\)
+\end{proof}
+\begin{proposition}
+    Sia \(f : D \to \mathbb{R}^{N}\) continua e \(K \subseteq D \) compatto.
+    Allora esiste \(\alpha > 0\) (dipendente solo da \(K\)) tale che, per ogni
+    \((t_{0}, x_{0}) \in K\) il problema
+    \[
+        \begin{cases}
+            x' = f(t, x) \\
+            x(t_{0}) = x_{0}
+        \end{cases}
+    \]
+    ammette soluzione definita in \([t_{0} - \alpha, t_{0} + \alpha]\)
+\end{proposition}
+\begin{figure}[ht]
+    \centering
+    \incfig[.4]{compatto}
+    \caption{compatto}
+    \label{fig:compatto}
+\end{figure}
+\begin{remark}
+    Modificando la costruzione della dimostrazione del teorema di Peano
+    operando una suddvisione in \(n\) parti anche di \([x_{0}-b, x_{0}+b]\) e
+    scegliendo su ogni tratto la pendenza \(\max f\) o \(\min f\) sul quadratino
+    contenente \((t_{k}, x_{n}(t_k))\) (con qualche complicazione in più se
+    becchi il punto di cambio quadratino) si ottengono due soluzioni del
+    problema di Cauchy: le soluzioni massimale e minimale rispettivamente.
+    Nell'esempio \(x' = \sqrt{|x|}\) abbiamo in particolare che \(0\) è la
+    soluzione minimale e \(t^2\) è la soluzione massimale.
+\end{remark}
+\begin{example}
+    Sia \(f(t, x) = x^2\) e consideriamo il problema di Cauchy
+    \[
+        \begin{cases}
+            x' = x^2 \\
+            x(0) = x_{0}
+        \end{cases}
+    \]
+    Allora la soluzione è \(x(t) = -\frac{1}{t-\frac{1}{x_{0}}}\) che a
+    prescindere di come si fa non può essere definita in \(t = x_{0}\).
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                xmin= -2, xmax= 5,
+                ymin= -3, ymax = 3,
+                axis lines = middle,
+            ]
+                \addplot[domain=-2:5, samples=100]{ - 1 / (x - 1) };
+            \end{axis}
+        \end{tikzpicture}
+    \end{figure}
+    Un obiettivo dei prossimi teoremi sarà capire quando si può prolungare il
+    dominio su tutto \(\mathbb{R}\) o su molta parte.
+\end{example}
+
+Proviamo ora a guardare alla stima sull'intervallo di esistenza, data dal
+Teorema di esistenza e unicità. Allora, ricordando
+l'immagine~\ref{fig:problema} % TODO check ref
+abbiamo che è definit in \([-\alpha, \alpha]\) con \(\alpha = \min(a, b/M)\) e
+\(M = \max |f| = \max_{R_{a,b} }  |x^2| = \max_{x \in [1-b, 1+b]}{(1+b)}^2\).
+Quindi abbiamo \(\alpha = \min(a, \frac{b}{{(1+b)}^2})\). Poiché possiamo
+prendere \(a\) arbitrariamente grande (\(f\) è definito su tutto \(\mathbb{R}^2
+\ni (t, x)\)) allora \(\alpha = \frac{b}{{(1+b)}^2}\).
+
+\subsection{Prolungamento}
+Sia in seguito \(f : D\subseteq \mathbb{R}^{N+1} \to \mathbb{R}^{N} \) continua
+e \(x : J \to \mathbb{R}^{N}\) soluzione di \(x' = f(t, x)\).
+
+\begin{definition}
+    Diciamo \textbf{prolungamento} di \(x\) ogni soluzione
+    \[
+        \hat{x} : \hat{J} \to \mathbb{R}^{N} \quad \hat{J} \not\supseteq J,
+        \quad \hat{x}|_J = x
+    \]
+    se \(x(\cdot )\) non ammette prolungamento diciamo che è definita su un
+    intervallo massimale.
+\end{definition}
+\begin{theorem}[Prolungamento]\label{th:prolungamento}
+    Sia \(f\) continua, allora
+\begin{enumerate}[label = \alph*)]
+    \item Se \(x : J \to \mathbb{R}^{N}\) è definita su un intervallo massimale,
+        questo è aperto. Posto \(J = (\omega_-, \omega_+)\) risulta:
+        Per ogni \(K \subseteq D \) compatto esiste \(U\) intorno di
+        \(\omega_+\) (\(\omega_-\)) tale che
+        \[
+            \forall t \in U \cap J \quad (t, x(t)) \not\in K
+        \]
+        ossia il grafico di \(x\) abbandona definitivamente ogni compatto, per
+        \(t \to \omega_+ \) (\(\omega_-\)). Scrivereemo anche
+        \[
+            (t, x(t)) \to \partial D \quad \text{per } t \to \omega_{\pm} 
+        \]
+    \item Ogni soluzione ammete un prolungamento a un itervallo massimale
+
+\end{enumerate}
+\end{theorem}
+
+\begin{figure}[ht]
+    \centering
+    \incfig[.5]{proprieta_massimale}
+    \caption{Illustrazione del teorema di prolungamento}\label{fig:proprieta_massimale}
+\end{figure}
+
+\paragraph{Conseguenze per l'esistenza globale}
+\begin{proposition}
+
+    Sia \(D = I \times \Omega\), \(I \subseteq \mathbb{R} \) intervallo e
+        \(\Omega \subseteq \mathbb{R}^{N} \) aperto. 
+        Sia \(x : J \to \mathbb{R}^{N}\) una soluzione e \(J\) massimale.
+        Supponiamo esiste \(Y \subseteq \Omega \) compatto tali che
+        \[
+            \forall  t \in J \quad x(t) \in Y
+        \]
+        Allora \(J = I\) e viene chiamata \textbf{esistenza globale}
+\end{proposition}
+\begin{proof}
+    Mostriamo che \(\omega_+ = \sup I\). Se fosse \(\omega_+ < \sup I\), preso
+    comunque \(t_{0} \in J\) si avrebbe
+    \[
+        (t, x(t)) \in  [t_{0}, \omega_+] \times Y \quad t_{0} \le  t < \omega_+
+    \]
+    che sarebbe assurdo perché significherebbe che il grafico di \(x\) è contenuta in un
+    compatto
+\end{proof}
+\begin{figure}[ht]
+    \centering
+    \incfig[.5]{esistenza_globale}
+    \caption{Esistenza Globale}\label{fig:esistenza_globale}
+\end{figure}
+
+\begin{example}
+Consideriamo la logistica per esempio
+\[
+    x' = rx(1-\frac{x}{K})
+\]
+Consideriamo il problema
+\[
+    \begin{cases}
+        x' = rx(1-\frac{x}{K}) \\
+        x(0) = x_{0} \in (0, K)
+    \end{cases}
+\]
+Il teorema di esistenza e unicità garantisce l'esistenza in \([t_{0} - \alpha,
+t_{0}+ \alpha] = [-\alpha, \alpha]\). Sia \(\hat{x}\) un prolungamento
+assicurato dal teorema di prolungamento. Per semplicità sia \(x : J \to
+\mathbb{R}^{N}\) la soluzione di \((P)\) con \(J\) massimale. Sappiamo che le
+costanti \(0\) e \(K\) sono soluzioni. Allora per unicità \(\forall t \in  J\),
+\(x(t) \in (0, K)\) e quindi \(J = \mathbb{R}\).
+\end{example}
+
+\begin{example}
+    Similmente abbiamo per (esercizio)
+    \[
+        x' = (t^2 + t + 1) x^2 \log ( 1 + {(1-\frac{x}{K})}^2 )
+    \]
+\end{example}
+
+\begin{proposition}
+    Sia \(D = I \times \mathbb{R}\) (quindi \(N = 1\)) e \(x : J \to
+    \mathbb{R}\) soluzione con \(J\) massimale.
+    Esistono
+    \[
+        x_{1}, x_{2} : I \to \mathbb{R}
+    \]
+    funzioni continue (non necessariamente soluzioni) tali che 
+    \[
+        \forall  t \in J : x_{1}
+    \]
+    Allora \(J = I\) 
+\end{proposition}
+\begin{proof}
+    Similmente a prima, l'idea è che deve raggiungere il bordo di \(\Omega\) e
+    non potendolo raggiungere ``in verticale'' deve raggiungerlo ``in
+    orizzontale''. Più precisamnte, fisiamo \(t_{0} \in J\) e \(\beta \in
+    (t_{0}, \sup I)\). Sia \(m = \min_{[t_{0}, \beta]} x_{1} \) e \(M =
+    \max_{[t_{0}, \beta]}x_{2} \). Allora 
+    \[
+        \forall t \in J \cap [t_{0}, \beta] \quad x(t) \in [m, M] =: Y
+    \]
+    Allora per il risutato precedente \(J \supseteq [t_{0}, \beta) \) 
+    Per l'arbitrarietà di \(\beta\) si ha \(\sup J = \sup I\) 
+\end{proof}
+
+\begin{proposition}
+    Similmente a prima, ma sia ora \(N \ge 1\). Sia \(D = I \times
+    \mathbb{R}^{N}\). Sia \(x : J \to \mathbb{R}^{N}\) soluzione con \(J\)
+    masssimale. Se esiste \(\rho : I \to \mathbb{R}\) continua, tale che 
+    \[
+        \forall t \in J \quad |x(t)| \le \rho(t)
+    \]
+    Allora \(J = I\) 
+\end{proposition}
+\begin{proof}
+    Similmente a sopra
+\end{proof}
+
+\begin{proposition}
+    Sia \(D = I \times \mathbb{R}^{N}\) e \(f\) limitata.
+    Sia \(x : J \to \mathbb{R}^{N}\) soluzione con \(J\) massimale. Allora \(J =
+    I\) 
+\end{proposition}
+\begin{proof}
+    se \(t_{0} \in J\) per ogni \(t \in J\) si ha che
+    \begin{align*}
+        x(t) = x(t_{0}) + \int_{t_{0}}^{t} f(s, x(s)) ds \iff |x(t)| &\le
+        |x(t_{0})| + \int_{t_{0}}^{t} |f(s, x(s))| ds \le \\
+        &\le |x(t_{0})| + M|t - t_{0}| =: \rho(t) \quad \forall t \in J
+    \end{align*}
+    dove \(M\) è un maggiorante per \(|f|\). A questo punto si applica il caso
+    precedente 
+\end{proof}
+
+\begin{proof}[Dimostrazione del Teorema di Prolungamento] \(\) 
+\begin{enumerate}[label = \alph*)]
+    \item Sia \(x : J \to \mathbb{R}^{N}\) soluzione con \(J\) massimale. Allora
+        \(J\) è aperto, infatti se ad esempio fosse
+        \[
+            \omega_+ := \sup J \in J
+        \]
+        Allora \((\omega_+, x(\omega_+)) \in D\). In tal caso \(x\) sarebbe
+        prolungabile considerando la soluzione di \(z' = f(t, z) ; z(\omega_+) =
+        x(\omega_+)\) che è chiaramente assurdo perché \(J\) è massimale.
+
+        Non dimostriamo che \((t, x(t)) \to \partial D\) per \(t \to \omega_+\).
+    \item Sia \(x : J \to \mathbb{R}^{N}\) una soluzione. Mostriamo che ammette
+        un prolungamento massimale (destro wlog). Sia \(b = \sup J\). Se
+        \(x(\cdot )\) non fosse prolungabile in \(t=b\) allora \(J\) sarebbe
+        massimale. Supponiamo allora che
+        \[
+            x : [t_{0}, b] \to \mathbb{R}^{N} \text{ soluzione }
+        \]
+        Il grafico è compatto. Sia \(K \subseteq D \) un compatto contenente il
+        grafico di \(x|_{[t_{0}, b]}\). Sappiamo ora che esiste \(\alpha_K >0\)
+        tale che \(\forall (\tau_0, z_0) \in K\), il problema di Cauchy \(z' =
+        f(t, z) ; z(\tau_0) = z_{0}\) ha soluzione in \([\tau_0 - \alpha_K, \tau_0
+        + \alpha_K]\). Concludiamo quindi che possiamo prolungare \(x\) fino a
+        \(b + \alpha_K\) considerando \((\tau_0, z_{0}) = (b, x(b))\). Se ora
+        \((b + \alpha_K, x(b + \alpha_K)) \in K\) si ripete il ragionamento.
+        Poiché \(K\) è compatto, dopo l'applicazione del ragionamento un numero
+        finito di volte, poiché \(\alpha_K\) è il medesimo ad ogni passo, il
+        grafico esce da \(K\), cioè esiste una \(b_K\) tale che \(x\) è definita
+        su \([t_{0}, b_K]\) e \((b_K, x(b_K)) \not\in K\). Applichiamo il metodo
+        considerando una famiglia \({\{V_{j}\}}_{j \in \mathbb{N}}\) con
+        \(V_{j}\) aperto e \(V_{j} \subset\subset D \), \( V_{j} \to D \) crescenti,
+        ossia \(V_{j} \subseteq V_{j+1}  \) e \(\bigcup_{j} V_{j} = D\) e
+        inoltre \(\overline{V_{1}} = \text{graf}(x|_{[t_{0},b]})\). Applichiamo
+        ora lo schema precedente con \(K = \overline{V_{1}}\) e allora esiste
+        \(b_{1} = b_{\overline{V_{1}}} \) tale che \(x\) è definita su \([t_{0},
+        b_{1}]\) e \((b_{1}, x(b_{1})) \not\in \overline{V_{1}}\) (per
+        semplicità notazionale supponiamo che il grafico di
+        \(x|_{[t_{0},b_{1}]}\) sia contenuto in \(V_{2}\)) allora ora iterando
+        abbiamo che esiste \(b_{2} = b_{V_{2}}\) tale che \(x\) è definita su 
+        \([t_{0}, b_{2}]\) e \((b_{2}, x(b_{2})) \not\in V_{2}\) e così via.
+        Abbiamo ora \(b_{1} < b_{2}<\dots < b_k <\dots\) tale che \(x\) è
+        definita su \([t_{0}, b_k]\) e \((b_k, x(b_k)) \not\in V_{k}\). Ne
+        seguirà che, posto \(\omega_+ = \sup_{k \in \mathbb{N}}b_k \) si a che
+        \(x\) è definita in \(J := [t_{0}, \omega_+)\). Se \(\omega_+ = +\infty\)
+        allora banalmente \(J\) è massimale destro. Se \(J\) non fosse massimale
+        si avrebbe \(x(\cdot )\) definita in \(\omega_+\) e \((\omega_+,
+        x(\omega_+)) \in D\). Ciò è incompatibile con 
+        \[
+            \overline{V_k} \not\ni (b_k, x(b_k)) \to (\omega_+, x(\omega_+)) \quad \text{per }
+            k \to \infty
+        \]
+\end{enumerate}
+\end{proof}
+
+\subsection{Stime}
+\begin{theorem}[Lemma di Gronwall]
+    Sia \(\beta \in C^{0}(I)\), \(\beta \ge 0\); \(a \in I\) e \(\alpha \in
+    \mathbb{R}\) e \(u \in C^{0}(I)\) tali che
+    \[
+        u(t) \le \alpha + \int_{a}^{t} \beta(s) u(s) ds \quad \forall t \in I, t
+        \ge a
+    \]
+    Allora
+    \[
+        u(t) \le \alpha e^{\int_{a}^{t} \beta(s) ds} \quad \forall t \in I, t
+        \ge a
+    \]
+\end{theorem}
+\begin{proof}
+    % TODO
+\end{proof}
+
+\paragraph{Applicazione al problema di Cauchy}
+Consideriamo l'equazione differenziale \(x' = f(t, x)\) con \(f : D \to
+\mathbb{R}^{N}\) continua localmente lipschitziana. Siano \(x_{1},x_{2} : J \to
+\mathbb{R}^{N}\) due soluzioni. Fissiiamo \(t_{0} \in J\) si ha che
+\begin{align*}
+    x_{1}(t) &= x_{1}(t_{0}) + \int_{t_{0}}^{t} f(s, x_{1}(s)) ds \\
+    x_{2}(t) &= x_{2}(t_{0}) + \int_{t_{0}}^{t} f(s, x_{2}(s)) ds
+\end{align*}
+Sottraendo membro a membro si ha
+\[
+    |x_{1}(t) - x_{2}(t)| \le |x_{1}(t_{0}) - x_{2}(t_{0})| + \int_{t_{0}}^{t}
+    |f(s, x_{1}(s)) - f(s, x_{2}(s))| ds
+\]
+Fissato \(\overline{t} > t_{0}\), se \(t \in [t_{0}, \overline{t}]\) e \(K\) è
+un compatto di \(D\) contenente i grafici di \(x_{1, 2}|_{[t_{0}, \overline{t}]}
+\). Sia allora \(L_K\) una costante di Lipschitz di \(f\) relativa a \(K\).
+Allora
+\[
+    \underbrace{|x_{1}(t) - x_{2}(t)|}_{u(t)} \le \underbrace{|x_{1}(t_{0}) -
+    x_{2}(t_{0})|}_{\alpha} + \underbrace{L_K}_{\beta}
+    \int_{t_{0}}^{t} \underbrace{|x_{1}(s) - x_{2}(s)|}_{u(s)} ds
+\]
+Che rispetta le ipotesi del lemma di Gronwall e quindi sappiamo che
+\[
+    \underbrace{|x_{1}(t) - x_{2}(t)|}_{u(t)} \le \underbrace{|x_{1}(t_{0}) -
+    x_{2}(t_{0})|}_{\alpha} e^{L_K(t-t_{0})}
+    \quad \forall t \ge t_{0}
+\]
+Da tale schema scende anche l'unicità della soluzione del problema di Cauchy.
+Infatti se \(x_{1}(t_{0}) = x_{2}(t_{0})\) abbiamo
+\[
+    |x_{1}(t) - x_{2}(t)| \le 0 \quad \forall t \in J, t \ge t_{0}
+\]
+
+Iniziamo ora con un'idea del prossimo teorema, con un'intuizione geometrica. Sia
+dato un campo di pendenze (\(N=1\)). Ossia 
+\[
+    (t, x) \mapsto \omega(t, x) \in \mathbb{R}^2
+\]
+\begin{figure}[ht]
+    \centering
+    \incfig[.8]{confronto}
+    \caption{La curva \(x(\cdot)\) ha pendenza sempre minore della pendenza che
+    il campo di pendenze assegna in ogni punto, mentre la curva \(u(\cdot )\)
+segue la pendenza in ogni punto e ha valore iniziale \(u(a)\) non minore di \(x(a)\)  }\label{fig:confronto}
+\end{figure}
+
+\begin{theorem}[Teorema del confronto]
+    Sia \(D \subseteq \mathbb{R}^2 \) aperto e \(\omega : D \to \mathbb{R}\)
+    continua e localmente lipschitziana in \(x\) uniformemente rispetto a \(t\).
+    Sia \(x, u : J \to \mathbb{R}\) di classe \(C^{1}\), sia \(a \in J\) 
+        Se \(x'(t) \le \omega(t, x(t))\) e \(u'(t) = \omega(t, u(t))\), se
+        \(x(a) \le u(a)\) allora
+        \[
+            x(t) \le u(t) \quad \forall t \in J, t \ge a
+        \]
+\end{theorem}
+\begin{proof}
+    Supponiamo per assurdo che esista un valore \(\overline{t} \in J\) con
+    \(\overline{t} > a\) tale che \(x(\overline{t})> u(\overline{t})\).
+    Sia \(t_{0} = \sup \{t \in [0, \overline{t}] : x(t) \le u(t)\} \). Allora
+    \(x(t_{0}) = u(t_{0})\) (per continuità)e \(x(t) > u(t)\) per \(t \in
+    (t_{0}, \overline{t}]\).
+    Adesso per ogni \(t \in [t_{0}, \overline{t}]\) abbiamo
+    \[
+        x(t) = x(t_{0}) + \int_{t_{0}}^{t} x'(s) ds \le x(t_{0}) +
+        \int_{t_{0}}^{t} \omega(s, x(s)) ds
+    \]
+    e
+    \[
+        u(t) = u(t_{0}) + \int_{t_{0}}^{t} u'(s) ds = u(t_{0}) + \int_{t_{0}}^{t}
+        \omega(s, u(s)) ds
+    \]
+    Sottraendo membro a membro e prendendone il module otteniamo
+    \[
+        x(t) - u(t) \le x(t_{0}) - u(t_{0}) + \int_{t_{0}}^{t} \omega(s, x(s)) - \omega(s, u(s)) ds
+    \]
+    Sia ora \(L_K\) una costante di Lipschitz relativa a un compatto \(K\)
+    contenente i grafici di \(x, u\) su \([t_{0}, \overline{t}]\). Allora
+    \[
+        x(t) - u(t) \le x(t_{0}) - u(t_{0}) + L_K \int_{t_{0}}^{t} |x(s) -
+        u(s)| ds
+    \]
+    Ma ora in \([t_{0}, \overline{t}]\) possiamo togliere il modulo perché
+    abbiamo che \(x(t) \ge u(t)\). Abbiamo allora
+    \[
+        \underbrace{x(t) - u(t)}_{u(t)} \le \underbrace{x(t_{0}) -
+        u(t_{0})}_{\alpha=0} + \underbrace{L_K}_\beta \int_{t_{0}}^{t}
+        \underbrace{x(s) - u(s)}_{u(s)} ds
+    \]
+    Che rispetta le ipotesi del lemma di Gronwall e quindi sappiamo che
+    \[
+        x(t) - u(t) \le 0 \quad \forall t \in [t_{0}, \overline{t}]
+    \]
+    che è assurdo.
+\end{proof}
+
+\begin{example}
+    Consideriamo 
+    \[
+        \begin{cases}
+        x' = rx\left( 1 - \frac{x}{k} \right)  \\
+        x(0) = x_{0} < 0
+        \end{cases}
+    \]
+    Allora evidentemente \(x' \le -\frac{r}{k} x^2\) per \(x < 0\) e quindi
+    abbiamo
+    \[
+        \begin{cases}
+            x' \le  -\frac{r}{k} x^2 \\
+            x(0) = x_{0} < 0
+        \end{cases}
+        \quad 
+        \begin{cases}
+            u' =  -\frac{r}{k} u^2 \\
+            u(0) = x_{0}
+        \end{cases}
+    \]
+    Ne concludiamo che \(x(t) \le u(t)\) per il teorema del confronto. In
+    particolare abbiamo che \(\omega_+ < +\infty\) 
+
+    Vogliamo ora fare un ragionamento simile per studiare il caso \(x_{0} > k\).
+    Se consideriamo la parabola di equazione \(y = rx(1-\frac{x}{k})\) abbiamo
+    che sicuramente esiste una parabola \(-\gamma x^2\) tale per cui \(y \le
+    -\gamma x^2  \) per \(x \ge x_{0}\) e quindi abbiamo che
+    \[
+        \begin{cases}
+            x' \le -\gamma x^2 \\
+            x(0) = x_{0} > k
+        \end{cases}
+        \quad
+        \begin{cases}
+            u' = -\gamma u^2 \\
+            u(0) = x_{0}
+        \end{cases}
+    \]
+    e quindi \(x(t) \ge u(t)\) per il teorema del confronto. In particolare
+    abbiamo che \(x\) ha un asintoto verticale a sinsitra (per \(t < 0\)).
+\end{example}
+\begin{remark}[Teorema dell'asintoto]
+    Sia \(x : [a, +\infty) \to \mathbb{R}\) una funzione derivabile tale che 
+    \[
+        \lim_{t \to +\infty} x(t) = l \in \mathbb{R} \quad \text{ (finito,
+        \(x(\cdot )\) ha un asintoto)}
+    \]
+    Inoltre esiste \(\lim_{t \to +\infty} x'(t)\). 
+    Allora
+    \[
+        \lim_{t \to +\infty} x'(t) = 0
+    \]
+    Infatti abbiamo
+    \[
+        x(t + 1) - x(t) = x'(\xi_t) \quad \xi_t \in (t, t+1)
+    \] e portando al limite otteniamo
+    \[
+        0 = l - l = \lim_{t \to +\infty} x'(\xi_t) = 0
+    \]
+
+    La conseguenza è che se ho \(x(\cdot )\) soluzione del problema di Cauchy
+    della logistica, allora se \(x \to l\) per \(t \to +\infty\) ho che 
+    \[
+        x'(t) = rx(t)(1-\frac{x(t)}{k}) \to rl (1 - \frac{l}{k}) = 0
+    \]
+    quindi necessariamente \(l=0\) (no) oppure \(l=k\) (sì).
+\end{remark}
+
+\subsection{Dipendenza continua}
+\begin{theorem}
+    Siano \(f_{0}, f_{j} : D \to \mathbb{R}^{N}\), con \(j \in \mathbb{N}\) e
+    \(D \in \mathbb{R}^{N+1}\) funzioni continue. Consideriamo i problemi
+    \[
+        (P_{j})\,\,\begin{cases}
+            x' = f_{0}(t, x) \\
+            x(t_{0}) = x_{0}
+        \end{cases}
+        \quad
+        (P_{0}) \,\,
+        \begin{cases}
+            x' = f_{j}(t, x) \\
+            x(t_{0}^{j}) = x_{0}^{j}
+        \end{cases}
+    \]
+    dove \({(t_{0}^{j}, x_{0}^{j})}\) e \((t_{0},x_{0})\) sono assegnati in
+    \(D\). Supponiamo ora che \(f_{j}\to f_{0}\) uniformemente sui compatti di
+    \(D\), che \((t_{0}^{j}, x_{0}^{j}) \to {(t_{0},x_{0})}\) e supponiamo che
+    \(f_{0}\) sia localmente Lipschitziana in \(x\) uniformemente rispetto a
+    \(t\).
+    Sia \([a,b]\) un intervallo su cui è definita la soluzione \(\varphi_{0}\)
+    di \((P_{0})\). Se \(\varphi_j\) risolve \((P_{j})\) allora per \(j\)
+    sufficientemente grande \(\varphi_j\) è definita in \([a,b]\) e \(\varphi_j
+    \to \varphi_{0}\) uniformemente su \([a,b]\) 
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \incfig[.4]{dipcontinua}
+    \caption{dipcontinua}\label{fig:dipcontinua}
+\end{figure}
+\begin{remark}
+    Si noti il caso particolare in cui \(f_{j}=f_{0}\).
+\end{remark}
+Per il precedente teorema esiste anche una forma variante.
+    \[
+        \begin{cases}
+            x'=f(t, x, \lambda) \\
+            x{(t_{0})} = x_{0}
+        \end{cases}
+    \]
+    con \(f : G \to \mathbb{R}^{N}\) e \(G \subseteq \mathbb{R}\times
+    \mathbb{R}^{N} \times \mathbb{R}^{m} \) aperto e chiamiamo \(G_\lambda :=
+    \{{(t,x)} \in \mathbb{R}^{N+1} : {(t,x,\lambda)} \in G\} \). Supponiamo ora
+    che \(f\) sia continua e tale che \(f{(\cdot , \cdot ,\lambda)}\) sia
+    localmente lipschitziana su \(G_\lambda\) nella seconda variabile
+    uniformemente rispetto alla prima, per ogni \(\lambda\).~\emph{In ipotesi di
+unicità} indichiamo con \(x(\cdot ,t_{0}, x_{0})\) l'unica soluzione, definita
+sul suo intervallo massimale \({(\omega_-{(t_{0},x_{0})},
+\omega_+{(t_{0},x_{0})})}\). Consideriamo ora il problema
+\[
+    (P_\lambda) \begin{cases}
+        x' = f(t, x, \lambda) \\
+        x(t_{0}) = x_{0}
+    \end{cases}
+\]
+    dove \({(t_{0},x_{0},\lambda)}\) è assegnato in \(G\). Indichiamo con
+    \(x{(\cdot ,t_{0},x_{0},\lambda)}\) la soluzione di \((P_\lambda)\) definita
+    nel proprio intervallo massimale \({(\omega_-{(t_{0},x_{0},\lambda)},
+    \omega_+{(t_{0},x_{0},\lambda)})}\). Allora abbiamo
+\begin{theorem}
+\begin{itemize}
+    \item \(\omega_-\) (\(\omega_+\)) è semicontinua superiormente
+        (inferiormente) in \(G\) 
+    \item l'insieme 
+        \[
+            E = \{{(t,t_{0},x_{0},\lambda)} \in \mathbb{R}\times G :
+            \omega_-{(t_{0},x_{0},\lambda)} < t < \omega_+{(t_{0},x_{0},\lambda)}\} 
+        \]
+        è aperto
+    \item \(x : E \to \mathbb{R}^{N}\) definita da
+        \({(t,t_{0},x_{0},\lambda)} \mapsto x{(t,t_{0},x_{0},\lambda)}\) è
+        continua
+\end{itemize}
+\end{theorem}
+\begin{definition}[Semicontinuità]
+    Sia \(X\) uno spazio topologico, \(x_{0} \in X\) e \(f: X \to \mathbb{R}\).
+    Diciamo che \(f\) è \textbf{semicontinua inferiormente} in \(x_{0}\) se
+    \[
+        \forall \varepsilon > 0 \quad \exists U \text{ intorno di } x_{0} :
+        f(x) > f(x_{0}) - \varepsilon \quad \forall x \in U
+    \]
+\end{definition}
+Dove vale la seguente caratterizzazione
+\begin{proposition}
+    Sono equivalenti: 
+\begin{enumerate}[label = \roman*)]
+    \item \(f\) è semicontinua inferiormente in \(X\)
+    \item \(\{x \in X : f{(x)}>\alpha\} \) è aperto per ogni \(\alpha \in \mathbb{R}\) 
+    \item l'epigrafico di \(f\), cioè 
+        \[
+            \text{epi}(f) = \{{(x, \alpha)} \in X \times \mathbb{R} : f(x) \le
+            \alpha\} 
+        \]
+        è chiuso
+    \item \(\liminf_{x \to x_{0}} f(x) \ge f(x_{0})\)
+\end{enumerate}
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(i) \implies ii)\)] Fissiamo \(x_{0} \in \{f>\alpha\}\); allora
+        \(f(x_{0}) > \alpha\). Dalla definizione esiste \(U\) intorno di
+        \(x_{0}\) tale che \(\forall x \in U\) si ha che \(f(x) \ge f(x_{0})
+        -\varepsilon > \alpha\) e quindi \(U \subseteq \{f > \alpha\}\) 
+    \item[\(ii) \implies iii) \)] 
+    \item[\(iii) \implies iv) \)]
+    \item[\(iv) \implies i)\)]
+\end{itemize}
+\end{proof}
+
+\begin{proof}[Dimostrazione parziale del Teorema]
+    Dalla caratterizzazione di semicontinuità inferiore sappiamo che l'insieme
+    \(\{(t, t_{0},x_{0}, \lambda) : t < \omega_+{(t_{0},x_{0},\lambda)}\} \) è
+    aperto. Analogamente per \(\{{(t,t_{0},x_{0},\lambda)}: t>
+        \omega_-{(t_{0},x_{0},\lambda)} \). L'intersezione dà \(E\) aperto.
+        Dimostrare che \(\omega_-\) e \(\omega_+\) sono semicontinue
+        rispettivamente superiormente e inferiormente è molto complicato.
+\end{proof}
+\begin{figure}[ht]
+    \centering
+    \incfig[.5]{prooftheorema}
+    \caption{prooftheorema}
+    \label{fig:prooftheorema}
+\end{figure}
+\begin{eser}
+    \[
+        (P) \begin{cases}
+            x' = 1-te^{x} \\
+            x(0) = \alpha \in \mathbb{R}
+        \end{cases}
+    \]
+    Studiamo quando \(x' > 0\) e abbiamo \(1 - te^{x}> 0\) e quindi \(te^{x}<1\)
+    e \(t < e^{-x}\) e quindi \(x < -\logt\).
+    Sia ora 
+    \[
+        \overline{t} = \sup \{t \ge t_{1} : x(\tau) > \psi {(\tau)} \forall \tau
+        \in [\text_{1}, t]\} 
+    \]
+    Supponiamo ora \(\overline{t} < +\infty\) e allora sia \(\delta(t) =
+    x{(t)}-\psi {(t)}\). Allora \(\delta {(\overline{t})}=0\) per continuità e
+    \(\delta'{(\overline{t})} = \underbrace{x'{(\overline{t})}}_{0}  -
+    \underbrace{\psi'{(\overline{t})}}_{<0} > 0\). Ne consegue che in un intorno
+    sinistro di \(\overline{t}\) si ha che \(\delta(t) < 0\) che è assurdo. Ne
+    conseguo che \(\overline{t} = +\infty\) e quindi si ottiene che \(\omega_+ =
+    +\infty\), infatti il grafico di \(x{(\cdot )}\) si deve trovare sotto al
+    valore \(x{(t_{1})}\) e sopra al grafico di \(\psi\). Per monotonia esiste
+    \(\lim_{t\to +\infty} x{(t)}\). Se fosse finito si avrebbe
+    \[
+        \lim_{t\to +\infty} x'{(t)} = \lim_{t \to +\infty} 1 - te^{x{(t)}} =
+        -\infty
+    \]
+    escluso per il teorema dell'asintoto. Ne concludiamo che \(\lim_{t\to
+    +\infty} = -\infty\).
+
+    Per \(t < 0\) invece abbiamo che
+    \[
+        0 \le 1-te^{x} \le 1 - t e^{\alpha} = 1 + e^{\alpha} |t|
+    \]
+    che è una crescita sottolineare e quindi \(\omega_- = -\infty\) e per un
+    argomento simile al precedente si ha che \(\lim_{t \to -\infty} x{(t)} =
+    -\infty\)
+\end{eser}
+\begin{figure}[ht]
+    \centering
+    \incfig[.6]{eser1}
+    \caption{eser1}\label{fig:eser1}
+\end{figure}
+\begin{eser}
+    Si studi qualitativamente il problema di Cauchy
+    \[
+        \begin{cases}
+            x' = x{(x^3-t^2)} \\
+            x{(1)}=1
+        \end{cases}
+    \]
+    
+\end{eser}
+
+
+
+\end{document}

@@ -1,0 +1,2733 @@
+\input{~/.config/nvim/templates/preamble_appunti.tex}
+\title{Appunti di Analisi 4}
+\author{Osea}
+\date{Primo semestre, A.A. 2024\-2025}
+\begin{document}
+\maketitle
+
+Il corso tratterà sostanzialmente due tematiche:
+\begin{itemize}[label = --]
+    \item \textbf{Misura e Integrale di Lebesgue}
+    \item Rudimenti di \textbf{Analisi Funzionale}, in particolare spazi di
+        Hilbert e serie di Fourier e qualcosa relativa agli spazi normati.
+\end{itemize}
+In particolare legati dagli \textbf{spazi \(L^{p}\)} che rientrano in entrambe
+le categorie.
+Purtroppo non c'è un testo che contiene tutti e soli gli argomenti del corso, ma
+sul kiro c'è molto materiale didattico che può essere utilizzato.
+
+\section{Misura e integrazione di Lebesgue}
+Il libro era di Haim Brezis e si chiamava \emph{Analisi Funzionale e
+Applicazioni}, era la versione in italiano ed era edita da Liguori. Aveva
+un'appendice curata da Carlo Sbordone (?). Di tale libro esiste la versione in
+inglese che è molto più ricca e completa.
+\subsection{Algebre, \(\sigma\)-algebre, misure}
+Sia \(\Omega\) un insieme ambiente, e sia \(\mathcal{M}\) una famiglia di
+sottoinsiemi di \(\Omega\), ossia \(\mathcal{M} \subseteq 2^{\Omega} \).
+\begin{definition}[Algebra]
+    Una famiglia \(\mathcal{M}\) di sottoinsiemi di \(\Omega\) si dice
+    \textbf{algebra} se
+\begin{enumerate}[label = \arabic*.]
+    \item \(\varnothing \in \mathcal{M} \) 
+    \item Se \(A \in \mathcal{M}\) allora \(A^{C} \in \mathcal{M}\) 
+    \item Se \(A, B \in \mathcal{M}\) allora anche \(A \cup B \in \mathcal{M}\) 
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+    Poiché \(\varnothing \in \mathcal{M}\), anche \(\Omega \in \mathcal{M}\)
+    perché il complementare di \(\varnothing\).
+\end{remark}
+
+\begin{remark}
+Se \(A, B \in \Omega\), anche \({(A^{C} \cup B^{C})}^{C} = A \cap B \in
+\mathcal{M}\) 
+\end{remark}
+
+\begin{remark}
+    Se \(A, B \in \mathcal{M}\) anche \(A \cap B^{C} = A
+    \sminus B \in
+    \mathcal{M}\) 
+\end{remark}
+
+In pratica un'algebra è una famiglia di sottoinsiemi di \(\Omega\) chiusa
+rispetto alle comuni operazioni di insiemi.
+
+\begin{example}
+    \(P(\Omega)\) è banalmente un'algebra perché contiene tutti i sottoinsiemi.
+
+    Anche \(\{\varnothing, \Omega\}\) lo è poiché la loro unione è \(\Omega\).
+\end{example}
+
+\begin{example}
+    In \(\Omega = \mathbb{R}^2\) consideriamo \(\mathcal{M}\) costituita dai
+    rettangoli. Allora \(\mathcal{M}\) è un'algebra? NO, perché per quanto
+    potrei metterci l'insieme vuoto e tutto \(\mathbb{R}^2\), se considero ad
+    esempio \([0, 1] \times [0, 2] \cup [0, 2] \times [0, 1]\) ottengo un
+    poligono che non è un rettangolo.
+
+    Invece, potrei considerare la famiglia delle unioni finite di rettangoli,
+    anche non limitati, e considerando anche l'insieme vuoto.
+    Questa è un'algebra perché l'intersezione di due rettangoli è un rettangolo,
+    e il complementare di un'unione finita di rettangoli è un'intersezione di
+    finiti rettangoli.
+\end{example}
+
+\begin{definition}[funzione finitamente additiva]
+     Sia \(\Omega\) un'insieme e \(\mathcal{M}\) un'algebra di sottoinsiemi di
+     \(\Omega\).
+
+     Una funzione \(\mu : \mathcal{M} \to [0, +\infty]\) si dice
+     \textbf{finitamente additiva} se
+\begin{enumerate}[label = \arabic*.]
+    \item \(\mu(\varnothing) = 0\) 
+    \item Se \(A, B \in \mathcal{M}\) e \(A \cap B = \varnothing\) allora
+        \(\mu(A \cup B) = \mu(A) + \mu(B)\) 
+\end{enumerate}
+Va inteso che se per uno dei due \(\mu(A) = +\infty\) allora
+\(\mu(A \cup B) = +\infty\) 
+\end{definition}
+
+\begin{example}
+    Nel caso dell'algebra delle unioni finite di rettangoli, potrei considerare
+    la funzione che restituisce la somma delle aree dei rettangoli.
+\end{example}
+
+\begin{proposition}
+    Se \(\mu\) è una funzione finitamente additiva su \(\mathcal{M}\) algebra
+    allora
+\begin{enumerate}[label = \arabic*.]
+    \item (monotonia) Se \(A, B \in \mathcal{M}\) e \(A \subseteq B \) allora \(\mu(A) \le
+        \mu(B)\) 
+    \item (sottratività) Se \(A, B \in \mathcal{M}\) e \(A \subseteq B \) e \(\mu(A) <
+        +\infty\) allora \(\mu(B \sminus A) = \mu(B) - \mu(A)\) 
+    \item (sub-additività) Se \(A_{1}, \dots, A_{n} \in \mathcal{M} \) allora \(\mu\left(\bigcup_{i =
+        1}^n A_{i}\right) \le \sum_{i=1}^{n} \mu(A_{i})\) 
+\end{enumerate}
+\end{proposition}
+\begin{proof} \(\) 
+\begin{enumerate}[label = \arabic*.]
+    \item \(B = A \cup (B \sminus A)\), quindi \(\mu(B) = \mu(A) + \mu(B
+        \sminus A) \ge \mu(A)\) 
+    \item Da sopra, ma necessito di aggiungere l'ipotesi \(\mu(A) < +\infty\)
+        per evitare di sottrarre \(+\infty\) 
+    \item Considero \(B_{1} = A_{1}\), \(B_{2} = A_{2} \sminus A_{1}\)
+        ecc.\ ponendo sempre \(B_{n} = A_{n} \sminus \bigcup_{i=1}^{n}
+        A_{i}\), per cui \(\bigcup_{i=1}^{n} B_{i} = \bigcup_{i=1}^{n} A_{i}  \)
+        e so che \(\mu(\bigcup_{i=1}^{n} B_{i}) = \sum_{i=1}^{n} B_{i} \le
+        \sum_{i=1}^{n} A_{i}\) dove prima si è usata la finita additività
+        essendo \(B_{i}\) a due a due disgiunti, e la disuguaglianza per la
+        monotonia.
+\end{enumerate}
+\end{proof}
+
+\begin{definition}[Misura]
+    Sia \(\Omega\) insieme, \(\mathcal{M}\) algebra su \(\Omega\), allora \(\mu
+    : \mathcal{M} \to [0, +\infty]\) si dice \textbf{misura} se:
+\begin{enumerate}[label = \arabic*.]
+    \item \(\mu(\varnothing) = 0\) 
+    \item (Numerabile additività / \(\sigma\)-additività) Se \(\{A_{n}\} \) è una successione di insiemi di \(\mathcal{M}\) a
+        due a due disgiunti e tali che  \(\bigcup_{i \in \mathbb{N}} A_{i} \in
+        \mathcal{M}\) allora \(\mu\left( \bigcup_{i \in \mathbb{N}} A_{i}
+        \right) = \sum_{i=1}^{\infty} \mu(A_{i})  \) 
+\end{enumerate}
+\end{definition}
+\begin{remark}
+    È evidente che la \(\sigma\)-additività implica l'additività finita, poiché
+    si può prendere \(A_{1} = A\), \(A_{2} = B\) e \(A_{i} = \varnothing\) per
+    ogni \(i \ge 3\) 
+\end{remark}
+Il problema delle algebre in questo caso è che bisogna specificare nella
+definizione di misura che l'unione della successione deve essere nell'algebra,
+il che motiva la seguente definizione.
+\begin{definition}[\(\sigma\)-algebra]
+    Sia \(\Omega\) un insieme, \(\mathcal{M}\) una famiglia di sottoinsiemi di
+    \(\Omega\). Allora \(\mathcal{M}\) si dice \textbf{\(\sigma\)-algebra} se:
+\begin{enumerate}[label = \arabic*.]
+    \item \(\varnothing \in \mathcal{M}\) 
+    \item Se \(A \in \mathcal{M}\) allora anche \(A^{C}\in \mathcal{M}\) 
+    \item Se \(A_{n} \in \mathcal{M}\) per ogni \(n \in \mathbb{N}\) allora
+        \(\bigcup_{n \in \mathbb{N}} A_{n} \in \mathcal{M}\) 
+\end{enumerate}
+\end{definition}
+\begin{remark}
+    Di nuovo è evidente che una \(\sigma\)-algebra è un'algebra.
+\end{remark}
+\begin{remark}
+    Se \(A_{n} \in \mathcal{M} \forall n \in \mathbb{N}\) posso concludere che
+    \(\bigcap_{n \in \mathbb{N}} A_{n} \in \mathcal{M} \), sì, poiché è il
+    complementare dell'unione dei complementari, come prima.
+\end{remark}
+
+\begin{example}
+    \(\mathcal{M} = P(\Omega)\) è anche una \(\sigma\)-algebra. Vale lo stesso
+    anche per \(\mathcal{M} = \{\varnothing, \Omega\} \).
+\end{example}
+\begin{example}
+    L'unione finita di rettangoli, anche non limitati, che include l'insieme
+    vuoto, invece non lo è, poiché un aperto qualunque di \(\mathbb{R}^{2}\) è
+    esprimibile come unione numerabile di rettangoli.
+\end{example}
+
+\begin{theorem}
+
+Dato \(\Omega\) e una famiglia \(\mathcal{F}\) di sottoinsiemi di \(\Omega\),
+esiste sempre una \(\sigma\)-algebra \(\mathcal{M}\) che contiene
+\(\mathcal{F}\) ed è contenuta in ogni \(\sigma\)-algebra che contiene
+\(\mathcal{F}\), e viene denotata \(\sigma(\mathcal{F})\)
+
+\end{theorem}
+
+\begin{proof}
+    Data \(\mathcal{F}\), allora esiste almeno \(P(\Omega) \supseteq \mathcal{F}
+    \). Prendo allora tutte le \(\sigma\)-algebre che contengono \(\mathcal{F}\)
+    e l'intersezione è una \(\sigma\)-algebra ed è contenuta in tutte.
+\end{proof}
+
+\begin{example}
+    Dato un insieme \(\Omega\), sia \(\tau\) la collezione di aperti di
+    \(\Omega\). La \(\sigma\)-algebra \(\sigma(\tau)\) generata da \(\tau\)
+    viene detta \(\sigma\)-algebra di Borel e contiene tutti gli aperti, tutti i
+    chiusi e tutte le unioni e intersezioni numerabili di aperti e chiusi.
+\end{example}
+
+    Dato \(\Omega\) un insieme e una \(\sigma\)-algebra \(\mathcal{M}\) su
+    \(\Omega\), la coppia \((\Omega, \mathcal{M})\) viene detta \textbf{spazio
+    misurabile} e la terna \((\Omega, \mathcal{M}, \mu)\), dove \(\mu\) è una
+    misura su \(\mathcal{M}\) viene detta \textbf{spazio di misura}.
+
+    Uno spazio di misura si dice \textbf{finito} se \(\mu(\Omega) < +\infty\) e
+    uno spazio di misura si dice \textbf{\(\sigma\)-finito} se \(\Omega =
+    \bigcup_{n \in \mathbb{N}} B_{n} \) con \(B_{n} \in \mathcal{M} \forall n
+    \in \mathbb{N}\) e \(\mu(B_{n}) < +\infty \forall n \in \mathbb{N}\).
+    Inoltre se \(\mu(A) = 0\) allora \(A\) si dice \textbf{trascurabile}. Ancora
+    una proprietà si dice \textbf{vera quasi ovunque} se vale per ogni \(x \in
+    \Omega \sminus A\) dove \(A\) è trascurabile.
+
+\begin{example}
+    \(\Omega = \mathbb{R}^{N}\), \(\mathcal{M} = 2^{\mathbb{R}^{N}}\), sia
+        \(O\) l'origine. Allora \(\delta_O\) è la misura che ha valore \(1\) se
+        e solo se \(O \in A \in \mathcal{M}\), altrimenti 0. Allora questa è una
+        misura perché data una successione di insiemi a due a disgiunti della
+        \(\sigma\)-algebra la misura della loro unione è 1 se e solo se uno
+        degli insiemi contiene \(O\), e nel caso può essere solo uno, perché
+        tali insiemi sono a due a due disgiunti. In particolare questa è una
+        misura finita.
+\end{example}
+
+\begin{example}[Misura del contare \(\#\)]
+    Consideriamo lo spazio di misura \((\mathbb{N}, 2^{\mathbb{N}}, \#)\), dove
+    per un insieme \(A \subseteq \mathbb{N}\), 
+    \[
+        \#(A) = \begin{cases}
+            n & \text{se } A \text{ ha } n \text{ elementi}\\
+            +\infty & \text{altrimenti}
+        \end{cases}
+    \]
+    Verifichiamo che si tratta di una misura:
+    \begin{enumerate}[label = \arabic*.]
+        \item \(\#(\varnothing) = 0\) ovviamente.
+        \item Se \(\{A_{n}\} \) è una successione di insiemi a due a due
+            disgiunti, allora \[\#A := \#\left(\bigcup_{n \in \mathbb{N}}
+                A_{n}\right) = \sum_{i=1}^{\infty}
+            \#(A_{i}) \]
+            Infatti si possono verificare due casi: se \(\#A < \infty\) allora
+            significa che ogni \(A_{i}\) è finito oppure vuoto e solo un numero
+            finito di \(A_{i}\) (al massimo \(\#A\) insiemi) sono diversi
+            dall'insieme vuoto, e quindi il numero di elementi di \(A\) è la
+            somma dei numeri di elementi degli \(A_{i}\).
+
+            L'altro caso è quando \(\#A = +\infty\) che si può realizzare in
+            diversi modi: se nella successione abbiamo un insieme \(A_{i}\) con
+            un numero infinito di elementi e in tal caso l'eguaglianza è
+            immediatamente soddisfatta, oppure si ha che \(\#A_{i} < +\infty\)
+            per ogni \(i \in \mathbb{N}\) ma la serie non può convergere, poiché
+            significherebbe che esiste una sottosuccessione di elementi non
+            vuoti, e tutti hanno almeno un elemento.
+    \end{enumerate}
+
+    Notare che questo \textbf{non} è uno spazio di misura finito, ma è uno
+    spazio di misura \(\sigma\)-finito perché \(\mathbb{N} =
+    \bigcup_{n=1}^\infty \{n\}\) dove naturalmente ogni singoletto ha \(\#\{n\}
+    = 1\). Inoltre è interessante notare che in questo spazio l'unico insieme
+    trascurabile è l'insieme vuoto.
+\end{example}
+
+\begin{theorem}[Continuità della misura]\label{thm:cont_misura}
+    Sia \(\Omega, \mathcal{M}, \mu\) uno spazio di misura e sia \(\{A_{n}\} \)
+    una successione di insiemi di \(\mathcal{M}\).
+\begin{enumerate}[label = \arabic*.]
+    \item Se \(\{A_{n}\} \) è crescente, ossia \(A_{n} \subseteq A_{n+1}\),
+        \(\forall n \in \mathbb{N}\), allora 
+        \[
+            \mu\left(\bigcup_{n \in \mathbb{N}} A_{n}\right) = \lim_{n \to
+            \infty} \mu(A_{n})
+        \]
+    \item Se \(\{A_{n}\} \) è decrescente, ossia \(A_{n} \supseteq A_{n+1}\),
+        \(\forall n \in \mathbb{N}\), e \(\mu(A_{1}) < +\infty\), allora
+        \[
+            \mu\left(\bigcap_{n \in \mathbb{N}} A_{n}\right) = \lim_{n \to
+            \infty} \mu(A_{n})
+        \]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label = \arabic*.]
+    \item Noto che \[\bigcup_{n=1}^{\infty} A_{n} = A_{1} \cup (A_{2}\sminus
+        A_{1}) \cup (A_{3}\sminus A_{2}) \cup \dots \cup (A_{n} \sminus A_{n-1})
+        \cup \dots\] 
+        E che gli insiemi nelle parentesi in questa espressione sono tutti a due
+        a due disgiunti. Allora abbiamo per la \(\sigma\)-additività che
+        \[
+            \mu\left(\bigcup A_{n}\right) = \mu(A_{1}) +
+            \sum_{n=2}^{\infty} \mu(A_{n} \sminus A_{n-1}) = \lim_{n \to
+            \infty} \left( \mu(A_{1}) + \sum_{k=1}^{n} \mu(A_{k+1} \sminus A_k)  \right) 
+        \]
+        Ma ora possiamo riapplicare la \(\sigma\)-additività della misura
+        all'interno al limite ottenendo che 
+        \[
+            \mu \left( \bigcup_{n=1}^{\infty} A_{n}  \right) = \lim_{n \to
+            \infty} \left( \mu\left( A_{1} \cup (A_{2}\sminus A_{1}) \cup \dots \cup
+            (A_{n+1} \sminus A_{n}) \right)  \right) = \lim_{n \to \infty}
+            \mu(A_{n+1})
+        \]
+    \item Vogliamo costruire una successione crescente. Poniamo \(B_{1} = A_{1}\),
+        \(B_{2} = A_{1} \sminus A_{2}\), \(B_{3} = A_{1} \sminus A_{3}\) ecc.
+        Allora \(\bigcup_{n \in \mathbb{N}} B_{n} = A_{1} \sminus \bigcap_{n
+        \in \mathbb{N}} A_{n}\) e \(B_{n} \subseteq B_{n+1}\). Allora per la
+        continuità della misura crescente \(\mu\left( \bigcup_{n \in \mathbb{N}}
+        B_{n} \right) = \lim_{n \to \infty} \mu(B_{n}) \) da cui la tesi, poiché
+        essendo \(\mu(A_{1}) < +\infty\) possiamo scrivere
+        \[
+            \lim_{n \to \infty} \mu(B_{n})=
+            \mu\left( \bigcup_{n \in \mathbb{N}} B_{n}  \right) = \mu \left(
+            A_{1} \sminus \bigcap_{n \in \mathbb{N}} A_{n} \right) = \mu(A_{1})
+            - \mu\left( \bigcap_{n \in \mathbb{N}} A_{n} \right)
+        \]
+        ma anche 
+        \[
+            \lim_{n \to \infty} \mu(B_{n}) = \lim_{n \to \infty} \left(
+            \mu(A_{1}) - \mu(A_{n}) \right) = \mu(A_{1}) - \lim_{n \to \infty}
+            \mu(A_{n})
+        \]
+        da cui la tesi.
+\end{enumerate}
+\end{proof}
+\begin{remark}
+    Notiamo che se fosse \(\mu(A_{1}) = +\infty\) il risultato non segue
+    necessariamente. Ad esempio nello spazio di misura \((\mathbb{N},
+    2^{\mathbb{N}}, \#)\) Possiamo considerare la successione \(A_{1} =
+    \mathbb{N}\), \(A_{2} = \mathbb{N} \sminus \{1\} \), \(A_{3} = \mathbb{N}
+    \sminus \{1, 2\} \) ecc. Allora \(\bigcap_{n \in \mathbb{N}} A_{n} =
+    \varnothing\) ma \(\mu(A_{n}) = +\infty\) per ogni \(n \in \mathbb{N}\).
+    Quindi il limite delle misure è \(+\infty\) ma la misura dell'intersezione è
+    \(0\) 
+\end{remark}
+
+\subsection{Misura esterna}
+\begin{definition}[Misura esterna]
+    Sia \(\Omega\) un insieme e consideriamo l'algebra \(2^{\Omega}\), allora
+    \(\lambda : 2^{\Omega} \to [0, +\infty]\) si dice \textbf{misura esterna} se 
+\begin{enumerate}[label = \arabic*.]
+    \item \(\lambda(\varnothing) = 0\) 
+    \item (monotonia) Se \(A \subseteq B \) allora \(\lambda(A) \le \lambda(B)\)
+    \item (sub-additività) Se \(\{A_{n}\} \) è una successione di insiemi di
+        \(2^{\Omega}\) allora \[\lambda\left( \bigcup_{n \in \mathbb{N}} A_{n}
+        \right) \le \sum_{n=1}^{\infty} \lambda(A_{n})\]
+\end{enumerate}
+\end{definition}
+
+Ora vogliamo introdurre su \(\mathbb{R}^{N}\) una misura esterna, che chiameremo
+\(\mu^\star\). Lavoriamo con intervalli di \(\mathbb{R}^{n}\), ossia prodotti
+cartesiani di intervalli reali di estremi sinistri \(\{a_{1}, \dots, a_{N}\} \)
+e sinistri \(\{b_{1}, \dots, b_{N}\} \) di ogni tipologia. Naturalmente abbiamo
+che \(a_{i} \le b_{i}\) per ogni \(i \in \{1, \dots, N\}\). Un un intervallo \(I\) di
+\(\mathbb{R}^{n}\) è dunque il prodotto cartesiano degli \(n\) intervalli di
+estremi \(a_{i}\) e \(b_{i}\), con \(i \in \{1, \dots, N\} \). Per questi
+intervalli possiamo definire \(|I| = \prod_{i=1}^{N}(b_{i} - a_{i})\) la misura
+elementare. Allora definiamo 
+\[
+    \mu^\star(A) := \inf\left\{ \sum_{i=1}^{\infty} |I_{i}| : A \subseteq
+    \bigcup_{n = 1}^{\infty}I_{n} \right\}
+\]
+Procediamo ora col verificare che questa è una misura esterna.
+\begin{enumerate}[label = \arabic*.]
+    \item Naturalmente \(\mu^\star(\varnothing) = 0\) perché l'insieme vuoto è
+        contenuto in ogni insieme, in particolare per ogni \(\varepsilon\) posso
+        creare una successione di intervalli con \(\sum_{i=1}^{\infty} |I_{i}|
+        <\varepsilon \) 
+    \item Se \(A \subseteq B \) allora \(\mu^\star(A) \le \mu^\star(B)\).
+        Infatti tutte le successioni di intervalli che ricoprono \(B\) ricoprono
+        anche \(A\).
+    \item Abbiamo \(A = \bigcup_{n=1}^{\infty}A_{n} \) e vogliamo mostrare che
+        \(\mu^\star(A) \le \sum_{n=1}^{\infty} \mu^\star(A_{n}) \). Possiamo
+        supporre che la serie converga finita e tutti gli \(\mu^\star(A_{n})\)
+        siano quindi finiti, perché altrimenti la disuguaglianza è
+        banalmente soddisfatta. Allora per la definizione di \(\mu^\star\)
+        abbiamo che per ogni \(n\) e per ogni \(\varepsilon>0\), esiste una
+        successione \({\{I_{n, k}\}}_{k \in \mathbb{N}} \) tale che \(A_{n}
+        \subseteq \cup_{k=1}^{\infty} I_{n, k} \) e \(\sum_{k=1}^{\infty}
+        |I_{n,k}| < \mu^\star(A_{n}) + \frac{\varepsilon}{2^{n}} \). Allora
+        la successione \({\{I_{n, k}\}}_{n, k \in \mathbb{N}} \) ricopre \(A\).
+        Allora per la definizione di \(\mu^\star\) sicuramente abbiamo che
+        \[
+            \mu^\star(A) \le \sum_{n=1}^{\infty} \sum_{k=1}^{\infty} |I_{n, k}|
+            < \sum_{n=1}^{\infty} \left( \mu^\star(A_{n}) +
+            \frac{\varepsilon}{2^{n}} \right) = \varepsilon + \sum_{n=1}^{\infty}
+            \mu^\star(A_{n})
+        \]
+        Dove sommare su \(k\) e poi su \(n\) è equivalente a ogni altro modo di
+        svolgere la somma perché la serie è assolutamente convergente.
+\end{enumerate}
+Si può verificare che \(\mu^\star(I) = |I|\) per gli intervalli, infatti
+naturalmente \(\mu^\star(I) \le |I|\) perché il ricoprimento \(\{I\} \) fa parte
+dell'insieme su cui si fa l'inf. Per l'altra disuguaglianza, consideriamo per
+ogni \(\varepsilon>0\) una successione \(\{I_{i}\} \) di intervalli tale che 
+\[
+    \sum_{i=1}^{\infty} |I_{i}| < \mu^\star(I) + \frac{\varepsilon}{2}
+\]
+Ora dico che esiste una successione di intervalli aperti \(J_{i}\) tale che
+\(I_{i} \subseteq J_{i} \) e inoltre \(\sum_{i=1}^{\infty} |J_{i}| \le
+\sum_{i=1}^{\infty} |I_{i}| + \frac{\varepsilon}{2} \) (basta richiedere che
+\(|J_{i}| \le |I_{i}| + \frac{\varepsilon}{2^{i+1}}\)). Succede allora che \(I
+\subseteq \bigcup_{i=1}^{\infty}J_{i}  \). Ora diciamo che esiste un intervallo
+chiuso \(K \subseteq I \) tale che \(|K| \ge |I| - \varepsilon\), succede quindi
+che \(K \subseteq \bigcup_{i = 1}^{\infty}J_{i}\), dunque essendo \(K\) compatto
+e \(J_{i}\) aperti esiste un sottoricoprimento finito di \(K\). A meno di
+riordinare i \(J_{i}\) quindi \(K \subseteq \bigcup_{i = 1}^{k} J_{i}  \) per un
+qualche \(k \in \mathbb{N}\). Allora abbiamo
+\[
+    |I| - \varepsilon \le  |K| \le \sum_{i=1}^{k} |J_{i}| \le
+    \sum_{i=1}^{\infty} |J_{i}| \le \mu^\star(I) + \varepsilon
+\]
+che essendo vero per ogni \(\varepsilon\) ci porta a ottenere la disuguaglianza
+\(|I| \le \mu^\star(I)\).
+
+\subsection{Misura di Lebesgue}
+Ora invece vogliamo costruire la misura di Lebesgue e gli
+insiemi misurabili secondo Lebesgue, ma prima introduciamo un po' di
+proposizioni.
+\begin{proposition}\label{prop:prop_1}
+    Per \(\delta > 0\) fissato e per \(A \subseteq \mathbb{R}^{N} \) si ha che 
+    \[
+        \mu^\star(A) = \inf\left\{ \sum_{i=1}^{\infty} |I_{i}| : A \subseteq
+            \bigcup_{n = 1}^{\infty} I_{n}, \quad \text{diam}(I_{n}) \le \delta
+        \right\}
+    \]
+\end{proposition}
+\begin{proof}
+    Se io prendo un qualunque ricoprimento di \(A\) con intervalli, posso
+    costruirne uno analogo dove il diametro di ogni intervallo è \(\le \delta\).
+    Questo si può fare eventualmente ``spezzando'' gli intervalli in intervalli
+    più piccoli, tenendo la somma della serie uguale.
+\end{proof}
+
+\begin{proposition}\label{prop:prop_2}
+    Se \(F_{1}, \dots, F_{n}\) sono insiemi chiusi, limitati e disgiunti a due a
+    due, allora la \[\mu^\star \left( \bigcup_{i = 1}^{n}F_{i}  \right) = \sum_{i=1}^{n}
+    \mu^{\star}(F_{i})\]
+\end{proposition}
+\begin{proof}
+    Iniziamo con due insiemi, \(F_{1}\) e \(F_{2}\) chiusi e limitati, con
+    \(F_{1} \cap F_{2} = \varnothing\). Allora per la subadditività della misura
+    esterna \(\mu^{\star}(F_{1} \cup F_{2}) \le \mu^{\star}(F_{1}) +
+    \mu^{\star}(F_{2})\). Inoltre, \(\forall \varepsilon > 0\) esiste (per la
+    definizione con l'inf) un
+    ricoprimento \(\{I_{n}\} \) di \(F_{1}\cup F_{2}\) tale che
+    \(\sum_{i=1}^{\infty} \mu^\star\left( F_{1} \cup F_{2} \right) +
+    \varepsilon\), chiediamo inoltre che \(\text{diam}(I_{n}) \le \frac{d}{3}\),
+    con \(d\) la distanza tra \(F_{1}\) e \(F_{2}\).
+
+    Tutti gli \(I_{n}\) tali che \(I_{n} \cap F_{1} \neq \varnothing\) danno un
+    ricoprimento di \(F_{1}\), e similmente tutti gli \(I_{m}\) tali che \(I_{m}
+    \cap F_{2} \neq\varnothing\) danno un ricoprimento di \(F_{2}\). Allora
+    necessariamente \[\mu^\star(F_{1}) + \mu^\star(F_{2}) \le \sum_{I_{n}\cap
+    F_{1}\neq\varnothing} |I_{n}| + \sum_{I_{m}\cap F_{2}\neq\varnothing}
+|I_{m}| \le \mu^\star(F_{1} \cup F_{2}) + \varepsilon\]
+
+    Infine procedendo per induzione si ottiene il risultato con \(n\) insiemi.
+\end{proof}
+\begin{proposition}\label{prop:reticolazione}
+    \(\forall \) aperto limitato \(G\) e \(\forall \varepsilon > 0\), esiste \(F
+    \subseteq G \) chiuso tale che 
+    \[
+        \mu^\star(F) > \mu^\star(G) - \varepsilon
+    \]
+\end{proposition}
+\begin{proof}
+\begin{figure}[ht]
+    \centering
+    \incfig{reticolazione}
+    \caption{Reticolazione usata per costruire \(I_{n}\) della dimostrazione
+della Proposizione~\ref{prop:reticolazione}}\label{fig:reticolazione}
+\end{figure}
+Costruisco una successione \(I_{n}\) di intervalli disgiunti tali che \(G =
+\bigcup_{n \in \mathbb{N}} I_{n} \) e \(\mu^\star(G) \le \sum_{i=1}^{\infty}
+|I_{n}| \) (notare che vengono presi tutti i punti perché \(G\) è aperto usando
+la reticolazione in figura~\ref{fig:reticolazione}). Dico che esiste
+\(\overline{n} \in \mathbb{N}\) tale che \(\sum_{i=1}^{\overline{n}} |I_{n}| >
+\mu^\star(G) - \frac{\varepsilon}{2} \).
+
+Per ognuno degli \(I_{i}\) fisso un intervallo chiuso \(J_{i} \subseteq I_{i} \)
+e tale che \(|J_{i}| > |I_{i}| - \frac{\varepsilon}{2\overline{n}}\). In questo modo ho
+che evidentemente i \(J_{i}\) sono chiusi, limitati e disgiunti a due a due.
+Allora \(F = \bigcup_{i=1}^{\overline{n}}J_{i} \). Allora per la proposizione
+precedente \(\mu^\star(F) = \sum_{i=1}^{\overline{n}} \mu^\star(J_{i}) =
+\sum_{i=1}^{\overline{n}} |J_{i}| > \sum_{i=1}^{\overline{n}} |I_{i}| -
+\frac{\varepsilon}{2} > \mu^\star(G) - \varepsilon \).
+\end{proof}
+
+\begin{proposition}\label{prop:prop_4}
+\(\forall \) aperto limitato \(G\), \(\forall \) chiuso \(F \subseteq G \),
+allora \(\mu^\star(G \sminus F) = \mu^\star(G) - \mu^\star(F)\).
+\end{proposition}
+\begin{proof}
+Applico la
+proposizione~\ref{prop:reticolazione} a \(G \sminus F\), ottenendo che esiste un
+chiuso \(F_{1} \subseteq G \sminus F \) tale che \(\mu^\star(F_{1}) >
+\mu^\star(G \sminus F) - \varepsilon\). Allora \(\mu^\star(F) + \mu^\star(F_{1})
+= \mu^\star(F \cup F_{1})\), da cui
+\[
+    \mu^\star(F) + \mu^\star(G\sminus F) < \mu^\star(F) + \mu^\star(F_{1}) +
+    \varepsilon = \mu^\star(F \cup F_{1}) + \varepsilon \le \mu^\star(G) + \varepsilon
+\]
+Inoltre \(\mu^\star(G) \le \mu^\star(F) + \mu^\star(G\sminus F)\) da cui
+l'uguaglianza. Poiché sono tutti valori finiti, posso sottrarre \(\mu^\star(F)\)
+da ambo i lati ottenendo la tesi.
+\end{proof}
+\begin{definition}[Misurabilità secondo Lebesgue]
+    Un insieme \(A \subseteq \mathbb{R}^{N} \) è \textbf{misurabile secondo
+    Lebesgue} se \(\forall \varepsilon > 0\) esistono un chiuso \(F_\varepsilon
+    \subseteq A \) e un aperto \(G_\varepsilon \supseteq A \) tali che
+    \(\mu^\star(G_\varepsilon \sminus F_\varepsilon) \le \varepsilon\) 
+\end{definition}
+\begin{remark}
+    La misura esterna \(\mu^\star\) ristretta alla classe degli insiemi
+    misurabili sarà una misura.
+\end{remark}
+\begin{theorem}
+    La famiglia \(\mathcal{M}\) degli insiemi misurabili secondo Lebesgue è
+    un'algebra.
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label = \arabic*.]
+    \item \(\varnothing\) è misurabile, poiché \(F = \varnothing\) e \(G =
+        \varnothing\) soddisfano la definizione.
+    \item Se \(A\) è misurabile, allora \(\forall \varepsilon >0\) esistono \(F_{\varepsilon} \subseteq A
+        \) chiuso e \(G_{\varepsilon} \supseteq A \) aperto tali che
+        \(\mu^\star(G_{\varepsilon} \sminus F_{\varepsilon}) \le \varepsilon\).
+        Allora \(F_{\varepsilon}^{C} \supseteq  A^{C} \) aperto e \(G_{\varepsilon}^{C}
+        \subseteq A^{C} \) chiuso, e \(\mu^\star(G_{\varepsilon}^{C} \sminus
+        F_{\varepsilon}^{C}) = \mu^\star(G_{\varepsilon} \sminus
+        F_{\varepsilon}) \le \varepsilon\).
+    \item Se \(A, B\) sono misurabili, allora \(\forall \varepsilon > 0\)
+        esistono \(F_{\varepsilon} \subseteq A \) chiuso e \(G_{\varepsilon}
+        \supseteq A \) aperto tali che \(\mu^\star(G_{\varepsilon} \sminus
+        F_{\varepsilon}) \le \frac{\varepsilon}{2}\), e \(F_{\varepsilon}' \subseteq B \)
+        chiuso e \(G_{\varepsilon}' \supseteq B \) aperto tali che
+        \(\mu^\star(G_{\varepsilon}' \sminus F_{\varepsilon}') \le
+        \frac{\varepsilon}{2}\).
+
+        Allora
+        \[
+            \text{chiuso } F_\varepsilon \cap F_\varepsilon' \subseteq A \cap B \subseteq
+            G_\varepsilon \cap G_\varepsilon' \text{ aperto }
+        \]
+        e
+        \[
+            \mu^\star(G_\varepsilon \cap G_\varepsilon' \sminus F_\varepsilon \cap F_\varepsilon') \le
+            \mu^\star(G_\varepsilon \sminus F_\varepsilon) + \mu^\star(G_\varepsilon' \sminus F_\varepsilon') \le
+            \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+        \]
+\begin{figure}[ht]
+    \centering
+    \incfig[.4]{weird_intersection}
+    \caption{\(G_\varepsilon \cap G_\varepsilon' \sminus F_\varepsilon \cap
+    F_\varepsilon' \subseteq (G_\varepsilon \sminus F_\varepsilon) \cup
+(G_\varepsilon' \sminus F_\varepsilon') \) }\label{fig:weird_intersection}
+\end{figure}
+
+\end{enumerate}
+\end{proof}
+\begin{proposition}\label{prop:prop_5}
+    Se \(A\subseteq \mathbb{R}^{N} \) è limitato, allora \(A\) è misurabile se e
+    solo se \(\forall \varepsilon > 0, \,\, \exists F_\varepsilon \subseteq A \)
+    chiuso tale che \(\mu^\star(F_\varepsilon) > \mu^\star(A) - \varepsilon\) 
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Se \(A\) è misurabile, allora \(\forall \varepsilon > 0\)
+        esistono \(F_{\varepsilon} \subseteq A \) chiuso e \(G_{\varepsilon}
+        \supseteq A \) aperto tali che \(\mu^\star(G_{\varepsilon} \sminus
+        F_{\varepsilon}) \le \varepsilon\). Allora \(\mu^\star(A) \le
+        \mu^\star(F_\varepsilon) + \mu^\star(G_\varepsilon \sminus
+        F_\varepsilon) \le \mu^\star(F_\varepsilon) + \varepsilon\) 
+    \item[\(\impliedby \)] Dico che esiste una successione \(I_{n}\) di
+        intervalli aperti e di diametro \(\le  1\) tali che \(A \subseteq
+        \bigcup_{n \in \mathbb{N}} I_{n}  \) e \(\sum_{i=1}^{\infty} |I_{n}| <
+        \mu^\star(A) + \varepsilon \). Prendo come \(G_\varepsilon\) l'unione di
+        tutti gli \(I_{n}\) tali che \(I_{n} \cap A \neq \varnothing\). Allora
+        \(G_\varepsilon\) è aperto limitato contenente \(A\), questo perché
+        avendo diametro minore o eguale a 1 l'unione si ``distacca'' da \(A\) al
+        più di 1. Allora \[\mu^\star(G_\varepsilon \sminus F_\varepsilon) =
+        \mu^\star(G_\varepsilon) - \mu^\star(F_\varepsilon) \le
+        \sum_{i=1}^{\infty} |I_n| - \mu^\star(F_\varepsilon) < \mu^\star(A) +
+        \varepsilon - \mu^\star(F_\varepsilon) < 2\varepsilon \] 
+        Dove nell'ultima diseguaglianza si è usata l'ipotesi.
+\end{itemize}
+\end{proof}
+
+\begin{theorem}
+    La famiglia \(\mathcal{M}\) degli insiemi misurabili secondo Lebesgue è una
+    \(\sigma\)-algebra e inoltre \(\mu^\star\) è \(\sigma\)-additiva su
+    \(\mathcal{M}\). In altre parole, \(\mu^\star\) ristretto a \(\mathcal{M}\)
+    è una misura.
+\end{theorem}
+\begin{proof}
+    Divideremo la dimostrazione in tre parti.
+\begin{enumerate}[label = \arabic*.]
+    \item Sia \(\{A_{n}\} \subseteq \mathcal{M} \) con \(A_{n} \cap A_{m} =
+        \varnothing\), \(\forall n \neq m\) e \(\exists I\) intervallo tale che
+        \(A_{n} \subseteq I \), \(\forall n \in \mathbb{N}\).
+
+        Allora \(A = \bigcup_{n \in \mathbb{N}} A_{n} \subseteq I \). Ora
+        possiamo usare la proposizione~\ref{prop:prop_5} per dire che, dato
+        \(\varepsilon > 0\), \(\forall n \in \mathbb{N}\) esiste un \(F_{n} \subseteq A_{n} \) chiuso tale che
+        \(\mu^\star(F_{n}) > \mu^\star(A_{n}) - \frac{\varepsilon}{2^{n+1}}\).
+        Inoltre \(\mu^\star(A) \le \sum_{i=1}^{\infty} \mu^\star(A_{i}) \)
+        allora esiste \(k \in \mathbb{N}\) tale che \(\sum_{i=1}^{k}
+        \mu^\star(A_{i}) > \mu^\star(A) - \frac{\varepsilon}{2} \) per il
+        limite. Allora sia \(F = \bigcup_{n = 1}^{k} F_{n} \) chiuso. Allora
+        possiamo dire che \(\mu^\star(F) = \sum_{i=1}^{k} \mu^\star(F_{i}) >
+        \sum_{i=1}^{k} \mu^\star(A_{i}) - \frac{\varepsilon}{2} > \mu^\star(A) -
+        \varepsilon\). Ora poiché abbiamo trovato un chiuso contenuto in \(A\)
+        con la proprietà richiesta, allora \(A\) è misurabile, poiché è
+        limitato (proposizione~\ref{prop:prop_5}).
+
+        Ora se \(k\) è generico
+        \[
+            \sum_{i=1}^{k} \mu^\star(A_{i}) < \sum_{i=1}^{k} \mu^\star(F_{i})  +
+            \frac{\varepsilon}{2} = \mu^\star\left( \bigcup_{i = 1}^{k} F_{i}
+            \right) + \frac{\varepsilon}{2} \le \mu^\star(A) +
+            \frac{\varepsilon}{2}
+        \]
+        Da cui trovo che, per \(\varepsilon \to 0\) e \(k \to \infty\) 
+        \[
+            \mu^\star(A) \ge \sum_{i=1}^{\infty} \mu^\star(A_{i}) \ge
+            \mu^\star(A)
+        \]
+        dove la seconda uguaglianza è per la subadditività della misura esterna.
+
+    \item  Sia \(\{A_{n}\} \subseteq \mathcal{M} \) con \(A_{n} \cap A_{m} =
+        \varnothing\), \(\forall n \neq m\). Di nuovo sia \(A = \bigcup_{n \in
+        \mathbb{N}} A_{n}\).
+
+        Reticoliamo \(\mathbb{R}^{N}\) con intervalli \(\{I_{j}\} \) tali che
+        \(I_{i} \cap  I_{j} = \varnothing\), \(\forall i \neq j\) e
+        \(\bigcup_{j=1}^{\infty} I_{j} = \mathbb{R}^{N} \). Ci interessiamo agli
+        insiemi \(B_{j} = \bigcup_{i=1}^{\infty} (A_{i} \cap I_{i}) \). Allora i
+        \(B_{j}\) sono misurabili per il punto 1, infatti \((A_{i} \cap I_{j})
+        \subseteq I_{j} \)  e sono disgiunti a due a due. Ora notiamo che
+        \(B_{j} \cap B_{i} = \varnothing\) \(\forall A j \neq i\). Inoltre
+        \(\bigcup_{j = 1}^{\infty} B_{j} = A \). Ora per \(\varepsilon > 0\)
+        fissato e \( \forall j\) esistono \(F_{j}\) chiuso e \(G_{j}\) aperto
+        tali che \(F_{j} \subseteq B_{j} \subseteq G_{j}  \) e \(\mu^\star(G_{j}
+        \sminus F_{j}) \le \frac{\varepsilon}{2^{j}}\). A questo punto abbiamo
+        \[
+            F := \bigcup_{j=1}^{\infty} F_{j} \subseteq A \subseteq
+            \bigcup_{j=1}^{\infty} G_{j} =: G
+        \]
+        È evidente che \(G\) è aperto. Inoltre \(F\) è chiuso, perché data una
+        successione \(\{x_{n}\} \) convergente in \(\mathbb{R}^{N}\) e a valori
+        in \(F\). Poiché è convergente è limitata, e allora i suoi valori cadono
+        in un numero finito di insiemi \(F_{j}\). Poiché l'unione di quegli
+        \(F_{j}\) è chiusa allora \(x \in F\) è chiuso.
+
+        Adesso prendiamo \[G \sminus F = \bigcup_{j=1}^{\infty}(G_{j} - F)
+        \subseteq \bigcup_{j = 1}^{\infty} (G_{j} - F_{j}) \] che ha misura
+        \(\mu^\star(G\sminus F) \le \sum_{j=1}^{\infty}
+        \frac{\varepsilon}{2^{j}} = \varepsilon \) quindi \(A\) è misurabile.
+
+        Ora vogliamo mostrare la \(\sigma\)-additività. Possiamo assumere che
+        \(\mu^\star(A_{i}) < +\infty\) per ogni \(i\), altrimenti la tesi è
+        banale. Ora supponiamo che \(\sum_{i=1}^{\infty} \mu^\star(A_{i}) =
+        +\infty \), allora ne deduciamo che 
+        \[
+            \sum_{i=1}^{k} \mu^\star(A_{i}) \overset{\mathcal{M} \text{ è
+            un'algebra}}{=} \mu^\star \left( \bigcup_{i=1}^{k}A_{i} \right) \le \mu^\star(A) \quad \forall k \in
+            \mathbb{N}
+        \]
+        e quindi \(\mu^\star(A) = +\infty\).
+
+        Supponiamo infine che \(\sum_{i=1}^{\infty} \mu^\star(A_{i}) \)
+        converga, allora poiché \(\mu^\star(A_{i}) \) è minore o eguale a \( \sum_{j=1}^{\infty}
+        \mu^\star(A_{i} \cap I_{j}) \) abbiamo che 
+        \[
+            \sum_{i=1}^{\infty} \mu^\star(A_{i}) \le \sum_{i=1}^{\infty}
+            \sum_{j=1}^{\infty} \mu^\star(A_{i} \cap I_{j}) \overset{1.}{=}
+            \sum_{j=1}^{\infty} \mu^\star(B_{j})
+        \]
+        Ora analizziamo la ridotta
+        \[
+            \sum_{j=1}^{n} \mu^\star(B_{j}) \le \sum_{j=1}^{n} \mu^\star(F_{j})
+            + \sum_{j=1}^{n} \mu^\star(G_{j} \sminus F_{j})
+            \le \mu^\star\left(
+        \bigcup_{j = 1}^{n}F_{j}  \right) + \sum_{j=1}^{n}
+        \frac{\varepsilon}{2^{j}} \le \mu^\star(A) + \varepsilon
+        \]
+        Dove nella diseguaglianza centrale si è usata la
+        proposizione~\ref{prop:prop_2}. Mettendo tutto assieme e avendo \(n\to
+        \infty\) e \(\varepsilon \to 0\)  otteniamo che
+        \(\sum_{i=1}^{\infty} \mu^\star(A_{i}) \le \mu^\star(A)\) e naturalmente
+        l'altra diseguaglianza è data dalla sub-additività.
+    \item Sia \(\{A_{n}\} \subseteq   \mathcal{M}\) e \(A = \bigcup_{i \in
+        \mathbb{N}} A_{i} \) e vogliamo provare che \(A \in \mathcal{M}\).
+
+        Costruisco un'altra successione \(\{B_{n}\} \subseteq \mathcal{M}\) di
+        insiemi a due a due disgiunti. Definisco \(B_{1} = A_{1}\), \(B_{2} =
+        A_{2} \sminus A_{1}\), \(B_{3} = A_{3} \sminus (A_{1} \cup A_{2})\),
+        ecc. Sono misurabili perché sappiamo già che \(\mathcal{M}\) è
+        un'algebra. Ora poiché 
+        \(
+            A = \bigcup_{i \in \mathbb{N}} A_{i} = \bigcup_{i \in \mathbb{N}} B_{j}
+        \), \(A\) è misurabile per il punto 2.
+\end{enumerate}
+\end{proof}
+Quindi ora possiamo considerare lo spazio di misura di Lebesgue \(\left(
+\mathbb{R}^{N}, \mathcal{M}, \mu \right) \) con \(\mathcal{M}\) gli insiemi
+misurabili secondo Lebesgue e \(\mu = \mu^\star\) la misura esterna.
+\begin{theorem}[Caratterizzazione degli insiemi misurabili]
+    Un insieme \(A \subseteq \mathbb{R}^{N} \) è misurabile se e solo se \(A\)
+    può essere rappresentato come
+\begin{itemize}
+    \item Unione numerabile di chiusi e di un insieme trascurabile
+\end{itemize}
+oppure 
+\begin{itemize}
+    \item Intersezione numerabile di aperti meno un trascurabile
+\end{itemize}
+\end{theorem}
+\begin{proof}
+    Gli intervalli sono misurabili, l'insieme vuoto è misurabile.
+    Sia \(N\) un insieme trascurabile, allora \(N\) è misurabile. Infatti
+    \(\forall \varepsilon >0\) prendo \(\varnothing =: F \subseteq N \subseteq G
+    := \bigcup_{i=1}^{\infty} I_{i} \) con \(I_{i}\) intervalli aperti e
+    \(\sum_{i=1}^{\infty} \mu^\star(I_{i}) < \varepsilon \), a questo punto
+    naturalmente quindi \(\mu^\star(G \sminus F) < \varepsilon\).
+    Gli aperti sono misurabili, infatti se è limitato si scrive come unione
+    numerabile di intervalli. Ora se \(A\) è un aperto qualunque \(A =
+    \bigcup_{n=1}^{\infty} \left( A \cap {(-n, n)}^{N} \right)\) e quindi è
+    misurabile. Inoltre tutti i chiusi sono misurabili in quanto complementare
+    di aperti. Ne consegue che la \(\sigma\)-algebra \(\mathcal{B}\) di Borel
+    generata dalla famiglia \(\tau\) degli aperti di \(\mathbb{R}^{n}\) è
+    contenuta in \(\mathcal{M}\).
+
+    Ne consegue che se scrivo \(A\) come unione numerabile di chiusi e di un
+    trascurabile allora \(A\) è misurabile. Stessa cosa se scrivo \(A\) come
+    intersezione numerabile di aperti meno un trascurabile.
+
+    Per il viceversa, supponiamo \(A\) misurabile, allora per ogni \(n \in
+    \mathbb{N}\) esistono chiuso \(F_{n}\) e aperto \(G_{n}\) con \(F_{n}
+    \subseteq A \subseteq G_{n}  \) e \(\mu^\star(G_{n} \sminus F_{n}) <
+    \frac{1}{n}\). Ora considero \(F = \bigcup_{n=1}^{\infty}F_{n}\) e sia \(N =
+    A \sminus F\). \(N\) è allora trascurabile perché \(\mu^\star(N) =
+    \mu^\star(A \sminus F) \le \mu^\star(G_{n} \sminus F) \le \mu^\star(G_{n} -
+    F_{n}) < \frac{1}{n}\) per ogni \(n\) quindi \(\mu^\star(N) = 0\). In
+    pratica quindi \(A = \bigcup_{n \in \mathbb{N}} F_{n}  \cup N\) unione
+    numerabile di chiusi e di un trascurabile. Il complementare di A quindi si
+può rappresentare come \(A^{C} = {\left(\bigcup_{n \in \mathbb{N}} F_{n} \right)}^{C} \cap
+N^{C} = \left(\bigcap_{n \in \mathbb{N}} F_{n}^{C}\right) \sminus N\) ossia nel
+secondo modo.
+\end{proof}
+\begin{proposition}\label{prop:prop_6}
+    Vale la seguente proprietà:
+    \[
+        \mu^\star(A) = \inf \{\mu(G) : G \text{ aperto }, G \supseteq A \} \quad
+        \forall A \subseteq \mathbb{R}^{n} 
+    \]
+    Se inoltre \(A \in \mathcal{M}\) allora 
+    \[
+        \mu(A) = \mu^\star(A) = \sup \{\mu(F) : F \text{ chiuso e limitato}, F
+        \subseteq A \} 
+    \]
+\end{proposition}
+\begin{proof}
+    La prima è una conseguenza della rappresentabilità di un aperto tramite
+intervalli. Fissato ora \(\varepsilon>0\) e posto \(A_{n} = A \cap
+{(-n,n)}^{N}\), per\(A\) misurabile abbiamo
+\[
+    \mu(A) = \lim_{n \to \infty} \mu(A_{n})
+\]
+Se \(\mu(A) < +\infty\) esiste \(n\) tale che \(\mu(A_{n}) > \mu(A) -
+\frac{\varepsilon}{2}\) e \(A_{n}\) contiene un chiuso \(F\) tale che \(\mu(F) >
+\mu(A_{n}) - \frac{\varepsilon}{2}\). Se invece \(\mu(A) = +\infty\) esiste
+\(n\) con \(\mu(A_{n}) > \varepsilon\) e \(A_{n}\) contiene un chiuso \(F\) tale
+che \(\mu(F) > \mu(A_{n}) - \frac{\varepsilon}{2}\), pertanto \(\mu(F) >
+\frac{\varepsilon}{2}\).
+
+\end{proof}
+
+\subsection{Insiemi Trascurabili}
+Si tratta di insiemi la cui misura esterna è nulla, vediamo alcuni esempi.
+\begin{example}
+    In \(\mathbb{R}\) i punti sono trascurabili e le unioni numerabili di trascurabili è trascurabile per \(\sigma\)-additività.
+    In particolare quindi \(\mathbb{Q}\) è trascurabile in \(\mathbb{R}\) 
+\end{example}
+
+La funzione di Dirichlet è un esempio di funzione che non è integrabile secondo
+Riemann, ma è integrabile secondo Lebesgue. Vedremo più avanti in dettaglio ma
+per ora notiamo che la funzione di Dirichlet è
+\[
+    d(x) = \begin{cases}
+        1 & x \in \mathbb{Q}  \\
+        0 & x \notin \mathbb{Q} 
+    \end{cases}
+\]
+Allora \(d = 0\) quasi ovunque in \(\mathbb{R}\).
+
+\begin{example}
+    In \(\mathbb{R}^2\) segmenti e rette sono insiemi trascurabili. Quindi ad
+    esempio l'insieme 
+    \[
+        A = \{(x, y) \in \mathbb{R}^2 : x \in \mathbb{Q}\} 
+    \]
+    è trascurabile in \(\mathbb{R}^2\) poiché unione numerabile di rette \(x=q\)
+    con \(q \in \mathbb{Q}\) 
+\end{example}
+
+\begin{example}[Insieme di Cantor]
+    L'insieme di Cantor è un trascurabile che ha la cardinalità del continuo.
+    Si costruisce prendendo una successione di insiemi chiusi in \(\mathbb{R}\). 
+    \begin{align*}
+        C_{0} &= [0, 1] \\
+        C_{1} &= \left[ 0, \frac{1}{3} \right] \cup \left[ \frac{2}{3}, 1 \right] \\
+        C_{2} &= \left[ 0, \frac{1}{9} \right] \cup \left[ \frac{2}{9}, \frac{3}{9} \right] \cup \left[ \frac{6}{9}, \frac{7}{9} \right] \cup \left[ \frac{8}{9}, 1 \right] \\
+        &\vdots
+    \end{align*}
+\begin{figure}[ht]
+    \centering
+    \incfig{cantor}
+    \caption{Successione la cui intersezione è l'insieme di Cantor}\label{fig:cantor}
+\end{figure}
+    \(C_{n}\) è composto da \(2^{n}\) intervallini ciascuno di lunghezza
+    \(\frac{1}{3}^{n}\) 
+    L'insieme di Cantor è definito come
+    \[
+        C = \bigcap_{n \in \mathbb{N}} C_{n}
+    \]
+    Allora \(C\) è chiuso perché ogni \(C_{n}\) è chiuso, e \(C\) è non vuoto
+    perché ad esempio \(0 \in C\).
+
+    \(C_{n}\) è una successione decrescenti di insiemi, di cui \(\mu(C_{0}) = 1
+    < +\infty\). Allora per continuità della misura esterna
+    \[
+        \mu(C) = \lim_{n \to \infty} \mu(C_{n}) = \lim_{n \to \infty} {\left( 1 -
+    \frac{1}{3} \right)}^{n} = 0
+    \]
+    quindi \(C\) è trascurabile.
+
+    Ora vogliamo dimostrare che ha la cardinalità del continuo. Consideriamo di
+    usare la base ternaria, quindi ogni numero in \([0, 1]\) può essere scritto
+    come \(0.c_{1}c_{2}c_{3}\dots c_{n}\dots_3\) con \(c_{i}\in \{0, 1, 2\}\) ed è
+    equivalente a \(\sum_{n=1}^{\infty} c_n 3^{-n}\). Quindi ad esempio il punto
+    \(\frac{1}{3}\) si può scrivere come \(0.1\) oppure \(0.\overline{2}\) dove
+    la barra indica la periodicità. Notare ora che i punti dell'insieme di
+    Cantor si possono rappresentare in base ternaria utilizzando le sole cifre
+    \(0\) e \(2\).
+
+    I punti dell'intervallo \([0, 1]\) si possono rappresentare
+    anche in base binaria, quindi \(y \in [0, 1]\) si può scrivere come
+    \(0.d_{1}d_{2}\dots d_{n} \dots_2\) dove \(d_{i} \in \{0, 1\}\) per ogni
+    \(i\) e \(y = \sum_{n=1}^{\infty} d_{n} 2^{-n} \). Ad esempio \(1 =
+    0.\overline{1}_2\).
+
+    Adesso possiamo quindi costruire una funzione suriettiva
+    dall'insieme di Cantor ai punti di \([0, 1]\) in questo modo:
+    \begin{align*}
+        x \in C &\longmapsto y \in [0, 1] \\
+        x = 0.c_{1}c_{2}\dots c_{n}\dots_3 &\longmapsto y =
+        0.d_{1}d_{2}\dots d_{n}\dots_2 \\
+        d_{n} = \frac{c_{n}}{2} \,&\quad\quad\quad \forall n \in \mathbb{N}
+    \end{align*}
+    Ossia associamo a ogni punto dell'insieme di Cantor il numero reale ottenuto
+    dividendo ogni sua cifra in base ternaria per due e leggendolo in base
+    binaria. È una funzione suriettiva perché per ogni punto \(y \in [0, 1]\) possiamo
+    ottenere un \(x \in C\) moltiplicando per due ogni cifra e leggendo il
+    numero in base ternaria. Notare che questa funzione non è iniettiva poiché,
+    ad esempio, sia \(\frac{1}{3} = 0.0\overline{2}_3\) che \(\frac{2}{3} =
+    0.2_3\) hanno come immagine \(\frac{1}{2} = 0.1_2 = 0.0\overline{1}_2\). Non
+    è difficile comunque trovare una funzione iniettiva, ad esempio
+    l'inclusione da \(C\) a \([0, 1]\) è una funzione iniettiva e quindi abbiamo
+    che \(C\) e \([0, 1]\) hanno la stessa cardinalità.
+\end{example}
+\subsection{Funzioni misurabili}
+Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e sia \(f: \Omega \to
+\mathbb{R} \cup \{-\infty, \infty\}\) 
+\begin{definition}
+    La funzione \(f : \Omega \to \mathbb{R} \cup \{-\infty, \infty \}\) si dice \textbf{misurabile} se \(\forall \alpha \in \mathbb{R}\) l'insieme
+    \[
+        f^{-1}((\alpha, +\infty]) = \{x \in \Omega : f(x) > \alpha\} \in \mathcal{M}
+    \]
+\end{definition}
+La definizione verrà parzialmente motivata dalla seguente proposizione:
+\begin{proposition}
+    Ciascuna delle seguenti affermazioni implica le altre:
+\begin{enumerate}[label = \roman*)]
+    \item \(f ^{-1}\left((\alpha, +\infty]\right) \in \mathcal{M} \quad \forall \alpha \in \mathbb{R}\)
+    \item \(f ^{-1}\left([\alpha, +\infty]\right) \in \mathcal{M} \quad \forall \alpha \in
+        \mathbb{R}\)
+    \item \(f ^{-1}\left([-\infty, \alpha)\right) \in \mathcal{M} \quad \forall \alpha \in
+        \mathbb{R}\)
+    \item \(f ^{-1}\left([-\infty, \alpha]\right) \in \mathcal{M} \quad \forall \alpha \in 
+        \mathbb{R}\) 
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Dimostriamo che \(i) \implies ii) \implies iii) \implies iv) \implies i)\).
+    
+    Scriviamo quindi
+    \[f ^{-1}\left( [\alpha, +\infty] \right) = \bigcap_{n \in \mathbb{N}}  \left\{x \in \Omega :
+    f(x) > \alpha - \frac{1}{n}\right\}\] che è intersezione numerabile di
+    insiemi misurabili (se vale la \(i)\)), quindi è misurabile.
+    
+    Se ora vale la \(ii)\), allora 
+    \[
+        f ^{-1} \left( [-\infty, \alpha) \right) = \left( f ^{-1} \left(
+        [\alpha, +\infty] \right) \right)^{C} \in \mathcal{M}
+    \]
+    per cui vale la \(iii)\). Analogamente alla prima implicazione, se vale la \(iii)\) allora 
+    \[
+        f ^{-1} \left( [-\infty, \alpha] \right) = \bigcap_{n \in \mathbb{N}}  \left\{x \in \Omega :
+        f(x) > \alpha + \frac{1}{n}\right\} \in \mathcal{M}
+    \]
+    e quindi vale la \(iv)\). Infine se vale la \(iv)\) allora, analogamente
+    alla seconda implicazione,
+    \[
+        f ^{-1} \left( (\alpha, +\infty] \right) = \left( f ^{-1} \left(
+        [-\infty, \alpha] \right) \right)^{C} \in \mathcal{M}
+    \]
+    e quindi vale la \(i)\).
+\end{proof}
+
+Grazie alla proposizione so che \(f\) è misurabile se e solo se le
+controimmagini di tutte le semirette sono misurabili. A questo punto però anche
+tutti i segmenti sono misurabili, infatti ad esempio \([a, b] = [a, +\infty]
+\cap [-\infty, b]\) quindi se le controimmagini di \([a, +\infty]\) e di \([-
+\infty, b]\) sono misurabili, allora anche la controimmagine di \([a, b]\) è
+misurabile, in quanto l'intersezione delle due. Ora avendo quindi che le
+controimmagini degli intervalli sono misurabili, abbiamo che anche le
+controimmagini dei borelliani sono misurabili, in quanto i borelliani sono
+unioni numerabili di intervalli.
+
+Praticamente ogni funzione che possa venire in mente a chiunque è misurabile, e
+costruire una funzione non misurabile è un'operazione non banale e richiede
+l'assioma della scelta. Ora procediamo con alcune proprietà della classe delle
+funzioni misurabili.
+\begin{proposition}
+    Siano \(f,g\) funzioni misurabili. Allora anche \(\max(f, g)\) e \(\min(f,
+    g)\) sono misurabili.
+\end{proposition}
+\begin{proof}
+    \[
+        \{x \in \Omega : \max(f, g) (x) > \alpha\} = \{x \in \Omega : f(x) >
+        \alpha \} \cup \{x \in \Omega : g(x) > \alpha\} 
+    \]
+    che è unione di insiemi misurabili, quindi è misurabile. Analogamente per il
+    minimo con l'intersezione.
+\end{proof}
+
+\begin{proposition}
+    Sia \(f\) una funzione misurabile, allora anche \(-f, f^{+}, f^{-}, |f|\)
+    sono misurabili
+\end{proposition}
+\begin{proof}
+    Per \(-f\):
+    \[
+        \{x \in \Omega : -f(x) > \alpha\} = \{x \in \Omega : f(x) < -\alpha\}
+    \]
+    che è misurabile per ipotesi.
+
+    Naturalmente anche la funzione \(0\) è misurabile, poiché la controimmagine
+    delle semirette è \(\varnothing\) oppure \(\Omega\) che sono entrambi
+    misurabili. Quindi anche \(f^{+} = \max(f, 0)\) e \(f^{-} = -\min(f, 0)\)
+    sono misurabili per sopra e per la proposizione precedente.
+
+    Per \(|f|\):
+    \[
+    \{x \in \Omega: |f(x)| > \alpha\}  = \begin{cases}
+        \{x \in \Omega : f(x) > \alpha\} \cup \{x \in \Omega : f(x) < -\alpha\}
+        & \alpha \ge  0 \\
+        \Omega & \alpha < 0
+    \end{cases}
+    \]
+\end{proof}
+
+\begin{proposition}
+    Se \(f_{n}\) è una successione di funzioni misurabili allora
+    \[g(x)=\sup_{n}f_{n}(x), \quad h(x)=\inf_{n}f_{n}(x),\quad
+        u(x)=\limsup_{n}f_{n}(x),\quad
+    v(x)=\liminf_{n}f_{n}(x)\] sono tutte misurabili
+\end{proposition}
+\begin{corollary}
+    Se \(f_{n}\) converge puntualmente a \(f\) allora \(f\) è misurabile.
+\end{corollary}
+\begin{proof}
+    Sia \(g(x) = \sup_n f_{n}(x)\), allora
+    \[
+        \{x \in \Omega : g(x) > \alpha\} = \bigcup_{n=1}^{\infty} \{x \in \Omega
+        : f_{n}(x) > \alpha\}
+    \]
+    poiché significa che esiste almeno un \(n\) tale che \(f_{n}(x) > \alpha\). 
+
+    Sia \(h(x) = \inf_{n} f_{n}(x)\), consideriamo
+    \[
+        \{x \in \Omega : h(x) \ge \alpha\} = \bigcap_{n=1}^{\infty} \{x \in
+        \Omega : f_{n}(x) > \alpha\}
+    \]
+    poiché significa che per ogni \(n\) vale \(f_{n}(x) > \alpha\).
+
+    Per quanto riguarda \(u(x) = \sup_n \inf_{k \ge n} f_k(x)\) e \(v(x) =
+    \inf_n \sup_{k \ge n} f_k(x)\) si ha quindi che sono il sup e l'inf di
+    successioni di funzioni misurabili per la prima parte della proposizione, quindi
+    sono misurabili per la prima parte della proposizione.
+
+    Il corollario segue ovviamente poiché se la funzione converge allora il
+    limite è ad esempio uguale al \(\liminf\) 
+\end{proof}
+
+\begin{proposition}
+    Siano \(f, g\) misurabili. Allora la somma \(f+g\), se è ben
+    definita\footnote{ossia quando non succede mai che una delle due faccia
+    \(+\infty\) e l'altra \(-\infty\)}, è
+    misurabile.
+\end{proposition}
+\begin{proof}
+    \[
+        \{x \in \Omega : f(x) + g(x) > \alpha\} = \bigcup_{q \in \mathbb{Q}}
+        \big( \{x \in \Omega : f(x) > \alpha - q\} \cap \{x \in \Omega: g(x) >
+            q\} \big)
+    \]
+    che è unione numerabile di insiemi misurabili, quindi è misurabile.
+    L'eguaglianza è giustificata dal fatto che se \(f(x) + g(x) > \alpha\) e
+    \(|g(x)| < \infty\) 
+    allora ad esempio \(f(x) > \alpha - g(x) > \alpha - q\) per qualche \(q <
+    g(x)\) razionale, che esiste perché sicuramente tra \(\alpha - f(x)\) e
+    \(g(x)\) esiste un razionale per densità di \(\mathbb{Q}\), mentre se \(f(x)
+    = +\infty\) allora sicuramente \(f(x) > \alpha - q\) per ogni \(q \in
+    \mathbb{Q}\) quindi basta sceglierne uno tale che \(g(x) > q\) che è
+    fattibile sempre poiché per ipotesi \(g(x) > -\infty\). L'altra
+    implicazione invece è data dal fatto che se, per
+    qualche \(q\), \(f(x) > \alpha - q\) e \(q < g(x)\) allora \(f(x) > \alpha -
+    g(x)\) da cui \(x \in {(f+g)}^{-1}((\alpha, +\infty])\). Infine se invece \(g(x) =
+    +\infty\) allora qualsiasi \(x\) è in \({(f+g)}^{-1}((\alpha, +\infty])\),
+    ed esiste sempre un \(q\) tale che \(f(x) > \alpha - q\) poiché \(f(x) >
+    -\infty\). È facile similmente notare che se \(f(x)\) oppure \(g(x)\) sono
+    eguali a \(-\infty\) allora entrambi gli insiemi sono \(\varnothing\).
+\end{proof}
+
+\begin{proposition}
+    Siano \(f, g\) misurabili. Allora \(f\cdot g\) è misurabile, purché
+    l'operazione sia ben definita.
+\end{proposition}
+\begin{proposition}
+    Iniziamo provando che se \(h\) è misurabile allora \(h^{2}\) è misurabile.
+    Questo perché \(h^2(x) > \alpha \iff |h(x)| > \sqrt{\alpha}\) se \(\alpha\)
+    è positivo (altrimenti la controimmagine è banalmente misurabile). Ma allora
+    chiedere che \(h^2\) sia misurabile è equivalente a chiedere che lo sia
+    \(|h|\).
+
+    Inoltre se \(h\) è misurabile, allora \(c\, h\), con \(c \in \mathbb{R}\)
+    è misurabile in quanto \(c\cdot h(x) > \alpha \iff h(x) >
+    \frac{\alpha}{c}\).
+
+    Notare adesso che \(\displaystyle \frac{{(f+g)}^2 - {(f-g)}^2}{4}\). 
+\end{proposition}
+
+\begin{proposition}
+    Siano \(f,g\) misurabili. Allora \(\frac{f}{g}\) è misurabile, purché
+    l'operazione sia ben definita.
+\end{proposition}
+\begin{proof}
+    Basta controllare che se \(h\) è misurabile e \(h\neq 0\) allora anche
+    \(\frac{1}{h}\) è misurabile, poi usare la proposizione precedente.
+    Infatti \(\frac{1}{h(x)} > \alpha\) se e solo se
+\begin{itemize}[label = --]
+    \item \(0 < h(x) < \frac{1}{\alpha}\) se \(\alpha > 0\)
+    \item \(h(x) < \frac{1}{\alpha}\) o \(h(x) > 0\)  se \(\alpha < 0\)
+    \item \(h(x) > 0\) se \(\alpha = 0\)
+\end{itemize}
+    In tutti i tre e casi gli \(x\) che soddisfano tale requisito formano per
+    ipotesi un insieme misurabile.
+\end{proof}
+
+\begin{definition}[Funzione semplice]
+Consideriamo uno spazio di misura \((\Omega, \mathcal{M}, \mu)\). Le
+\textbf{funzioni semplici}
+sono le funzioni che assumono un numero finito di valori reali. Quindi
+\(s : \Omega \to  \mathbb{R}\) è semplice se si può scrivere come combinazione
+lineare finita di funzioni caratteristiche. Quindi abbiamo
+\[
+    s = \sum_{i=1}^{n} c_{i} \rchi_{E_{i}}
+\]
+dove \(E_{1}, \dots, E_{n}\) sono sottoinsiemi di \(\Omega\) e \(c_{1}, \dots,
+c_{n} \in \mathbb{R}\).
+
+Inoltre la funzione è semplice misurabile se \(E_{1}, \dots, E_{n} \in
+\mathcal{M}\).
+\end{definition}
+Esiste sempre una rappresentazione in tale modo di \(s\) dove i coefficienti
+\(c_{1}, \dots, c_{n}\) sono diversi tra loro e gli insiemi \(E_{1}, \dots,
+E_{n}\) sono a due a due disgiunti. Queste funzioni sono particolarmente utili
+nell'approssimare funzioni. Più precisamente
+\begin{proposition}\label{prop:esistenza_semplici}
+    Sia \(f : \Omega \to  \mathbb{R} \cup \{-\infty, \infty\} \). Allora esiste
+    una successione \(\{s_{n}\} \) di funzioni semplici tali che \(s_{n} \to f\)
+    puntualmente. Se \(f\) è misurabile, allora anche le \(s_{n}\) possono
+    essere scelte tutte misurabili. Inoltre se \(f \ge 0\) (\(f \le 0\)) in \(\Omega\), allora
+    la successione \(\{s_{n}\} \) può essere presa non decrescente (non
+    crescente).
+\end{proposition}
+\begin{proof}
+    Cominciamo da \(f\) non negativa. Per \(n\) fissato scegliamo gli insiemi in
+    base ai valori di \(f\). Quindi scegliamo \(i = 1, \dots, n2^{n}\) e
+    prendiamo \[E_{n, i} = \{x \in \Omega : \frac{i-1}{2^{n}} \le f(x) <
+    \frac{i}{2^{n}}\} \quad \forall n \in \mathbb{N}, \,\, \forall i \in \{1,
+\dots, n2^{n}\}  \] 
+Inoltre sia \[ F_{n}=\{x \in \Omega : f(x) \ge n\} \]
+
+    Ora possiamo scrivere
+    \[
+        s_{n}(x) = \sum_{i=1}^{n{2}^{n}} \frac{i-1}{2^{n}} \rchi_{E_{n, i}}(x) +
+        n \rchi_{F_{n}}(x)
+    \]
+    Ora abbiamo chiaramente per costruzione che \(s_{n} \le f\). Vogliamo
+    mostrare che per ogni \(x \in \Omega\) abbiamo \(s_{n}(x) \to f(x)\).
+\begin{itemize}[label = --]
+    \item Se \(f(x) = +\infty\) allora \(s_{n}(x) = n \to +\infty\)
+    \item Se \(f(x) = 0\) allora \(s_{n}(x) = 0 \to 0\)
+    \item Se \(n \le f(x) < n+1\) allora \(|f(x) - s_{n}(x)| \le \frac{1}{2^{n}}
+        \to 0\) 
+\end{itemize}
+
+È chiaro che se \(f\) è misurabile allora ogni \(s_{n}\) è misurabile, gli insiemi scelti sono controimmagini di segmenti e una retta.
+
+Ora dobbiamo controllare che la successione \(s_{n}\) che abbiamo costruito sia
+crescente. Infatti passando da \(s_{n}\) a \(s_{n+1}\) abbiamo un intervallo in
+più \([n, n+1)\), inoltre se \(f(x) < n\) allora \(s_{n+1}(x) = s_{n}(x)\)
+oppure \(s_{n+1}(x) = s_{n}(x) + \frac{1}{2^{n+1}}\). In conclusione quindi la
+successione è non decrescente.
+
+Consideriamo ora \(f\) di segno qualsiasi. Abbiamo \(f = f^{+} - f^{-}\) e
+osservo che \(f^{+}\) e \(f^{-}\) sono non negative. Costruisco due successioni
+di funzioni semplici \(s_{n}^{+}\) e \(s_{n}^{-}\) che convergono
+rispettivamente a \(f^{+}\) e \(f^{-}\) e osservo che \(s_{n} = s_{n}^{+} -
+s_{n}^{-}\) è ancora una successione di funzioni semplici che converge a \(f\).
+\end{proof}
+\begin{remark}
+    Se \(f\) è limitata allora la successione \(s_{n}\) converge uniformemente a
+    \(f\), infatti se \(f = f^{+} - f^{-}\) e sia \(f^{+}\) che \(f^{-}\) sono
+    limitate, per cui succede che \(|f^{+} - s_{n}^{+}| \le \frac{1}{2^{n}}\)
+    definitivamente e analogamente per \(f^{-}\).
+\end{remark}
+
+\begin{lemma}\label{le:nulle_fuori_compatti}
+Sia ora \(\Omega = \mathbb{R}^{N}\) e sia \(\mathcal{L}\) la \(\sigma\)-algebra
+degli insiemi misurabili secondo Lebesgue. Allora valgono tutte le
+considerazioni della proposizione precedente e inoltre la successione
+\(\{s_{n}\} \) può essere scelta in modo che tutte le \(s_{n}\) siano nulle al
+di fuori di un compatto 
+\end{lemma}
+\begin{proof}
+    Posso considerare una successione \(K_{n}\) di compatti che invade tutto
+    \(\mathbb{R}^{N}\) (esempio le palle, gli ipercubi, ecc) e operiamo come
+    prima ma con una modifica (caso \(f \ge 0\)):
+    \[
+        s_{n}(x) = \sum_{i=1}^{n{2}^{n}} \frac{i-1}{2^{n}} \rchi_{E_{n, i} \cap
+        K_{n}}(x) +
+        n \rchi_{F_{n} \cap K_{n}}(x)
+    \]
+\end{proof}
+
+\subsection{Integrale di Lebesgue}
+Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Cominciamo dalle
+funzioni semplici misurabili non negative, ossia
+\[
+    s(x) = \sum_{i=1}^{n} c_{i} \rchi_{E_{i}}(x) \quad c_{i} \ge 0 \,\,
+    E_{i} \in \mathcal{M} \,\, \forall i \in \{1, \dots, n\}
+\]
+Allora definiamo un \emph{integrale elementare} su \(E \in \mathcal{M}\) 
+\[
+    I_E(s) = \sum_{i=1}^{n} c_{i} \mu(E \cap E_{i})
+\]
+Dove per convenzione \(c_{i}\mu(E \cap E_{i}) = 0\) se \(c_{i} = 0\) e \(\mu(E
+\cap E_{i}) = +\infty\). 
+\begin{example}
+    In \(\mathbb{R}\) con la misura di Lebesgue, se prendo \(s = \rchi_{[0,
+    +\infty)}\), allora \(I_{\mathbb{R}}(s) = \mu([0, +\infty)) = +\infty \) 
+\end{example}
+\begin{definition}[Integrale di Lebesgue]
+    Sia \(f: \Omega \to [0, +\infty]\) misurabile e non negativa. Allora per
+    ogni \(E \in \mathcal{M}\) definiamo 
+    \[
+        \int_E f \, d\mu = \sup \{I_{E}(s) : s \text{ semplice }, 0 \le s \le f
+        \text{ in \(E\) }\}
+    \]
+Se ora \(f\) è misurabile e di segno qualunque allora scrivendo \(f = f^{+} -
+f^{-}\) che noto sono misurabili e non negative, quindi, se almeno uno tra
+\(\int_E f^{+} d\mu\) e \(\int_E f^{-} d\mu\) è finito definiamo
+\[
+    \int_{E} f \, d\mu = \int_{E} f^{+} \, d\mu - \int_{E} f^{-} \, d\mu
+\]
+Se entrambi \(f^{+}\) e \(f^{-}\) hanno integrale finito su \(E\) allora dico
+che \(f\) è \textbf{integrabile} su \(E\) e scrivo \(f \in L^{1}(E)\).
+\end{definition}
+Intanto quell'insieme non è vuoto, poiché la funzione \(0 \le f\) è una funzione
+semplice. Inoltre il sup può essere sia finito che \(+\infty\). Se \(f\) è una
+funzione semplice, allora \(\int_{E} f \, d\mu = I_{E}(f)\), infatti \(f \le f\)
+è semplice e per ogni \(s\) misurabile e tale che \(0 \le s\le f\) in \(E\) avrò
+che \(I_E(s) \le I_E(f)\).
+
+NB:~\emph{Sommabile} è un sinonimo di \emph{integrabile} e capiterà di
+usarlo.
+\paragraph{Proprietà dell'integrale}
+
+\begin{enumerate}[label = \arabic*.]
+    \item Se \(f \in L^{1}(E)\) e \(\alpha \in \mathbb{R}\), allora \(\alpha f
+        \in  L^{1}(E)\) e \(\int_E \alpha f d\mu = \alpha \int_E f d\mu\) 
+    \begin{proof}
+        Sia \(f\) misurabile e non negativa, sia \(\alpha > 0\). Allora
+        \(\forall s\) semplice con \(0 \le s \le f\) in \(E\) si ha che
+        \(I_E(\alpha s) = \alpha I_E(s)\) e che \(0 \le \alpha s \le \alpha f\);
+         procedendo con il sup il lato sinistro diventa \(\alpha \int_E f d\mu\)
+         e il lato destro notiamo che ogni \(\alpha s\) è una funzione semplice
+         \(u\) che rispetta la definizione di integrale per \(\alpha f\), quindi
+         procedendo con il sup otteniamo la proprietà. Similmente otteniamo 
+
+         Ora possiamo estendere a \(f\) misurabile e \(\alpha \in \mathbb{R}\)
+         scrivendo \(f = f^{+} - f^{-}\) e osservando che \(\alpha f =
+         \text{sign}(\alpha) |\alpha| f^{+} - \text{sign}(\alpha) |\alpha|
+         f^{-}\) dove se \(\alpha < 0\)  allora \(-\text{sign}(\alpha) f^{-}\) e
+     \(- \text{sign}(\alpha) f^{+}\) sono non negative e misurabili.
+    \end{proof}
+    \item Se \(f, g\) in \(L^{1}(E)\) e \(f(x) \le g(x)\) per ogni \(x \in E\)
+        allora \(\int_{E} f d\mu \le \int_{E} g d\mu\)
+    \begin{proof}
+        Sia \(f = f^{+} - f^{-}\) e \(g = g^{+} - g^{-}\). Allora naturalmente
+        \(f^{+} \le g^{+}\) perché la funzione \(x \mapsto x^{+}\) è non
+        decrescente e \(f^{-} \ge g^{-}\) perché la funzione \(x \mapsto x^{-}\)
+        è non crescente. Necessariamente ora \(\int_E f^{+} d\mu \le \int_E
+        g^{+} d\mu\) per definizione col sup e similmente \(\int_E g^{-} d\mu
+        \le \int_E f^{-} d\mu\) e infine dalle due diseguaglianze si ottiene
+        quella richiesta
+    \end{proof}
+    \item Se \(\mu(E) < +\infty\), \(f\)  è misurabile, e esistono \(a, b \in
+        \mathbb{R}\) tali che \(a \le f(x) \le b\) per ogni \(x \in E\) allora
+        \(f \in L^{1}(E)\) e \(a \mu(E) \le \int_E f d\mu \le b\mu(E)\) 
+    \begin{proof}
+        \(f = f^{+} - f^{-}\) e abbiamo che \(a^+ \le f^{+} \le b^{+}\) e
+        \(a^{-} \ge f^{-} \ge b^{-}\). Le funzioni che valgono \(a^{+}, b^{+}, a^{-},
+        b^{-}\) su \(E\) sono funzioni semplici misurabili con integrale dato da
+        \(a^{+} \mu(E), b^{+} \mu(E), a^{-} \mu(E), b^{-} \mu(E)\)
+        rispettivamente. %TODO: finire
+    \end{proof}
+    \item Se \(f \in L^{1}(E)\), \(A \in \mathcal{M}\) e \(A \subseteq E \)
+        allora \(f \in L^{1}(A)\) 
+    \begin{proof}
+        Abbiamo che \(\int_E f^{+} d\mu\) e \(\int_E f^{-} d\mu\) sono entrambi
+        finiti e \[\int_A f^{+} d\mu = \int_E f^{+} \rchi_A d\mu \le \int_E
+        f^{+} d\mu\] Similmente per \(f^{-}\).
+    \end{proof}
+    \item Se \(\mu(E) = 0\) e \(f\) è misurabile allora \(f \in L^{1}(E)\) e
+        \(\int_E f d\mu = 0\)
+    \begin{proof}
+        Consideriamo la definizione col sup di \(\int_E f^{+} d\mu\) e allora
+        per ogni \(s\) semplice misurabile tale che \(0 \le s \le f^{+}\)
+        abbiamo che \\\(I_E(s) = \sum_{i=1}^{n} c_{1} \mu(E \cap E_{i}) = 0 \) 
+    \end{proof}
+
+\end{enumerate}
+\begin{theorem}[Teorema di generazione di misure]
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura e sia \(f : \Omega
+    -> [0, +\infty]\) una funzione misurabile e non negativa. Allora la funzione
+    di insieme 
+    \[
+        \nu(E) = \int_E f d\mu \quad \forall E \in \mathcal{M}
+    \]
+    è una misura
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}[label = \arabic*.]
+        \item \(\nu(\varnothing) = \int_{\varnothing} f d\mu = 0\)
+        \item Siano \(A = \bigcup_{n=1}^{\infty} A_{n} \) con \(A_{n} \in
+            \mathcal{M}\) a due a due disgiunti, vogliamo provare che 
+            \[
+                \nu(A) = \int_{A} f d\mu = \sum_{n=1}^{\infty} \int_{A_{n}} f
+                d\mu = \sum_{n=1}^{\infty} \nu(A_{n})
+            \]
+            Innanzitutto assumeremo che tutti i \(\nu(A_{n}) < +\infty\) per
+            ogni \(n\), altrimenti naturalmente \(\nu(A) = +\infty\) poiché
+            \(A_{n} \subseteq A \).
+            Se \(f = s = \sum_{i=1}^{n} c_{i}\rchi_{E_{i}} \) semplice misurabile non negativa allora
+            \[
+                \int_A s d\mu = I_A(s) = \sum_{i=1}^{n} c_{i} \mu(A \cap E_{i}) = \sum_{i=1}^{n}
+                c_{i} \sum_{k=1}^{\infty} \mu(A_k \cap E_{i})
+            \]
+            Dove si è usata la \(\sigma\)-additività di \(\mu\). Ora scambiando
+            la somma e la serie, che possiamo fare perché se sono tutte
+            convergenti allora ok, se invece anche solo una di quelle con
+            \(c_{i} >0\) dovesse divergere allora necessariemente l'integrale
+            originale è \(+\infty\), ma anche la serie ottenuta scambiando somma
+            e serie diverge, poiché ha termine generale maggiore di quello della
+            serie divergente.
+            \[
+                I_A(s) = \sum_{k=1}^{\infty} \sum_{i=1}^{n} c_{i} \mu(A_k \cap
+                E_{i}) = \sum_{k=1}^{\infty} I_{A_k}(s) = \sum_{k=1}^{\infty}
+                \int_{A_k} s d\mu
+            \]
+            Ora se \(f\) è misurabile e non negativa e \(0 \le s \le f\) in
+            \(A\) abbiamo che
+            \[
+                I_A(s) = \sum_{k=1}^{\infty} I_{A_k}(s) \le  \sum_{k=1}^{\infty}
+                \int_{A_k}  f d\mu
+            \]
+            Ora procedendo con il sup otteniamo la diseguaglianza 
+            \[
+                \int_{A} f d\mu \le \sum_{k=1}^{\infty} \int_{A_k} f d\mu
+            \]
+            Ora vogliamo trovare l'altra diseguaglianza. Per ogni
+            \(\varepsilon>0\) e \(k = 1, \dots, m\) esistono \(s_{1}, \dots,
+            s_{m}\) semplici, misurabili e \(0 \le s_{i} \le f\) in \(A_{i}\)
+            tali che 
+            \[
+                \int_{A_{i}} f d\mu \le \int_{A_{i}} s_{i} d\mu +
+                \frac{\varepsilon}{m}
+            \]
+            Osservo ora la funzione \(s(x) = s_{i}(x)\) se \(x \in A_{i}\) per
+            \(i = 1, \dots, m\). Allora \(s\) è semplice, misurabile e \(0 \le s
+            \le f\) in \(\bigcup_{i=1}^{m} A_{i} \). A questo punto
+            \[
+                \sum_{i=1}^{m} \int_{A_{i}} f d\mu  - m \frac{\varepsilon}{m}
+                \le   \sum_{i=1}^m \int_{A_{i}} s_{i} d\mu =
+                \int_{\bigcup_{i=1}^{m} A_{i} } f d\mu \le \int_{A} f d\mu
+            \]
+            Da cui troviamo che 
+            \[
+                \varepsilon + \int_{A} f d\mu \ge \sum_{i=1}^{m} \int_{A_{i}} f
+                d\mu \quad \forall \varepsilon >0 \,,\, \forall m \in \mathbb{N}
+            \]
+            e con \(\varepsilon \to 0 \) e \(m \to +\infty\) otteniamo l'altra
+            diseguaglianza.
+    \end{enumerate}
+\end{proof}
+\begin{corollary}[ \(\sigma\)-additività dell'integrale]
+    Se \(f \in L^{1}(\Omega)\) e \(\{A_{n}\}\) è una successione di insiemi
+    disgiunti a due a due, con \(A = \bigcup_{n=1}^{\infty} A_{n} \) 
+    \[
+        \int_{A} f d\mu = \sum_{n=1}^{\infty}
+        \int_{A_{n}} f d\mu
+    \]
+\end{corollary}
+\begin{proof}
+    Sia \(f = f^{+} - f^{-}\) e per \(f^{+}\) e \(f^{-}\) vale il teorema di
+    generazione di misure.
+\end{proof}
+\begin{corollary}
+    Se \(f, g \in L^{1} (\Omega)\) e \(f = g\) quasi ovunque in \(\Omega\),
+    allora \[\forall E \in \mathcal{M} \quad \int_{E} f d\mu = \int_{E} g d\mu\]
+\end{corollary}
+\begin{proof}
+    Se \(f=g\) quasi ovunque allora esiste un insieme \(F \in \mathcal{M}\) con
+    \(\mu(F) = 0\) tali che \(f(x) = g(x)\) per ogni \(x \in \Omega \sminus F\).
+    Allora abbiamo
+    \[
+        \int_{E} f d\mu = \int_{E \cap F} f d\mu + \int_{E \sminus F} f d\mu =
+        \int_{E \cap F} g d\mu + \int_{E \sminus F} g d\mu = \int_{E} g d\mu
+    \]
+    Dove i due integrali su \(E \cap F\) sono uguali in quanto entrambi
+    integrali su un trascurabile quindi uguali a 0
+\end{proof}
+\begin{proposition}
+    Sia \(f \in L^{1}(E)\). Allora \(|f| \in L^{1}(E)\) e
+    \[
+        \left| \int_{E} f d\mu \right| \le \int_{E} |f| d\mu
+    \]
+\end{proposition}
+\begin{proof}
+    \(|f|\) è misurabile perché \(f\) è misurabile. Ora sia \(A = \{x \in E:
+    f(x) \ge 0\} \) e \(B = \{x \in E : f(x) < 0\} \) sono entrambi misurabili
+    per la misurabilità di \(f\). Allora abbiamo che
+    \[
+        \int_E |f| d\mu = \int_{A} |f| d\mu + \int_{B} |f| d\mu = \int_{A} f^{+}
+        d\mu + \int_B f^{-} d\mu < +\infty
+    \]
+    dove gli ultimi due integrali sono finiti per ipotesi.
+
+    La diseguaglianza è ovvia, infatti
+    \[
+        \left|\int_{E} f d\mu\right| =\left| \int_{A} f^{+} d\mu - \int_{B}
+        f^{-} d\mu \right| \le \int_{A}
+        f^{+}
+        d\mu + \int_{B} f^{-} d\mu = \int_{E} |f| d\mu
+    \]
+\end{proof}
+\begin{theorem}[CNES per l'integrabilità]
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(f : \Omega
+    \to  \mathbb{R}\cup \{\pm\infty\} \) misurabile. Allora \(f\) è integrabile
+    se e solo se esiste \(g\) integrabile tale che \(|f| \le g\) quasi ovunque.
+    \[
+        f \in L^{1}(\Omega) \iff \exists g \in L^{1}(\Omega) \quad |f| \le g
+        \quad \text{q.o.}
+    \]
+\end{theorem}
+\begin{corollary}
+    In particolare se \(|f|\) è integrabile e \(f\) è misurabile allora \(f\) è
+    integrabile.
+\end{corollary}
+
+\subsection{Teoremi di passaggio al limite sotto il segno di integrale}
+\begin{theorem}[Beppo Levi \-- versione base]\label{th:beppo_levi_base}
+Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(f_{n}\) una
+successione non decrescente di funzioni misurabili e non negative su \(\Omega\).
+Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
+\(\forall E \in \mathcal{M}\) si ha
+\[
+    \int_E f d\mu = \lim_{n \to \infty} \int_E f_{n} d\mu
+\]
+\end{theorem}
+\begin{proof}
+    Sia \(\alpha := \lim_{n \to \infty} f_{n} d\mu\), dove \(\alpha \in [0,
+    +\infty]\). Abbiamo necessariamente che 
+    \[
+        \int_E f d\mu \ge \alpha = \lim_{n \to \infty} \int_E f_{n} d\mu
+    \]
+    Vogliamo dimostrare l'altra diseguaglianza. Prendo \(s\) semplice,
+    misurabile e tale che \(0 \le s \le f\) in \(E\). Sia poi \(\delta \in (0,
+    1)\). Siano 
+    \[
+        E_{n} := \{ x \in E : f_{n}(x) \ge \delta s(x)\} 
+    \]
+    Se \(x\) è tale che \(f(x) < +\infty\) allora sicuramente esiste
+    \(\overline{n} \in \mathbb{N}\) tale che \(f_{n}(x) \ge \delta s(x)\) per
+    ogni \(n \ge \overline{n}\). Se invece \(f(x) = +\infty\) allora poiché
+    \(s\) assume solo valori finiti vale lo stesso senza bisogno di ricorrere
+    all'uso del \(\delta\).
+
+    Osservo quindi che \(E_{n} \subseteq E_{n+1}\) e che \(\bigcup_{n=1}^{\infty} E_{n}
+    = E\). Quindi abbiamo che
+    \[
+        \int_E f_{n} d\mu \ge \int_{E_{n}} f_{n} d\mu \ge \delta \int_{E_{n}} s
+        d\mu
+    \]
+    Per \(n \to +\infty\) otteniamo quindi
+    \[
+        \alpha \ge \delta \int_E s d\mu \quad \forall \delta \in (0, 1)
+    \]
+    Per definizione di \(\alpha\) e per continuità della misura data da \(s\).
+    Ora poiché vale per ogni \(\delta in (0, 1)\) deve valere anche per \(\delta
+    = 1\). Otteniamo quindi
+    \[
+        \alpha \ge \int_E s d\mu \quad \forall s \text{ semplice, misurabile e }
+        0 \le s \le f \text{ in } E
+    \]
+    Ora procedendo con il sup otteniamo la diseguaglianza desiderata.
+\end{proof}
+\begin{lemmao}[Lemma di Fatou \-- versione base]\label{le:fatou_base}
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(f_{n}\) una
+    successione di funzioni misurabili e non negative su \(\Omega\). Allora, per
+    ogni \(E \in \mathcal{M}\),
+    \[
+        \int_E \liminf_{n \to \infty} f_{n} d\mu \le \liminf_{n \to \infty}
+        \int_E f_{n} d\mu
+    \]
+\end{lemmao}
+\begin{proof}
+    Sia \(g_{n} = \inf_{k \ge n} f_{k}\). Allora ogni \(g_{n}\) è non negativa e
+    di funzioni misurabili, inoltre \(0 \le g_{n} \le f_{n}\) e \(g_{n} \le
+    g_{n+1} \). Quindi \(g_{n}\) è una successione non decrescente e
+    per il teorema di Beppo Levi abbiamo che
+    \[
+        \int_E \lim_{n \to \infty} g_{n} d\mu = \lim_{n \to \infty} \int_E g_{n}
+        d\mu
+    \]
+    Ora poiché \(g_{n} \le f_{n}\) per ogni \(n\), e poiché \(\lim_{n \to
+    \infty} g_{n}(x) = \sup_{n \in N} g_{n}(x) =\\= \liminf_{n \to \infty} f_{n}(x)\) 
+    \[
+        \int_E \liminf_{n \to \infty} f_{n} d\mu = \int_E \lim_{n \to \infty}
+        g_{n} d\mu = \lim_{n \to \infty} \int_E g_{n} d\mu \le \liminf_{n \to
+        \infty} \int_E f_{n} d\mu
+    \]
+    Dove l'ultima diseguaglianza è data dal fatto che \(\lim =
+    \liminf\) se il limite esiste e il \(\liminf\) conserva le diseguaglianze di
+    successioni.
+\end{proof}
+\begin{example}
+    Sia \(\Omega = \mathbb{R}\) con la misura di Lebesgue. Sia \(f_{n} =
+    \rchi_{[-n, n]}\). Allora \(\lim_{n \to \infty} f_{n} = 1\) e
+    \(\int_{\mathbb{R}} f_{n} d\mu = 2n\) otteniamo quindi
+    \[
+        \int_{\mathbb{R}} \lim_{n \to \infty} f_{n} d\mu = +\infty =
+        \lim_{n \to \infty} \int_{\mathbb{R}} f_{n} d\mu
+    \]
+    Confermando Beppo Levi
+\end{example}
+\begin{example}
+    Sia \(\Omega = \mathbb{R}\) con la misura di Lebesgue. Sia \(f_{n} =
+    \rchi_{[n, n+1]}\). Allora \(\lim_{n \to \infty} f_{n} = 0\) e
+    \(\int_{\mathbb{R}} f_{n} d\mu = +\infty\) otteniamo quindi 
+    \[
+        \int_{\mathbb{R}} \liminf_{n \to \infty} f_{n} d\mu = 0 \le \liminf_{n
+        \to \infty} \int_{\mathbb{R}} f_{n} d\mu = +\infty
+    \]
+    Una variante è \(f_{n} = \rchi_{[n, n+1]}\) per cui
+    \[
+        \int_{\mathbb{R}} \liminf_{n \to \infty} f_{n} d\mu = 0 \le \liminf_{n
+        \to \infty} \int_{\mathbb{R}} f_{n} d\mu = 1
+    \]
+\end{example}
+
+\begin{example}
+    Studiare l'integrabilità della funzione 
+    \[
+    f_{\alpha}(x) = {\left| \log x \right|}^{\alpha} \quad x \in (0, 1)
+    \]
+    quindi quand'è che \(f_\alpha \in L^{1}(0, 1)\) al variare di \(\alpha \in
+    \mathbb{R}\)?
+\begin{itemize}[label = --]
+    \item se \(\alpha = 0\) è chiaramente \(f_0 = 1\) integrabile
+    \item se \(\alpha > 0\) dobbiamo studiare il comportamente vicino a \(0\).
+        Vogliamo confrontare la funzione con \(\frac{1}{x^{\beta}}\) che
+        sappiamo essere integrabile per \(\beta \in (0, 1)\). Abbiamo quindi ad
+        esempio, per \(\beta = \frac{1}{2}\) 
+        \[
+            \lim_{x \to 0^{+}} \frac{{|\ln x|}^{\alpha}}{\frac{1}{\sqrt{x}}} =
+            \frac{{(-\ln x)}^{\alpha}}{x^{-\frac{1}{2}}} \overset{\text{ L'H
+            }}{=} \frac{- \alpha {(-\ln
+            x)}^{\alpha-1} \cdot \frac{1}{x} }{ -\frac{1}{2} x^{-\frac{3}{2}} }
+            = 2 \alpha \frac{{(-\ln x)}^{\alpha - 1}}{x^{\frac{1}{2}}}
+        \]
+        procedendo con l'hopital finché l'esponente non diventa negativo
+        otteniamo che il limite non è più una forma indeterminata. Quindi
+        otteniamo che il limite è \(0\). Abbiamo dunque che \(\sqrt{x} |\ln x
+        |^{\alpha}\) è limitata in \((0, 1)\) e quindi \(\exists C >0\) tale che 
+        \[
+            |\ln x|^{\alpha} \le \frac{C}{\sqrt{x}} \text{ che è integrabile } \quad \forall x \in (0, 1)
+        \]
+        Quindi \(f_{\alpha} \in L^{1}(0, 1)\) per ogni \(\alpha > 0\).
+    \item se \(\alpha < 0\) Sia \(\alpha = -\gamma\), con \(\gamma > 0\).
+        Abbiamo dunque
+        \[
+            f_\alpha (x) = \frac{1}{{|\ln x|}^{\gamma}} \overset{ x \to
+            0^{+}}{\longrightarrow} 0
+        \]
+        ora poiché \(\ln x \sim x - 1\) per \(x \to 1\) abbiamo che 
+        \[
+            f_\alpha (x) \sim \frac{1}{|x-1|^{\gamma}} 
+        \]
+        che è integrabile per \(\gamma < 1\). Quindi \(f_{\alpha} \in L^{1}(0,1)
+        \iff \alpha > -1\).
+\end{itemize}
+\end{example}
+\begin{remark}
+    Ci sono funzioni integrabili in senso improprio che non L-integrabili.
+    \begin{example}
+        Sia \(f(x) = \frac{\cos x}{x}\) in \([\frac{\pi}{2}, +\infty]\). Allora
+\begin{enumerate}[label = \arabic*.]
+    \item \(f\) è integrabile in senso improprio:
+        \[
+            \int_{\frac{\pi}{2}}^{R} \frac{\cos(x)}{x} dx = \frac{\sin x}{x}
+            \Big|_{\frac{\pi}{2}}^{R} + \int_{\frac{\pi}{2}}^{R} \frac{\sin
+            x}{x^{2}} dx = \frac{\sin R}{R} - \frac{2}{\pi} + \int_{\frac{\pi}{2}}^{R}
+            \frac{\sin x}{x^{2}} dx
+        \]
+        Per \(R \to \infty\) otteniamo che l'integrale converge in quanto anche
+        il secondo integrale converge perché il suo valore assoluto è maggiorato
+        da \(\frac{1}{x^{2}}\).
+    \item \(f\) non è integrabile in senso di Lebesgue. Infatti se così fosse
+        allora anche \(|f| = |\cos x| / x\) sarebbe integrabile 
+        \begin{align*}
+            \int_{\frac{\pi}{2}}^{\frac{\pi}{2} + n\pi} \frac{|\cos x|}{x} dx &=
+            \sum_{k=1}^{n} \int_{\frac{\pi}{2} + (k-1)\pi}^{\frac{\pi}{2} +
+        k\pi} \frac{|\cos x|}{x} dx \ge \\ &\ge \sum_{k=1}^{n}
+                \frac{1}{\frac{\pi}{2} + k\pi} \int_{\frac{\pi}{2} +
+                (k-1)\pi}^{\frac{\pi}{2} + k\pi} |\cos x| dx
+        \end{align*}
+        dove l'eguaglianza è data dalla minorazione per il minimo.
+        Ora evidentemente tutti gli integrali sono uguali e valgono
+        \[
+            \int_{\frac{\pi}{2}}^{\frac{\pi}{2} + \pi} |\cos x| dx =
+            \int_{\frac{\pi}{2}} ^{\frac{3\pi}{2}} -\cos x  dx = 2
+        \]
+        quindi la ridotta della serie ora vale
+        \[
+            \sum_{k=1}^{n} \frac{2}{\frac{\pi}{2} + k\pi} \to +\infty   
+        \]
+        e quindi \(|f|\) e \(f\) non sono integrabili.
+\end{enumerate}
+\end{example}
+\end{remark}
+
+\begin{example}
+    Quali sono le funzione integrabili per la misura di Dirac? Consideriamo lo
+    spazio di misura \((\mathbb{R}^{N}, 2^{\mathbb{R}^{N}}, \delta_O)\). Allora
+    ogni funzione \(f : \mathbb{R}^{N} \to \mathbb{R} \cup \{\pm \infty\} \) è
+    misurabile perché ogni insieme è misurabile. Se \(f\) è non negativa allora 
+    \[
+        \int_{\mathbb{R}^{N}} f d\delta_O = \sup \{ I(s) : s \text{ semplice
+        tale che } 0\le s\le f\} 
+    \]
+    Ora quindi \(s(x) = \sum_{i=1}^{n} c_{i} \rchi_{E_{i}}(x)\) e \(I(s) =
+    \sum_{i=1}^{n} c_{i} \delta_O(E_{i}) \) che diventa quindi
+    \[
+        I(s) = \sum_{i:O \in E_{i}} c_{i} \le f(O)
+    \]
+    dove l'ultima uguaglianza è data da \(0 \le s\le f\) 
+    Ne concludiamo dunque che 
+    \[
+        \int_{\mathbb{R}^{N}} f d\delta_O = f(O)
+    \]
+    Se ora \(f\) è di segno qualunque allora 
+    \[
+        \int_{\mathbb{R}^{N}} f d\delta_O = f^{+}(O) - f^{-}(O) = f(O)
+    \]
+    Dunque \(f\) è integrabile se e solo se \(f(O) \in \mathbb{R}\).
+\end{example}
+
+\begin{example}
+    Consideriamo ora la misura del contare e lo spazio \((\mathbb{N},
+    2^{\mathbb{N}}, \#)\). Ora le funzioni sono le funzioni sono le successioni
+    \(f : \mathbb{N} \to \mathbb{R} \cup \{\pm \infty\} \). Di nuovo tutte sono
+    misurabili perché tutti gli insiemi sono misurabili. Procediamo a capire
+    quali sono le \(f\) integrabili. Sia ora \(f \ge 0\).
+    Allora
+    \[
+        \int_{\mathbb{N}} f d\# = \sup \{ I(s) : s \text{ semplice tale che } 0
+        \le s \le f\}
+    \]
+    dove \(s(x) = \sum_{i=1}^{n} c_{i} \rchi_{E_{i}}(x) \) dove chiediamo che gli
+    \(E_{i}\) siano a due a due disgiunti. Osservo che \(\sum_{i=1}^{k} c_{i}
+    \rchi_{\{i\} } (x) \) sono particolari funzioni semplici. Deve essere
+    \(c_{i} \le f(i)\) per \(i = 1, \dots, k\).
+    Ne concludiamo che ha senso che sia
+    \[
+        \int_{\mathbb{N}} f d\# = \sum_{i=1}^{+\infty} f(i) \#(\{i\} ) =
+        \sum_{i=1}^{+\infty} f(i)
+    \]
+    Se \(f(i) = +\infty\) per qualche \(i\) oppure la serie diverge allora
+    l'integrale è \(+\infty\).
+    Concludiamo \(f\) non negativa, allora \(f \in L^{1(\mathbb{N})}\) se
+    \(\sum_{n=1}^{\infty} f(n) \) converge. Se ora \(f\) è di segno qualunque
+    allora \(f \in  L^{1}(\mathbb{N})\) se 
+    \[
+        \sum_{n=1}^{+\infty} f^{+}(n) < +\infty \quad \text{ e } \quad
+        \sum_{n=1}^{+\infty} f^{-}(n) < +\infty
+    \]
+    Notare che è verificata la proprietà \(f \in L^{1} \iff |f| \in L^{1}\).
+\end{example}
+
+\begin{example}
+    per ogni \(n \in \mathbb{N}\) definiamo \[f_{n}(x) =
+        \begin{cases}
+            \displaystyle
+        \frac{|\ln (n^{7} x^2)|}{3 + n^{4}x^2} & \text{ se } x \neq 0 \\
+        1 & \text{ se } x = 0
+\end{cases}
+\]
+\begin{enumerate}[label = \alph*)]
+    \item Per quali \(n\) \(f_{n}\) è integrabile su \(\mathbb{R}\)? Succede che
+        esiste \(C_{n}\) tale che 
+        \[
+            |\ln (n^{7} x^2)| \le \frac{C_{n}}{\sqrt{ |x| }} \quad \forall x \in
+            (-1, 1) \sminus \{0\}
+        \]
+        Quindi \(f_{n}\) è integrabile in tutto \((-1, 1)\).
+        Ora poiché
+        \[
+            \frac{f_{n}}{x^{-\frac{3}{2}}} \to 0 \quad \text{ per } x \to +\infty
+        \]
+        da cui
+        \[
+            \exists  \overline{x} > 0 \text{ tale che } \forall x \ge
+            \overline{x} \quad 0\le f_{n}(x) \le \frac{1}{x^{\frac{3}{2}}}
+        \]
+        dunque \(f_{n}\) è integrabile su tutto \(\mathbb{R}\) 
+    \item Consideriamo ora la serie
+        \[
+            \sum_{i=1}^{\infty} f_{n}(x) \quad x \in \mathbb{R}
+        \]
+        e sia \(C\) l'insieme di convergenza della serie, allora \(s: C \to
+        \mathbb{R}\) sia la somma della serie. Discutiamo ora la misurabilità di
+        \(C\) e di \(s\).
+        Se \(x = 0\) chiaramente diverge, mentre se \(x \neq 0\) allora
+        \[
+            s(x) = \sum_{n=1}^{\infty} \frac{|7 \ln n + 2 \ln|x|}{3 + n^{4}x^2} 
+        \]
+        Quindi \(C = \mathbb{R} \sminus \{0\} \) è misurabile, inoltre \(s\) è
+        misurabile in quanto limite di una successione di ridotte tutte
+        misurabili.
+    \item Vale l'uguaglianza 
+        \[
+            \int_{C}  s dx = \sum_{n=1}^{\infty} \int_{C} f_{n} dx  \text{ ? }
+        \]
+        SÌ alla grande per Beppo Levi, infatti \(f_{n} \ge 0\) e nel nostro caso
+        i termini della serie sono tutti finiti.
+
+        Vogliamo ora vedere se \(s \in L^{1} (C)\) sfruttando l'uguaglianza.
+        \[
+            \int_{\mathbb{R}} \frac{|\ln(n^{7}x ^2)}{3 + n^{4}x^2} dx =
+            \int_{\mathbb{R}} \frac{1}{n^2} \frac{|\ln(n^3 t^2)|}{ 3 + t^2 } dt
+            \le \frac{1}{n^2} \int_{\mathbb{R}} \frac{|3 \ln n + 2 \ln |t||}{ 3 +
+            t^2} dt
+        \]
+        operando la sostituzione \(n^2x = t\), \(n^2 dx = dt\). Ora nuovamente
+        maggioriamo dividendo la frazione con la diseguaglianza triangolare
+        \[
+            \le \frac{3 |\ln n|}{ n^2 } \int_{\mathbb{R}} \frac{1}{3 + t^2} dt +
+            \frac{2}{n^2} \int_{\mathbb{R}} \frac{|\ln |t||}{3 + t^2} dt
+        \]
+        che sono entrambi termini generali di serie convergente. Quindi \(s \in
+        L^{1}(C)\)
+
+\end{enumerate}
+\end{example}
+
+\subsection{Convergenze di funzioni misurabili}
+\begin{definition}[Convergenza quasi ovunque]
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Una successione di
+    funzioni misurabili \(f_{n} : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
+    converge quasi ovunque a \(f : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
+    se esiste un insieme \(F \in \mathcal{M}\) tale che \(\mu(F) = 0\) e
+    \(\lim_{n \to \infty} f_{n}(x) = f(x) \quad \forall x \in \Omega \sminus F\)
+\end{definition}
+\begin{definition}[Convergenza quasi uniforme]
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Una successione di
+    funzioni misurabili \(f_{n} : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
+    converge quasi uniformemente a \(f : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
+    se per ogni \(\varepsilon > 0\) esiste un insieme \(F \in \mathcal{M}\) tale
+    che \(\mu(F) < \varepsilon\) e \(f_{n} \to f\) uniformemente in \(\Omega
+    \sminus F\).
+\end{definition}
+\begin{definition}[Convergenza in misura]
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Una successione di
+    funzioni misurabili \(f_{n} : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
+    converge in misura a \(f : \Omega \to \mathbb{R} \cup \{\pm \infty\} \) se
+    per ogni \(\varepsilon > 0\) 
+    \[
+        \lim_{n \to \infty} \mu(\{x \in \Omega : |f_{n}(x) - f(x)| \ge
+        \varepsilon\}) = 0
+    \]
+\end{definition}
+\begin{theorem}[\(f_n \overset{\mu}{\to} f \implies f_{n_k} \overset{q.o.}{\to}
+    f\)]\label{thm:3}
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(f_{n}\) una
+    successione di funzioni misurabili e \(f\) una funzione misurabile. Allora
+    se \(f_{n} \to f\) in misura, allora esiste una sottosuccessione \(f_{n_{k}}\)
+    che converge quasi ovunque a \(f\).
+\end{theorem}
+\begin{eser}
+    Sia
+    \[
+        f_{n}(x) = \frac{2 n \sqrt[3]{x} + 3}{1 + {(nx)}^2} \quad x \in \mathbb{R}
+    \]
+    studiare:
+\begin{enumerate}[label = \alph*)]
+    \item per \(n\) fissato la misurabilità e l'integrabilità di \(f_{n}\)
+        \[
+            f_{n} \sim c_{n} \frac{\sqrt[3]{x}}{x^2} \sim c_{n}
+            \frac{1}{x^{\frac{5}{3}}} \quad \text{ per } x \to \pm\infty
+        \]
+        Quindi \(f_{n}\) è integrabile su tutto \(\mathbb{R}\) in quanto
+        \(\frac{5}{3} > 1\) 
+    \item Dimostrare che \(|f_{n}(x)| \le \frac{5}{n}\) per ogni \(x\) con \(|x|
+        \ge 1\) 
+        \[
+            |f_{n}(x)| \le \frac{2 n |x|^{\frac{1}{3} + 3}}{1 + n^2x^2} \le
+            \frac{\frac{2}{n}|x|^{\frac{1}{3}} + \frac{3}{n^2}}{\frac{1}{n^2} +
+            x^2} \le \frac{2}{n} \frac{|x|^{\frac{1}{3}}}{x^2} +
+            \frac{\frac{3}{n^2}}{1} \le \frac{2}{n}\cdot 1 + \frac{3}{n} =
+            \frac{5}{n}
+        \]
+    \item \(f_{n}\) converge quasi ovunque in \(\mathbb{R}\)? E quasi
+        uniformemente? E in misura?
+
+        \(f_{n} \overset{\text{q.o.}}{\to} 0\). Infatti per \(x = 0\)
+        \(f_{n}(0) \to 3\) mentre per \(x \neq 0\) abbiamo che \(f_{n}(x) \to
+        0\).
+
+        Il punto b) ci dice che \(f_{n}\) converge quasi uniformemente a 0 in
+        \(\mathbb{R} \sminus (-1, 1)\).
+        Ora possiamo considerare che in
+        \((-1,1)\) \(f_{n} \to \) q.o., per cui per Severini-Egorov \(f_{n} \to
+        0\) quasi uniformemente.
+        Infine avendo convergenza q.u. in \((-1,1)\) e convergenza
+        q.u. in \(\mathbb{R}\sminus (-1,1)\) allora abbiamo convergenza q.u. in
+         \(\mathbb{R}\). 
+        Infine \(f_{n} \overset{\mu}{\to} 0\) in quanto la convergenza uniforme
+        implica la convergenza in misura.
+    \item C'è convergenza in \(L^{1}\)? Ossia è vero che
+      \[
+            \lim_{n \to \infty} \int_{\mathbb{R}} |f_{n} - 0| d\mu = 0 \quad ?
+        \]
+       \[
+           \int_{\mathbb{R}} |f_{n}| d\mu \le  \int_{\mathbb{R}} \frac{2n
+           |x|^{\frac{1}{3}}}{1 + n^2x^2} dx + \underbrace{\int_{\mathbb{R}}\frac{3}{1 +
+       n^2x^2}dx}_{\le \frac{3}{1+x^2} \in L^{1}(\mathbb{R})\text{ per Lebesgue
+       \(\to 0\) }}
+       \] 
+       Invece per il primo integrale operiamo la sostituzione \(nx = t\), \(ndx
+       = dt\) 
+       \[
+           \frac{1}{\cancel{n}}\int_{\mathbb{R}} \frac{2\cancel{n}
+           \sqrt[3]{\frac{t}{n}}}{1+t^2} dt = \frac{2}{\sqrt[3]{n}}
+           \int_{\mathbb{R}} \frac{\sqrt[3]{t} }{1+t^2} dt \to 0 \text{ per
+           $n->\infty$}
+       \]
+       poiché l'integrale è finito.
+
+\end{enumerate}
+\end{eser}
+
+\subsection{Teoremi di Fubini e Tonelli}
+Vogliamo analizzare gli integrali multipli, considerando gli spazi prodotto.
+Siano \((X, \mathcal{M}, \mu)\) e \((Y, \mathcal{N}, \nu)\) spazi di misura
+\(\sigma\)-finiti. Vogliamo costruire uno spazio di probabilità prodotto
+Allora l'insieme ambiente è \(X \times Y\) e definiamo \(\mathcal{M} \times
+\mathcal{N}\) come la \(\sigma\)-algebra generata da tutti gli insiemi del tipo
+\(A \times B\), con \(A \in \mathcal{M}\) e \(B \in \mathcal{N}\). Adesso quindi
+\((X \times Y, \mathcal{M} \times \mathcal{N})\) è uno spazio misurabile con una 
+misura indotta da \(\mu\) e \(\nu\). A tale scopo introduciamo nuovi insiemi e
+costruzioni.
+Sia \(E \in \mathcal{M} \times \mathcal{N}\). Allora per ogni \((x,y) \in X
+\times Y\) abbiamo i due insiemi  \(E_x := \{y \in Y : (x, y)
+\in E\} \) e \(E_{y} := \{x \in X : (x, y) \in E\} \). Per definire la misura
+prodotto quindi ricorriamo alla seguente proposizione
+\begin{proposition}\label{prop:def_misura_prodotto}
+    Per ogni \(x \in X\) si ha che \(E_x \in \mathcal{N}\) e per ogni \(y
+    \in Y\) si ha che \(E_y \in \mathcal{M}\). Inoltre le funzioni \(x \mapsto
+    \nu(E_x)\) e \(y \mapsto \mu(E_y)\) risultano misurabili in \((X,
+    \mathcal{M})\) e \((Y, \mathcal{N})\) rispettivamente. In aggiunta
+    \[
+        \int_X \nu(E_x) d\mu = \int_Y \mu(E_y) d\nu =: (\mu \times \nu)(E)
+    \]
+\end{proposition}
+Per la dimostrazione di questa proposizione si usano le \emph{famiglie
+monotone} di misure.
+\begin{definition}[lol]
+Una collezione \(\mathcal{A}\) di sottoinsiemi di un
+insieme ambiente \(\Omega\) si dice \emph{famiglia monotona} se per ogni
+successione \(\{A_{n}\} \) crescente di insiemi in \(\mathcal{A}\) e per ogni
+successione \(\{B_{n}\} \) decrescente di insiemi in \(\mathcal{A}\) si ha che
+\[
+    \bigcup_{n=1}^{\infty} A_{n} \in \mathcal{A} \quad \text{ e } \quad
+    \bigcap_{n=1}^{\infty} B_{n} \in \mathcal{A}
+\]
+Ossia è una famiglia chiusa rispetto all'unione crescente e all'intersezione
+decrescente.
+\end{definition}
+Data una collezione \(\mathcal{F}\) di sottoinsiemi di \(\Omega\), si definisce
+\(\nu(\mathcal{F})\) famiglia monotona generata da \(\mathcal{F}\) come la più
+piccola famiglia monotona di insiemi contenente \(\mathcal{F}\). 
+\begin{remark}
+    Dato \(\mathcal{F}\), si possono definire \(\sigma(\mathcal{F})\) e
+    \(\nu(\mathcal{F})\), con \(\sigma(\mathcal{F})\) 
+\end{remark}
+
+\begin{lemma}
+    Se \(\mathcal{F}\) è un'algebra, allora \(\nu(\mathcal{F})\) è anche una
+    \(\sigma\)-algebra e coincide con \(\sigma(\mathcal{F})\).
+\end{lemma}
+Possiamo ora utilizzare questo lemma perché \(\mathcal{M} \times \mathcal{N}\) è
+anche la \(\sigma\)-algebra generata dalle unioni finite di insiemi
+``rettangolari'', ossia del tipo \(A \times B\), con \(A \in \mathcal{M}\) e \(B
+\in \mathcal{N}\), che formano un'algebra di insiemi.
+
+Notiamo che
+\begin{align*}
+    {\left( \mu \times \nu \right)} (E) &= \int_{X} \nu(E_x) d\mu = \int_{Y}
+    \mu(E_y) d\nu = \int_{X \times Y} \rchi_{E}(x, y) d(\mu \times \nu) \\
+        &= \int_X {\left( \int_Y \rchi_E(x, y) d\nu\right)} d\mu = \int_X
+        {\left( \int_Y \rchi_E(x, y) d\nu\right)} d\mu
+\end{align*}
+\begin{theorem}[Tonelli]
+    Sia \(F\) una funzione misurabile in \((X \times Y, \mathcal{M} \times
+    \mathcal{N})\) e non negativa. Allora
+    \begin{itemize}
+        \item \(F(x, y)\) è misurabile sia rispatto a \(x\) per q.o.~\(y\) che
+            rispetto a \(y\) per q.o.~\(x\)
+        \item La funzione \(\displaystyle x \mapsto \int_Y F(x,y) d\nu\) è
+            misurabile in \((X, \mathcal{M})\).
+        \item La funzione \(\displaystyle y \mapsto \int_X F(x,y) d\mu\) è
+            misurabile in \((Y, \mathcal{N})\).
+        \item Valgono le seguenti uguaglianze
+            \[
+                \int_{X \times Y} F d(\mu \times \nu) = \int_X \left( \int_Y
+                    F(x,y) d\nu \right) d\mu = \int_Y \left( \int_X F(x,y) d\mu
+                        \right) d\nu
+            \]
+            dove il secondo e il terzo integrale vengono chiamati
+            \emph{integrali iterati}. In particolare se esiste finito uno degli
+            integrali iterati, allora \(F \in L^{1}(X \times Y)\) e esiste
+            finito anche l'altro integrale iterato.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Dimostriamo il teorema di Tonelli per funzioni semplici. Sia \(F = \sum_{i=1}^{n}
+    c_{i} \rchi_{A_{i} \times B_{i}}\). Allora
+    \[
+        \int_{X \times Y} F d(\mu \times \nu) = \sum_{i=1}^{n} c_{i} \mu(A_{i})
+        \nu(B_{i}) = \int_X \left( \int_Y F(x,y) d\nu \right) d\mu
+    \]
+    Ora per passare da funzioni semplici a funzioni non negative, consideriamo
+    una successione crescente di funzioni semplici \(F_{n} \nearrow F\). Allora
+    per il teorema di Beppo Levi abbiamo che
+    \[
+        \int_{X \times Y} F d(\mu \times \nu) = \lim_{n \to \infty} \int_{X
+        \times Y} F_{n} d(\mu \times \nu) = \lim_{n \to \infty} \int_X \left(
+        \int_Y F_{n}(x,y) d\nu \right) d\mu
+    \]
+    Ora per il teorema di Beppo Levi abbiamo che
+    \[
+        \int_X \left( \int_Y F_{n}(x,y) d\nu \right) d\mu = \int_X \left(
+        \int_Y F(x,y) d\nu \right) d\mu
+    \]
+    e quindi abbiamo dimostrato il teorema di Tonelli per funzioni non negative.
+    Ora per il caso generale, consideriamo \(F = F^{+} - F^{-}\) e applichiamo
+    il teorema di Tonelli per funzioni non negative.
+\end{proof}
+\begin{remark}
+    La non-negatività di \(F\) è essenziale per il teorema di Tonelli. Si
+    consideri come esempio \(\displaystyle f(x, y) = \frac{xy}{{\left( x^2+y^2
+    \right)}^2}\) su \(\mathbb{R}^2 - (0, 0)\), \(f(0, 0) = 0\). Allora \(f\) è
+    L-integrabile su \(\mathbb{R}\) rispetto a \(x\) e a \(y\), e l'integrale
+    vale 0. Otteniamo quindi che
+    \[
+        \int_{\mathbb{R}} \left( \int_{\mathbb{R}} f(x, y) dx \right) dy = 
+        \int_{\mathbb{R}} \left( \int_{\mathbb{R}} f(x, y) dy \right) dx = 0 
+    \]
+    eppure \(f\) non è L-integrabile su \(\mathbb{R}^2\), infatti
+    \[
+        \int_{\mathbb{R}^2} |f(x, y)| d(x, y) = \int_{\mathbb{R}^2}\left| \frac{xy}{{\left(
+        x^2 + y^2 \right)}^2} \right|d(x, y) = \int_{0}^{2\pi} \int_{0}^{+\infty}
+        \frac{\cancel{r^2} |\cos \theta \sin \theta|}{r^{\cancel{4}}} \cancel{r}dr d\theta
+    \]
+    e rispetto a \(r\) viene l'integrale di \(\frac{1}{r}\) né in un intorno di
+    \(0\) né in un intorno di \(+\infty\).
+\end{remark}
+\begin{theorem}[Fubini]
+    Sia \(F \in L^{1}(X \times Y)\). Allora 
+\begin{itemize}
+    \item per q.o.~\(x \in X\), \(F(x, \cdot ) \in L^{1}(Y)\) e per q.o.~\(y \in
+        Y\), \(F(\cdot, y) \in L^{1}(X)\)
+    \item La funzione \(\displaystyle x \mapsto \int_Y F(x, y) d\nu\) è
+        integrabile su \(X\) e la funzione \(\displaystyle y \mapsto \int_X F(x,
+        y) d\mu\) è integrabile su \(Y\)
+    \item Valgono le seguenti uguaglianze
+        \[
+            \int_{X \times Y} F d(\mu \times \nu) = \int_X \left( \int_Y F(x,y)
+                d\nu \right) d\mu = \int_Y \left( \int_X F(x,y) d\mu \right) d\nu
+        \]
+\end{itemize}
+\end{theorem}
+\begin{proof}
+    Sia \(F = F^{+} - F^{-}\), e in particolare \(F^{+}, F^{-} \in L^{1}(X
+    \times Y)\). Allora per il teorema di Tonelli abbiamo che
+    \[
+        \int_{X \times Y} F^{+} d(\mu \times \nu) = \int_X \left( \int_Y F^{+}(x,y)
+        d\nu \right) d\mu
+    \]
+    e
+    \[
+        \int_{X \times Y} F^{-} d(\mu \times \nu) = \int_X \left( \int_Y F^{-}(x,y)
+        d\nu \right) d\mu
+    \]
+    e infine per sottrazione e linearità dell'integrale deduciamo l'uguaglianza
+    finale.
+\end{proof}
+\begin{eser}
+    Si considerino in \(\mathbb{R}^2\) le funzioni del tipo \((x_{1}, x_{2})
+    \mapsto |x|^{-\alpha}\), dove \(|x| = \sqrt{x_{1}^2 + x_{2}^2}\). Per quali
+    \(\alpha\) queste funzioni sono integrabili in \(B_{1}(0)\)? E in
+    \(\mathbb{R}^2 \sminus B_{1}(0)\)?
+\end{eser}
+\begin{definition}[Convoluzione]
+    Siano due funzioni \(f, g : \mathbb{R}^{N} \to \mathbb{R}\). Allora la
+    funzione
+    \[
+        (f \star g)(x) = \int_{\mathbb{R}^{N}} f(x-y) g(y) dy
+    \]
+    viene detto \textbf{prodotto di convoluzione} di \(f\) e \(g\).
+\end{definition}
+\begin{proposition}
+    Se \(f, g \in L^{1}(\mathbb{R}^{N})\) allora \(f \star g \in
+    L^{1}(\mathbb{R}^{N})\) (ed è ben definita).
+\end{proposition}
+\begin{proof}
+    Consideriamo la funzione \(F(x, y) = f(x-y) g(y)\). Allora chiaramente
+    \(|F(x-y)| = |f(x-y)||g(y)|\). Allora abbiamo che
+    \[
+\int_{\mathbb{R}^{N}}
+        |f(x-y)||g(y)| dx = |g(y)| \int_{\mathbb{R}^{N}} |f(x-y)| dx = |g(y)|
+        \int_{\mathbb{R}^{N}} |f| d\mu
+    \]
+    E abbiamo che
+    \[
+        \int_{\mathbb{R}^{N}} {\left( \int_{\mathbb{R}^{N}} |f(x-y)| |g(y)| dx
+        \right)} dy = \int_{\mathbb{R}^{N}} |g(y)| \int_{\mathbb{R}^{N}} |f|
+        d\mu dy = \int_{\mathbb{R}^{N}} |g| d\mu \int_{\mathbb{R}^{N}} |f| d\mu
+    \]
+    che è finito, quindi per il teorema di Tonelli abbiamo che
+    \[
+        \int_{\mathbb{R}^{N}} |F(x, y)| d\mu =
+         \int_{\mathbb{R}^{N}}
+        \int_{\mathbb{R}^{N}} |f(x-y)||g(y)| dy dx = \int_{\mathbb{R}^{N}}
+        \int_{\mathbb{R}^{N}}|f|d\mu \int_{\mathbb{R}^{N}} |g|d\mu < +\infty    
+    \]
+    Quindi ora sapendo che \(F \in L^{1}\), possiamo applicare il teorema di
+    Fubini e ottenere che \(f \star g \in L^{1}\).
+\end{proof}
+\begin{eser}
+    La precedente proprietà non è vera per il prodotto normale di funzioni,
+    trovare un controesempio dove \(f, g \in L^{1}(\mathbb{R})\) ma \(f \cdot g
+    \not\in L^{1}(\mathbb{R})\).
+\end{eser}
+
+\subsection{Misure Relative}
+\begin{definition}[Misura Relativa]
+Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. Sia \(\phi: \mathcal{M} \to
+\mathbb{R}\) si dice \textbf{misura relativa} se valgono le seguenti proprietà:
+\begin{enumerate}[label = \arabic*.]
+    \item \(\varphi(\varnothing) = 0\)  
+    \item Se \(\{A_{n}\} \subseteq\mathcal{M} \) è una successioni di insiemi a
+        due a due disgiunti, allora
+        \[
+            \varphi\left( \bigcup_{i \in \mathbb{N}} A_{i} \right) =
+            \sum_{i=1}^{\infty} \varphi(A_{i}) 
+        \]
+\end{enumerate}
+\end{definition}
+
+Ora procediamo con alcune osservazioni sulle misure relative
+
+\begin{enumerate}[label = \arabic*.]
+    \item Le misure relative possono assumere valori negativi, ma sono sempre
+        finite
+    \item La serie \(\sum_{i=1}^{\infty} \varphi(A_{n})\) è una serie
+        convergente come conseguenza della \\ \(\sigma\)-additività
+    \item Le misure finite sono anche misure relative
+    \item \emph{(\(\lnot\)monotonia)} Infatti se \(B \in \mathcal{M}\) tale che
+        \(\varphi(B) < 0\) abbiamo che \(\varnothing \subseteq B \) ma \(0 >
+        \varphi(B)\) 
+    \item \emph{(sottrattività)} Per la stessa dimostrazione di prima vale
+        ancora, quindi se \(A \subseteq B \) sono misurabili, allora abbiamo che
+        \(\varphi(B \sminus A) = \varphi(B) - \varphi(A)\) 
+    \item \emph{(\(\lnot\)subadditività)} Consideriamo lo spazio di misura
+        relativa \((\mathbb{R}, \mathcal{B}(\mathbb{R}), \delta_1 + \delta_{-1}
+        - \delta_0)\), che mostreremo più avanti che è una misura. Sia \(A =
+        [-1, 0], B = [0, 1]\). Allora \(A \cap B = \{0\} \) e \(A \cup B = [-1,
+        1]\).
+        \[
+            1 = 1 + 1 - 1 = \varphi(A \cup B) > \varphi(A) + \varphi(B) = (1 -
+            1) + (-1 + 1) = 0
+        \]
+    \item \emph{(continuità)} La dimostrazione del
+        teorema~\ref{thm:cont_misura}, parte 1,
+        non usava la positività né la monotonia, né la subadditività, ma solo
+        \(\sigma\)-additività, ossia abbiamo che
+        se \(A_{n}\) è una successione crescente di insiemi misurabili,
+        \[
+            \lim_{n \to \infty} \varphi(A_{n}) = \varphi\left( \bigcup_{n \in
+            \mathbb{N}} A_{n} \right) 
+        \]
+        Per quanto riguarda le successioni decrescenti la dimostrazione del
+        teorema~\ref{thm:cont_misura} usava solo \(\sigma\)-additività e
+        sottrattività, quindi abbiamo anche che se \(A_{n}\) è una successione
+        decrescente di insiemi misurabili,
+        \[
+            \lim_{n \to \infty} \varphi(A_{n}) = \varphi \left( \bigcap_{n \in
+            \mathbb{N}} A_{n} \right)
+        \] 
+        notare che non necessitiamo di aggiungere l'ipotesi \(\varphi(A_{1}) <
+        +\infty\) 
+\end{enumerate}
+\begin{example}
+    La misura \(\delta_O\) di Dirac è una misura finita quindi è una misura
+    relativa, mentre la misura del contare e la misura di Lebesgue non sono
+    misure relative, perché \(\# \mathbb{N} = +\infty\) e \(\mu(\mathbb{R}) =
+    +\infty\).
+\end{example}
+\begin{proposition}
+    Se \(\varphi_{1}, \varphi_{2}: \mathcal{M} \to  [0, +\infty]\) sono misure
+    finite su \((\Omega, \mathcal{M})\), allora 
+    \begin{align*}
+        \varphi_+ := \varphi_{1} + \varphi_{2}: \mathcal{M} &\longrightarrow \mathbb{R} \\
+        E &\longmapsto (\varphi_{1} + \varphi_{2})(E) = \varphi_{1}(E) +
+        \varphi_{2}(E)
+    \end{align*}
+    è una misura finita (e quindi relativa).
+    \begin{align*}
+        \varphi_- := \varphi_{1} - \varphi_{2}: \mathcal{M} &\longrightarrow \mathbb{R} \\
+        E &\longmapsto (\varphi_{1} - \varphi_{2})(E) = \varphi_{1}(E) -
+        \varphi_{2}(E)
+    \end{align*}
+    è una misura relativa
+\end{proposition}
+\begin{proof} \(\) 
+La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda.
+
+\begin{enumerate}[label = \arabic*.]
+    \item \((\varphi_{1} - \varphi_{2})(E) = \varphi_{1}(E) - \varphi_{2}(E) \in
+        \mathbb{R}\) per ogni \(E \in \mathcal{M}\) 
+    \item \((\varphi_{1}-\varphi_{2})(\varnothing) = \varphi_{1}(\varnothing) -
+        \varphi_{2}(\varnothing) = 0\)
+    \item Sia \(\{A_{n}\} \) una successione di insiemi disgiunti. Allora
+        \begin{align*}
+            (\varphi_{1}-\varphi_{2})\left( \bigcup_{n \in \mathbb{N}} A_{n}
+            \right) &= \varphi_{1}\left( \bigcup_{n \in \mathbb{N}} A_{n} \right)
+            - \varphi_{2}\left( \bigcup_{n \in \mathbb{N}} A_{n}  \right) = \\
+                    &= \sum_{i=1}^{\infty} \varphi_{1}(A_{i}) - \varphi_{2}(A_{i})
+        \end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}[Generazione misura relativa]
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura e sia \(f : \Omega
+    \to \mathbb{R}\) una funzione, con \(f \in L^{1}\). Allora
+    \begin{align*}
+        \varphi : \mathcal{M} &\longrightarrow \mathbb{R} \\
+        E &\longmapsto \varphi (E) = \int_E f d\mu
+    \end{align*}
+    è una misura relativa
+\end{proposition}
+\begin{proof} \(\) 
+\begin{enumerate}[label = \arabic*.]
+    \item \(\varphi(E) \in \mathbb{R}\) poiché \(f \in L^{1}\) 
+    \item \(\varphi(\varnothing) = \int_\varnothing f d\mu = 0\)
+    \item Sia \(\{E_{n}\} \) una successione disgiunta di insiemi misurabili.
+        Allora
+        \[
+            \varphi\left( \bigcup_{n \in \mathbb{N}} E_{n} \right) =
+            \int_{\bigcup_{n \in \mathbb{N}} E_{n} } f d\mu =
+            \sum_{n=1}^{\infty} \int_{E_{n}} \varphi(E_{n}) =
+            \sum_{n=1}^{\infty} \varphi(E_{n}) 
+        \]
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e sia \(\varphi:
+    \mathcal{M} \to  \mathbb{R}\) una misura relativa. Allora 
+\begin{itemize}[label = --]
+    \item diciamo che \(P \in \mathcal{M}\) è positivo per \(\varphi\) se 
+        \[
+            \forall E \in \mathcal{M}, \quad E \subseteq P, \quad \varphi(E) \ge
+            0
+        \]
+    \item diciamo che \(N \subseteq \mathcal{M} \) è negativo per \(\varphi\) se 
+        \[
+            \forall E \in \mathcal{M}, \quad E \subseteq N, \quad \varphi(E) \le
+            0
+        \]
+\end{itemize}
+\end{definition}
+\begin{remark}
+    \(\varnothing\) è sia positivo che negativo per ogni misura relativa.
+\end{remark}
+
+\begin{theorem}[Teorema di decomposizione di Hahn]
+    Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e \(\varphi : \mathcal{M
+    \to \mathbb{R}}\) una misura relativa. Allora esistono due insiemi \(A, B
+    \in \mathcal{M}\) tali che \(A \cup B = \Omega\), \(A \cap B =
+    \varnothing\), \(A\) è positivo e \(B\) è negativo.
+\end{theorem}
+\begin{remark}
+    La decomposizione di Hahn \textbf{non} è unica. Consideriamo \((\mathbb{R},
+    \mathcal{B}(\mathbb{R}), \delta_{0} - \delta_{1})\). Allora \((A,
+    B) = (\{0\}, \mathbb{R} \sminus \{0\} )\) è una buona decomposizione di
+    Hahn, ma anche \((A, B) = (\mathbb{R} \sminus \{1\}, \{1\} )\) lo è. In
+    generale basta prendere \(1 \not\in A \ni 0\) e \(B = A^C\).
+\end{remark}
+\begin{lemma}
+    Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e \(\varphi :
+    \mathcal{M} \to \mathbb{R}\) una misura relativa. Allora se esiste \(A \in
+    \mathcal{M}\) tale che \(\varphi(A) > 0\) allora esiste \(P \subseteq A \),
+    con \(P \in \mathcal{M}\) tale che \(P\) è positivo per \(\varphi\) e
+    \(\varphi(P)>0\).
+\end{lemma}
+\begin{proof}
+    Se \(A\) è positivo ho concluso, supponiamo quindi che \(A\) non sia
+    positivo. Allora esiste un sottoinsieme di \(A\) con misura negativa.
+    \[
+        n_{1} := \min \{n \in \mathbb{N} : \exists A' \in \mathcal{M}, \quad A'
+        \subseteq A, \quad \varphi(A') < - \frac{1}{n} \} 
+    \]
+    trovo quindi \(A_{1} \subseteq A \), con \(A_{1} \in \mathcal{M}\) e tale
+    che \(\varphi(A_{1}) < -\frac{1}{n_{1}}\).
+
+    Se \(A\sminus A_{1}\) è positivo ho concluso, infatti \(\varphi(A \sminus
+    A_{1}) = \varphi(A) - \varphi(A_{1}) > \varphi(A)>0\), supponiamo quindi che
+    \(A \sminus A_{1}\) non sia positivo e ripetiamo il procedimento.
+    \[
+        n_{2} := \min \{n \in \mathbb{N}: \exists A' \in \mathcal{M}, \quad A'
+        \subseteq A \sminus A_{1}, \quad \varphi(A') < -\frac{1}{n} \} 
+    \]
+    trovo quindi \(A_{2} \in \mathcal{M}\) con \(A_{2} \subseteq A - A_{1} \) e
+    \(\varphi(A_{2}) < -\frac{1}{n_{2}}\).
+
+    Ora se \(A \sminus (A_{1} \cup A_{2})\) è positivo concludiamo, altrimenti
+    ripetiamo.
+    Se esiste un \(N \in \mathbb{N}\) tale che \(A \sminus (\bigcup_{i=1}^{N}
+    A_{i} )\) è positivo abbiamo concluso, infatti
+    \[
+        \varphi(A \sminus \bigcup_{i=1}^{N} A_{i}) = \varphi(A) - \sum_{i=1}^{N}
+        \varphi(A_{i}) > \varphi(A) + \sum_{i=1}^{N} \frac{1}{n_{i}} > 0
+    \]
+    Supponiamo quindi che non esista un tale \(N\). Otteniamo una successione
+    \(\{A_k\} \) di insiemi \(A_k \in \mathcal{M}\) e con
+    \begin{align*}
+        A_{i} \cap A_{j} &= \varnothing \quad \forall i \neq j, \quad
+        \varphi(A_k) < -\frac{1}{n_{k}} \quad \forall k \in \mathbb{N} \\
+        n_k &:= \min \{n \in \mathbb{N}: \exists A' \in \mathcal{M}, \quad A'
+        \subseteq A - \left( \bigcup_{i=1}^{k-1} A_{i}  \right), \quad
+    \varphi(A') < -\frac{1}{n} \} 
+    \end{align*}
+    
+    Allora il claim è che \(P = A \sminus \left( \bigcup_{k \in \mathbb{N}} A_K
+    \right) \in \mathcal{M}\) sia positivo e abbia misura positiva.
+    \[
+        \varphi(P) = \varphi(A) - \sum_{k=1}^{\infty} \varphi(A_{k}) >
+        \varphi(A) > 0
+    \]
+    Ci rimane da verificare che \(P\) sia positivo. Suppongo per assurdo che
+    esista un \(E \in \mathcal{M}\) tale che \(E \subseteq P \) e \(\varphi(E) <
+    -\varepsilon\). Abbiamo che
+    \[
+        \mathbb{R} \ni \varphi(P) = \varphi(A) + \sum_{i=1}^{\infty}
+        \frac{1}{n_{i}} 
+    \]
+    quindi la serie è convergente, per cui \(\lim_{k \to \infty} \frac{1}{n_k} =
+    0\) e quindi esiste un \(\overline{k} \in \mathbb{N}\) tale che 
+    \[
+        \frac{1}{n_{\overline{k} - 1}} < \varepsilon \implies \varphi(E) <
+        -\varepsilon < -\frac{1}{n_{\overline{k} - 1}}
+    \]
+    ma ora sappiamo che 
+    \[
+        E \subseteq A \sminus \left( \bigcup_{k \in \mathbb{N}} A_k \right)
+        \subseteq A \sminus \left( \bigcup_{k=1}^{\overline{k}-1} A_k \right)  
+    \]
+\end{proof}
+\begin{lemma}
+    Sia \((\Omega, \mathcal{M})\) con misura relativa \(\varphi : \mathcal{M}
+    \to \mathbb{R}\) e sia \(\{P_k\} \) una successione di insiemi positivi.
+    Allora 
+    \[
+        \bigcup_{k \in \mathbb{N}} P_k \text{ è positivo}
+    \]
+\end{lemma}
+\begin{proof}
+    Consideriamo la successione \({\tilde{P}_k}\), dove \(\tilde{P}_1 = P_{1}\),
+    \(\tilde{P}_2 = P_{2} \sminus P_{1}\) e in genere
+    \[
+        \tilde{P}_{k+1}  = P_{k+1} \sminus \left( \bigcup_{i=1}^{k} P_{i}
+            \right)
+    \]
+    Abbiamo che \(\tilde{P}_{k} \subseteq P_{k}\) e quindi \(\tilde{P}_{k}\) è
+    positivo. Inoltre per ogni \(i \neq j\) abbiamo che \(\tilde{P}_{i} \cap
+    \tilde{P}_{j} = \varnothing\). Infine l'unione dei \(\tilde{P}_{k}\) è
+    uguale all'unione dei \(P_{k}\), ossia
+    \[
+        \bigcup_{k \in \mathbb{N}} P_k = \bigcup_{k \in \mathbb{N}} \tilde{P}_k 
+    \]
+    Sia \(E \in \mathcal{M}\) con \(E \in \bigcup_{k \in \mathbb{N}} P_k\).
+    Allora
+    \[
+        \varphi(E) = \varphi\left(E \cap \bigcup_{k \in \mathbb{N}} \tilde{P}_k
+        \right) = \varphi\left( \bigcup_{k \in \mathbb{N}} \left( E \cap
+        \tilde{P}_k \right)   \right) = \sum_{k=1}^{\infty}
+        \varphi(\underbrace{E \cap
+        \tilde{P}_k}_{\subseteq \tilde{P}_k })  > 0
+    \]
+\end{proof}
+\begin{proof}[Dimostrazione del teorema di decomposizione di Hahn]
+    Sia
+    \[
+        p := \sup \{ \varphi(P) : P \in \mathcal{M}, \quad P \text{ positivo}\} 
+    \]
+    dove il \(\sup\) è finito in quanto \(\varphi(\varnothing) = 0\). Sia ora
+    una successione \(\{A_{n}\}_{n \in \mathbb{N}} \) con \(A_{n}\) positivo
+    tale che \(\lim_{n \to \infty} \varphi(A_{n}) = p\). Allora \(A := \bigcup_{n \in
+    \mathbb{N}} A_{n}\)  allora \(A \in \mathcal{M}\) e \(A\) è positivo, per il
+    lemma 2. Per definizione di \(p\) abbiamo che \(\varphi(A) \le p\). Inoltre
+    \[
+        \varphi(A) = \varphi((A \sminus A_{n}) \cup A_{n}) = \varphi(A \sminus
+        A_{n}) + \varphi(A_{n}) \ge \varphi(A_{n}), \quad \forall n \in \mathbb{N}
+    \]
+    e quindi \(\varphi(A) \ge \lim_{n \to \infty} \varphi(A_{n}) =  p\). Abbiamo
+    quindi che \(\varphi(A) = p\).
+
+    Ora prendiamo \(B = \Omega \sminus A \implies A \cap B = \varnothing\) e \(A
+    \cup B = \Omega\). Vogliamo mostrare che \(B\) è negativa. Assumiamo per
+    assurdo che esista un insieme a misura positiva, e quindi per il lemma
+    possiamo assumere che esista un insieme positivo \(P \subseteq B \) con \(P
+    \in \mathcal{M}\). Allora \(A \cup P\) è positivo e 
+    \[
+        \varphi(A \cup P) = \varphi(A) + \varphi(P) = p + \varphi(P) > p
+    \]
+    che è assurdo per la massimalità di \(p\). Dunque \(B\) non ha sottoinsiemi
+    di misura positiva ed è quindi negativo.
+\end{proof}
+\begin{theorem}[Invarianza della decomposizione di Hahn]
+    Sia \((\Omega, \mathcal{M})\) uno spazio di misura con \(\varphi :
+    \mathcal{M} \to \mathbb{R}\) una misura relativa. Siano \((A, B)\) e \((A',
+    B')\) due decomposizioni di Hahn di \(\Omega\) rispetto a \(\varphi\).
+    Allora \(\forall E \in \mathcal{M}\) si ha che 
+    \[
+        \varphi(A \cap E) = \varphi(A' \cap E) \quad \text{ e } \quad \varphi(B
+        \cap E) = \varphi(B' \cap E)
+    \]
+\end{theorem}
+\begin{proof}
+\begin{figure}[ht]
+    \centering
+    \incfig{diminvaranza}
+    \label{fig:diminvaranza}
+\end{figure}
+Partiamo dalla prima:
+\[
+    \varphi(A \cap E) = \varphi(A \cap A' \cap E) + \varphi((A \sminus A') \cap E)
+\]
+ma allora poiché \((A \sminus A') \cap E \subseteq A \cap B'\) abbiamo che ha
+misura necessariamente \(0\) da cui \(\varphi(A \cap E) = \varphi(A \cap A' \cap
+E)\). Analogamente si dimostra che \(\varphi(A' \cap E) = \varphi(A \cap A \cap
+E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
+\end{proof}
+
+\begin{definition}
+    Sia \((\Omega, \mathcal{M})\) uno spazio di misura e \(\varphi : \mathcal{M}
+    \to \mathbb{R}\) una misura relativa. Sia \((A, B)\) una decomposizione di
+    \(Hahn\). Allora
+\begin{itemize}[label = --]
+    \item \(\varphi^{+}\), definita con \(\varphi^{+}(E) = \varphi(A \cap E)\) è
+        detta \textbf{variazione superiore}
+    \item \(\varphi^{-}\), definita con \(\varphi^{-}(E) = -\varphi(B \cap E)\)
+        è detta \textbf{variazione inferiore}
+    \item \(|\varphi| = \varphi^{+} + \varphi^{-}\) è detta \textbf{variazione totale}
+\end{itemize}
+\end{definition}
+\begin{remark}
+    La precedente è una buona definizione, per il teorema di invarianza della
+    decomposizione di Hahn.
+\end{remark}
+\begin{example}
+    Consideriamo \((\mathbb{R}, \mathcal{M}, \mu)\) con la misura di Lebesgue, e
+    sia \(f \in L^{1}\). Allora \(\varphi(E) = \int_E f d\mu\) è una misura
+    relativa. Consideriamo la decomposizione di Hahn \((A, B) = (\{ f \ge 0, f
+    \le 0\})\). Allora
+    \[
+        \varphi^{+}(E) = \int_{E} f^{+} d\mu, \quad 
+        \varphi^{-}(E) = -\int_{E} f^{-} d\mu, \quad 
+        |\varphi|(E) = \int_{E} |f| d\mu
+    \]
+\end{example}
+\begin{eser}
+    Come sono fatte le variazioni inferiori e totali della misura relativa data
+    da somme di misure di Dirac?
+\end{eser}
+
+\begin{theorem}
+    Sia \((\Omega, \mathcal{M})\) uno spazio di misura con \(\varphi:
+    \mathcal{M} \to \mathbb{R}\) una misura relativa. Allora 
+\begin{enumerate}[label = \arabic*)]
+    \item \(\varphi^{+}, \varphi^{-}, |\varphi|\) sono misure finite (positive)
+    \item \(\forall E \in \mathcal{M}\) abbiamo che 
+        \(
+            \varphi(E) = \varphi^{+}(E) - \varphi^{-}(E)
+        \)
+        e 
+        \(
+            |\varphi(E)| \le |\varphi|(E)
+       \)
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label = \arabic*.]
+    \item \(\forall E \in \mathcal{M}\), tutte le \(\varphi^{+}(E), \varphi^{-}(E),
+        |\varphi|(E) \in [0, +\infty)\). Inoltre \(\varphi^{+}(\varnothing) =
+        \varphi^{-}(\varnothing) = |\varphi|(\varnothing) = 0\).
+    \item \(\varphi(E) = \varphi((E \cap A) \cup (E \cap B)) = \varphi(E \cap A)
+        + \varphi(E \cap B) = \varphi^{+}(E) - \varphi^{-}(E)\) e \(|\varphi(E)|
+        = |\varphi^{+}(E) - \varphi^{-}(E)| \le \varphi^{+}(E) + \varphi^{-}(E)
+        = |\varphi|(E)\) 
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(\varphi\) una
+    misura (o misura relativa) su \((\Omega, \mathcal{M})\). Allora \(\varphi\)
+    si dice \(\mu\)-\textbf{assolutamente continua} (denotato \(\mu\)-a.c.) se
+    per 
+    \[
+        \mu(E) = 0 \implies \varphi(E) = 0, \forall E \in \mathcal{M}
+    \]
+\end{definition}
+\begin{example}
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(f \in
+    L^{1}(\Omega)\), con \(\varphi(E) = \int_E f d\mu\) misura relativa. Allora
+    \(\varphi\) è assolutamente continua. Infatti preso un insieme \(E \in
+    \mathcal{M}\) tale che \(\mu(E) = 0\) abbiamo che \(\varphi(E) = 0\) perché
+    integra su un insieme trascurabile.
+\end{example}
+\begin{example}
+    Sia \((\mathbb{R}, \mathcal{L}(\mathbb{R}))\) lo spazio misurabile di
+    Lebesgue. Allora consideriamo su tale spazio due misure: \(\delta_O\) delta
+    di Dirac in \(x=0\) e \(\mathcal{L}^{1}(\mathbb{R})\) la misura di Lebesgue
+    1-dimensionale.
+
+    Allora \(\delta_0\) non è assolutamente continua, infatti \(E =\{0\} \)
+    allora \(\mathcal{L}^{1}(E) = 0\) ma \(\delta_0(E) = 1\). Similmente
+    \(\mathcal{L}^{1}\) non è \(\delta_0\)-assolutamente continua, infatti preso
+    \(E = (1, 2)\) abbiamo che \(\mathcal{L}^{1}(E) = 1\) ma \(\delta_0(E) =
+    0\).
+\end{example}
+\begin{example}
+    Ora sempre su \((\mathbb{R}, \mathcal{L}(\mathbb{R}))\) consideriamo la
+    misura \(\mathcal{L}^{1}_{\star} (\mathbb{R}) : \mathcal{L}(\mathbb{R}) \to
+    \mathbb{R}\) definita come \(E \mapsto \mathcal{L}^{1}(E \cap [0, 1])\).
+
+    Allora \(\mathcal{L}^{1}_\star\) è \(\mathcal{L}^{1}\)-assolutamente
+    continua, infatti preso \(E\) trascurabile per \(\mathcal{L}^{1}\) abbiamo
+    che \(E \cap [0, 1] \subseteq E \) quindi anche \(\mathcal{L}^{1}_{\star}(E)
+    = \mathcal{L}^{1}(E \cap [0,1]) \le \mathcal{L}^{1}(E) = 0\).
+    \(\mathcal{L}^{1}\) non è tuttavia \(\mathcal{L}^{1}_\star\)-assolutamente
+    continua, infatti preso \(E = (1, 2)\) abbiamo che \(\mathcal{L}^{1}(E) =
+    1\) ma \(\mathcal{L}^{1}_\star(E) = \mathcal{L}^{1}(\varnothing)= 0\).
+\end{example}
+\begin{proposition}
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(\varphi\) una
+    misura relativa su \((\Omega, \mathcal{M})\). Allora sono equivalenti:
+\begin{enumerate}[label = \roman*)]
+    \item \(\varphi\) è \(\mu\)-assolutamente continua
+    \item \(\varphi^{+}, \varphi^{-}\) sono \(\mu\)-assolutamente continue
+    \item \(|\varphi|\) è \(\mu\)-assolutamente continua
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+    \(\text{i)} \implies \text{ii)}\). Sia \((A, B)\) una decomposizione di Hahn
+    di \(\Omega\) per \(\varphi \). Supponiamo che \(\varphi\) sia
+    \(\mu\)-assolutamente continua. Sia \(E \in \mathcal{M}\) tale che
+    \(\mu(E) = 0\) e quindi anche \(\mu(E \cap A) = 0\) e \(\mu(E \cap B) = 0\).
+    Quindi per \(\mu\)-a.c.~\(\varphi^{+}(E) =
+    \varphi(E \cap A) = 0\) e similmente \(\varphi^{-}(E) = -\varphi(E \cap B) = 0\).
+
+    \(\text{ii)} \implies \text{iii)}\). Supponiamo che \(\varphi^{+}\) e
+    \(\varphi^{-}\) siano \(\mu\)-assolutamente continue. Sia \(E \in \mathcal{M}\)
+    tale che \(\mu(E) = 0\). Allora \(\varphi^{+}(E) = 0\) e \(\varphi^{-}(E) =
+    0\), ma allora \(|\varphi|(E) = \varphi^{+}(E) + \varphi^{-}(E) = 0\).
+
+    \(\text{iii)} \implies \text{i)}\). Supponiamo che \(|\varphi|\) sia
+    \(\mu\)-assolutamente continua. Sia \(E \in \mathcal{M}\) tale che \(\mu(E) =
+    0\). Allora \(|\varphi (E)| \le |\varphi |(E) = 0\), quindi \(\varphi (E) =
+    0\) 
+\end{proof}
+
+\begin{proposition}
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura e sia \(\varphi \)
+    una misura relativa su \((\Omega, \mathcal{M})\). Se \(\varphi \) è
+    \(\mu\)-a.c.~allora 
+    \[
+        \forall \varepsilon>0 \quad \exists \delta >0 \text{ t.c. } \forall E
+        \in \mathcal{M} \quad \mu(E) <\delta \implies |\varphi |(E) < \varepsilon
+    \]
+\end{proposition}
+\begin{proof}
+    Procediamo per assurdo. Supponiamo quindi che valendo le ipotesi si abbia
+    \[
+        \exists \varepsilon >0 \quad \forall n \in \mathbb{N} \quad \exists E_{n} \in
+        \mathcal{M} \quad \mu(E_n) < \frac{1}{2^{n}} \text{ e } |\varphi|(E_n) \ge
+        \varepsilon
+    \]
+    Sia 
+    \[
+        E := \bigcap_{n=1}^{\infty} \bigcup_{k=n}^{\infty} E_k \in \mathcal{M} 
+    \]
+    Dove la successione interna all'intersezione è una successione decrescente.
+    Inoltre abbiamo che \(\mu{\left( \bigcup_{k=1}^{\infty}E_k  \right)}\le
+    \sum_{k=1}^{\infty} < \sum_{k=1}^{\infty} \frac{1}{2^{k}} = 1\) che è
+    finito.
+    Possiamo quindi calcolarne la misura:
+    \[
+        \mu(E) = \lim_{n \to \infty} \mu\left( \bigcup_{k=n}^{\infty} E_k
+        \right) \le \lim_{n \to \infty} \sum_{k=n}^{\infty} \mu(E_k) < \lim_{n
+        \to \infty} \sum_{k=n}^{\infty} \frac{1}{2^{k}} = 0 
+    \]
+    sicché l'ultimo passaggio è il resto di una successione convergente.
+
+    Ora per concludere vogliamo mostrare che \(\varphi (E) \neq 0\) mostrando
+    quindi che \(\varphi \) non è \(\mu\)-a.c. Sappiamo che \(|\varphi |\) è una
+    misura finita. Allora per continuità abbiamo
+    \[
+        |\varphi |(E) = \lim_{n \to \infty} |\varphi |{\left(
+        \bigcup_{k=n}^{\infty}E_k  \right)} \overset{\text{monotonia}}{\ge}
+        \lim_{n \to \infty} |\varphi |(E_n) \ge \varepsilon >0
+    \]
+    ora per la proposizione precedente anche \(\varphi \) non è \(\mu\)-a.c.,
+    arriviamo dunque a una contraddizione.
+\end{proof}
+\begin{corollary}
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura e sia \(f \in
+    L^{1}(\Omega, \mathcal{M}, \mu)\). Allora 
+    \[
+        \forall \varepsilon > 0 \quad \exists \delta > 0 \text{ t.c. } \forall E
+        \in \mathcal{M} \quad \mu(E) < \delta \implies \left|\int_{E} f
+        d\mu\right| < \varepsilon
+    \]
+\end{corollary}
+\begin{proof}
+    Data \(f \in L^{1}\) possiamo associarle la misura relativa \(\varphi(E) =
+    \int f d\mu\) che è \(\mu\)-a.c. Per la proposizione precedente sappiamo che
+    \[
+        \forall \varepsilon > 0 \quad \exists \delta > 0 \text{ t.c. } \forall E
+        \in \mathcal{M} \quad \mu(E) < \delta \implies |\varphi|(E) = <
+        \varepsilon
+    \]
+    Il corollario segue semplicemente da \( \left| \int_E f d\mu\right| =
+    |\varphi(E)| \le |\varphi |(E) \) 
+\end{proof}
+\begin{definition}[Misura singolare]
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura e sia \(\varphi\)
+    una misura o misura relativa su \((\Omega, \mathcal{M})\). Allora
+    \(\varphi\) è \textbf{\(\mu\)-singolare} se esistono \(A, B \in
+    \mathcal{M}\) tali che 
+\begin{itemize}[label = --]
+    \item \(A \cup B = \Omega\) e \(A \cap B = \varnothing\) 
+    \item \(\mu(A) = 0\) e \(|\varphi |(B) = 0\) 
+\end{itemize}
+\end{definition}
+\begin{remark}
+    Se abbiamo \(\mu, \varphi \) misure su \((\Omega, \mathcal{M})\) allora
+    \(\varphi \) è \(\mu\)-singolare se e solo se \(\mu\) è
+    \(\varphi \)-singolare (si dice che \(\mu\) e \(\varphi\) sono mutuamente singolari).
+
+    Infatti se \(\varphi \) è \(\mu\)-singolare allora esistono \(A, B \in
+    \mathcal{M}\), con \(A\cup B =\Omega\) e \(A \cap B = \varnothing\)  tali
+    che \(\mu(A) = 0\) e \(\varphi(B) = 0\). Allora chiaramente ``scambiando''
+    \(A\) e \(B\) si ottiene che \(\mu\) è \(\varphi\)-singolare.
+\end{remark}
+\begin{proposition}
+    Sia \(\varphi \) una misura o misura relativa su \((\Omega, \mathcal{M})\)
+    e sia \(\mu\) una misura su \((\Omega, \mathcal{M})\). Se \(\varphi \) è
+    \(\mu\)-assolutamente continua e \(\mu\)-singolare allora \(\varphi = 0\).
+\end{proposition}
+\begin{proof}
+    Sia \(\varphi \) \(\mu\)-assolutamente continua e \(\mu\)-singolare. Allora
+    esistono \(A, B \in \mathcal{M}\) decomposizione di \(\Omega\)  tali che
+    \(\mu(A) = 0\) e \(|\varphi |(B) =
+    0\). Preso ora \(E \in \mathcal{M}\) abbiamo che \(\varphi (E) = \varphi (E
+    \cap A) + \varphi (E \cap B)\). Poiché \(\mu(E\cap B) \le \mu(A) = 0\)
+    allora anche \(\varphi (E \cap B) = 0\). Inoltre \(|\varphi (E \cap B)| \le
+    |\varphi |(E \cap B) \le |\varphi |(B) = 0\). Concludiamo che \(\varphi (E)
+    = 0\) 
+\end{proof}
+\begin{example}
+    Sia \((\mathbb{R}, \mathcal{L}(\mathbb{R}), \mu)\) lo spazio di misura di
+    Lebesgue e sia \(\delta_0\) la misura di Dirac in \(x=0\). Allora
+    \(\delta_0\) è \(\mu\)-singolare. Infatti preso \(A = \{0\} \) e
+    \(B=\mathbb{R}-\{0\} \) si ha che \(A \cap B = \mathbb{R}\), \(A \cap B =
+    \varnothing\), \(\mu(A) = 0\) e \(\delta_0(B) = 0\).
+    Inoltre \(\mu\) è \(\delta_0\)-singolare, per l'osservazione precedente
+    ossia con \((A, B) = (B, A)\) 
+\end{example}
+\begin{proposition}
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura e sia \(\varphi \)
+    una misura relativa su \((\Omega, \mathcal{M})\). Allora sono equivalenti:
+    \begin{enumerate}[label = \roman*)]
+        \item \(\varphi \) è \(\mu\)-singolare
+        \item \(\varphi^{+}, \varphi^{-}\) sono \(\mu\)-singolari
+        \item \(|\varphi|\) è \(\mu\)-singolare
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    \(\text{i)} \implies \text{ii)}\) Sia \(A, B\) partizione per la
+    \(\mu\)-singolarità di \(\varphi \). Allora \(\mu(A) = 0\) e \(|\varphi|(B)
+    = 0\). Allora \(|\varphi ^{+}|(B) = \varphi ^{+}(B) \le |\varphi |(B) = 0\)
+    e similmente per \(\varphi^{-}\). Ne consegue che \(\varphi^{+}\) e
+    \(\varphi^{-}\) sono \(\mu\)-singolari.
+
+    \(\text{ii)} \implies \text{iii)}\) Sia \((A, B)\) partizione di \(\Omega\)
+    tale che \(\mu(A) = 0\) e \(\varphi ^{+}(B) = 0\). Siano \((A', B')\)
+    partizione di \(\Omega\) con \(\mu(A') = 0\) e \(\varphi ^{-}(B') = 0\).
+    Prendiamo \((A \cup A', B \cap B')\) e mostriamo che è una
+    decomposizione che rende \(\varphi \) \(\mu\)-singolare. Infatti 
+    \((A \cup A') \cup (B \cap B') = (A \cup A' \cup B) \cap (A \cup A' \cup B')
+    = \Omega \cap \Omega = \Omega\) e \((A \cup A') \cap (B \cap B') = ((A \cap
+    B) \cup (A' \cap B)) \cap B' = A' \cap B \cap B' = \varnothing \). Ora si ha
+    che \(\mu(A \cup A') = \mu(A) + \mu(A') = 0 + 0 = 0\) e \(|\varphi |(B \cap
+    B') = \varphi ^{+}(B \cap B') + \varphi ^{-} (B \cap B') \le \varphi ^{+}
+    (B) + \varphi ^{-} (B') = 0+0 = 0\) 
+
+    \(\text{iii)} \implies \text{i)}\) Ovvia.
+\end{proof}
+
+\begin{theorem}[Decomposizione di Lebesgue-Radon-Nikodym]
+    Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. Siano \(\mu\) e
+    \(\phi\) due misure finite su \((\Omega, \mathcal{M})\). 
+    Sia ora
+    \[
+        \mathcal{F} := \{g : \Omega \to \mathbb{R} : g \ge 0 \text{ \(\mu\)-q.o},\,\, g \in L^{1}, \forall E \in \mathcal{M} \,\, \int_E g d\mu \le
+    \phi(E) \} 
+    \]
+    Allora esiste unica (a meno di uguaglianza \(\mu\)-q.o.) una funzione \(f
+    \in \mathcal{F}\) tale che \[
+        \int_\Omega f d\mu = \sup_{g \in \mathcal{F}}  \int_\Omega g d\mu
+    \]
+\end{theorem}
+\begin{definition}[Derivata di Radon-Nikodym]
+    Siano \(\mu\) e \(\varphi \) misure finite su \((\Omega, \mathcal{M})\).
+    Chiamiamo \textbf{derivata di Radon-Nikodym} di \(\varphi \) rispetto a
+    \(\mu\) la funzione \(f \in \mathcal{F}\) del teorema precedente e viene
+    denotata con
+    \[
+        f = \frac{\partial \phi}{\partial \mu } \quad ;\quad \int_\Omega \frac{\partial
+        \phi}{\partial \mu } d\mu = \sup_{g \in \mathcal{F}} \int_\Omega g d\mu
+    \]
+\end{definition}
+
+\newpage
+\section{Analisi Funzionale}
+In tutti gli spazi vettoriali considerati in questa sezione, il campo su cui
+opereremo sarà \(\mathbb{K} = \mathbb{R}\) o \(\mathbb{C}\).
+\subsection{Spazi normati}
+\begin{definition}[Spazio normato]
+    Uno spazio normato è uno spazio vettoriale \(V\) su un campo \(\mathbb{K}\)
+    dotato di una norma \(\| \cdot \| : V \to \mathbb{R}_{\ge 0} \) tale che
+    \begin{enumerate}[label = \arabic*.]
+        \item \emph{(definita positività)} \(\| v \| = 0 \iff v = 0\)
+        \item \emph{(omogeneità)} \(\| \lambda v \| = |\lambda| \| v \|\) per ogni \(v \in V\) e
+            \(\lambda \in \mathbb{K}\)
+        \item \emph{(diseguaglianza triangolare)} \(\| v + w \| \le \| v \| + \| w \|\) per ogni \(v, y \in V\)
+    \end{enumerate}
+\end{definition}
+\begin{example}
+    \(V = \mathbb{R}\), con norma \(|\cdot |\)
+\end{example}
+\begin{example}
+    \(V=\mathbb{C}\), con norma \(| \cdot | : x \mapsto x \overline{x}\)
+\end{example}
+\begin{example}
+    \(V = \mathbb{R}^{N}\) o \(\mathbb{C}^{N}\) con la norma euclidea, ossia
+\(\|x\| = \sqrt{\sum_{i=1}^{N} |x_i|^2}\)
+\end{example}
+\begin{example}
+    \(V = C^{0}[-1, 1]\) spazio vettoriale reale delle funzioni \(f : [-1, 1]
+    \to \mathbb{R} \) continue in ogni punto. La norma è data da
+    \(\|f\|_{\infty} = \max f([-1, 1]) \).
+    La norma \(\| \cdot \|_{\infty}\) è detta \textbf{norma uniforme} o norma
+    infinito, e non è l'unica norma. Ad esempio possiamo definire
+    \[
+        \|f\|_{1} = \int_{-1}^{1} |f(x)| dx
+    \]
+    che è una norma perché è sempre positiva, vale 0 se e solo se \(f = 0\), nel
+    caso di \(f \in C^{0}\), per linearità dell'integrale segue l'omogeneità e
+    per la diseguaglianza triangolare del modulo e la linearità dell'integrale
+    abbiamo che vale anche la diseguaglianza triangolare.
+\end{example}
+\begin{eser}
+    Verificare che le precedenti norme sono effettivamente norme.
+\end{eser}
+Ogni spazio normato è uno spazio metrico, dove la distanza tra due punti è data
+dalla norma della loro differenza. Un problema interessante è valutare se
+diverse norme danno su uno spazio metrico la stessa topologia, ossia
+caratterizzare le norme equivalenti.
+
+Ricordiamo che in uno spazio normato \((V, \|\cdot \|)\) gli aperti sono così
+caratterizzati: un insieme \(A \subseteq V\) è aperto se e solo se per ogni \(x
+\in A\) esiste un \(\varepsilon > 0\) tale che \(B_\varepsilon(x) \subseteq
+A\), dove \(B_\varepsilon(x) = \{y \in V : \|y - x\| < \varepsilon\}\). Inoltre
+\(C \subseteq V \) è chiuso se \(V \sminus C\) è aperto. \(\{x_{n}\} \subseteq V
+\) è convergente se esiste \(x \in V\) tale che \(\lim_{n \to \infty} \|x_{n} -
+x\| = 0\). \(C\) è chiuso se e solo se \(\forall \) successione convergente
+contenuta in \(C\), questa ha limite in \(C\).
+
+Le funzioni continue tra spazi normati \((V, \|\cdot \|_V)\) e \((W, \|\cdot
+\|_W)\)  sono così caratterizzate: \(f : V \to W \) è continua in \(x_{0} \in
+V\) se
+\[
+    \forall \varepsilon > 0 \quad \exists \delta > 0 \quad \text{tale che} \quad
+    \|x - x_{0}\|_V < \delta \implies \|f(x) - f(x_{0})\|_W < \varepsilon
+\]
+Allora \(f : V \to W\) è continua se è continua in ogni punto di \(V\).
+Questo è equivalente alla definizione topologica, dove \(f\) è continua se per
+ogni aperto \(A \subseteq W \) allora la controimmagine \(f ^{-1}(A)  = \{x \in
+V : f(x) \in A\} \) è un aperto di \(V\). Ancora questa è equivalente a dire che
+per ogni successione \(\{v_{n}\} \) convergente in \(V\), allora
+\(f(v_{n})\) converge in \(W\) a \(f(\lim_{n \to \infty} v_{n})\) 
+\begin{proposition}
+    In uno spazio normato \((V, \|\cdot \|)\), la funzione \(x \mapsto \|x\|\) è
+    una funzione continua
+\end{proposition}
+\begin{proof}
+    Sia \(x_{0} \in V\) e \(\varepsilon > 0\). Allora
+    \[
+        \|x - x_{0}\| < \delta \implies |\|x\| - \|x_{0}\| | \le \|x - x_{0}\| <
+        \delta
+    \]
+    scegliendo \(\delta = \varepsilon\) abbiamo la tesi.
+\end{proof}
+In uno spazio vettoriale \(V\) si possono consdierare più norme, vediamo alcuni
+esempi di norme diverse su \(\mathbb{R}^{N}\) e \(\mathbb{C}^{N}\):
+\begin{align*}
+    \|x\|_{1} &= \sum_{i=1}^{N} |x_i| \quad \quad
+    \|x\|_{\infty} = \max_{1 \le i \le N} |x_i| \\
+    \|x\|_{p} &= {\left( \sum_{i=1}^{N} |x_{i}|^{p}  \right)}^{\frac{1}{p}}
+    \quad p \in [1, +\infty) \\
+\end{align*}
+Come sono fatte le palle? Vedasi figura~\ref{fig:palle}
+
+Data una coppia \((p, q)\) e fissata la palla \(\|x\|_p < 1\) esistono due palle
+\(\|x\|_q < r\) e \(\|x\|_q < R\) con \(R\) e \(r\) positivi, tali che la prima
+è contenuta in \(\|x\|_p < 1\) e l'altra contiene \(\|x\|_p <1\). 
+
+Notare che si potrebbe in teoria prendere anche \(p < 1\) ma non è più una norma
+perché non c'è la diseguaglianza triangolare.
+\begin{definition}[Norme equivalenti]
+    Date \(\|\cdot \|_a\) e \(\|\cdot \|_b\) norme in \(V\), queste si dicono
+    \textbf{equivalenti} se esistono due costanti \(C_{1}, C_{2} >0\) tali che
+    \[
+        C_{1}\|v\|_a \le \|v\|_b \le C_{2}\|v\|_a \quad \forall v \in V
+    \]
+\end{definition}
+\begin{remark}
+    La precedente è una relazione di equivalenza, infatti
+    \begin{itemize}
+        \item \emph{riflessiva} \(\|v\|_a = \|v\|_a\)
+        \item \emph{simmetrica} se \(C_{1}\|v\|_a \le \|v\|_b \le C_{2}\|v\|_a\)
+            allora \(\frac{1}{C_{2}}\|v\|_b \le \|v\|_a \le \frac{1}{C_{1}}\|v\|_b\)
+        \item \emph{transitiva} se \(C_{1}\|v\|_a \le \|v\|_b \le C_{2}\|v\|_a\)
+            e \(C_{3}\|v\|_b \le \|v\|_c \le C_{4}\|v\|_b\) allora
+            \(C_{1}C_{3}\|v\|_a \le \|v\|_c \le C_{2}C_{4}\|v\|_a\)
+    \end{itemize}
+\end{remark}
+\begin{proposition}
+    Due norme equivalenti inducono la stessa topologia sullo spazio \(V\): gli
+    aperti rispetto a una norma sono aperti anche rispetto all'altra, e
+    viceversa.
+\end{proposition}
+\begin{proposition}
+    In uno spazio vettoriale \(V\) di dimensione finita tutte le norme sono tra
+    loro equivalenti
+\end{proposition}
+\begin{proof}
+    Sia \(V\) di dimensione \(N\). Fissiamo una base \(\{e_{1}, \ldots,
+    e_{N}\}\). Ogni elemento \(v \in V\) si può scrivere come \(v =
+    \sum_{i=1}^{N} \alpha_{i}e_{i}\) per opportuni scalari \(\alpha_i\). Sia
+    \(\|\cdot \|_1\) la norma 1, ossia \(\|v\|_1 = \sum_{i=1}^{N}
+    |\alpha_{i}|\). Sia ora \(\|\cdot \|\) una norma qualunque in \(V\).
+    \[
+        \|v\| = \left\| \sum_{i=1}^{N} \alpha_{i}e_{i} \right\| \le
+        \sum_{i=1}^{N} |\alpha_{i}|\|e_{i}\| \le M \sum_{i=1}^{N} |\alpha_{i}| =
+        M \|v\|_1
+    \]
+    per \(M = \max_{1 \le i \le N} \|e_{i}\| \) 
+\end{proof}
+
+\end{document}

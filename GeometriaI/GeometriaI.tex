@@ -1,0 +1,2396 @@
+\documentclass{article}
+\usepackage{layout}
+\usepackage[a4paper, total={5in,9in}]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+
+\newcommand*{\transp}[2][-3mu]{\ensuremath{\mskip1mu\prescript{\smash{\mathrm t\mkern#1}}{}{\mathstrut#2}}}%
+
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
+
+\pdfsuppresswarningpagegroup=1
+
+\newcounter{theo}[section]\setcounter{theo}{0}
+\renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
+
+\newcounter{excounter}[section]\setcounter{excounter}{0}
+\renewcommand{\theexcounter}{\arabic{section}.\arabic{excounter}}
+
+\newenvironment{theorem}[1][]{
+    \refstepcounter{theo}
+     \ifstrempty{#1}
+    {\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=blue!20,rounded corners=5pt]
+            {\strut Teorema~\thetheo};}
+        }
+    }{\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=blue!20,rounded corners=5pt]
+            {\strut Teorema~\thetheo:~#1};}
+        }
+    }
+    \mdfsetup{
+        roundcorner=10pt,
+        innertopmargin=10pt,linecolor=blue!20,
+        linewidth=2pt,topline=true,
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+    }
+\begin{mdframed}[]\relax}{
+\end{mdframed}}
+
+\newenvironment{definition}[1][]{
+    \refstepcounter{theo}
+     \ifstrempty{#1}
+    {\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=violet!20,rounded corners=5pt]
+            {\strut Definizione~\thetheo};}
+        }
+    }{\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=violet!20,rounded corners=5pt]
+            {\strut Definizione~\thetheo:~#1};}
+        }
+    }
+    \mdfsetup{
+        roundcorner=10pt,
+        innertopmargin=10pt,linecolor=violet!20,
+        linewidth=2pt,topline=true,
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+    }
+\begin{mdframed}[]\relax}{
+\end{mdframed}}
+
+\newenvironment{lemmao}[1][]{
+    \refstepcounter{theo}
+     \ifstrempty{#1}
+    {\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=green!20,rounded corners=5pt]
+            {\strut Lemma~\thetheo};}
+        }
+    }{\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=green!20,rounded corners=5pt]
+            {\strut Lemma~\thetheo:~#1};}
+        }
+    }
+    \mdfsetup{
+        roundcorner=10pt,
+        innertopmargin=10pt,linecolor=green!20,
+        linewidth=2pt,topline=true,
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+    }
+\begin{mdframed}[]\relax}{
+\end{mdframed}}
+
+\theoremstyle{plain}
+\newtheorem{lemma}[theo]{Lemma}
+\newtheorem{corollary}{Corollario}[theo]
+\newtheorem{proposition}[theo]{Proposizione}
+
+\theoremstyle{definition}
+\newtheorem{example}[excounter]{Esempio}
+
+\theoremstyle{remark}
+\newtheorem*{note}{Nota}
+\newtheorem*{remark}{Osservazione}
+
+\newtcolorbox{notebox}{
+  colback=gray!10,
+  colframe=black,
+  arc=5pt,
+  boxrule=1pt,
+  left=15pt,
+  right=15pt,
+  top=15pt,
+  bottom=15pt,
+}
+
+\title{Appunti di Geometria I}
+\author{Osea}
+\date{1 Marzo 2024}
+
+\begin{document}
+\maketitle
+Libri: Sernesi 2 oppure (più avanzato) Manetti.
+
+\section{Spazi Topologici}
+\begin{definition}[Spazio topologico]
+    Sia \(X\) un insieme non vuoto sul quale è
+    presente una famiglia di sottoinsiemi \(\tau \subseteq P(X)\), i cui
+    elementi sono chiamati \textbf{aperti}. La famiglia \(\tau\) deve avere
+    queste proprietà:
+\begin{enumerate}[label = \arabic*)]
+    \item \(\varnothing, X \in \tau\) 
+    \item \(\{A_{i}\}_{i \in J} A_{i} \in \tau \implies \bigcup_{i \in I} A_{i} \in \tau\)
+    \item \(A_{1}, A_{2} \in  \tau \implies  A_{1} \cap A_{2} \in  \tau\) 
+\end{enumerate}
+    Allora \((X, \tau)\) è uno \textbf{spazio topologico}. Gli elementi di \(X\)
+    si chiamano solitamente \textbf{punti}
+\end{definition}
+\begin{note}
+    se 3') è \(A_{1}, \dots, A_{n} \in  \tau \implies  \bigcap_{i \in
+    \{1,\dots,n\}} \in  \tau\) allora per il principio di induzione \(3) \iff 3')\) 
+    per cui \textbf{l'intersezione finita di aperti è aperta}
+\end{note}
+\begin{definition}[insieme chiuso]
+    Sia \((X, \tau)\) uno spazio topologico. Se \(A\) è un insieme aperto,
+    allora \(X - A\) è \textbf{chiuso}
+\end{definition}
+\begin{note}
+    Sia \(\mathcal{C}\) la famiglia degli insiemi chiusi, allora
+\begin{enumerate}[label = \arabic*)]
+    \item \(\varnothing, X \in \mathcal{C}\) 
+    \item Intersezione arbitraria di chiusi è chiusa
+    \item Unione finita di chiusi è chiusa
+\end{enumerate}
+Data una famiglia di chiusi si può definire la topologia dove gli aperti
+sono complementari di chiusi.
+
+Infatti se \(\varnothing, X\) sono chiusi allora sono anche aperti
+(complementari), se \(A_{i}\) sono insiemi aperti allora \(\bigcup_{i \in  I} A_{i} = X - (\bigcap_{i \in  I} (X -
+A_{i}))\) che è aperto, quindi l'unione arbitraria di aperti è aperta, se \(A\)
+e \(B\) sono aperti allora \(A \cap  B = X - ((X - A) \cup (X - B))\) che è
+aperto, quindi l'intersezione finita di aperti è aperta.
+\end{note}
+
+\begin{example}[Topologia Discreta]
+    \(\tau = P(x)\) Tutti i sottoinsiemi di \(X\) sono aperti, si chiama
+        \textbf{topologia discreta}.
+\end{example}
+\begin{example}[Topologia Indiscreta]
+\(\tau = \{\varnothing, X\} \) più piccola
+        topologia possibile.
+\end{example}
+\begin{example}[Alcune topologie su \(X\) di tre elementi]
+\begin{enumerate}[label = \roman*-]
+    \item Se \(X = \{1, 2, 3\} \) allora una topologia può essere \(\tau =
+        \{\varnothing, \{1, 2, 3\}, \{1\}\} \) 
+    \item Con lo stesso \(X\), \(\tau = \{\varnothing, \{1\} , \{2\} , \{1,2,3\}
+        \}\) \textbf{non} è una topologia. Infatti \(\{1,2\} \not\in \tau\) 
+\end{enumerate}
+\end{example}
+\begin{example}[Topologia Cofinita]
+    \item Sia \(X\) un insieme, la topologia \textbf{cofinita} è quella tale che
+        \(\mathcal{C} = \{\varnothing, X\} \cup \{S \in X : \# S < +\infty\}
+        \). Verifico le proprietà:
+\begin{enumerate}[label = \arabic*)]
+    \item \(\varnothing, X\) sono chiusi
+    \item L'intersezione arbitraria di chiusi ha cardinalità minore o eguale a
+        ognuna delle cardinalità degli insiemi nell'intersezione, quindi in
+        particolare è ancora finita, quindi è chiusa
+    \item L'unione di due chiusi ha cardinalità al più eguale alla somma delle
+        cardinalità dei due insiemi, per cui è finita, quindi chiusa.
+\end{enumerate}
+
+\end{example}
+\begin{example}[Topologia Euclidea su \(\mathbb{R}\) ]
+    Sia \(X = \mathbb{R}\). \(A \in  R\) aperto se è
+        unione (anche infinita) di intervalli aperti \((a, b)\), quindi \(\tau =
+        A \in  \mathbb{R} : A = \bigcup_{i \in  I} (a_{i}, b_{i})\) dove
+        \((a_{i}, b_{i}) = \{x \in R : a_{i} < x < b_{i}\} \) 
+\end{example}
+\begin{proof}
+\begin{enumerate}[label = \arabic*)]
+    \item \(\varnothing, \mathbb{R} \in \tau\) 
+    \item Siano \(A_{i}\) insiemi del tipo \(A_{i} = \bigcup_{j \in  I_{i}}
+        (a_{ij}, b_{ij})\), con \(i \in J\). Allora \(\bigcup_{i \in  J}A_{i} =
+        \bigcup_{i \in  J}(\bigcup_{j \in I_{i}} ) (a_{ij}, b_{ij})\) è ancora
+        unione di intervalli aperti, quindi è in \(\tau\) 
+    \item Siano \(A_{1}, A_{2} \in \tau\) allora \(A_{1} \cap A_{2}\) per la
+        distributività di \(\cap \) su \(\cup \) è un'unione di intervalli
+        aperti, quindi è aperto.
+\end{enumerate}
+
+\end{proof}
+
+\begin{definition}
+    Sia \(X\) un insieme non vuoto con una topologia \(\tau\) allora
+    \(\mathcal{B} \subseteq 
+    \tau\) si dice \textbf{base della topologia} se \(\forall A \in \tau, A =
+    \bigcup_{i \in  I} B_{i}\), con \(B_{i} \in \mathcal{B}\,\,\forall i \in I\) 
+
+\end{definition}
+\begin{note}
+\begin{enumerate}[label = \arabic*)]
+    Quindi se \(\mathcal{B}\) è base di una topologia se e solo se
+    \item \(\bigcup_{B \in \mathcal{B}} B = X\) 
+    \item \(B_{1}, B_{2} \in \mathcal{B} \implies B_{1} \cap  B_{2} = \bigcup_{i \in I}
+        B_{i}, \, B_{i} \in \mathcal{B}\) 
+\end{enumerate}
+\end{note}
+
+\begin{example}
+    Sia \(X = \mathbb{R}\), \(\mathcal{B} = \text{intervalli aperti}\) e
+    consideriamo \(\mathcal{B}' \subseteq  \mathcal{B}\), con \(\mathcal{B}' =
+    (a, b) \text{ con } a, b \in \mathbb{Q} \).
+\begin{enumerate}[label = \arabic*)]
+    \item \(\bigcup_{B \in  \mathcal{B}'} = \mathbb{R} \) 
+    \item Intersezione di due intervalli razionali è ancora razionale, quindi
+        vale anche la (2).
+\end{enumerate}
+    Quindi \(\mathcal{B}'\) è una base per una topologia. È la topologia
+    euclidea? Sia \((a, b) \subseteq R\). Allora esistono due successioni \(a_n
+    \to a\) monotona decrescente con \(a_n \in \mathbb{Q}\) e \(b_n \to  b\) monotona
+    crescente con \(b_n \in \mathbb{Q}\). Di conseguenza \((a, b) = \bigcup_{i
+    \in  \mathbb{N}} (a_i, b_{i})\) per cui è aperto nella topologia di
+    \(\mathcal{B}'\). Di conseguenza la topologia euclidea si può riscrivere
+    con le unioni di insiemi di \(\mathcal{B}'\). Quindi questo mostra che
+    \textbf{la topologia euclidea ha una base numerabile}.
+\end{example}
+\begin{example}
+    Anche la topologia \(\mathcal{B}''\) data dagli intervalli interi \((n, m)
+    \text{ con } n, m \in \mathbb{Z}\) è una base, ma ovviamente non della
+    topologia euclidea perché ad esempio \(\left(0, \frac{1}{2}\right)\) non è esprimibile
+    come unione di intervalli interi.
+\end{example}
+
+\begin{definition}
+    Sia \(S \subseteq  X\), allora \(\overline{S}\) è la \textbf{chiusura} di
+    \(S\) se è il più piccolo chiuso che contiene \(S\) 
+\end{definition}
+\begin{proof}[Esistenza e Unicità]
+    Sia \(\mathcal{S}\) la famiglia di chiusi che contengono \(S\). È non vuota,
+    perché \(X \in \mathcal{S}\). Sia \(\overline{S} = \bigcap_{C \in
+    \mathcal{S}} \) è chiuso perché è intersezione di chiusi. Ovviamente
+    contiene \(S\) perché ogni elemento di \(\mathcal{S}\) contiene S. Inoltre
+    ogni altro chiuso che contiene S contiene anche \(\overline{S}\) perché è
+    stato usato nell'intersezione.
+\end{proof}
+
+\begin{proposition}
+    \(K := \{x \in X : \forall A \in \tau\,,x \in A\,, A \cap S \neq \varnothing\}
+    = \overline{S}\) 
+\end{proposition}
+\begin{proof}
+    Sia \(x \in  K\), supponiamo per assurdo che \(x \not\in \overline{S} \iff x \in
+X - \overline{S} \in \tau\) perché per definizione \(\overline{S}\) è chiuso.
+Poiché \(S \subseteq \overline{S}\),  \(X - \overline{S} \cap S = \varnothing\) ma per
+costruzione di \(K\),  \(X - \overline{S} \cap  S \neq \varnothing\), che è una
+contraddizione.
+
+    Per l'altra inclusione iniziamo mostrando che \(S \subseteq  K\), poi mostrando che
+    \(K\) è chiuso concludiamo che \(\overline{S} \subseteq  K\). Sia \(x \in
+    S\), allora per ogni aperto \(A\) contenente \(x\), \(x \in A \cap  S\),
+    quindi necessariamente \(A \cap  S \neq \varnothing\), ossia \(x \in K\).
+    Consideriamo ora l'insieme aperto \(X - \overline{K}\). Se \(K \neq
+    \overline{K}\) allora esiste \(x \in \overline{K}, x \not\in K\).
+\end{proof}
+\section{Spazi Metrici}
+
+\section{Funzioni Continue}
+La definizione conosciuta è che \(f: (a, b) \subseteq \mathbb{R} \to  \mathbb{R}\) è continua se
+\[\forall x \in (a, b), \forall \varepsilon \in  \mathbb{R}^{+},\,\, \exists \delta
+    \in  \mathbb{R}^{+}: x' \in  (a, b), |x - x'| < \delta \implies  |f(x) - f(x')| <
+\varepsilon\]
+
+Per gli spazi metrici otteniamo:
+Siano \((X, d)\) e \((Y, d')\) due spazi metrici. Diremo che \(f: X \to  Y\)
+è continua se \[\forall x \in  X, \forall \varepsilon \in \mathbb{R}^{+}\,\,
+\exists \delta \in \mathbb{R}^{+}: \forall x' \in
+X, d(x, x') < \delta \implies  d'(f(x), f(x')) < \varepsilon\]
+
+Per migliorare questa definizione notiamo che \(\{x' \in  X : d(x, x') <
+\delta\} = D(x, \delta)\). Stessa cosa per il codominio. Otteniamo quindi che,
+per ogni \(x\)  e per ogni \(\delta\) positivo \(f(D(x, \delta)) \subseteq
+D(f(x), \varepsilon)\) 
+
+\textbf{Claim}: quindi \(\forall x \in X, \forall \varepsilon \in \mathbb{R},
+\varepsilon > 0, f^{-1}(D(f(x), \varepsilon))\) è un aperto di X
+
+\textbf{Dimostrazione}. Sia \(f\) continua e sia \(x' \in f^{-1}(D(f(x),
+\varepsilon))\), \(x' \in X\). Allora \(f(x') \in D(f(x), \varepsilon)\). Per la
+definizione ``provvisoria'' di continuità esiste un \(\delta\) tale che \(D()\) 
+
+\begin{proposition}[continuità in senso topologico]
+    Siano \(X\) e \(Y\) spazi metrici.\ \(f: X \to  Y\) è continua in senso metrico se è solo se 
+    \[
+        \forall A \in \tau_Y, f^{-1}(A) \in \tau_X
+    \]
+    In altre parole \textbf{la controimmagine di aperti è aperta}
+\end{proposition}
+\begin{proof}
+    Supponiamo che sia continua in senso topologico. Sia \(x \in X, \varepsilon
+    \in \mathbb{R}^{+}\). Il disco \(D(f(x), \varepsilon)\) è aperto in \(Y\),
+    quindi \(f^{-1}(D(f(x), \varepsilon))\) è aperto in \(X\). Chiaramente \(x
+    \in f^{-1}(D(f(x), \varepsilon))\) ma quindi significa che esiste un disco
+    centrato in \(x\) completamente contenuto in \(f^{-1}(d(f(x),
+    \varepsilon))\), ossia \(\exists \delta \in \mathbb{R}^{+}:\,D(x, \delta)
+    \subseteq f^{-1}(D(f(x), \varepsilon))\), quindi \(f(D(x, \delta)) \subseteq
+    D(f(x), \varepsilon)\).
+
+    Viceversa, supponendo \(f\) continua in senso metrico, 
+\end{proof}
+
+\begin{definition}
+    Dati due spazi topologici \(X\) e \(Y\), rispettivamente con topologie
+    \(\tau_X\) e \(\tau_Y\), una funzione \(F: X \to  Y\) si
+    dice continua se \(\forall A \in \tau_Y,\, F^{-1}(A) \in \tau_X\) 
+\end{definition}
+
+\begin{remark}
+    Se \(X, Y, Z\) sono spazi topologici, \(F: X \to  Y\) e \(G: Y \to  Z\) sono
+    continue allora \(G \circ F\) è continua.
+\end{remark}
+\begin{proof}
+    Sia \(A\) un aperto di \(Z\), allora \((G \circ F)^{-1}(A) =
+    F^{-1}(G^{-1}(A))\). Dato che G è continua, \(G^{-1}(A)\) è aperto in \(Y\)
+    e dato che \(F\) è continua la sua controimmagine tramite \(F\) è aperta in
+    \(X\)
+\end{proof}
+\begin{remark}
+    L'identità (da \(X\) a \(X\) con la stessa topologia) è una funzione continua, infatti la controimmagine di ogni aperto
+    è se stesso, che è aperto.
+\end{remark}
+Le precedenti due osservazioni danno agli spazi topologici la struttura di
+\textbf{categoria}, con le funzioni continue come morfismi.
+
+\begin{example}
+    L'identità da \(X\) a \(X'\), insiemi con gli stessi elementi ma diversa
+    topologia, è continua se \(\tau_X' \subseteq \tau_X\) 
+\end{example}
+\begin{example}
+    \(X\) con topologia discreta (ogni sottoinsieme di \(X\) è aperto).
+    Allora qualsiasi funzione \(f: X \to Y\) è continua.
+\end{example}
+\begin{example}
+    \(F: \mathbb{R}_e \to \mathbb{R}_d\) da $\mathbb{R}$ con topologia euclidea a
+    \(\mathbb{R}\) con topologia discreta. Le funzioni non continue da
+    \(\mathbb{R}_e\) a \(\mathbb{R}_e\) non sono continue neanche da
+    \(\mathbb{R}_e\) a \(\mathbb{R}_d\) perché gli stessi insiemi aperti per cui
+    la definizione di continuità non era rispettata sono aperti anche
+    della topologia discreta. Una funzione continua per la topologia euclidea
+    invece può essere non continua con la discreta. Ad esempio l'identità
+    non è continua da \(\mathbb{R}_e\) a \(\mathbb{R}_d\) perché \([0, 1]\) è un aperto della discreta ma non
+    dell'euclidea.
+
+    Soluzione: solo le funzioni costanti sono continue, infatti se \(f\) è una
+    funzione non costante, è possibile trovare un sottoinsieme \(A \subseteq f(X)\) in
+    \(f(X)\), \(\varnothing \neq A \neq f(X)\). Dato che nella
+    topologia discreta tutti gli insiemi sono aperti, \(A\) è aperto
+    e chiuso. Se \(f\) fosse continua, la controimmagine di \(A\) sarebbe aperta
+    e chiusa, ma in \(\mathbb{R}_e\) gli unici insiemi aperti e chiusi sono
+    \(\varnothing \text{ e } \mathbb{R}_e\).
+    
+\end{example}
+
+\begin{proposition}
+    \(F: X \to Y\) continua se e solo se \(\forall C\) chiuso in \(Y\),
+    \(F^{-1}(C)\) è chiuso in \(X\).
+\end{proposition}
+\begin{proof}
+    Sia \(C\) chiuso (aperto) in \(Y\), allora \(Y - C\) è aperto (chiuso)
+        in \(Y\), quindi \(F^{-1}(Y - C) = X - F^{-1}(C)\) è aperto (chiuso), quindi
+        \(F^{-1}(C)\) è chiuso (aperto).
+\end{proof}
+
+\begin{definition}[Omeomorfismo]
+    \(F: X^{\tau_X} \to Y^{\tau_Y}\) è un omeomorfismo se \(F\) è biettiva
+    continua e \(F^{-1}\) è continua.
+\end{definition}
+\begin{remark}
+    L'omeomorfismo è una relazione di equivalenza: infatti
+\begin{itemize}[label = --]
+    \item se esistono \(F: X \to Y\) e \(G: Y \to  Z\) biettive continue con
+        inversa continua allora anche \(F \circ G\) è biettiva continua con
+        inversa continua
+    \item L'identità è un omeomorfismo, quindi ogni spazio topologico è isomorfo
+        a se stesso
+    \item Se esiste \(F: X \to  Y\) biettiva continua con inversa continua
+        allora \(F^{-1}: Y \to  X\) è biettiva continua con inversa continua
+\end{itemize}
+
+\end{remark}
+
+\begin{example}
+    Le funzioni costanti sono sempre continue:
+
+    Siano \(X\) e \(Y\) spazi
+    topologici. Sia \(F : X \to  Y\) tale che \(F(x) = y\) per ogni \(x \in X\) e per
+    un \(y \in Y\) fissato. Allora preso un aperto \(A\) di \(Y\) ci sono due
+    possibilità: \(y \in A\) oppure \(y \not\in A\). Nel primo caso \(F^{-1}(A)
+    = X\) e nel secondo \(F^{-1}(A) = \varnothing\). In entrambi i casi la
+    controimmagine è un insieme aperto, quindi \(F\) è continua.
+\end{example}
+
+\begin{example}
+    Tutti gli intervalli aperti di \(\mathbb{R}\) sono \emph{omeomorfi} tra di
+    loro:
+\begin{itemize}[label = --]
+    \item se \(a, b \in \mathbb{R}, (a, b) \cong (0, 1)\), \(f(x) = \frac{x -
+        a}{b - a}\) è continua e monotona crescente, quindi iniettiva. Essendo
+        \(f((a, b)) = (0, 1)\) è suriettiva. L'inversa è ovviamente anche
+        biettiva (da \(\mathbb{R}\) a \(\mathbb{R}\) tutte le funzioni biettive
+        continue sono monotone e hanno inversa continua)
+    \item \((1, +\infty) \cong (0, 1)\), \(f(x) = \frac{1}{x}\) 
+    \item Se \(a \in \mathbb{R}, (a, +\infty) \cong  (1, +\infty)\), \(f(x) = x
+        - a + 1\) 
+    \item Se \(a \in \mathbb{R}, (-\infty, -a) \cong  (a, +\infty)\), \(f(x) =
+        -x\) 
+    \item \(\mathbb{R} \cong (-\frac{\pi}{2}, \frac{\pi}{2})\), \(f(x) =
+        \arctan(x)\) 
+\end{itemize}
+
+\end{example}
+
+Quindi anche se i diversi intervalli sono ``diversi'' dal punto di vista
+metrico, sono topologicamente indistinguibili.
+\begin{example}
+    \(\mathbb{R}\) con la topologia dove i chiusi sono gli insiemi finiti, oltre
+    a \(\mathbb{R}\) stesso (topologia cofinita). In tal caso dato che i chiusi
+    sono unioni di singoletti, una funzione è continua se la controimmagine di
+    ogni punto è finita (quindi chiusa) oppure tutto \(\mathbb{R}\) (quindi
+    ancora chiusa). Ad esempio la funzione \(x \mapsto p(x)\) polinomio è
+    continua per la topologia euclidea e la controimmagine di ogni punto è
+    l'insieme delle radici del polinomio, ossia al più contiene un numero di
+    elementi corrispondenti al grado del polinomio. I polinomi sono quindi
+    continui anche secondo la topologia cofinita.
+
+    Tuttavia ad esempio la funzione definita come \(0\) per \(x < 0\), \(1\) per
+    \(x > 1\) e \(x\) per \(x \in [0, 1]\) è continua per l'euclidea ma non per
+    la cofinita, dato che la controimmagine di \(1\), ad esempio, ha cardinalità
+    non numerabile.
+\end{example}
+
+\begin{example}
+    \(\mathbb{R}\) con la topologia dove gli aperti sono le semirette \((a,
+    +\infty)\) con \(a \in \mathbb{R} \cup \{-\infty\} \). Per esercizio
+    dimostrare che è una topologia e dare esempi di funzioni continue.
+\end{example}
+
+\section{Successioni}
+Se abbiamo un'applicazione \(f : \text{aperto }A \subseteq  \mathbb{R} \to  \mathbb{R}\) è
+continua se e solo se ogni successione \(x_{n} \in A\), \(x_{n} \to  x\) allora
+\(f(x_{n}) \to  f(x)\). Questo vuol dire che \(\lim_{n \to \infty}(x_{n} - x) =
+0\) ossia 
+\[
+    \forall \varepsilon > 0, \varepsilon \in \mathbb{R}, \, \exists \overline{n}
+    : \forall n \ge \overline{n}, |x_{n} - x| < \varepsilon
+\]
+In uno \textbf{spazio metrico}, definiamo una successione convergente 
+\(x_{n} \to x \in X\) se \(\lim_{n \to  \infty} {d (x_{n}, x)} = 0\) 
+Quindi se una successione \(x_{n}\) converge a \(x \in  X\) il limite precedente diventa
+\[
+    \forall  \varepsilon > 0 \exists  \overline{n} : \forall n \ge
+    \overline{n}, d(x_{n}, x) < \varepsilon \implies x_{n} \in D(x, \varepsilon)
+\]
+Possiamo limitare gli \(\varepsilon\) solo a un insieme numerabile (ad esempio
+\(\frac{1}{n} \forall  n \in \mathbb{N}\) )
+
+
+Riscrivendo la notazione di continuità precedente in forma topologica:
+\[
+    \forall A \text{ aperto } x \in  A \exists \overline{n} : \forall n \ge
+    \overline{n} f(x_{n}) \in A
+\]
+Infine possiamo ancora allargare la richiesta a un qualsiasi intorno di \(x\),
+ossia un insieme contenente un aperto contenente \(x\) 
+
+\begin{definition}[Convergenza di successione]
+    Una successione \(x_{n} \in X\) converge a \(x \in  X\)  se
+    \[
+        \forall  A \text{ aperto }, x \in A\, \exists \overline{n} : \forall n >
+        \overline{n} x_{n} \in A
+    \]
+\end{definition}
+Notare che se non siamo in uno spazio metrico non è così difficile né utile la
+convergenza: ad esempio nella concreta qualsiasi successione converge a
+qualsiasi elemento.
+
+Caratterizziamo prima di procedere la chiusura di \(S\) 
+\begin{proposition}
+\[\overline{S} = \{s \in  X : \exists \{x_{n}\}_{n \in  N}, x_{n} \in S, x_{n}
+\to  s \} =: K\]
+Ossia \(\overline{S}\) è l'insieme dei punti di accumulazione di \(S\) 
+\end{proposition}
+
+\begin{proof}\( \) 
+\begin{itemize}[label = --]
+    \item[\(\supseteq\) ] Prendiamo un punto di accumulazione \(x \in K\), allora
+        esiste una successione \(x_{n} \in S\) tale che \(x_{n} \to  x\). Dobbiamo
+        mostrare che \(x \in \overline{S}\). Prendiamo un aperto \(A\) tale che
+        \(x \in A\), allora esiste \(\overline{n}\) tale che \(\forall n \ge
+        \overline{n}, x_{n} \in A\), quindi \(A \cap  S \neq \varnothing\), quindi
+        \(x \in \overline{S}\)
+    \item[\(\subseteq \) ] Prendiamo un punto della chiusura, \(x \in  \overline{S}\). Vogliamo
+        far vedere che sta in \(K\). Prendiamo \(D(x, \frac{1}{n})\) è aperto.
+        Il criterio della chiusura dice quindi che \(D(x, \frac{1}{n}) \cap  S =
+        \varnothing\). Preso \(x_{n} \in X \) che appartiene ad entrambi, quindi
+        costruendo così una successione otteniamo che \(\lim d(x_{n}, x) = 0\)
+        quindi \(x_{n} \to x\) quindi \(x\) è punto di accumulazione
+\end{itemize}
+\end{proof}
+Da questo quindi troviamo che \(C \subseteq  (X, d)\) è chiuso se e solo se
+\(c_n \in C\), \(c_n \to y\) allora \(y \in C\) 
+% \begin{definition}[Primo assioma di numerabilità]
+%     \(X\) soddisfa il primo assioma di numerabilità se \(\forall x \in X\)
+%     esiste una famiglia numerabile \(U_n\) di intorni di \(x\) tale che
+%     \(\forall A\) aperto \(\exists n : U_n \subseteq  A\) 
+%     \textbf{Sistema di intorni}
+% \end{definition}
+\begin{theorem}
+    Tra due \textbf{spazi metrici} \(X, d\) e \(Y, d'\), \(F : X \to  Y\) è
+    continua se e solo se per ogni successione convergente \(x_{n} \to x \in X
+    \implies f(x_{n}) \to f(x) \in Y\) 
+\end{theorem}
+
+\begin{proof}
+    Supponiamo \(f : X \to  Y\) continua in senso topologico, allora \(\forall
+    A\) aperto in \(Y, f^{-1}(A)\) è aperto in \(X\). Sia \(x_{n} \to x \in X\)
+    una successione convergente in \(X\). 
+    Sia \(A\) tale che \(f(x) = y \in  A\). \(f^{-1}(A) = B\) aperto e contiene
+    \(x\). \(\exists  \overline{n} : \forall n \ge \overline{n}, x_{n} \in B\)
+    ma quindi \(f(x_{n}) = y_{n} \in A\) per cui \(f(x_{n}) \to f(x)\).
+
+    Viceversa, supponiamo di avere uno spazio metrico \(X, d\) e uno spazio \(Y,
+    d'\), supponiamo che \(\forall x_{n} \to  x \implies f(x_{n}) \to  f(x)\) e
+    cerchiamo di dimostrare che allora è continua in senso topologico. A tale
+    scopo dimostriamo che la controimmagine di un chiuso di \(Y\) è sempre un
+    chiuso di \(X\). Sia quindi \(C \subseteq Y\) chiuso. Prendiamo una
+    successione di elementi \(x_{n} \in  f^{-1}(C)\) che convergono \(x_{n} \to
+    x\), dobbiamo dimostrare che \(x \in  f^{-1}(C)\), e questo significherebbe
+    che \(f^{-1}(C)\) contiene i suoi punti di accumulazione ed è quindi chiuso.
+    Sappiamo che \(f(x_{n}) \to f(x)\). Quindi, dato che \(C\) è chiuso \(f(x)
+    \in C \implies x \in f^{-1}(C)\) quindi \(f\) è continua. 
+\end{proof}
+
+\begin{example}
+    Nella \textbf{topologia discreta} sono convergenti solo le successioni
+    definitivamente costanti, infatti se prendiamo come aperto il punto \(x\),
+    una successione convergente deve definitivamente avere punti in \(\{x\} \),
+    quindi è definitivamente costante.
+\end{example}
+\begin{example}
+    Sia \(\mathbb{R}\) con la topologia dove una base di aperti sono gli
+    intervalli del tipo \([a , b)\). 
+    Gli aperti sono quindi del tipo \(A = \bigcup_{i \in  I} [a_{i}, b_{i})\). È
+    una topologia più fine di quella euclidea perché ogni intervallo \((a,
+    b)\) è ottenibile come unione
+    \[
+        \bigcup_{n \in  \mathbb{N}} \big[a + \frac{1}{n}, b\big) = (a, b)
+    \]
+\end{example}
+
+\section{Funzione Lipschitziana}
+\begin{definition}
+    Dati due spazi metrici \((X, d)\) e \((Y, d')\), una funzione \(F: X \to Y\)
+    Si dice \textbf{Lipschitziana} se 
+    \[
+        \forall x, x' \in X \,\, \exists 0 < K \in \mathbb{R} : d'(f(x), f(x'))
+        \le K d(x, x')
+    \]
+\end{definition}
+
+\begin{proposition}
+    Sia \(F : X \to Y\) una funzione Lipschitziana, allora \(F\) è continua
+\end{proposition}
+\begin{proof}
+    Sia \(x_{n} \to x\) una successione in \(X\) convergente a \(x \in X\).
+    Allora \(d'(f(x), f(x_{n})) \le Kd(x, x_{n}) \to 0\) quindi \(f(x_{n}) \to
+    f(x)\).
+\end{proof}
+
+\begin{example}[Distanza da un insieme]
+    Sia \(\varnothing \neq C \subseteq  X\), e sia \(f_C : X \to \mathbb{R}\)
+    definita da \[f_C(x) = \inf_{c \in C} d(x, c) =: d(x, C)\] 
+    Ossia \(f_C\) definisce la distanza dall'insieme \(C\).
+
+    Ora notiamo che, per la disuguaglianza triangolare,
+    \[
+        \forall c \in  C, \forall x, y \in X, f_C(x) \le d(x, c) \le d(x, y) +
+        d(y, c)
+    \]
+    Sostituendo a \(d(y, c)\) il suo estremo inferiore otteniamo che
+    \[
+        f_C(x) \le d(x, y) + f_C(y)
+    \]
+    Da cui
+    \[
+        |f_C(y) - f_C(x)| = \le d(x, y), \forall x, y \in X
+    \]
+    Quindi \(f_C\) è una funzione Lipschitziana con \(K = 1\), quindi è una
+    funzione continua
+\end{example}
+
+\begin{proposition}
+    \[
+        \overline{C} = \{x \in X : f_C(x) = 0\} 
+    \]
+\end{proposition}
+\begin{proof}
+    Chiamando l'insieme alla destra \(K\):
+\begin{itemize}[label = --]
+    \item[\(\subseteq  \) ] \(K\) è chiuso perché è la controimmagine di \(\{0\} \subseteq
+        \mathbb{R}\), che è chiuso. Inoltre \(C \subseteq  K\) perché se \(c \in
+        C\) allora \(d(c, c) = 0\). Quindi \(\overline{C} \subseteq  K\) 
+    \item[\(\supseteq  \) ] Prendiamo un elemento \(s \in \overline{C}\), quindi esiste una
+        successione convergente \(c_n \to  s\) ossia \(d(c_n, s) \to s\) quindi
+        l'estremo inferiore della distanza è \(0\), ossia \(\overline{C}
+        \subseteq  K\) 
+\end{itemize}
+\end{proof}
+
+\begin{proposition}
+    In uno spazio metrico ogni punto è chiuso, infatti la controimmagine di
+    \(0\) della funzione distanza \(d(x, y)\) con \(x\) fissato è \(\{x\}\) che
+    è quindi chiuso.
+
+    Dato che ad esempio in \(\mathbb{R}\) con la topologia dove gli aperti sono del
+    tipo \((-\infty, a)\) i punti non sono chiusi, gli spazi topologici sono di
+    più degli spazi metrici.
+\end{proposition}
+\begin{example}
+    Sia \(\mathbb{R}\) con la topologia \textbf{cofinita}. Dimostrare che
+    \textbf{non è metrizzabile} (anche se i punti sono chiusi).
+
+    Hint: notare che non è \(T_{2}\) 
+\end{example}
+
+\begin{definition}
+    Un'applicazione \(f: X \to Y\), con \(X, Y\) spazi topologici si dice
+    \textbf{aperta} se
+    \[
+        \forall A \subseteq  X \text{aperto}, f(A) \text{ è aperto }
+    \]
+    e similmente si dice \textbf{chiusa} se
+    \[
+        \forall A \subseteq  X \text{chiuso}, f(A) \text{ è chiuso }
+    \]
+\end{definition}
+\begin{proposition}
+    Ogni omeomorfismo è aperto e chiuso
+\end{proposition}
+\begin{proof}
+    Sia \(f: X \to Y\) omeomorfismo da \(X\) a \(Y\). Sia \(g := f^{-1}\)
+    Preso \(A\) aperto di \(X\), \(g(f(A)) = A\) e quindi \(g^{-1}(A) = f(A)\)
+    Ossia la controimmagine di \(A\) della funzione inversa di \(f\) è
+    l'immagine attraverso \(f\) di \(A\). Ma dato che \(g\) è continua, \(f(A)\)
+    è aperto. Per la stessa ragione la funzione è anche chiusa.
+\end{proof}
+Anzi
+\begin{proposition}
+    \(f: X \to Y\) continua e biettiva allora è un omeomorfismo se e solo se è
+    aperta (oppure chiusa).
+\end{proposition}
+\begin{proof}
+    Simile a prima
+\end{proof}
+
+\section{Costruzioni}
+\subsection{Sottospazi topologici}
+\begin{definition}[Topologia Indotta]
+Sia \(X\) uno spazio topologico, e \(S \subseteq  X\). Per indurre una topologia
+su \(S\) dichiariamo aperti di \(S\) gli insiemi \(A \cap  S\), con A aperto di
+\(X\). Tale topologia viene chiamata \textbf{topologia indotta}
+\end{definition}
+\begin{proof}[Buona definizione] Controlliamo le proprietà della topologia:
+\begin{enumerate}[label = \arabic*)]
+    \item \(\varnothing \cap S = \varnothing \in \tau_S\), \(X \cap  S = S \in
+        \tau_S\) 
+    \item \(\bigcup_{i \in I} (A_{i} \cap S) = \left(\bigcup_{i \in  I}
+            A_{i}\right) \cap S\) 
+    \item \((A_{1}\cap S) \cap (A_{2} \cap S) = (A_{1} \cap A_{2}) \cap S\) 
+\end{enumerate}
+Quindi le proprietà della topologia sono verificate
+\end{proof}
+
+\begin{proposition}
+    I chiusi di \(S\) sono le intersezioni di chiusi di \(X\) con \(S\) 
+\end{proposition}
+\begin{proof}
+    \(S - (S \cap A) = S \cap  (X - A)\) 
+    Con \(A\) aperto di \(X\) 
+\end{proof}
+\begin{example}
+    Sia \(S_r^{n}\) la sfera \(n\)-dimensionale  di raggio \(r\) 
+    \[
+        S_r^{n} = \{\mathbf{x} \in \mathbb{R}^{n+1} : \|\mathbf{x}\| = r\}   
+    \]
+    Ha una struttura di spazio topologico.
+\end{example}
+
+Ora dopo aver definito la topologia indotta su \(S \subseteq X\), consideriamo
+la funzione \(i_S : S \to  X\) l'inclusione. L'inclusione è continua. Infatti
+preso \(A \subseteq  X\) aperto, \(i_S^{-1}(A) = S \cap  A\) che è un aperto
+di \(S\), per cui \(i_S\) è continua.
+
+In particolare \(\tau_S\) è la topologia \textbf{meno fine} su \(S\) che rende
+\(i_S\) continua
+
+\begin{proposition}[Proprietà Universale]
+    Siano \(X\) e \(Y\) spazi topologici, si consideri una funzione \(F : X \to
+    S\), con \(S \subseteq Y \) un sottospazio e sia \(i_S : S \to Y\) l'inclusione.
+
+    Allora \(F\) è continua se e solo se \(i_S \circ F : X \to  Y\) è continua
+\end{proposition}
+\begin{tikzcd}
+    X \arrow[r, "i_S \circ F"]  \arrow[rd, "F"] & Y \\
+& S \arrow[u, "i_S", hook]
+\end{tikzcd}
+
+\begin{proof}\( \) 
+\begin{itemize}[label = --]
+    \item[\(\implies \) ] Se \(F\) è continua allora \(i_S \circ
+        F \) è continua, perché \(i_S\) è continua
+    \item[\(\impliedby  \) ] Se \(i_S \circ F\) è continua, sia \(A \cap S\) un aperto di
+        \(S\), con \(A\) aperto di \(Y\), allora \(F^{-1}(A \cap S) = \{x \in X
+        : F(x) \in A \cap S\} = \{x \in X : F(x) \in A\} = F^{-1}(A) = {(i_S
+    \circ F)}^{-1}(A)\) che è aperto perché controimmagine di un aperto
+        tramite funzione continua
+\end{itemize}
+\end{proof}
+\begin{corollary}
+    Sia \(F : X \to Y\) e \(S \subseteq X \), \(T \subseteq Y \) sottospazi tali
+    che \(F(S) \subseteq T \). Allora \(F \text{ è continua } \implies  F|_S \text{ è
+    continua}\).
+\end{corollary}
+\begin{tikzcd}
+X \arrow[r, "F"]  & Y \\
+S \arrow[r, "F\vert_S"'] \arrow[u, "i_S", hook]       &  T \arrow[u, "i_T", hook]
+\end{tikzcd}
+\begin{proof}
+    Sia \(F\) continua, allora \(i_T \circ F|_S = F \circ i_S\) è continua
+    perché composizione di funzioni continue. Ma allora per la proprietà
+    universale anche \(F|_S\) è continua
+\end{proof}
+
+\begin{proposition}
+    Sia \(S \subseteq Y \subseteq X  \). Da X indurre una topologia su \(Y\) e
+    su \(S\). È indifferente prendere la topologia indotta su \(Y\) e
+    indurla su \(S\).
+\end{proposition}
+\begin{proof}
+    \(\tau_S = \{U = A \cap  S, \text{ a aperto di \(X\)  } \} \) ma quindi ogni
+    aperto di \(S\) è della forma \(U = A \cap  S = (A \cap  Y) \cap  S\), dove
+    \(A \cap  Y\) è un aperto di \(Y\). Viceversa se \(W\) è indotto da \(Y\)
+    allora \(W = B \cap S\) con \(B\) aperto di \(Y\), quindi \(W = (A \cap Y)
+    \cap S\) con \(A\) aperto di \(X\) ma \(S \subseteq Y \) quindi \(W = A \cap
+    S\) 
+\end{proof}
+
+\begin{remark}
+    Sia \(\varnothing \neq A \subseteq X \) un aperto. La topologia indotta è
+    \(\tau_A = \{A \cap  A', \text{ \(A'\) aperto di \(X\)  }\} \) ma quindi
+    ogni aperto è intersezione di due aperti di \(X\), che è quindi ancora
+    aperto di \(X\), quindi \textbf{tutti gli aperti di \(A\) sono gli aperti
+        \(A'\) di \(X\) tali che \(A' \subseteq A  \) }. La stessa osservazione
+        vale anche per i chiusi.
+\end{remark}
+
+\begin{proposition}
+    Supponiamo di avere \(S \subseteq Y \subseteq X  \). Siano
+    \(\overline{S}^{X}\) e \(\overline{S}^{Y}\) rispettivamente i più piccoli
+    chiusi di \(x\) e di \(Y\) contenenti \(S\).
+    \textbf{Allora} \(\overline{\overline{S}^{Y}}^{X} = \overline{S}^{X}\) 
+\end{proposition}
+\begin{proof}
+    Una inclusione è ovvia: \(\overline{S}^{X} \subseteq
+    \overline{\overline{S}^{Y}}^{X} \) perché \(S \subseteq \overline{S}^{Y} \).
+
+    Viceversa sia \(x \in \overline{\overline{S}^{Y}}^{X}\). Allora \(x \in
+    \overline{S}^{X} \iff A \cap S \neq \varnothing\) per ogni \(A \ni x\) aperto di
+    \(X\). Notare però che \(A \cap \overline{S}^{Y} \neq \varnothing\) Sia
+    quindi \(y \in  A \cap  \overline{S}^{Y}\) e in particolare \(y \in Y\)
+    quindi \(y \in A \cap Y = B\) che è un aperto di \(Y\) ma quindi \(B \cap  S
+    \neq \varnothing\) e allora \(A \cap S \neq \varnothing\).
+\end{proof}
+
+\begin{proposition}
+    Sia \(\varnothing \neq S \subseteq X \), con \(X\) spazio topologico. Allora
+    Sia \(D \subseteq Y \subseteq X  \) con \(D\) denso in \(Y\), \(Y\) denso in
+    \(X\) allora \(D\) è denso in \(X\). Un insieme \(A \subseteq X \) si dice
+    denso se \(\overline{A}^{X} = X\).
+\end{proposition}
+\begin{proof}
+    Per ipotesi \(\overline{D}^{Y} = Y\) e \(\overline{Y}^{X} = X\) ma allora
+    \(\overline{D}^{X} = \overline{\overline{D}^{Y}}^{X} = \overline{Y}^{X} =
+    X\) quindi \(D\) è denso in \(X\) 
+\end{proof}
+
+
+\begin{example}
+    Sia \(S^{n}(r)\) la sfera n-dimensionale di raggio \(r\).
+
+    \(\implies  S^{n}(r)\) omeomorfa a \(S^{n}(r'), \forall r, r' > 0\) 
+\end{example}
+\begin{proof}
+    Dimostriamo che \(S^{n}(r) \equiv S^{n}(1), \forall r > 0\). Sia \(F_\rho :
+    \mathbb{R}^{n+1} \to  \mathbb{R}^{n+1}\) tale che \(F(x) = \rho x\), con
+    \(\rho > 0\). Notiamo che \(d(F_\rho (x), F_\rho(y)) = d(\rho x, \rho y) =
+    \| \rho x, \rho y\| = \rho d(x, y)\) quindi è (lineare) Lipschitziana e continua.
+    Inoltre \(F_\rho ^{-1} = F_{\rho ^{-1}}\). A questo punto per restrizione
+    possiamo dire che anche \(F_r|_{S(1)} : S(1) \to S(r)\) è continua, e dato
+    che anche la sua inversa è continua allora è un omeomorfismo.
+\end{proof}
+
+\subsection{Topologia Prodotto}
+Provando a definire una topologia sull'insieme \(X \times  Y\) iniziamo
+ipotizzando come aperti gli insiemi del tipo \(A \times  B\), con \(A\) aperto
+in \(X\) e \(B \) aperto in \(Y\).
+\begin{enumerate}[label = \arabic*)]
+    \item \(\varnothing \times  \varnothing = \varnothing\) aperto
+    \item \(X \times Y\) aperto
+    \item \((A_{1} \times B_{1}) \cap (A_{2} \times B_{2}) = (A_{1} \cap A_{2})
+        \times (B_{1} \cap B_{2})\) è aperto
+\end{enumerate}
+Tuttavia l'unione di due insiemi definiti aperti in questo modo non è
+necessariamente un prodotto di aperti. Dobbiamo quindi dire che gli insiemi \(A
+\times B\) sono una \textbf{base} della topologia.
+
+\begin{definition}[Topologia Prodotto]
+    Dati due spazi topologici \(X^{\tau_X}\) e \(Y^{\tau_Y}\). Diamo
+    sull'insieme \(X \times Y\) una struttura di spazio topologico dichiarandone
+    gli aperti tutti gli insiemi del tipo
+    \[
+        A = \bigcup_{i \in  I} A_{i} \times  B_{i}\,\,,\,A_{i} \text{ aperto di
+        \(X\) }, B_{i} \text{ aperto di \(Y\)  }
+    \]
+    Ossia i prodotti di aperti sono una \textbf{base della topologia}.
+\end{definition}
+
+\begin{example}
+    In \(\mathbb{R}^2\) abbiamo adesso due modi di definire una topologia: con
+    la topologia prodotto (\(\mathbb{R}^2 = \mathbb{R} \times  \mathbb{R}\)) e
+    anche la topologia indotta dalla metrica euclidea. Sono la stessa topologia?
+
+    Sì, perché usando la metrica del massimo, che è equivalente alla metrica
+    euclidea, dà origine ad una base di aperti costituita da quadrati. Essendo
+    che la topologia prodotto contiene tutti i rettangoli, \textbf{la topologia
+    prodotto è più fine della topologia euclidea}. Viceversa prendiamo che base
+    della topologia prodotto i prodotti di rettangoli prodotti di intervalli.
+    Ogni rettangolo si può semplicemente scrivere come unione di quadrati, ossia
+    elementi della topologia indotta dalla metrica del massimo. Quindi anche
+    \textbf{la topologia euclidea è più fine della topologia prodotto}.
+\end{example}
+
+\begin{theorem}
+    Siano \(\pi_X\) e \(\pi_Y\) le proiezioni \(\pi_X : X \times Y \to X, (x, y)
+    \mapsto x\) e \(\pi_Y : X \times Y \to Y, (x, y) \mapsto y\). Allora
+    \(\pi_X\) e \(\pi_Y\) sono continue e la topologia \(\tau_{X \times Y}\) è
+    la topologia meno fine che rende continue le due proiezioni.
+\end{theorem}
+\begin{proof}
+    Sia \(A\) aperto di \(X\), \(\pi_X^{-1}(A) = A \times Y\) che è aperto in
+    \(X \times Y\) perché elemento della base.
+    Similmente per \(\pi_Y\).
+
+    Se \(\pi_X\) e \(\pi_Y\) sono continue allora \(A \times Y\) e \(X \times
+    B\) con \(A\) aperto di \(X\)  e \(B\) aperto di \(Y\) devono essere aperti,
+    ma quindi anche \((A\times Y) \cap (X \times B) = A \times B\) deve essere
+    aperto.
+\end{proof}
+
+\begin{proposition}[Proprietà Universale]
+    Sia \(G : Z \to (X \times Y)\) allora \(G\) è continua se e solo se \(G_{1}
+    = \pi_X \circ G\) e \(G_{2} = \pi_Y \circ G\) sono continue.
+\end{proposition}
+
+\begin{tikzcd}
+    Z \arrow[r, "F"] & X \times Y
+\end{tikzcd}
+
+\begin{proof}
+    Una implicazione è ovvia perché se \(G\) è continua allora lo sono anche
+    \(G_{1}\) e \(G_{2}\) perché composizione di funzioni continue.
+
+    Viceversa siano \(G_{1}\) e \(G_{2}\) continue e siano \(A\) aperto di \(X\)
+    e \(B\) aperto di \(Y\). Allora \(sia z \in G^{-1}(A \times B)\) quindi
+    \((G_{1}(z), G_{2}(z)) \in A \times B\) ma quindi \(z \in  G_{1}^{-1}(A)
+    \cap G_{2}^{-1}(B)\) che è intersezione di aperti quindi è aperta.
+    A questo punto la controimmagine di un generico aperto \(U\) di \(X \times
+    Y\) è \(G^{-1}(U) = \bigcup_{i \in I} (A_{i}\times B_{i}) = \bigcup_{i \in
+    I} G^{-1}(A_{i} \times B_{i})\) che è unione di aperti quindi aperta.   
+\end{proof}
+
+\begin{remark}
+    Se \(\mathcal{B}_X\) è una base della topologia di \(X\) e \(\mathcal{B}_Y\)
+    è una base della topologia di \(Y\), allora anche solo \(\{U_{i} \times
+    K_{i}\}, U_{i} \in  \mathcal{B}_X, K_{i} \in  \mathcal{B}_Y\) è una base
+    della topologia prodotto su \(X \times  Y\) 
+\end{remark}
+
+Ora fissiamo un \(\overline{y} \in Y\), denotando l'insieme \(\{(x, y) \in X
+\times Y : y = \overline{y}\} \) con \(X \times \{\overline{y}\}  \subseteq X
+\times Y \). Similmente denotiamo anche \(\overline{x} \times Y \). Notare che
+se \(\overline{y}\) è chiuso allora \(X \times \overline{y} =
+\pi_Y^{-1}(\overline{y})\) quindi è chiuso.
+\begin{proposition}
+    Consideriamo la funzione \(\rho : X \to X \times \overline{y}; x \mapsto (x,
+    \overline{y})\). È un omeomorfismo.
+\end{proposition}
+\begin{proof}
+    Usando la proprietà universale, \(\pi_X \circ \rho : X \to X\) è l'identità,
+    quindi è continua; \(\pi_Y \circ \rho : X \to Y\) è costante (sempre
+    \(\overline{y}\)) perciò è continua. Ne concludiamo che \(\rho\) è continua.
+    Ha come inversa la proiezione quindi ha inversa continua.
+\end{proof}
+
+\begin{proposition}
+    Le funzioni
+\begin{itemize}[label = --]
+    \item \(s: \mathbb{R}\times \mathbb{R} \to \mathbb{R}; (x, y) \mapsto x+y\)
+    \item \(m: \mathbb{R}\times \mathbb{R} \to \mathbb{R}; (x,y) \mapsto xy\) 
+    \item \(\rho: \mathbb{R}^{+} \to \mathbb{R}^{+}; x \mapsto \frac{1}{x}\) 
+\end{itemize}
+sono continue
+\end{proposition}
+
+\begin{proposition}
+    Siano \(f, g: X \to \mathbb{R}\) continue, allora \(f+g\) e \(fg\) sono
+    continue. Se \(h: X \to \mathbb{R}^{+}\) è continua, allora \(\frac{1}{h}\)
+    è continua
+\end{proposition}
+
+\begin{proof}
+    Consideriamo la funzione continua per proprietà universale \(F: X \to
+    \mathbb{R}^2; x \mapsto (f(x),
+    g(x))\) e la componiamo con \(s\) e \(m\). Similmente componiamo \(h\) con
+    \(\rho\) per ottenere l'ultimo risultato.
+\end{proof}
+
+\begin{proposition}
+    Supponiamo di avere uno spazio metrico \(X\) con distanza \(d: X\times X \to
+    \mathbb{R}\). Vediamo se la distanza è una funzione continua.
+\end{proposition}
+\begin{proof}
+    Consideriamo le controimmagini degli intervalli \(-\infty, a\) e \(a,
+    \infty\). Si chiama \textbf{sottobase} perché l'intersezione finita dà una
+    base.
+\begin{itemize}[label = --]
+    \item \(d^{-1}(-\infty, a)\). Un elemento nella controimmagine è una coppia
+        \((x, y) \in X\times X\)  tale che \(d(x,y) = d_{0} < d\). Vogliamo dire
+        che esiste un aperto \(W\) che contiene \((x,y)\) e tale che \(W
+        \subseteq d^{-1}(-\infty,a) \). Sia \(\varepsilon = \frac{b-b_{0}}{3}\),
+        consideriamo \(D(x, \varepsilon) \times D(y, \varepsilon)\) e prendiamo
+        un punto \((x', y')\) in questo sottoinsieme. A questo punto \(d(x',
+        y')\le d(x', x) + d(x, y') \le d(x',x) + d(x,y)+d(y,y') \le
+        \frac{2}{3}(b-b_{0}) + b_{0} < b\) quindi è incluso in
+        \(d^{-1}(-\infty,a)\) 
+    \item % TODO
+\end{itemize}
+\end{proof}
+
+\begin{proposition}
+    Le proiezioni \(\pi_X\) e \(\pi_Y\) sono aperte (notare che generalmente non
+    sono chiuse) 
+\end{proposition}
+\begin{example}
+    Sia \(I = \{xy=1\} \subseteq \mathbb{R}^2\). Mostrare che è chiusa ma che ha
+    proiezione non chiusa.
+
+    È chiusa perché controimmagine di \(1\) (chiiuso) rispetto a \(f: (x, y) \mapsto xy\)
+    che è continua. Tuttavia \(\pi_X(I) = \mathbb{R} \smallsetminus \{0\} \)
+    poiché \(\forall x \in \mathbb{R} \smallsetminus \{0\}, x \cdot \frac{1}{x}
+    = 1\) ma 0 non ha inverso moltiplicativo.
+\end{example}
+
+\begin{definition}
+    Su \((X, d) \times (Y, d')\) vogliamo aggiungere una metrica.
+\begin{itemize}[label = --]
+    \item \(d_\infty((x,y), (x', y')) = \max(d(x,x'), d'(y', y'))\) 
+    \item \(d_{1}((x,y), (x', y')) = d(x, x') + d'(y, y')\) 
+    \item \(d_{2}((x,y),(x', y')) = \sqrt{d{(x,x')}^2+d'{(y,y')}^2}\) 
+\end{itemize}
+Sono metriche equivalenti.
+\end{definition}
+\begin{proposition}
+    \(\mathbb{R}^{n+1} - \mathbf{0} \approx S^{n}\times \mathbb{R}\)
+    omeomorfismo
+\end{proposition}
+\begin{proof}
+    Sia \(F: v \mapsto (\frac{v}{\|v\|}, \|v\|)\). È continua per la proprietà
+    universale da \(\mathbb{R}^{n+1} - \mathbf{0}\) a \(\mathbb{R}^{n+1}\) e per l'altra
+    proprietà anche nel nostro sottospazio. Inoltre ha inversa \((y, \rho)
+    \mapsto \rho y\) continua in quanto prodotto di proiezioni (che sono
+    continue).
+\end{proof}
+
+\begin{proposition}
+    Sia \(C\) chiuso in \(X\) e \(D\) chiuso in \(Y\). Allora \(C \times D\) è
+    chiuso in \(X\times Y\) 
+\end{proposition}
+\begin{proof}
+    (Vedasi figura~\ref{fig:chiuso-prodotto}) \(X \times Y - (C \times D) = (X
+    - C) \times Y \cup (X\times (Y - D))\) 
+\end{proof}
+\begin{figure}[ht]
+    \centering
+    \tiny{\incfig[.5]{chiuso-prodotto}}
+    \caption{Prodotto di chiusi è chiuso}
+    \label{fig:chiuso-prodotto}
+\end{figure}
+\begin{proposition}
+    Sia \(D_{1} \subseteq X \) denso in \(X\)  e \(D_{2} \subseteq Y \) denso in
+    \(Y\). Allora \(D_{1} \times D_{2}\) è denso in \(X \times Y\) 
+\end{proposition}
+\begin{proof}
+    Dobbiamo dimostrare che \(\overline{D_{1} \times D_{2}} = X \times Y\),
+    ossia \(\forall A \subseteq X \times Y \) aperto, \(A \cap (D_{1} \times
+    D_{2}) \neq \varnothing\) 
+    L'aperto \(A\) contiene un elemento \(A_{1} \times A_{2} \subseteq A \) tale
+    che \(A_{1}\) è aperto di \(X\) e \(A_{2}\) è aperto di \(Y\) poiché tali
+    aperti costituiscono una base della topologia prodotto.
+    % TODO
+\end{proof}
+\begin{example}
+    Poiché \(\mathbb{Q}\) è denso in \(\mathbb{R}\), \(\mathbb{Q}^{n}\) è denso
+    in \(\mathbb{R}^{n}\) 
+\end{example}
+
+Ora supponiamo di avere \(X\times X\) con la topologia prodotto rispetto a una
+topologia su \(X\). Consideriamo lo spazio diagionale \(\Delta \subseteq X\times
+X = \{(x, x) \forall x in X\} \) 
+\begin{proposition}
+    \(\Delta\) è omeomorfo a \(X\)
+\end{proposition}
+\begin{proof}
+    Consideriamo la funzione \(X \to \Delta; x \mapsto (x, x)\) e la sua inversa
+    \(\Delta \to X; (x, x) \mapsto x\). Sono entrambe continue per la continuità
+    della proiezione, dell'identità e per la proprietà universale della
+    topologia prodotto.
+\end{proof}
+Se invece si considera la diagonale di \(X\times X\) con due topologie diverse,
+la diagonale ha poi una topologia che contiene entrambe, ed è la più piccola
+topologia con questa proprietà.
+\begin{example}
+    Sia \(\mathbb{R}_e\) con l'euclidea e \(\mathbb{R}_C\) con la cofinita.
+    Consideriamo ora \(\Delta_\mathbb{R}\subseteq \mathbb{R}_e \times \mathbb{R}_C \).
+    Gli aperti della cofinita sono anche aperti nella topologia euclidea. Di
+    conseguenza \(\Delta_ \mathbb{R}\) ha la topologia euclidea.
+\end{example}
+\begin{example}
+    Consideriamo \(S_{1} \times \mathbb{R}\) (figura~\ref{fig:cilindro-infinito})
+\end{example}
+\begin{figure}[ht]
+    \centering
+    \incfig[.6]{cilindro-infinito}
+    \caption{\(S_{1}\times \mathbb{R}\) proiettato su \(S_2\) meno i poli}
+    \label{fig:cilindro-infinito}
+\end{figure}
+\begin{example}
+Sia \(\mathbb{R}_{\aleph_0}\) con la topologia dove i chiusi sono \(\mathbb{R},
+\varnothing\) e i sottoinsiemi numerabili o finiti di \(\mathbb{R}\). L'intersezione di
+arbitrari insiemi numerabili è finita o numerabile, quindi ok. L'unione di due
+numerabili deve essere ancora numerabile, lo è (prendendone uno e uno). Non è
+confrontabile con la topologia euclidea, infatti \(\mathbb{Q}\) è chiuso per la
+conumerabile, ma non per la euclidea, e l'intervallo \([0, 1]\) il contrario. La
+topologia sulla diagonale di \(\mathbb{R}_{\aleph_0} \times \mathbb{R}_e\) è la
+topologia dove ogni aperto è intersezione di aperti di \(\mathbb{R}_e\) e
+\(\mathbb{R}_{\aleph_0}\) 
+\end{example}
+
+
+
+\subsection{Topologia Quoziente}
+Per definire la topologia quoziente, consideriamo come costruire una
+topologia su un insieme che è codominio di una funzione suriettiva.
+\begin{definition}[Topologia Quoziente \-- Funzione Suriettiva]
+
+Sia
+\(f: X \twoheadrightarrow Z\) suriettiva. Dichiariamo su \(Z\) la topologia più
+fine che rende \(f\) continua, ossia la topologia dove tutti e soli gli insiemi
+tali che la loro controimmagine sia aperta, ossia
+\[
+    \tau_f = \{A \subseteq Z : f^{-1}(A) \text{ aperto di \(X\)  }\}
+\]
+\end{definition}
+Verifichiamo che questa sia effettivamente una topologia:
+\begin{enumerate}[label = \arabic*)]
+    \item \(f^{-1}(\varnothing) = \varnothing\) aperto di \(X \implies
+        \varnothing\) aperto di \(Z\) 
+    
+        \(f^{-1}(Z) = X\) aperto di \(X \implies Z\) aperto di \(Z\) 
+    \item Supponiamo \(\{A_{i}\}_{i in I} \subseteq \tau_Z \implies
+        f^{-1}(A_{i}) \text{ aperti di \(X\)} \implies\)
+
+        \(\implies \bigcup_{i \in  I}
+        f^{-1}(A_{i}) \text{ (aperto di \(X\))}= f^{-1}{\left( \bigcup_{i \in
+        I} A_{i}\right)} \implies \bigcup_{i \in  I}A_{i} \) aperto di \(Z\) 
+    \item \(A_{1}, A_{2}\) aperti di \(Z\) \(\implies f^{-1}(A_{1}) \cap
+        f^{-1}(A_{2}) = f^{-1}(A_{1} \cap A_{2})\) è aperto di \(X\) perché
+        intersezioni di aperti di \(X\), quindi \(A_{1}\cap A_{2} \in \tau_Z\) 
+\end{enumerate}
+\begin{remark}
+    Inoltre \(C\) chiuso \(\iff f^{-1}(C)\) chiuso, infatti:
+    \(C \text{ chiuso in \(Z\)} \iff Z-C \text{ aperto } \iff f^{-1}(Z - C)
+    \text{ aperto in \(X\) } \iff X - f^{-1}(C) \text{ aperto in \(X\)  }\)
+    ossia \(f^{-1}(C)\) chiuso in \(X\) 
+\end{remark}
+Tuttavia possiamo anche vedere la funzione suriettiva come una relazione di
+equivalenza, infatti consideriamo la relazione \(\sim\) su \(X\) definita da
+\[
+    x \sim x' \iff f(x) = f(x')
+\]
+Vediamo che questa è una relazione di equivalenza:
+\begin{itemize}[label = --]
+    \item Chiaramente \(x \sim x\) perché \(f(x) = f(x)\) 
+    \item \(x \sim x' \iff f(x) = f(x') \iff f(x') = f(x) \iff x' \sim x\) 
+    \item Se \(x \sim x'\) e \(x' \sim x''\) allora \(f(x) = f(x') = f(x'')\) da
+        cui \(f(x) = f(x'') \iff x \sim x''\) 
+\end{itemize}
+Viceversa se \(\sim\) è una relazione di equivalenza allora \(\pi : X \to
+X/\sim\) è una funzione suriettiva, quindi possiamo definire la topologia
+quoziente. In particolare possiamo quindi definire una topologia quoziente su un
+insieme solo avendo una relazione di equivalenza.
+
+\begin{definition}[Topologia Quoziente \-- Relazione di Equivalenza]
+    Sia \(\sim\) una relazione di equivalenza su \(X\). Dichiariamo su \(X/\sim\)
+    la topologia più fine che rende continua la proiezione \(\pi: X \to X/\sim\)
+\end{definition}
+
+\begin{definition}
+    Un sottoinsieme \(Y \subseteq X \) si dice \textbf{bilanciato} rispetto a una
+    funzione suriettiva \(f : X \twoheadrightarrow Z\) se
+    \[
+        \forall y \in Y, f^{-1}(f(y)) \subseteq Y 
+    \]
+\end{definition}
+\begin{proposition}
+    \(A \subseteq Z \) è aperto (chiuso) di \(Z\) se \(A\) è immagine di un
+    aperto (chiuso) bilanciato di \(X\) 
+\end{proposition}
+\begin{proof}
+    \(A\) aperto di \(Z \iff f^{-1}(A)\) aperto di \(X\), che è bilanciato per
+    costruzione della topologia, infatti \(ff^{-1}(A) = A\) perché \(f\) è
+    suriettiva.
+\end{proof}
+
+\begin{definition}
+    \(y : X_{\tau_X} \to  Y_{\tau_Y}\) è chiamata \textbf{identificazione} se
+    \(\tau_Y = \tau_y\) 
+\end{definition}
+\begin{example}
+    Sia \(X\times Y\) e consideriamo lo spazio \(X = \pi_X(X\times Y)\) immagine
+della proiezione (quindi suriettiva). Poiché \(\pi_X\) e \(\pi_Y\) sono aperte
+    \(\tau_{X \times Y|_{\pi_X}} = \tau_X\) 
+\end{example}
+\begin{proposition}
+    Siano \(f: X \to Y\) e \(g: Y \to Z\) suriettive, quindi \(h = gf\) è
+    suriettiva. Adesso possiamo costruire su Y una topologia \(\tau_f\) e su
+    \(Z\) la topologia \(\tau_h\), ma avendo construto una topologia su \(Y\)
+    ora possiamo controllare se \(\tau_h = {(\tau_f)}_g\) ossia se \textbf{la
+    composizione di identificazioni è una identificazione}
+\end{proposition}
+\begin{proof}
+    Sia \(U \subseteq \mathbb{Z} \) aperto in \((\tau_f)_g\), quindi
+    \(g^{-1}(U)\) è aperto in \(Y\), ossia \( g^{-1}(U) \in \tau_f\), ma quindi
+    \(f^{-1}g^{-1}(U) = h^{-1}(U)\) è aperto in \(X\), ma allora \(U \in
+    \tau_h\). Essendo tutte queste implicazioni dei se e solo se, vale anche il
+    viceversa, quindi \(\tau_h = {\tau_f}_g\) 
+\end{proof}
+\begin{tikzcd}
+    X_{\tau_X} \arrow[d, "f", two heads] \arrow[dr, "h"] & \\
+    Y_{\tau_f} \arrow[r, "g"] & Z
+\end{tikzcd}
+\begin{proposition}[Proprietà universale]
+    Dire che \(h = gf\) equivale a dire che è costante nella controimmagine di
+    \(Y\). Vale anche il viceversa.
+    
+    La proprietà universale dice che \textbf{\(g\) continua \(\iff h\)
+    continua}. Inoltre se \(h\) è aperta \(g\) è aperta e se \(h\) è chiusa,
+    \(g\) è chiusa.
+\end{proposition}
+\begin{proposition}[Stessa, ma con il termine identificazione]
+    Se \(f\) è continua ed è identificazione, le funzioni continue da \(Y\) a
+    \(Z\) sono in corrispondenza biunivoca con le funzioni continue da \(X\) a
+    \(Z\) che sono ottenute per composizione.
+\end{proposition}
+\begin{example}
+    Supponiamo di avere \(X\) e un suo sottoinsieme \(S \subseteq X\).
+    Consideriamo la relazione di equivalenza dove tutti gli elementi di \(S\)
+    collassano in uno solo. Quindi \(x \sim x' \iff x = x'\) oppure \(x \in S,
+    x' \in S\). Il risultato è che \(X / S= X - S \cup \{S\} \) 
+\end{example}
+\begin{example}
+    Sia \(D_C = \{(x,y) \in \mathbb{R}^2:x^2+y^2\le 1\} \). Consideriamo il
+    sottoinsieme \(\partial D_C = \overline{D} - \dot{D} \supseteq D_C \). È
+    quindi ovviamente \(S^{1} = \{(x,y) \in \mathbb{R}^2 : x^2+y^2 = 1\} \). Ora
+    consideriamo \(D_C / S^{1} = \dot{D}_C \cup \{S^{1}\} \). Intuitivamente è
+    omeomorfa a \(S^{2}\). Per dimostrarlo devo trovare una funzione continua da
+    \(D_C\) a \(S^{2}\) (vedasi figura~\ref{fig:esempio}). Dopo un po' di
+    calcoli si trova che la funzione è:
+    \[
+        (x, y) \mapsto (x, y -\sqrt{1- x^2 - y^2}) \mapsto (\alpha x, \alpha y,
+        -\sqrt{1 - x^2 - y^2})
+    \]
+    dove 
+    \[
+        \alpha = \sqrt{((\sqrt{1-x^2-y^2})(1-\sqrt{1-x^2-y^2}))}
+    \]
+    Notare che quando siamo sul bordo, ossia \(x^2+y^2=1\), allora \(\alpha =
+    0\) quindi i punti collassano sullo stesso punto (0,0,0)
+\end{example}
+\begin{figure}[ht]
+    \centering
+    \incfig[0.8]{esempio}
+    \caption{Esempio 6.11: Omeomorfismo tra \(D_C\) e \(S^{2}\) }\label{fig:esempio}
+\end{figure}
+\begin{example}
+    Vari attaccamenti del quadratino \([0,1] \times [0,1]\) in modi diversi
+    escono cilindro, Möbius, toro, piano proiettivo, otre di Klein
+\end{example}
+\begin{example}
+    Consideriamo lo spazio \(\mathbb{R}^{n+1} - \mathbf{O}\) e impostiamo una
+    relazione di equivalenza \(v\sim v' \iff \exists \lambda \in \mathbb{R} -
+    \mathbf{O} : \lambda v = v'\). Facilmente verificabile che è una relazione
+    di equivalenza perché partiziona in classi separate lo spazio, infatti solo
+    l'origine apparterrebbe a tutte le classi. Denotiamo
+    \[
+        P_ \mathbb{R}^{n} = \frac{\mathbb{R}^{n+1} - \mathbf{O}}{\sim }
+    \]
+    (Stessa cosa si può ovviamente fare anche con \(\mathbb{C}\)). In
+    \(\mathbb{R}\) dividiamo la
+    relazione di equivalenza in due parti:
+    \begin{align*}
+        \sim ^{+} : & v \sim^{+} v' &\iff \exists \lambda \in \mathbb{R}^{+}:v =
+        \lambda v' \\
+        \sim^{\pm} : & v\sim ^{\pm}v' &\iff \mathbf{x} = -\mathbf{x}
+    \end{align*}
+
+    Possiamo quindi vedere \(P_ \mathbb{R}^{n}\) come \(\frac{\mathbb{R}^{n+1} -
+    \mathbf{0}}{\sim^{+}} / \sim^{\pm} = S^{n} / \sim^{\pm}\) 
+
+\end{example}
+
+\begin{example}
+    Sia \(\mathbb{Q} \subseteq \mathbb{R} \) e consideriamo due relazioni di
+    equivalenza:
+\begin{enumerate}[label = \arabic*)]
+    \item \(x \sim^{1} y \iff x = y \text{ oppure } x, y \in  \mathbb{Q}\) 
+    \item  \(x \sim^{2} y \iff x - y \in  \mathbb{Q}\) 
+\end{enumerate}
+La seconda (o forse la prima) non è ``buona'' perché non è ``localmente'' come
+\(\mathbb{R}^{n}\), dove \textbf{localmente}, in genere vuol dire che ogni punto ha un
+intorno di \(\dots\) 
+
+\begin{enumerate}[label = \arabic*)]
+    \item Nella relazione \(\sim^{1}\), l'insieme risultante è \((\mathbb{R} -
+        \mathbb{Q}) \cup \{\mathbb{Q}\} \).
+
+        Dato che ogni punto irrazionale ha come controimmagine solo sé stesso,
+        tutti gli irrazionali sono chiusi, ma \(\pi ^{-1}(\{\mathbb{Q}\} ) =
+        \mathbb{Q}\) che quindi non è chiuso. In particolare la sua chiusura
+        deve essere tale che la controimmagine sia un chiuso di \(\mathbb{R}\)
+        che contiene \(\mathbb{Q}\), quindi è al minimo \(\mathbb{R}\), ma se
+        \(\pi ^{-1}(\overline{\{\mathbb{Q}\}}) = \mathbb{R}\) allora
+        \(\overline{\{\mathbb{Q}\} } = \mathbb{R}\), per cui \(\{\mathbb{Q}\} \)
+        è denso.
+    \item Nella relazione \(\sim^{2}\) invece gli elementi di \(\mathbb{R} /
+        \mathbb{Q}\) sono del tipo \(x + \mathbb{Q}\), tuttavia gli aperti di
+        questo insieme devono immagine di aperti bilanciati, ma gli
+        unici aperti bilanciati sono \(\varnothing, \mathbb{R}\) perché preso un
+        intervallo aperto \((a, b)\), \((a, b) + \mathbb{Q} = \mathbb{R}\). 
+        Di conseguenza la topologia su \(\mathbb{R} / \mathbb{Q}\)  è la
+        concreta (indiscreta)
+\end{enumerate}
+\end{example}
+
+\begin{example}
+    Sia \(C_n = \{(x, y) \in \mathbb{R}^2 : x + ny = 1\} \) al variare di \(n
+    \in \mathbb{Z}, n \ge 1\).
+\begin{enumerate}[label = \arabic*.]
+    \item Per quali valori di \(n\) \(\mathbb{R}^2 - ((C_n \cup C_{n+1}) \cap
+        C_{n+2})\) è aperto?
+
+        I vari \(C_n\) sono chiusi, perché controimmagine di \(1\) della
+        funzione \(f_n: (x,y) \mapsto x + ny\). Quindi intersezione e unione
+        finite rimangono chiusi, quindi il complementare è aperto.
+    \item Sia \(E = \cup_n C_n\). Dire se è \(E\) è chiuso.
+        
+        Ad esempio il punto (0,0) è punto di accumulazione, ma non è
+        nell'insieme, quindi \(E\) non è chiuso.
+\end{enumerate}
+\end{example}
+
+\begin{example}
+    Supponiamo di prendere in \(\mathbb{R}\) la topologia euclidea e la
+    topologia \(\tau'\) strettamente più fine di quella euclidea. Dire se
+    \(\mathbb{R}_{\tau'}\) e \(\mathbb{R}_e\) possono essere omeomorfi.
+\end{example}
+\begin{example}
+    Sia \(c_n = \{(x, y )  \in  \mathbb{R}^2: x^2+y^2 = n^2\} \) e \(d_n = \{(x,
+    y) \in  \mathbb{R}^2 : x^2 - y^2 = n^2\}\)
+\begin{enumerate}[label = \arabic*.]
+    \item Per quali \(n\) \(\mathbb{R}^2 - (c_n \cup d_n)\) è aperto?
+    \item \(E = \bigcup_{n} d_n \cup \bigcup_{n} c_n\) è chiuso?
+\end{enumerate}
+\end{example}
+
+\section{Assiomi di Separazione}
+\begin{definition}[Assioma di Separazione \(T_1\) ]
+    Uno spazio topologico \(X\) soddisfa l'assioma di separazione \(T_1\) se per
+    ogni coppia di punti \(P, Q \in  X\), con \(P \neq Q\) esiste un aperto
+    \(U\) tale che \(P \in  U\), \(Q \not\in  U\) 
+\end{definition}
+\begin{proposition}
+    \(X\) è \(T_{1}\) se e solo se ogni punto di \(X\) è chiuso
+\end{proposition}
+\begin{proof}
+    Se ogni punto di \(X\) è chiuso allora presi \(P, Q \in X\), \(P \neq Q\),
+    \(U = X \smallsetminus \{Q\}  \) è aperto, inoltre \(P \in U, Q \not\in U\).
+
+    Viceversa, se \(X\) è \(T_{1}\) allora mostriamo che \(Q \in X\) è chiuso.
+    Prendiamo quindi, per ogni altro punto \(P \in X\), un aperto \(U_P\) tale
+    che rispetti l'assioma di separazione, ossia \(P \in U_P, Q \not\in U_P\).
+    Allora \(\bigcup_{P \in X} U_P = X \smallsetminus \{Q\} \) è aperto, ma
+    quindi \(Q\) è chiuso.
+\end{proof}
+
+\begin{definition}[Assioma di Separazione \(T_2\) o di Hausdorff]
+    Uno spazio topologico \(X\) soddisfa l'assioma di separazione \(T_2\) o di
+    Hausdorff se per ogni coppia di punti \(P, Q \in  X\), con \(P \neq Q\)
+    esistono due aperti disgiunti \(U, V\) tali che \(P \in  U\), \(Q \in  V\).
+    Ossia
+    \[
+        \forall P, Q \in X, P \neq Q,\,\, \exists U \ni P, \,\exists V \ni Q : U \cap V = \varnothing
+    \]
+\end{definition}
+
+\begin{example}
+    Se \((X, d)\) è uno spazio metrico, allora è \(T_{2}\) 
+\end{example}
+
+\begin{example}[Spazio \(T_{1}\) non \(T_{2}\) ]
+    Sia \(X\) un insieme infinito con la topologia cofinita. È \(T_{1}\) perché
+    i punti sono chiusi, ma non è \(T_{2}\) perché due aperti si intersecano
+    sempre.
+\end{example}
+
+\begin{proposition}
+    Se \(X\) è \(T_{2}\) abbiamo unicità del limite di successioni.
+\end{proposition}
+
+\begin{proposition}
+    Se \(X\) è \(T_{2}\) allora \(S \subseteq X \) è \(T_{2}\). Inoltre se anche
+    \(Y\) è \(T_{2}\) allora \(X \times Y\) è \(T_{2}\) 
+\end{proposition}
+
+\begin{proposition}
+    \(X\) è \(T_{2}\) se e solo se la diagonale \(\Delta = \{(x, x) \forall x
+    \in X\} \subseteq X \times X \) è chiusa (con la topologia prodotto).
+\end{proposition}
+
+\begin{definition}[Assioma di Separazione \(T_3\) o Regolare]
+    Uno spazio topologico \(X\) che è \(T_{1}\)  soddisfa l'assioma di
+    separazione \(T_3\) e
+    viene detto anche \emph{regolare} se per ogni chiuso \(C \subseteq X\) e per ogni punto \(P \in  X\)
+    con \(P \not\in  C\) esistono due aperti disgiunti \(U, V\) tali che \(P \in
+    U\), \(C \subseteq V\).
+\end{definition}
+\begin{definition}[Assioma di Separazione \(T_4\) o Normale]
+    Uno spazio topologico \(X\) che è \(T_{1}\) soddisfa l'assioma di
+    separazione \(T_{4}\) e viene detto anche \emph{normale} se dati \(C_{1}\) e \(C_{2}\) chiusi e disgiunti,
+    esiste \(A_{1} \supseteq C_{1}  \) e \(A_{2} \supseteq C_{2} \) tali che
+    \(A_{1} \cap A_{2} = \varnothing\) con \(A_{1}\) e \(A_{2}\) aperti.
+\end{definition}
+
+\begin{example}
+    Uno spazio metrico \((X, d)\) è \(T_{3}\) e \(T_{4}\) 
+\end{example}
+
+\begin{example}[\(T_{2} \) non \( T_{3}\) ]
+    Sia \(X\) con una topologia \(\tau\) che lo rende \(T_{2}\). Se prendo su
+    \(X\) una topologia più fine rimane di Hausdorff, perché possiamo separare i
+    punti con gli stessi aperti di prima. Non è detto però che se per \(\tau\)
+    era \(T_{3}\) o \(T_{4}\) rimanga tale, perché aggiungiamo anche nuovi
+    chiusi.
+
+    Consideriamo \(\mathbb{R}_\text{S.Gius}\) con la topologia più fine che
+    include sia la euclidea che la conumerabile. Per l'osservazione precedente questo spazio è \(T_{2}\). Ora
+    consideriamo il chiuso (poiché numerabile) \(\mathbb{Q}\) e il punto
+    \(\sqrt{2}\); chiaramente \(\sqrt{2} \not\in \mathbb{Q}\).
+    Una base di aperti di \(\mathbb{R}_\text{S.Gius} \) è costituita dagli
+    insiemi del tipo \((a, b) \smallsetminus S\), dove \(S\) è una successione
+    al più numerabile, quindi ogni aperto \(A\) contenente il punto \(\sqrt{2}\)
+    contiene un elemento della base del tipo
+    \(A' := (\sqrt{2} - \varepsilon, \sqrt{2} + \varepsilon) \smallsetminus
+    S_{\sqrt{2}}\), con
+    \(\varepsilon \in \mathbb{R}\) e \(S_{\sqrt{2}}\) al più numerabile. Sia ora
+    \(a\) un razionale tale che \(a \in (\sqrt{2} - \varepsilon, \sqrt{2} +
+    \varepsilon)\). Possiamo essere certi dell'esistenza di un tale \(a\)  per la
+    densità di \(\mathbb{Q}\) in \(\mathbb{R}\) secondo l'euclidea. A questo
+    punto ogni aperto \(B\) contenente \(\mathbb{Q}\) contiene un elemento della base
+    del tipo \(B' := (a - \delta, a + \delta) \smallsetminus S_a\), dove \(\delta \in
+    \mathbb{R}\) e \(S\) è al più numerabile, perché \(B \ni a\). Considerando
+    adesso \(B \cap A\) abbiamo che \(A' \cap  B' \subseteq A \cap B \), ma \(A'
+    \cap B' = ((\sqrt{2} - \varepsilon, \sqrt{2} + \varepsilon) \cap (a -
+    \delta, a + \delta)) \smallsetminus (S_{\sqrt{2}} \cup S_a )\). Ora notiamo
+    che poiché \(a \in (\sqrt{2} - \varepsilon, \sqrt{2} + \varepsilon)\), \(a\)
+    appartiene all'intersezione dei due intervalli, ma poiché gli intervalli
+    sono aperti per l'euclidea, la loro intersezione è un aperto dell'euclidea e
+    poiché è non vuota, contiene un elemento della base di aperti dell'euclidea,
+    chiamiamo tale intervallo \((\alpha, \beta)\).
+    Inoltre notare che \(S := S_{\sqrt{2}} \cup S_a\) è al più
+    numerabile, perché unione di tali insiemi.
+    Quindi \(A' \cap B' = (\alpha, \beta) \smallsetminus S\) è non vuoto e di
+    conseguenza \(\mathbb{R}_\text{S.Gius} \) non è \(T_{3}\).
+\end{example}
+
+\begin{example}[\(T_{3}\) non \(T_{4}\) ]
+    v. Sernesi pag. 96
+\end{example}
+
+\begin{lemmao}[Lemma di Uryson]
+    Se \(X\) è \(T_{4}\) allora per ogni \(C_{1}\) e \(C_{2}\) chiusi e
+    disgiunti esiste una funzione continua \(f: X \to \mathbb{R}\) tale
+    che \(f(C_{1}) = 0\) e \(f(C_{2}) = 1\) 
+\end{lemmao}
+
+\section{Assiomi di Numerabilità}
+\begin{definition}[Primo assioma di numerabilità]
+    \(X\) soddisfa il primo assioma di numerabilità se 
+    \[
+        \forall P \in X \exists \{U_n\}_{n \in \mathbb{N}}
+    \]
+    dove \(\{U_n\}_{n \in \mathbb{N}} \) è un sistema di intorni numerabili tali
+    che \(U_n+1 \subseteq U_n \) per ogni \(n > 1\) naturale e \(\forall  A\)
+    aperto, con \(A \ni P\), \(\exists n \in \mathbb{N} : U_n \subseteq A \)
+
+    Si dice allora anche che \(X\) è I-numerabile
+\end{definition}
+
+\begin{example}
+    In uno spazio metrico, dato un punto \(P\), \(\{D(P, \frac{1}{n})\}_{n \in
+    \mathbb{N}} \) è un sistema numerabile di intorni.
+\end{example}
+
+\begin{definition}[X è Separabile]
+    \(X\) è detto \textbf{separabile} se
+    \[
+        \exists D \subseteq X, \text{ con \(D\) denso e numerabile }
+    \]
+\end{definition}
+\begin{example}
+    \(\mathbb{R}^{n} \supseteq \mathbb{Q}^{n} \) 
+\end{example}
+
+\begin{definition}[Secondo assioma di Numerabilità]
+    \(X\) soddisfa il secondo assioma di numerabilità se ammette una base di
+    aperti numerabile.
+
+    Si dice allora anche che \(X\) è II-numerabile.
+\end{definition}
+
+\begin{remark}
+    Se X è I(II)-numerabile, \(S \subseteq X \) è I(II)-numerabile. Questo segue
+    banalmente dal fatto che un sistema di intorni di ogni punto \(P\) (una base
+    di aperti) può essere trovata intersecando \(S\) con un sistema di intorni
+    di \(P \in X\) (con una base di aperti di \(X\)).
+\end{remark}
+\begin{theorem}[Teorema di Uryson]
+    Se \(X, \tau\) è \(T_{4}\) e soddisfa il secondo assioma di numerabilità allora è
+    metrizzabile (quindi esiste una distanza \(d: X^2 \to  \mathbb{R}\)) e in
+    particolare la topologia data dalla distanza \(d\) è la stessa di \(\tau\) 
+\end{theorem}
+\begin{definition}[Varietà Topologica]
+    Una varietà topologica di dimensione \(n \in \mathbb{N}\) è uno spazio
+    topologico \(M\),  \(T_{2} + \text{II-numerabile}\) ``localmente come
+    \(\mathbb{R}^{n}\)'', ossia
+    \[
+        \forall P \in M\,\,\exists U \ni P \text{ aperto },\,\exists \varphi :
+        U_P \to \mathbb{R}^{n}
+    \]
+    tale che \(\varphi(U)\) è un aperto di \(\mathbb{R}^{n}\) e \(\varphi\) è
+    iniettiva. In
+    altre parole, esiste per ogni punto \(P\) esiste un aperto che lo contiene
+    omeomorfo ad un aperto di \(\mathbb{R}^{n}\).
+\end{definition}
+
+\begin{example}
+    \(S^{n} = \{x \in \mathbb{R}^{n+1} : \|x\| = 1\} \) è una \(n-\)varietà. È
+    infatti \(T_{2}\) e II-numerabile in quanto sottospazio di
+    \(\mathbb{R}^{n+1}\).
+    Inoltre l'aperto \(S^{n} \smallsetminus \{P\} \stackrel{\text{omeo}}{\approx }
+    \mathbb{R}^{n}\), con \(P \in S^{n}\) un punto sulla sfera, per la
+    proiezione stereografica, e il punto \(P\) ha un intorno aperto omeomorfo a un
+    aperto di \(\mathbb{R}^{n}\) perché preso il suo punto antipodale \(Q\),
+    l'aperto \(S^{n} \smallsetminus \{Q\} \stackrel{\text{omeo}}{\approx}
+    \mathbb{R}^{n}\) per la proiezione stereografica in \(Q\) (notare che si può anche
+    ragionare sulle piccole calotte omeomorfe ad un disco).
+\end{example}
+\begin{example}
+    Se abbiamo \(M\) e \(N\) due varietà di dimensione rispettivamente \(n\) e
+    \(m\) allora \(N \times M\) è una varietà di dimensione \(n+m\) 
+\end{example}
+Inoltre le \(1-\)varietà si chiamano \emph{curve} e le \(2-\)varietà si chiamano
+\emph{superfici}
+
+\begin{example}
+    Prendiamo \(\mathbb{R}^{n}_{\tau_\text{aff} }\) con la topologia che ha come base di chiusi
+    \(\varnothing\) e i sottospazi affini.
+\begin{enumerate}[label = \arabic*.]
+    \item[\(T_{1}\) ] Sì, perché i punti sono chiusi in quanto sottospazi
+        affini.
+    \item[\(T_{2}\) ] No, perché due aperti non vuoti si intersecano
+        \textbf{sempre} (dimostrazione per induzione)
+\end{enumerate}
+A questo punto conideriamo \(\Delta \subseteq \mathbb{R}^{n}_{\tau_\text{aff} }
+\times \mathbb{R}^{n}_{\tau_\text{aff}  }\). Se la topologia prodotto fosse
+ancora quella degli affini allora la diagonale sarebbe chiusa, ma noi sappiamo
+che non può essere (altrimenti sarebbe \(T_{2}\) ), quindi la dopologia prodotto è diversa.
+\end{example}
+
+\begin{example}
+    Supponiamo di avere uno spazio \(X\) che sia \(T_{3}\) e prendiamo \(C\) un
+    chiuso. Consideriamo la relazione di equivalenza \(x \sim y \iff x = y \lor
+    x, y \in C\) (ossia identifichiamo \(C\) a un punto, il resto rimane
+    invariato).
+    Vogliamo mostrare che \(X / \sim \) è \(T_{2}\).
+    Prima consideriamo se prendiamo come coppia di punti \(P \in X
+    \smallsetminus C\) e \(\{C\} \). Allora dato che \(X\) è \(T_{3}\)
+    consideriamo \(P\) e \(C\) ed esistono \(V\) e \(U\) aperti disgiunti tali che \(U \ni P, U
+    \not\supseteq C \) e \(V \not\ni P, V \supseteq C\), ora se \(f\) è la
+    funzione di identificazione \(f(V) \cap f(U) = \varnothing\) e \(f(V),
+    f(U)\) sono aperti perché \(V\) e \(U\) sono aperti bilanciati.
+
+    Con due punti la procedura è simile ma basta usare che \(X\) è \(T_{2}\) 
+\end{example}
+
+\begin{example}
+    Prendiamo il quadratino identificato \([0, 1] \times [0, 1]\) e
+    identifichiamo tutti i punti \((x, 0), 0 \le x < 1\). Questo spazio non è
+    \(T_{1}\) perché il punto costituito dalla classe di equivalenza non è
+    chiuso.
+\end{example}
+
+\begin{example}
+    Consideriamo \(\mathbb{R}^{n}\) e diciamo che due vettori \(v \sim w \iff
+\exists T \in \mathcal{L}(\mathbb{R}^{n}) : T(v) = w\), con \(T\) invertibile.
+    Quindi abbiamo solo due classi di equivalenza, \(\{\mathbf{0}\} \) e
+    \(\mathbb{R}^{n} \smallsetminus \{\mathbf{0}\} \), dove \(\{\mathbf{0}\}\) è chiuso
+    e \(\{\mathbb{R}^{n} \smallsetminus \{\mathbf{0}\}\} \) è aperto, quindi
+    questo spazio è \(T_{0}\) ma non \(T_{1}\), l'unico aperto che contiene il
+    punto aperto è infatti tutto lo spazio, che contiene anche il punto chiuso.
+\end{example}
+
+\begin{example}
+    Stesso di prima con le matrici ortogonali, l'insieme risultante è omeomorfo
+    a \(\mathbb{R}^{+} = [0, +\infty)\) perché le trasformazioni ortogonali preservano la
+    norma dei vettori. 
+\end{example}
+
+
+
+\section{Compattezza}
+\begin{definition}[Ricoprimento, Sottoricoprimento]
+    Sia \(X\) uno spazio topologico. Una famiglia di sottoinsiemi
+    \(\{S_{i}\}_{i \in  I}, \, S_{i} \subseteq X\) tali che \(\bigcup_{i \in  I} S_{i} = X\) viene
+    detto \textbf{ricoprimento} di \(X\).
+
+    Se esiste un \(J \subseteq I\) tale che
+    \(
+        \bigcup_{j \in J} S_{j} = X
+        \) allora la famiglia \(\{S_{j}\}_{j \in J}\) viene detto
+        \textbf{sottoricoprimento}.
+
+        Un ricoprimento è aperto (chiuso) se ogni \(S_{i}\) è
+        aperto (chiuso).
+
+        Un ricoprimento è finito se \(I\) è finito.
+\end{definition}
+\begin{example}
+    Considerato \(X = [0, 1]\), \(\{[0, 0.5], [0.5, 1]\} \) è un ricoprimento
+    finito chiuso; \(\{[0, 0.5), (0.3, 7), (0.5, 1]\} \) è un ricoprimento finito
+    aperto; un ricoprimento non finito di \(X\) è
+    \(\{(0.9, 1]\} \cup \{[0, b)\}_{b \in [0, 1]}\) (che è un ricoprimento aperto)
+\end{example}
+
+\begin{definition}[Compattezza (per ricoprimenti)]
+    \(X, \tau\) è \textbf{compatto} per ricoprimenti se \emph{per ogni
+    ricoprimento aperto di \(X\) esiste un sottoricoprimento finito}. In altre
+    parole
+    \[
+        \forall \{S_i\}_{i \in I} \subseteq \tau : \bigcup_{i \in  I} S_{i} =
+        X,\,\,\exists J \subseteq I, \#J \in \mathbb{N}: \bigcup_{j \in J} S_j =
+        X
+    \]
+\end{definition}
+\begin{example}[Spazi compatti] \(\) 
+\begin{itemize}[label = --]
+    \item Se \(X\) è finito, la topologia è finita, quindi ogni ricoprimento è
+        finito, quindi \(X\) è compatto.
+    \item Similmente se \(\tau\) è finito \(X\) è compatto
+    \item \(X\) con la cofinita. Se \(X = \bigcup_{i in I} A_{i}\) con \(A_{i}\)
+        aperti, allora \(X \smallsetminus A_{1} = \{x_{1}, \dots, x_k\} \)
+        perché è un chiuso. Ma poiché \(\{A_{i}\} \) è un ricoprimento, per ogni
+        \(x_{j}\) esiste un \(A_{i_j}\) che lo contiene. Quindi \(X = A_{1} \cup
+        \bigcup_{j \in 1\dots k} A_{i_j}\), per cui \(X\) è compatto.
+\end{itemize}
+\end{example}
+\begin{example}[Spazi non compatti] \(\) 
+\begin{itemize}[label = --]
+    \item \(\mathbb{R}\). Sia \(A_{i} = (i - 1, i + 1), i \in \mathbb{Z}\).
+        Chiaramente \(\bigcup_{i \in  \mathbb{Z}} A_{i} = \mathbb{R}\) ma
+        rimuovendo ogni particolare aperto \((i - 1, i + 1)\) il punto \(i\) non
+        è più nell'unione, per cui non esiste nessun sottoricoprimento di
+        \(\{A_{i}\} \).
+    \item \(\mathbb{R}^{n}\). Si considerino i dischi centrati in \(\mathbf{x} \in
+        \mathbb{R}^{n}\). Chiaramente \(\bigcup_{r \in
+        \mathbb{R}^{+}}D(\mathbf{x}, r) = \mathbb{R}^{n} \) ma se \(F \subseteq
+        \mathbb{R}^{+}\) è finito allora \(\bigcup_{r \in F} D(\mathbf{x}, r) =
+        D(\mathbf{x}, \max F) \neq \mathbb{R}^{n}\) 
+    \item \([0, 1) = \bigcup_{n \in \mathbb{Z}^{+}}[0, 1 - \frac{1}{n})\) ma di
+        nuovo se \(F \subseteq \mathbb{Z}^{+} \) è finito allora \(\bigcup_{n
+        \in F} [0, 1 - \frac{1}{n}) = [0, 1 - \frac{1}{\max F}) \neq [0, 1)\) 
+\end{itemize}
+\begin{example} \(\mathbf{[0, 1]}\) \textbf{è compatto}.
+\end{example}
+\begin{proof}
+    Sia \(\{A_{i}\}_{i \in  I}\), con \(A_{i}\) aperti in \([0, 1]\) e
+    \(\bigcup_{i \in  I} A_{i} = [0, 1]\) un ricoprimento aperto di \([0, 1]\).
+    Sia \[C = \{x \in [0, 1] : \exists i_{1}, \dots, i_k \in I, \, \bigcup_{j
+    \in 1\dots k} A_{i_j} \supseteq [0, x] \} \]
+    Procediamo col dimostrare \(1 \in C\).
+\begin{enumerate}[label = \alph*.]
+    \item \(C\) è non vuoto.
+
+        Deve esistere un \(A_{i_0} \ni 0\), per cui
+        \(\exists \varepsilon : [0, \varepsilon) \subseteq A_{i_0}\). Ora per
+        ogni \(\varepsilon' < \varepsilon, \varepsilon' \in C\) poiché \([0,
+        \varepsilon'] \subseteq [0, \varepsilon) \). In particolare \(\exists 0
+        < \varepsilon'\in C\) 
+    \item \((0, 1] \ni c := \sup C \in C\).
+
+        \(\exists A_{i_c} \ni c \implies \exists \varepsilon : (c - \varepsilon,
+        c] \subseteq A_{i_c} \). Sia ora \(\gamma \in (c - \varepsilon,
+        \varepsilon)\). Poiché \(\gamma < c\), esiste un sottoricoprimento
+        finito di \([0, \gamma]\). Aggiungendo \(A_{i_c}\) a tale
+        sottoricoprimento, otteniamo un sottoricoprimento finito di \([0, c]\),
+        per cui \(c \in C\). 
+    \item c = 1.
+
+        Se \(c < 1\) allora \(\exists \varepsilon > 0: [c, c + \varepsilon)
+        \subseteq A_{i_c} \). Ma allora se \(\sigma \in (0, \varepsilon)\)
+        troviamo che esiste un sottoricoprimento finito di \([0, \sigma]\) (lo
+        stesso di \([0, c]\) costruito nel passo precedente), quindi \(\sigma
+        \in C\) ma \(\sigma > c\) che è assurdo.
+\end{enumerate}
+\end{proof}
+\end{example}
+\begin{remark}
+    Si può anche ragionare sui chiusi. Se esiste un sottoricoprimento finito con
+    unione \(X\) allora, ragionando ai complementari, esiste un insieme finito
+    di chiusi con intersezione vuota.
+    Infatti se \(\{{A_{i}}\}_{i \in  I}\) è un ricoprimento aperto di \(X\)
+    compatto significa che esiste un sottoricoprimento finito. Esiste quindi \(F
+    \subseteq I \) finito tale che \(\bigcup_{i \in  F} A_{i} = X\). Ma allora:
+    \[
+        \varnothing = X \smallsetminus \left(\bigcup_{i \in F}A_{i} \right) = \bigcap_{i
+        \in F} \left(X \smallsetminus A_{i}\right)
+    \]
+    Ossia esiste un numero finito di chiusi \(C_{i} := X \smallsetminus A_{i}\)
+    con intersezione vuota. Notare che vale anche il viceversa.
+\end{remark}
+\begin{proposition}
+    Sia \(X\) compatto, \(f: X \twoheadrightarrow Y\) continua e suriettiva.
+    Allora \(Y\) è compatto. In altre parole \textbf{l'immagine continua di
+    compatti è compatta}
+\end{proposition}
+\begin{proof}
+    Sia \(\{A_{i}\}_{i \in I}\) un ricoprimento aperto di \(Y\). Allora
+    \(f^{-1}(A_{i}) =: B_{i}\) aperti di \(X\) e \(\bigcup_{i \in  I} B_{i} =
+    f^{-1}(Y) = X\). Ma allora per compattezza di \(X\) esiste un
+    sottoricoprimento di \(\{B_{i}\} \), indicizzato da \(F \subseteq I \)
+    finito. Poiché \(f(B_{i}) = A_{i}\) per suriettività, 
+    \[
+        \bigcup_{i \in F} A_{i} = \bigcup_{i \in F} f\left( B_{i} \right) =
+        f\left( \bigcup_{i \in F} B_{i} \right) = f\left( X \right) = Y 
+    \]
+    Per cui \(Y\) è compatto
+\end{proof}
+\begin{proposition}
+    \(X\) compatto, \(S \subseteq X \) chiuso, allora \(S\) è compatto (con la
+    topologia indotta).
+\end{proposition}
+\begin{proof}
+    Sia \(\{A_{i}\}_{i \in I}\) un ricoprimento aperto di \(S\). Ogni \(A_{i}\)
+    è quindi \(A_{i} = A_{i}' \cap S\), con \(A_{i}' \subseteq X \) un aperto di
+    \(X\). Ora considerato l'aperto \(A' := X \smallsetminus S\) abbiamo che
+    \(A' \cup \bigcup_{i \in  I} A'_i = X\), per cui per compattezza esiste un
+    sottoricoprimento finito, quindi \(\exists F \subseteq I \) finito tale che
+    \(A' \cup \bigcup_{i \in F} A'_i = X\). Ma allora \(\bigcup_{i \in F} A'_i
+    \supseteq S \implies \bigcup_{i \in F} A_{i} = S \) 
+\end{proof}
+\begin{remark}
+    Il viceversa generalmente non vale, infatti i punti sono sempre compatti ma
+    alcuni spazi non sono \(T_{1}\). Un altro esempio è \(\mathbb{N}\) con la
+    cofinita, dove \(\{2, 4, \dots\} \) è compatto (perché la topologia indotta
+    è la cofinita) ma non chiuso, perché non è finito.
+\end{remark}
+\begin{theorem}
+    Se \(X\) è \(T_{2}\) e \(K \subseteq X \) è compatto, allora \(K\) è chiuso.
+\end{theorem}
+\begin{proof}
+    Mostreremo che se \(X \ni x \not\in K\), allora esiste un aperto di \(X\)
+    contenente \(x\) e disgiunto da \(K\), ossia
+    \begin{equation}
+        \forall X \ni x \not\in K\,\,\exists \text{ aperto }A_x \ni x, A_x \cap  K
+        = \varnothing
+    \end{equation}
+    L'idea è che se questa osservazione è corretta allora possiamo prendere
+    l'unione di tutti gli aperti trovati da ogni punto di \(X\smallsetminus K\)
+    e quindi avere che
+    \[
+        \bigcup_{x \in  X \smallsetminus K} A_x = X \smallsetminus K \text{
+        aperto } \implies K \text{ chiuso }
+    \]
+    Per dimostrare \((1)\), sia quindi \(x \not\in K, y \in K\), ovviamente
+    quindi \(x \neq y\). Poiché \(X\) è \(T_{2}\), \(\exists A_{x, y} \ni x, B_y
+    \ni y, A_{x, y} \cap B_y = \varnothing\). Ora \(\bigcup_{y \in K} B_y
+    \supseteq K \), quindi se \(B'_y := B_y \cap K\), \(\bigcup_{y \in K} B'_y =
+    K\) e ogni \(B'_y\) è un aperto di \(K\). Abbiamo quindi che \(\{B'_y\} \) è
+    un ricoprimento aperto di \(K\), per compattezza quindi esiste un
+    sottoricoprimento finito, sia quindi \(F \subseteq K \) finito tale che
+    \(\bigcup_{y \in F} B'_y = K\), ma quindi
+    \[
+        \bigcup_{y \in F} B_y \supseteq K \implies \bigcap_{y \in F} A_{x, y}
+        \cap K = \varnothing
+    \]
+    Ma poiché \(F\) è finito, \(A_x := \bigcap_{y \in F} A_{x, y}\) è un aperto
+    di \(X\), per cui verifica la tesi (1).
+\end{proof}
+\begin{corollary}
+    Se \(X\) è \(T_{2}\) e compatto, allora i sottoinsiemi compatti di \(X\)
+    sono esattamente i chiusi.
+\end{corollary}
+\begin{proof}
+    Segue direttamente da 9.5 e 9.4
+\end{proof}
+La stessa dimostrazione di \(9.5\) mostra però anche un'altra cosa, infatti se
+\(X\) è compatto e \(T_{2}\) siamo nell'ipotesi del corollario, quindi
+notiamo che scelto un chiuso \(K\) e un punto \(x \not\in K\), si possono
+separare con aperti, poiché \(K\) è compatto, in altre parole \(T_{2}\) +
+compatto \(= T_{3}\). Ma il divertimento non finisce qui, infatti
+\begin{proposition}
+    Se \(X\) è uno spazio \(T_{2}\) e compatto, allora \(X\) è \(T_{4}\) 
+\end{proposition}
+\begin{proof}
+    Per quanto visto prima, \(X\) è \(T_{3}\), userò questa ipotesi più forte
+    nella dimostrazione.
+    Presi due chiusi disgiunti \(C_{1}\) e \(C_{2}\), sono compatti per il corollario
+    9.5.1.
+    Prendiamo ora un punto \(x \in C_{1}\). Poiché \(X\) è \(T_{3}\) esistono
+    due aperti \(A_{1, x}\) e \(A_{2, x}\) tali che \(A_{1, x} \ni x, A_{2, x}
+    \supseteq C_{2} \) e \(A_{1,x} \cap A_{2, x} = \varnothing\). Procedendo in
+    maniera simile alla dimostrazione di \(9.5\), ponendo \(A'_{1, x} = A_{1, x}
+    \cap C_{1}\) otteniamo che \(\{A'_{1, x}\}_{x \in C_{1}} \) è un
+    ricoprimento aperto di \(C_{1}\), che essendo compatto ammette quindi un
+    sottoricoprimento finito. Sia quindi \(F \subseteq C_{1} \) finito tale che
+    \(\bigcup_{x \in F} A'_{1, x} = C_{1}\) e quindi
+    \(A_1 := \bigcup_{x \in F} A_{1, x} \supseteq C_{1} \). Consideriamo adesso
+    \(A_{2} := \bigcap_{x \in F} A_{2, x}\). Chiaramente \(A_{2} \supseteq C_{2}
+    \) poiché ogni sua componente lo contiene. Inoltre \(A_{2}\) è aperto in
+    quanto intersezione finita di aperti. Infine
+    \[
+        A_{1} \cap A_{2} = \left( \bigcup_{x \in F} A_{1, x} \right) \cap A_{2}
+        = \bigcup_{x \in F} \left( A_{1, x} \cap A_{2} \right) \subseteq
+        \bigcup_{x \in F} \left( A_{1, x} \cap A_{2, x} \right) = \varnothing
+    \]
+    Quindi \(A_{1}\) e \(A_{2}\) sono aperti che separano \(C_{1}\) e \(C_{2}\)
+    e verificano la condizione di normalità (\(T_{4}\)).
+\end{proof}
+\begin{proposition}[Heine-Borel debole]
+    I compatti di \(\mathbb{R}\) sono tutti e soli i chiusi limitati. Ossia
+    \(C\) chiuso e \(C \subseteq [a, b] \) con \(a, b \in \mathbb{R}\) 
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Sia \(C \subseteq [a, b] \) chiuso, allora \(C\) è
+        compatto (chiuso in un compatto)
+    \item[\(\impliedby \)] Sia \(C\) un compatto, è un chiuso per 9.5. Consideriamo il ricoprimento
+        aperto \({(-a, a) \cap C}_{a \in \mathbb{R}^{+}}\). Essendo \(C\)
+        compatto, esiste un \(F \subseteq \mathbb{R}^{+} \) finito tale che
+        \(\{(-a, a)\}_{a \in F}\) sia un sottoricoprimento finito. Ma quindi se
+        \(M := \max F\) abbiamo che \((-M, M) \supseteq C \), e quindi \([-M-1,
+        M+1] \supseteq C \) 
+\end{itemize}
+\end{proof}
+\begin{proposition}
+    Sia \(X\) compatto, \(f: X \to \mathbb{R}\) continua, allora \(f\) ha un
+    minimo e un massimo.
+\end{proposition}
+\begin{proof}
+    \(f(X) \subseteq \mathbb{R} \) è un compatto di \(\mathbb{R}\) perché
+    immagine continua di compatto. Ma allora per Heine-Borel debole, \(f(X)
+    \subseteq [a, b] \) ed è chiuso, quindi \(\sup f(X) \in f(X) \implies
+    \exists x \in X: f(x) = \sup f(X) = \max f(X)\) 
+
+    Similmente si dimostra l'esistenza del minimo.
+\end{proof}
+
+
+\begin{proposition}
+    Sia \(X\) compatto, \(f: X \to Y\) continua e suriettiva, \(Y\) è \(T_{2}\),
+    allora \(f\) è \textbf{chiusa}
+\end{proposition}
+\begin{proof}
+    Sia \(C \subseteq X \) un chiuso, quindi è compatto perché chiuso di un
+    compatto. \(f(C) \subseteq  Y\) è quindi un compatto, ma poiché \(Y\) è di Haussdorf
+    \(f(C)\) è anche un chiuso.
+\end{proof}
+\begin{lemmao}
+    Supponiamo di avere \(X_\tau\) e \(\mathcal{B} \subseteq \tau \) una base della
+    topologia. Allora \(X\) è compatto se e solo se per ogni ricoprimento
+    \(\bigcup_{\ell \in  L} B_\ell = X\), con \(B_{i} \in \mathcal{B}\) ne possiamo
+    estrarre un sottoricoprimento finito.
+\end{lemmao}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Ovvio, se \(X\) è compatto posso estrarre un
+        sottoricoprimento finito da qualsiasi ricoprimento, incluso se
+        costituiti da aperti di una base.
+    \item[\(\impliedby \)] Supponiamo di poter estrarre sottoricoprimenti finiti
+        da ricoprimenti aperti con elementi in \(\mathcal{B}\). Sia \(X =
+        \bigcup_{i \in  I} A_{i} = \bigcup_{i \in  I} \left( \bigcup_{j \in
+        J_{i}} B_{i, j} \right) \), dove l'ultimo è un ricoprimento con elementi
+        di \(\mathcal{B}\). Ma quindi esiste un insieme finito \(F\) di coppie
+        \((i, j)\) tali che \(\bigcup_{(i, j) \in F} B_{i, j} = X\). A questo
+        punto per ogni elemento \(B_{i, j}\) prendiamo \(A_i \supseteq B_{i,
+        j}\) e ne otteniamo dunque comunque un numero finito.
+\end{itemize}
+\end{proof}
+
+\begin{theorem}[Teorema debole di Tichonov]
+    Siano \(X\) e \(Y\) spazi compatti, allora \(X \times Y\) è compatto. In
+    altre parole \textbf{il prodotto di due compatti è compatto}.
+\end{theorem}
+\begin{proof}
+    Per il Lemma 9.10 è sufficiente considerare dei ricoprimenti \(X \times Y =
+    \bigcup_{i \in  I} A_{i} \times B_{i}\) dove \(A_{i}\) sono aperti di \(X\)
+    e \(B_{i}\) sono aperti di \(Y\), perché questa è una base della topologia
+    su \(X \times Y\).
+
+    Chiamiamo \(\pi_X: X \times  Y \to  X\) e \(\pi_Y: X \times Y \to  Y\) le
+    proiezioni a \(X\) e \(Y\).
+
+    Ora fissiamo \(\overline{x} \in  X\) un punto e consideriamo \(\overline{x} \times Y =
+    \pi_X^{-1}(\overline{x})\) che è compatto perché è omeomorfo a \(Y\).
+    Consideriamo \(\bigcup_{i \in  I} \left( A_{i} \times B_{i} \cap
+    (\overline{x}\times Y) \right) = \overline{x} \times Y\) perché abbiamo
+    intersecato il ricoprimento di \(X \times Y\) con un suo sottospazio.
+    Inoltre è un ricoprimento aperto perché è composto da aperti di
+    \(\overline{x} \times Y\). Per compattezza quindi esiste un
+    sottoricoprimento finito, indicizzato da \(F_{\overline{x}} \subseteq I \) finito tale che
+    \(\bigcup_{i \in F_{\overline{x}}} \left( A_{i} \times B_{i} \cap
+    (\overline{x} \times Y) \right) = \overline{x} \times Y\), il che significa
+    che \(\bigcup_{i \in F_{\overline{x}}} A_{i} \times B_{i} \supseteq
+    \overline{x} \times Y\).
+
+    Considero ora \(A_{\overline{x}} = \bigcap_{i \in
+    F_{\overline{x}}} A_i \) che è un aperto non vuoto poiché ovviamente
+    \(\overline{x} \in A_{\overline{x}} \). Dico ora che \(A_{\overline{x}}
+    \times Y \subseteq \bigcup_{i \in F_{\overline{x}}} (A_{i} \times B_{i}) \).
+    Ma poiché \(\{B_{i}\}_{i \in F_{\overline{x}}} \) ricopre \(Y\),
+    \[A_{\overline{x}} \times Y \subseteq A_{\overline{x}} \times \bigcup_{i \in
+        F_{\overline{x}}} B_{i} = \bigcup_{i \in F_{\overline{x}}}
+    A_{\overline{x}} \times B_{i} \] Ma ogni \(A_{\overline{x}} \times B_{i}
+    \subseteq A_{i} \times B_{i} \), da cui l'inclusione richiesta.
+
+    Adesso ovviamente \(\bigcup_{x \in X} A_x = X \) è un ricoprimento aperto di
+    \(X\), quindi essendo \(X\) compatto esiste un \(F \subseteq X \) finito
+    tale che \(\bigcup_{x \in F}A_x = X \). Quindi \(\bigcup_{x \in F} A_x
+    \times Y = X \times Y\). Infine, poiché ogni \(A_x \times Y\) si può
+    ricoprire con finiti aperti indicizzati da \(F_x \subseteq I \),
+    \[
+        X \times Y = \bigcup_{x \in F} \bigcup_{i \in F_x} A_{i} \times B_{i}
+    \]
+\end{proof}
+\begin{corollary}
+    Il prodotto di finiti compatti è compatto
+\end{corollary}
+\begin{proof}
+    Per induzione sul numero di compatti, il passo base è il teorema 9.11.
+\end{proof}
+
+\begin{theorem}[Teorema di Heine-Borel]
+    Sia \(C \subseteq \mathbb{R}^{n}\). Allora \(C\) è compatto se e solo se è
+    chiuso e limitato, ossia \(\exists \rho > 0 : C \subseteq D(0, \rho) \) 
+\end{theorem}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Sia \(C\) compatto, quindi è chiuso perché
+        \(\mathbb{R}^{n}\) è \(T_{2}\). Quindi Consideriamo \(\bigcup_{r \in
+        \mathbb{R}^{+}} D(0, r) \cap C = C \) è un ricoprimento aperto di \(C\),
+        quindi esiste un sottoricoprimento indicizzato da \(F \subseteq
+        \mathbb{R}^{+} \) finito. Poniamo \(\rho := \max F\) e otteniamo che
+        \(D(0, \rho) \cap C = C\) da cui \(D(0, \rho) \supseteq C  \) 
+    \item[\(\impliedby \)] \(C\) è chiuso e limitato, quindi è contenuto in un
+        ``disco'' \(D_n = [-N, N]^{n} \supseteq C \) per un qualche \(N \in
+        \mathbb{R}^{+}\), ma poiché \(D_n \stackrel{\text{omeo}}{\approx} [0, 1]^{n}
+        \) che è compatto, allora \(C\) è un chiuso in un compatto, per cui è
+        compatto.
+\end{itemize}
+\end{proof}
+\begin{example}
+    Dire quando \(C_n = \{(x, y) \in \mathbb{R}^{2} : x^2 - ny^2 = 1\} \).
+
+    \(C_n\) è sempre chiuso perché è controimmagine di \(1\) che è chiuso
+    rispetto a \(f: \mathbb{R}^{2} \to \mathbb{R}; (x, y) \mapsto x^2 - ny^2\)
+    che è continua.
+\end{example}
+
+
+\begin{example}
+    Sia \(C_n = \{ (x, y) : nx^2 + (n+2)y^2 = n+1\} \), con \(n \in \mathbb{Z}\) 
+    Per quali valori di \(n\),
+\begin{enumerate}[label = \arabic*.]
+    \item \(C_n \cup C_{-n}\) è chiuso
+
+        Sempre, l'unione di finiti chiusi è chiusa, ogni \(C_n\) è chiuso
+        perché controimmagine continua di chiuso \(n+1\) 
+    \item \(C_n\) è compatto
+
+        Poiché siamo in \(\mathbb{R}^{2}\), i compatti sono i chiusi limitati,
+        essendo \(C_n\) chiuso, dobbiamo solo controllare quando è limitato. Se
+        \(n \ge 1\) oppure \(n \le -3\), \(C_n\) è un ellisse ed è quindi limitato.
+        Se \(n = 0\) si ottengono due rette, se \(n = -1\) si ottiene \(x^2 =
+        y^2 \) che è le due rette bisettrici del piano. Se \(n = -2\) abbiamo due
+        rette parallele.
+
+    \item \(\bigcup_{n \ge 1} C_n =: K\) è compatto
+
+        Consideriamo la successione di punti che è contenuta all'interno di
+        \(K\) data da tutti i punti con \(y=0\) tali punti soddisfano \(nx^2 =
+        n+1\) quindi consideriamo la successione \(x_n = \sqrt{\frac{n+1}{n}}
+        \to 1\). Per ogni \(n \ge 1, (x_{n}, 0) \in K \)  ma \((1, 0) \not\in
+        K\) infatti significherebbe che \(n = n+1\) che è assurdo. Non essendo
+        chiuso non è quindi compatto.
+    \item \(\mathbb{R}^2 - K\) è denso?
+\end{enumerate}
+\end{example}
+\begin{example}
+    Sia \(C_n = \{(x, y) \in \mathbb{R}^2 : 2 n x + 2 (n+1) y = 3n\} \). Sia \(K
+    = \bigcup_{n \in \mathbb{N}} C_n\). Sia \(S^{1} = \{(x, y) : x^2+y^2 = 1\}
+    \) e \(D^{+} = \{(x, y) : x \ge 0, y \ge 0\} \).
+
+    Per quali valori di \(n\):
+\begin{enumerate}[label = \arabic*.]
+    \item \(C_n \cup C_{n+1}\) è chiuso?
+
+        Sempre ovvio
+    \item \(C_n \cap D^{+}\) è compatto?
+
+        Bisogna solo controllare se è limitato, essendo chiuso in quanto
+        intersezione di due chiusi.
+        Poiché per \(n\neq 0, y = 0\) otteniamo \(x = \frac{3}{2}\) significa
+        che tutte le rette passano per il punto \((\frac{3}{2}, 0)\). Quindi per
+        vedere se l'insieme è limitato basta controllare se, quando \(x=0\), \(y
+        > 0\). Otteniamo quindi \(y = \frac{3n}{2(n+1)}\) oppure \(n = -1\). La
+        seconda tuttavia comporta \(x = \frac{3}{2}\) che è non limitato.
+        Risolvendo quindi \(\frac{3n}{2(n+1)} > 0\) otteniamo \(n > 0 \lor n <
+        -1\) da cui \(n \ge 1 \lor n \le -2 \) 
+    \item \(K \cap S^{1}\) è compatto?
+
+        Vogliamo risolvere il sistema, quindi consideriamo \(x = \frac{3}{2} -
+        \frac{n+1}{n} y\), e la circonferenza, quindi \(\left(\frac{3}{2} -
+        \frac{n+1}{n} y \right)^2 + y^2 = 1\). Da cui \(y^2 \left( 1 +
+    \frac{n+1}{n}^2 \right) - 3 \frac{n+1}{n} y + \frac{5}{4}\).
+        Da cui il discriminante \(\Delta = 9 \frac{n+1}{n}^2 - 5 \left( 1 +
+        \frac{n+1}{n}^2 \right) = 4 \frac{n+1}{n}^2 - 5 \ge 0\) da cui l'ultima
+        diseguaglianza perché vogliamo controllare se il numero di punti è
+        finito. Troviamo \(\frac{n+1}{n} \ge \sqrt{\frac{5}{4}}\) che
+        effettivamente ha un numero finito di soluzioni. Quindi \(K \cap S^{1}\)
+        è compatto.
+\end{enumerate}
+\end{example}
+
+\begin{example}
+    Sia \(C_n = \{(x, y) \in \mathbb{R}^2 : (x^2+y^2-1)(x^{n} + y^{n} - 1) = 0\} \) 
+
+    Per quali valori di \(n\), \(C_n\) è compatto? Chiaramente \(C_n\) è chiuso,
+    ma in particolare è l'unione delle controimmagini di \(0\) delle funzioni
+    \(f: (x, y) \mapsto x^2 + y^2 - 1\) e \(g: (x, y) \mapsto x^{n} + y^{n} -
+    1\) Chiamando \(S^{1} = f^{-1}(0) \) e \(D_n = g^{-1}(0)\) abbiamo \(C_n =
+    S^{1} \cup D_n\). \(S^{1}\) è sempre compatto, mentre \(D_n\) è compatto se
+    \(n\) è pari. Da questo troviamo che \(n\) deve essere pari.
+
+    Sia ora \(K= \bigcup_{n \in \mathbb{N}} D_n\). Non è compatto perché non è
+    chiuso. Infatti il punto \((1,1) \not\in K\) ma se \(x = y\) si ottiene \(2
+    x^{2k} = 1\) che tende a \(x = 1\) 
+\end{example}
+
+\begin{example}
+    Sia \(M_n(\mathbb{R}) \stackrel{\text{omeo}}{\approx} \mathbb{R}^{n^2}\) lo spazio delle matrici \(n \times n\) a
+    coefficienti in \(\mathbb{R}\). Si considerino \(GL(n)\) il gruppo lineare,
+    \(SL(n)\) il gruppo speciale, \(O(n)\) le matrici ortogonali.
+
+    \(GL(n)\) è un aperto, perché è controimmagine di \(\mathbb{R}
+    \smallsetminus \{0\} \) che è aperto di \(\mathbb{R}\) rispetto al
+    determinante che è continuo. \(SL(n)\) è la
+    controimmagine di \(1\) rispetto al determinante, quindi è chiuso.
+    Infine \(O(n) = (A \mapsto ^{t}A A )^{-1}(I)\) quindi è chiuso. Ma inoltre
+    dato che una matrice ortogonale ha colonne composte da vettori di norma
+    unitaria, \(d(A, \mathbf{0}) = \sqrt{n}\) da cui \(O(n)\) è chiuso e
+    limitato, quindi compatto.
+\end{example}
+
+\begin{definition}[Gruppo topologico]
+    Un gruppo topologico \(G\) è un gruppo \(G\) con topologia \(\tau\) tale che
+    l'operazione di gruppo \(G \times G \to G\) è continua e l'operazione di
+    inversa \(G \to G\) è continua.
+\end{definition}
+
+\subsection{Compattezza in Spazi Metrici}
+\begin{definition}[Compattezza per successioni]
+    Uno spazio topologico \((X, \tau)\) è \textbf{compatto per successioni} se
+    da ogni successione ne possiamo estrarre una sottosuccessione convergente
+    \[
+        \forall \{x_{n}\}_{n \in \mathbb{N}} \exists C \subseteq \mathbb{N} :
+        \{x_n\}_{n \in C} \text{ converge } 
+    \]
+\end{definition}
+\begin{lemmao}[Numero di Lebesgue]\label{lebesgue_number}
+    Supponiamo di avere un ricoprimento aperto di \(X\) \(\mathcal{U} = \{A_{i}\}_{i \in I}\).
+    Supponiamo che \(X\) sia compatto per successioni. Allora esiste un
+    \(\sigma_{\mathcal{U}}\) tale che \(\forall x \in X\) \(\exists i \in I:
+    D(x, \sigma_{\mathcal{U}}) \subseteq A_{i} \) 
+\end{lemmao}
+\begin{proof}
+    Procediamo per assurdo, allora negando la tesi otteniamo che esiste un
+    ricoprimento aperto \(\mathcal{U} = \{A_{i}\}_{i \in I} \) 
+    \[
+        \forall \sigma \in \mathbb{R}^{+} \,\,\exists x_\sigma \in X : D(x_\sigma,
+        \sigma)\text{ non è contenuto in nessun \(A_{i}\)  }
+    \]
+    E ancora ``\(D(x_\sigma, \sigma)\) non è contenuto in nessun \(A_{i}\)'' quindi
+    \[
+        \forall i \in I : x_\sigma \in A_{i} \implies \exists y_{i, \sigma}
+        \not\in A_{i} : d(x_\sigma, y_{i, \sigma}) < \sigma
+    \]
+    Ora consideriamo la successione \(x_{n}\) degli \(x_\sigma\) tali che
+    \(\sigma = \frac{1}{n}\). Poiché \(X\) è compatto per successioni esiste una
+    sottosuccessione convergente a \(z\). Allora \(\exists i \in I:
+    z\in A_{i}\) e da un certo punto in poi della sottosuccessione
+    tutti i valori \(x_{n_k}\), per \(k > \overline{k}\) sono contenuti in
+    \(A_{i}\). Ma per ogni \(n_k\), abbiamo che \(y_{i, n_k} \not\in A_{i}\) e
+    \(d(x_{n_k}, y_{i, n_k}) < \frac{1}{n_k}\).
+\begin{remark}
+Abbiamo \(\{x_{n}\} \to z\) e \(\lim_{n}d(x_{n}, y_{n}) = 0\). Allora \(y_{n}
+\to z\) 
+\begin{proof}
+    \(0 \le d(y_{n}, z) \le d(y_{n}, x_{n}) + d(x_{n}, z)\) Per il squeeze
+    theorem anche \(d(y_{n}, z) \to 0\) 
+\end{proof}
+\end{remark}
+    Per l'osservazione allora \(y_{n_k} \to z\) che è assurdo perché di sicuro
+    esiste un \(r\) tale che \(D(z, r) \subseteq A_{i} \) e \(y_{n_k} \not\in
+    A_{i}\), quindi di sicuro \(d(y_{n_k}, z)\ge r\).
+\end{proof}
+\begin{definition}
+    Sia \((X, d)\) uno spazio metrico. Si dice \textbf{totalmente limitato} se
+    \(\forall \mathbb{R} \ni \sigma >0 \) allora \(\exists F \subseteq X \)
+    finito tale che \(\bigcup_{x \in F} D(x, \sigma) = X\) ossia è possibile
+    ricoprirlo con un numero finito di dischi di un raggio fissato.
+\end{definition}
+    Notare che la totale limitatezza non implica la compattezza (ad esempio [0, 1)). È più evidente
+    però che se \(X\) è compatto allora è totalmente limitato. Basta infatti
+    prendere come ricoprimento tutti i dischi di raggio \(\varepsilon\) e poi
+    per la compattezza sceglierne un sottoricoprimento finito.
+    Ma questo risultato (e sarà più ovvio il perché in seguito al teorema enunciato
+    tra poco) è valido anche in caso di compattezza per successioni
+    \begin{lemmao}\label{sequentially_compact_then_totally_bounded}
+    Sia \((X, d)\) compatto per successioni, allora è totalmente limitato
+\end{lemmao}
+    \begin{proof}
+Supponiamo che \(X\) sia non totalmente
+    limitato, ossia \(\exists \sigma > 0\) tale che \(X\) non possa essere
+    ricoperto da un numero finito di dischi di raggio \(\sigma\). In particolare
+    scelto un \(x_{1} \in X\) tale che \(D(x_{1}, \sigma) \neq X\), scegliamo
+    allora \(x_{2} \in X \smallsetminus D(x, \sigma)\) e di nuovo l'unione dei
+    due dischi centrati in \(x_{1}\) e \(x_{2}\) non può essere \(X\),
+    procediamo così costruendo. Inoltre abbiamo che \(d(x_{i}, x_{j}) > \sigma\)
+    per ogni \(i, j \in \mathbb{N}\) poiché ogni punto successivo è fuori da
+    ogni altro disco. Tuttavia se la distanza non è mai minore di \(\sigma\) non
+    può esistere una sottosuccessione convergente.
+    Leggendo l'implicazione al contrario otteniamo che se \(X\) è compatto per
+    successioni allora \(X\) è totalmente limitato.
+    \end{proof}
+\begin{theorem}
+    Se \((X, d)\) è uno spazio metrico, e consideriamo \(\tau_d\) la topologia
+    data dalla distanza, allora \(X\) è compatto per ricoprimenti se e solo se è
+    compatto per successioni.
+\end{theorem}
+\begin{proof}\( \text{compatto} \iff \text{compatto per successioni}\) 
+\begin{itemize}
+    \item[\(\implies \)] Supponiamo \(X\) compatto. Prendiamo una successione
+        \(\{x_{n}\}_{n \in \mathbb{N}}\) e sia \(Y = \bigcup_{n \in \mathbb{N}}
+        \{x_{n}\} \).  Supponiamo non esista una
+        sottosuccessione convergente, allora non esistono punti di
+        accumulazione, quindi per ogni \(x \in X\) esiste un aperto \(A_x \ni
+        x\) tale che \(\{n: x_n \in A_x\} \) è finito. Ma allora \(\mathcal{U} = \{A_x
+        : x \in X\} \) è un ricoprimento aperto di \(X\) e per la compattezza
+        esiste un sottoricoprimento finito, indicizzato da \(F \subseteq X \)
+        finito. Ma questo significa che \(\bigcup_{x \in F} \{n: x_n \in A_x\}
+        = \mathbb{N}\) è finito, che è assurdo.
+    \item[\(\impliedby \)] 
+    Sia \(X\) compatto per successioni e sia \(\mathcal{U} = \{A_{i}\}_{i \in
+    I}\) un ricoprimento aperto di \(X\). Sia \(\sigma\) il numero di Lebesgue
+    per il ricoprimento \(\mathcal{U}\), che esiste per il
+    Lemma~\ref{lebesgue_number}. Ora per il
+    Lemma~\ref{sequentially_compact_then_totally_bounded} sappiamo che \(X\) è
+    totalmente limitato, quindi esiste un ricoprimento finito composto da dischi
+    di raggio \(\sigma\), di cui ognuno è contenuto in un aperto del
+    ricoprimento \(\mathcal{U}\), formando un sottoricoprimento finito di
+    \(\mathcal{U}\).
+\end{itemize}
+\end{proof}
+\begin{definition}
+    Una successione \(\{x_{n}\}_{n \in \mathbb{N}} \subseteq X \) si dice di
+    Cauchy se 
+    \[
+        \forall \varepsilon \in \mathbb{R}_{> 0}\,\,\exists
+        \overline{n}(\varepsilon) : d(x_{n}, x_{m}) < \varepsilon \forall n, m >
+        \overline{n}
+    \]
+\end{definition}
+\begin{proposition}
+    Se \(x_{n} \to x\) allora \(x_{n}\) è di Cauchy.
+\end{proposition}
+\begin{proof}
+    Scelto \(\frac{\varepsilon}{2}\), esiste \(\overline{n}\) tale che \(\forall
+    n > \overline{n}\), \(d(x_{n}, x) < \frac{\varepsilon}{2}\). Allora per la
+    diseguaglianza triangolare \(d(x_{n}, x_{m}) \le d(x_{n}, x) + d(x, x_{m}) <
+    \varepsilon\) se \(n, m \ge \overline{n}\) 
+\end{proof}
+Notare che generalmente il viceversa non è detto. Ad esempio in (0, 1) la
+successione \(\frac{1}{n}\) non è convergente (convergerebbe a \(0 \not\in X\))
+ma è di Cauchy
+\begin{definition}
+    Uno spazio metrico \((X, d)\) si dice \textbf{completo} se ogni successione
+    di Cauchy è convergente.
+\end{definition}
+\begin{proposition}
+    Sia \(X, d\) uno spazio metrico.
+    \(X\) compatto, allora \(X\) è completo
+\end{proposition}
+\begin{proof}
+    Sia \(\{x_{n}\} \) una successione di Cauchy. Essendo \(X\) compatto ammette
+    una sottosuccessione convergente \(x_{n_k} \to x\). Vogliamo mostrare che
+    \(x_{n} \to x\). \(\exists \overline{k}: \forall k > \overline{k}\),
+    \(d(x_{n_k}, x) < \frac{\varepsilon}{2}\). Inoltre possiamo anche trovare un
+    \(\overline{n}\) tale che \(\forall n, m > \overline{n}\), \(d(x_{n}, x_{m})
+    < \frac{\varepsilon}{2}\). Supponiamo che \(n_k = m\) per qualche \(k\), ma
+    allora \(d(x_{m}, x) \le d(x_{m}, x_{m_k}) + d(x_{m_k}, x) < \varepsilon\) 
+\end{proof}
+\begin{proposition}
+    Se in \((X, d)\) i chiusi limitati sono compatti, allora \((X, d)\) è
+    completo. In particolare \(\mathbb{R}^{n}, d\) è completo.
+\end{proposition}
+\begin{proof}
+    Prendiamo un punto \(z \in X\) e \(x_{n}\) una successione di Cauchy. Allora
+    scelto \(\varepsilon\) esiste un \(\overline{n}\) tale che \(n, m >
+    \overline{n} \implies d(x_{n}, x_{m}) < \varepsilon\). Allora \(d(x, x_{n})
+    \le d(x, x_{\overline{n}}) + d(x_{n}, x_{m}) < \rho\) fissato. Allora
+    aggiungendo i primi finiti termini minori di \(\overline{n}\) otteniamo che
+    \(\{x_{n}\} \) è limitata.
+\end{proof}
+\begin{proposition}
+    Totalmente Limitato + Completo \(\iff\) Compatto
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Sia \(X\) completo e totalmente limitato. Sia
+        \(\{x_{n}\}\) una successione. Vogliamo mostrare che esiste \(x_{n_k}\)
+        di Cauchy, quindi convergente per completezza, in modo da garantire la
+        compattezza per successioni e di conseguenza la compattezza.
+
+        Siano \(D_n\) i centri dei ricoprimenti composti da dischi di raggio
+        \(\frac{1}{n}\), di cui conosciamo l'esistenza per la totale
+        limitatezza. \(D_{1}\) è finito, quindi esiste un \(y_{1} \in D_{1}\)
+        tale che \(A_{1} := \{n: x_{n} \in D(y_{0}, 1)\} \) è infinito. Adesso sul
+        sottospazio \(D(y_{0}, 1)\) esiste un \(y_{2} \in D_{2} : A_{2} := \{n:
+        x_{n} \in D(y_{1}, 1) \cap D(y_{2}, \frac{1}{2})\} \) è infinito.
+        Continuando in questo modo, \[\exists y_k \in D_k : A_k := \{n : x_{n} \in
+        \bigcap_{m \in 1\dots k} D\left( y_m, \frac{1}{m} \right)  \} \] 
+        Ora per l'assioma della scelta estraiamo una successione di \(n_k\) tale
+        che ogni \(n_k \in A_k\). Infine, per ogni \(\varepsilon > 0\), scelti
+        \(\mathbb{N} \ni k_{1}, k_{2} > \frac{2}{\varepsilon}\), allora se \(N =
+        \left\lceil \frac{2}{\varepsilon} \right\rceil \), quindi \(\varepsilon
+        \ge \frac{2}{N}\).
+
+        Per definizione di \(A_k\) e poiché \(k_{1}, k_{2} \ge N\), 
+        \(x_{n_{k_{1}}}, x_{n_{k_{2}}} \in D\left( y_{n_N}, \frac{1}{N} \right) \).
+        Infine
+        \[d(x_{n_{k_{1}}}, x_{n_{k_{2}}}) \le d(x_{n_{k_{1}}}, y_{n_N}) +
+            d(y_{n_N},
+        x_{n_{k_{2}}}) < \frac{1}{N} + \frac{1}{N} = \frac{2}{N} \le \varepsilon\] 
+        Per cui \(x_{n_k}\) è di Cauchy.
+        
+    \item[\(\impliedby \)] Compatto \(\implies \) compatto per successioni
+        \(\implies \) totalmente limitato, per teorema e lemma enunciati
+        dimostrati in precedenza. Inoltre essendo compatto è completo.
+\end{itemize}
+\end{proof}
+\begin{proposition}
+    Sia \((X, d)\) completo, e sia \(Y \subseteq X \) allora \(Y\) è completo
+    \(\iff Y\) è chiuso
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Sia \(Y\) completo. Allora se \(y_{n} \in Y\) è una
+        successione convergente a \(z \in X\). Ma allora \(y_{n}\) è di Cauchy e
+        per la completezza di \(Y\) \(y_{n} \to \overline{z} \in Y\). Per
+        l'unicità del limite \(z = \overline{z}\) \(Y\) è chiuso.
+    \item[\(\impliedby \)] Sia \(Y\) chiuso. 
+\end{itemize}
+\end{proof}
+
+\begin{definition}
+    Un insieme non vuoto \(A \subseteq X \) è detto \textbf{magro} se \(X \smallsetminus A\) è denso in \(X\). In
+    altre parole \(A\) è \textbf{magro} se non ha parte interna.
+\end{definition}
+
+\begin{theorem}[Baire]
+    Sia \((X, d)\) uno spazio metrico completo.
+Supponiamo di avere una famiglia \(\{A_n\}_{n \in  \mathbb{N}}\) una famiglia
+numerabile di aperti densi in \(X\). Allora 
+\[
+    \bigcap_{n \in \mathbb{N}}A_n \text{ è denso }
+\]
+Similmente se \(\{C_n\}_{n \in \mathbb{N}} = \{X \smallsetminus A_n\}_{n \in
+\mathbb{N}}  \) è una famiglia numerabile di chiusi magri, allora 
+\[
+    \bigcup_{n \in \mathbb{N}} C_n \text{ è magro }
+\]
+\end{theorem}
+Notare l'importanza dell'ipotesi di completezza: ad esempio se \(X =
+\mathbb{Q}\) allora ogni insieme del tipo \(\mathbb{Q} \smallsetminus \{q_n\} =
+A_n\) è denso in \(\mathbb{Q}\) ma l'intersezione \(\bigcap_{n \in \mathbb{N}}
+A_n = \varnothing\).
+\begin{proof}
+    \begin{lemma}[``Palla mobile'']
+    Sia \((X, d)\) uno spazio completo. 
+    Siano \(D(x, r) = \{y \in X : d(x, y)< r\} \) e \(D^{C}(x, r) = \{y \in X :
+    d(x, y) \le r\} \). Allora ogni \(D\) è aperto perché controimmagine di
+    aperto e ogni \(D^{C}\) è chiuso perché controimmagine di chiuso.
+    Inoltre chiaramente \(D^{C}(x, \frac{r}{2}) \subseteq D(x, r) \subseteq
+    D^{C}(x, r) \). Supponiamo quindi di avere una successione di \(x_{i} \in
+    X\), \(r_{i} \in \mathbb{R}_{> 0}\), con \(r_{i} < r_{i - 1}\) e \(r_{i}\to
+    0\). Inoltre supponiamo che \(D^{C}(x_{n}, r_{n}) \subseteq D(x_{n-1},
+    r_{n-1}) \) e denotiamo \(D_n := D(x_{n}, r_n)\) e \(D^{C}_n := D^{C}(x_n,
+    r_n)\).
+    \[
+        \implies \bigcap D_i = \{y\}, \text{ con } x_i \to y \in X
+    \]
+\begin{figure}[ht]
+    \centering
+    \incfig[.4]{palla-mobile}
+    \caption{palla mobile}
+    \label{fig:palla-mobile}
+\end{figure}
+\end{lemma}
+\begin{proof}
+    Iniziamo mostrando che \(x_{n}\) è di Cauchy. Infatti poiché \(r_n \to 0 \)
+    per ogni \(\varepsilon \in \mathbb{R}\) esiste un \(\overline{n}\) tale che
+    se \(n \ge \overline{n}\) allora \(0 < r_n < \frac{\varepsilon}{2}\). Ma allora presi
+    \(n, m > \overline{n}\) abbiamo che \(x_{n}, x_{m} \in D_{\overline{n}}\) ma
+    allora \(d(x_{n}, x_{m}) < d(x_{n}, x_{\overline{n}}) + d(x_{m},
+    x_{\overline{n}}) < \varepsilon\). Quindi \(x_{n}\) è di Cauchy e per la
+    completezza dello spazio \(X\) è convergente.
+
+    Allora \(x_{n} \to y\). Inoltre \(y \in \bigcap_{n \in \mathbb{N}}
+    D^{C}_n\), poiché ogni \(D^{C}\) è completo e da un punto in poi ogni
+    termine di \(x_{n}\) è contenuto in ogni \(D^{C}_n\).
+    Però per definizione dei \(D\) e \(D^{C}\) e della successione abbiamo che
+    \(D_n \subseteq D_n^{C} \subseteq D_{n-1}  \) da cui \(\bigcap D_n =
+    \bigcap D_n^{C}  \) 
+\end{proof}
+Supponiamo di avere \(A_{1}\) e \(A_{2}\) densi aperti in \(X\). Allora \(A_{1}
+\cap A_{2}\) è aperto denso. Infatti se \(U\) è aperto in \(X\) allora \(A_{1}
+\cap U \neq \varnothing\) è aperto allora \(A_{2} \cap (A_{1} \cap U) \neq
+\varnothing\) da cui la tesi per associatività dell'intersezione (notare che
+non abbiamo usato che \(A_{2}\) è aperto, quindi tecnicamente basterebbe che
+\(A_{2}\) sia solo denso). Per induzione otteniamo che anche \(B_n = A_{1} \cap
+\dots A_n\) è denso aperto se ogni \(A_{i}\) è aperto denso. Infatti se sappiamo che
+\(B_{n-1}\) è denso aperto allora \(B_n = B_{n-1} \cap A_n\) che quindi è denso
+aperto.
+
+Sia ora una successione di aperti densi \(\{A_n\}_{n \in \mathbb{N}} \) e siano
+\(B_{i} = \bigcap_{i = 1\dots n} A_n\). Quindi abbbiamo che \(B_i \supseteq B_{i
++ 1} \) per ogni naturale \(i\). Allora
+\[
+    D = \bigcap_{n \in \mathbb{N}} A_n = \bigcap_{n \in \mathbb{N}} B_n
+\]
+Poiché ogni \(B_i\) è intersezione di \(A_i\). Ora vogliamo mostrare che \(D\) è denso.
+
+A questo scopo sia \(x_{1} \in B_{1} \cap U \neq \varnothing\) che esiste per la
+densità di \(B_{1}\). Sia ora \(D_{1}^{C} = D^{C}(x_{1}, r_{1}) \subseteq B_{1}
+\cap U\) che si può fare perché \(B_{1} \cap U\) è aperto; e inoltre sia \(0 <
+r_{1} < 1\) 
+Sia ora \(\varnothing \neq D_{1} \cap B_{2}\) che è aperto di \(X\). Quindi ora
+sia \(D_{2}^{C} = D^{C}(x_{2}, r_{2}) \subseteq D_{1} \cap B_{2} \subseteq D_{1}
+\cap B_{1} \subseteq U \) e sia \(r_{2} < \frac{1}{2}\). Continuando in questo
+modo fino a \(x_{n}\) in modo che ogni \(r_{i+1} < r_{i} < \frac{1}{i}\) e
+\(D^{C}_i = D^{C}(x_{i}, r_{i}) \subseteq D_{i - 1} \cap B_{i} \). Per procedere
+sia l'aperto \(D_n \cap B_{n+1} \neq \varnothing\), quindi sia \(x_{n+1} \in D_n \cap
+B_{n+1}\) e poiché è aperto allora esiste un \(r_{n+1} < r_n\) e \(r_{n+1} <
+\frac{1}{n+1}\) tale che \(D_{n+1}^{C} = D^{C}(x_{n+1}, r_{n+1}) \subseteq D_n
+\cap B_{n+1} \).
+A questo punto abbiamo una famiglia di dischi \(D_n\) che soddisfa le ipotesi
+del lemma della palla mobile, quindi esiste un \(y \in \bigcap D_n \subseteq U
+\) ma anche \(y \in \bigcap D_n \subseteq \bigcap B_n \) da cui \(y \in U \cap \bigcap B_n\) 
+\end{proof}
+
+\begin{example}
+    Sia \(K\) un compatto e \((X, d)\) uno spazio metrico. Sia \(\mathcal{C}(K,
+    X) = \{f : K \to X \text{ continue }\} \). 
+
+    Date \(f, g \in \mathcal{C}(K, X)\) sia \(\delta(f, g) = \sup_{x \in K}
+    d(f(x), g(x)) = \max_{x \in K} d(f(x), g(x))\). Mostriamo che \((\mathcal{C(K, X), \delta})\) è uno spazio
+    metrico. 
+    \[
+        K \stackrel{F = (f, g)}{\longrightarrow } X \times X \stackrel{d}{\to } \mathbb{R}
+    \]
+    \[
+        x \stackrel{F}{ \mapsto } (f(x), g(x)) \stackrel{d}{ \mapsto } d(f(x), g(x))
+    \]
+    Ha un massimo perché è immagine continua del compatto \(K\). Mostriamo che è
+    una metrica:
+\begin{itemize}[label = --]
+    \item \(\delta(f, g) \ge 0\) vero perché sup di distanze 
+    \item \(\delta(f,g) = 0 \iff\) \(f(x) = g(x) \forall x \in K\) 
+    \item \(\delta(f, g) = \delta(g,f)\) è un estremo superiore sullo stesso
+        insieme di valori reali perché ogni elemento del sup ha la proprietà
+        simmetrica
+    \item Disuguaglianza triangolare. Siano \(f, g, h : K \to X\) continue.
+        Allora \(\delta(f, g) = d(f(\overline{x}), g(\overline{x})) \le
+        d(f\overline{x}, h\overline{x}) + d(h\overline{x}, g\overline{x}) \le
+        \delta(f, h) + \delta(h, g)\) perché ovviamente preso un qualsiasi \(x
+        \in K\), \(d(fx, hx) \le \sup_{x \in K}d(fx, hx) = \delta(f, h)\) 
+\end{itemize}
+ 
+\end{example}
+
+
+
+\end{document}
+

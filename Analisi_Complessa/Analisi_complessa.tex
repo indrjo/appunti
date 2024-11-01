@@ -1,0 +1,1264 @@
+\input{~/.config/nvim/templates/preamble_appunti.tex}
+
+\title{Appunti di Analisi 3 \-- Analisi Complessa}
+\author{Osea}
+\date{Primo semestre A.A. 2024 \-- 2025, prof. Enrico Vitali}
+
+\begin{document}
+
+\maketitle
+
+\section{Convergenza puntuale e uniforme}
+Sia \(E\) un'insieme (non vuoto) e \(\{f_{n}\} \) una successione di funzioni
+\(E \to \mathbb{R}\) (o \(E \to \mathbb{R}^{n}\) o \(E \to \mathbb{C}\)). Sia
+\(f: E \to \mathbb{R}\).
+\begin{definition}
+    Diciamo che \(\{f_{n}\} \) converge \textbf{puntualmente} ad \(f\) se 
+    \[
+        \lim_{n \to \infty} f_{n}(x) = f(x) \quad \forall x \in E
+    \]
+\end{definition}
+\begin{example}
+    \(E = \mathbb{R}\) e \(f_{n}(x) = \frac{1}{n + x^2}\), \(f_{n} \to 0\) su
+    \(\mathbb{R}\) 
+\end{example}
+\begin{example}
+\(f_{n}(x) = {\left( x - \frac{1}{n} \right)}^2 \to x^2\)
+\end{example}
+\begin{example}
+    \(f_{n}(x) = x^2 - \frac{1}{n}\) 
+\end{example}
+\begin{example}
+    \(f_{n}(x) = e^{x - n}\) 
+    \(f_{n} \to 0\) 
+\end{example}
+
+\begin{example}
+    \(E = [0, 1]\), \(f_{n}(x) \) funzione che è a triangolo con vertici
+    \((\frac{1}{4n}, 0), (\frac{1}{2n}, 1)\), \( (\frac{1}{n}, 0)\). Allora
+    \(f_{n} \to 0\)
+\end{example}
+
+In questi esempi l'idea è che per ogni \(\varepsilon\) esiste un
+\(n_\varepsilon\) tale che per \(n\ge n_\varepsilon\), \(f_{n}(x) <
+\varepsilon\). La domanda è se si riesce a esprimere \(n_\varepsilon\) senza che
+dipenda da \(x\).
+Nell'esempio di \(f_{n}(x) = \frac{1}{n+x^2}\) si può perché \(f_{n}\) ha un
+massimo in \(x = 0\), in tal caso infatti se prendo \(n_\varepsilon \) tale che
+\(\frac{1}{n_\varepsilon} < \varepsilon\) allora \(\frac{1}{n+x^2}\le
+\frac{1}{n} \le \frac{1}{n_\varepsilon} < \varepsilon\).
+
+Nell'esempio 1.2 invece vogliamo un \(n_\varepsilon\) tale che \(\forall n\ge
+n_\varepsilon\), \(|f_{n}(x) - f(x)| \le \varepsilon\) ossia \(|-\frac{2}{n} x +
+\frac{1}{n^2} | \le  \varepsilon\). Da questo troviamo che
+\[
+    \frac{1}{n^2} - \varepsilon \le \frac{2x}{n} \le \frac{1}{n^2} + \varepsilon
+\]
+Ma è sempre possibile, per qualsiasi \(\frac{1}{n^2} + \varepsilon\) è
+possibile trovare un \(x\) tale che sia maggiore, quindi non è possibile non
+esprimere \(n_\varepsilon\) anche in funzione di \(x\).
+
+\begin{definition}
+    Sia \(f\), \(f_{n} : E \to \mathbb{R}\). Diciamo che \(f_{n} \to f\)
+    uniformemente in \(E\) se:
+    \[
+        \forall \varepsilon > 0 \quad \exists n_\varepsilon \in \mathbb{N} :
+        \forall n \ge n_\varepsilon, \forall x \in E, \quad |f_{n}(x) - f(x)| <
+        \varepsilon
+    \]
+\end{definition}
+\begin{remark}
+    La condizione della definizione di convergenza uniforme è equivalente a
+    richiedere che \(\sup_{x \in E} |f_n(x) - f(x)| < \varepsilon\). Da questo
+    concludiamo che \(f_{n} \to f\) uniformemente se e solo se
+    \[
+        \lim_{n \to \infty} \sup_{x \in E} |f_{n}(x) - f(x)| <\varepsilon
+    \]
+\end{remark}
+Allora con questa nuova osservazione è facile notare la non convergenza uniforme
+dell'esempio 1.2. Infatti se \(f_{n}(x) = {(x-\frac{1}{n})}^2\) e \(f(x) = x^2\)
+allora \(\sup_{x \in \mathbb{R}} |f_{n}(x) - f(x)| \ge |f_n(n) - f(n)| = |2 -
+\frac{1}{n}| \to 2 > 0\).
+
+Abbiamo però che converge uniformemente sugli insiemi limitati (esercizio).
+Similmente nell'esempio 1.4 \(f_{n}\) converge uniformemente sugli insiemi
+\((-\infty, a]\) infatti \(0 \le f_{n}(x) \le e^{a-n} \to 0\) per \(n \to +\infty\) 
+
+Geometricamente la convergenza uniforme dice che il grafico di \(f_{n}\) è
+contenuta in un intorno tubolare arbitrario di \(f\) per \(n\) sufficientemente
+grande.
+
+\begin{proposition}[Criterio di Cauchy / completezza di \(\mathbb{R}\) ]
+    Se \(\{a_{n}\} \) è una successione di numeri reali si ha:
+    \(a_{n}\) converge se e solo se \(a_{n}\) è una successione di Cauchy, ossia
+    se \(\forall \varepsilon > 0 \exists n_\varepsilon\) tale che \(\forall
+    n_{1},n_{2} \ge n_\varepsilon\), \(|a_{n_{1}} - a_{n2}| <\varepsilon\) 
+\end{proposition}
+
+\begin{theorem}[Criterio di Cauchy per la convergenza uniforme]
+    Siano \(f, f_{n} : E \to \mathbb{R}\), con \(f_{n} \to f\) in \(E\). Allora la
+    convergenza è uniforme in \(E\) se e solo se 
+    \[
+        \forall \varepsilon>0 \quad \exists n_\varepsilon \in \mathbb{N} : \forall n,m
+        \ge n_\varepsilon \text{ e } \forall x \in E, \quad |f_{n}(x) -
+        f_{m}(x)| < \varepsilon
+    \]
+\end{theorem}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Sia \(f_{n} \to f\) uniformemente in \(E\). Fissato
+        \(\varepsilon>0\), sia \(n_\varepsilon\) tale che (convergenza uniforme)
+        \(\forall k \ge n_\varepsilon\) e \(\forall x \in E\), \(|f_k(x) - f(x)|
+        < \frac{\varepsilon}{2}\) allora presi \(n,m \ge n_\varepsilon\) ho
+        che \(|f_n(x) - f_m(x)| \le |f_n(x) - f(x)| + |f_m(x) - f(x)| <
+        \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\) 
+    \item[\(\impliedby \)] Valga la condizione di Cauchy. Allora \(\forall x \in
+        E\) la successione \(\{f_{n}(x)\} \) è una successione di Cauchy, quindi
+        è convergente, quindi \(\exists f : E \to \mathbb{R}\) tale che
+        \(f_{n} \to f\). Allora dalla condizione di Cauchy, tenendo \(n\) fisso
+        e facendo tendere \(n \to +\infty\) si ottiene esattamente la
+        convergenza uniforme.
+\end{itemize}
+\end{proof}
+
+Fun fact: esistono dei cosiddetti ``Spazi uniformi'', che sono spazi topologici
+ma non metrici.
+
+\begin{example}
+    Sia \(f_{n} = \frac{n^2 - x}{n^3 + e^{nx}}\). È evidente per \(x \in
+    \mathbb{R}\) che \(f_{n}(x) \to 0\).
+
+    C'è convergenza uniforme sui limitati, infatti se \(|x| \le M\) allora
+    \(|f_{n}(x)| \le \frac{n^2 + M}{n^3} \to 0\). Consideriamo ora \(x \ge  0\)
+    (esercizio). Invece per \(x \le 0\), posso prendere per ogni \(n\) \(x_{n} =
+    -n^{4}\) e allora ottengo che \(f_{n}(x_{n}) \to +\infty\) 
+\end{example}
+
+\begin{remark}
+    Sia \(f_{n}: [a, b) \to  \mathbb{R}\) continua, suppongo che \(\{f_{n}\} \)
+    converga uniformemente a \(f\) in \((a, b)\). Allora converge uniformemente
+    in \([a, b)\) 
+\end{remark}
+\begin{proof}
+    Per Cauchy
+    \[
+        \forall \varepsilon > 0 \quad \exists n_\varepsilon \in \mathbb{N} :
+        \forall  n, m \ge n_\varepsilon, \forall x \in (a, b), \quad |f_{n}(x) -
+        f_{m}(x)| \le \varepsilon
+    \]
+
+    Per \(x \to  a\) abbiamo per continuità che \(|f_{n}(a) - f_{m}(a)| \le
+    \varepsilon\) per \(n, m \ge \overline{n} \in \mathbb{N}\), quindi preso
+    \(\tilde{n} = \max{n_\varepsilon, \overline{n}}\) si ha che \(f_{n}\)
+    soddisfa il criterio di Cauchy in \([a, b)\) e quindi converge
+    uniformemente.
+\end{proof}
+Da questa osservazione noto anche che vale il contrapositivo: se \(f_{n}\) non
+converge uniformemente in \([a, b)\) non può neanche convergere uniformemente in
+\((a, b)\)
+\begin{example}
+    \(\displaystyle f_{n}(x) = \frac{1}{1 + {n^2 \left( x - \frac{q}{\sqrt{n}}
+\right)}^2}\), allora ho che \(\displaystyle f_{n}(0) = \frac{1}{1+n} \to 0\), e
+per \(x \neq 0\) pure, infatti
+\[
+    0 \le \frac{1}{1+ n^2 {\left( x - \frac{1}{\sqrt{n}} \right)}^2}
+    \overset{\text{definitivamente}}{\le} \frac{1}{1 + n^2 {\left(
+    \frac{x^2}{2} \right) }^2} \to 0
+\]
+è convergente uniformemente su tutto \(\mathbb{R}\)
+\end{example}
+Sia \(E\) un insieme non vuoto e sia \(\mathcal{B}(E)\) l'insieme delle funzioni
+reali e limitate su \(E\).
+\begin{definition}[Norma dell'estremo superiore]
+    Sia \(f : E \to \mathbb{R}^{n}\) una funzione. Allora
+    \[
+        \|f \|_{\infty} := \sup_{x \in E} |f(x)| 
+    \]
+    è la norma dell'estremo superiore (anche denotata semplicemente \(\|f\|\)).
+\end{definition}
+\begin{proof}[Buona definizione]
+Perché sia una buona definizione, serve che sia una norma. 
+\begin{enumerate}[label = \alph*.]
+    \item \(\|f\| \ge 0\) e \(\|f\| = 0 \iff f = 0\)
+    \item \(\|\lambda f\| = |\lambda| \|f\|\)
+    \item \(\|f + g\| \le \|f\| + \|g\|\)
+\end{enumerate}
+\end{proof}
+\begin{proposition}
+    \(\mathcal{B}(E)\) è uno spazio metrico normato con la norma dell'estremo
+    superiore, e quindi distanza \(d(f, g) = \|f - g\|\) 
+\end{proposition}
+\begin{proof}
+    ovvio
+\end{proof}
+
+\subsection{Scambi di limite, derivate, integrali}
+\begin{example}
+    Dimostrare che se \(f \in C^{0}([a, b] \times [c, d])\) a valori reali e 
+    \[
+        g(y) = \int_{a}^{b} f(x, y) \, dx \quad y \in [c, d]
+    \]
+    Allora \(g\) è continua in \([c,d]\) 
+
+    Infatti \(\forall \overline{y} \in [c, d]\) abbiamo che comunque presa
+    \(y_{n} \to \overline{y}\) chiaramente \(g(y_{n}) \to g(\overline{y})\).
+    Ponendo ora \(f_{n} = f(\cdot , y_{n})\). Allora vogliamo mostrare che
+    \(f_{n}(\cdot ) \to f(\cdot , \overline{y})\) uniformemente in \([a, b]\).
+    Poiché \(f\) è uniformemente continua in \([a, b] \times [c, d]\) perché
+    continua su un compatto, allora \(\forall \varepsilon > 0 \quad \exists
+    \delta > 0\) tale che \(\forall x, x' \in [a, b]\) e \(\forall y, y' \in [c,
+    d]\) se \(\sqrt{{(x - x')}^2 + {(y - y')}^2} < \delta\) allora \(|f(x, y) -
+    f(x', y')| < \varepsilon\). Allora fissato \(\varepsilon>0\) sia \(\delta\)
+    come sopra; sia quindi \(n_\varepsilon\) tale che \(n \ge n_\varepsilon
+    \implies |y_{n} - \overline{y}| \le \delta\) e quindi, per ogni \(x \in [a,
+    b]\) abbiamo \(|(x, y_{n}) - (x,
+    \overline{y})| = |y_{n}-y| \le \delta\), da cui \(|f_{n}(x, y_{n}) - f(x,
+    \overline{y})|\le \varepsilon\). Abbiamo quindi mostrato l'uniforme
+    convergenza.
+\end{example}
+\begin{proposition}[Derivation under the integral sign]
+    Sia \(f \in C^{1}([a,b] \times [c, d])\) e \(g(y) = \int_a^b f(x, y) dx\)
+    per \(y \in [c, d]\), allora
+    \[
+        g \in C^{1}([c, d]) \text{ e } g'(y) = \int_a^b \frac{\partial
+        f}{\partial y}(x, y) \, dx
+    \]
+\end{proposition}
+\begin{proof}
+    Fissiamo \(\overline{y} \in [c, d]\) e consideriamo 
+    \[
+        \frac{g(y) - g(\overline{y})}{y - \overline{y}} = \int_a^b
+        \frac{f(x, y) - f(x, \overline{y})}{y - \overline{y}} \, dx = \int_a^b 
+        \varphi(x, y) dx
+    \]
+    con \(\varphi(x, y)\) l'integrando.
+    Siappiamo che \(\lim_{y \to \overline{y}} \varphi(x, y) = \frac{\partial
+    f}{\partial y} (x, \overline{y})\) e vogliamo mostrare che questa
+    convergenza è uniforme al variare di \(x\). Per il teorema di Lagrange si ha
+    che 
+    \[
+        \varphi(x, y) = \frac{f(x, y) - f(x, \overline{y})}{y - \overline{y}} =
+        \frac{\partial f}{\partial y} (x, \xi_{x, y}) \quad \xi_{x, y} \in
+        (\overline{y}, y) \text{ oppure } (\overline{y}, y)
+    \]
+    Poiché \(\frac{\partial f}{\partial y}\) è uniformemente continua in \([a,
+    b] \times [c, d]\) allora
+    \begin{align*}
+        \forall \varepsilon > 0 \quad \exists \delta > 0 : \forall x, x' \in [a,
+        b] \text{ e } \forall y, y' \in [c, d]\\
+        |(x, y) - (x', y')| < \delta \implies \left| \frac{\partial f}{\partial y}(x,
+        y) - \frac{\partial f}{\partial y}(x', y') \right| < \varepsilon
+    \end{align*}
+    e ora prendiamo come coppie \((x, \overline{y})\) e \((x, \xi_{x, y})\) e
+    abbiamo
+    \[
+        |(x, \xi_{x, y}) - (x, \overline{y})| = |\xi_{x, y} - \overline{y}| \le
+        |y - \overline{y}|
+    \]
+    Ora come prima ciò dimostra che \(\varphi(x, y) \to \frac{\partial
+    f}{\partial y}(x, \overline{y})\) uniformemente in \([a, b]\) e quindi
+    \[
+        \frac{d}{dy} \int_a^b f(x, y) \, dx = \int_a^b \frac{\partial
+        f}{\partial y}(x, y) \, dx
+    \]
+\end{proof}
+
+\subsection{Serie di funzioni}
+I risultati visti per le successioni di funzioni danno luogo ad analoghi
+risultati per le serie di funzioni.
+Sia quindi \(E\) un insieme \(f_{n} : E \to \mathbb{R}\) (oppure
+\(\mathbb{R}^{m}, \mathbb{C}\)) e si considera la serie 
+\[
+    \sum_{n=1}^{\infty} f_{n}(x)\quad x \in E
+\]
+che è una serie di funzioni.
+\begin{definition}
+    Diciamo che la serie \(\sum_{n=1}^{\infty} f_{n}(x)\) converge puntualmente
+    in \(E\) se la successione delle somme parziali converge puntualmente in
+    \(E\), ossia se 
+    \[
+        \lim_{N \to \infty} \sum_{n=1}^{N} f_{n}(x) = f(x) \quad \forall x \in E
+    \]
+
+    Diciamo che la serie \(\sum_{n=1}^{\infty} f_{n}(x)\) converge uniformemente
+    in \(E\) se la successione delle somme parziali converge uniformemente in
+    \(E\),
+\end{definition}
+Ne consegue che alcuni risultati hanno rispettivi analoghi, ad esempio
+    \[
+        \sum_{i=1}^{\infty} f_{n}(x) 
+    \]
+    converge uniformemente in \(E\) se e solo se 
+    \[
+        s_N(x) = \sum_{n=1}^{N} f_{n}(x)
+    \]
+    converge uniformemente in \(E\) (definizione), ossia questo vale se 
+    \[
+        \forall \varepsilon > 0 \quad \exists n_\varepsilon \in \mathbb{N} :
+        \forall N, M \ge n_\varepsilon, \forall x \in E, \quad |s_N(x) - s_M(x)|
+        < \varepsilon
+    \]
+    Ora assumiamo senza perdita di generalità che \(N \le  M\), allora chiamiamo
+    \(M = N + p\) e otteniamo che l'ultima eguaglianza si scrive come
+    \[
+        \left| \sum_{n=N+1}^{N+p} f_{n}(x) \right| < \varepsilon
+    \]
+Otteniamo
+\begin{proposition}[Criterio di Cauchy]
+    La serie \(\sum_{n=1}^{\infty} f_{n}(x)\) converge uniformemente in \(E\) se
+    e solo se 
+    \begin{equation}
+        \forall \varepsilon > 0 \quad \exists n_\varepsilon \in \mathbb{N} :
+        \forall n, p \ge n_\varepsilon, \forall x \in E, \quad \left|
+        \sum_{k=n+1}^{n+p}
+        f_{k}(x) \right| < \varepsilon
+    \end{equation}
+\end{proposition}
+\begin{corollary}
+    Condizione necessaria affinche la serie \(\sum_{n=1}^{\infty} f_{n}(x)\)
+    converga uniformemente in \(E\) è che \(f_{n} \to 0\) uniformemente in \(E\)
+\end{corollary}
+\begin{proof}
+    prendiamo \(p=1\) in (1) e otteniamo
+    \(
+        \left| f_{n+1}(x) \right| < \varepsilon
+    \)
+    ossia \(f_{n} \to 0\) uniformemente in \(E\) 
+\end{proof}
+
+\begin{example}
+Supponiamo ora che esista una successione numerica \({\{a_{n}\}}_{n \in
+\mathbb{N}}  \) tale che
+\begin{itemize}
+    \item \(|f_{n}(x)| \le a_{n}\) per ogni \(x \in E\) 
+    \item \(\sum_{n=1}^{\infty} a_{n} < +\infty\)
+\end{itemize}
+vogliamo mostrare che allora la serie \(\sum_{n=1}^{\infty} f_{n}(x)\) converge
+uniformemente in \(E\), usando \((1)\), infatti abbiamo 
+\[
+    \left| \sum_{k=n+1}^{n+p} f_{k}(x) \right| \le \sum_{k=n+1}^{n+p} |f_{k}(x)|
+    \le \sum_{k=n+1}^{n+p} a_{k} < \varepsilon
+\]
+dove nell'ultima diseguaglianza si è utilizzato il criterio di Cauchy per le
+serie numeriche.
+\end{example}
+\begin{definition}[Convergenza totale]
+    Si dice che la serie \(\sum_{n=1}^{\infty} f_{n}(x)\) converge
+    \textbf{totalmente} in \(E\) se esiste \(\{a_{n}\} \) in \(\mathbb{R}\) tale
+    che 
+    \begin{itemize}
+        \item \(|f_{n}(x)| \le a_{n}\) per ogni \(x \in E\) 
+        \item \(\sum_{n=1}^{\infty} a_{n} < +\infty\)
+    \end{itemize}
+\end{definition}
+Per quanto visto prima quindi
+\begin{proposition}
+    Convergenza totale implica convergenza uniforme, e notando dalla
+    dimostrazione prima abbiamo anche che implica la convergenza assoluta
+    uniforme.
+\end{proposition}
+
+\begin{example}
+Non vale il contrario, un esempio di serie uniformemente convergente ma non
+totalmente convergente è
+\[
+\sum_{n=1}^{\infty} -1 \cdot \frac{{(-1)}^{n}}{n}
+\]
+dove \(f_{n}(x)\) è costante per ogni \(n\). Allora la serie converge
+uniformenenente in \(\mathbb{R}\) ovviamente perché è costante e converge in
+quanto a segno alternato, ma non converge totalmente perché la serie armonica
+diverge.
+\end{example}
+\begin{example}
+    Sia \(f_{n}(x) = {(-1)}^{n+1} \frac{x^{n}}{n}\), per \(x \in \mathbb{R}\).
+    Allora usiamo il criterio della radice ottenendo
+    \[
+        \lim_{n \to \infty} \sqrt[n]{|f_{n}(x)|} = \lim_{n \to \infty}
+        \frac{|x|}{\sqrt[n]{n}} = |x|
+    \]
+    quindi per \(|x| < 1\) la serie converge assolutamente, per \(|x| > 1\) la
+    serie diverge, per \(x = -1\) la serie è la serie armonica che diverge, per
+    \(x = 1\) la serie è una serie a segni alterni che converge.
+
+    Concludiamo quindi che la serie converge puntalmente in \((-1, 1]\) e per
+    ogni \(0 < \delta < 1\) la serie converge uniformemente in \([-\delta,
+    \delta]\), infatti 
+    \[
+        \left| {(-1)}^{n+1} \frac{x^{n}}{n} \right| \le \delta^{n}{n}
+    \]
+    la cui serie converge, quindi la serie converge totalmente.
+
+    Naturalmente però la serie non converge totalmente in \([0, 1]\) poiché
+\[\max_{x \in [0, 1]} |f_{n}(x)| = \frac{1}{n}\] ma comunque la serie converge
+uniformemente in \([0, 1]\), infatti usiamo il criterio di Cauchy.
+\[
+    \left| \sum_{k=n+1}^{n+p} f_{k}(x) \right| \le |s_{n+p}(x) - s_{n}(x)| <=
+    |s_{n+p} - S(x)| + |S(x) - s_{n}(x)| < \frac{x^{n+p}}{n+p} + \frac{x^{n}}{n}
+\]
+che converge a \(0\) per \(n\to +\infty\)
+e si è usato il fatto che se \(S = \sum_{i=1}^{\infty} {(-1)}^{n+1} a_{n} \)
+è una serie convergente a segni alterni, con \(a_{n} > 0, a_{n} \to 0\) allora
+\(|S - s_{n}| \le a_{n+1} \) 
+
+Procediamo a chiederci se la serie converge uniformemente in \((-1, 0]\).
+Utilizziamo allora la seguente osservazione dedotta direttamente dalle
+successioni
+\begin{remark}
+    Sia \(\sum_{i=1}^{\infty} f_{n}(x) \), \(f_{n} \in C^{0}([a, b])\). Se la
+    serie converge uniformemente in \((a, b]\) allora converge uniformemente in
+    \([a, b]\) (in particolare converge in \(x=a\))
+\end{remark}
+\begin{proof}
+    Per ipotesi \(s_{n}(x)\) converge uniformemente in \((a, b]\) e \(s_{n}\)
+    sono funzioni continue in \(x = a\), quindi per il risultato che avevamo già
+    per le successioni (in breve basta enunciare il criterio di Cauchy e usare
+la continuità in \(x=a\)) otteniamo che la serie converge uniformemente in \([a,
+b]\)
+\end{proof}
+Ne concludiamo che la serie non può convergere uniformemente in \((-1, 0]\)
+altrimenti convergerebbe uniformemente in \([-1, 0]\) ma sappiamo che in \(-1\)
+non abbiamo neanche convergenza puntuale.
+\end{example}
+
+\begin{example}
+    Studiare la convergenza puntuale e uniforme di
+    \[
+        \sum_{n=1}^{\infty} \frac{x}{{(1+x)}^{n}} 
+    \]
+\end{example}
+
+\section{Richiami su limiti e serie}
+\begin{proposition}
+    Sia \(a_{n}\) una successione di numeri reali positivi. Allora 
+    \[
+       \liminf_{n \to +\infty} \frac{a_{n+1}}{ a_{n} } \le \liminf_{n \to
+       +\infty} \sqrt[n]{a_{n}} \le \limsup_{n \to +\infty} \sqrt[n]{a_{n}} \le
+       \limsup_{n \to +\infty} \frac{a_{n+1}}{a_{n}}
+    \]
+\end{proposition}
+\begin{proof}
+    Sia \(L = \limsup \frac{a_{n+1}}{a_{n}}\). Se \(L=+\infty\) non c'è nulla da
+    dimostrare. Sia allora \( L < +\infty\). Fissato un \(\varepsilon>0\) quindi
+    esiste \(n_{\varepsilon} \) tale che \(\forall n \ge n_{\varepsilon}\) si ha 
+    \[
+        \frac{a_{n+1} }{a_{n}} \le  L + \varepsilon
+    \]
+    Allora iterando otteniamo
+    \[
+        a_{n} \le (L + \varepsilon)^{n - n_{\varepsilon}} a_{n_{\varepsilon}}
+        \implies \sqrt[n]{a_{n}} \le {(L + \varepsilon)}^{1 -
+        \frac{n_{\varepsilon}}{n}} \sqrt[n]{a_{n_{\varepsilon}}} \to L +
+        \varepsilon 
+    \]
+    Per \(n \to \infty\), ora per l'arbitrarietà di \(\varepsilon > 0\)
+    otteniamo
+    \[
+        \limsup_{n \to \infty} \sqrt[n]{a_{n}} \le L = \limsup_{n \to \infty}
+        \frac{a_{n+1}}{a_{n}}
+    \]
+    Similmente si dimostra anche l'altra uguaglianza, quella centrale è ovvia.
+\end{proof}
+\begin{example}
+    Sia \(a_{n} = n\). Allora poiché \(\frac{a_{n+1}}{a_{n}} \to 1\) abbiamo che
+    anche \(\sqrt[n]{n} \to 1\).
+
+    Sia \(a_{n} = n!\). Allora \(\frac{a_{n+1}}{a_{n}} = n+1 \to +\infty\) e
+    quindi anche \(\sqrt[n]{n!} \to +\infty\)
+
+    Sia \(a_{n} = \frac{n^{n}}{n!}\) allora
+    \[
+        \frac{a_{n+1}}{a_{n}} = \frac{{(n+1)}^{n+1}}{(n+1)!} \frac{n!}{n^{n}} =
+        \frac{{(n+1)}^{n}}{n^{n}} = {\left( 1 + \frac{1}{n} \right)}^{n} \to e
+    \]
+    e quindi \(\displaystyle \sqrt[n]{\frac{n^{n}}{n!}} =
+    \frac{n}{\sqrt[n]{n!}}\to e\).
+
+\end{example}
+\begin{remark}
+    In realtà (e potremmo vederlo più tardi), l'approssimazione di Stirling ci
+    dice
+    \[
+    n! \sim \sqrt{2\pi n} {\left( \frac{n}{e} \right)}^{n}
+    \]
+\end{remark}
+
+Ora procediamo vedendo un criterio di convergenza (non assoluta) che sarà il
+criterio di convergenza di Abel. Procediamo a passi più piccoli.
+\begin{lemmao}[Disuguaglianza di (Brunacci) Abel]
+    Siano \(\gamma_0, \gamma_{1}, \dots, \gamma_{\ell} \in \mathbb{C}\) e siano
+    \(\zeta_{0}, \zeta_{1}, \dots, \zeta_{\ell} \in \mathbb{C} \). Poniamo ora 
+    \[
+        w_m = \sum_{i=0}^{m} \zeta_i \quad m = 0, 1, \dots, \ell
+    \]
+    Sia \(M > 0\) tale che 
+    \[
+        |w_m| \le M \quad \forall m = 0, 1, \dots, \ell
+    \]
+    Allora 
+    \[
+        \left| \sum_{i=0}^{\ell} \gamma_i \zeta_i \right| \le (|\gamma_0 -
+        \gamma_{1}| + |\gamma_1 - \gamma_{2}| +~\dots + |\gamma_{\ell-1} -
+        \gamma_{\ell}| + |\gamma_{\ell}|)M
+    \]
+\end{lemmao}
+\begin{proof}
+    \[
+        \sum_{i=0}^{\ell} \gamma_{i} \zeta_{i} = \sum_{i=0}^{\ell} \gamma_{i}
+        (w_{i} - w_{i-1}) = \sum_{i=0}^{\ell} (\gamma_{i} - \gamma_{i+1})w_{i}
+    \]
+    Dove si intende che \(\gamma_{\ell+1} = 0\) e \(w_{-1} = 0\). Ora
+    semplicemente per disuguaglianza triangolare e applicando l'ipotesi
+    definente \(M\) otteniamo la tesi.
+\end{proof}
+
+\begin{theorem}[primo criterio di convergenza di Abel]
+    Sia \(\sum_{n=1}^{\infty} c_{n} z_{n}\) una serie numerica. Se 
+    \begin{itemize}
+        \item \(z_{n} \in \mathbb{C}\) (oppure in \(\mathbb{R}^{N}\))
+        \item \(\sum_{n=1}^{\infty} z_{n}\) è una serie le cui somme parziali
+            sono limitate
+        \item \(\{c_{n}\}\) è una successione di numeri reali non creascente e
+            infinitesima
+    \end{itemize}
+    allora la serie \(\sum_{n=1}^{\infty} c_{n} z_{n}\) converge.
+\end{theorem}
+
+\begin{proof}
+    Utilizziamo il criterio di convergenza di Cauchy. Fissiamo \(N, p \in
+    \mathbb{N}\) e consideriamo
+    \[
+        \left| \sum_{n=N}^{N+p} c_{n} z^{n} \right| \le 2M\sum_{n=N}^{N+p} |c_{n}
+        - c_{n+1}| \text{ (diciamo \(c_{N+p+1} = 0 \) per comodità notazionale) }
+    \]
+    Dove \(M\) è maggiorante per le somme parziali di \(z_{n}\). Infatti abbiamo
+    che 
+    \[
+        w_m = z_N + z_{N+1} +~\dots + z_{N+m} = \sum_{i=0}^{N+m} z_{n} -
+        \sum_{i=0}^{N-1} z_{n}
+    \]
+    per cui effettivamente \(|w_m| \le 2M\) e possimao applicare la
+    disuguaglianza di Abel.
+    
+    Ora possiamo, sapendo che \(c_k \to 0\) da sopra, ottenere che la serie
+    precedentemente trovata è telescopica per \(N\) sufficientemente grande e
+    quindi
+    \[
+        \left| \sum_{n=N}^{N+p} c_{n} z^{n} \right| \le 2M|c_{N}|\to 0 \text{ per
+        } N \to +\infty
+    \]
+    e quindi per il criterio di Cauchy la serie converge.
+\end{proof}
+\begin{example}
+    Consideriamo la serie
+    \[
+    \sum_{n=1}^{\infty} {(-1)}^{n+1} \frac{z^{n}}{n} \quad z \in \mathbb{C}
+    \]
+    Allora se \(|z| > 1\) manca la condizione necessaria di convergenza.
+
+    Sia allora \(|z| \le  1\). Consideriamo prima il caso \(|z| < 1\). Sia ha
+    allora convergenza assoluta, perché
+    \[
+        \frac{|z|^{n+1}}{n+1} \cdot \frac{n}{|z|^{n}} =  |z| \frac{n}{n+1} \to 0
+    \]
+
+    Consideriamo invine il caso \(|z| = 1\). Se \(z = -1\) la serie non
+    converge:
+    \[
+        \sum_{n=1}^{\infty} \frac{{(-1)}^{n+1} \cdot {(-1)}^{n}}{n} = -
+        \sum_{i=1}^{\infty} \frac{1}{n}  \to -\infty
+    \]
+    Ora consideriamo \(|z|=1\) con \(z\neq-1\) e vogliamo applicare il criterio
+    di Abel, con \(c_{n} = \frac{1}{n}\) e \(z_{n} = {(-1)}^{n+1} z^{n}\).
+    Chiaramente \(c_{n}\) è infinitesima non crescente reale. Inoltre
+    \[
+        |z_{1} + z_{2} + \dots + z_N| = \left| \sum_{i=1}^{N} {(-1)}^{n+1} z^{n}
+        \right| = \left| \sum_{n=1}^{N} (-z)^{N} \right| = |z| \left| \frac{1 -
+        {(-z)}^{N}}{1 - (-z)} \right| \le \frac{z}{|1+z|}
+    \]
+    Quindi sono soddisfatte le ipotesi del criterio di Abel e la serie converge.
+
+\begin{figure}[ht]
+    \centering
+    \incfig[.4]{esempio2}
+    \caption{Punti del piano \(\mathbb{C}\) tali che la serie dell'esempio 2.2
+    converge}\label{fig:esempio2}
+\end{figure}
+\end{example}
+\begin{corollary}[Criterio di Leibniz]
+    Se una serie è a segni alterni del tipo 
+    \[
+        \sum_{n=1}^{\infty} {(-1)}^{n} a_{n}
+    \]
+    con \(a_{n} \to 0\) e \(a_{n} > 0\) non crescente. Allora abbiamo che
+    \(z_{n} = {(-1)}^{n}\) e \(c_{n} = a_{n}\) soddisfano le ipotesi del
+    criterio di Abel e quindi la serie converge.
+\end{corollary}
+\begin{theorem}[Secondo criterio di convergenza di Abel]
+    Si consideri la serie \[
+        \sum_{n=0}^{\infty} c_{n} z_{n} 
+    \]
+    con
+    \begin{itemize}
+        \item \(z_{n} \in \mathbb{C}\) (oppure in \(\mathbb{R}^{N}\))
+        \item \(\sum_{n=0}^{\infty} z_{n}\) è una serie convergente
+        \item \(\{c_{n}\}\) è una successione monotona e convergente
+    \end{itemize}
+    Allora la serie \(\sum_{n=0}^{\infty} c_{n} z_{n}\) converge.
+\end{theorem}
+\begin{proof}
+    Supponiamo \(c_{n} \to c\) non crescente. Allora
+    \[
+        \sum_{n=0}^{N} c_{n} z_{n} = \sum_{n=0}^{N} (c_{n} - c)z_{n} + c
+        \sum_{n=0}^{N} z_{n}
+    \]
+    Ora per \(N \to \infty\) abbiamo che \(c_{n} - c \to 0\) decrescente e le
+    somme parziali di \(z_{n}\) sono limitate, perché la serie converge. Quindi
+    abbiamo che la prima serie converge per il primo criterio di Abel. 
+    Anche la seconda serie converge per ipotesi, quindi la tesi è dimostrata.
+\end{proof}
+
+Sappiamo che 
+\[
+    \left( \sum_{n=0}^{N} a_{n} z^{n}  \right) \left( \sum_{n=0}^{M}
+        b_{n} z^{n}
+    \right) = \sum_{n=0}^{N+M} \sum_{k=0}^{n} a_{k} b_{n-k}  z^{n}
+\]
+è il prodtto di polinomi. Quindi formalmente, se \(z = 1\) e \(N, M \to \infty\) otteniamo
+
+\begin{definition}[Serie prodotto alla Cauchy]
+\[
+    \left( \sum_{n=0}^{\infty} a_{n}  \right) \left( \sum_{n=0}^{\infty} b_{n}
+    \right) := \sum_{n=0}^{\infty} \sum_{k=0}^{n} a_{k} b_{n-k}  
+\]
+che è detta serie prodotto alla Cauchy delle serie \(\sum_{n=0}^{\infty} a_{n}\)
+e \(\sum_{n=0}^{\infty} b_{n} \) 
+\end{definition}
+
+\begin{theorem}[Mertens + Cauchy]
+    Se le serie \(\sum_{n=0}^{\infty} a_{n}\) e \(\sum_{n=0}^{\infty} b_{n} \)
+    sono convergenti e almeno una è assolutamente convergente, allora la serie
+    prodotto è convergente ed ha per somma il prodotto delle serie.
+    
+    Se entrambe le serie sono assolutamente convergenti, allora tale è anche la
+    serie prodotto.
+\end{theorem}
+
+Consideriamo serie della forma 
+\[
+\sum_{n=0}^{\infty} c_{n} {(z - a)}^{n} \text{ con } c_{n}\in \mathbb{C} \text{
+e } z, a \in \mathbb{C}
+\]
+Abbiamo visto alcuni esempi:
+\begin{enumerate}[label = \alph*)]
+    \item \(\sum_{n=0}^{\infty} z^{n} \) converge se e solo se \(|z| < 1\)
+    \item \(\sum_{n=0}^{\infty} {(-1)}^{n+1} \frac{z^{n}}{n} \), converge se e
+        solo se \(|z| \le 1\) e \(z \neq -1\)  
+\end{enumerate}
+In entrambi i casi (e vedremo in generale) la convergenza è nei punti di un
+disco (detto cerchio di convergenza) di centro \(z = a\). Il comportamento sul
+bordo del cerchio varia da caso a caso.
+
+\begin{theorem}[Abel]
+    Si consideri la seire di potenze 
+    \[
+    \sum_{n=0}^{\infty} c_{n} {\left( z-a \right)}^{n}
+    \]
+    Se la serie converge in un punto \(z \in \mathbb{C}\) allora converge
+    uniformemente su tutto il segmento di estremi \(a\) e \(z\).
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \incfig[.3]{abel}
+    \caption{abel}
+    \label{fig:abel}
+\end{figure}
+\begin{proof}
+    Il teorema è significativo quando \(z_{1} \in \partial D_R(a) \) 
+    Non è restrittivo supporre \(a =0\). Consideriamo
+    \[
+        \sum_{n=0}^{\infty} c_{n} z^{n}_t = \sum_{n=0}^{\infty} c_{n}
+        {(tz_{1})}^{n} 
+    \]
+    utilizziamo il criterio di Cauchy per le convergenze uniformi: fissiamo \(
+    \varepsilon >0\),
+    vogliamo avere che per un \(n_\varepsilon\) allora per ogni \(N \ge
+    n_\varepsilon\), \(p \in \mathbb{N}\) e \(t \in [0, 1]\) si abbia che
+    \begin{align*}
+        \left|\sum_{m=N}^{N+p} \underbrace{t^{n}}_{\gamma_{m-N} }
+        \underbrace{c_{n}z_{1}^{n}}_{\zeta_{m-N}} \right| &< \varepsilon \\
+ &\le  M(|\gamma_0 - \gamma_{1}|
+        + |\gamma_1 - \gamma_{2}| +~\dots + |\gamma_{p-1} - \gamma_{p}|) 
+    \end{align*}
+    con \(M\) un maggiorante per le somme parziali di \(c_{n}z_{1}^{n}\). Ora
+    poiché per ipotesi tale serie converge, esiste \(n_\varepsilon\) tale per
+    cui per ogni \(N \ge n_\varepsilon\) e per ogni \(p \in \mathbb{N}\) si ha
+    che
+    \[
+        \left|\sum_{m=N}^{N+p} c_{m}z_{1}^{m} \right| \le \varepsilon
+    \]
+    ora poiché \(1 \ge t ^{n}\) per ogni \(n \in \mathbb{N}\) abbiamo che la
+    precedente disugaglianza è soddisfatta per \(M = 1\), quindi
+    \[
+        \left| \sum_{n=N}^{N+p} t ^{n} c_{n} z_{1}^{n} \right| \le t ^{N}
+        \varepsilon \le  \varepsilon
+    \]
+\end{proof}
+
+\begin{definition}
+    Sia \(I\) un intervallo aperto. Diciamo che una funzione \(f: I \to
+    \mathbb{R}\) è analitica se per ogni \(x_{0} \in I\) esiste \(\delta > 0\)
+    tale che su \((x_{0} - \delta, x_{0} + \delta)\) la funzione sia esprimibile
+    come somma di una serie di potenze 
+    \begin{equation}
+        f(x) = \sum_{n=0}^{\infty} a_{n} {(x - x_{0})}^{n} 
+    \end{equation}
+\end{definition}
+Sia \(f\) come in \((2)\); Sia \(R\) il raggio di convergenza della serie. Su
+ogni intervallo \(J\) tale che \(\overline{J} \subseteq (x_{0} - R, x_{0} + R)
+\) sappiamo che la serie converge totalmente. Consideriamo la serie delle
+derivate (cioè la \emph{serie derivata})
+\[
+    \sum_{n=1}^{\infty} n a_{n} {(x - x_{0})}^{n-1} 
+\]
+è una serie di potenze con raggio di convergenza \(R\), poiché 
+\[
+    \limsup_{n \to \infty} \sqrt[n]{n|a_{n}|} = \limsup_{n \to \infty}
+    \sqrt[n]{|a_{n}|} \cdot \underbrace{\limsup_{n \to \infty} \sqrt[n]{n}}_{=1}
+\]
+Quindi la Erie delle derivate è uniformemente convergente su ogni compatto di
+\(x_{0}-R, x_{0}+R\). 
+\begin{lemma}[Teorema di derivazione per Serie]
+    Sia \(f = \sum f_{n}\) convergente e \(g = \sum f_{n}' \) uniformemente
+    convergente. Allora \(f\) è derivabile e \(f' = g\).
+\end{lemma}
+Per il teorema di derivazione per serie, \(f\) è derivabile e
+\[
+    f'(x) = \sum_{n=1}^{\infty} n a_{n} {(x - x_{0})}^{n-1} \quad \forall x \in
+    (x_{0} - R, x_{0}+R)
+\]
+A \(f'\) applichiamo lo stesso ragionamento visto su \(f\): \(f'\) è derivabile
+e si ha che 
+\[
+    f''(x) = \sum_{n=2}^{\infty} n(n-1) a_{n} {(x - x_{0})}^{n-2} \quad \forall
+    x \in (x_{0} - R, x_{0}+R)
+\]
+Procedendo induttivamente otteniamo che \(f \in C^{\infty}(x_{0} - R, x_{0}+R)\)
+e
+\[
+    f^{(k)}(x) = \sum_{n=k}^{\infty} n(n-1) \dots (n-k+1) a_{n} {(x -
+    x_{0})}^{n-k}
+\]
+In particolare abbiamo che \(\displaystyle f^{(k)}(x_{0}) = k! a_k\) e quindi la
+serie di potenze è la serie di Taylor di \(f\) centrata in \(x_{0}\). Più
+precisamente
+\begin{theorem}
+    Sia \(\displaystyle f(x) = \sum_{n=0}^{\infty} a_{n} {(x-x_{0})}^{n} \) per
+    \(x \in (x_{0} -R, x_{0} + R)\), con \(a_{n} \in \mathbb{R}\) e \(x_{0} \in
+    \mathbb{R}\). Allora \(f \in C^{\infty}(x_{0}-R, x_{0}+R)\) e la serie è la
+    serie di Taylor di \(f\) centrata in \(x_{0}\).
+\end{theorem}
+\begin{proof}
+    Vedasi sopra.
+\end{proof}
+Non è vero che ogni funzione \(C^{\infty}\) sia sviluppabile in serie di Taylor.
+\begin{example}
+    Sia \(f(x) = e^{-\frac{1}{x^2}}\) per \(x \in \mathbb{R} \sminus \{0\} \) e \(f(0)
+    = 0\). Allora 
+    \[
+        f'(x) = \begin{cases}
+            \lim_{x \to 0} \frac{f(x)}{x} = \frac{1}{x} e^{-\frac{1}{x^2}} = 0  & x = 0 \\
+            \frac{2}{x^3} e^{-\frac{1}{x^2}} & x \neq 0
+        \end{cases}
+    \]
+    eccetera anche per le altre derivate si ha che \(f^{(k)}(0) = 0\). Quindi la
+    serie di Taylor centrata in \(0\) è la serie nulla, ma \(f \neq 0\) in alcun
+    intorno di \(0\).
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                xmin= -4, xmax= 4,
+                ymin= -1, ymax = 2,
+                axis lines = middle,
+            ]
+            \addplot[domain=-4:4, samples=100]{ e^(-(1/x^2))};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{\(\displaystyle e^{-\frac{1}{x^2}}\)}
+    \end{figure}
+\end{example}
+\begin{theorem}
+    Sia \(f \in C^{\infty}(I)\) con \(I \subseteq \mathbb{R} \) un intervallo
+    aperto per la quale esistano \(M, L > 0\) tali che per ogni \(k \in \mathbb{N}\) 
+    \[
+        \forall  x \in I \quad |f^{(k)}(x)| \le M L^{k}
+    \]
+    Allora \(f\) è analitica.
+\end{theorem}
+\begin{proof}
+    Sia \(x_{0} \in I\) e consideriamo
+    \[
+        \sum_{n=0}^{\infty} \frac{f^{(k)} (x_{0})}{k!} {(x - x_{0})}^{k} \quad x
+        \in I
+    \]
+    Scriviamo lo sviluppo di Taylor con il resto di Lagrange.
+    \[
+        f(x) = \sum_{k=0}^{k} \frac{f^{(n)}}{k!}  
+        {(x - x_{0})}^{k} + \frac{1}{(n+1)!} f^{(n+1)}(\xi_x) {(x - x_{0})}^{n+1}
+    \]
+    dove \(\xi_x \in (x_{0}, x)\) è un opportuno punto.
+    Mostriamo ora che  
+    \[
+        \left| \frac{1}{(n+1)!} f^{(n+1)}(\xi_x) {(x - x_{0})}^{n+1} \right| \le
+    \frac{M L^{n+1}}{(n+1)!} {(x - x_{0})}^{n+1} \to 0 \text{ per } n \to
+    \infty
+    \]
+\end{proof}
+\begin{example}
+    Le funzioni \(e^{x}, \sin x, \cos x\) sono analitiche.
+\end{example}
+
+\subsection{\(\mathbb{C}\)-differenziabilità}
+Sia \(\Omega \subseteq \mathbb{C}\) aperto, \(f : \Omega \to \mathbb{C}\) 
+\begin{definition}[\(\mathbb{C}-\)differenziabilità]
+    Sia \(a \in \Omega\). Diciamo che \(f\)  è \(\mathbb{C}-\)differenziabile in
+    \(z=a\) se esiste
+    \begin{equation}
+        \lim_{z \to a} \frac{f(z) = f(a)}{z - a} = f'(a)
+    \end{equation}
+    o equivalentemente
+    \begin{align}
+        f(z) &= f(a) + f'(a) (z-a) + (\varepsilon(z-a))(z-a) \\
+        \lim_{w \to 0} \varepsilon(w) &= 0
+    \end{align}
+\end{definition}
+Se poniamo \(\varepsilon(0) = 0\) allora la \((1)'\) vale per ogni \(z \in
+\Omega\), non solo \(z\neq a\) 
+
+Alcune proprietà:
+\begin{itemize}[label = --]
+    \item Se \(f\) è \(\mathbb{C}\)-differenziabile in \(z = a\) allora è
+        continua (da \((1)'\))
+    \item \(f, g\) \(\mathbb{C}-\)differenziabile in \(z=a\); allora \(f \pm g\)
+        è \(\mathbb{C}-\)differenziabile, \(\lambda f\), con \(\lambda \in
+        \mathbb{C}\) è \(\mathbb{C}-\)differenziabile e \(fg\) è
+        \(\mathbb{C}-\)differenziabile.
+
+        Se \(g(a) \neq 0\) allora \(\frac{f}{g}\) è
+        \(\mathbb{C}-\)differenziabile in \(z=a\) e \({\left( \frac{f}{g}
+        \right)}' = \frac{f'g -
+        fg'}{g^2}\) 
+\end{itemize}
+\begin{example}
+    \(z \mapsto z\) è \(\mathbb{C}-\)differenziabile in ogni \(z \in
+    \mathbb{C}\). Ne consegue dalle proprietà che i polinomi sono
+    \(\mathbb{C}-\)differenziabili, e anche le funzioni razionali.
+\end{example}
+\begin{example}
+    \(z \mapsto \overline{z}\) \textbf{non} è \(\mathbb{C}\)-differenziabile.
+    Infatti
+    \[
+        \frac{f(z) - f(a)}{z-a} = \frac{\overline{z} - \overline{a} }{z-a} =
+        \frac{\overline{z-a}}{z-a}
+    \]
+    che non ha limite perché assume valori diversi ad esempio sulla retta \(a +
+    \delta \) e \(a + \delta i\) al variare di \(\delta \in \mathbb{R}\).
+\end{example}
+
+Una funzione \(f : \Omega \to \mathbb{C}\) può essere vista come \(f : \Omega
+\subseteq \mathbb{R}^2 \to \mathbb{R}^2 \) tralasciando la struttura di campo di
+\(\mathbb{C}\). Allora possiamo scrivere \(f(x, y) = (u{\left( x, y \right)} ,
+v{\left( x, y \right)} ) \in \mathbb{R}^2\), con \(u, v : \Omega \subseteq
+\mathbb{R}^2 \to \mathbb{R} \). Si utilizza spesso la scrittura
+\[
+    f(x, y) = u(x,y) + iv(x,y)
+\]
+che è una sorta di ``ibrido''.
+Possiamo ora scrivere \(\frac{\partial f}{\partial x}\), \(\frac{\partial
+f}{\partial y}\), \(\frac{\partial u}{\partial x}\), \(\frac{\partial
+v}{\partial y}\) ecc.
+
+Supponiamo ora che \(f\) sia \(\mathbb{C}-\)differenziabile in
+\(z=a=x_{0}+iy_{0}\). Esiste quindi
+\[
+    \lim_{z\to a}  \frac{f(z) - f(a)}{z-a} = f'(a)
+\]
+Guardiamo ora la retta \(z=a+\delta\), con \(\delta \in \mathbb{R}\), quindi
+\[
+    f'(a) = \lim_{\delta \to 0} \frac{f(x_{0})+\delta, y_{0}) -
+    f(x_{0},y_{0})}{\delta} = \frac{\partial f}{\partial x}(x_{0},y_{0}) =
+    \frac{\partial f}{\partial x}(a)
+\] 
+In maniera analoga, per \(z= a + \delta i\) abbiamo
+\[
+    f'(a) = \lim_{\delta \to 0} \frac{f(x_{0}, y_{0}+\delta i) -
+    f(x_{0},y_{0})}{\delta i} = \frac{1}{i} \frac{\partial f}{\partial
+y}f(x_{0},y_{0}) = -i \frac{\partial f}{\partial y}f(a)
+\]
+In breve abbiamo che deve essere 
+\[
+    \frac{\partial f}{\partial x}(a) = -i \frac{\partial f}{\partial y}(a)
+\]
+Che in termini di \(u\) e \(v\) equivale a dire che
+\[
+    u_x + iv_x = -i {\left( u_y + iv_y \right)} = v_y - iu_y \iff \begin{cases}
+        u_x &= v_y \\
+        u_y &= -v_x
+    \end{cases}
+\]
+\begin{proposition}[Condizioni necessarie]
+    Se \(f\) è \(\mathbb{C}-\)differenziabile in \(z=a\) allora valgono le
+    condizioni di \textbf{Cauchy-Riemann}, cioè
+    \[
+        \frac{\partial f}{\partial x} = -i \frac{\partial f}{\partial y} \text{
+        o equivalentemente } \begin{cases}
+        u_x &= v_y \\
+        u_y &= -v_x
+        \end{cases}
+    \]
+\end{proposition}
+\begin{proof}
+    Vedasi sopra.
+\end{proof}
+\begin{proposition}
+    Sia \(f\) differenziabile in \(a = (x_{0}, y_{0})\) come funzione \(\mathbb{R}^2
+    \supseteq \Omega \to \mathbb{R}^2 \). Se valgono le condizioni di
+    Cauchy-Riemann, allora \(f : C \supseteq \Omega \to \mathbb{C} \) è
+    \(\mathbb{C}-\)differenziabile in \(z = x_{0} + iy_{0}\) 
+\end{proposition}
+\begin{proof}
+    Per ipotesi (con \(h = (h_{1}, h_{2})\))
+    \[
+        f(a + h) - f(a) = \frac{\partial f}{\partial x}(a) h_{1} +
+        \frac{\partial f}{\partial y}(a) h_{2} + o(h)
+    \]
+    Poiché \(\frac{\partial f}{\partial y} = i \frac{\partial f}{\partial x}\)
+    si ha 
+    \begin{align*}
+        f(a+h)  - f(a) &= \frac{\partial f}{\partial x}(a) h_{1} +
+        i\frac{\partial f}{\partial x}(a) h_{2} + o(h) = \frac{\partial
+    f}{\partial x}(a) (h_{1} + ih_{2}) + o(h) \\
+        &= \frac{\partial f}{\partial x} (a) h + o(h) = \frac{\partial
+        f}{\partial x} (a) (z-a) + o(z-a)
+    \end{align*}
+\end{proof}
+\begin{theorem}[Looman-Menchoff]
+    Sia \(f : \Omega \to \mathbb{C}\) continua e dotata di \(\frac{\partial
+    f}{\partial x}\), \(\frac{\partial f}{\partial y}\) in \(z=a\). Se valgono
+    le condizioni di Cauchy Riemann, allora \(f\) è
+    \(\mathbb{C}-\)differenziabile in \(z=a\) 
+\end{theorem}
+Abbiamo già visto sui reali che analitica implica \(C^{\infty}\). Ora spiace lo
+spoiler ma dimostreremo che \(\mathbb{C}\)-differenziabile implica analitica,
+quindi \(\mathbb{C}-\)differenziabilità, \(C^{\infty}\), analitica saranno
+nozioni equivalenti e gli assegneremo la dicitura di \textbf{olomorfe}.
+
+\begin{definition}[Derivata complessa]
+    \begin{align*}
+        \frac{\partial f}{\partial z} &= \frac{1}{2} {\left( \frac{\partial
+        f}{\partial x} - i \frac{\partial f}{\partial y} \right)} \\
+                    \frac{\partial f}{\partial \overline{z}} &= \frac{1}{2}
+                    {\left( \frac{\partial f}{\partial x} + i \frac{\partial
+                    f}{\partial y} \right)}
+    \end{align*}
+\end{definition}
+Ciò è motivato dal seguente passaggio formale: Sia \(z = x+iy\) con \(x,y \in
+\mathbb{R}\), allora \(f(x,y) = f{\left( \frac{z+\overline{z}}{2},
+\frac{z-\overline{z}}{2} \right)} \) e quindi si ottiene formalmente il
+risultato come sopra definito.
+\begin{remark}
+    Le condizioni di Cauchy-Riemann diventano
+    \( \displaystyle
+        \frac{\partial f}{\partial \overline{z}} = 0
+    \)
+\end{remark}
+
+\subsection{\(\mathbb{C}\)-differenziabilità delle funzioni analitiche}
+\begin{theorem}
+    Si consideri la serie 
+    \[
+        \sum_{n=0}^{\infty} c_{n} {\left( z-a \right)}^{n} \quad c_{n} \in \mathbb{C} 
+    \]
+    con \(R\) il raggio di convergenza.
+    Allora la serie derivata 
+    \[
+        \sum_{n=1}^{\infty} nc_{n} {\left( z-a \right)}^{n-1}
+    \] ha lo stesso raggio di convergenza \(R\). Inoltre se \(f(z)\) è la somma
+    della serie data e \(g(z)\) la somma della serie derivata, allora avremo che
+    \(f\) è \(\mathbb{C}\)-differenziabile e \(f'(z) = g(z)\) per ogni \(z \in
+    D_R(a)\)
+\end{theorem}
+\begin{proof}
+    Come nel caso reale,
+    \[
+        \limsup_{n \to \infty} \sqrt[n]{|nc_{n}|} = \limsup_{n\to \infty}{\sqrt[n]{|c_{n}|}} 
+    \]
+    quindi i due raggi di convergenza coincidono. Supponiamo \(a=0\). Fissiamo
+    \(w \in D_R(0)\) e consideriamo
+    \[
+        \frac{f(w+h) - f(w)}{h}
+    \] con \(h\) tale che \(w+h \in D_R(0)\). Scriviamo, per \(N \in
+    \mathbb{N}\),
+    \[
+        f(z) = S_N(z) + R_N(z) \quad \text{ con } \quad S_N(z) = \sum_{n=0}^{N}
+        c_{n} {\left( z - a \right)}^{n}
+    \]
+    e \(R_N(z)\) il resto della serie. Sappiamo che 
+    \[
+        \lim_{n \to 0} \frac{S_N(w + h) - S_N(w)}{h} = S'_N(w) \to g(z) \text{
+        per \(N\to \infty\)  }
+    \]
+    Consideriamo il resto
+    \[
+        \frac{R_N(w +h) - R_N(w)}{h} = \frac{1}{h} \sum_{n=N=1}^{\infty} {\left(
+        c_{n} {\left( {\left( w+h \right)}^{n} - w^{n} \right)} \right)}  
+    \]
+    essendo
+    \[
+        {\left( w + h \right)}^{n} - w^{n} = {\left( w + h - w \right)} {\left(
+        {\left( w+h \right)}^{n-1} + {\left( w+h \right)}^{n-2} w + \dots +
+w^{n-1}\right)} 
+    \]
+    ottengo
+    \[
+        \left| \frac{R_N(w+h)-R_N(w)}{h} \right| \le \sum_{n=N+1}^{\infty} |c_N| {\left( |w+h|^{n-1}
+        +|w+h|^{n-2} |w| +~\dots + |w|^{n-1}\right)} 
+    \]
+    Ora, per \(h\) tale che \(w+h \in D_\rho(0)\), con \(|w| \le \rho < R\) si
+    ha che \(|w+h|^{n-k} |w|^{k-1} \le \rho^{n-1}\) quindi
+    \[
+        \left| \frac{R_N(w+h) -R_N(w)}{h} \right| \le \sum_{n=N+1}^{\infty}
+        |c_n| n \rho^{n-1} \to 0
+    \]
+    Poiché la serie \(\sum_{n=1}^{\infty} nc_{n} \zeta^{n-1} \) la serie
+    derivata converge assolutamente in \(D_R(0)\) in particolare per \(\zeta =
+    \rho\). 
+    Concludiamo ora 
+    \begin{align*}
+        \limsup_{h\to 0} \left| \frac{f(w+h) - f(w)}{h} -g(w)\right| \le
+        \limsup_{h\to 0} \left| \frac{S_N(w+h) - S_N(w)}{h} - S_N'(w) \right| +
+        \\ +
+        \limsup_{h \to 0} \left| S_N'(w) - g(w) \right| + \limsup_{h\to 0}
+        \left| \frac{R_N(w+h) - R_N(w)}{h} \right| = |S'_N(w) - g(w)| +
+        \varepsilon
+    \end{align*}
+    per \(N\) sufficientemente grande. Si conclude per l'abitrarietà di \(\varepsilon\) 
+\end{proof}
+
+\subsection{Integrazione su Curve}
+\begin{definition}[Curva in \(\mathbb{C}\) ]
+    Diremo \textbf{curva} in \(\mathbb{C}\) ogni funzione continua \(\gamma : [a,b] \to
+    \mathbb{C}\). Si dice \textbf{chiusa} se \(\gamma(a) = \gamma(b)\). Il
+    \textbf{sostegno} di \(\gamma\) è l'immagine di \(\gamma\), cioè
+    \(\gamma([a,b])\). Inoltre \(\gamma\) si dice \(C^{1}\) a tratti se esistono
+    \(a=t_{0}<t_{1}<\dots<t_{n}=b\) tali che 
+    \[
+        \gamma|_{[t_{k-1} , t_k]} \in C^{1}([t_{k-1}, t_k]) \quad \forall k = 1,
+        \dots, n
+    \]
+    Diciamo \textbf{curva opposta} di \(\gamma\) la curva percorsa in
+    ``senso opposto'' ossia:
+    \[
+        -\gamma : [a,b] \to \mathbb{C} \quad -\gamma(t) = \gamma(a+b-t)
+    \]
+    Chiamiamo \textbf{saldatura} di due curve \(\gamma_1 : [a_{1}, b_{1}] \to
+    \mathbb{C}, \gamma_2 [a_{2}, b_{2}] \to \mathbb{C}\), con
+    \(\gamma_{1}(b_{1}) = \gamma_{2}(a_{2}). \), la curva 
+    \[
+        (\gamma_{1} + \gamma_{2})(t) = \begin{cases}
+            \gamma_{1}(t) & t \in [a_{1}, b_{1}] \\
+            \gamma_{2}(a_{2} + t - b_{1}) & t \in [b_{1}, b_{1} + b_{2} - a_{2}]
+        \end{cases}
+        \quad \forall t \in [a_{1}, b_{1} + (b_{2}-a_{2})]
+    \]
+    (Notare che esiste anche la notazione moltiplicativa per saldatura e curva
+    opposta).
+
+Siano ora \(\gamma: [a,b] \to \mathbb{C}\) e \(\tilde{\gamma} : [\alpha, \beta]
+\to \mathbb{C}\) due curve. Allora diciamo che le due curve sono
+\textbf{equivalenti} se esiste \(\varphi : [\alpha, \beta] \to [a,b]\) \(C^{1}\)
+a tratti, biettiva, con \(\varphi'>0\), tale che
+\(
+    \tilde\gamma = \gamma \circ \varphi 
+\)
+\end{definition}
+
+Per convenzione, se non espressamente specificato diversamente considereremo
+curve \(C^{1}\) a tratti.
+
+\begin{definition}[Integrale su curva]
+    Sia \(\gamma : [a,b] \to \mathbb{C}\) una curva \(C^{1}\) a tratti e sia
+    \(f\) continua a valori in \(\mathbb{C}\) definita (almeno) sul sostegno di
+    \(\gamma\). Allora si definisce
+    \[
+        \int_{\gamma} f(z) dz = \int_{a}^{b} f(\gamma(t)) \gamma'(t) dt
+    \]
+\end{definition}
+Abbiamo le seguenti proprietà:
+\begin{itemize}[label = --]
+    \item (linearità) \(\displaystyle \int_{\gamma} \left( \lambda f + \mu g
+        \right) dz = \lambda \int_{\gamma} f dz + \mu \int_{\gamma} g dz\)
+    \item (additività) \(\displaystyle \int_{\gamma_1 + \gamma_2} f dz =
+        \int_{\gamma_1} f dz + \int_{\gamma_2} f dz\)
+    \item \(\displaystyle \left| \int_{\gamma} f dz \right| \le \text{ lungh
+        }(\gamma) \cdot \max_{\text{spt } \gamma } |f|  \) 
+    \item \(\displaystyle \int_{-\gamma} f(z) dz = - \int_{\gamma} f(z)dz\) 
+\end{itemize}
+
+Sia \(\mathcal{C}\) una curva in \(\mathbb{C}\) assegnata come ``oggetto
+geometrico'': circonferenza, retangolo, segmento eccetera. Allora scriveremo
+\(
+    \int_{\mathcal{C}} f(z) dz
+\)
+purché il contesto chiarisca il tipo di parametrizzazione. Ad esempio
+\(
+    \int_{\partial D_R} 
+\) o \(
+    \int_{\partial R}
+\) (rispettivamente integrale su circonferenza e su bordo di un rettangolo) si intenderà a meno di specificare in orientamento antiorario.
+
+\begin{proposition}
+    Siano \(\gamma : [a,b] \to \mathbb{C}\) e \(\tilde{\gamma} : [\alpha, \beta]
+    \to \mathbb{C}\) due curve equivalenti. Allora
+    \[
+        \int_{\gamma} f(z) dz = \int_{\tilde{\gamma}} f(z) dz
+    \]
+\end{proposition}
+\begin{proof}
+    Sia \(\varphi : [\alpha, \beta] \to [a,b]\) la funzione di equivalenza. Allora
+    \begin{align*}
+        \int_{\tilde{\gamma}} f(z) dz &= \int_{\alpha}^{\beta} f(\tilde{\gamma}(t))
+        \tilde{\gamma}'(t) dt = \int_{\alpha}^{\beta} f(\gamma(\varphi(t)))
+        \gamma'(\varphi(t)) \varphi'(t) dt = \\&= \int_{a}^{b} f(\gamma(s)) \gamma'(s)
+        ds = \int_{\gamma} f(z) dz
+    \end{align*}
+\end{proof}
+
+\begin{example}
+    Se consideriamo \(\int_{\partial D_R (a)} \) allora la parametrizzazione che
+    prendiamo sarà \(\gamma(t) = a + Re^{it}\) con \(t \in [0, 2\pi]\). Quindi
+    abbiamo \(\gamma'(t) = iRe^{it}\) e 
+    \[
+        \int_{\partial D_R(a)} f(z) dz = \int_{0}^{2\pi} f(a + Re^{it}) iRe^{it}
+        dt   
+    \]
+    ad esempio se \(\displaystyle f(z) = \frac{1}{z-a}\) 
+    \[
+        \int_{\partial D_R(a)} \frac{1}{z-a} dz = \int_{0}^{2\pi} \frac{1}{Re^{it}}
+        iRe^{it} dt = \int_{0}^{2\pi} i dt = 2\pi i
+    \]
+\end{example}
+\begin{example}
+    Se consideriamo \(R\) rettangolo, \(a \in R\sminus \partial R\). Calcoliamo
+    quindi
+    \[
+        \int_{\partial R} \frac{1}{z-a} dz
+    \]
+    dove \(z = a + \rho(\theta) e^{i\theta} \) dove \(\theta \in [0, 2\pi]\) e
+    \(\rho\) è \(C^{1}\) a tratti. Allora otteniamo che
+    \[
+        \int_{\partial R} \frac{1}{z-a} dz = \int_{0}^{2\pi} \frac{1}{\rho(\theta)
+        e^{i\theta}} i \rho(\theta) e^{i\theta} d\theta = \int_{0}^{2\pi} i d\theta
+        = 2\pi i
+    \]
+    % TODO: fare meglio
+\end{example}
+\begin{remark}
+    Se ho \(F : \Omega \subseteq \mathbb{C} \to \mathbb{C} \), 
+    \(\mathbb{C}-\)differenziabile e \(\gamma : [a,b] \to \Omega\) \(C^{1}\) a
+    tratti, allora \(\displaystyle \frac{d}{dt}F{(\gamma{(t)})} =
+    F'{(\gamma{(t)})}\gamma'{(t)}\). Infatti, fissato \(t_{0}\in [a,b]\)
+    Consideriamo
+    \[
+        \frac{F{(\gamma{(t)})}-F{(\gamma{(t_{0})})}}{t-t_{0}}
+    \]
+    Ricordiamo che \(F(z) = F{(a)} + F'{(a)}{(z-a)} + {(\varepsilon
+    {(z-a)})}{(z-a)}\) con \(\varepsilon {(w)}\) infinitesimo per \(w\to 0\) e
+    \(\varepsilon {(0)} = 0\). Allora
+    \[
+        \frac{F{(\gamma{(t)})}- F{(\gamma{(t_{0})})}}{t-t_{0}} =
+        F'{(\gamma{(t_{0})})}\frac{\gamma{(t)}-\gamma{(t_{0})}}{t-t_{0}} +
+        \varepsilon{(\gamma{(t)}-\gamma{(t_{0})})}
+        \frac{\gamma{(t)}-\gamma{(t_{0})}}{t-t_{0}}
+    \]
+    e passando al limite otteniamo la tesi.
+\end{remark}
+\begin{remark}
+    \(\int_{\gamma} f(z) dz\) è l'integrale su un intervallo di una funzione
+    vettoriale \(f{(\gamma{(t)})}\gamma'{(t)}\). Come tale possiamo applicare i
+    risultati visti di passaggio al limite sotto il segno di integrale. Ad
+    esempio supponiamo di avere \(\gamma : [a,b] \to \Omega\) e una successione
+    e una funzione \(f_{n}, f : \text{spt}\gamma \to \mathbb{C}\) continua e
+    \(f_{n} \to f\) uniformemente su \(\text{spt}\gamma\). Allora
+    \[
+        \int_{\gamma} f_{n}(z) dz \to \int_{\gamma} f(z) dz
+    \]
+    Infatti 
+    per ipotesi sappiamo che
+    \[
+        \forall \varepsilon>0\,\, \exists n_\varepsilon : \forall n \ge
+        n_\varepsilon \,\, \forall z \in \text{spt}\gamma \quad |f_{n}(z) -
+        f(z)| < \varepsilon
+    \]
+    ma quindi anche \(\forall t \in [a,b]\) abbiamo che \(|f_{n}{(\gamma{(t)})}
+    - f{(\gamma{(t)})} < \varepsilon\) e quindi
+    \[
+        \left| f_{n}{(g{(t)})}\gamma'{(t)} - f{(\gamma{(t)})}\gamma'{(t)}\right|
+        \le |f_{n}{(\gamma{(t)})} - f{(\gamma{(t)})}| \max_{a\le s\le b}
+        |\gamma'{(s)}| < M\varepsilon 
+    \]
+    cioè \(f_{n}{(\gamma{(\cdot )})}\gamma'{(\cdot )} \to f{(\gamma{(\cdot
+    )})}\gamma'{(\cdot )}\) uniformemente.
+
+    In particolare (come successione si consideri la successione delle somme
+    parziali di una serie) si ha che se \(\sum_{n=0}^{\infty} f_{n}(z) \)
+    converge uniformemente sul supporto di \(\gamma\) allora
+    \[
+        \int_{\gamma} \sum_{n=0}^{\infty} f_{n}(z) dz = \sum_{n=0}^{\infty}
+        \int_{\gamma} f_{n}(z) dz
+    \]
+\end{remark}
+
+\begin{definition}[Primitiva]
+    Sia \(\Omega \subseteq \mathbb{C}\) aperto e \(f : \Omega \to \mathbb{C}\)
+    continua. Una funzione \(F : \Omega \to \mathbb{C}\) si dice \textbf{primitiva} di
+    \(f\) se \(F\) è \(\mathbb{C}-\)differenziabile e \(F'(z) = f(z)\) per ogni
+    \(z \in \Omega\).
+\end{definition}
+\begin{proposition}
+    Sia \(F\) primitiva di \(f\) e \(\gamma:[a,b] \to \Omega\) una curva
+    \(C^{1}\) a tratti. Allora 
+    \[
+        \int_{\gamma} f(z) dz = F{(\gamma{(b)})} - F{(\gamma{(a)})}
+    \]
+\end{proposition}
+\begin{proof}
+    \[
+        \int_{\gamma} f(z) dz = \int_{a}^{b} f{(\gamma{(t)})}\gamma'(t) dt =
+        \int_{a}^{b} F'{(\gamma{(t)})}\gamma'(t) dt = F{(\gamma{(b)})} -
+        F{(\gamma{(a)})}
+    \]
+\end{proof}
+\begin{corollary}
+    Se \(F\) ammette primitiva in \(\Omega\) allora \(\int_{\gamma} f(z) dz =
+    0\) per ogni curva chiusa \(\gamma\) in \(\Omega\).
+\end{corollary}
+\begin{proof}
+    ovvia
+\end{proof}
+\begin{corollary}
+    Sia \(\Omega\) un aperto \textbf{connesso}, allora se \(f\) è
+    \(\mathbb{C}-\)differenziabile e \(f'=0\) allora \(f\) è costante.
+\end{corollary}
+\begin{proof}
+    Fissiamo \(z_{0}, z_{1} \in \Omega\), allora esiste (connessione per archi)
+    una \(\gamma\) \(C^{1}\) a tratti (poligonale) con \(\gamma{(a)}=z_{0}\) e
+    \(g{(b)}=z_{1}\) e allora poiché \(f\) è primitiva di \(f'\) abbiamo che 
+    \[
+        0 = \int_{\gamma} f'(z) dz = f{(\gamma{(b)})} - f{(\gamma{(a)})} =
+        f(z_{1}) - f(z_{0})
+    \]
+\end{proof}
+
+\end{document}
+
