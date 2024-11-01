@@ -23,7 +23,7 @@
 \newcommand*{\transp}[2][-3mu]{\ensuremath{\mskip1mu\prescript{\smash{\mathrm t\mkern#1}}{}{\mathstrut#2}}}%
 
 % newcommand for span with langle and rangle around
-\newcommand{\span}[1]{\left\langle #1 \right\rangle}
+\newcommand{\span}[1]{\left\langle~#1 \right\rangle}
 
 \newcommand{\incfig}[2][1]{%
     \def\svgwidth{#1\columnwidth}
@@ -111,7 +111,7 @@
   bottom=15pt,
 }
 
-\title{Appunti di Geometria Affine e Proiettiva}
+\title{Appunti di Geometria Affine e (non) Proiettiva}
 \author{Osea}
 \date{2023 \-- 2024 Secondo Semestre}
 
@@ -120,6 +120,7 @@
 \maketitle
 
 Testo di riferimento: E. Sernesi,  Geometria 1
+\tableofcontents
 \section{Spazi Affini}
 
 \subsection{Definizioni}
@@ -628,7 +629,7 @@ Quindi scritto in altro modo
     \(\sum_{i=1}^{n} \lambda_i = 1\), e fissiamo \(O \in A\).
 
     Allora la combinazione convessa di \(P_{1}, \dots, P_n\) a coefficienti
-    \(\lambda_i, i \in \{1, \dots, n\} \) è il punto
+    \(\lambda_i \), per \(i \in \{1, \dots, n\} \) è il punto
     \[
         Q(P_{i}, \lambda_i) = O + \sum_{i=1}^{n} \lambda_i \overline{OP_{i}} \in
         A
@@ -1134,7 +1135,7 @@ vettore \(u_{1} \in V\) t.c.
     tale che \(F(S) = S'\) 
 \end{definition}
 
-\subsection{Proiezioni}
+\subsection{Proiezioni e riflessioni}
 % \begin{figure}[ht]
 %     \centering
 %     \incfig[.5]{proiezione}
@@ -1213,7 +1214,7 @@ punto equidistante dal sottospazio e sulla stessa retta che contiene \(P\) e
 
 \begin{definition}
     Sia \(E\) uno spazio euclideo su \(V\), con \(\dim E = n < +\infty\). Un
-    \textbf{iperpiano}è un sottospazio \(H \subseteq E \) con \(\dim H = n-1\).
+    \textbf{iperpiano} è un sottospazio \(H \subseteq E \) con \(\dim H = n-1\).
 \end{definition}
 
     Sia \(W\) la gicitura di \(H\) iperpiano, \(W \subseteq V \) è sottospazio e \(\dim W
@@ -1481,12 +1482,6 @@ Sia ora \(s = (p, q)\) la segnatura di \(B\).
     trovare un segno meno, e alla fine ottenere quindi che la conica è
     affinemente equivalente a \(\mathcal{Q} = \{(x, y) : x^2 - y^2 - 1 = 0\} \) 
 \end{proof}
-\begin{figure}[ht]
-    \centering
-    \incfig{figura_nuova}
-    \caption{figura_nuova}
-    \label{fig:figura_nuova}
-\end{figure}
 
 
 
