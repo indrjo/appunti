@@ -137,11 +137,14 @@
 
 \title{Appunti di Geometria I}
 \author{Osea}
-\date{1 Marzo 2024}
+\date{Secondo semestre 2023~--~2024}
 
 \begin{document}
 \maketitle
+
 Libri: Sernesi 2 oppure (più avanzato) Manetti.
+
+\tableofcontents
 
 \section{Spazi Topologici}
 \begin{definition}[Spazio topologico]
@@ -986,7 +989,7 @@ sono continue
     \infty\). Si chiama \textbf{sottobase} perché l'intersezione finita dà una
     base.
 \begin{itemize}[label = --]
-    \item \(d^{-1}(-\infty, a)\). Un elemento nella controimmagine è una coppia
+    \item[\(d^{-1}(-\infty, a)\)] Un elemento nella controimmagine è una coppia
         \((x, y) \in X\times X\)  tale che \(d(x,y) = d_{0} < d\). Vogliamo dire
         che esiste un aperto \(W\) che contiene \((x,y)\) e tale che \(W
         \subseteq d^{-1}(-\infty,a) \). Sia \(\varepsilon = \frac{b-b_{0}}{3}\),
@@ -995,8 +998,12 @@ sono continue
         y')\le d(x', x) + d(x, y') \le d(x',x) + d(x,y)+d(y,y') \le
         \frac{2}{3}(b-b_{0}) + b_{0} < b\) quindi è incluso in
         \(d^{-1}(-\infty,a)\) 
-    \item % TODO
+    \item[\(d^{-1}(a, \infty)\) ] Simile
 \end{itemize}
+    Poiché ogni insieme aperto di \(\mathbb{R}\) si può scrivere come
+    unione di elementi ottenibili come intersezione finita di elementi di questa
+    sottobase, la controimmagine di un aperto è aperta, quindi la distanza è
+    continua.
 \end{proof}
 
 \begin{proposition}
@@ -1059,7 +1066,9 @@ Sono metriche equivalenti.
     L'aperto \(A\) contiene un elemento \(A_{1} \times A_{2} \subseteq A \) tale
     che \(A_{1}\) è aperto di \(X\) e \(A_{2}\) è aperto di \(Y\) poiché tali
     aperti costituiscono una base della topologia prodotto.
-    % TODO
+    Ora esiste \(x \in A_{1} \cap D_{1} \) e esiste \(y \in A_{2} \cap D_{2}\)
+    per densità. Ne consegue che \((x, y) \in {(A_{1} \times A_{2})} \cap (D_{1}
+    \times D_{2}) \subseteq A \cap {(D_{1} \times D_{2})} \).
 \end{proof}
 \begin{example}
     Poiché \(\mathbb{Q}\) è denso in \(\mathbb{R}\), \(\mathbb{Q}^{n}\) è denso
