@@ -8,8 +8,8 @@
 ## Informazioni
 Gli appunti sono scritti in LaTeX, su questa repository troverete sia il codice
 sorgente che i pdf generati. Gli appunti sono divisi per corso in cartelle
-diverse. All'interno di ogni cartella troverete un file `{corso}.tex`, dei file
-di supporto e il pdf generato, tutti con lo stesso nome. Inoltre c'è una
+diverse. All'interno di ogni cartella troverete un file `{corso}.tex`
+pdf generato, tutti con lo stesso nome. Inoltre c'è una
 cartella `figures` dove (sorpresa) ci sono le figure usate nei vari appunti.
 Inoltre in alcune cartelle (dei corsi finiti prevalentemente) c'è un file
 `README.md` con alcune informaizoni, come ad asempio se mancano parti
