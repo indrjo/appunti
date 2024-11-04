@@ -2582,11 +2582,11 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
 
 \begin{theorem}[Decomposizione di Lebesgue-Radon-Nikodym]
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. Siano \(\mu\) e
-    \(\phi\) due misure finite su \((\Omega, \mathcal{M})\). 
+    \(\varphi\) due misure finite su \((\Omega, \mathcal{M})\). 
     Sia ora
     \[
         \mathcal{F} := \{g : \Omega \to \mathbb{R} : g \ge 0 \text{ \(\mu\)-q.o},\,\, g \in L^{1}, \forall E \in \mathcal{M} \,\, \int_E g d\mu \le
-    \phi(E) \} 
+    \varphi(E) \} 
     \]
     Allora esiste unica (a meno di uguaglianza \(\mu\)-q.o.) una funzione \(f
     \in \mathcal{F}\) tale che \[
@@ -2599,10 +2599,167 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
     \(\mu\) la funzione \(f \in \mathcal{F}\) del teorema precedente e viene
     denotata con
     \[
-        f = \frac{\partial \phi}{\partial \mu } \quad ;\quad \int_\Omega \frac{\partial
-        \phi}{\partial \mu } d\mu = \sup_{g \in \mathcal{F}} \int_\Omega g d\mu
+        f = \frac{\partial \varphi}{\partial \mu } \quad ;\quad \int_\Omega \frac{\partial
+        \varphi}{\partial \mu } d\mu = \sup_{g \in \mathcal{F}} \int_\Omega g d\mu
     \]
 \end{definition}
+
+\begin{theorem}[Teorema di Radon-Nykodym]
+    Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. Siano \(\mu\) e
+    \(\varphi\) rispettivamente una misura \(\sigma\)-finita e una misura
+    relativa. Sia \(\varphi \) \(\mu\)-assolutamente continua. Allora
+    \[
+        \forall E \in \mathcal{M} \quad \int_E \frac{\partial \varphi }{\partial
+        \mu} d\mu = \varphi(E)
+    \]
+\end{theorem}
+\begin{proof}[Dimostrazione per \(\varphi , \mu\) misure finite]
+    Supponiamo per assurdo che esista un insieme \(E_{0} \in \mathcal{M}\) tale
+    che \(\int_{E_{0}} \frac{\partial \varphi }{\partial \mu} d\mu \neq \varphi
+    (E_{0})\), e quindi essendo \(\frac{\partial \varphi }{\partial \mu} \ge 0\)
+    q.o.~possiamo assumere che \(\int_{E_{0}} \frac{\partial \varphi }{\partial
+    \mu} d\mu > \varphi (E_{0})\). Ne segue che \(\varphi (E_{0}) >0\) e per
+    \(\mu\)-a.c.~anche \(\mu(E_{0}) > 0\).
+
+    Siccome \(\mu\) è finita 
+    \begin{equation}
+        \exists \varepsilon > 0 \quad \text{t.c.} \int_{E_{0}} \frac{\partial
+        \varphi }{\partial \mu} d\mu + \varepsilon \mu(E_{0}) = \int_{E_{0}}
+        {\left( \frac{\partial \varphi }{\partial \mu} + \varepsilon \right)}
+        d\mu < \varphi (E_{0})
+    \end{equation}
+    Definiamo ora la misura \(\tilde{\varphi}\) come 
+    \[
+        \tilde{\varphi }(E) = \varphi (E) - \int_E {\left( \frac{\partial
+        \varphi }{\partial \mu} + \varepsilon \right)} d\mu \quad \forall E \in
+        \mathcal{M}
+    \]
+    che essendo la differenza di due misure finite è una misura relativa. Sia
+    quindi \((A, B)\) una decomposizione di Hahn rispetto a \(\tilde{\varphi
+    }\). Abbiamo ora che \(\tilde{\varphi }(E_{0}) > 0\) per \((1)\) e
+    \(\tilde{\varphi}(A) \ge \tilde{\varphi}(A \cap E_{0}) \ge \tilde{\varphi}(A
+    \cap E_{0}) + \tilde{\varphi}(B \cap E_{0}) = \tilde{\varphi}(E_{0}) > 0\),
+    quindi
+    \[
+        \varphi (A) > \int_A {\left( \frac{\partial \varphi }{\partial \mu} +
+        \varepsilon \right)} d\mu \ge 0 \overset{\mu-\text{a.c.}}{\implies } \mu(A) > 0
+    \]
+    Ora sia \(f := \frac{\partial \varphi }{\partial \mu} + \varepsilon
+    \chi_{A}\). Allora \(f \ge 0\), in quanto somma di funzioni non negative;
+    \(f \in L^{1}\) in quanto somma di funzioni \(L^{1}\) e, \(\forall E \in
+    \mathcal{M}\) 
+    \[
+        \int_E f d\mu = \int_{E \cap A} {\left( \frac{\partial \varphi
+        }{\partial \mu} + \varepsilon \right)} d\mu + \int_{E \cap B}
+        \frac{\partial \varphi }{\partial \mu} d\mu \le \varphi (E \cap A) +
+        \varphi (E \cap B) = \varphi (E)
+    \]
+    quindi abbiamo che \(f \in \mathcal{F}\), ma
+    \[
+        \int_\Omega f d\mu = \int_A {\left( \frac{\partial \varphi }{\partial
+        \mu} \right)} d\mu  + \int_B \frac{\partial \varphi }{\partial \mu}d\mu
+        \overset{\varepsilon > 0, \mu(A) > 0}{>} \int_A \frac{\partial \varphi
+        }{\partial \mu} d\mu + \int_B \frac{\partial \varphi }{\partial \mu}
+        d\mu = \int_\Omega \frac{\partial \varphi }{\partial \mu} d\mu
+    \]
+    che è assurdo perché sappiamo per definizione di \(\frac{\partial \varphi
+    }{\partial \mu}\) che \(\int_\Omega \frac{\partial \varphi }{\partial \mu}
+    d\mu \) è il sup di tutti gli integrali di funzioni in \(\mathcal{F}\).
+\end{proof}
+\begin{proof}[Dimostrazione per \(\mu\) \(\sigma\)-finita e \(\varphi \) misura
+finita] Sia \({\{\Omega_{n}\}}_{n \in \mathbb{N}}\) una partizione di
+    \(\Omega\) tale che \(\mu(\Omega_{n}) < +\infty\) per ogni \(n \in
+    \mathbb{N}\) e quindi le restrizioni \(\mu_{n}, \varphi_n :=
+    \mu|_{\Omega_{n}}, \varphi|_{\Omega_{n}}  \) sono misure finite e
+    \(\varphi_n\) è \(\mu_{n}\)-a.c.~per ogni \(n \in \mathbb{N}\). Allora
+    \(\forall e \in \mathcal{M}\),
+    \begin{align*}
+        \int_E \frac{\partial \varphi }{\partial \mu} d\mu &=
+        \int_{E} {\left( \sum_{n=1}^{\infty} \frac{\partial \varphi_n}{\partial
+        \mu_{n}}\rchi_{\Omega_{n}}   \right)} d\mu = \sum_{n=1}^{\infty} \int_{E
+    \cap \Omega_{n}} \frac{\partial \varphi_n}{\partial \mu_{n}} d\mu
+    \underset{\text{finite}}{\overset{\text{misure}}{=}} \sum_{n=1}^{\infty}
+    \varphi_n(E \cap \Omega_{n}) = \\ &= \varphi(E)
+    \end{align*}
+\end{proof}
+\begin{proof}[Dimostrazione generale: \(\mu\) \(\sigma\)-finita e \(\varphi\)
+    misura relativa] Scomponendo \(\varphi = \varphi^{+} - \varphi^{-}\)
+    otteniamo che \(\forall E \in \mathcal{M}\) 
+    \begin{align*}
+        \int_E \frac{\partial \varphi }{\partial \mu}d\mu
+        &\overset{\text{def}}{=} \int_E \frac{\partial \varphi ^{+}}{\partial
+        \mu} - \frac{\partial \varphi ^{-}}{\partial \mu} d\mu = \int_E
+        \frac{\partial \varphi ^{+}}{\partial \mu} d\mu - \int_E \frac{\partial
+            \varphi ^{-}}{\partial \mu} d\mu
+            \underset{\text{mis.}}{\overset{\varphi^{\pm}}{=}} \varphi ^{+}(E)
+            - \varphi ^{-}(E) =  \\ &=\varphi(E)
+    \end{align*}
+    infatti \(\varphi\) è \(\mu\)-a.c.~e quindi \(\varphi^{+}\) e
+    \(\varphi^{-}\) sono \(\mu\)-a.c.
+\end{proof}
+
+\begin{theorem}[Teorema di Lebesgue]
+    Sia \((\Omega, \mathcal{M})\) uno spazio misurabile, con \(\mu\) misura e
+    \(\varphi \) misura relativa. Allora esiste unica una misura \(\varphi_a\)
+    \(\mu\)-assolutamente continua e esiste unica una misura \(\varphi_s\)
+    \(\mu\)-singolare tali che
+    \[
+        \varphi = \varphi_a + \varphi_s
+    \]
+\end{theorem}
+\begin{proof}[Esistenza, \(\varphi \) misura finita]
+    Sia \(K = \sup \{ \varphi (N) : N \in \mathcal{M}, \, \mu(N) = 0\} \). Se
+    \(K = 0\) allora \(\varphi =\varphi_a\) è \(\mu\)-a.c.~e \(\varphi_s = 0\).
+    Assumiamo quindi \(K > 0\). Esiste quindi una successione \(E_{n}\) di
+    insiemi misurabili tali che \(\lim_{n \to \infty} \varphi (E_{n}) = K\) e
+    \(\mu(E_{n}) = 0\) per ogni \(n \in \mathbb{N}\). Sia ora \(E = \bigcup_{n
+    \in \mathbb{N}} E_{n}\). Allora \(\mu(E) = 0 \implies \varphi (E) \le K\) e
+    \(\varphi (E) \ge \varphi (E_{n})\) per ogni \(n\), quindi per
+    l'arbitrarietà di \(n\) abbiamo che \(\varphi(E) \ge K\). Ne consegue
+    proprio \(\varphi (E) = K\).
+
+    Sia ora
+    \begin{align*}
+        \varphi_a(E) &:= \varphi (A \sminus E) &\forall A \in \mathcal{M} \\
+        \varphi_s(E) &:= \varphi (A \cap E) &\forall A \in \mathcal{M}
+    \end{align*}
+    Allora per ogni \(A\) misurabile abbiamo
+\begin{itemize}[label = --]
+    \item \(\varphi(A) = \varphi (A \cap E) + \varphi (A \sminus E) = (\varphi_s
+        + \varphi_a)(A)\) ok.
+    \item \(\varphi_a\) è \(\mu\)-a.c.~infatti se \(N \in \mathcal{M}\) è tale
+        che \(\mu(N) = 0\) e se fosse
+        vero che \(\varphi_a(N) = \varphi (N \sminus E) > 0\) allora avremmo
+        \(\varphi (E \cup N) = \varphi (N \sminus E) + \varphi (E) > \varphi
+        (E)\) che è assurdo
+    \item \(\varphi_s\) è \(\mu\)-singolare infatti presa la decomposizione
+        \((E, \Omega \sminus E)\) abbiamo che \\ \(\mu(E) = 0\) e
+        \(\varphi_s(\Omega \sminus E) = \varphi ((\Omega - E) \cap E) =
+        \varphi(\varnothing) = 0\) 
+\end{itemize}
+\end{proof}
+\begin{proof}[Esistenza, \(\varphi \) misura relativa] Sia \(\varphi  = \varphi
+    ^{+} - \varphi ^{-}\) differenza di misure finite. Allora abbiamo
+    \[
+        \begin{cases}
+            \varphi^{+} = \varphi^{+}_a + \varphi^{+}_s \\
+            \varphi^{-} = \varphi^{-}_a + \varphi^{-}_s
+        \end{cases}
+        \implies \varphi = \varphi^{+} - \varphi ^{-} = \underbrace{(\varphi ^{+}_a -
+        \varphi ^{-}_a)}_{:=\varphi_a} + \underbrace{(\varphi ^{+}_s - \varphi
+    ^{-}_s)}_{:=\varphi_s}
+    \]
+    dove \(\varphi_a\) e \(\varphi_s\) sono rispettivamente \(\mu\)-a.c.~e
+    \(\mu\)-singolare perché differenze di misure \(\mu\)-a.c.~e \(\mu\)-singolari.
+\end{proof}
+
+\begin{proof}[Unicità]
+    Sia \(\varphi = \varphi_s + \varphi_a = \varphi'_s + \varphi'_a\), ne
+    consegue che \(\varphi_s - \varphi'_s = \varphi'_a - \varphi_a =:
+    \varphi_0\) e quindi \(\varphi_0\) è sia \(\mu\)-a.c.~che \(\mu\)-singolare,
+    quindi \(\varphi_0 = 0\) e di conseguenza \(\varphi_s = \varphi'_s\) e
+    \(\varphi_a = \varphi'_a\).
+\end{proof}
 
 \newpage
 \section{Analisi Funzionale}
@@ -2813,4 +2970,120 @@ perché non c'è la diseguaglianza triangolare.
     per \(M = \max_{1 \le i \le N} \|e_{i}\| \) 
 \end{proof}
 
+\subsection{Spazi \(L^{p}\) }
+\begin{definition}[Spazio \(L^{p}\)]
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Per \(p \in [1,
+    +\infty)\) definiamo lo spazio \(L^{p}(\Omega, \mathcal{M}, \mu)\) come lo
+    spazio delle funzioni misurabili \(f : \Omega \to \mathbb{K}\) tali che
+    \[
+    \int_{\Omega} |f|^{p} d\mu < +\infty
+    \]
+    Se \(p = +\infty\) allora \(L^{+\infty}(\Omega, \mathcal{M}, \mu)\) è lo
+    spazio delle funzioni misurabili \(f : \Omega \to \mathbb{K}\) tali che
+    \[
+        \exists M > 0 \quad \text{tale che} \quad |f(x)| \le M \quad
+        \forall x \in \Omega \sminus N, \quad \mu(N) = 0
+    \]
+    ossia che \(f\) è limitata \(\mu\)-q.o.
+\end{definition}
+\begin{note}
+    Se \(p=1\) allora \(|f|\) è integrabile se e solo se \(f\) è integrabile, in
+    altre parole \(f \in L^{1} \iff |f| \in L^{1}\). Questo è un caso
+    particolare
+\end{note}
+\begin{note}
+    Vedremo che, per \(1 \le p \le p' < +\infty\) si ha che che \(f \in L^{p'}
+    \implies f \in L^{p}\). Questo non vale evidentemente per \(p = \infty\).
+    Infatti ad esempio per \(f = 1\) su \(\Omega = \mathbb{R}^{N}\) abbiamo che
+    evidentemente \(f\) è limitata quindi \(f \in L^{+\infty}\), ma \(f \notin
+    L^{p}\) per ogni \(p \in [1, +\infty)\) 
+\end{note}
+Gli elementi degli spazi \(L^{p}\) non sono funzioni, ma classi di funzioni,
+equivalenti \(\mu\)-q.o.
+\begin{remark}
+    Ogni spazio \(L^{p}\) è uno spazio vettoriale. L'unica condizione che non è
+    ovvia è verificare che se \(f, g \in L^{p}\) allora \(f+g \in L^{p}\).
+    Infatti se \(p = +\infty\) allora è ovvio che \(f+g\) è limitata
+    \(\mu\)-q.o.~Se \(p < +\infty\) allora 
+    \[
+    |f+g|^{p} d\mu \le {(|f| + |g|)}^{p} d\mu \le 2^{p}
+    \max \left\{ |f|^{p}, |g|^{p} \right\} \le 2^{p} (|f|^{p} + |g|^{p})
+    \]
+    Ne consegue che \(f+g \in L^{p}\), infatti
+    \[
+        \int_{\Omega} |f+g|^{p} d\mu \le 2^{p} \int_{\Omega} (|f|^{p} + |g|^{p})
+        d\mu < 2^{p} {\left( \int_\Omega |f|^{p} d\mu + \int_\Omega |g|^{p} d\mu
+        \right)} < +\infty
+    \]
+\end{remark}
+\begin{proposition}
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Allora per ogni
+    \(p \in [1, +\infty]\) lo spazio \(L^{p}(\Omega, \mathcal{M}, \mu)\) è uno
+    spazio normato con norma
+    \[
+        \|f\|_p = 
+        \begin{cases}
+            \displaystyle
+            {\left( \int_{\Omega} |f|^{p} d\mu
+            \right)}^{\frac{1}{p}} & \text{se } p \in [1, +\infty) \\
+            \inf \{M > 0 : |f| \le M \quad \mu\text{-q.o.} \} & \text{se } p = +\infty
+        \end{cases}
+    \]
+\end{proposition}
+\begin{proof}
+    Dividiamo la dimostrazione nel caso \(p < +\infty\) e \(p = +\infty\) 
+
+    \paragraph{Caso \(p < +\infty\):}
+\begin{itemize}[label = --]
+    \item La norma è ben definita perché se \(f = g\) q.o.~allora \(|f|^{p} =
+        |g|^{p}\) q.o.~e quindi \(\int_{\Omega} |f|^{p} d\mu = \int_{\Omega}
+        |g|^{p} d\mu\) e di conseguenza \(\|f\|_p = \|g\|_p\) 
+    \item \emph{Definita positività} \(\|f\|_p = 0 \iff \int_{\Omega} |f|^{p}
+        d\mu = 0 \iff |f|^{p} = 0 \quad \mu\text{-q.o.} \iff |f| = 0 \quad
+        \mu\text{-q.o.} \iff f = 0 \quad \mu\text{-q.o.}\)
+    \item \emph{Omogeneità} \(\|\lambda f\|_p = {\left( \int_{\Omega} |\lambda
+        f|^{p} d\mu \right)}^{\frac{1}{p}} = {\left( \int_{\Omega} |\lambda
+        |f|^{p} d\mu \right)}^{\frac{1}{p}} = |\lambda| {\left( \int_{\Omega}
+        |f|^{p} d\mu \right)}^{\frac{1}{p}} = |\lambda| \|f\|_p\)
+    \item \emph{Diseguaglianza triangolare} Difficile da dimostrare, è chiamata
+        diseguaglianza di Minkowski e la dimostreremo più avanti.
+\end{itemize}
+\paragraph{Caso \(p = +\infty\):}
+\begin{itemize}[label = --]
+    \item La norma è ben definita perché se \(f = g\) q.o.~allora ogniqualvolta
+        \(M\) è maggiorante quasi ovunque di \(f\) lo è anche di \(g\), e quindi
+        \(\|f\|_{\infty} = \|g\|_{\infty}\) perché sono l'\(\inf\)  dello stesso
+        insieme. Inoltre in realtà è evidentemente un \(\min\).
+    \item \emph{Definita positività} \(\|f\|_{\infty} = 0 \iff \inf \{M > 0 : |f|
+        \le M \quad \mu\text{-q.o.} \} = 0 \iff |f| \le 0 \quad \mu\text{-q.o.}
+        \iff f = 0 \quad \mu\text{-q.o.}\)
+    \item \emph{Omogeneità} \(\|\lambda f\|_{\infty} = \inf \{M > 0 : |\lambda f| \le M
+        \quad \mu\text{-q.o.} \} = \inf \{|\lambda| M > 0 : |f| \le M \quad
+        \mu\text{-q.o.} \} = |\lambda| \inf \{M > 0 : |f| \le M \quad
+        \mu\text{-q.o.} \} = |\lambda| \|f\|_{\infty}\)
+    \item \emph{Diseguaglianza triangolare} Evidente, infatti ogni costante che
+        maggiori \(|f| + |g|\) necessariamente maggiora \(|f + g|\) ed è almeno
+        \(\|f\|_\infty + \|g\|_\infty\).
+\end{itemize}
+\end{proof}
+
+\begin{proposition}[Diseguaglianza di Young]
+    Sia \(1 \le p \le \infty\) e \(p'\) tale che \(\frac{1}{p} + \frac{1}{p'} =
+    1\), con la convenzione che \(\frac{1}{\infty} = 0\). Allora per ogni \(a,
+    b \in \mathbb{R}_{\ge 0} \) vale che \(ab \le \frac{1}{p} a^{p}
+    +\frac{1}{p'} b^{p'}\).
+\end{proposition}
+\begin{proof}
+    Se \(a=0\) o \(b=0\) allora la disuguaglianza è ovvia. Supponiamo quindi che
+    \(a, b > 0\). Osserviamo che il logaritmo è una funzione concava su \(R_{>0}
+    \) e quindi \(\ln(tx + (1-t)y) \ge t \ln x + (1-t) \ln y\) per ogni \(x, y >
+    0\) e \(t \in [0, 1]\). Applichiamo questa disuguaglianza con \(x = a^{p}\),
+    \(y = b^{p'}\), \(t = \frac{1}{p}\), \((1-t) = 1 - \frac{1}{p} =
+    \frac{1}{p'}\). Otteniamo
+    \[
+        \ln\left(\frac{1}{p} a^{p} + \frac{1}{p'} b^{p'}\right) \ge \ln a + \ln b \implies
+        \frac{1}{p} a^{p} + \frac{1}{p'} b^{p'} \ge ab
+    \]
+    dove l'ultima uguaglianza è per la monotonia del logaritmo.
+\end{proof}
 \end{document}
