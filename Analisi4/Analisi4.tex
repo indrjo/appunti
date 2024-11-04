@@ -104,7 +104,7 @@ Va inteso che se per uno dei due \(\mu(A) = +\infty\) allora
 \begin{enumerate}[label = \arabic*.]
     \item (monotonia) Se \(A, B \in \mathcal{M}\) e \(A \subseteq B \) allora \(\mu(A) \le
         \mu(B)\) 
-    \item (sottratività) Se \(A, B \in \mathcal{M}\) e \(A \subseteq B \) e \(\mu(A) <
+    \item (sottrattività) Se \(A, B \in \mathcal{M}\) e \(A \subseteq B \) e \(\mu(A) <
         +\infty\) allora \(\mu(B \sminus A) = \mu(B) - \mu(A)\) 
     \item (sub-additività) Se \(A_{1}, \dots, A_{n} \in \mathcal{M} \) allora \(\mu\left(\bigcup_{i =
         1}^n A_{i}\right) \le \sum_{i=1}^{n} \mu(A_{i})\) 
@@ -1289,7 +1289,7 @@ usarlo.
             Dove si è usata la \(\sigma\)-additività di \(\mu\). Ora scambiando
             la somma e la serie, che possiamo fare perché se sono tutte
             convergenti allora ok, se invece anche solo una di quelle con
-            \(c_{i} >0\) dovesse divergere allora necessariemente l'integrale
+            \(c_{i} >0\) dovesse divergere allora necessariamente l'integrale
             originale è \(+\infty\), ma anche la serie ottenuta scambiando somma
             e serie diverge, poiché ha termine generale maggiore di quello della
             serie divergente.
@@ -1508,7 +1508,7 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
     \mathbb{R}\)?
 \begin{itemize}[label = --]
     \item se \(\alpha = 0\) è chiaramente \(f_0 = 1\) integrabile
-    \item se \(\alpha > 0\) dobbiamo studiare il comportamente vicino a \(0\).
+    \item se \(\alpha > 0\) dobbiamo studiare il comportamento vicino a \(0\).
         Vogliamo confrontare la funzione con \(\frac{1}{x^{\beta}}\) che
         sappiamo essere integrabile per \(\beta \in (0, 1)\). Abbiamo quindi ad
         esempio, per \(\beta = \frac{1}{2}\) 
@@ -1519,7 +1519,7 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
             x)}^{\alpha-1} \cdot \frac{1}{x} }{ -\frac{1}{2} x^{-\frac{3}{2}} }
             = 2 \alpha \frac{{(-\ln x)}^{\alpha - 1}}{x^{\frac{1}{2}}}
         \]
-        procedendo con l'hopital finché l'esponente non diventa negativo
+        procedendo con l'Hôpital finché l'esponente non diventa negativo
         otteniamo che il limite non è più una forma indeterminata. Quindi
         otteniamo che il limite è \(0\). Abbiamo dunque che \(\sqrt{x} |\ln x
         |^{\alpha}\) è limitata in \((0, 1)\) e quindi \(\exists C >0\) tale che 
@@ -1772,8 +1772,8 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
         Ora possiamo considerare che in
         \((-1,1)\) \(f_{n} \to \) q.o., per cui per Severini-Egorov \(f_{n} \to
         0\) quasi uniformemente.
-        Infine avendo convergenza q.u. in \((-1,1)\) e convergenza
-        q.u. in \(\mathbb{R}\sminus (-1,1)\) allora abbiamo convergenza q.u. in
+        Infine avendo convergenza q.u.~in \((-1,1)\) e convergenza
+        q.u.~in \(\mathbb{R}\sminus (-1,1)\) allora abbiamo convergenza q.u.~in
          \(\mathbb{R}\). 
         Infine \(f_{n} \overset{\mu}{\to} 0\) in quanto la convergenza uniforme
         implica la convergenza in misura.
@@ -1863,7 +1863,7 @@ Notiamo che
     Sia \(F\) una funzione misurabile in \((X \times Y, \mathcal{M} \times
     \mathcal{N})\) e non negativa. Allora
     \begin{itemize}
-        \item \(F(x, y)\) è misurabile sia rispatto a \(x\) per q.o.~\(y\) che
+        \item \(F(x, y)\) è misurabile sia rispetto a \(x\) per q.o.~\(y\) che
             rispetto a \(y\) per q.o.~\(x\)
         \item La funzione \(\displaystyle x \mapsto \int_Y F(x,y) d\nu\) è
             misurabile in \((X, \mathcal{M})\).
@@ -2842,7 +2842,7 @@ per ogni successione \(\{v_{n}\} \) convergente in \(V\), allora
     \]
     scegliendo \(\delta = \varepsilon\) abbiamo la tesi.
 \end{proof}
-In uno spazio vettoriale \(V\) si possono consdierare più norme, vediamo alcuni
+In uno spazio vettoriale \(V\) si possono considerare più norme, vediamo alcuni
 esempi di norme diverse su \(\mathbb{R}^{N}\) e \(\mathbb{C}^{N}\):
 \begin{align*}
     \|x\|_{1} &= \sum_{i=1}^{N} |x_i| \quad \quad
