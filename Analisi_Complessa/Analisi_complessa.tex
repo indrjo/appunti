@@ -1239,7 +1239,7 @@ purché il contesto chiarisca il tipo di parametrizzazione. Ad esempio
         F{(\gamma{(a)})}
     \]
 \end{proof}
-\begin{corollary}
+\begin{corollary}\label{cor:primitiva_zero}
     Se \(F\) ammette primitiva in \(\Omega\) allora \(\int_{\gamma} f(z) dz =
     0\) per ogni curva chiusa \(\gamma\) in \(\Omega\).
 \end{corollary}
@@ -1259,6 +1259,349 @@ purché il contesto chiarisca il tipo di parametrizzazione. Ad esempio
         f(z_{1}) - f(z_{0})
     \]
 \end{proof}
+Ricordiamo la notazione ``mista'' per le funzioni \(f: \mathbb{C} \to
+\mathbb{C}\), \(f = f(x, y) = u(x, y) + i v {(x, y)}\). Sia ora \(\gamma: [a,b]
+\to \Omega\) \(C^{1}\) a tratti e la denotiamo \(\gamma(\cdot) = x{(\cdot )} +
+iy(\cdot )\). Allora 
+\begin{align*}
+    \int_{\gamma} f(z) dz &= \int_{a}^{b} {\left( u(x(t), y(t)) + i v(x(t),y(y))
+    \right)} (x'(t) + i y'(t))dt = \\
+                          &= \int_{a}^{b} u(x(t), y(t)) x'(t) - v(x(t), y(t))
+            y'(t) dt + \\ &+ i \int_{a}^{b} u(x(t), y(t)) y'(t) +
+                          v(x(t), y(t)) x'(t) dt
+\end{align*}
+Se ora poniamo \(\omega_{r}(x,y) = u(x,y)dx - v(x,y)dy \) e \(\omega_{i}(x,y) =
+v{(x,y)}dx + u{(x,y)}dy\) allora otteniamo
+\[
+    \int_{\gamma} f(z) dz = \int_{\gamma} \omega_{r} + i \int_{\gamma}
+    \omega_{i}
+\]
+e anche 
+\begin{align*}
+    \int_{\gamma} f(z) dz &= \int_{a}^{b} {\left( u(x{(t)}, y{(t)}) + i v(x(t),
+            y(t)) \right)} x'(t) dt + \\ &+ i \int_{a}^{b} {\left( u(x{(t)}, y{(t)}) +
+            i v(x(t), y(t)) \right)} y'(t) dt = \\ &= \int_{\gamma} f(x,y) dx + i
+            \int_{\gamma} f(x,y) dy
+\end{align*}
 
+\begin{proposition}\label{prp:forme-funzioni}
+    Sia \(\Omega \subseteq \mathbb{C} \) aperto, \(f: \Omega \to \mathbb{C}\). 
+\begin{enumerate}[label = \alph*)]
+    \item Sia \(f\) continua. Allora \(f\) \emph{ammette primitiva} se e solo se
+        \(\omega_r\) e \(\omega_i\) sono \emph{esatte}
+    \item Sia \(f \in C^{1}\). Allora \(f\) soddisfa le condizioni di
+        \(Cauchy-Riemann\) (cioè \emph{è \(\mathbb{C}\)-differenziabile}) se e solo se
+        \(\omega_r\) e \(\omega_i\) sono \emph{chiuse}
+\end{enumerate}
+\end{proposition}
+\begin{proof} \( \) 
+\begin{enumerate}[label = \alph*)]
+    \item \(f\) ammette primitiva \(F = \varphi + i \psi\); si ha quindi che 
+        \[
+            u+ iv = F' = F_x = \varphi_x + i \psi_x \quad \text{ e }
+            \begin{cases}
+                \varphi_x = \psi_y \\
+                \varphi_y = -\psi_x
+            \end{cases}
+        \]
+        Allora otteniamo che 
+        \[
+            \begin{cases}
+                u = \varphi_x = \psi_y \\
+                v = \psi_x = -\varphi_y
+            \end{cases}
+        \]
+        ne consegue che 
+        \[
+            \begin{cases}
+                \omega_r = udx - vdy = \varphi_x dx - \varphi_y dy = d\varphi \\
+                \omega_i = vdx + udy = \psi_x dx + \psi_y dy = d\psi
+            \end{cases}
+        \]
+        sono esatte.
+
+        Viceversa, siano \(\omega_{r}\) e \(\omega_{i}\) esatte, quindi
+        \(\omega_r = d\varphi \) e \(\omega_{i} = d\psi\), per opportune
+        \(\varphi , \psi \in C^{1}(\Omega)\). Allora 
+        \[
+            \begin{cases}
+                u = \varphi _x \\
+                -v = \varphi_y
+            \end{cases}
+            \quad
+            \begin{cases}
+                v = \psi_x \\
+                u = \psi_y
+            \end{cases}
+        \]
+        Ponendo ora \(F = \varphi + i\psi \in C^{1}\) si ha che 
+        \[
+            \begin{cases}
+                \varphi_x = y = \psi_y \\ 
+                \varphi_y = -v = -\psi_x
+            \end{cases}
+        \]
+        che sono esattamente le condizioni di Cauchy-Riemann per \(F\). Allora
+        \(F\) è \(\mathbb{C}\)-differenziabile e \(F' = F_x = \varphi_x +
+        i\psi_x = u + iv = f\), quindi \(F\) è primitiva di \(f\).
+    \item \(f = u + iv\). Le condizioni di Cauchy-Riemann sono 
+        \[
+            \begin{cases}
+                u_x = v_y \\
+                u_y = -v_x
+            \end{cases}
+            \iff 
+            \begin{cases}
+                w_{i} = vdx + udy \text{ è chiusa} \\
+                w_{r} = udx - vdy \text{ è chiusa}
+            \end{cases}
+        \]
+        semplicemente per definizione
+\end{enumerate}
+\end{proof}
+
+Ricordiamo che vogliamo cercare di invertire il risultato precedente, ossia il
+corollario~\ref{cor:primitiva_zero}. Per il viceversa quindi abbiamo che
+\(\int_{\gamma} f = 0\) per ogni \(\gamma\) chiusa in \(\Omega\), ma ora poiché
+\(\int_{\gamma} f = \int_{\gamma} \omega_{r} + i \int_{\gamma} \omega_{i} \) ne
+consegue che 
+\[
+    \int_{\gamma} \omega_{r} = \int_{\gamma} \omega_{i} = 0 \quad \forall \gamma
+    \overset{\text{Teorema }\ref{thm:1_forme}}{\implies } \omega_{r}, \omega_{i}
+    \text{ esatte } \overset{\text{Proposizione}}{\implies } f \text{ ammette
+    primitiva}
+\]
+Con questo abbiamo dimostrato
+\begin{proposition}
+    Sia \(f : \Omega \to \mathbb{C}\) continua, allora \(f\) ammette primitiva
+    se e solo se 
+    \[
+        \int_{\gamma} f(z) dz = 0 \quad \forall \gamma \text{ chiusa in } \Omega
+    \]
+\end{proposition}
+Nella dimostrazione \(f \mathbb{C}-\)differenziabile \(\implies f\) analitica
+servirà avere che \(\int_{\gamma} f = 0\) per ogni \(\gamma\) chiusa in
+\(\Omega\) semplicemente connesso. Ma non possiamo usare \((b)\) della
+proposizione~\ref{prp:forme-funzioni} perché non possiamo assumere che \(f\) sia
+\(C^{1}\). Allora mostriamo direttamente che \(\int_{\gamma} f = 0\) in un caso
+particolare, usando il seguente lemma
+
+\begin{lemmao}[Cauchy-Goursat]\label{lemma:cauchy_goursat}
+    Sia \(f : \Omega \to \mathbb{C}\) \(\mathbb{C}-\)differenziabile. Sia \(R\)
+    un rettangolo chiuso, con \(R \subseteq \Omega \). Allora
+    \[
+        \int_{\partial R} f(z) dz = 0
+    \]
+\end{lemmao}
+\begin{figure}[ht]\label{fig:cauchygoursat}
+    \centering
+    \incfig[.5]{cauchygoursat}
+\end{figure}
+\begin{proof}
+    Sia \(A = \left| \int_{\partial R} f dz \right| \). Per assurdo supponiamo
+    sia \(A > 0\). Ora suddividiamo \(R\) in quattro rettangoli \(R^{1}_1,
+    R^{1}_2, R^{1}_3, R^{1}_4\) e abbiamo
+    \[
+        A = \left|\int_{\partial R} f \right|=\left| \sum_{i=1}^{4}
+        \int_{\partial R^{1}_i} f \right| \le \sum_{i=1}^{4} \left|
+        \int_{\partial R^{1}_i} f \right|
+    \]
+    Allora abbiamo che per un qualche \(R^{1}_j\) si ha che 
+    \[
+        \left| \int_{\partial R^{1}_{j_{1}} } f \right| \ge \frac{A}{4}
+    \]
+    Procediamo in questo modo suddividendo \(R^{1}_{j_1} \) in quattro rettangoli
+    \(R^{2}_i\) per \(i = 1, 2, 3, 4\) e così procedendo si forma una
+    successione di rettangoli
+    \[
+        R^{1}_{j_{1}} \supseteq R^{2}_{j_{2}} \supseteq \dots \supseteq
+        R^{n}_{j_{n}}
+    \]
+    che hanno diametro \(\text{diam} R^{k}_{j_k} = \frac{1}{2^{k}} \text{ diam
+    }R \) di lunghezza \(\text{lungh} R^{k}_{j_k} = \frac{1}{2^{k}}
+    \text{lungh}\) e tali che
+    \[
+        \left| \int_{\partial R^{k}_{j_k} } f  \right| \ge \frac{1}{4^{k}}
+    \]
+    Ora essendo ogni rettangolo compatto, la loro intersezione
+    non è vuota e anzi è un solo punto \(\bigcap_{k \in \mathbb{N}}
+    \mathbb{R}^{k}_{j_k} = \{a\}\), avendo diametro \(0\). Poiché \(f\) è
+    \(\mathbb{C}-\)differenziabile in \(z=a\):
+    \[
+        f(z) = f(a) + f'(a) (z-a) + \varepsilon(z-a)(z-a) \quad \varepsilon(0) =
+        0 \quad \varepsilon(w) \to 0 \text{ per } w \to 0
+    \]
+    Infine notiamo che
+    \[
+        \int_{\partial R^{k}_{j_k}} f(z) dz = \int_{\partial R^{k}_{j_k} }
+        {\left( f(a) + f'{(a)}{(z-a)} \right)} dz + \int_{\partial R^{k}_{j_k} }
+        \varepsilon(z-a)(z-a) dz
+    \]
+    dove il primo termine è uguale a \(0\) poiché la funzione integranda ammette
+    primitiva \(f(a)z + \frac{1}{2} f'(a) {(z-a)}^2\). Ora fissiamo \(\sigma >
+    0\). Sia \(\delta >0\) tale che \(|w|<\delta \implies
+    |\varepsilon(w)|<\sigma\). Per \(k\) sufficientemente grande abbiamo che
+    \(\text{diam}R^{k}_{j_k} < \delta  \) e allora \(|z-a|<\delta\) se \(z \in
+    \partial R^{k}_{j_k} \). Allora, per tali \(k\):
+    \[
+        \left| \int_{\partial R^{k}_{j_k} } \varepsilon(z-a) {(z-a)}  dz \right|
+        \le \sigma \text{ diam } R^{k}_{j_k} \text{ lungh } R^{k}_{j_k} = \sigma
+        \cdot \frac{1}{2^{k}} \text{ diam } R \cdot \frac{1}{2^{k}} \text{ lungh
+        }\partial R
+    \]
+    Ricordando che 
+    \[
+        \left| \int_{\partial R^{k}_{j_k} } f  \right| \ge \frac{1}{4^{k}}
+    \]
+    e mettendo assieme i pezzi otteniamo che \(A = 0\) (per l'arbitrarietà di
+    \(\sigma\)), che è assurdo
+\end{proof}
+Estendiamo ora il risultato
+\begin{proposition}\label{prp:cauchygoursat}
+    Sia \(f : \Omega \to \mathbb{C}\) continua. Sia \(a \in \Omega\) e
+    supponiamo che \(f\) sia \(\mathbb{C}-\)differenziabile in \(\Omega \sminus
+    \{a\} \). Allora 
+    \[
+        \int_{\partial R} f = 0
+    \]
+    per ogni rettangolo chiuso \(R\) in \(\Omega\) 
+\end{proposition}
+\begin{proof}
+\begin{itemize}[label = --]
+    \item Se \(a \not\in R\) allora si usa il lemma di Cauchy-Goursat
+    \item Se \(a \in \partial R\) si approssima \(R\) con una successione
+        \(R_{n}\) di rettangoli internamente (come in
+        figura~\ref{fig:cauchygoursatapprox})
+        Risulta poi 
+        \[
+            0 = \int_{\partial R_{n}} f \to \int_{\partial R} f
+        \]
+        (possiamo pensare ogni \(\partial R_{n}\) parametrizzato su un
+        intervallo fisso \([a,b]\) e c'è convergenza uniforme)
+\begin{figure}[ht]
+    \centering
+    \incfig{cauchygoursatapprox}
+    \caption{Approssimazione di \(R\) con \(R_{n}\) per \(a \in \partial R\) e
+    decomposizione per \(a \in \mathring{R}\)}
+    \label{fig:cauchygoursatapprox}
+\end{figure}
+    \item \(a \in \mathring{R}\) Scomponendo \(R\) in due rettangoli \(R_{1}\) e
+        \(R_{2}\) come in figura, con \(a \in \partial R_{1} \cap \partial
+        R_{2}\) si ha che
+        \[
+            \int_{\partial R } f = \int_{\partial R_{1}} f + \int_{\partial
+            R_{2}} f = 0
+        \]
+        per il caso precedente
+\end{itemize}
+\end{proof}
+
+\begin{theorem}[Formula di Cauchy per il rettangolo] Sia \(f : \Omega \to
+    \mathbb{C}\) \(\mathbb{C}-\)differenziabile. Sia \(R \subseteq \Omega \) un
+    rettangolo chiusa. Allora per ogni \(w \in \mathring{R}\) risulta
+    \[
+        f(w) =\frac{1}{2\pi i} \int_{\partial R} \frac{f(z)}{z-w}dz
+    \]
+\end{theorem}
+\begin{proof}
+    Sia 
+    \[
+        g(z) := \begin{cases}
+            \frac{f(z) - f(w)}{z-w} & z \neq w \\
+            f'(w) & z = w
+        \end{cases}
+    \]
+    allora poiché \(f\) è \(\mathbb{C}-\)differenziabile, \(g\) è continua
+    \(\Omega\). Inoltre \(g\) è \(\mathbb{C}-\)differenziabile in \(\Omega
+    \sminus \{w\} \). Allora per la proposizione~\ref{prp:cauchygoursat} si ha
+    che
+    \[
+        0 = \int_{\partial R} g(z) dz = \int_{\partial R} \frac{f(z) -
+        f(w)}{z-w} dz = \int_{\partial R} \frac{f(z)}{z-w} dz - f(w)
+        \int_{\partial R} \frac{1}{z-w} dz
+    \]
+    Infine poiché \(\int_{\partial R} \frac{dz}{z-w} = 2\pi i \) per \(w \in
+    \mathring{R}\) si ottiene la tesi.
+\end{proof}
+
+\newpage
+\section{Richiamo delle forme differenziali}
+
+Sia \(\Omega \subseteq \mathbb{R}^{2} \) aperto. Una forma differenziale su \(\Omega\) è
+un'espressione formale della forma 
+\[
+    \omega(x, y) = A(x,y)dx + B(x,y) dy
+\]
+con \(A, B \in C^{0}(\Omega)\). Più precisamente \(\omega\) è una funzione
+continua \(\omega: \Omega \to (\mathbb{R}^{2})'\). Se \(\gamma\) è una curva
+\(C^{1}\) a tratti in \(\Omega\), \(\gamma : [a,b] \to \Omega\), allora
+\[
+    \int_{\gamma}\omega \overset{\text{def}}{=} \int_{a}^{b} 
+\]
+\begin{definition}
+    La forma differenziale \(\omega\) si dice \textbf{esatta} se esiste \(F \in
+    C^{1}(\Omega)\) tale che \(\omega = dF\), e \(F\) è detta \emph{primitiva}
+    di \(\omega\) 
+\end{definition}
+
+Se \(\omega\) è \(C^{1}\) (cioè \(A, B \in C^{\Omega}\)) allora, se è esatta,
+ossia \(\frac{\partial F}{\partial x} = A\) e \(\frac{\partial F}{\partial y} =
+B\) risulta
+\begin{equation}\label{eq:forma-chiusa}
+    \frac{\partial A}{\partial y} = \frac{\partial B}{\partial x}
+\end{equation}
+
+\begin{definition}
+    Se \(\omega\) è una forma differenziale \(C^{1}\) e
+    soddisfa~\eqref{eq:forma-chiusa} allora si dice \textbf{chiusa} 
+\end{definition}
+\begin{theorem}\label{thm:1_forme}
+    Sia \(\Omega\) connesso. Allora 
+    \[
+        \omega \text{ esatta } \iff \int_{\gamma} \omega = 0 \text{ per ogni
+        \(\gamma\) in \(\Omega\) chiusa }
+    \]
+\end{theorem}
+\begin{proof}[idea di dimostrazione]\( \)
+\begin{itemize}
+    \item[\(\implies \)] semplice
+    \item[\(\impliedby \)] Fissiamo \((x_{0},y_{0}) \in \Omega\). Definiamo ora 
+        \[
+            F(x, y) = \int_{\gamma(x,y)} \omega
+        \]
+        dove \(\gamma_{x,y} \) è una qualunque curva in \(\Omega\) che unisce
+        \((x_{0},y_{0})\) a \((x,y)\). La definizione è ben posta perché se
+        \(\gamma_{(x,y)} e \tilde{\gamma}_{(x,y)}\) sono due tali curve allora
+        \[
+            0 = \int_{\gamma_{(x,y)} - \tilde{\gamma}_{(x,y)}} \omega =
+            \int_{\gamma_{(x,y)}} \omega - \int_{\tilde{\gamma}_{(x,y)}} \omega
+        \]
+
+        La dimostrazione procede dimostrando che \(dF = \omega\)
+\end{itemize}
+\end{proof}
+
+\begin{theorem}
+    Sia \(\Omega\) connesso e \(\omega\) \textbf{chiusa}. Allora se
+    \(\gamma_{0}\) e \(\gamma_{1}\) sono curve chiuse \(C^{1}\) a tratti omotope
+    in \(\Omega\) allora
+    \[
+        \int_{\gamma_{0}} \omega = \int_{\gamma_{1}} \omega
+    \]
+\end{theorem}
+\begin{remark}
+    Il teorema vale anche per curve non necessariamente chiuse purché siano omotope 
+    mediante un'omotopia che fissa gli estremi.
+\end{remark}
+
+\begin{corollary}
+    Sia \(\Omega\) semplicemente connesso e \(\omega\) chiusa. Allora \(\omega\)
+    è esatta.
+\end{corollary}
+\begin{proof}
+    Se \(\Omega\) è semplicemente connesso ogni curva chiusa è omotopa a
+    costante \(0\) e quindi \(\int_{\gamma} \omega = 0\), ossia \(\omega\) è
+    esatta 
+\end{proof}
 \end{document}
 
