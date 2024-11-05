@@ -2,7 +2,6 @@
 \title{Appunti di Analisi 3 \-- Equazioni Differenziali}
 \author{Osea}
 \date{Primo semestre A.A. 2024 \-- 2025, prof. Enrico Vitali}
-
 \begin{document}
 
 \maketitle
@@ -695,7 +694,8 @@ Sia \(D \subseteq \mathbb{R}^{N+1} \) aperto e \(f : D\to \mathbb{R}^{N}\) e
 \begin{figure}[ht]
     \centering
     \incfig[.6]{problema}
-    \caption{Problema ai valori iniziali}\label{fig:problema}
+    \caption{Problema ai valori iniziali, \(\alpha = \frac{b}{M}\) in questo
+    caso, evidentemente}\label{fig:problema}
 \end{figure}
 Siano \(a, b > 0\) tali che 
 \[
@@ -719,7 +719,7 @@ rispetto alla prima. Allora
 \end{theorem}
 \begin{proof}
     Abbiamo visto che se \(x : J \to \mathbb{R}^{N}\) con \(J\) intervallo è una
-    funzione continua con graico in \(D\), allora \(x\) è soluzione di \((P)\)
+    funzione continua con grafico in \(D\), allora \(x\) è soluzione di \((P)\)
     se e solo se 
     \[
         x(t) = x_{0} + \int_{t_{0}}^{t} f(s, x(s)) ds \quad \forall t \in J
@@ -747,20 +747,22 @@ rispetto alla prima. Allora
     Ora quindi mostriamo che la successione \(x_{n}\) converge uniformemente con
     il criterio di Cauchy
     \begin{align*}
-        |x_{1}(t) - x_{0}(t)| = \left| \int_{t_{0}}^{t} f(s, x_{0}(s))\right|
+        |x_{1}(t) - x_{0}(t)| &= \left| \int_{t_{0}}^{t} f(s, x_{0}(s))\right|
         \le M|t - t_{0}| \\
-        |x_{2}(t) - x_{1}(t)| = \left| \int_{t_{0}}^{t} f(s, x_{1}(s)) - f(s,
-        x_{0}(s))\right| ds \le \left| \int_{t_{0}}^{t} |f(s, x_{1}(s)) - f(s,
-        x_{0}(s))| ds \right| \\
-        \le L_R \left|\int_{t_{0}}^{t} |x_{1}(s) - x_{0}(s)| ds\right| \le ML_R
-        |\int_{t_{0}}^{t}|s-t_{0}| ds| = \frac{ML_R}{2} |t - t_{0}|^2 \\
-        |x_{3}(t) - x_{2}(t)| = \left| \int_{t_{0}}^{t} f(s, x_{2}(s)) - f(s,
+        |x_{2}(t) - x_{1}(t)| &= \left| \int_{t_{0}}^{t} f(s, x_{1}(s)) - f(s,
+        x_{0}(s))\right| ds \le  \left| \int_{t_{0}}^{t} |f(s, x_{1}(s)) - f(s,
+        x_{0}(s))| ds \right| \le \\
+                                   &\le L_R \left|\int_{t_{0}}^{t} |x_{1}(s) - x_{0}(s)| ds\right| \le ML_R
+        |\int_{t_{0}}^{t}|s-t_{0}| ds| = \frac{ML_R}{2} |t - t_{0}|^2
+    \end{align*}
+    \begin{align*}
+        |x_{3}(t) - x_{2}(t)| &= \left| \int_{t_{0}}^{t} f(s, x_{2}(s)) - f(s,
         x_{1}(s))\right| ds \le \left| \int_{t_{0}}^{t} |f(s, x_{2}(s)) - f(s,
-        x_{1}(s))| ds \right| \\
-        \le L_R \left|\int_{t_{0}}^{t} |x_{2}(s) - x_{1}(s)| ds\right| \le
+        x_{1}(s))| ds \right| \le \\
+                              &\le L_R \left|\int_{t_{0}}^{t} |x_{2}(s) - x_{1}(s)| ds\right| \le
         \frac{ML_R^2}{2}
         \left|\int_{t_{0}}^{t}|s-t_{0}|^2 ds\right| = \frac{ML_R^2}{6} |t - t_{0}|^3
-        \vdots
+                           \\ &\vdots
     \end{align*}
     E in generale abbiamo 
     \[
@@ -863,11 +865,11 @@ Costruiamo un famoso esempio.
         \centering
         \begin{tikzpicture}
             \begin{axis}[
-                xmin= -10, xmax= 10,
-                ymin= -10, ymax = 10,
+                xmin= -4, xmax= 4,
+                ymin= -4, ymax = 4,
                 axis lines = middle,
             ]
-            \addplot[domain=-10:10, samples=100]{sqrt(abs(x))};
+            \addplot[domain=-4:4, samples=101]{sqrt(abs(x))};
             \end{axis}
         \end{tikzpicture}
         \caption{Grafico di \(f(x) = \sqrt{|x|}\)}\label{fig:grafico_di_sqrt}
@@ -911,8 +913,7 @@ Costruiamo un famoso esempio.
 \begin{figure}[ht]
     \centering
     \incfig{pennellopeano}
-    \caption{pennelloPeano}
-    \label{fig:pennellopeano}
+    \caption{Pennello di Peano}\label{fig:pennellopeano}
 \end{figure}
 \end{example}
     Comunque abbiamo l'esistenza della soluzione. Esiste anche un teorema a
@@ -960,7 +961,7 @@ potente, che invece non dimostriamo. Procediamo con della terminologia.
     \incfig[.4]{teo_peano}
     \caption{Costruzione successione \(x_{n}\)}\label{fig:teo_peano}
 \end{figure}
-Fissato \(n \in \mathbb{N}\) suddividiamo \([t_{0}, t_{0}+\alpha]\) in \(n\)
+Fissato \(n \in \mathbb{N}\) suddividiamo \\ \([t_{0}, t_{0}+\alpha]\) in \(n\)
 parti. Definiamo poi \(x_{n} : [t_{0}, t_{0} + \alpha] \to  \mathbb{R}\) come
 segue (affine a tratti).
 \begin{align*}
@@ -1075,8 +1076,8 @@ quindi possiamo passare al limite sotto il segno di integrale e ottenere che
 Proviamo ora a guardare alla stima sull'intervallo di esistenza, data dal
 Teorema di esistenza e unicità. Allora, ricordando
 l'immagine~\ref{fig:problema} % TODO check ref
-abbiamo che è definit in \([-\alpha, \alpha]\) con \(\alpha = \min(a, b/M)\) e
-\(M = \max |f| = \max_{R_{a,b} }  |x^2| = \max_{x \in [1-b, 1+b]}{(1+b)}^2\).
+abbiamo che è definita in \([-\alpha, \alpha]\) con \(\alpha = \min(a, b/M)\) e
+\(M = \max |f| = \max_{R_{a,b} }  |x^2| = \max_{[1-b, 1+b]}{(1+b)}^2\).
 Quindi abbiamo \(\alpha = \min(a, \frac{b}{{(1+b)}^2})\). Poiché possiamo
 prendere \(a\) arbitrariamente grande (\(f\) è definito su tutto \(\mathbb{R}^2
 \ni (t, x)\)) allora \(\alpha = \frac{b}{{(1+b)}^2}\).
@@ -1599,13 +1600,13 @@ Dove vale la seguente caratterizzazione
             x(0) = \alpha \in \mathbb{R}
         \end{cases}
     \]
-    Studiamo quando \(x' > 0\) e abbiamo \(1 - te^{x}> 0\) e quindi \(te^{x}<1\)
-    e \(t < e^{-x}\) e quindi \(x < -\logt\).
-    Sia ora 
-    \[
-        \overline{t} = \sup \{t \ge t_{1} : x(\tau) > \psi {(\tau)} \forall \tau
-        \in [\text_{1}, t]\} 
-    \]
+     Studiamo quando \(x' > 0\) e abbiamo \(1 - te^{x}> 0\) e quindi \(te^{x}<1\)
+     e \(t < e^{-x}\) e quindi \(x < -\log t\).
+     Sia ora 
+     \[
+         \overline{t} = \sup \{t \ge t_{1} : x(\tau) > \psi {(\tau)} \forall \tau
+         \in [t_{1}, t]\} 
+     \]
     Supponiamo ora \(\overline{t} < +\infty\) e allora sia \(\delta(t) =
     x{(t)}-\psi {(t)}\). Allora \(\delta {(\overline{t})}=0\) per continuità e
     \(\delta'{(\overline{t})} = \underbrace{x'{(\overline{t})}}_{0}  -
@@ -1633,7 +1634,7 @@ Dove vale la seguente caratterizzazione
 \begin{figure}[ht]
     \centering
     \incfig[.6]{eser1}
-    \caption{eser1}\label{fig:eser1}
+    \caption{Esercizio 1.1}\label{fig:eser1}
 \end{figure}
 \begin{eser}
     Si studi qualitativamente il problema di Cauchy
@@ -1642,8 +1643,6 @@ Dove vale la seguente caratterizzazione
             x' = x{(x^3-t^2)} \\
             x{(1)}=1
         \end{cases}
-    \]
-    
+   \]
 \end{eser}
-
 \end{document}
