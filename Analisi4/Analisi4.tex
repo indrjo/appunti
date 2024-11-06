@@ -1398,6 +1398,51 @@ usarlo.
     integrabile.
 \end{corollary}
 
+\paragraph{Integrale di Riemann} L'integrale di Lebesgue che abbiamo introdotto
+è un'estensione dell'integrale di Riemann, cioè \emph{ogni funzione
+R-integrabile è anche L-integrabile e i due integrali coincidono}. Infatti una
+funzione \(f\) si dice R-integrabile in \(E\) se per ogni \(\varepsilon>0\)
+esistono una somma inferiore \(S\) e una somma superiore \(T\) tali che \(T-S <
+\varepsilon\). Per ogni somma (superiore e inferiore) io posso considerare la
+funzione a scala che su ogni elemento di suddivisione (intervallino, quadratino,
+ecc) prende il valore specifico che appare nella somma.
+\begin{remark}
+    Le funzioni a scala sono particolari funzioni semplici, anche se la
+    ``filosofia'' è diversa: per le funzioni a scala si divide il dominio,
+    mentre per le funzioni semplici si guardano i valori assunti dalla funzione
+    e poi si costruiscono gli insiemi su cui la funzione assume quei valori.
+\end{remark}
+ora diciamo 
+\[
+    I_R = \sup_{\substack{s\text{ a scala} \\ s \le f}} \int_{E} s dx = 
+    \inf_{\substack{S\text{ a scala} \\ t \ge f}} \int_{E} t dx
+\]
+Invece \(f\) è L-integrabile se \(f^{+}, f^{-} \in L^{1}{(E)}\). Se \(f\) è
+R-integrabile allora anche \(f^{+}\) e \(f^{-}\) lo sono. Basta quindi mostrare
+che se\(g\) è non-negativa e R-integrabile allora è anche L-integrabile e i due
+integrali coincidono. Esiste quindi \(I_R{(g)} = \int_{E} g dx\) integrale di
+Riemann. Per \(g\) tale esiste anche \[I_L{(g)} = \sup \left\{\int_E s d\mu : s
+\text{ semplice, misurabile, e } 0\le s\le g \text{ in E} \right\} \] Dobbiamo
+quindi provare che \(I_R{(g)} = I_L{(g)}\). A tale scopo possiamo controllare
+che sia \(I_R{(g)} < I_R{(g)}\) che \(I_R{(g)} < I_L{(g)}\) portano a
+contraddizioni. Nel primo caso abbiamo \(I_R{(g)} < I_L{(g)}\) quindi esiste una
+funzione a scala \(t\) tale che \(t \ge g\) in \(E\) e \(I_R{(g)} \le  \int_E t dx
+< I_L{(g)}\). Per tale funzione a scala, essendo \(t\) anche semplice abbiamo
+che \(\int_E t dx = \int_E t d\mu\) ma allora ogni \(s\) nell'insieme il cui sup
+è \(I_L{(g)}\) verifica \(0 \le s\le t\) e quindi
+\[
+    \int_E s d\mu \le \int_E t d\mu < I_L{(g)}
+\]
+e quindi \(\int_E t d\mu\) è un maggiorante dell'insieme, per cui \(I_L{(g)}\)
+non ne può essere il sup.
+
+Supponiamo ora invece che \(I_R{(g)} > I_L{(g)}\), allora esiste una funzione a
+scala \(s\) tale che \(s \le g\) in \(E\) e \(I_L{(g)} < \int_E s d\mu \le
+I_R{(g)}\). Ma allora \(s\) appartiene all'insieme il cui sup è \(I_L{(g)}\) e
+ha un integrale più grande del sup stesso. 
+
+Ne consegue necessariamente che \(I_L{(g)} = I_R{(g)}\) 
+
 \subsection{Teoremi di passaggio al limite sotto il segno di integrale}
 \begin{theorem}[Beppo Levi \-- versione base]\label{th:beppo_levi_base}
 Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(f_{n}\) una
@@ -3093,7 +3138,7 @@ equivalenti \(\mu\)-q.o.
 \begin{proof}[dimostrazione per \(p=+\infty\)]
     % TODO
 \end{proof}
-\begin{proof}[dimostrazinoe con \(1 \le p < +\infty\)]
+\begin{proof}[dimostrazione con \(1 \le p < +\infty\)]
     Sia \(f_{n}\) una successione di Cauchy in \(L^{p}\), ossia
     \begin{equation}\label{eq:cauchy_lp}
         \forall \varepsilon > 0 \quad \exists n_\varepsilon \in \mathbb{N} \quad
