@@ -3086,4 +3086,185 @@ equivalenti \(\mu\)-q.o.
     \]
     dove l'ultima uguaglianza è per la monotonia del logaritmo.
 \end{proof}
+
+\begin{theorem}
+    Ogni spazio \(L^{p}\) è completo
+\end{theorem}
+\begin{proof}[dimostrazione per \(p=+\infty\)]
+    % TODO
+\end{proof}
+\begin{proof}[dimostrazinoe con \(1 \le p < +\infty\)]
+    Sia \(f_{n}\) una successione di Cauchy in \(L^{p}\), ossia
+    \begin{equation}\label{eq:cauchy_lp}
+        \forall \varepsilon > 0 \quad \exists n_\varepsilon \in \mathbb{N} \quad
+        \text{tale che} \quad m, n \ge n_\varepsilon \implies \|f_{m} -
+        f_{n}\|_{p} < \varepsilon
+    \end{equation}
+    Vogliamo dimostrare che esiste un'estratta convergente. Consideriamo
+    l'\(n_{1} \) dato dalla~\eqref{eq:cauchy_lp} per \(\varepsilon = \frac{1}{2}\), e
+    consideriamo \(f_{n_{1} } \). Prendiamo ora \(n_{2} =
+    \max{n_{\varepsilon = \frac{1}{2^2}}, n_{1}+1}\) e consideriamo \(f_{n_{2}}\), dove il primo argomento è dato dal valore restituito
+    dall'equazione~\ref{eq:cauchy_lp}. Procediamo in questo modo, ogni volta
+    prendendo
+    \[
+    f_{n_k} = f_{\max\{n_{\varepsilon = \frac{1}{2^k}}, n_{k-1} + 1\}}
+    \]
+    e abbiamo quindi che si verifica
+    \[
+        \|f_{n_{k+1}} - f_{n_k} \|_p \le \frac{1}{2^{k}} \quad \forall k \in \mathbb{N}
+    \]
+    definiamo ora \(u_k := f_{n_k} \) e vogliamo mostrare che \(u_k\) converge
+    in \(L^{p}\) a qualche elemento \(f\). A tale scopo sia
+    \[
+        g_k(x) := \sum_{i=1}^{k} \left| u_{i+1} {(x)} - u_{i}{(x)} \right|  
+    \]
+    che è la ridotta di una serie a termini non negativi e inoltre ogni \(g_k
+    \in L^{p}(\Omega)\). Inoltre
+    \[
+        \|g_k\|_p = \sum_{i=1}^{k} \|u_{i+1} -u_{i}\|_p \le \sum_{i=1}^{k}
+        \frac{1}{2^{i}} \le 1 \implies \int_{\Omega} \underbrace{\left| g_k
+        \right|^{p}}_{=:h_k} d\mu
+        \le 1
+    \]
+    Allora \(h_k := |g_k|^{p}\) è una successione monotona crescente e sono
+    tutte non negative. Quindi per Beppo Levi (Teorema~\ref{thm:beppo-levi})
+possiamo concludere che esiste \(h\) misurabile e non negativa tale
+che 
+\[
+    h(x) = \lim_{k\to \infty} h_k(x) \text{ e } \int_{\Omega} h d\mu =
+    \lim_{k\to \infty} \int_{\Omega} h_k d\mu \le 1
+\]
+succede quindi che \(g_k(x) \to g(x)\) per ogni \(x \in \Omega\), con \(g \in
+L^{p}\) perché \(\int_{\Omega} |g(x)|^{p} d\mu \le 1 \).
+Abbiamo ora che, se \(n > m\) 
+\begin{equation}\label{eq:cauchy_lp_pf1}
+    \left| u_n(x) - u_{m}{(x)} \right| \le \sum_{i=m}^{n-1} \left| u_{i+1}
+    -u_{i}{(x)} \right| \le g_{n-1} {(x)} - g_{m-1}{(x)} \le g(x) - g_{m-1} {(x)}
+\end{equation}
+per \(x \in \Omega\) fissato \(\{u_{k} {(x)}\} \) è una successione di Cauchy e
+dunque possiamo definire una funzione
+\[
+    f(x) = \lim_{k\to \infty} u_{k}{(x)} \quad \forall x \in \Omega 
+\]
+Infine vogliamo controllare che \(f \in L^{p}{(\Omega)}\) e che \(u_k \to f\) in
+\(L^{p}{(\Omega)}\). Passando al limite per \(n\to \infty\)
+in~\eqref{eq:cauchy_lp_pf1} otteniamo
+\[
+    |f(x) - u_{m}{(x)}| \le g(x) - g_{m-1}{(x)} \le g(x)
+    \implies 
+    |f(x)| \le |u_{n}{(x)}| + g{(x)} 
+\]
+e quindi \(f \in L^{p}\) perché è dominata da una funzione \(L^{p}\), in quanto
+somma di due tali funzioni. D'altra parte per la stessa equazione, portando
+anche \(m\to \infty\) otteniamo che il secondo membro tende a 0, e quindi
+\(u_{m}\to f\) q.o.~in \(\Omega\). Inoltre
+\[
+    \left| f(x) - u_{m}{(x)} \right|^{p} \le \left| g{(x)} \right|^{p} = g{(x)}
+    \in L^{1}{(\Omega)}
+\]
+e possiamo applicare il teorema di convergenza dominata di Lebesgue
+(Teorema~\ref{thm:Lebesgue_conv_dom}) per cui
+\[
+    \lim_{m\to \infty} \int_{\Omega} \left| f(x) - u_{m}(x) \right|^{p} d\mu = 0
+    \iff \|f-u_{m}\|_p^{p} \longrightarrow 0
+\]
+\end{proof}
+\begin{corollary}
+    Sia \(\{f_{n}\} \) una successione convergente a \(f \in L^{p}{(\Omega)}\).
+    Allora esistono una sottosuccessione \(\{f_{n_k}\} \) e una funzione \(w \in
+    L^{p}{(\Omega)}\) tali che 
+\begin{enumerate}[label = \arabic*.]
+    \item \(f_{n_k} \to f\) q.o.~in \(\Omega\)
+    \item \(\left| f_{n_k} {(x)} \right| \le w{(x)} \) per q.o.~\(x \in \Omega\)
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+    Se \(f_{n}\to f\) in \(L^{p}{(\Omega)}\) allora è di Cauchy in \(L^{p}\) e
+    quindi esiste sicuramente un'estratta \(u_k := f_{n_k} \) tale che \(u_k\)
+    converge q.o.~a una funzione \(\tilde{f}\) e inoltre
+\[
+    \left| \tilde{f}{(x)} - u_k{(x)} \right| \le g(x) \quad \forall k \in
+    \mathbb{N} \implies 
+    \left| u_k{(x)} \right| \le \left| \tilde{f}{(x)} \right| +g{(x)}
+\]
+per cui possiamo prendere \(w{(x)} = \left| \tilde{f}{(x)} \right| + g{(x)} \in
+L^{p}{(\Omega)}\). Ci rimane da controllare che \(f \equiv \tilde{f}\) q.o.~in
+$\Omega$: questo è vero in quanto \(u_k\) converge in \(L^{p}\) sia a \(f\) (per
+ipotesi) che a \(\tilde{f}\) (per quanto appena detto) dunque per l'unicità del
+limite \(f \) e \(\tilde{f}\) devono appartenere alla stessa classe di funzioni
+in \(L^{p}\).
+
+Per \(p=+\infty\) la tesi vale più banalmente.
+\end{proof}
+
+\begin{remark}
+    Convergenza in \(L^{\infty}\) implica convergenza quasi uniforme
+\end{remark}
+
+Il corollario si può espandere a dire che tutta la funzione converge quasi
+ovunque? No. Consideriamo ad esempio la successione
+\begin{align*}
+    f_{1} &= \rchi_{[0, 1]}, \quad f_{2} = \rchi_{[0, \frac{1}{2}]}, \quad f_{3} =
+    \rchi_{[\frac{1}{2}, 1]} \\
+    f_{4} &= \rchi_{[0, \frac{1}{3}]}, \quad f_{5} = \rchi_{[\frac{1}{3},
+    \frac{2}{3}]}, \quad f_{6} = \rchi_{[\frac{2}{3}, 1]} \\ 
+          &\vdots
+\end{align*}
+Questa successione converge a \(0\) in \(L^{p}(0,1)\) per ogni \(1 \le p <
+\infty\), infatti 
+\[
+    \int_{0}^{1} |f_{n} - 0|^{p} dx = \int_{0}^{1} |f_{n}|^{p} dx = \frac{1}{k_n}
+    \to 0
+\]
+\begin{proposition}[Convergenze] \( \) 
+\begin{enumerate}[label = \arabic*.]
+    \item \[
+        \text{ Conv.~in \(L^{\infty}\)  } \implies \text{ conv.~q.u } \implies
+        \begin{cases}
+            \text{conv.~q.o.} \\
+            \text{conv.~in misura}
+        \end{cases}
+    \]
+    \item Conv.~in \(L^{p}{(\Omega)}\) per \(1 \le p< \infty\) \(\implies \)
+        conv.~q.o.~per un estratta (come la convergenza in misura)
+    \item Conv.~in \(L^{p}{(\Omega)}\) per \(1 \le p < \infty\) \(\implies\)
+        Conv.~in misura
+    \item Se \(\mu{(\Omega)} < +\infty\) e \(1 \le p < q \le \infty\) allora
+        \(L^{q}{(\Omega)} \subseteq L^{p}{(\Omega)}\) e si ha che
+        \[
+            \|f\|_p \le C \|f\|_q \quad \forall f \in L^{q}{(\Omega)}
+        \]
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+La terza è vera perché se \(f_{n} \to
+f\) in \(L^{p}{(\Omega)}\) e definiamo \(A_{n} = \{x \in \Omega : \left|
+f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \) 
+\[
+    \varepsilon^{p} \mu(A_{n}) \le \int_{A_{n}} \left| f_{n}{(x)} - f{(x)}
+    \right|^{p} d\mu \le \int_{\Omega} \left| f_{n}{(x)} - f{(x)} \right|^{p}
+    d\mu \overset{n \to \infty}{\longrightarrow} 0
+\]
+
+    Per la quarta, sia \(f \in L^{q}{(\Omega)}\). Allora, usiamo la
+    diseguaglianza di Hölder con esponenti \(\frac{q}{p}\) e \(\frac{q}{q-p}\) 
+    \[
+        \int_{\Omega} \left| f \right|^{p} d\mu = \int_{\Omega} 1 \cdot
+        |f|^{p}d\mu \le {\left( \int_{\Omega} 1^{\frac{q}{q-p}}
+        \right)}^{\frac{q-p}{q}} {\left( \int_{\Omega} {\left( |f|^{p}
+        \right)}^{\frac{q}{p}}  \right)}^{\frac{p}{q}}
+    \]
+    Da cui troviamo 
+    \[
+    \|f\|_p^{p} \le {\mu(\Omega)}^{1 - \frac{p}{q}} \|f\|_q^{p} \implies
+    \|f\|_p \le {\mu(\Omega)}^{\frac{1}{p} - \frac{1}{q}} \|f\|_q
+    \]
+    Se \(q = \infty\) invece abbiamo 
+    \[
+        \int_\Omega |f|^{p} d\mu \le \int_{\Omega} \|f\|^{p}_{\infty} d\mu \le
+        \mu(\Omega) \|f\|_{\infty}^{p} \implies \|f\|_p \le
+        {\mu(\Omega)}^{\frac{1}{p}} \|f\|_{\infty}
+    \]
+\end{proof}
+
 \end{document}
