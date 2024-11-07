@@ -1524,6 +1524,141 @@ Estendiamo ora il risultato
     \mathring{R}\) si ottiene la tesi.
 \end{proof}
 
+\begin{theorem}
+    Sia \(\Omega \subseteq \mathbb{C} \) aperto e \(f : \Omega \to \mathbb{C}\)
+    una funzione \(\mathbb{C}-\)differenziabile. Allora \(f\) è analitica in
+    \(\Omega\) 
+\end{theorem}
+\begin{proof}
+    Fissiamo \(a \in \Omega\) e mostriamo che \(f\) è sviluppabile in serie di
+    potenze in un intorno di \(a\).
+\begin{figure}[ht]
+    \centering
+    \incfig[.6]{diffanalitica}
+    \caption{diffanalitica}
+    \label{fig:diffanalitica}
+\end{figure}
+Sia \(R\) un rettangolo chiuso con \(a \in \mathring{R}\) e \(R \subseteq \Omega
+\). Sia \(D_r{(a)}\) con \(\overline{D_r{(a)}} \subseteq \mathring{R} \).
+Consideriamo \(z \in D_r{(a)}\). Sappiamo per la formula di Cauchy per il
+rettangolo 
+\[
+    f{(z)} = \frac{1}{2\pi i} \int_{\partial R} \frac{f(\zeta)}{\zeta-z} d\zeta
+\]
+Ora comunque presi \(z \in D_r{(a)}\) e \(\zeta \in \partial R\) 
+\[
+    \frac{1}{\zeta - z} = \frac{1}{\zeta - a - (z-a)} = \frac{1}{\zeta - a}
+    \cdot \frac{1}{1 - \frac{z-a}{\zeta-a}}
+\]
+e poiché
+\[
+    \left| \frac{z-a}{\zeta - a} \right| \le \alpha < 1
+\]
+per un opportuno \(\alpha\). Allora abbiamo
+\[
+    \frac{1}{1 - \frac{z-a}{\zeta-a}} = \sum_{n=0}^{\infty} {\left( \frac{z-a}{\zeta
+    - a} \right)}^{n}
+\]
+e quindi
+\[
+    f{(z)} = \frac{1}{2\pi i} \int_{\partial R} \sum_{n=0}^{\infty}
+    \frac{f{(\zeta)}}{{(\zeta - a)}^{n+1}} {(z-a)}^{n} d\zeta
+\]
+Risulta che
+\[
+    \left| \frac{f{(\zeta)}}{{(\zeta - a)}^{n+1}} {(z-a)}^{n} \right| \le
+    {\left( \max_{\partial R} |f| \right)} \frac{1}{|\zeta - a|} \cdot \alpha
+    ^{n}
+\]
+e quindi poiché \(\alpha < 1\) si ha convergenza globale e si può scambiare il
+segno di serie e integrale ottenendo
+\[
+    f{(z)} = \frac{1}{2\pi i} \sum_{n=0}^{\infty} {\left( \int_{\partial R}
+    \frac{f{(\zeta)}}{{(\zeta -a)}^{n+1}} d \zeta \right)} {(z-a)}^{n} =
+    \sum_{n=0}^{\infty} c_{n} {(z-a)}^{n}
+\]
+dove \(\displaystyle c_{n} = \frac{1}{2\pi i} \int_{\partial R}
+\frac{f{(\zeta)}}{{(\zeta - a)}^{n+1}} d \zeta \) 
+\end{proof}
+
+Abbiamo allora dimostrato che \(f\) è \(\mathbb{C}-\)differenziabile se e solo
+se è analitica. Si parla anche di funzioni \textbf{olomorfe} e si indica con \(f
+\in \mathcal{H}{(\Omega)}\) 
+\begin{remark}
+    Se \(f\) è olomorfa allora \(f\) è infinitamente differenziabile in senso
+    complesso. Inoltre se guardiamo \(f\) come funzione reale \(f:
+    \mathbb{R}^{2} \to \mathbb{R}^{2}\) allora \(f\) è \(C^{\infty}\)
+\end{remark}
+
+Sia \(f : \Omega \to \mathbb{C}\). Abbiamo già visto che se per ogni \(\gamma\)
+chiusa in \(\Omega\) si ha \(\int_{\gamma} f = 0\) allora \(f\) ammette
+primitiva in \(\Omega\), ossia esiste \(F : \Omega \to \mathbb{C}\) tale che
+\(F' = f\). In particolare \(F\) è \(\mathbb{C}-\)differenziabile e quindi
+olomorfa, ma quindi anche \(f\) è olomorfa.
+% TODO: mettere in forma più carina evidenziando la tesi
+
+Ricordando la dimostrazione del teorema~\ref{thm:1_forme} che dice che se
+l'integrale su ogni curva chiusa di una forma differenziale è nullo allora la
+forma è esatta. Similmente se per ogni curva chiusa \(\gamma\) si ha che
+l'integrale su \(\gamma\) di \(f\) è nullo allora \(f\) ammette primitiva,
+costruita nello stesso modo, ossia
+\[
+    F{(z)} = \int_{\gamma_z} f(\zeta) d\zeta
+\]
+dove \(\gamma_z\) è una curva che unisce \(z_{0}\) a \(z\), con \(z_{0}\)
+fissato. Richiedere che l'integrale su ogni curva chiusa sia nullo serve perché
+questa funzione sia ben definita.
+
+Supponiamo ora di avere solamente l'ipotesi
+\[
+    \forall R \subseteq \Omega \quad \int_{\partial R} f = 0
+\]
+Otteniamo un simile risultato
+\begin{theorem}[Morera]
+    Sia \(f : \Omega \to \mathbb{C}\) continua e tale che
+\[
+    \forall R \subseteq \Omega \quad \int_{\partial R} f = 0
+\]
+Allora \(f\) è olomorfa in \(\Omega\)
+\end{theorem}
+\begin{proof}
+Fissato \(\overline{D}_r{(a)} \subseteq \Omega \), per ogni \(z \in
+D_r{(a)}\) costruiamo
+\[
+    F{(z)} := \int_{\gamma_z} f(\zeta) d\zeta
+\]
+dove \(\gamma_z\) consiste in due dei lati di un rettangolo con vertici \(a\) e
+\(z\). Tecnicamente allora ci sono due curve \(\gamma_z\) e \(\tilde{\gamma}_z\)
+con questa proprietà, ma per l'ipotesi posta hanno uguale integrale, quindi
+\(F\) è ben posta. Ora come nel caso precedente si dimostra che \(F\) è
+\(\mathbb{C}-\)differenziabile e \(F'{(z)} = f{(z)}\) in ogni \(z \in
+D_r{(a)}\). Allora \(F\) è \(\mathbb{C}-\)differenziabile in \(D_r{(a)}\). Per
+l'arbitrarietà di \(a\) si ha che \(f\) è olomorfa in \(\Omega\).
+\end{proof}
+\begin{remark}
+    Non abbiamo dimostrato in questo caso che \(f\) ammette primitiva su tutto
+    \(\Omega\), ma soltanto in un intorno di ogni punto. Questo comunque ci
+    permette di mostrare che \(f\) è olomorfa.
+\end{remark}
+
+Con quanto appena visto possiamo aggiornare la
+Proposizione~\ref{prp:forme-funzioni}. Infatti se \(f\) è olomorfa, in
+particolare è \(C^{1}\) e allora \(\omega_{i}\) e \(\omega_{r}\) sono chiuse.
+Ora usando il Teorema~\ref{thm:2_forme} vale l'invarianza per omotopia. Allora
+\begin{theorem}[Cauchy, forma omotopica]
+    Sia \(f \in \mathcal{H}{(\Omega)}\) e \(\gamma_{0}, \gamma_{1}\) curve
+    chiuse fra loro omotope in \(\Omega\). Allora
+    \[
+        \int_{\gamma_{0}} f = \int_{\gamma_{1}} f
+    \]
+\end{theorem}
+\begin{proof}
+    vedasi sopra
+\end{proof}
+Risultato analogo vale per curve omotope rispetto a un'omotopia che fissa gli
+estremi.
+
+
 \newpage
 \section{Richiamo delle forme differenziali}
 
@@ -1581,7 +1716,7 @@ B\) risulta
 \end{itemize}
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{thm:2_forme}
     Sia \(\Omega\) connesso e \(\omega\) \textbf{chiusa}. Allora se
     \(\gamma_{0}\) e \(\gamma_{1}\) sono curve chiuse \(C^{1}\) a tratti omotope
     in \(\Omega\) allora

@@ -3607,7 +3607,7 @@ equivalenti \(\mu\)-q.o.
 \end{proof}
 
 \begin{theorem}
-    Ogni spazio \(L^{p}\) è completo
+    Ogni spazio \(L^{p}\) è completo.
 \end{theorem}
 \begin{proof}[dimostrazione per \(p=+\infty\)]
     % TODO
@@ -3735,6 +3735,9 @@ Questa successione converge a \(0\) in \(L^{p}(0,1)\) per ogni \(1 \le p <
     \int_{0}^{1} |f_{n} - 0|^{p} dx = \int_{0}^{1} |f_{n}|^{p} dx = \frac{1}{k_n}
     \to 0
 \]
+tuttavia non converge quasi ovunque a \(0\), infatti per ogni \(x \in (0, 1)\)
+la successione \(f_{n}{(x)}\) non ha limite perché non smette mai di assumere
+anche il valore \(1\).
 \begin{proposition}[Convergenze] \( \) 
 \begin{enumerate}[label = \arabic*.]
     \item \[
@@ -3785,4 +3788,109 @@ f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \)
         {\mu(\Omega)}^{\frac{1}{p}} \|f\|_{\infty}
     \]
 \end{proof}
+\begin{example}
+    Nella 4. è importante richiedere \(\mu{(\Omega )} < +\infty\). Ad esempio se
+    \(\Omega = \mathbb{R}\) e \(f{(x)} = 1\) abbiamo che \(f \in L^{\infty}\) ma
+    \(f \not\in L^{p}{(\mathbb{R})}\) per ogni \(1 \le p < \infty\) 
+\end{example}
+\begin{example}
+    L'altra implicazione è normalmente falsa. Ad esempio se \(f{(x)} =
+    \frac{1}{|x|^{\alpha}} \rchi_{[-1,1]}{(x)} \) per \(\alpha < 1\) è
+    integrabile ma non è limitata, quindi \(f \in L^{1}\) ma \(f\not\in L^{\infty}\) 
+\end{example}
+\begin{proof}
+    Se \(\mu{(\Omega)} = +\infty\) e \(f \in L^{1}{(\Omega)} \cap
+    L^{\infty}{(\Omega)}\) allora \(f \in L^{p}{(\Omega)}\) per ogni \(1 \le p
+    \le +\infty\) e
+    \[
+        \|f\|_p \le \|f\|_1^{\theta} \|f\|_{\infty}^{1-\theta} 
+    \]
+    per un certo \(\theta \in {(0,1)}\).
+\end{proof}
+\begin{proof}
+    Notiamo che \(|f|^{p} \le |f||f|^{p-1} \le |f| \|f\|_\infty^{p-1}\). Ne
+    consegue che \(|f|^{p }\) è integrabile e inoltre
+    \[
+        \int_\Omega |f|^{p} d\mu \le \|f\|_\infty^{p-1} \int_\Omega |f| d\mu =
+        \|f\|_\infty^{p-1} \|f\|_1
+    \]
+    ora elevando il tutto alla \(1/p\) otteniamo
+    \[
+        \|f\|_p \le \|f\|_\infty^{1-1/p} \|f\|_1^{1/p}
+    \]
+    ossia \(\displaystyle \theta = \frac{1}{p}\) e \(\displaystyle 1 - \theta = \frac{1}{p'}\) 
+\end{proof}
+\begin{corollary}
+    Se \(\mu{(\Omega)} = +\infty\) e \(f_{n} \to f\) in \(L^{1}{(\Omega)}\) e
+    in \(L^{\infty}{(\Omega)}\) allora \(f_{n} \to f\) in \(L^{p}{(\Omega)}\)
+    per ogni \(p \in (1, \infty)\).
+\end{corollary}
+\begin{proof}
+    Per la preposizione precedente
+    \[
+        \|f_{n} -f\|_p \le  \|f_{n} - f\|_1^{\frac{1}{p}} \|f_{n} -
+        f\|_{\infty}^{1-\frac{1}{p}}
+    \]
+    da qui la tesi. Notare che in realtà le ipotesi potrebbero essere
+    alleggerite a chiedere solo una delle due convergenze, purché l'altra sia
+    finita.
+\end{proof}
+\begin{note}
+    Le convergenze q.o., q.u.~e in misura non richiedono che le funzioni della
+    successione o la funzione limite appartengano a un qualche spazio \(L^{p}\).
+\end{note}
+
+\begin{definition}[Spazio di Hilbert]
+    Uno spazio prehilbertiano che sia completo rispetto alla norma indotta dal
+    prodotto scalare si chiama \textbf{spazio di Hilbert}.
+\end{definition}
+\begin{example}
+    \(\mathbb{R}^{N}\) e \(\mathbb{C}^{N}\) sono spazi di Hilbert. Ad esempio in
+    \(\mathbb{C}^{N}\) il prodotto scalare standard è \(\langle x, y \rangle =
+    \sum_{i=1}^{N} x_{i} \overline{y_{i}}\) e induce la norma euclidea su
+    \(\mathbb{C}^{N}\). I dettagli sono facili e lasciati come esercizio.
+
+    Su \(\mathbb{R}^{N}\) si può mettere come prodotto scalare anche ad esempio
+    \[
+        {(x, y)} = \begin{pmatrix}
+            x & y
+        \end{pmatrix} A \begin{pmatrix}
+            x \\ y
+        \end{pmatrix}
+    \]
+    con \(A\) una matrice simmetrica definita positiva.
+\end{example}
+\begin{example}
+    \(L^{2}{(\Omega)}\) è uno spazio di Hilbert se prendiamo come prodotto
+    scalare 
+    \[
+        \langle f, g \rangle = \int_{\Omega} f(x) \overline{g(x)} d\mu
+    \]
+    dove il coniugio è rilevante solo nel caso complesso. La norma associata a
+    questo prodotto scalare è proprio la norma 2.
+\end{example}
+\begin{proposition}[Regola del Parallelogramma]
+    Se \(H\) è uno spazio prehilbertiano allora vale l'identità
+    \[
+        \|x + y\|^2 + \|x - y\|^2 = 2\|x\|^2 + 2\|y\|^2 \quad \forall x, y \in H
+    \]
+    che vista graficamente (figura~\ref{fig:parallelogramma}) significa che la somma dei quadrati costruiti
+    sulle diagonali è uguale alla somma dei quadrati costruiti sui lati.
+\end{proposition}
+\begin{figure}[ht]
+    \centering
+    \incfig[.5]{parallelogramma}
+    \caption{Regola del Parallelogramma}\label{fig:parallelogramma}
+\end{figure}
+\begin{proof}
+    \begin{align*}
+        \|x+y\|^2 + \|x-y\|^2 &= \langle x+y, x+y \rangle + \langle x-y, x-y
+        \rangle = \\ &= \langle x, x \rangle + \langle y, y \rangle + \langle x, y
+        \rangle + \langle y, x \rangle + \\ &+ \langle x, x \rangle + \langle y, y
+        \rangle - \langle x, y \rangle - \langle y, x \rangle = 2\|x\|^2 +
+        2\|y\|^2
+    \end{align*}
+\end{proof}
+    Data una norma, se essa verifica l'identità del parallelogramma allora
+    essa è una norma hilbertiana, cioè associata a un prodotto scalare
 \end{document}
