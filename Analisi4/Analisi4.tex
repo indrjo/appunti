@@ -1594,7 +1594,7 @@ diseguaglianza stretta.
     \]
     Confermando Beppo Levi
 \end{example}
-\begin{example}
+\begin{example}\label{ex:limite_integrale_NO}
     Sia \(\Omega = \mathbb{R}\) con la misura di Lebesgue. Sia \(f_{n} =
     \rchi_{[n, n+1]}\). Allora \(\lim_{n \to \infty} f_{n} = 0\) e
     \(\int_{\mathbb{R}} f_{n} d\mu = +\infty\) otteniamo quindi 
@@ -1768,8 +1768,39 @@ sarebbero non limitate
     \]
 \end{theorem}
 \begin{proof}
-    % TODO 
+    Per poter applicare il lemma di Fatou abbiamo bisogno che \(f_{n}\) siano
+    integrabili questo è vero perché sappiamo che \(|f_{n}| \le g\) e dunque
+    \(f_{n} \in L^{1}{(E)}\) per la CNES~\ref{th:cnes_L1}.
+
+    Ora per sappiamo che
+    \[
+        -g{(x)} \le f{(x)} \le g{(x)} \quad \forall x \in E
+    \]
+    possiamo allora applicare Fatou~\ref{thm:fatou} che ci dice che \(f =
+    \liminf_{n \to \infty} f_{n} = \\ = \limsup_{n \to \infty} f_{n} \) è integrabile
+    in \(E\) e inoltre 
+    \[
+        \int_E \liminf_{n \to \infty} f_{n} d\mu \le \liminf_{n \to \infty} \int_E f_{n} d\mu \le \limsup_{n
+        \to \infty} \int_E f_{n} d\mu \le \int_E \limsup_{n \to \infty}f_{n}  d\mu
+    \]
+    ma poiché \(\liminf_{n \to \infty} f_{n} = \limsup_{n \to \infty} f_{n} =
+    f\) otteniamo la tesi.
 \end{proof}
+Notare come non abbiamo mai richiesto la convergenza uniforme, cosa che invece
+era essenziale per lo stesso risultato nell'integrale di Riemann
+
+\begin{note}
+    La convergenza puntuale, l'integrabilità di \(f_{n}\) e la limitatezza della
+    successioni \(\{f_{n}\} \)  non bastano per passare al limite sotto il segno
+di integrale. Basti pensare all'esempio~\ref{ex:limite_integrale_NO}
+\end{note}
+
+\begin{remark}
+    Come nel teorema di Beppo Levi~\ref{thm:beppo-levi} possiamo estendere il
+    teorema della convergenza dominata rilassando le ipotesi \(f_{n} \to f\)
+    puntualmente a \(f_{n} \to f\) q.o.~e \(|f_{n}| \le g\) q.o.
+\end{remark}
+
 
 \paragraph{Funzioni \(\frac{1}{x^{\alpha}}\)} Consideriamo le funzioni \(f{(x)}
 = \frac{1}{x^{\alpha}}\), con \(\alpha>0\) sia su \((0,1)\) che in \({(1,
@@ -3480,14 +3511,146 @@ perché non c'è la diseguaglianza triangolare.
     e_{N}\}\). Ogni elemento \(v \in V\) si può scrivere come \(v =
     \sum_{i=1}^{N} \alpha_{i}e_{i}\) per opportuni scalari \(\alpha_i\). Sia
     \(\|\cdot \|_1\) la norma 1, ossia \(\|v\|_1 = \sum_{i=1}^{N}
-    |\alpha_{i}|\). Sia ora \(\|\cdot \|\) una norma qualunque in \(V\).
+    |\alpha_{i}|\). Allora questa è una norma perché è sempre positiva, vale 0
+    solo se tutti gli \(\alpha_{i} = 0\), ossia \(v = 0\), vale l'omogeneità
+    perché il modulo è omogeneo e vale la diseguaglianza triangolare perché vale
+    per il modulo.
+
+    Sia ora \(\|\cdot \|\) una norma qualunque in \(V\).
     \[
         \|v\| = \left\| \sum_{i=1}^{N} \alpha_{i}e_{i} \right\| \le
         \sum_{i=1}^{N} |\alpha_{i}|\|e_{i}\| \le M \sum_{i=1}^{N} |\alpha_{i}| =
         M \|v\|_1
     \]
-    per \(M = \max_{1 \le i \le N} \|e_{i}\| \) 
+    per \(\displaystyle M = \max_{1 \le i \le N} \|e_{i}\| \). Ora dobbiamo
+    provare che
+    \[
+        \exists m > 0 \quad \forall x \in V \text{tale che} \quad \|v\| \ge m \|v\|_1
+    \]
+    e la dimostriamo per assurdo, ossia diciamo che 
+    \[
+        \forall k \in \mathbb{N} \quad \exists x_k \in V \text{ tale che } \|x_k\|_1 > k
+        \|x_k\|
+    \]
+    Notiamo che \(\|x_k\|_1 > 0\) per ogni \(k\), quindi possiamo definire per
+    ogni \(k\) 
+    \[
+        u_k = \frac{x_k}{\|x_k\|_1} \implies \|u_k\|_1 = 1 > k \|u_k\|
+    \]
+    Rappresentiamo ora \(u_k\) come
+    \[
+        u_k = \sum_{i=1}^{N} \alpha_{i,k}e_{i} 
+    \]
+e quindi abbiamo \(N\) successioni \({\{\alpha_{i,k}\}}_{k \in \mathbb{N}}\)
+    reali o complesse tali che \(\sum_{i=1}^{N} |\alpha_{i,k}| = 1\) e quindi
+    tutte le successioni sono limitate. Allora per compattezza ne esiste
+    un'estratta \(\{k_n\} \) tale che \(\alpha_{i, k_n} \to \alpha_{i}\) in
+    \(\mathbb{R}\) o \(\mathbb{C}\). Abbiamo ora la successione \(u_{k_n}\) che
+    quindi converge a \(u = \sum_{i=1}^{N} \alpha_{i}e_{i}\) rispetto a entrambe
+    le norme, abbiamo che
+    \[
+        \|u\| \le \|u - u_{k_n} \| + \|u_{k_n} \| < \|u - u_{k_n} \| +
+        \frac{1}{k_n} \to 0
+    \]
+    per cui \(\|u\| = 0\) e quindi \(u = 0\), ma d'altra parte
+    \[
+        \left| \|u\|_1 - 1 \right| = \left| \|u\|_1 - \|u_{k_n} \|_1 \right| \le
+        \|u - u_{k_n} \|_1 = \sum_{i=1}^{N} |\alpha_{i} - \alpha_{i, k_n}| \to 0 
+    \]
+    ma allora \(\|u\|_1 = 1\) che è una contraddizione.
 \end{proof}
+
+\begin{example}[Norme non equivalenti]
+    Sia \(V = C^{0}[-1, 1]\) con le norme \(\|f\|_{1} = \int_{-1}^{1} |f(x)|dx\)
+    e \(\|f\|_{\infty} = \max_{x \in [-1, 1]} |f(x)|\). Queste due norme non sono
+    equivalenti, infatti non è vero che esiste \(C > 0\) tale
+    che \(\|f\|_\infty \le C \|f\|_1\) per ogni \(f \in V\).
+    In particolare vogliamo mostrare che
+    \[
+        \forall k \in \mathbb{N} \quad \exists f_k \in V : \|f_k\|_\infty > k
+        \|f_k\|_1
+    \]
+\begin{figure}[ht]
+    \centering
+    \incfig[.4]{triangoli}
+    \caption{triangoli}
+    \label{fig:triangoli}
+\end{figure}
+    Se prendiamo funzioni \(f_k\) come in figura~\ref{fig:triangoli} abbiamo che
+    il massimo di \(f_k\) è \(k\) e l'integrale è \(\frac{1}{2} \cdot
+    \frac{2}{k^2} \cdot k = \frac{1}{k}\). Allora abbiamo che 
+    \[
+        \frac{\|f_k\|_\infty}{\|f_k\|_1} = \frac{k}{\frac{1}{k}} = k^2 > k
+        \text{ per ogni  \(k > 1\) }
+    \]
+\end{example}
+
+\begin{definition}[Spazio di Banach]
+    Uno spazio normato \({(V, \|\cdot \|)}\) si dice \textbf{di Banach} se è
+    completo rispetto alla metrica indotta dalla norma
+\end{definition}
+\begin{example}
+    Gli spazi \(\mathbb{R}^{N}\) e \(\mathbb{C}^{N}\) sono spazi di Banach.
+\end{example}
+
+\begin{eser}
+    Mostrare che \(C^{0}{[-1, 1]}\) con la norma \(\|\cdot \|_\infty\) è
+    uno spazio di Banach
+\end{eser}
+
+\begin{example}
+    Su \(V = C^{0}[-1, 1]\), la norma \(\|\cdot \|_1\) non induce uno spazio di
+    Banach. Dobbiamo trovare una successione di Cauchy che non converge in
+    \(V\), quindi ad esempio trovare una funzione che converga a una funzione
+    non continua.
+    Prendiamo 
+    \[
+        f_{n}{(x)} = \frac{2}{\pi}\arctan {(nx)} \overset{n \to
+        \infty}{\longrightarrow} \text{sign} x \text{ q.o. }
+    \]
+    allora \(f_{n}\) è una successione di Cauchy, ossia
+    \[
+        I_{n,m} := \int_{-1}^{1} |f_{n} - f_{m}| = \int_{-1}^{1} \left| \frac{2}{\pi}
+        \arctan {(nx)} - \frac{2}{\pi} \arctan {(mx)} \right| dx \to 0 \text{
+        per } n, m \to \infty 
+    \]
+    infatti
+    \begin{align*}
+        I_{n,m} &= \int_{-1} ^{1}\left| \frac{2}{\pi}\arctan {(nx)} -
+        \text{sign}x + \text{sign}x - \frac{2}{\pi}\arctan {(mx)} \right| \le \\
+        &\le \int_{-1} ^{1} \left| \frac{2}{\pi}\arctan {(nx)} - \text{sign}x
+        \right| dx + \int_{-1} ^{1} \left| \text{sign}x - \frac{2}{\pi}\arctan
+        {(mx)} \right| dx
+    \end{align*}
+    e vogliamo mostrare che entrambi gli integrali tendono a 0. Prendendo ad
+    esempio il primo
+    \[
+        \int_{-1} ^{1} \left| \frac{2}{\pi}\arctan {(nx)} - \text{sign}x
+        \right| dx = 2 \int_{0} ^{1} \left| \frac{2}{\pi}\arctan {(nx)} -
+        1\right| dx \to 0 \text{ per } n \to \infty
+    \]
+    dove per l'ultimo limite possiamo usare sia il teorema della convergenza
+    dominata (\ref{thm:Lebesgue_conv_dom}) che il teorema della convergenza
+    monotona (\ref{thm:beppo-levi}). Dunque la successione è di Cauchy, ma non
+    converge ad una funzione in \(C^{0}[-1, 1]\) 
+\end{example}
+\begin{eser}
+    Sia \(V\) uno spazio vettoriale con due norme \(\|\cdot \|\) e \(\|\cdot
+    \|'\) e rispetto a \(\|\cdot \|\) \(V\) è uno spazio di Banach. Mostrare
+    che, se le due norme sono equivalenti, allora \(V\) è uno spazio di Banach
+    anche con la norma \(\|\cdot \|'\).
+\end{eser}
+\begin{remark}
+    Se le norme non sono equivalenti, allora non si può dire nulla
+\end{remark}
+
+\begin{proposition}
+    Se \(V\) è uno spazio normato e \(W \subseteq V \) è un sottospazio
+    vettoriale allora \(W\) è uno spazio normato con la norma di \(V\) ristretta
+    a \(W\).
+
+    Se \(W\) ha dimensione finita allora \(W\) è necessariamente chiuso.
+\end{proposition}
 
 \subsection{Spazi \(L^{p}\) }
 \begin{definition}[Spazio \(L^{p}\)]
@@ -3606,7 +3769,7 @@ equivalenti \(\mu\)-q.o.
     dove l'ultima uguaglianza è per la monotonia del logaritmo.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{thm:completezza_Lp}
     Ogni spazio \(L^{p}\) è completo.
 \end{theorem}
 \begin{proof}[dimostrazione per \(p=+\infty\)]
