@@ -1198,7 +1198,6 @@ che \(I_E(s) \le I_E(f)\).
 NB:~\emph{Sommabile} è un sinonimo di \emph{integrabile} e capiterà di
 usarlo.
 \paragraph{Proprietà dell'integrale}
-
 \begin{enumerate}[label = \arabic*.]
     \item Se \(f \in L^{1}(E)\) e \(\alpha \in \mathbb{R}\), allora \(\alpha f
         \in  L^{1}(E)\) e \(\int_E \alpha f d\mu = \alpha \int_E f d\mu\) 
@@ -1333,9 +1332,10 @@ usarlo.
             diseguaglianza.
     \end{enumerate}
 \end{proof}
-\begin{corollary}[ \(\sigma\)-additività dell'integrale]
-    Se \(f \in L^{1}(\Omega)\) e \(\{A_{n}\}\) è una successione di insiemi
-    disgiunti a due a due, con \(A = \bigcup_{n=1}^{\infty} A_{n} \) 
+\begin{corollary}[\(\sigma\)-additività dell'integrale]
+    Se \(f \in L^{1}(A)\) e \(\{A_{n}\}\) è una successione di insiemi
+    disgiunti a due a due, con \(A = \bigcup_{n=1}^{\infty} A_{n} \), allora \(f
+    \in L^{1}(A_n)\) per ogni \(n\) e
     \[
         \int_{A} f d\mu = \sum_{n=1}^{\infty}
         \int_{A_{n}} f d\mu
@@ -1384,7 +1384,7 @@ usarlo.
         d\mu + \int_{B} f^{-} d\mu = \int_{E} |f| d\mu
     \]
 \end{proof}
-\begin{theorem}[CNES per l'integrabilità]
+\begin{theorem}[CNES per l'integrabilità]\label{th:cnes_L1}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(f : \Omega
     \to  \mathbb{R}\cup \{\pm\infty\} \) misurabile. Allora \(f\) è integrabile
     se e solo se esiste \(g\) integrabile tale che \(|f| \le g\) quasi ovunque.
@@ -1393,10 +1393,26 @@ usarlo.
         \quad \text{q.o.}
     \]
 \end{theorem}
+\begin{note}
+    In questi casi si usa dire che \(f\) è  ``dominata'' da \(g\). L'enunciato
+    precedente quindi si può anche dire \(f\) è integrabile se e solo se è
+    misurabile e dominata da una funzione integrabile.
+\end{note}
+\begin{proof}
+    Se \(f\)  è integrabile, allora è misurabile e dominata da
+        \(|f|\). Viceversa, se
+    \(|f| \le g\) in \(\Omega\) allora \(f^{+} < g\) e
+        \(f^{-} < g\). Allora \(f^{+}, f^{-} \in L^{1}{(\Omega)}\) e dunque \(f
+        \in L^{1}{(\Omega)}\)
+\end{proof}
 \begin{corollary}
     In particolare se \(|f|\) è integrabile e \(f\) è misurabile allora \(f\) è
     integrabile.
 \end{corollary}
+Con questo risultato l'integrale di Lebesgue si distingue molto dall'integrale
+di Riemann. Ad esempio la funzione definita su \([0, 1]\) come 1 sui razionali e
+\(-1\) su \(\mathbb{R}\sminus \mathbb{Q}\) non è integrabile secondo Riemann ma
+lo è secondo Lebesgue perché \(|f| = 1\) è integrabile.
 
 \paragraph{Integrale di Riemann} L'integrale di Lebesgue che abbiamo introdotto
 è un'estensione dell'integrale di Riemann, cioè \emph{ogni funzione
@@ -1519,9 +1535,58 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
     \liminf\) se il limite esiste e il \(\liminf\) conserva le diseguaglianze di
     successioni.
 \end{proof}
+
+\begin{proposition}[Linearità dell'integrale di Lebesgue]
+    Se \(f_{1}, f_{2} \in L^{1}(E)\) allora \(f = f_{1}+f_{2} \in L^{1}{(E)}\) e
+    inoltre
+    \[
+        \int_E f d\mu = \int_E f_{1} d\mu + \int_E f_{2} d\mu
+    \]
+\end{proposition}
+\begin{proof}
+    Siano \(u,v\) misurabili e non negative. Posto \(w = u +v\) si ha 
+    \begin{equation}\label{eq:linearita_integrale_1}
+        \int_E w d\mu = \int_{E} u d\mu + \int_v d\mu
+    \end{equation}
+    Infatti esistono due successioni \(s_{n}\) e \(t_{n}\) di funzioni semplici
+    tali che \(s_{n} \to u\) e \(t_{n} \to v\) puntualmente e sia \(\{s_{n}\} \)
+    che \(\{t_{n}\} \) sono crescenti. Definiamo \(h_{n} := s_{n} + t_{n}\)
+    ottenendo ancora una successione crescente di funzioni semplici misurabili
+    non negative. Notiamo che  
+    \[
+        \int_E h_{n} d\mu = \int_E s_{n} d\mu + \int_E t_{n} d\mu
+    \]
+    perché sono funzioni semplici. Ora portiamo al limite e applichiamo Beppo
+    Levi, ossia~\ref{th:beppo_levi_base}
+    ottenendo~\eqref{eq:linearita_integrale_1}. 
+
+    Ora se siano \(f_{1}, f_{2}\) integrabili, quindi misurabili. Inoltre
+    \(|f_{1}|, |f_{2}| \in L^{1}{(E)}\). Poiché \(|f| = |f_{1}+f_{2}| \le
+    |f_{1}|+|f_{2}|\) che è integrabile perché ricade nel caso precedente, anche
+    \(|f|\) è integrabile e quindi \(f\), per la CNES~\ref{th:cnes_L1}.
+    Sappiamo che 
+    \[
+        f^{+}- f^{-} = f_{1}^{+} -f_{1}^{-} + f_{2}^{+} - f_{2}^{-} \iff f^{+} +
+        f^{-}_1 +f^{-}_2 = f_{1}^{+} + f_{2}^{+} + f^{-}
+    \]
+    che è un uguaglianza tra due funzioni somme di funzioni misurabili non
+    negative, per cui posso applicare la prima parte, ottenendo
+    \[
+        \int_E f^{+} d\mu + \int_E f^{-}_1 d\mu + \int_E f^{-}_2 d\mu = \int_E
+        f_{1}^{+} d\mu + \int_E f_{2}^{+} d\mu + \int_E f^{-} d\mu 
+    \]
+    da cui, riordinando i termini otteniamo la tesi.
+\end{proof}
+
+Ricordando il lemma di Fatou~\ref{le:fatou_base}, avevamo che la diseguaglianza
+è spesso un'uguaglianza. In particolare ovviamente ogni volta che la successione
+\(f_{n}\) è crescente abbiamo un uguale (Beppo Levi~\ref{th:beppo_levi_base}) e
+i \(\liminf \)  sono dei \(\lim\). Ci sono però anche casi in cui vale la
+diseguaglianza stretta.
+
 \begin{example}
-    Sia \(\Omega = \mathbb{R}\) con la misura di Lebesgue. Sia \(f_{n} =
-    \rchi_{[-n, n]}\). Allora \(\lim_{n \to \infty} f_{n} = 1\) e
+    Sia \(\Omega = \mathbb{R}\) con la misura di Lebesgue. Sia \(f_{n}{(x)} =
+    x\rchi_{[-n, n]}\). Allora \(\lim_{n \to \infty} f_{n} = 1\) e
     \(\int_{\mathbb{R}} f_{n} d\mu = 2n\) otteniamo quindi
     \[
         \int_{\mathbb{R}} \lim_{n \to \infty} f_{n} d\mu = +\infty =
@@ -1544,7 +1609,147 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
     \]
 \end{example}
 
+Se ho una funzione integrabile su \(E\), questa può prendere i valori
+\(+\infty\) e \(-\infty\)? Sì, ma solo in un sottoinsieme trascurabile. In caso
+contrario la funzione non sarebbe integrabile perché \(f^{+}\) oppure \(f^{-}\)
+sarebbero non limitate
+
+\begin{theorem}[Lemma di Fatou \-- versione estesa]\label{th:fatou_esteso}
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(\{f_{n}\}\) una
+    successione di funzioni misurabili su \(\Omega\). Allora
+\begin{enumerate}[label = \arabic*.]
+    \item Se esiste \(g\) integrabile su \(E\) tale che \(g \le f_{n}\) su \(E\)
+        allora
+        \[
+        \int_E \liminf_{n \to \infty} f_{n} d\mu \le \liminf_{n \to \infty} 
+        \int_E f_{n} d\mu
+        \]
+    \item Se esiste \(h\) integrabile in \(E\) tale che \(f_{n} \le h\) su \(E\)
+        allora
+        \[
+            \int_E \limsup_{n \to \infty} f_{n} d\mu \ge \limsup_{n \to \infty}
+            \int_E f_{n} d\mu
+        \]
+\end{enumerate}
+\end{theorem}
+\begin{proof}[Dimostrazione parte 1]
+    Poniamo \(f{(x)} = \liminf_{n \to \infty} f_{n}{(x)} \ge g{(x)}\) per \(x
+    \in E\). Possiamo considerare la successione \(u_{n}{(x)} = f_{n}{(x)} -
+    g{(x)}\) che verifica le ipotesi di Fatou base~\ref{le:fatou_base} in \(E\)
+    e allora 
+    \[
+        \liminf_{n \to \infty} u_{n}{(x)} = f{(x)} - g{(x)}
+        \implies 
+        \int_E {\left( f-g \right)} d\mu \le \liminf_{n \to \infty} \int_E
+        {\left( f_{n} - g \right)} d\mu
+    \]
+    usando la linearità dell'integrale abbiamo
+    \[
+        \int_E f d\mu - \underbrace{\int_E g d\mu}_{\text{finito}}  \le 
+        \liminf_{n \to \infty} \left(\int_E f_{n}
+        d\mu - \underbrace{\int_E g d\mu}_{\text{finito}} \right) = 
+        \liminf_{n \to \infty} \int_E f_{n} d\mu - \int_E g d\mu
+    \]
+    da cui otteniamo la tesi.
+\end{proof}
+\begin{proof}[Dimostrazione parte 2]
+    La successione \(v_{n} = -f_{n}\) verifica \(v_{n} \ge -h\) in \(E\) dove
+    \(-h\) è una funzione integrabile. Allora possiamo applicare la parte 1 a
+    \(v_{n}\) ottenendo 
+    \[
+        \int_E \liminf_{n \to \infty} v_{n} d\mu \le \liminf_{n \to \infty}
+        \int_E v_{n} d\mu
+    \]
+    poiché \(\liminf_{n \to \infty} (-f_{n}) = -\limsup_{n \to \infty} f_{n}\)
+    segue che
+    \[
+        \int_E -\limsup_{n \to \infty} f_{n} d\mu \le -\limsup_{n \to \infty}
+        \int_E f_{n} d\mu \iff \int_E \limsup_{n \to \infty} f_{n} d\mu \ge 
+        \limsup_{n \to \infty} \int_E f_{n} d\mu
+    \]
+\end{proof}
+
+\begin{theorem}[Beppo Levi \-- seconda versione]\label{thm:beppo-levi}
+    Sia \({(\Omega, \mathcal{M}, \mu)}\) uno spazio di misura. Sia \(\{f_{n}\}
+    \) una successione monotona di funzioni misurabili tali che la successione
+    degli integrali \(\displaystyle \{\int_E f_{n} d\mu\} \) sia limitata.
+    Allora posto
+    \[
+        f{(x)} := \lim_{n \to \infty} f_{n}{(x)} \quad \forall x \in \Omega
+    \]
+    si ha che \(f \in L^{1}{(E)}\) e inoltre
+    \[
+        \int_E f d\mu = \lim_{n \to \infty} \int_E f_{n} d\mu 
+    \]
+\end{theorem}
+\begin{remark}
+    Si potrebbe estendere l'enunciato al caso di una successione che sia
+    monotona solo quasi ovunque, cioè che esista \(N \subseteq \Omega \) trascurabile
+    tale che \(f_{n}{(x)} \lessgtr f_{n+1}{(x)} \) per ogni \(n \in \mathbb{N}\)
+    e per ogni \(x \in \Omega \sminus N\)
+\end{remark}
+
+\paragraph{Funzioni \(\frac{1}{x^{\alpha}}\)} Consideriamo le funzioni \(f{(x)}
+= \frac{1}{x^{\alpha}}\), con \(\alpha>0\) sia su \((0,1)\) che in \({(1,
++\infty)}\). Queste funzioni sono non limitate oppure hanno dominio non
+limitato, e possiamo estendere Riemann per integrarle in senso improprio in
+alcuni casi. In particolare
+
+\begin{itemize}[label = --]
+    \item \(\frac{1}{x^{\alpha}}\) è integrabile in senso improprio su
+        \({(0,1)}\) se e solo se \(\alpha<1\) 
+    \item \(\frac{1}{x^{\alpha}}\) è integrabile in senso improprio in
+        \({(1,+\infty)}\) se e solo se \(\alpha>1\)
+\end{itemize}
+dove l'integrale in senso improprio è definito come
+\[
+    \int_{0}^{1} \frac{1}{x^{\alpha}} dx = \lim_{\varepsilon \to 0^{+}}
+    \int_{\varepsilon}^{1} \frac{1}{x^{\alpha}} dx = \begin{cases}
+        \frac{1}{1-\alpha} & \text{se } \alpha < 1 \\
+        +\infty & \text{se } \alpha \ge 1
+    \end{cases}
+\]
+
+Se io ora vado a considerare le funzioni
+\[
+    f_{\varepsilon} {(x)} = \begin{cases}
+        \frac{1}{x^{\alpha}} & \text{se } \varepsilon \le x\le 1 \\
+        0 & \text{se } 0 \le x < \varepsilon
+    \end{cases}
+\]
+allora la famiglia di funzioni \(\{f_\varepsilon\} \) risulta monotona rispetto
+a \(\varepsilon \to 0^{p}\) ossia \(\forall {(\varepsilon_{1},
+\varepsilon_{2})}\) con \(\varepsilon_{1} < \varepsilon_{2}\) si ha che 
+\[
+    f_{\varepsilon_{1}}{(x)} \ge f_{\varepsilon_{2}}{(x)} \quad \forall x \in
+    {(0,1)}
+\]
+se ora passo al limite per \(\varepsilon \to 0^{+}\) per il teorema di Beppo
+Levi concludo che la funzione limite \(f{(x)} = \frac{1}{x^{\alpha}}\) è
+L-integrabile se e solo se \(\alpha < 1\).
+
+Queste informazioni sono molto utili quando dobbiamo valutare l'integrabilità di
+una funzione. Ad esempio data una qualunque funzione misurabile \(f{(x)}\)
+definita in \({(1, +\infty)}\) tale per cui esistano \(C > 0\) e \(\alpha > 1\)
+tali che \(\left| f{(x)} \right| \le \frac{C}{x^{\alpha}}\) per ogni \(x \in
+{(1, +\infty)}\) allora questa è integrabile. D'altro canto se \(g{(x)}\) è una
+funzione su \({(1, +\infty)}\) tale che \(g{(x)} \ge \frac{1}{\sqrt{x}}\) per
+ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
+
 \begin{example}
+    Consideriamo la funzione \(g{(x)} = \frac{1}{\ln x}\) in \(2,
+    +\infty\). Sappiamo che \(\lim_{x \to \infty} \frac{\ln x}{\sqrt{x}} = 0\) ossia
+    \(\forall \varepsilon > 0\) \(\exists \overline{x}\) tale che \(\forall x \ge
+    \overline{x}\) si ha che \(\frac{\ln x}{\sqrt{x}} \le \varepsilon\) ossia
+    \(\frac{1}{\ln x} \ge \frac{1}{\varepsilon \sqrt{x}}\). Quindi \(g\) non è
+    L-integrabile in \((1, +\infty)\). 
+
+    Ora consideriamo la funzione \(g\) su \({(1, 2)}\). Sappiamo che \(\ln x
+    \sim x- 1\) per \(x \to 1^{+}\). Ma sappiamo che \(\frac{1}{\sqrt{x}}\) non
+    è integrabile perché \(\frac{1}{x-1}\) non è L-integrabile in \({(1, 2)}\) 
+\end{example}
+
+\begin{eser}
     Studiare l'integrabilità della funzione 
     \[
     f_{\alpha}(x) = {\left| \log x \right|}^{\alpha} \quad x \in (0, 1)
@@ -1585,10 +1790,12 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
         che è integrabile per \(\gamma < 1\). Quindi \(f_{\alpha} \in L^{1}(0,1)
         \iff \alpha > -1\).
 \end{itemize}
-\end{example}
+\end{eser}
 \begin{remark}
-    Ci sono funzioni integrabili in senso improprio che non L-integrabili.
-    \begin{example}
+    Ci sono funzioni integrabili in senso improprio che non L-integrabili. Il
+    prossimo esempio ne è un esempio (scusate il gioco di parole)
+\end{remark}
+\begin{example}
         Sia \(f(x) = \frac{\cos x}{x}\) in \([\frac{\pi}{2}, +\infty]\). Allora
 \begin{enumerate}[label = \arabic*.]
     \item \(f\) è integrabile in senso improprio:
@@ -1623,7 +1830,6 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
         e quindi \(|f|\) e \(f\) non sono integrabili.
 \end{enumerate}
 \end{example}
-\end{remark}
 
 \begin{example}
     Quali sono le funzione integrabili per la misura di Dirac? Consideriamo lo
@@ -1683,7 +1889,7 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
     Notare che è verificata la proprietà \(f \in L^{1} \iff |f| \in L^{1}\).
 \end{example}
 
-\begin{example}
+\begin{eser}
     per ogni \(n \in \mathbb{N}\) definiamo \[f_{n}(x) =
         \begin{cases}
             \displaystyle
@@ -1747,7 +1953,7 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
         L^{1}(C)\)
 
 \end{enumerate}
-\end{example}
+\end{eser}
 
 \subsection{Convergenze di funzioni misurabili}
 \begin{definition}[Convergenza quasi ovunque]
@@ -1775,6 +1981,141 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
         \varepsilon\}) = 0
     \]
 \end{definition}
+\begin{example}
+    Consideriamo la successione \(f_{n}{(x)} = x^{n}\) in \([0,1]\). Allora
+    \(f_{n} \to 0\) q.o.~in \([0, 1]\), perché per ogni \(x \in (0, 1)\)
+    \(f_{n}{(x)} \to 0\) e chiaramente \(\mu{[0,1] \sminus {(0,1)}} =
+    \mu{(\{0,1\} )} = 0\). Ma anche \(f_{n} \to f\) quasi uniformemente, infatti
+    per ogni \(\varepsilon > 0\) scegliamo \([1-\frac{\varepsilon}{2} , 1]\) e
+    in questo intervallo c'è convergenza uniforme. Infine 
+    \[
+        \{x \in [0,1] : |x^{n}| > \varepsilon\} = \{x \in
+        [0,1] : |x| > \varepsilon^{\frac{1}{n}}\} = (\varepsilon^{\frac{1}{n}},
+        1]
+    \]
+    e poiché \(\mu{(\varepsilon^{\frac{1}{n}}, 1]} = 1-\varepsilon^{\frac{1}{n}}
+    \to 0\) allora \(f_{n} \overset{\mu}{\to} 0\).
+\end{example}
+\begin{example}
+    Consideriamo la successione \(f_{n}{(x)} = \frac{x}{n}\) in \(\mathbb{R}\).
+    Allora \(f_{n} \to 0\) q.o.~in \(\mathbb{R}\). Anche qui non abbiamo
+    convergenza uniforme, e neanche quasi uniforme, in quanto ogni insieme su
+    cui c'è convergenza uniforme è limitato e ha complementare di misura non
+    finita.
+    Infine \(\{x \in \mathbb{R} : | \frac{x}{n}| > \varepsilon\} = {(-\infty,
+    - \varepsilon n) \cup {(\varepsilon n , +\infty)}} \) che ha sempre misura
+    infinita, quindi \(f_{n} \not\to f \) in misura.
+\end{example}
+Dal precedente esempio possiamo dedurre che q.o.~\(\not\implies\) q.u.~e che
+q.o.~\(\not\implies\) in misura. Ora invece mostriamo le implicazioni che
+valgono. 
+\begin{theorem}[\(f_n \overset{q.u.}{\to} f \implies f_{n} \overset{q.o.}{\to}
+    f\)]\label{thm:qu_qo}
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura.
+    Sia \(f_{n}\) una successione di funzioni misurabili tale che \(f_{n}
+    \overset{q.u.}{\to } f\) funzione misurabile. Allora \(f_{n}
+    \overset{q.o}{\to } f\) 
+\end{theorem}
+\begin{proof}
+    Per ogni \(k \in \mathbb{N}\) esiste un insieme \(E_k \in
+    \mathcal{M}\) tale che \(\mu{(\Omega \sminus E_k)} <\frac{1}{k}\) e \(f_{n}
+    \to f\) uniformemente, quindi anche puntualmente, in \(E_k\). Ora prendiamo
+    \[
+        E = \bigcup_{k \in \mathbb{N}} E_k
+    \]
+    allora dico che \(f_{n} \to f\) puntualmente in \(E\). Infatti per ogni
+    punto \(x \in E\) esiste \(k\) tale che \(x \in E_k\) e quindi \(f_{n}{(x)} \to
+    f{(x)}\). Infine
+    \[
+        \mu{(E^{C})} = \mu{\left( \bigcap_{k \in \mathbb{N}} E^{C}  \right)} \le
+        \mu{\left( E^{C} \right)} < \frac{1}{k} \quad \forall k \in \mathbb{N}
+    \]
+    e quindi necessariamente \(\mu{(E^{C})} = 0\) e quindi \(f_{n} \to f\) q.o.
+\end{proof}
+
+\begin{theorem}[Severini-Egorov]\label{thm:severini-egorov}
+    Sia \({(\Omega, \mathcal{M}, \mu)}\) uno spazio di misura finito, ossia
+    \(\mu{(\Omega)} < +\infty\). Se allora \(f_{n} \to f\) q.o~in \(\Omega\),
+    \(f_{n} \to f\) q.u.~in \(\Omega\).
+\end{theorem}
+\begin{proof}
+    Iniziamo fissando \(\varepsilon>0\).
+    \(f_{n} \overset{q.o.}{\to } f\) in \(\Omega\), quindi esiste \(N\)
+    trascurabile tale che \(f_{n} \to f\) puntualmente in \(\Omega \sminus N\).
+    Per ogni \(k \in \mathbb{N}\) introduciamo gli insiemi \[A_{m} = \bigcap_{n
+    \ge m} \left\{x \in \Omega \sminus N : \left| f_{n}{(x)} - f{(x)} \right| \le
+\frac{1}{k}\right\} \]
+
+    Gli insiemi \(A_{m}\) formano una successione crescente e inoltre 
+    \(
+        \bigcup_{m \in \mathbb{N}} A_{m} = \Omega \sminus N
+    \)
+    infatti se \(x \in A_{m}\) per \(m\) fissato, allora succede che
+    \(|f_{n}{(x)} - f{(x)}| \le \frac{1}{k}\) per ogni \(n\ge m\), quindi
+    \(f_{n}{(x)} \to f{(x)}\). Ora per continuità della misura 
+    \[
+        \lim_{n \to \infty} \mu{(A_{m})} = \mu{(\Omega \sminus N)} = \mu{(\Omega)}
+    \]
+    dunque esisterà certamente un \(m_k\) tale che \(A_{m_k}\) ha complementare
+    di misura minore di \(\frac{\varepsilon}{2^{k}}\) \((\star)\). In \(A_{m_k}\) succede
+    che \(|f_{n}{(x)} - f{(x)}| \le \frac{1}{k}\) per ogni \(n \ge m_k\) e per
+    ogni \(x \in A_{m_k} \). Poniamo allora
+    \[
+        E = \bigcap_{k \in \mathbb{N}} A_{m_k}
+    \]
+    Allora su \(E\) c'è convergenza uniforme di \(f_{n}\) a \(f\) perché
+    se \(x \in E\) allora per ogni \(k \in \mathbb{N}\) esiste \(m_k \in
+    \mathbb{N}\) tale che per ogni \(n \ge m_k\) si ha che \(|f_{n}{(x)} -
+    f{(x)}| \le \frac{1}{k}\). 
+
+    Vogliamo ora mostrare che \(\mu {\left( E^{C} \right)} < \varepsilon\).
+    Abbiamo
+    \[
+        \mu{\left( E^{C} \right)} = \mu {\left( \bigcup_{k \in \mathbb{N}}
+    \left\{ A_{m} \right\} \right)} \le \sum_{k=1}^{\infty} \mu{(A_{m_k}^{C})} <
+    \sum_{k=1}^{\infty} \frac{\varepsilon}{2^{k}} = \varepsilon 
+    \]
+\end{proof}
+\begin{note}
+    L'ipotesi di \(\mu{(\Omega)} < +\infty\) è stata usata in \((\star)\),
+    perché noi sappiamo che
+    \[
+        \mu{\left( A_{m_k}  \right)} +\mu{\left( A_{m_k} ^{C} \right)} = \mu{(\Omega)}
+    \]
+    e per dire che \(\mu{\left( A_{m_k} ^{C} \right)} \to 0\) dobbiamo poter
+    sottrarre \(\mu{\left( A_{m_k}  \right)} \) da entrambi i lati
+    dell'uguaglianza.
+\end{note}
+
+\begin{theorem}[\(f_n \overset{q.u.}{\to} f \implies f_{n} \overset{\mu}{\to}
+    f\)]\label{thm:2}
+    Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Se \(f_{n} \to f\)
+    quasi uniformemente allora \(f_{n} \to f\) in misura.
+\end{theorem}
+\begin{proof}
+    \(\forall \sigma > 0\) esiste \(E \in \mathcal{M}\) tale che \(\mu{(E^{C})}
+    < \sigma\) e \(f_{n} \to f\) uniformemente in \(E\), quindi 
+    \(\forall  \varepsilon>0\) esiste un \(n_\varepsilon\) tale che \(\forall n
+    \ge n_\varepsilon\) e \(\forall x \in E\), \(|f_{n}{(x)} - f{(x)}| \le
+    \varepsilon\). Proseguendo
+    \begin{align*}
+        \{x \in \Omega : \left| f_{n}{(x)} - f{(x)} \right| > \varepsilon\} &=
+        \underbrace{\{x \in E : \left| f_{n}{(x)} - f{(x)} > \varepsilon \right|
+        \}}_{\text{vuoto per } n \ge n_\varepsilon}  \cup \\
+     &\cup \underbrace{\{x \in E^{C} : \left| f_{n}{(x)} - f{(x)} >\varepsilon
+        \right| \}}_{\text{sottoinsieme di \(E^{C}\), quindi di misura \(<
+        \sigma\)}}  
+    \end{align*}
+    ma allora abbiamo provato che
+    \[
+        \forall \sigma > 0 \quad \exists n_\varepsilon : \forall n \ge
+        n_\varepsilon \quad \mu{\left( \{x \in \Omega : \left| f_{n}{(x)} -
+        f{(x)} \right| > \varepsilon \}  \right)} < \sigma
+    \]
+    e quindi \(f_{n} \to f\) in misura.
+\end{proof}
+
+
 \begin{theorem}[\(f_n \overset{\mu}{\to} f \implies f_{n_k} \overset{q.o.}{\to}
     f\)]\label{thm:3}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(f_{n}\) una
@@ -1782,6 +2123,57 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
     se \(f_{n} \to f\) in misura, allora esiste una sottosuccessione \(f_{n_{k}}\)
     che converge quasi ovunque a \(f\).
 \end{theorem}
+
+\begin{proof}
+    Sappiamo che
+    \[
+        \forall k \in \mathbb{N} \quad \exists n_k : \forall n \ge n_k \quad \mu
+        {\left( \left\{ x \in \Omega : \left| f_{n}{(x)} - f{(x)}\right| >
+        \frac{1}{k} \right\}  \right)} < \frac{1}{k^2}
+    \]
+    Definisco \(\displaystyle E_k := \left\{ x \in \Omega : \left| f_{n_k}{(x)}
+    - f{(x)}\right| < \frac{1}{k} \right\}  \) e l'insieme \(\displaystyle E =
+    \bigcap_{m \in \mathbb{N}} \bigcup_{k \ge m} E_k\). Noto ora che
+    \(\displaystyle \mu{\left( E \right)} \le \sum_{k=m}^{\infty}
+    \frac{1}{k^2}\) che tende a \(0\) per \(m\to \infty\) in quanto coda di
+    serie convergente e per \(x \in E^{C}\) ho che \(f_{n_k}{(x)} \to f{(x)}\)
+    in quanto 
+    \[
+        E^{C} = \bigcup_{m \in \mathbb{N}} \bigcap_{k \ge m} \left\{ x \in
+        \Omega : \left| f_{n_k} {(x)} - f{(x)}  \right| \le \frac{1}{k} \right\} 
+    \]
+    ossia esiste un \(m\) tale che per ogni \(k \ge m\) si ha che
+    \(|f_{n_k}{(x)} - f{(x)} | \le \frac{1}{k}\) e quindi \(f_{n_k} \to f\) in
+    \(E^{C}\).
+    In questo modo abbiamo trovato una sottosuccessione \(f_{n_k}\) che converge quasi
+    ovunque a \(f\).
+\end{proof}
+\begin{example}
+    È importante evidenziare che la convergenza in misura non implica la
+    convergenza quasi ovunque, ma solo la convergenza di una sottosuccessione,
+    ad esempio se \(\Omega = [0, 1]\) e prendiamo
+\begin{align*}
+    f_{1} &= \rchi_{[0, 1]} \\ \quad f_{2} &= \rchi_{[0, \frac{1}{2}]}, \quad f_{3} =
+    \rchi_{[\frac{1}{2}, 1]} \\
+    f_{4} &= \rchi_{[0, \frac{1}{3}]}, \quad f_{5} = \rchi_{[\frac{1}{3},
+    \frac{2}{3}]}, \quad f_{6} = \rchi_{[\frac{2}{3}, 1]} \\ 
+    f_{7} &= \rchi_{[0, \frac{1}{4}]}, \quad f_{8} = \rchi_{[\frac{1}{4},
+    \frac{2}{4}]}, \quad f_{9} = \rchi_{[\frac{2}{4}, \frac{3}{4}]}, \quad
+    f_{10} = \rchi_{[\frac{3}{4}, 1]}   \\
+          &\vdots
+\end{align*}
+    Allora \(f_{n} \to 0\) in misura, infatti 
+    \[
+        \mu{\{ x \in [0,1] : |f_{n}{(x)}| > \varepsilon\}} \to 0 \quad \text{per
+        \(n\to \infty\)}
+    \]
+    ma non c'è convergenza quasi ovunque, infatti fissato \(x \in [0,1]\), la
+    successione numerica \(f_{n}{(x)}\) non ha limite, perché purché assuma
+    principalmente il valore 0, ogni tanto assume il valore 1, e per ogni \(n\)
+    esiste un \(\overline{n} \ge  n\) tale che \(f_{\overline{n}} {(x)} = 1 \),
+    per cui non può esistere il limite. Poiché questo è vero per ogni \(x \in
+    [0,1]\), non c'è convergenza puntuale in nessun sottoinsieme.
+\end{example}
 \begin{eser}
     Sia
     \[
@@ -3214,7 +3606,7 @@ e possiamo applicare il teorema di convergenza dominata di Lebesgue
     \iff \|f-u_{m}\|_p^{p} \longrightarrow 0
 \]
 \end{proof}
-\begin{corollary}
+\begin{corollary}\label{cor:conv_lp_sottosucc}
     Sia \(\{f_{n}\} \) una successione convergente a \(f \in L^{p}{(\Omega)}\).
     Allora esistono una sottosuccessione \(\{f_{n_k}\} \) e una funzione \(w \in
     L^{p}{(\Omega)}\) tali che 
@@ -3246,7 +3638,7 @@ Per \(p=+\infty\) la tesi vale più banalmente.
     Convergenza in \(L^{\infty}\) implica convergenza quasi uniforme
 \end{remark}
 
-Il corollario si può espandere a dire che tutta la funzione converge quasi
+Il corollario~\ref{cor:conv_lp_sottosucc} si può espandere a dire che tutta la funzione converge quasi
 ovunque? No. Consideriamo ad esempio la successione
 \begin{align*}
     f_{1} &= \rchi_{[0, 1]}, \quad f_{2} = \rchi_{[0, \frac{1}{2}]}, \quad f_{3} =
