@@ -1614,7 +1614,7 @@ Se ho una funzione integrabile su \(E\), questa può prendere i valori
 contrario la funzione non sarebbe integrabile perché \(f^{+}\) oppure \(f^{-}\)
 sarebbero non limitate
 
-\begin{theorem}[Lemma di Fatou \-- versione estesa]\label{th:fatou_esteso}
+\begin{lemma}[Lemma di Fatou \-- versione estesa]\label{th:fatou_esteso}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(\{f_{n}\}\) una
     successione di funzioni misurabili su \(\Omega\). Allora
 \begin{enumerate}[label = \arabic*.]
@@ -1631,7 +1631,7 @@ sarebbero non limitate
             \int_E f_{n} d\mu
         \]
 \end{enumerate}
-\end{theorem}
+\end{lemma}
 \begin{proof}[Dimostrazione parte 1]
     Poniamo \(f{(x)} = \liminf_{n \to \infty} f_{n}{(x)} \ge g{(x)}\) per \(x
     \in E\). Possiamo considerare la successione \(u_{n}{(x)} = f_{n}{(x)} -
@@ -1669,9 +1669,42 @@ sarebbero non limitate
     \]
 \end{proof}
 
+\begin{lemmao}[Lemma di Fatou \-- definitivo]\label{thm:fatou}
+    Sia \(\{f_{n}\} \) una successione di funzioni integrabili in \(E\) tali che
+    \(\{\int_E f_{n} d\mu\} \) sia limitata. Allora
+\begin{enumerate}[label = \arabic*.]
+    \item Se esiste \(g \in L^{1}{(E)}\) tale che \(g \le f_{n}\) in \(\Omega\)
+        per ogni \(n\), allora \(\liminf_{n \to \infty} f_{n}\) è integrabile in
+        \(E\) e
+        \[
+            \int_E \liminf_{n \to \infty} f_{n} d\mu \le \liminf_{n \to \infty}
+            \int_E f_{n} d\mu
+        \]
+    \item Se esiste \(h \in L^{1}{(E)}\) tale che \(f_{n} \le h\) in \(\Omega\)
+        per ogni \(n \in \mathbb{N}\) allora \(\limsup_{n \to \infty} f_{n}\) è
+        integrabile in \(E\) e
+        \[
+            \int_E \limsup_{n \to \infty} f_{n} d\mu \ge \limsup_{n \to \infty}
+            \int_E f_{n} d\mu
+        \]
+\end{enumerate}
+\end{lemmao}
+\begin{proof}
+    Segue semplicemente da Fatou esteso~\ref{th:fatou_esteso}, e il liminf è
+    integrabile perché 
+    \[
+        -\infty < \int_E g d\mu \le \int_E{\left( \liminf_{n \to \infty} f_{n}
+        \right)} d\mu \le \liminf_{n \to \infty} \int_E f_{n} d\mu < +\infty
+    \]
+    dove le prime diseguaglianze sono per integrabilità di \(g\) e \(g
+    \le f_{n}\) e l'ultima perché la successione degli integrali è limitata.
+
+    Similmente per il caso 2.
+\end{proof}
+
 \begin{theorem}[Beppo Levi \-- seconda versione]\label{thm:beppo-levi}
     Sia \({(\Omega, \mathcal{M}, \mu)}\) uno spazio di misura. Sia \(\{f_{n}\}
-    \) una successione monotona di funzioni misurabili tali che la successione
+    \) una successione monotona di funzioni integrabili in \(E \in \mathcal{M}\)  tali che la successione
     degli integrali \(\displaystyle \{\int_E f_{n} d\mu\} \) sia limitata.
     Allora posto
     \[
@@ -1688,6 +1721,55 @@ sarebbero non limitate
     tale che \(f_{n}{(x)} \lessgtr f_{n+1}{(x)} \) per ogni \(n \in \mathbb{N}\)
     e per ogni \(x \in \Omega \sminus N\)
 \end{remark}
+\begin{proof}
+    Assumiamo \(f_{n}\) una successione decrescente. Quindi \(f_{1} \ge f_{2}
+    \ge \dots\ge f_{n}\ge \dots\). 
+    Tutte le \(f_{n}\) sono integrabili e inoltre \(f \le f_{n} \le f_{1}\) per ogni
+    \(n \in \mathbb{N}\) e \(f_{1}\) è integrabile.
+    Allora \(f = \limsup_{n \to \infty} f_{n}\) e dunque è integrabile per la
+    parte 2 del lemma di Fatou~\ref{thm:fatou}.
+    Ora possiamo applicare la parte 1 del lemma di Fatou~\ref{thm:fatou} ottenendo
+    \[
+        \int_E \liminf_{n \to \infty} f_{n} d\mu \le \liminf_{n
+        \to \infty} \int_E f_{n} d\mu \le \limsup_{n \to \infty} \int_E f_{n}
+        d\mu \le  \int_E \limsup_{n \to \infty} f_{n} d\mu
+    \]
+    poiché \(\displaystyle \liminf_{n \to \infty} f_{n} = \limsup_{n \to \infty}
+    f_{n} = f\) segue la tesi.
+\end{proof}
+\begin{corollary}[Beppo Levi per le serie]
+    Sia \(f_{n}\) una successione di funzioni misurabili e non negative. Allora
+    la serie \(\sum_{n=1}^{\infty} f_{n}{(x)} \) converge a una funzione \(s:
+    \Omega \to [0, +\infty]\) tale che
+    \[
+        \int_E s d\mu = \sum_{n=1}^{\infty} \int_E f_{n} d\mu \quad \forall E
+        \in \mathcal{M} 
+    \]
+    In particolare se la serie degli integrali converge allora \(s \in L^{1}{(E)}\) 
+\end{corollary}
+\begin{proof}
+    Si consideri la successione \(s_{n}\) delle ridotte, questa costituisce una
+    successione crescente di funzioni misurabili e non negative e si può quindi
+    applicare Beppo Levi base~\ref{th:beppo_levi_base} ottenendo la tesi. Se poi
+    la serie degli integrali converge allora la successione degli integrali
+    delle ridotte è limitata e si può applicare Beppo Levi~\ref{thm:beppo-levi}
+\end{proof}
+
+\begin{theorem}[Convergenza Dominata di Legesgue]\ref{thm:Lebesgue_conv_dom}
+    Sia \({(\Omega, \mathcal{M}, \mu)}\) uno spazio di misura. Sia \(f_{n}\) una
+    successione di funzioni misurabili tale che \(f_{n} \to f\) puntualmente.
+    Inoltre sia \(g\) una funzione integrabile in \(E \in \mathcal{M}\) tale che 
+    \[
+        |f_{n}{(x)}| \le g{(x)} \quad \forall x \in E, \quad \forall n \in \mathbb{N}
+    \]
+    allora \(f \in L^{1}{(E)}\) e inoltre
+    \[
+        \int_E f d\mu = \lim_{n \to \infty} \int_E f_{n} d\mu
+    \]
+\end{theorem}
+\begin{proof}
+    % TODO 
+\end{proof}
 
 \paragraph{Funzioni \(\frac{1}{x^{\alpha}}\)} Consideriamo le funzioni \(f{(x)}
 = \frac{1}{x^{\alpha}}\), con \(\alpha>0\) sia su \((0,1)\) che in \({(1,
@@ -3703,5 +3785,4 @@ f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \)
         {\mu(\Omega)}^{\frac{1}{p}} \|f\|_{\infty}
     \]
 \end{proof}
-
 \end{document}
