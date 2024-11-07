@@ -1645,4 +1645,179 @@ Dove vale la seguente caratterizzazione
         \end{cases}
    \]
 \end{eser}
+\begin{remark}[sulla dipendenza continua]
+    Consideriamo il problema di Cauchy
+    \[
+        \begin{cases}
+            x' = x^2 \\
+            x{(0)} = x_{0} > 0
+        \end{cases}
+    \]
+    allora otteniamo \( \displaystyle x{(t)} = - \frac{1}{t-\frac{1}{x_{0}}}\).
+
+    Fissato \(T > 0\) consideriamo i valori \(x_{0}\) per i quali la soluzione è
+    definita (almeno) in \([0, T]\), quindi \(x_{0} < \frac{1}{T}\). Per \(x_{0}
+    \to 0\) per la dipendenza continua la soluzione tende (uniformemente perché
+    su \([0, T]\)) alla soluzione 0. In particolare \(x{(T)} < \varepsilon\) se 
+    \[
+        \frac{1}{x_{0}} - T > \frac{1}{\varepsilon} \iff \frac{1}{x_{0}} > T +
+        \frac{1}{\varepsilon} \iff x_{0} < \frac{1}{T + \frac{1}{\varepsilon}}
+        =: \delta_{\varepsilon, T} 
+    \]
+    per cui \(\delta\) dipende sia da \(\varepsilon\) che da \(T\) e non è
+    possibile individuarlo uniformemente rispetto a \(T\).
+
+    La proprietà, diversa, di ``dipendenza continua'' su intervalli illimitati
+    darà luogo alla definizione di stabilità.
+\end{remark}
+
+\section{Sistemi autonomi}
+Sia \(\Omega \subseteq \mathbb{R}^{N} \) aperto e sia \(f : \Omega \to
+\mathbb{R}^{N}\). Supponiamo \(f\) localmente lipschitziana in \(\Omega\). Il
+sistema che consideriamo è 
+\[
+    \begin{cases}
+        x' = f(x) \\
+        x(t_{0}) = x_{0}
+    \end{cases}
+\]
+Indichiamo con \(x{(\cdot , t_{0}, x_{0})}\) la soluzione definita
+sull'intervallo massimale.
+\begin{proposition}
+\begin{enumerate}[label = \arabic*.]
+    \item Sia \(x : J \to \mathbb{R}^{N}\) una soluzione di \(x' = f{(x)}\); sia
+    \(\tau > 0\). Allora \(x_\tau : J+\tau \to \mathbb{R}^{N}\) definita da
+    \(x_\tau{(t)} = x{(t - \tau)}\) è soluzione.
+\item Se \(x_{1}\) e \(x_{2}\) sono due soluzioni di \(x' = f{(x)}\) che assumono
+    un valore comune allora sono traslate temporali l'una dell'altra.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label = \arabic*.]
+    \item Già vista 200 volte: 
+        \[
+            x'_\tau{(t)} = x'{(t - \tau)} = f{(x{(t-\tau)})} = f{(x_\tau{(t)})}  
+        \]
+\begin{figure}[ht]
+    \centering
+    \incfig[.4]{prop_2}
+\end{figure}
+    \item usando la notazione del disegno, supponiamo \(u{(t)} = x_{1}{(t -
+        {(t_{2} - t_{1})})}\). Allora \(u\) è soluzione di \(x' = f{(x)}\) in
+        quanto traslata di \(x'\). Inoltre \(u{(t_{2})} = x_{1}{(t_{1})} =
+        \overline{x} = x_{2}{(t_{2})}\), per unicità quindi \(u \equiv x_{2}\) 
+\end{enumerate}
+\end{proof}
+Allora stesso modo si vede che \(x{(t, t_{0}, x_{0})} = x{(t-t_{0}, 0,
+x_{0})}\). Infatti \(x{(\cdot , t_{0}, x_{0})}\) risolve il problema originale e
+allora
+\[
+    x{(\cdot - t_{0}, 0, x_{0})} \text{ risolve } \begin{cases}
+        x' = f{(x)} \\
+        x(\cdot - t_{0}, 0, x_{0})|_{t = t_{0}}  = x{(0, 0, x_{0})} = x_{0}
+    \end{cases}
+\]
+che per unicità coincidono.
+
+Ne consegue che posso sempre ricondurre un problema di Cauchy autonomo a uno in
+cui \(t_{0} = 0\). È una cosa così comune che motiva la seguente definizione
+
+\begin{definition}
+    Diciamo \textbf{flusso} associato all'equazione differenziale \(x' = f
+    {(x)}\) la funzione
+    \[
+        \varphi {(t, \xi)} = x{(t , 0, \xi)}
+    \]
+    con \(\xi \in \Omega\) e \( t\) variabile nell'intervallo massimale
+    \({(\omega_-{(\xi)}, \omega_+{(\xi)})}\) della soluzione \(x{(\cdot , 0, \xi)}\) 
+\end{definition}
+
+\begin{proposition}
+    \begin{itemize}
+    \item \(\omega_+\, [\omega_-]\) è semicontinua inferiormente [superiormente] in
+    \(\Omega\)
+\item \[
+        \{{(t, \xi)} \in \mathbb{R} \times \Omega : \xi \in \Omega,
+        \omega_-{(\xi)} < t < \omega_+{(\xi)}\} 
+    \]
+    è aperto.
+
+\item \(\varphi : E \to \mathbb{R}^{N}\) è continua
+
+\item \(\varphi {(0, \cdot )} = \text{id}_\Omega\) 
+
+\item \(\varphi {(s, \varphi {(t, \xi)})} = \varphi {(s+t, \xi)}\) 
+    \end{itemize}
+\end{proposition}
+    
+\begin{proof}[Dimostrazione ultimo punto]
+    Le funzioni \(\varphi {(\cdot , \varphi {(t, \xi)})}\)  e \(\varphi {(\cdot
+    +t, \xi)}\) sono due soluzioni di \(x'=f{(x)}\) che coincidono in \(t = 0\),
+    poiché valgono entrambe \(\varphi {(t, \xi)}\). Per unicità quindi
+    coincidono.
+\end{proof}
+
+\begin{remark}
+    Sia \({(X, d)}\) uno spazio metrico che sia \(\varphi : \mathbb{R} \times X
+    \to X\) continua tale che
+    \[
+        \begin{cases}
+            \varphi {(0, \cdot )} = \text{id}_X \\
+            \varphi {(s, \varphi {(t, \xi)})} = \varphi {(s+t, \xi)}
+        \end{cases}
+    \]
+    allora \(\varphi \) è anche detta ``sistema dinamico''
+\end{remark}
+
+\begin{definition}
+
+Dato \(x_{0} \in \Omega\) diciamo \textbf{orbita} per \(x_{0}\) l'insieme 
+\[
+    \gamma_{x_{0}} = \{\varphi {(t, x_{0})} : t \in {(\omega_-{(x_{0})},
+    \omega_+{(x_{0})})}\}
+\]
+\end{definition}
+\begin{remark}
+    Utilizzando \(t \mapsto x{(t, t_{0},x_{0})}\) in luogo di \(x{(t, 0,
+    x_{0})}\) si ottiene lo stesso insieme \(\gamma_{x_{0}}\), perché è
+    semplicemente una traslata temporale.
+\end{remark}
+\begin{note}
+    \(\gamma_{x_{0}} \) è la proiezione del grafico di \(x{(\cdot ,0, x_{0})}\)
+    su \(\Omega\) 
+\end{note}
+\begin{proposition}
+    Se due orbite hanno un punto in comune, allora coincidono
+\end{proposition}
+\begin{proof}
+    Solito discorso di traslazione temporale, perché due soluzioni che assumono
+    lo stesso valore devono essere traslate temporali una dell'altra, e quindi
+    la proiezione su \(\Omega\) coincide.
+\end{proof}
+\begin{proposition}
+    Se un'orbita non è un singoletto allora è una curva regolare.
+\end{proposition}
+\begin{proof}
+    Sia \(x\) soluzione di \(x' = f{(x)}\). Se \(x'{(t_{0})} = 0\) per un
+    qualche \(t_{0}\) allora
+    \[
+        0 = x'{(t_{0})} = f{(x{(t_{0})})}
+    \]
+    ma allora posto \(x{(t_{0})} = x_{0}\) la funzione costante \(u{(t)} =
+    x_{0}\) è una soluzione, e per unicità è l'unica soluzione, quindi l'orbita
+    è un singoletto.
+\end{proof}
+
+\section{Tecniche elementari di Integrazione}
+Ne conosciamo già diverse, come le equazioni a variabili separabili, le
+equazioni lineari del primo ordine e secondo ordine. Cambiare poco nelle forme
+porta a equazioni differenziali molto diverse e con soluzioni difficili.
+Nell 1800 si è cercato di mettere ordine e di capire in quali casi si può solo
+trovare un modello qualitativo (esempio trovare che Lotka-Volterra abbia le
+orbite chiuse). E molto spesso anche se ci sono soluzioni a volte basta sapere
+una soluzione approssimata, e quindi le tecniche esplicite di soluzione sono un
+po' meh. E allora a cosa servono le tecniche esplicite di risoluzione? Boh
+diciamo che quelle facili sono utili perché dai, servono (cit.) mentre altre più
+complicate si fanno solo per vedere quanto è difficile risolvere equazioni
+differenziali ma è simpatico quindi vederle come esempi.
 \end{document}
