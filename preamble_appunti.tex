@@ -93,11 +93,11 @@
 % \begin{mdframed}[]\relax}{
 % \end{mdframed}}
 
-\newtcolorbox[auto counter, number within=section]{definition}[1][]{
+\newtcolorbox[auto counter, number within=section]{definition}[2][]{
     colframe=violet!0,
     coltitle=violet, % Title text color
     fonttitle=\bfseries, % Title font
-    title={Definizione~\thetcbcounter:~#1}, % Title format
+    title={Definizione~\thetcbcounter:~#2}, % Title format
     sharp corners, % Less rounded corners
     boxrule=0pt, % Line width of the box frame
     toptitle=1mm, % Distance from top to title
@@ -109,7 +109,8 @@
     after skip=10pt, % Space after the box
     breakable, % Allow box to split across pages
     colback=violet!0,
-    borderline west={2pt}{-5pt}{violet!40}
+    borderline west={2pt}{-5pt}{violet!40},
+    #1
 }
 
 \newenvironment{lemmao}[1][]{

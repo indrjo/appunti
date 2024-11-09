@@ -29,7 +29,7 @@ inglese che è molto più ricca e completa.
 \subsection{Algebre, \(\sigma\)-algebre, misure}
 Sia \(\Omega\) un insieme ambiente, e sia \(\mathcal{M}\) una famiglia di
 sottoinsiemi di \(\Omega\), ossia \(\mathcal{M} \subseteq 2^{\Omega} \).
-\begin{definition}[Algebra]
+\begin{definition}{Algebra}
     Una famiglia \(\mathcal{M}\) di sottoinsiemi di \(\Omega\) si dice
     \textbf{algebra} se
 \begin{enumerate}[label = \arabic*.]
@@ -78,7 +78,7 @@ rispetto alle comuni operazioni di insiemi.
     finiti rettangoli.
 \end{example}
 
-\begin{definition}[funzione finitamente additiva]
+\begin{definition}{funzione finitamente additiva}
      Sia \(\Omega\) un'insieme e \(\mathcal{M}\) un'algebra di sottoinsiemi di
      \(\Omega\).
 
@@ -126,7 +126,7 @@ Va inteso che se per uno dei due \(\mu(A) = +\infty\) allora
 \end{enumerate}
 \end{proof}
 
-\begin{definition}[Misura]
+\begin{definition}{Misura}
     Sia \(\Omega\) insieme, \(\mathcal{M}\) algebra su \(\Omega\), allora \(\mu
     : \mathcal{M} \to [0, +\infty]\) si dice \textbf{misura} se:
 \begin{enumerate}[label = \arabic*.]
@@ -145,7 +145,7 @@ Va inteso che se per uno dei due \(\mu(A) = +\infty\) allora
 Il problema delle algebre in questo caso è che bisogna specificare nella
 definizione di misura che l'unione della successione deve essere nell'algebra,
 il che motiva la seguente definizione.
-\begin{definition}[\(\sigma\)-algebra]
+\begin{definition}{\(\sigma\)-algebra}
     Sia \(\Omega\) un insieme, \(\mathcal{M}\) una famiglia di sottoinsiemi di
     \(\Omega\). Allora \(\mathcal{M}\) si dice \textbf{\(\sigma\)-algebra} se:
 \begin{enumerate}[label = \arabic*.]
@@ -332,7 +332,7 @@ esiste sempre una \(\sigma\)-algebra \(\mathcal{M}\) che contiene
 
 \newpage
 \subsection{Misura esterna}
-\begin{definition}[Misura esterna]
+\begin{definition}{Misura esterna}
     Sia \(\Omega\) un insieme e consideriamo l'algebra \(2^{\Omega}\), allora
     \(\lambda : 2^{\Omega} \to [0, +\infty]\) si dice \textbf{misura esterna} se 
 \begin{enumerate}[label = \arabic*.]
@@ -502,7 +502,7 @@ Inoltre \(\mu^\star(G) \le \mu^\star(F) + \mu^\star(G\sminus F)\) da cui
 l'uguaglianza. Poiché sono tutti valori finiti, posso sottrarre \(\mu^\star(F)\)
 da ambo i lati ottenendo la tesi.
 \end{proof}
-\begin{definition}[Misurabilità secondo Lebesgue]
+\begin{definition}{Misurabilità secondo Lebesgue}
     Un insieme \(A \subseteq \mathbb{R}^{N} \) è \textbf{misurabile secondo
     Lebesgue} se \(\forall \varepsilon > 0\) esistono un chiuso \(F_\varepsilon
     \subseteq A \) e un aperto \(G_\varepsilon \supseteq A \) tali che
@@ -870,7 +870,7 @@ Allora \(d = 0\) quasi ovunque in \(\mathbb{R}\).
 \subsection{Funzioni misurabili}
 Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e sia \(f: \Omega \to
 \mathbb{R} \cup \{-\infty, \infty\}\) 
-\begin{definition}[Funzione misurabile]
+\begin{definition}{Funzione misurabile}
     La funzione \(f : \Omega \to \mathbb{R} \cup \{-\infty, \infty \}\) si dice \textbf{misurabile} se \(\forall \alpha \in \mathbb{R}\) l'insieme
     \[
         f^{-1}((\alpha, +\infty]) = \{x \in \Omega : f(x) > \alpha\} \in \mathcal{M}
@@ -1068,7 +1068,7 @@ funzioni misurabili.
     ipotesi un insieme misurabile.
 \end{proof}
 
-\begin{definition}[Funzione semplice]
+\begin{definition}{Funzione semplice}
 Consideriamo uno spazio di misura \((\Omega, \mathcal{M}, \mu)\). Le
 \textbf{funzioni semplici}
 sono le funzioni che assumono un numero finito di valori reali. Quindi
@@ -1173,7 +1173,7 @@ Dove per convenzione \(c_{i}\mu(E \cap E_{i}) = 0\) se \(c_{i} = 0\) e \(\mu(E
     In \(\mathbb{R}\) con la misura di Lebesgue, se prendo \(s = \rchi_{[0,
     +\infty)}\), allora \(I_{\mathbb{R}}(s) = \mu([0, +\infty)) = +\infty \) 
 \end{example}
-\begin{definition}[Integrale di Lebesgue]
+\begin{definition}{Integrale di Lebesgue}
     Sia \(f: \Omega \to [0, +\infty]\) misurabile e non negativa. Allora per
     ogni \(E \in \mathcal{M}\) definiamo 
     \[
@@ -2069,14 +2069,14 @@ ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
 \end{eser}
 
 \subsection{Convergenze di funzioni misurabili}
-\begin{definition}[Convergenza quasi ovunque]
+\begin{definition}{Convergenza quasi ovunque}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Una successione di
     funzioni misurabili \(f_{n} : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
     converge quasi ovunque a \(f : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
     se esiste un insieme \(F \in \mathcal{M}\) tale che \(\mu(F) = 0\) e
     \(\lim_{n \to \infty} f_{n}(x) = f(x) \quad \forall x \in \Omega \sminus F\)
 \end{definition}
-\begin{definition}[Convergenza quasi uniforme]
+\begin{definition}{Convergenza quasi uniforme}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Una successione di
     funzioni misurabili \(f_{n} : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
     converge quasi uniformemente a \(f : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
@@ -2084,7 +2084,7 @@ ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
     che \(\mu(F) < \varepsilon\) e \(f_{n} \to f\) uniformemente in \(\Omega
     \sminus F\).
 \end{definition}
-\begin{definition}[Convergenza in misura]
+\begin{definition}{Convergenza in misura}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Una successione di
     funzioni misurabili \(f_{n} : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
     converge in misura a \(f : \Omega \to \mathbb{R} \cup \{\pm \infty\} \) se
@@ -2375,7 +2375,7 @@ prodotto quindi ricorriamo alla seguente proposizione
 \end{proposition}
 Per la dimostrazione di questa proposizione si usano le \emph{famiglie
 monotone} di misure.
-\begin{definition}[Famiglia monotona]
+\begin{definition}{Famiglia monotona}
 Una collezione \(\mathcal{A}\) di sottoinsiemi di un
 insieme ambiente \(\Omega\) si dice \emph{famiglia monotona} se per ogni
 successione \(\{A_{n}\} \) crescente di insiemi in \(\mathcal{A}\) e per ogni
@@ -2510,7 +2510,7 @@ Notiamo che
     \(\alpha\) queste funzioni sono integrabili in \(B_{1}(0)\)? E in
     \(\mathbb{R}^2 \sminus B_{1}(0)\)?
 \end{eser}
-\begin{definition}[Convoluzione]
+\begin{definition}{Convoluzione}
     Siano due funzioni \(f, g : \mathbb{R}^{N} \to \mathbb{R}\). Allora la
     funzione
     \[
@@ -2554,7 +2554,7 @@ Notiamo che
 
 \newpage
 \subsection{Misure Relative}
-\begin{definition}[Misura Relativa]
+\begin{definition}{Misura Relativa}
 Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. Sia \(\phi: \mathcal{M} \to
 \mathbb{R}\) si dice \textbf{misura relativa} se valgono le seguenti proprietà:
 \begin{enumerate}[label = \arabic*.]
@@ -2675,7 +2675,7 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
 \end{enumerate}
 \end{proof}
 
-\begin{definition}[Insiemi positivi e negativi]
+\begin{definition}{Insiemi positivi e negativi}
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e sia \(\varphi:
     \mathcal{M} \to  \mathbb{R}\) una misura relativa. Allora 
 \begin{itemize}[label = --]
@@ -2864,7 +2864,7 @@ E)\). Analogamente si dimostra che \(\varphi(A' \cap E) = \varphi(A \cap A \cap
 E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
 \end{proof}
 
-\begin{definition}[Variazione superiore, inferiore, totale]
+\begin{definition}{Variazione superiore, inferiore, totale}
     Sia \((\Omega, \mathcal{M})\) uno spazio di misura e \(\varphi : \mathcal{M}
     \to \mathbb{R}\) una misura relativa. Sia \((A, B)\) una decomposizione di
     \(Hahn\). Allora
@@ -2923,7 +2923,7 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
 \end{enumerate}
 \end{proof}
 
-\begin{definition}[\(\mu\)-Assoluta continuità]
+\begin{definition}{\(\mu\)-Assoluta continuità}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(\varphi\) una
     misura (o misura relativa) su \((\Omega, \mathcal{M})\). Allora \(\varphi\)
     si dice \(\mu\)-\textbf{assolutamente continua} (denotato \(\mu\)-a.c.) se
@@ -2964,7 +2964,7 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
     continua, infatti preso \(E = (1, 2)\) abbiamo che \(\mathcal{L}^{1}(E) =
     1\) ma \(\mathcal{L}^{1}_\star(E) = \mathcal{L}^{1}(\varnothing)= 0\).
 \end{example}
-\begin{proposition}
+\begin{proposition}\label{prop:equivalenti_ac}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(\varphi\) una
     misura relativa su \((\Omega, \mathcal{M})\). Allora sono equivalenti:
 \begin{enumerate}[label = \roman*)]
@@ -3055,7 +3055,7 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
     Il corollario segue semplicemente da \( \left| \int_E f d\mu\right| =
     |\varphi(E)| \le |\varphi |(E) \) 
 \end{proof}
-\begin{definition}[Misura singolare]
+\begin{definition}{Misura singolare}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura e sia \(\varphi\)
     una misura o misura relativa su \((\Omega, \mathcal{M})\). Allora
     \(\varphi\) è \textbf{\(\mu\)-singolare} se esistono \(A, B \in
@@ -3099,7 +3099,7 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
     Inoltre \(\mu\) è \(\delta_0\)-singolare, per l'osservazione precedente
     ossia con \((A, B) = (B, A)\) 
 \end{example}
-\begin{proposition}
+\begin{proposition}\label{prop:equivalenti_sing}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura e sia \(\varphi \)
     una misura relativa su \((\Omega, \mathcal{M})\). Allora sono equivalenti:
     \begin{enumerate}[label = \roman*)]
@@ -3130,7 +3130,16 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
     \(\text{iii)} \implies \text{i)}\) Ovvia.
 \end{proof}
 
-\begin{theorem}[Decomposizione di Lebesgue-Radon-Nikodym]
+\subsection{Derivata di Radon-Nikodym}
+Sia \({(\Omega, \mathcal{M})}\) uno spazio misurabile. L'obiettivo di questa
+sottosezione è definire la derivata \(\frac{\partial \varphi }{\partial \mu}\)
+di una misura relativa \(\varphi \) rispetto a una misura \(\sigma\)-finita
+\(\mu\) su \((\Omega, \mathcal{M})\). Il significato di tale derivata è ancora
+sconosciuto a ogni essere mortale. Arriveremo a una definizione tramite 2
+generalizzazioni: prima la definiamo per misure finite, poi per \(\mu\) misura
+\(\sigma\)-finita e infine anche per \(\varphi \) relativa.
+
+\begin{theorem}[Decomposizione di Lebesgue-Radon-Nikodym]\label{thm:dec_rad_nik}
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. Siano \(\mu\) e
     \(\varphi\) due misure finite su \((\Omega, \mathcal{M})\). 
     Sia ora
@@ -3143,7 +3152,8 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
         \int_\Omega f d\mu = \sup_{g \in \mathcal{F}}  \int_\Omega g d\mu
     \]
 \end{theorem}
-\begin{definition}[Derivata di Radon-Nikodym]
+\begin{definition}[label=def:rad_nik_1]{Derivata di Radon-Nikodym per misure
+    finite}
     Siano \(\mu\) e \(\varphi \) misure finite su \((\Omega, \mathcal{M})\).
     Chiamiamo \textbf{derivata di Radon-Nikodym} di \(\varphi \) rispetto a
     \(\mu\) la funzione \(f \in \mathcal{F}\) del teorema precedente e viene
@@ -3153,8 +3163,277 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
         \varphi}{\partial \mu } d\mu = \sup_{g \in \mathcal{F}} \int_\Omega g d\mu
     \]
 \end{definition}
+\begin{proof}[Dimostrazione del Teorema~\ref{thm:dec_rad_nik}, ossia
+    che~\ref{def:rad_nik_1} è ben definita] \(\)  \\
+    Iniziamo dimostrando l'unicità. Sia 
+    \[
+        I = \sup_{g \in \mathcal{F}} \int_\Omega g d\mu = \int_\Omega f_{1} d\mu
+        = \int_\Omega f_{2} d\mu
+    \]
+    per due funzioni \(f_{1} ,f_{1} \in \mathcal{F}\).
+    Ora costruiamo la seguente partizione di \(\Omega\):
+    \begin{align*}
+        E_{1} &= \{ x \in \Omega : f_{1}{(x)} > f_{2}{(x)}\} \\
+        E_{2} &= \{x \in \Omega : f_{1}{(x)} <f_{2}{(x)}\} \\
+        E_{3} &= \{x \in \Omega : f_{1}{(x)} = f_{2}{(x)}\}
+    \end{align*}
+    supponiamo ora per assurdo che \(\mu{(E_{1})} > 0\). Sia \(h = \max \{f_{1},
+    f_{2}\} \), allora \(h \in \mathcal{F}\), infatti \(h \ge f_{1} \ge 0\), \(h
+    \in L^{1}{(\Omega)}\), perché \(f_{1}, f_{2} \in L^{1}\) e per ogni \(E \in
+    \mathcal{M}\), 
+    \begin{align*}
+        \int_E h d\mu &= \int_{E \cap E_{1}} h d\mu + \int_{E \cap E_{2}} h d\mu
+        + \int_{E \cap E_{3}} h d\mu =\\
+        &= \int_{E \cap E_{1}} f_{1} d\mu + \int_{E \cap E_{2}} f_{2} d\mu +
+        \int_{E \cap E_{3}} f_{1} d\mu \le \\
+        &\le \varphi {(E \cap E_{1})} + \varphi {(E \cap E_{2})} + \varphi {(E
+        \cap E_{3})} = \varphi {(E)}
+    \end{align*}
+    tuttavia
+    \[
+        \int_{\Omega} h d\mu = \int_{E_{1}} f_{1} d\mu + \int_{E_{2} \cup E_{3}} f_{2} d\mu
+    > \int_{E_{1}} f_{2} d\mu + \int_{E_{2} \cup E_{3}} f_{2}
+        d\mu = \int_{\Omega} f_{2} d\mu = I
+    \]
+    ma la \(f_{2}\) avrebbe dovuto realizzare il \(\sup\), assurdo. Ne consegue
+    che \(f_{1} = f_{2}\,\, \mu-q.o. \).
 
-\begin{theorem}[Teorema di Radon-Nykodym]
+    Ora mostriamo l'esistenza. Chiamiamo 
+    \[
+        I = \sup_{g \in \mathcal{F}} \int_\Omega g d\mu 
+    \]
+\begin{enumerate}[label = \arabic*.]
+    \item \(I\) esiste in quanto \(\mathcal{F} \neq \varnothing\) perché \( 0
+        \in \mathcal{F}\).
+    \item  \(I \ge 0\) poiché \(\int_\Omega g d\mu \ge 0\) per ogni \(g \in
+        \mathcal{F}\).
+    \item \(I < +\infty\) poiché \(\int_\Omega g d\mu \le \varphi {(\Omega)}\) per
+        ogni \(g \in \mathcal{F}\).
+\end{enumerate}
+    quindi esiste una successione \(\{g_{n}\} \subseteq \mathcal{F} \) tale che
+    \[
+        \lim_{n \to \infty} \int_\Omega g_{n} d\mu = I
+    \]
+    allora ne estraiamo una sottosuccessione (poi rinominata \(g_{n}\) per comodità) tale
+    che
+    \[
+        \forall n \in \mathbb{N} : I - \frac{1}{n} \le \int_\Omega g_{n} d\mu
+        \le I
+    \]
+    e costruiamo per ogni \(n \in \mathbb{N}\) la successione \(f_{n} = \max
+    \{g_{1}, \dots,g_{n}\} \). Dimostriamo ora che \(\{f_{n}\} \subseteq \mathcal{F}
+    \): \(f_{n} \ge g_{1} \ge 0\), \(f_{n} \in L^{1}{(\Omega)}\) in quanto
+    assume valori di funzioni integrabili e per ogni \(E \in \mathcal{M}\)
+    \[
+        \int_E f_{n} d\mu = \sum_{i=1}^{n} \int_{E \cap E_{i}} f_{n} d\mu 
+    \]
+    dove gli \(E_{i}\), per \(i = 1,\dots, n\) sono così definiti:
+    \begin{align*}
+        E_{1} &= \{x \in \Omega : g_{1}{(x)}\ge g_{j} {(x)} \, \forall j = 1,
+        \dots, n \}  \\
+        E_{2} &= \{x \in \Omega : g_{2}{(x)}\ge g_{j} {(x)} \, \forall j = 1,
+        \dots, n \} \sminus E_{1} \\
+        E_{3} &= \{x \in \Omega : g_{3}{(x)}\ge g_{j} {(x)} \, \forall j = 1,
+        \dots, n \} \sminus {(E_{1} \cup E_{2})}  \\
+        &\vdots \\
+            E_{n} &= \{x \in \Omega : g_{n}{(x)}\ge g_{j} {(x)} \, \forall j = 1,
+        \dots, n \} \sminus \left( \bigcup_{i=1}^{n-1} E_{i} \right)
+    \end{align*}
+    e quindi formano una partizione di \(\Omega\), ne consegue che 
+    \[
+        \int_E f_{n} d\mu = \sum_{i=1}^{n} \int_{E \cap E_{i}}   f_{n} d\mu =
+        \sum_{i=1}^{n} \int_{E \cap E_{i}} g_{i} d\mu
+        \overset{g_{i} \in \mathcal{F}}{\le }
+        \sum_{i=1}^{n} \varphi {(E \cap E_{i})} = \varphi {(E)}
+    \]
+    quindi \(f_{n} \in \mathcal{F}\) e inoltre 
+    \begin{equation}\label{eq:helper_rad_nik}
+        I - \frac{1}{n} \le g_{n} \le f_{n} \implies \int_\Omega g_{n} d\mu \le \int_\Omega f_{n}
+        d\mu \le I
+    \end{equation}
+    inoltre le \(f_{n}\) formano una successione monotona non decrescente, e
+    quindi per il teorema di Beppo Levi~\ref{thm:beppo-levi} abbiamo che \(f_{n}
+    \to f : \Omega \to \mathbb{R}\) q.o.~e tale che 
+    \[
+        \lim_{n \to \infty} \int_\Omega f_{n} d\mu = \int_\Omega f d\mu
+    \]
+    Per poter finire la dimostrazione, vogliamo che \(f \in \mathcal{F}\), che è
+    vero perché \(f_{n} \ge 0 \to f \le 0\); \(f \in L^{1}\) per Beppo Levi e
+    \(f_{n} \in L^{1}\); infine per ogni \(E \in \mathcal{M}\) abbiamo che
+    \[
+        \int_E f_{n} d\mu \le \varphi {(E)} \overset{n \to
+        \infty}{\longrightarrow} \int_E f d\mu \le \varphi {(E)}
+    \]
+    e quindi possiamo concludere \(f \in \mathcal{F}\) e inoltre da
+    \eqref{eq:helper_rad_nik} otteniamo che
+    \[
+        I - \frac{1}{n} \le \int_\Omega f_{n} d\mu \le I
+        \overset{n \to \infty}{\longrightarrow}I \le \int_\Omega f d\mu \le I
+    \]
+\end{proof}
+Ora vogliamo generalizzare la definizione di derivata di Radon-Nikodym ad avere
+\(\mu\) che sia \(\sigma\)-finita, ossia \(\Omega = \bigcup_{n=1}^{\infty}
+E_{n}\) e \(\mu(E_{n}) < +\infty\) per ogni \(n \in \mathbb{N}\). Per farlo
+dobbiamo prima mostrare tre lemmi.
+\begin{lemma}\label{lem:rad_nik_1}
+    Sia \(\Omega, \mathcal{M}\) uno spazio misurabile e siano \(\mu\) e
+    \(\varphi \) due misure finite. Allora \(\forall g \in \mathcal{F}\) si ha
+    che
+    \[
+        \frac{\partial f}{\partial \mu} \ge g \quad \mu-q.o.
+    \]
+\end{lemma}
+\begin{proof}
+    Fissiamo \(g \in \mathcal{F}\). Chiamiamo \(E_{\ge } = \{x \in \Omega :
+    \frac{\partial f}{\partial \mu} {(x )} \ge g{(x)}\} \) e \(E_< = \Omega
+    \sminus E_{\ge }  \) similmente caratterizzato. Chiamiamo \(h := \max \{f,
+    g\} \). Allora \(h \in \mathcal{F}\) perché \(h \ge f\ge 0\), \(h \in
+    L^{1}\) perché \(f, g \in L^{1}\) e \(\forall E \in \mathcal{M}\) abbiamo
+    \[
+        \int_E h d\mu = \int_{E \cap E_{\ge }} h d\mu + \int_{E \cap E_{<}} h
+        d\mu = \int_{E \cap E_{\ge }} f d\mu + \int_{E \cap E_{<}} g d\mu \le \varphi
+        {(E)}
+    \]
+    ma adesso assumiamo \(\mu{(E_<)} > 0\) e abbiamo
+    \[
+        \int_\Omega h d\mu = \int_{E_{\ge }} f d\mu + \int_{E_{<}} g d\mu >
+        \int_{E_{\ge } } g d\mu + \int_{E_{<}} f d\mu = \int_\Omega f d\mu
+    \]
+    che è assurdo per la definizione di \(f\). Quindi \(\mu{(E_<)} = 0\)
+\end{proof}
+
+\begin{lemma}\label{lem:rad_nik_2}
+    Sia \({(\Omega, \mathcal{M})}\) uno spazio misurabile e sia \(\mu\) una
+    misura \(\sigma\)-finita. Allora esiste una famiglia \(\{\Omega_n\}\) tale
+    che 
+    \[
+        \Omega_n \in \mathcal{M}, \quad \bigcup_{n \in \mathbb{N}} \Omega_n =
+        \Omega, \quad \mu(\Omega_n) < +\infty\,\, \forall n \in \mathbb{N}, \quad
+        \text{ gli \(\Omega_{n}\) sono \textbf{disgiunti} }
+    \]
+\end{lemma}
+\begin{proof}
+    Se abbiamo una misura \(\sigma\)-finita \(\mu\) allora sicuramente esiste
+    una famiglia \(\{E_{n}\} \) che soddisfa le prime tre richieste. Se ora
+    costruiamo
+    \[
+        \Omega_{n} = E_{n} \sminus \bigcup_{i=1}^{n-1} E_{i} \quad \forall n \in \mathbb{N}
+    \]
+    otteniamo una famiglia disgiunta che soddisfa tutte le richieste.
+\end{proof}
+
+\begin{lemma}\label{lem:rad_nik_3}
+    Sia \(\Omega, \mathcal{M}\) uno spazio misurabile, sia \(\mu\) una misura
+    \(\sigma\)-finita su di esso e sia \(\varphi \) una misura. Esisterà una
+    collezione \(\Omega_n\) che soddisfa la tesi del lemma~\ref{lem:rad_nik_2}.
+    Allora chiamiamo \(\mu_n = \mu|_{\mathcal{M}_n} \) con \(\mathcal{M}_n =
+    2^{\Omega_n} \cap \mathcal{M}\) e similmente \(\varphi_n = \varphi
+    |_{\mathcal{M}_n} \). Sia ora \(\{\Theta_n\} \) una collezione di insiemi
+    che ha le stesse proprietà del lemma~\ref{lem:rad_nik_2} e definiamo come
+    prima \(\hat{\mu}_n = \mu|_{\hat{\mathcal{M}}_n} \) e \(\hat{\varphi}_n =
+    \varphi|_{\hat{\mathcal{M}}_n} \). 
+
+    Se definiamo ora
+    \[
+        f = \sum_{n=1}^{\infty} \rchi_{\Omega_n} \frac{\partial
+        \varphi_n}{\partial \mu_n} \quad \text{e} \quad \hat{f} =
+        \sum_{n=1}^{\infty} \rchi_{\Theta_n} \frac{\partial
+        \hat{\varphi}_n}{\partial \hat{\mu}_n}
+    \]
+    allora \(f = \hat{f}\) \(\mu\)-q.o.
+\end{lemma}
+\begin{proof}
+    Vogliamo dimostrare che \(f = \hat{f}\) in \(\Omega_{i} \cap
+    \hat{\Omega_{j}}\). Questo è vero perché essendo in \(\Omega_{i}\), per il
+    lemma~\ref{lem:rad_nik_1} abbiamo che \(f \ge \hat{f}\) \(\mu_i\)-q.o. e
+    essendo in \(\hat{\Omega_{j}}\) abbiamo che \(\hat{f} \ge f\)
+    \(\hat{\mu_{j}}\)-q.o.~ma poiché entrambe le misure sono proiezioni di
+    \(\mu\), allora \(f = \hat{f}\) \(\mu\)-q.o.~in \(\Omega_{i} \cap
+    \hat{\Omega_{j}}\). Poiché l'unione di tutti questi insiemi è \(\Omega\),
+    segue la tesi.
+\end{proof}
+
+\begin{definition}[label=def:rad_nik_2]{Derivata di Radon-Nykodim con \(\mu\)
+    \(\sigma\)-finita}
+    Sia \(\Omega, \mathcal{M}\) lo spazio misurabile del
+    lemma~\ref{lem:rad_nik_3}. Allora \(f\) come definita sopra è la
+    \textbf{derivata di Radon-Nykodim} di \(\varphi \) misura finita rispetto a
+    \(\mu\) misura \(\sigma\)-finita, ossia
+    \[
+        \frac{\partial \varphi }{\partial \mu} = \sum_{n=1}^{\infty}
+        \rchi_{\Omega_n} \frac{\partial \varphi_n}{\partial \mu_n}
+    \]
+    e poiché le \(\mu_n\) sono misure finite, ogni termine della sommatoria
+    segue la definizione~\ref{def:rad_nik_1}
+
+\end{definition}
+
+Procedendo con la generalizzazione, vogliamo ora definire la derivata di una
+generica misura relativa \(\varphi \) rispetto a una misura \(\sigma\)-finita
+
+\begin{definition}[label=def:rad_nik]{Derivata di Radon-Nykodim}
+    Sia \(\Omega, \mathcal{M}\) uno spazio misurabile, sia \(\mu\) una misura
+    \(\sigma\)-finita e sia \(\varphi \) una misura relativa. Allora \(\varphi =
+    \varphi^{+} - \varphi^{-}\) e definiamo la \textbf{derivata di Radon-Nykodim}
+    \[
+        \frac{\partial \varphi }{\partial \mu} = \frac{\partial \varphi^{+}}{\partial \mu} - \frac{\partial \varphi^{-}}{\partial \mu}
+    \]
+    e poiché \(\varphi^{+}, \varphi^{-}\) sono misure finite, seguono
+    la definizione~\ref{def:rad_nik_2}
+\end{definition}
+
+\begin{theorem}[Teorema di Radon-Nyokym meno bello]
+    Sia \({(\Omega, \mathcal{M})}\) uno spazio misurabile. Siano \(\mu\) e
+    \(\varphi \) rispettivamente una misura \(\sigma\)-finita e una misura
+    relativa su esso. Sia \(\varphi \) \(\mu\)-singolare. Allora
+    \[
+        \frac{\partial \varphi }{\partial \mu} = 0 \quad \mu-q.o.
+    \]
+
+\end{theorem}
+\begin{proof}
+    Supponiamo \(\mu, \varphi \) misure finite e sia \(\varphi \)
+    \(\mu\)-singolare, ossia esiste una partizione \({(A, B)}\) di \(\Omega\)
+    dove \(\mu{(A)} = 0\) e \(\varphi {(B)} = 0\). Consideriamo ora
+    \(\mathcal{M} \ni E \subseteq B \), allora
+    \[
+        0 \le \int_E \underbrace{\frac{\partial \varphi }{\partial \mu}}_{\in
+        \mathcal{F} \implies \ge 0}  d\mu \overset{\in \mathcal{F}}{\le }
+        \varphi (E) \le \varphi {(B)} = 0
+    \]
+    e quindi, essendo \(\frac{\partial \varphi }{\partial \mu}\) positiva, vale
+    \(0\) \(\mu\)-q.o.~su \(B\), ed essendo \(A\) \(\mu\)-trascurabile segue la
+    tesi.
+
+    Supponiamo ora che \(\mu\) sia \(\sigma\)-finita, \(\varphi \) misura finita
+    e \(\mu\)-singolare. Sia \({(A, B)}\) la partizione di \(\Omega\) tale che
+    \(\mu{(A)} = 0\) e \(\varphi {(B)} = 0\). Sia \(\{\Omega_n\}\) la partizione
+    di \(\Omega\) tale che \(\mu{(\Omega_{n})}< \infty\) per ogni \(n \in
+    \mathbb{N}\). Ora per ogni \(n \in \mathbb{N}\) consideriamo \({(A_{n},
+    B_{n})} = {(\Omega_{n} \cap A, \Omega_{n} \cap B)}\). Allora ogni \({(A_{n},
+B_{n})}\) è una partizione di \(\Omega_{n}\) e \(\mu_n{(A_{n})} \le \mu{(A)} =0\)
+e \(\varphi_n {(B_{n})} \le \varphi {(B)} = 0\) per cui ogni \(\varphi _n\) e
+\(\mu_{n}\)-singolare e per il punto precedente 
+\[
+    \frac{\partial \varphi_n }{\partial \mu_n} = 0 \quad \mu_n\text{-q.o.} \,\, \forall
+    n \in \mathbb{N}\implies \frac{\partial \varphi }{\partial \mu} =
+    \sum_{n=1}^{\infty} \rchi_{\Omega_n} \frac{\partial \varphi _n}{\partial
+    \mu_{n}} = 0 \quad \mu\text{-q.o.}
+\]
+    
+    Infine andiamo al caso generale, con \(\mu\) misura \(\sigma\)-finita e
+    \(\varphi \) misura relativa \(\mu\)-singolare. Allora per la
+    proposizione~\ref{prop:equivalenti_sing} abbiamo che \(\varphi^{+}\) e
+    \(\varphi^{-}\) sono \(\mu\)-singolari e quindi per il caso precedente
+    \[
+        \frac{\partial \varphi }{\partial \mu} = \frac{\partial
+        \varphi^{+}}{\partial \mu} - \frac{\partial \varphi^{-}}{\partial \mu} =
+        0 - 0 = 0 \quad \mu\text{-q.o.}
+    \]
+
+\end{proof}
+
+\begin{theorem}[Teorema di Radon-Nykodym più bello]
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. Siano \(\mu\) e
     \(\varphi\) rispettivamente una misura \(\sigma\)-finita e una misura
     relativa. Sia \(\varphi \) \(\mu\)-assolutamente continua. Allora
@@ -3316,7 +3595,7 @@ finita] Sia \({\{\Omega_{n}\}}_{n \in \mathbb{N}}\) una partizione di
 In tutti gli spazi vettoriali considerati in questa sezione, il campo su cui
 opereremo sarà \(\mathbb{K} = \mathbb{R}\) o \(\mathbb{C}\).
 \subsection{Spazi normati}
-\begin{definition}[Spazio normato]
+\begin{definition}{Spazio normato}
     Uno spazio normato è uno spazio vettoriale \(V\) su un campo \(\mathbb{K}\)
     dotato di una norma \(\| \cdot \| : V \to \mathbb{R}_{\ge 0} \) tale che
     \begin{enumerate}[label = \arabic*.]
@@ -3479,7 +3758,92 @@ Data una coppia \((p, q)\) e fissata la palla \(\|x\|_p < 1\) esistono due palle
 
 Notare che si potrebbe in teoria prendere anche \(p < 1\) ma non è più una norma
 perché non c'è la diseguaglianza triangolare.
-\begin{definition}[Norme equivalenti]
+
+\paragraph{Struttura topologica di uno spazio normato}
+Uno spazio normato \({(V, \|\cdot \|)}\) è in particolare uno spazio metrico in
+cui la distanza \(d\) è quella indotta dalla norma, ossia \(d(x, y) = \|x -
+y\|\). Questa è effettivamente una distanza, ad esempio per la disuguaglianza
+triangolare abbiamo che \(d{(x, y)} = \|x - y\| = \| x - z + z - y\| \le \| x-
+z\| + \|z - y\| = d{(x, z)} + d{(z, y)}\) per ogni \(x, y, z \in V\). Possiamo
+quindi usare la struttura metrica per definire la topologia di \(V\), ossia la
+topologia che ha come base le palle aperte rispetto alla distanza, ossia
+\[
+    \mathcal{B} = \{B_{\varepsilon}(x) : x \in V, \varepsilon > 0\}
+\]
+Poiché gli aperti di una topologia che ha base \(\mathcal{B}\) sono così caratterizzati:
+\[
+    A \text{ aperto } \iff \forall x \in A \quad \exists B \in \mathcal{B} : x
+    \in B \subseteq A
+\]
+\begin{proof}[Infatti]
+    Sia \(A\) aperto, allora \(A = \bigcup_{i \in I} B_{i}\) con
+    \(B_{i} \in \mathcal{B}\), e allora per ogni \(x \in A\), deve essere che
+    \(x \in B_{i}\) per qualche \(i\). Viceversa 
+    per ogni \(x \in A\), sia \(B_x \) un aperto della base tale che \(x
+    \in B_x \subseteq A \), allora evidentemente \(A = \bigcup_{x \in A} B_x\) è
+    aperto
+\end{proof}
+ne consegue che gli aperti di uno spazio normato sono 
+\[
+    A \subseteq V \text{ aperto } \iff \forall x \in A \quad \exists \delta > 0
+    : B_\delta {(x)} = \{y \in V: \|x- y\| < \delta\} \subseteq A 
+\]
+
+Una successione convergente in \({(V, \|\cdot \|)}\) è una successione di punti \(\{x_{n}\}
+\subseteq V  \) tale che esiste \(x \in V\) tale che \(\|x_{n} -x\| \to 0\) per
+\(n \to \infty\).
+
+Un chiuso \(C \subseteq V \) è tale se \(V \sminus C\) è aperto. Nel caso degli
+spazi normati, i chiusi sono così caratterizzati:
+\[
+    C \subseteq V \text{ chiuso } \iff \forall \{x_{n}\} \subseteq C \text{ convergente in } V
+    \text{ si ha che } \lim_{n \to \infty} x_{n} \in C    
+\]
+
+Un \textbf{sottospazio} \(W\) di un \(\mathbb{K}\)-spazio vettoriale \(V\) è un sottoinsieme
+di \(V\) che è un \(\mathbb{K}\)-spazio vettoriale rispetto alle operazioni di \(V\). Ossia è
+tale che \(\forall x, y \in W\) e \(\forall \alpha, \beta \in \mathbb{K}\)
+allora \(\alpha x + \beta y \in W\). Inoltre un sottospazio vettoriale di uno
+spazio normato è a sua volta uno spazio normato, con la stessa norma ristretta
+al sottospazio.
+
+\begin{example}
+    Sia \(V = \mathbb{R}^{2}\) con la norma euclidea e sia \(W = \{(x, 0) : x
+    \in \mathbb{R}\}\) il sottospazio delle ascisse. Allora \(W\) è uno spazio
+    normato con la norma euclidea ristretta a \(W\), ossia \(\|x\| = |x|\).
+    Anche il sottospazio \(\{0\} \) costituito dal solo vettore nullo è un
+    sottospazio di \(V\).
+
+    Altri sottospazi di \(V\) sono ad esempio tutte le rette del tipo \(\{\alpha
+    x + \beta y = 0\} \) con \(\alpha\) e \(\beta\) fissati
+
+    Possiamo chiederci quali di questi sottospazi siano chiusi. Allora
+    chiaramente \(\{0\} \) è chiuso (in qualsiasi spazio normato), in quanto
+    controimmagine attraverso la funzione distanza da \(0\) del chiuso \(\{0\}
+    \subseteq \mathbb{R} \) (oppure perché normato \(\implies \) metrico
+    \(\implies T1\)). I sottospazi di dimensione 1 sono anche chiusi, in quanto
+    controimmagine di \(\{0\} \) attraverso la funzione continua \({(x,y)}
+    \mapsto \alpha x + \beta y\).
+\end{example}
+
+\begin{example}
+    Sia \(V = C^{0}[0, 1]\) con la norma \(\|f\|_{\infty} = \max f([0, 1])\).
+    Prendiamo come sottospazio \(X = \{\text{polinomi di qualunque grado su
+    \([0, 1]\) }\} \). Allora \(X\) è un sottospazio vettoriale in quanto \(X
+    \subseteq V \) e se \(f, g \in X\) allora \(f + g \in X\) e \(\alpha f \in
+    X\).
+
+    È chiuso \(X\) in \(V\)? No. Infatti possiamo costruire successioni di
+    polinomi che convergano in \({(V, \|\cdot \|_\infty)}\) (convergenza
+    uniforme) ma il cui limite non è in \(X\). Ad esempio consideriamo
+    \[
+        e^{x} = \sum_{n=0}^{\infty} \frac{x^{n}}{n!}
+    \]
+    che nell'intervallo \([0, 1]\) le ridotte tendono alla funzione \(e^{x}\)
+    uniformemente in \([0, 1]\), ma il limite \(e^{x}\) non è un polinomio.
+\end{example}
+
+\begin{definition}{Norme equivalenti}
     Date \(\|\cdot \|_a\) e \(\|\cdot \|_b\) norme in \(V\), queste si dicono
     \textbf{equivalenti} se esistono due costanti \(C_{1}, C_{2} >0\) tali che
     \[
@@ -3502,7 +3866,7 @@ perché non c'è la diseguaglianza triangolare.
     aperti rispetto a una norma sono aperti anche rispetto all'altra, e
     viceversa.
 \end{proposition}
-\begin{proposition}
+\begin{proposition}\label{prop:norme-equivalenti}
     In uno spazio vettoriale \(V\) di dimensione finita tutte le norme sono tra
     loro equivalenti
 \end{proposition}
@@ -3585,7 +3949,7 @@ e quindi abbiamo \(N\) successioni \({\{\alpha_{i,k}\}}_{k \in \mathbb{N}}\)
     \]
 \end{example}
 
-\begin{definition}[Spazio di Banach]
+\begin{definition}{Spazio di Banach}
     Uno spazio normato \({(V, \|\cdot \|)}\) si dice \textbf{di Banach} se è
     completo rispetto alla metrica indotta dalla norma
 \end{definition}
@@ -3598,7 +3962,7 @@ e quindi abbiamo \(N\) successioni \({\{\alpha_{i,k}\}}_{k \in \mathbb{N}}\)
     uno spazio di Banach
 \end{eser}
 
-\begin{example}
+\begin{example}\label{ex:non_banach}
     Su \(V = C^{0}[-1, 1]\), la norma \(\|\cdot \|_1\) non induce uno spazio di
     Banach. Dobbiamo trovare una successione di Cauchy che non converge in
     \(V\), quindi ad esempio trovare una funzione che converga a una funzione
@@ -3647,13 +4011,88 @@ e quindi abbiamo \(N\) successioni \({\{\alpha_{i,k}\}}_{k \in \mathbb{N}}\)
 \begin{proposition}
     Se \(V\) è uno spazio normato e \(W \subseteq V \) è un sottospazio
     vettoriale allora \(W\) è uno spazio normato con la norma di \(V\) ristretta
-    a \(W\).
+    a \(W\). Inoltre
 
-    Se \(W\) ha dimensione finita allora \(W\) è necessariamente chiuso.
+\begin{enumerate}[label = \alph*.]
+    \item Se \(W\) ha dimensione finita allora \(W\) è necessariamente chiuso.
+    \item Se \(V\) è uno spazio di Banach, allora ogni sottospazio \(W \subseteq
+        V\) chiuso risulta esso stesso un Banach rispetto alla norma
+\end{enumerate}
 \end{proposition}
+\begin{proof} \( \) 
+    È chiaro che se \({(V, \|\cdot \|)}\) è normato, la stessa norma su \(W\) è
+    una norma, infatti chiaramente valgono ancora le tre proprietà della norma,
+    dove semplicemente invece di \(\forall x \in V\) avremo \(\forall x \in W\)
+    ma questo non cambia nulla. Inoltre
+\begin{enumerate}[label = \alph*.]
+    \item Sia \(\{f_{n}\} \subseteq W \), con \(f_{n} \to f\) in \({(V, \|\cdot
+        \|)}\). Allora \(f_{n} \to f\) in \({(W \cup \{f\}, \|\cdot \|)}\). Ma
+        poiché \(W \cup  \{f\} \) ha dimensione finita, tutte le norme su di
+        esso sono equivalenti, allora allora \(f_{n} \to f\)
+    anche rispetto ad altre norme. Supponiamo che \({\{e_{i}\}}_{i = 1, \dots, N
+    }\) sia una base di \(W\) e supponiamo per assurdo che \(f \not\in W\).
+    Allora ogni \(f_{n} = 0\cdot f + \sum_{i=1}^{N} \alpha_{i}^{n} e_{i} \) e poiché
+    \(f_{n} \to f\) in norma 1, allora
+    \[
+        \|f_{n} - f\|_1 \to 0 \iff 0=\lim_{n \to \infty} |0 - 1| + \sum_{i=1}^{N}
+        |\alpha_{i}^{n} - 0| \ge  1
+    \]
+    che è assurdo, quindi \(f \in W\), ossia \(W\) è chiuso.
+        
+    \item Sia \(\{f_{n}\} \) una successione di Cauchy in \(W\) con la norma
+        \(\|\cdot \|\). Quindi \(f_{n} \in W\) per ogni \(n \in \mathbb{N}\) e
+        \(\| f_{n} - f_{m}\| \to 0\) per \(n, m\to \infty\). Segue quindi che
+        \(f_{n}\) è di Cauchy in \({(V, \| \cdot \|)}\) e quindi, essendo \(V\)
+        completo, esiste \(f \in V\) tale che \(\|f_{n} - f\| \to 0\) per \(n
+        \to \infty\). Dobbiamo mostrare che \(f \in W\) ma poiché \(W\) è chiuso
+        questo è ovvio.
+\end{enumerate}
 
+\end{proof}
+
+\begin{example}[\(W \subseteq V \), \(W\) Banach, \(V\) no]
+    È possibile che \(W\) sia uno spazio di Banach mentre \(V\) no. Ad esempio
+    sia \(V = C^{0}[-1, 1]\) con la norma \(\|\cdot \|_1\). Sappiamo che non è
+    uno spazio di Banach per l'esempio~\ref{ex:non_banach}. Sia \(W = \{f \in V
+    : f{(x)} = \alpha \in \mathbb{R} \} \) il sottospazio delle funzioni
+    costanti. È un sottospazio perché se \(a, b \in  W\) allora anche
+    \(\alpha a + \beta b\) è una funzione costante. Inoltre \(W\) è completo in
+    quanto omeomorfo a \(\mathbb{R}\) con la norma euclidea, che è completo.
+\end{example}
+
+\begin{example}
+    Prendiamo \(V = C^{0}[-1, 1]\) cone la norma \(\|\cdot \|_\infty\) che rende
+    \(V\) uno spazio di Banach. Consideriamo lo spazio \(W\) dei polinomi che
+    non è chiuso in \(V\) perché contiene tutti i polinomi di Taylor di
+    \(e^{x}\) ma non la funzione limite \(e^{x}\). In realtà, \(W\) è
+    \textbf{denso} in \(V\), ossia
+    \[
+        \forall f \in V \quad \forall \varepsilon > 0 \quad \exists g \in W :
+        \| f - g\|_\infty < \varepsilon
+    \]
+    oppure 
+    \[
+        \forall f \in V, \quad \exists \{g_{n}\} \subseteq W \text{ tale che }
+        \lim_{n \to \infty} \| f - g_{n}\|_\infty = 0
+    \]
+    (poiché \(W \neq V\) chiaramente se è denso non è chiuso) 
+
+    Alcuni sottospazi chiusi di \(V\) invece sono ad esempio
+\begin{itemize}[label = --]
+    \item i sottospazi di dimensione finita (e.g.~polinomi di grado 10)
+    \item \(Z = \{f \in C^{0}[-1, 1]: f{(0)} = 0\}  \) infatti se \(f_{n} \to
+        f\) in \({(V, \|\cdot \|_\infty)}\) allora \(f_{n} \to \) uniformemente
+        e quindi puntualmente e quindi \(f{(0)} = \lim_{n \to \infty} f_{n}{(0)}
+        = 0\)
+\item \(T = \{f \in C^{0}[-1, 1] : \int_{-1}^{1} f{(t)}dt = 0\}  \) è chiuso
+        infatti se \(f_{n} \to f\) uniformemente e \(\int_{-1}^{1} f_{n}{(t)}dt
+        = 0 \to \int_{-1}^{1}f{(t)}dt = 0\) perché c'è convergenza uniforme
+\end{itemize}
+\end{example}
+
+\newpage
 \subsection{Spazi \(L^{p}\) }
-\begin{definition}[Spazio \(L^{p}\)]
+\begin{definition}{Spazio \(L^{p}\)}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Per \(p \in [1,
     +\infty)\) definiamo lo spazio \(L^{p}(\Omega, \mathcal{M}, \mu)\) come lo
     spazio delle funzioni misurabili \(f : \Omega \to \mathbb{K}\) tali che
@@ -3661,7 +4100,8 @@ e quindi abbiamo \(N\) successioni \({\{\alpha_{i,k}\}}_{k \in \mathbb{N}}\)
     \int_{\Omega} |f|^{p} d\mu < +\infty
     \]
     Se \(p = +\infty\) allora \(L^{+\infty}(\Omega, \mathcal{M}, \mu)\) è lo
-    spazio delle funzioni misurabili \(f : \Omega \to \mathbb{K}\) tali che
+    spazio delle funzioni misurabili \(f : \Omega \to \mathbb{K}\) e
+    \textbf{essenzialmente limitate}, ossia tali che
     \[
         \exists M > 0 \quad \text{tale che} \quad |f(x)| \le M \quad
         \forall x \in \Omega \sminus N, \quad \mu(N) = 0
@@ -3698,7 +4138,7 @@ equivalenti \(\mu\)-q.o.
         \right)} < +\infty
     \]
 \end{remark}
-\begin{proposition}
+\begin{proposition}\label{prp:spazio-Lp-normato}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Allora per ogni
     \(p \in [1, +\infty]\) lo spazio \(L^{p}(\Omega, \mathcal{M}, \mu)\) è uno
     spazio normato con norma
@@ -3749,7 +4189,7 @@ equivalenti \(\mu\)-q.o.
 \end{itemize}
 \end{proof}
 
-\begin{proposition}[Diseguaglianza di Young]
+\begin{proposition}[Diseguaglianza di Young]\label{prp:Young}
     Sia \(1 \le p \le \infty\) e \(p'\) tale che \(\frac{1}{p} + \frac{1}{p'} =
     1\), con la convenzione che \(\frac{1}{\infty} = 0\). Allora per ogni \(a,
     b \in \mathbb{R}_{\ge 0} \) vale che \(ab \le \frac{1}{p} a^{p}
@@ -3769,11 +4209,142 @@ equivalenti \(\mu\)-q.o.
     dove l'ultima uguaglianza è per la monotonia del logaritmo.
 \end{proof}
 
-\begin{theorem}\label{thm:completezza_Lp}
-    Ogni spazio \(L^{p}\) è completo.
+\begin{definition}[label=def:coniugati]{Esponenti coniugati}
+    Se \(1 \le p, p' \le \infty\) verificano \(\frac{1}{p} + \frac{1}{p'} = 1\)
+    anche in senso generalizzato, ossia se \(p = 1\) e \(p' = +\infty\) o \(p =
+    \infty \) e \(p' = 1\), allora si dicono \textbf{esponenti coniugati}.
+\end{definition}
+
+\begin{theorem}[Diseguaglianza di Hölder]
+    Siano \(p, p' \in [1, \infty]\) esponenti coniugati. Allora se \(f \in
+    L^{1}{(\Omega)}\), \(g \in L^{p'}{(\Omega)}\) allora \(f\cdot g \in
+    L^{1}{(\Omega)}\) e vale
+    \[
+        \|fg\|_1 \le \|f\|_p \cdot \|g\|_{p'}
+    \]
+\end{theorem}
+\begin{proof}
+    Se \(p = 1\) o \(p = +\infty\) allora è semplice. Supponiamo
+    ad esempio \(p = 1\), 
+    \[
+        |fg|{(x)} \le |f|{(x)}|g|{(x)} \le |f|{(g)} \|g\|_{\infty} \quad \text{
+        q.o.}
+    \]
+    quindi \(fg\) è dominata da una funzione integrabile ed è dunque
+    integrabile, inoltre
+    \[
+        \|fg\|_1 = \int_\Omega |fg| d\mu \le \|g\|_\infty \int_\Omega |f| d\mu = \|f\|_1 \cdot \|g\|_\infty
+    \]
+
+    Sia ora \(p \in (1, \infty)\). Se \(f\) o \(g\) è la funzione nulla allora
+    la diseguaglianza è ovvia, quindi supponiamo \(\|f\|_p \neq 0 \neq
+    \|g\|_{p'} \). Ora dividiamo in due passi
+\begin{enumerate}[label = \arabic*.]
+    \item \(u\), \(v\) nelle stesse ipotesi di \(f\) e \(g\) ma con \(\|u\|_p =
+        1 = \|v\|_{p'} \). Allora
+        \[
+            |uv{(x)}| \le  \frac{1}{p}|u{(x)}|^{p} + \frac{1}{ p' }|v{(x)}|^{p'}
+            \quad \text{(Young~\ref{prp:Young})}
+        \]
+        quindi \(uv \in L^{1}(\Omega)\) in quanto dominata da funzione somma di
+        funzioni integrabili. Allora abbiamo
+        \[
+            \|uv\|_1 = \int_\Omega |uv| d\mu \le \frac{1}{p} int_\Omega |u|^{p} d\mu +
+            \frac{1}{p'} \int_\Omega |v|^{p'} d\mu = \frac{1}{p} + \frac{1}{p'}
+            = 1 = \|u\|_p \|v\|_{p'}
+        \]
+    \item \(f, g\) generiche. Sia \(M = \|f\|_p\) e \(N = \|g\|_{p'}\). Allora
+        \(\frac{f}{M}, \frac{g}{N} \in L^{p}\) e \(L^{p'}\) rispettivamente e
+        \(\left\| \frac{f}{M} \right\|_p = 1 = \left\| \frac{g}{N} \right\|_{p'}\).
+        Applichiamo il punto precedente a \(\frac{f}{M}\) e \(\frac{g}{N}\) e
+        otteniamo che \(fg \in L^{1}\) e inoltre
+        \[
+            \left\| \frac{f}{M} \cdot \frac{g}{N} \right\|_1 \le 1 \implies
+            \frac{1}{MN} \|fg\|_1 \le 1 \implies \|fg\|_1 \le MN = \|f\|_p \cdot
+            \|g\|_{p'}
+        \]
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}[Minkovsky o disuguaglianza triangolare]
+    Se \(f, g \in L^{p}{(\Omega)}\) allora \(f + g \in L^{p}{(\Omega)}\) e
+    \[
+        \|f+g\|_p \le \|f\|_p + \|g\|_p
+    \]
+\end{proposition}
+\begin{proof}
+    Già sappiamo che \(f+g \in L^{p}{(\Omega)}\). Allora
+    \begin{align*}
+        \int_\Omega |f+g|^{p} d\mu = \int_\Omega |f+g|^{p-1} |f+g| d\mu \le
+        \int_\Omega \underbrace{|f+g|^{p-1}}_{:= w} |f| d\mu + \int_\Omega |f+g|^{p-1} |g| d\mu
+    \end{align*}
+    \(w \in L^{p'}{(\Omega)}\)?
+    \[
+        \int_\Omega |w|^{p'} d\mu = \int_\Omega |f+g|^{(p-1)p'} d\mu = \int_\Omega |f+g|^{p} d\mu
+    \]
+    dove si è usato che \(\frac{1}{p} + \frac{1}{p'} = 1 \implies p' + p =
+    pp'\). Troviamo quindi
+    \[
+        \|w\|_{p'} = {\left( \int_\Omega |f+g|^{p}d\mu \right)}^{\frac{1}{p'} =
+        \frac{p-1}{p}} = \|f + g\|_p^{p-1}
+    \]
+    Ora possiamo applicare Hölder e ottenere
+    \[
+        \|f+g\|_p^{p} \le \|w\|_{p'} \|f\|_p + \|w\|_{p'} \|g\|_p =
+        \|f+g\|^{p-1}{\left( \|f\|_p + \|g\|_p \right)} 
+    \]
+    e infine dividendo per \(\|f+g\|^{p-1}\) otteniamo la diseguaglianza
+    triangolare
+\end{proof}
+Con la precedente proposizione abbiamo effettivamente finito di dimostrare la
+proposizione~\ref{prp:spazio-Lp-normato} che diceva che \(L^{p}\) è uno spazio
+normato.
+
+\begin{theorem}[\(L^p\) è Banach ]\label{thm:completezza_Lp}
+    Per ogni \(p \in [1, \infty]\), lo spazio \(L^{p}(\Omega, \mathcal{M},
+    \mu)\) è uno spazio di Banach
 \end{theorem}
 \begin{proof}[dimostrazione per \(p=+\infty\)]
-    % TODO
+    Sia \(\{f_{n}\} \subseteq L^{\infty}{(\Omega)} \) una successione di Cauchy.
+    Quindi 
+    \begin{equation}\label{eq:helper_compllp}
+        \forall k \in \mathbb{N} \quad \exists n_k \in \mathbb{N} \quad
+        \text{tale che} \quad \forall n, m \ge n_k \implies \|f_{n} -
+        f_{m}\|_\infty \le  \frac{1}{k}
+    \end{equation}
+    cioè \(|f_{n}{(x)} - f_{m}{(x)}| \le \frac{1}{k}\) per ogni \(x \in \Omega
+    \sminus N_{k, n, m} \), con \(N_{k, n, m} \) trascurabile. Consideriamo ora
+    l'insieme
+    \[
+        N = \bigcup_{k \in \mathbb{N}} \bigcup_{n, m \ge n_k} N_{k, n, m}
+    \]
+    perciò \(N\) è unione numerabile di trascurabili e quindi è trascurabile.
+    Allora sappiamo che in~\eqref{eq:helper_compllp} l'ultima diseguaglianza può
+    significare \(|f_{n}{(x)} - f_{m}{(x)}| \le \frac{1}{k}\) per ogni \(x \in
+    \Omega \sminus N\).
+    Questo significa che \(\{f_{n}{(x)}\} \in \mathbb{R}\) è di Cauchy e quindi
+    convergente per ogni \(x \in \Omega \sminus N\) e introduciamo la funzione
+    \[
+        f(x) = \lim_{n\to \infty} f_{n}{(x)} \quad \forall x \in \Omega \sminus N
+    \]
+    che è misurabile perché limite di funzioni misurabili. Ora portando \(m \to
+    \infty\) nella diseguaglianza precedente otteniamo
+    \begin{equation}\label{eq:helper_compllp2}
+        |f_{n}{(x)} - f{(x)}| \le \frac{1}{k} \quad \forall x \in \Omega \sminus N
+    \end{equation}
+    ci resta da dimostrare che \(f \in L^{\infty}(\Omega)\) e che \(f_{n} \to
+    f\) in \(L^{\infty}{(\Omega)}\). La prima è vera, perché ad esempio
+    \[
+        |f{(x)}| \le |f_{n_k}{(x)}| + |f{(x)} - f_{n_k} {(x)}| \le \|f_{n_k}\|_\infty +
+        \frac{1}{k} \quad \forall x \in \Omega \sminus N
+    \]
+    e la seconda pure, infatti ora riprendendo la~\eqref{eq:helper_compllp2} e
+    la~\eqref{eq:helper_compllp} otteniamo
+    \[
+        \forall k \in \mathbb{N} \quad \exists n_k \in \mathbb{N} : \forall n
+        \ge n_k \quad \|f - f_{n}\|_\infty \le \frac{1}{k} \quad \forall x \in \Omega \sminus N
+    \]
+    
 \end{proof}
 \begin{proof}[dimostrazione con \(1 \le p < +\infty\)]
     Sia \(f_{n}\) una successione di Cauchy in \(L^{p}\), ossia
@@ -4003,7 +4574,7 @@ f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \)
     successione o la funzione limite appartengano a un qualche spazio \(L^{p}\).
 \end{note}
 
-\begin{definition}[Spazio di Hilbert]
+\begin{definition}{Spazio di Hilbert}
     Uno spazio prehilbertiano che sia completo rispetto alla norma indotta dal
     prodotto scalare si chiama \textbf{spazio di Hilbert}.
 \end{definition}
