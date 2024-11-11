@@ -1098,8 +1098,8 @@ nell'approssimare funzioni. Più precisamente
 \begin{proof}
     Cominciamo da \(f\) non negativa. Per \(n\) fissato scegliamo gli insiemi in
     base ai valori di \(f\). Quindi scegliamo \(i = 1, \dots, n2^{n}\) e
-    prendiamo \[E_{n, i} = \{x \in \Omega : \frac{i-1}{2^{n}} \le f(x) <
-    \frac{i}{2^{n}}\} \quad \forall n \in \mathbb{N}, \,\, \forall i \in \{1,
+    prendiamo \[E_{n, i} = \left\{x \in \Omega : \frac{i-1}{2^{n}} \le f(x) <
+    \frac{i}{2^{n}}\right\} \quad \forall n \in \mathbb{N}, \,\, \forall i \in \{1,
 \dots, n2^{n}\}  \] 
 Inoltre sia \[ F_{n}=\{x \in \Omega : f(x) \ge n\} \]
 
@@ -4574,6 +4574,105 @@ f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \)
     successione o la funzione limite appartengano a un qualche spazio \(L^{p}\).
 \end{note}
 
+\subsection{Spazi di Hilbert}
+Per questo capitolo userò la notazione \(\mathbb{K} = \mathbb{R}\) o
+\(\mathbb{C}\) quando non è importante specificare il campo su cui lavoriamo.
+\begin{definition}{Spazio prehilbertiano}
+    Uno spazio vettoriale \(H\) su \(\mathbb{K}\) dotato di un
+    prodotto scalare \(\langle \cdot, \cdot \rangle\) si chiama \textbf{spazio
+    prehilbertiano}. In particolare l'applicazione
+    \[
+        \langle \cdot, \cdot \rangle : H \times H \to \mathbb{K}
+    \]
+    verifica le seguenti proprietà:
+\begin{enumerate}[label = \roman*)]
+    \item \emph{(positività)} \(\langle x, x \rangle \ge 0 \quad \forall x \in H\)
+    \item \emph{(definita positività)} \(\langle x, x \rangle = 0 \iff x = 0\)
+    \item \emph{(linearità rispetto alla prima componente)} \(\left< \alpha x + \beta y, z \right> = \alpha \left<
+        x, z\right> + \beta \left<y, z \right>\), \(\forall x, y, z \in H\) e
+        \(\forall \alpha, \beta \in \mathbb{K}\) 
+    \item \emph{(simmetria / coniugio)} \(\left< x, y \right> = \overline{\left<
+        y, x \right>}\), \(\forall x, y \in H\) 
+\end{enumerate}
+\end{definition}
+Ovviamente è giusto osservare che le proprietà \(i)\) \(ii)\) implicano che la
+funzione \(x \mapsto \left<x, x \right>\) è una norma.
+\begin{remark}
+    Da \(iii)\) e \(iv)\) otteniamo che, per ogni \(x, y, z \in H\) e \(\alpha,
+    \beta \in \mathbb{K}\) 
+    \[
+        \left<x, \alpha y + \beta z \right> \overset{iii)}{=}
+        \overline{\left<\alpha y + \beta z \right>} \overset{iv)}{=}
+        \overline{\alpha} \left<x, y
+        \right> + \overline{\beta} \left<x, z \right>
+    \]
+\end{remark}
+\begin{theorem}[Diseguaglianza di Schwarz]
+    Se \(H\) è uno spazio prehilbertiano allora per ogni \(x, y \in H\) vale la
+    diseguaglianza
+    \[
+        |\langle x, y \rangle|^{2} \le \left<x, x \right> \left<y, y \right>
+    \]
+\end{theorem}
+\begin{proof}
+    Considero l'elemento \(x + \lambda \left<x, y \right>y\), con \(\lambda \in
+    \mathbb{R}\) e calcolo il prodotto scalare con se stesso:
+    \begin{align*}
+        0 &\le \left<x + \lambda \left<x, y \right>y, x + \lambda\left<x,y \right> y
+        \right> = \\ &= \left<x, x \right> +
+        \lambda \left<x, y \right> \left<y, x \right> + \overline{\lambda }
+        \left<y, x \right> \left<x, y \right> + |\lambda|^{2} \left| \langle x,y
+        \rangle \right|^2  \left<y, y
+        \right>  = \\ &= \lambda^2 |\langle x,y \rangle|^2 \langle y,y \rangle + 2 \lambda |\langle x,y
+        \rangle|^2 + \left<x,x \right>
+    \end{align*}
+    dove, se il coefficiente di \(\lambda^2\) è diverso da 0,  l'ultimo è un
+    polinomio di secondo grado in \(\lambda\), con tutti i coefficienti reali e
+    non negativi, quindi il discriminante è non positivo, ossia
+    \[
+        \frac{\Delta}{4} \le  0 \iff |\langle x,y \rangle|^{4} \langle y,y \rangle - |\langle x,y 
+        \rangle|^2 \langle x,x \rangle \le 0
+    \]
+    da cui \(\displaystyle |\langle x,y \rangle| = 0\) oppure
+    \(\displaystyle |\langle x,y \rangle|^{2} \le  \langle x,x \rangle \langle
+    y,y \rangle\). In entrambi i casi la tesi è vera.
+
+    Se invece il coefficiente di \(\lambda^2\) è 0, allora \(\langle x,y
+    \rangle = 0\) e la tesi è vera, oppure \(\langle y,y \rangle = 0\), allora
+    \(y = 0\) e la tesi è vera perché \(\langle x,y \rangle = 0\).
+\end{proof}
+
+\begin{proposition}
+    Sia \(H\) uno spazio prehilbertiano con prodotto scalare \(\langle \cdot,
+    \cdot \rangle\). Allora la funzione
+    \begin{align*}
+        \|\cdot \|: H &\longrightarrow \mathbb{R}_{\ge 0}  \\
+        v &\longmapsto \|v \| = \sqrt{\langle v, v \rangle}
+    \end{align*}
+    è una norma.
+
+    In particolare uno spazio prehilbertiano è uno spazio normato, con tale
+    norma.
+\end{proposition}
+\begin{proof}
+    La definita positività corrisponde alle proprietà \(i)\) e \(ii)\) del
+    prodotto scalare.
+    L'omogenità segue dalla linearità:
+    \[
+        \|\alpha v\| = \sqrt{\langle \alpha v, \alpha v \rangle} = \sqrt{\alpha
+        \overline{\alpha} \langle v, v \rangle} = |\alpha| \sqrt{\langle v, v
+        \rangle} = |\alpha| \|v\|
+    \]
+    La diseguaglianza triangolare segue dalla diseguaglianza di Schwarz:
+    \begin{align*}
+        \|v + w\|^{2} &= \langle v + w, v + w \rangle = \|v\|^{2} + \|w\|^{2} +
+        2\Re\langle v, w \rangle \le \\ &\le  \|v\|^{2} + \|w\|^{2} + 2\|v\|\|w\| = {\left(
+        \|v\| + \|w\| \right)}^{2}
+    \end{align*}
+    per cui \(\|v + w\| \le \|v\| + \|w\|\).
+\end{proof}
+
+
 \begin{definition}{Spazio di Hilbert}
     Uno spazio prehilbertiano che sia completo rispetto alla norma indotta dal
     prodotto scalare si chiama \textbf{spazio di Hilbert}.
@@ -4627,4 +4726,262 @@ f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \)
 \end{proof}
     Data una norma, se essa verifica l'identità del parallelogramma allora
     essa è una norma hilbertiana, cioè associata a un prodotto scalare
+
+\begin{proposition}
+    Una norma \(\|\cdot \|\) definita su uno spazio vettoriale \(V\) è
+    hilbertiana se e solo se verifica l'identità del parallelogramma, ossia
+    \[
+        \|x + y\|^2 + \|x - y\|^2 = 2\|x\|^2 + 2\|y\|^2 \quad \forall x, y \in V
+    \]
+    in questo caso il prodotto scalare è definito da
+    \[
+        \langle x,y \rangle = \left\|\frac{x+y}{2}\right\|^2 -
+        \left\|\frac{x-y}{2}\right\|^2 + i
+        \left\|\frac{x+iy}{2}\right\|^2 - i \left\|\frac{x-iy}{2}\right\|^2
+        \quad \forall x, y \in V
+    \]
+    dove gli ultimi due termini non sono presenti nel caso \(\mathbb{K}=\mathbb{R}\) 
+\end{proposition}
+
+\begin{example}
+    Gli spazi \(L^{1}{(\Omega)}\) e \(L^{\infty}{(\Omega)}\) non sono Hilbertiani. Basta trovare una
+    coppia di funzioni \(f, g\) tali che 
+    \[
+        \|f + g\|_1^2 + \|f - g\|_1^2 \neq 2\|f\|_1^2 + 2\|g\|_1^2
+    \]
+    Ad esempio prendiamo \(\Omega = [-1,1]\) e prendiamo \(f = \rchi_{(-1, 0)}
+    \) e \(g = \rchi_{{(0,1)}} \) allora \(f + g = 1\) q.o.~e quindi 
+    \[
+        \|f+g\|_1^2  + \|f-g\|_1^2 = 4 + 4 \neq 2 + 2 = 2\|f\|_1^2 + 2\|g\|_1^2
+    \]
+    Ora con le stesse funzioni mostriamo che neanche \(L^{\infty}{[-1, 1]}\) ha
+    una norma hilbertiana, infatti
+    \[
+        \|f+g\|_{\infty}^2 + \|f-g\|_{\infty}^2 = 1 + 1 \neq 2 + 2 = 2\|f\|_{\infty}^2 + 2\|g\|_{\infty}^2
+    \]
+\end{example}
+
+\begin{definition}{Ortogonalità}
+    Sia \({(H, \langle \cdot ,\cdot  \rangle)}\) uno spazio prehilbertiano. Due
+    vettori \(x, y \in H\) si dicono \textbf{ortogonali} se \(\langle x, y \rangle = 0\).
+\end{definition}
+
+\begin{eser}
+    Mostrare che negli spazi prehilbertiani vale il teorema di Pitagora: 
+    per ogni coppia di vettori ortogonali \(x, y \in H\) si ha
+    \[
+        \|x + y\|^2 = \|x\|^2 + \|y\|^2
+    \]
+\end{eser}
+
+\subsection{Risultati di densità su \(L^{p}{(\Omega)}\) }
+In questa parte \(\Omega\) sarà un aperto di \(\mathbb{R}^{N}\) con la misura
+\(\mu\) di Lebesgue. Inizieremo con il caso \(\Omega = \mathbb{R}^{N}\) 
+\begin{proposition}\label{prop:risultato_1}
+    Le funzioni semplici, misurabili e nulle al di fuori di un compatto sono
+    dense in \(L^1(\mathbb{R}^{N})\) 
+\end{proposition}
+\begin{proof}
+    Data \(f \in L^1(\mathbb{R}^{N})\) osservo che \(f^{+}, f^{-} \in
+    L^1(\mathbb{R}^{N})\) e sono non negative. Allora esistono 2 successioni
+    \(s_{n}\) e \(t_{n}\) di funzioni semplici, misurabili, non negative e nulle fuori da un
+    compatto che convergono q.o.~rispettivamente a \(f^{+}\) e \(f^{-}\) e
+    queste successioni sono monotone crescenti. Ci rimane da controllare che
+    \(s_{n} \to f^{+}\) e \(t_{n} \to f^{-}\) in \(L^{1}{(\mathbb{R}^{N})}\).
+    Sappiamo che \(s_{n} \nearrow f^{+}\) e \(t_{n} \nearrow f^{-}\). Allora
+    \[
+        \int_{\mathbb{R}^{N}} |s_{n} - f^{+}| d\mu = \int_{\mathbb{R}^{N}} f^{+}
+        - s_{n} d\mu \to 0
+    \]
+    dove si è usato BL~\ref{thm:beppo-levi} perché la successione integranda è
+    monotona decrescente e gli integrali sono tutti maggiorati da quello di
+    \(f^{+}\) che è finito. Altrimenti si può anche usare il teorema di
+    convergenza dominata di Lebesgue perché tutte le funzioni sono dominate da
+    \(f^{+}\). Lo stesso vale per \(t_{n}\) e \(f^{-}\). 
+
+    Allora la successione \(\{s_{n} - t_{n}\}\) converge a \(f\) in
+    \(L^1(\mathbb{R}^{N})\) 
+\end{proof}
+
+Per \(C_C^{0}{(\Omega)} \subseteq C^{0}{(\Omega)} \) si intende lo spazio di funzioni continue a supporto
+compatto
+
+\begin{proposition}\label{prop:risultato_2}
+    \(C_C^{0}{(\mathbb{R}^{N})}\) è denso in \(L^1(\mathbb{R}^{N})\)
+\end{proposition}
+\begin{proof}
+    Dobbiamo provare che 
+    \[
+        \forall f \in L^1(\mathbb{R}^{N}) \quad \forall \varepsilon > 0 \quad \exists g \in C_C^{0}{(\mathbb{R}^{N})} \quad \|f - g\|_1 < \varepsilon
+    \]
+    Sappiamo per \(\ref{prop:risultato_1}\) già che esiste \(s\) semplice, misurabile e nulla al di fuori di un
+    compatto tale che \(\|f - s\|_1 < \varepsilon/2\). Ora sappiamo che
+    \[
+        s = \sum_{i=1}^{n} \alpha_i \rchi_{A_i}
+    \]
+    dove possiamo prendere \(\alpha_{i} \neq 0\) per ogni \(i\) e \(A_{i}\)
+    insiemi limitati. Dico allora che basta controllare che 
+    \[
+        \forall E \in \mathcal{M} \text{ limitato } \quad \forall \delta > 0
+        \quad \exists g \in C_C^{0}{(\mathbb{R}^{N})} \quad \|\rchi_E - u\|_1 < \delta
+    \]
+    \(E\)  è un misurabile limitato, quindi \(\forall \delta\) esistono un
+    chiuso \(F\) e un aperto limitato \(G\) tali che \(F \subseteq E \subseteq G \) e
+    \(\mu {( G \sminus F )} < \delta\). Consideriamo allora la funzione 
+    \[
+        u{(x)} = \frac{d{(x, \mathbb{R}^{N} \sminus G)}}{d{(x, F)} + d{(x, \mathbb{R}^{N} \sminus G)}}
+    \]
+    dove se \(C\) è un chiuso, \(d{(x, C)} = \inf_{y \in C} d{(x, y)}\) è la
+    distanza tra un punto e un chiuso. Allora \(u\) è continua\footnote{
+        Sia \(X, d\) spazio metrico, \(A \subseteq X \) e \(d_A{(x)} = \inf_{y
+        \in A} d(x, y)\) distanza punto-insieme. Allora la funzione \(d_A\) è
+        continua rispetto alla topologia indotta da \(d\). Da qualche parte
+        sugli appunti di topologia c'è la dimostrazione.
+    } e
+    \[
+        u{(x)} = \begin{cases}
+            1 & x \in F  \\
+            0 & x \in \mathbb{R}^{N} \sminus G \\
+            0 \le u \le 1 & x \in G \sminus F
+        \end{cases}
+    \]
+    e quindi \(u \in C_C^{0}{(\mathbb{R}^{N})}\). Inoltre
+    \[
+        \|\rchi_E - u\|_1 = \int_{\mathbb{R}^{N}} |\rchi_E - u| d\mu = \int_{G
+        \sminus F} |\rchi_E - u| d\mu \le \int_{G \sminus F} d\mu =\mu{(G \sminus F)}< \delta 
+    \]
+\end{proof}
+
+\begin{proposition}\label{thm:risultato_3}
+    \(C_C^{0}{(\mathbb{R}^{N})}\) è denso in \(L^p(\mathbb{R}^{N})\) per \(1 \le p < \infty\)
+\end{proposition}
+\begin{proof}
+    Vogliamo provare che
+    \[
+        \forall f \in L^p(\mathbb{R}^{N}) \quad \forall \varepsilon > 0 \quad \exists g \in C_C^{0}{(\mathbb{R}^{N})} \quad \|f - g\|_p < \varepsilon
+    \]
+\begin{enumerate}[label = \arabic*.]
+    \item Cominciamo ad approssimare \(f\) con una funzione \(h \in
+        L^{\infty}{(\mathbb{R}^{N})} \cap L^{1}{(\mathbb{R}^{N})}\).
+
+        Fissiamo un operatore di troncamento \(T_{n} : \mathbb{R} \to \mathbb{R}\) 
+        \[
+            T_{n}{(r)} = \begin{cases}
+                n & r > n \\
+                r & |r| \le  n \\
+                -n & r < -n
+            \end{cases}
+        \]
+        allora \(T_{n}\circ f \in L^{\infty}{(\mathbb{R}^{N})}\). Allora \(h_{n}
+        {(x)} = T_{n}{(f{(x)})}\rchi_{B_{n}} {(x)}\), 
+        con \(B_{n} = \{x \in \mathbb{R}^{N}: |x| \le n\}\). Allora \(h_{n} \in
+        L^\infty(\mathbb{R}^{N}) \cap L^1(\mathbb{R}^{N})\). Succede che \(h_{n}
+        \to f\) in \(L^p(\mathbb{R}^{N})\), ossia 
+        \[
+            \lim_{n\to \infty} \|h_{n} - f\|_p = 0 \iff \lim_{n\to \infty} \int |h_{n} - f|^p d\mu = 0
+        \]
+        perché \(h_{n} \to f\) q.o.~per \(n \to \infty\) e inoltre \(|h_{n}
+        -f|^{p}\) è dominata da \(|f|^{p} \in L^{1}{(\mathbb{R}^{N})}\). Ne
+        consegue che 
+        \[
+            \exists \overline{n} \in \mathbb{N} : \forall n \ge \overline{n} \quad \|h_{n} - f\|_p < \frac{\varepsilon}{2}
+        \]
+    \item Per ogni \(\delta > 0\) esiste una funzione \(u \in
+        C^{0}_C{(\mathbb{R}^{N})}\) tale che \(\|h_{\overline{n}} - u\|_1 \le 
+        \delta\) (per~\ref{prop:risultato_2}). Considero \(v = T_{n}(u)\) e dico
+        che \(\|v - h_{\overline{n}}\|_1 \le \|u - h_{\overline{n}} \|_1 \le
+        \delta\).
+        Infatti \(v \in C^{0}_C{(\mathbb{R}^{N})}\) e
+        \begin{align*}
+            &\int_{\mathbb{R}^{N}} | v- h_{\overline{n}} | d\mu =
+            \left(\int_{-\overline{n} \le u \le  \overline{n}} + 
+            \int_{u > \overline{n}} +
+            \int_{u < -\overline{n}} \right) |v - h_{\overline{n}}| d\mu = \\
+           &= \int_{-\overline{n} \le u \le \overline{n}} |u - h_{\overline{n}}|
+           d\mu + \int_{u > \overline{n}} (\overline{n} - h_{\overline{n}} )d\mu
+           + \int_{u < -\overline{n}} {(h_{\overline{n}} + \overline{n})}d\mu
+           \le \\
+           &\le 
+           {\left( \int_{-\overline{n} \le u \le \overline{n}} + \int_{u >
+           \overline{n}}  + \int_{u < \overline{n}}  \right)} |u -
+           h_{\overline{n}} | d\mu
+        \end{align*}
+    \end{enumerate}
+    Osservo che \(v - h_{n} \in L^1(\mathbb{R}^{N}) \cap
+    L^{\infty}{(\mathbb{R}^{N})}\) e inoltre \(|v - h_{\overline{n}}| \le
+    2\overline{n}\). Allora
+    \begin{align*}
+        \|v - h_{\overline{n}} \|_p &= {\left(\int |v-h_{\overline{n}}|^{p-1}|v -
+        h_{\overline{n}}| d\mu \le \right)}^{\frac{1}{p}} \le {\left( \|v -
+h_{\overline{n}} \|^{p-1} \|v - h_{\overline{n}} \|_1 \right)}^{\frac{1}{p}} =\\
+        &= \|v - h_{\overline{}} \|_{\infty}^{1 / p'} \|v -
+        h_{\overline{n}} \|_1^{1 / p} \le {(2\overline{n})}^{1 / p'} \delta^{1 /
+        p} \overset{?}{\le} \frac{\varepsilon}{2}
+    \end{align*}
+    dove al posto di ? intendiamo che \(\displaystyle \delta^{1 / p} =
+    \frac{\varepsilon}{2 {(2\overline{n})}^{1 / p'}}\) 
+    dunque posso prendere \(g = v\) e la tesi è dimostrata.
+\end{proof}
+
+\begin{theorem}[\(\overline{C_C^0(\Omega)} = L^p(\Omega)\) ]\label{thm:risultato_4}
+    Per \(1 \le p < \infty\) e \(\Omega \subseteq \mathbb{R}^{N} \) aperto, 
+    \(C_C^{0}{(\Omega)}\) è denso in \(L^p{(\Omega)}\)
+\end{theorem}
+\begin{proof}
+    Sia \(f \in L^p(\Omega)\) e \(\varepsilon>0\). Prolunghiamo \(f\) a
+    \(\mathbb{R}^{N}\) con 
+    \[
+        \tilde{f}{(x)} = \begin{cases}
+            f{(x)} & x \in \Omega \\
+            0 & x \in \mathbb{R}^{N} \sminus \Omega
+        \end{cases}
+    \]
+    Allora \(\tilde{f} \in L^p(\mathbb{R}^{N})\) e per~\ref{thm:risultato_3}
+    esiste \(g \in C_C^{0}{(\mathbb{R}^{N})}\) tale che \(\|\tilde{f} - g\|_p <
+    \frac{\varepsilon}{2}\).
+
+    Prendiamo una successione di insiemi 
+    \[
+        A_{n} := \left\{x \in \Omega: d{(x, \mathbb{R}^{N} \sminus \Omega)} >
+        \frac{1}{n} \, ; \, |x| < n\right\} 
+    \]
+    \(A_{n}\) sono sottoinsiemi aperti e limitati di \(\Omega\). Per ogni \(n\)
+    posso considerare una funzione \(\varphi_n\) tale che
+    \[
+        \varphi_n{(x)} = \begin{cases}
+            1 & x \in \overline{A_{n}} \\
+            0 & x \in \Omega \sminus A_{n+1} \\
+            0 \le \varphi_n \le 1 & x \in A_{n+1} \sminus \overline{A_{n}}
+        \end{cases}
+        \quad \text{e.g. }
+        \varphi_n{(x)} = \frac{d(x, \mathbb{R}^{n} \sminus A_{n+1})}{d{(x,
+        \overline{A_{n}}) + d{(x, \mathbb{R}^{N} \sminus A_{n+1})}}}
+    \]
+    allora \(\{\varphi _n\} \) è una successione di funzioni in
+    \(C_C^{0}{(\mathbb{R}^{N})}\) e hanno supporto compatto contenuto in
+    \(\Omega\). Mi interessa trovare \(n \in \mathbb{N}\) tale che
+    \[
+        \|g \varphi_n - f\|_{p, \Omega}  < \varepsilon \text{ (in \(\Omega\),
+        indico lo spazio in pedice)}
+    \]
+    Intanto sappiamo che \(\|g \varphi _n - g\|_{p, \Omega} \to 0\), infatti
+    \[
+        \|g \varphi _n - g \|_{p, \Omega}  = {\left( \int_{\Omega} |g|^{p} {(1 -
+    \varphi _n)}^{p} d\mu \right)}^{\frac{1}{p}} \to 0
+    \]
+    questo perché l'integranda è dominata da \(|g|^{p} \in L^1(\Omega)\)
+    e tende a 0 q.o.~in \(\mathbb{R}^{N}\), infatti se \(x \in \Omega\),
+    \(\varphi_n{(x)} = 1\) definitivamente. Dunque esiste \(n_\varepsilon\) tale
+    che \(\|g \varphi_{n_\varepsilon} - g\| \le \frac{\varepsilon}{2}\) 
+    e infine
+    \begin{align*}
+        \|g \varphi_{n_\varepsilon}  - f\|_{p, \Omega}  &\le   \|g \varphi
+        _{n_\varepsilon}  - g\|_{p, \Omega}
+        + \|g - f\|_{p, \Omega} \le \|g \varphi_{n_\varepsilon}  - g\|_{p, \Omega} + \|g -
+        \tilde{f}\|_{p, \mathbb{R}^{N}} \le \\
+        &\le \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+    \end{align*}
+\end{proof}
+
+\subsection{Operatori lineari e continui tra spazi normati}
 \end{document}
