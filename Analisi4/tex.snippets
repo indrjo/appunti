@@ -1,0 +1,14 @@
+global !p
+def math():
+    return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+endglobal
+
+context math()
+snippet jkl "Lp space" iA
+L^${1:p}(${2:\Omega})$0
+endsnippet
+
+context math()
+snippet om "Omega" iA
+\Omega$0
+endsnippet
