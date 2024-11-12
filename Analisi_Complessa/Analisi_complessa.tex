@@ -169,7 +169,7 @@ per \(x \neq 0\) pure, infatti
 \end{example}
 Sia \(E\) un insieme non vuoto e sia \(\mathcal{B}(E)\) l'insieme delle funzioni
 reali e limitate su \(E\).
-\begin{definition}[Norma dell'estremo superiore]
+\begin{definition}{Norma dell'estremo superiore}
     Sia \(f : E \to \mathbb{R}^{n}\) una funzione. Allora
     \[
         \|f \|_{\infty} := \sup_{x \in E} |f(x)| 
@@ -342,7 +342,7 @@ uniformemente in \(E\), usando \((1)\), infatti abbiamo
 dove nell'ultima diseguaglianza si è utilizzato il criterio di Cauchy per le
 serie numeriche.
 \end{example}
-\begin{definition}[Convergenza totale]
+\begin{definition}{Convergenza totale}
     Si dice che la serie \(\sum_{n=1}^{\infty} f_{n}(x)\) converge
     \textbf{totalmente} in \(E\) se esiste \(\{a_{n}\} \) in \(\mathbb{R}\) tale
     che 
@@ -625,7 +625,7 @@ Sappiamo che
 \]
 è il prodtto di polinomi. Quindi formalmente, se \(z = 1\) e \(N, M \to \infty\) otteniamo
 
-\begin{definition}[Serie prodotto alla Cauchy]
+\begin{definition}{Serie prodotto alla Cauchy}
 \[
     \left( \sum_{n=0}^{\infty} a_{n}  \right) \left( \sum_{n=0}^{\infty} b_{n}
     \right) := \sum_{n=0}^{\infty} \sum_{k=0}^{n} a_{k} b_{n-k}  
@@ -820,7 +820,7 @@ Non è vero che ogni funzione \(C^{\infty}\) sia sviluppabile in serie di Taylor
 
 \subsection{\(\mathbb{C}\)-differenziabilità}
 Sia \(\Omega \subseteq \mathbb{C}\) aperto, \(f : \Omega \to \mathbb{C}\) 
-\begin{definition}[\(\mathbb{C}-\)differenziabilità]
+\begin{definition}{\(\mathbb{C}-\)differenziabilità}
     Sia \(a \in \Omega\). Diciamo che \(f\)  è \(\mathbb{C}-\)differenziabile in
     \(z=a\) se esiste
     \begin{equation}
@@ -953,7 +953,7 @@ spoiler ma dimostreremo che \(\mathbb{C}\)-differenziabile implica analitica,
 quindi \(\mathbb{C}-\)differenziabilità, \(C^{\infty}\), analitica saranno
 nozioni equivalenti e gli assegneremo la dicitura di \textbf{olomorfe}.
 
-\begin{definition}[Derivata complessa]
+\begin{definition}{Derivata complessa}
     \begin{align*}
         \frac{\partial f}{\partial z} &= \frac{1}{2} {\left( \frac{\partial
         f}{\partial x} - i \frac{\partial f}{\partial y} \right)} \\
@@ -1042,11 +1042,11 @@ w^{n-1}\right)}
         \left| \frac{R_N(w+h) - R_N(w)}{h} \right| = |S'_N(w) - g(w)| +
         \varepsilon
     \end{align*}
-    per \(N\) sufficientemente grande. Si conclude per l'abitrarietà di \(\varepsilon\) 
+    per \(N\) sufficientemente grande. Si conclude per l'arbitrarietà di \(\varepsilon\) 
 \end{proof}
 
 \subsection{Integrazione su Curve}
-\begin{definition}[Curva in \(\mathbb{C}\) ]
+\begin{definition}{Curva in \(\mathbb{C}\) }
     Diremo \textbf{curva} in \(\mathbb{C}\) ogni funzione continua \(\gamma : [a,b] \to
     \mathbb{C}\). Si dice \textbf{chiusa} se \(\gamma(a) = \gamma(b)\). Il
     \textbf{sostegno} di \(\gamma\) è l'immagine di \(\gamma\), cioè
@@ -1086,7 +1086,7 @@ a tratti, biettiva, con \(\varphi'>0\), tale che
 Per convenzione, se non espressamente specificato diversamente considereremo
 curve \(C^{1}\) a tratti.
 
-\begin{definition}[Integrale su curva]
+\begin{definition}{Integrale su curva}
     Sia \(\gamma : [a,b] \to \mathbb{C}\) una curva \(C^{1}\) a tratti e sia
     \(f\) continua a valori in \(\mathbb{C}\) definita (almeno) sul sostegno di
     \(\gamma\). Allora si definisce
@@ -1219,7 +1219,7 @@ purché il contesto chiarisca il tipo di parametrizzazione. Ad esempio
     \]
 \end{remark}
 
-\begin{definition}[Primitiva]
+\begin{definition}{Primitiva}
     Sia \(\Omega \subseteq \mathbb{C}\) aperto e \(f : \Omega \to \mathbb{C}\)
     continua. Una funzione \(F : \Omega \to \mathbb{C}\) si dice \textbf{primitiva} di
     \(f\) se \(F\) è \(\mathbb{C}-\)differenziabile e \(F'(z) = f(z)\) per ogni
@@ -1657,8 +1657,178 @@ Ora usando il Teorema~\ref{thm:2_forme} vale l'invarianza per omotopia. Allora
 \end{proof}
 Risultato analogo vale per curve omotope rispetto a un'omotopia che fissa gli
 estremi.
+\begin{corollary}
+    Sia \(f \in \mathcal{H}{(\Omega)}\), con \(\om\) semplicemente connesso. Allora \(f\) ammette primitiva in \(\Omega\)
+\end{corollary}
+\begin{remark}
+    Segue che \(f \in \mathcal{H}{(\Omega)}\) ammette sempre una primitiva
+    locale.
+\end{remark}
 
+\begin{theorem}[Formula di Cauchy per il cerchio]
+    Sia \(f \in \mathcal{H}{(\Omega)}\) e \(D\) disco aperto con \(\overline{D}
+    \subseteq \Omega \). Allora per ogni \(z \in D\)
+    \[
+        f{(z)} =\frac{1}{2\pi i} \int_{\partial D}
+        \frac{f(\zeta)}{\zeta-z}d\zeta
+    \]
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \incfig[.5]{cauchy-disco}
+    \caption{cauchy-disco}
+    \label{fig:cauchy-disco}
+\end{figure}
+\begin{proof}
+    Sappiamo che
+    \[
+        f{(z)} = \frac{1}{2\pi i} \int_{\partial R}
+        \frac{f(\zeta)}{\zeta-z}d\zeta
+    \]
+    se \(R\) è un rettangolo chiuso in \(\Omega\), con \(z \in \mathring{R}\).
+    Sia \(R \subseteq D \)
 
+    Poiché 
+    \[
+        \zeta \mapsto \frac{f{(\zeta)}}{\zeta - z}
+    \]
+    è olomorfa in \(\Omega \sminus \{z\} \) e \(\partial D\) e \(\partial R\)
+    sono omotope in \(\Omega \sminus \{z\} \) risulta
+    \[
+        \int_{\partial D} \frac{f{(\zeta)}}{\zeta - z} d\zeta = \int_{\partial
+        R} \frac{f{(\zeta)}}{\zeta - z} d\zeta
+    \]
+\end{proof}
+\begin{remark}
+    La formula si estende al caso in cui anziché \(D\) vi è una ``qualunque
+    forma'' con bordo omotopo a \(\partial R\) 
+\end{remark}
+
+\paragraph{Funzioni olomorfe}
+Sia \(f \in \mathcal{H}{(\Omega)}\). Allora se \(a \in \Omega\) sappiamo che in
+un intorno di \(z = a\) 
+\[
+    f{(z)} = \sum_{n=0}^{\infty} c_{n} {(z-a)}^{n}
+\]
+per opportuni \(\displaystyle c_{n} = \frac{f^{{(n)}}{(a)}}{n!}\) per il teorema
+della serie derivata. Domanda naturale è chiedersi quant'è il raggio di
+convergenza di tale serie di potenze. 
+\begin{proposition}
+    La serie \(\sum_{n=0}^{\infty} c_{n} {(z-a)}^{n}\) converge nel più grande
+    disco contenuto in \(\Omega\) 
+\end{proposition}
+\begin{figure}[ht]
+    \centering
+    \incfig[.4]{radiusconv}
+\end{figure}
+\begin{proof}
+    Sia \(r = d(a, \partial \Omega)\). Fissiamo \(z \in D_{r} {(a)}\) e sia
+    \(0< \rho < r\) tale che \(z \in D_{\rho} {(a)}\). Applichiamo la formula di
+    Cauchy:
+    \[
+        f{(z)} = \frac{1}{2\pi i} \int_{\partial D_{\rho} {(a)}}
+        \frac{f{(\zeta)}}{\zeta-z}d \zeta
+    \]
+    e procediamo come nella dimostrazione dell'analiticità delle funzioni
+    $\mathbb{C}$-differenziabili. Allora per \(z\) fissato
+    \[
+        \frac{1}{\zeta - z} = \frac{1}{\zeta - a - {(z-a)}} = \frac{1}{{(\zeta -
+        a)}{(1 - \frac{z-a}{\zeta-a})}}
+    \]
+    e poiché \(\displaystyle \left| \frac{z-a}{\zeta-a} \right| =
+    \frac{1}{\rho}|z-a| < 1\) e indipendente da \(\zeta\). Quindi
+    \begin{align*}
+        f{(z)} &= \frac{1}{2 \pi i} \int_{\partial D_{\rho} {(a)}}
+        \sum_{n=0}^{\infty} \frac{f{(\zeta)}}{\zeta -a} {\left( \frac{z-a}{\zeta
+    -a} \right)}^{n} d \zeta = \\ &= \sum_{n=0}^{\infty} {\left( \frac{1}{2\pi i}
+                \int_{D_\rho{(a)}} \frac{f{(\zeta)}}{{(\zeta-a)}^{n+1}} d
+        \zeta\right)} {(z-a)}^{n}
+    \end{align*}
+    e quindi questa deve essere la serie di taylor
+\end{proof}
+Dalla dimostrazione scende anche che
+\[
+    \frac{f^{{(n)}}{(a)}}{n!} = c_{n} = \frac{1}{2\pi i} \int_{\partial D_{\rho}
+    {(a)}} \frac{f{(\zeta)}}{{(\zeta - a)}^{n+1}} d \zeta
+\]
+e poiché la funzione integranda è olomorfa in \(\Omega \sminus \{a\} \) e le
+curve \(\partial D\) e \(\partial D_{rho}{(a)} \) sono omotope, per \(D\)
+qualsiasi \(a \in D \subseteq \overline{D} \subseteq \Omega  \)  si ottiene il seguente corollario
+\begin{corollary}
+    Sia \(\overline{D} \subseteq \Omega \) disco chiuso. Allora per ogni \(z \in
+    D\) 
+    \begin{equation}\label{eq:cauchy-derivata}
+        f^{{(n)}}{(z)} = \frac{n!}{2\pi i} \int_{\partial D} \frac{f{(\zeta)}}{{(\zeta
+        - z)}^{n+1}} d \zeta
+    \end{equation}
+\end{corollary}
+\begin{remark}
+    Per \(n = 0\) si trova proprio la formula di Cauchy per il cerchio.
+\end{remark}
+\begin{remark}
+    Il corollario può essere ottenuto dalla formula di Cauchy per il cerchio per
+    derivazione sotto il segno di integrale
+    \[
+        \frac{d}{dz} \frac{1}{\zeta - z} = \frac{1}{{(\zeta - z)}^2}
+    \]
+\end{remark}
+\begin{proposition}
+    Per ogni \(a \in \Omega\) e \(\overline{D_\rho}{(a)} \subseteq \Omega \)
+    \[
+        \frac{|f^{{(n)}}{(a)}|}{n!} \le {\rho^{-n}} \max_{\partial D_{\rho}{(a)}
+        }|f|
+    \]
+\end{proposition}
+\begin{proof}
+    Da~\eqref{eq:cauchy-derivata} si ottiene che
+    \[
+        \frac{|f^{{(n)}}{(a)}|}{n!} \le  \frac{1}{ 2\pi } \frac{1}{\rho^{n+1}}
+        {\left( \max_{\partial D_{\rho} } |f| \right)} \cdot \underbrace{\text{lungh}
+        \partial D_{\rho}{(a)}}_{2\pi \rho} 
+    \]
+\end{proof}
+\begin{theorem}[Liouville]
+    Se \(f \in \mathcal{H}{(\mathbb{C})}\) è limitata, allora \(f\) è costante 
+\end{theorem}
+\begin{proof}
+    Fissiamo \(a \in \mathbb{C}\) e \(\rho > 0\) arbitrario. Consideriamo lo
+    sviluppo di Taylor di centro \(z = a\) 
+    \[
+        f{(z)} = \sum_{n=0}^{\infty} c_{n} {(z-a)}^{n} \quad c_{n} =
+        \frac{f^{{(n)}}{(a)}}{n!}
+    \]
+    è valido per ogni \(z \in \mathbb{C}\).
+
+    Sappiamo per la proposizione precedente che
+    \[
+        |c_{n}| \le \frac{1}{\rho^{n}} \max_{\partial D_{\rho}{(a)}} |f| \le
+        \rho^{-n} \max_{\mathbb{C}} |f| \to 0 \text{ per } \rho \to \infty
+    \]
+    da cui \(c_{n} = 0\) per \( n \ge 1\) da cui \(f{(z)}  = c_{0}\) è costante.
+\end{proof}
+\begin{corollary}[Teorema Fondamentale dell'Algebra]
+    Sia 
+    \[
+        p_{n}{(z)} = a_{n} z^{n} + a_{n-1} z^{n-1} +~\dots + a_{0}
+    \]
+    con \(a_{n} \neq\) 0. Allora \(p_{n}\) ha almeno uno zero
+    
+\end{corollary}
+\begin{proof}
+    Per assurdo sia \(p_{n}{(z)} \neq 0\) per ogni \(z\). Allora sia
+    \[
+        f{(z)} = \frac{1}{p_{n}{(z)}}
+    \]
+    Si ha che 
+    \[
+        p_{n}{(z)} = a_{n} z^{n} {\left( 1 + \frac{a_{n-1}}{a_{n} z} +
+        \frac{a_{n-2}}{a_{n} z^2} +~\dots+ \frac{a_{0}}{a_{n} z^{n}} \right)}
+    \]
+    il cui valore assoluto va a \(+\infty\) per \(|z| \to \infty\). Allora \(f\)
+    è limitata perché \(\displaystyle \lim_{|z| \to \infty} \frac{1}{p_{n}{(z)}}
+    = 0\).
+    Ma allora per il teorema di Liouville \(f\) è costante, assurdo.
+\end{proof}
 \newpage
 \section{Richiamo delle forme differenziali}
 
@@ -1738,5 +1908,5 @@ B\) risulta
     costante \(0\) e quindi \(\int_{\gamma} \omega = 0\), ossia \(\omega\) è
     esatta 
 \end{proof}
-\end{document}
 
+\end{document}

@@ -304,7 +304,7 @@ Anche in Lotka-Volterra abbiamo una forma simile ma con due variabili, infatti
 considerando \(\mathbf{x}(t) = (x_{1}(t), x_{2}(t))\) abbiamo che possiamo
 riscrivere il sistema come un sistema vettoriale della forma \(\mathbf{x}'(t) =
 \mathbf{f}(t, \mathbf{x}(t))\).
-\begin{definition}[soluzione di un'equazione differenziale]
+\begin{definition}{soluzione di un'equazione differenziale}
     Sia \(D \subseteq \mathbb{R} \times \mathbb{R}^{n} \), con \(n \ge 1\)
     aperto. Sia \(f : D \to \mathbb{R}^{n}\) continua. Consideriamo l'equazione
     differenziale \(x'(t) = f(t, x(t))\), che è detta quindi in \emph{forma
@@ -1544,7 +1544,7 @@ sul suo intervallo massimale \({(\omega_-{(t_{0},x_{0})},
         continua
 \end{itemize}
 \end{theorem}
-\begin{definition}[Semicontinuità]
+\begin{definition}{Semicontinuità}
     Sia \(X\) uno spazio topologico, \(x_{0} \in X\) e \(f: X \to \mathbb{R}\).
     Diciamo che \(f\) è \textbf{semicontinua inferiormente} in \(x_{0}\) se
     \[
@@ -1807,6 +1807,51 @@ Dato \(x_{0} \in \Omega\) diciamo \textbf{orbita} per \(x_{0}\) l'insieme
     x_{0}\) è una soluzione, e per unicità è l'unica soluzione, quindi l'orbita
     è un singoletto.
 \end{proof}
+\begin{eser}
+    Si consideri il sistema
+    \[
+        \begin{cases}
+            x' = \frac{x - t^2}{x^2 + t^2} \\
+            x{(0)} = a > 0
+        \end{cases}
+    \]
+    Allora \(f{(t, x)} > 0\) per \(x > t^2\) 
+    Per il teorema di esistenza e unicità esiste \(\delta > 0\) tale che la
+    soluzione esiste in \([-\delta, \delta]\). Possiamo supporre \(\delta < a\).
+    Per \(t \ge \delta\) 
+    \[
+        \left| \frac{x-t^2}{x^2 + t^2} \right| \le \frac{1}{\delta} {\left(
+        |x|+t^2 \right)} 
+    \]
+    e quindi per crescita sottolineare \(\omega_+ = +\infty\) 
+    Ora l'obiettivo è trovare una funzione \(u\) tale che \(x' \le u'\) e \(u\)
+    taglia \(x = t^2\) 
+\end{eser}
+\begin{eser}
+    Si risolva il problema di Cauchy
+    \[
+        \begin{cases}
+            x' = \frac{x{(1-x)}}{2t}\\
+            x{(0)} = x_{0}
+        \end{cases}
+    \]
+    in \(t > 0\). Poi si studi qualitativamente il problema di Cauchy
+    \[
+        \begin{cases}
+            x' = \frac{g{(x)}}{2t} \\
+            x{(1)} = x_{1}
+        \end{cases}
+    \]
+    dove \(g{(x)}\) ha lo stesso segno di \(x {(1-x)}\) 
+\end{eser}
+
+\begin{figure}[ht]
+    \centering
+    \incfig[.6]{esercizio2-1}
+    \caption{esercizio2-1}
+    \label{fig:esercizio2-1}
+\end{figure}
+
 
 \section{Tecniche elementari di Integrazione}
 Ne conosciamo già diverse, come le equazioni a variabili separabili, le
