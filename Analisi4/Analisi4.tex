@@ -4984,4 +4984,234 @@ h_{\overline{n}} \|^{p-1} \|v - h_{\overline{n}} \|_1 \right)}^{\frac{1}{p}} =\\
 \end{proof}
 
 \subsection{Operatori lineari e continui tra spazi normati}
+% intro
+% norma
+\begin{align*}
+    \|T\| &= \inf \{C \ge 0: \|Tx\|_Y \le C \|x\|_X \quad \forall x \in X\} = \\
+          &= \sup \left\{\frac{\|Tx\|_Y}{\|x\|_X}, \quad x \in X \sminus
+          \{0_X\} \right\} 
+\end{align*}
+\begin{note}
+    Nella definizione con l'inf, l'inf è in realtà un minimo \(\|T\|\), infatti
+    \[
+        \|Tx\|_Y \le \|T\|\|x\|_X \quad \forall x \in X
+    \]
+\end{note}
+
+tale norma è una norma, infatti
+\begin{enumerate}[label = \arabic*.]
+    \item \(\|T\| \ge 0\) per ogni \(T \in \mathcal{L}{(X, Y)}\) 
+    \item \(\|T\| = 0 \iff T \equiv 0\), infatti se \(\|T\| =  0\) allora
+        \(\|Tx\|_Y \le 0\) 
+    \item \(\displaystyle \|\lambda T\| = \sup_{X \sminus \{0_X\}}  \frac{\|\lambda T x\|_Y}{\|x\|_X}
+        = |\lambda|\|T\| \) 
+    \item \(\displaystyle\|T+S\| = \sup_{X \sminus \{0_X\} }
+        \frac{\|{(T+S)}{(x)}\|_Y}{\|x\|_X} \le \sup_{X \sminus \{0_X\} } {\left(
+        \frac{\|Tx\|_Y}{\|x\|_X} + \frac{\|Sx\|_Y}{\|x\|_X}\right)}\le  \) \\\(\le
+        \|T\|+\|S\| \) 
+\end{enumerate}
+\begin{remark}
+    \(\|T\| = \sup \{\|Tx\|_Y, x \in X: \|x\|=1\} \) infatti se \(z \in X
+    \sminus \{0_X\} \) allora \(\displaystyle \frac{\|Tz\|_Y}{\|z\|_X} = \left\|
+    T {\left( \frac{z}{\|z\|_X} \right)} \right\|_Y\) dove l'argomento è un
+    vettore di norma unitaria
+\end{remark}
+
+\begin{eser}
+    Mostrare che
+    \[
+        \|T\| = \sup_{\|x\|_X \le 1}  \{\|Tx\|_Y \} 
+    \]
+\end{eser}
+\begin{example}
+    I sistemi lineari da \(\mathbb{R}^{N}\) in \(\mathbb{R}^{M}\)
+    \[
+        \begin{cases}
+            y_1 = a_{11}x_1 + \ldots + a_{1N}x_N \\
+            \vdots \\
+            y_M = a_{M1}x_1 + \ldots + a_{MN}x_N
+        \end{cases}
+    \]
+    anche scritto \(\vec{y} = A \vec{x}\), con \(\vec{x} = {(x1, \dots, x_N)}\),
+    \(\vec{y} = {(y_{1}, \dots, y_M)}\) e \(A = {(a_{ij})}\) 
+    sono operatori lineari \({(x_{1}, \dots, x_N) \mapsto {(y_{1}, \dots,
+    y_M)}}\).
+
+    La ricerca della norma di questo problema è un bel problema di massimo sulla
+    palla chiusa di raggio 1 di \(\mathbb{R}^{N}\).
+\end{example}
+\begin{example}
+    Sia \({(\Omega, \mathcal{M}, \mu)}\) uno spazio di misura con
+    \(\mu{(\Omega)} < +\infty\). Allora l'inclusione \(i : L^{q}{(\Omega)} \to
+    L^{p}{(\Omega)}\), con \(1 \le p < q \le \infty\) è un operatore lineare.
+    Sappiamo
+    \[
+        \|f\|_p \le {\mu{(\Omega)}}^{\frac{1}{p} - \frac{1}{q}}\|f\|_q \quad \forall
+        f \in L^{q}{(\Omega)}
+    \]
+    e quindi necessariamente \(\|i\| \le \mu{(\Omega)}^{\frac{1}{p} -
+    \frac{1}{q}}\). La domanda ora si volge a capire se vale l'uguale o il
+    minore. Dobbiamo trovare un elemento \(0 \not\equiv f \in L^{p}{(\Omega)}\)
+    che realizza l'uguaglianza per dire che vale l'uguaglianza.
+    Sia \(f = 1\), allora
+    \begin{align*}
+        \|f\|_p &= {\left( \int_\Omega 1^{p}d\mu \right)} ^{\frac{1}{p}} =
+        \mu{(\Omega)}^{\frac{1}{p}} \\
+        \|f\|_p &= \begin{cases}
+            \mu{(\Omega)}^{\frac{1}{q}} & \text{se } q <
+            \infty \\
+            1 & \text{se } q = \infty
+        \end{cases}
+    \end{align*}
+    e quindi effettivamente
+    \[
+        \|f\|_p = \mu{(\Omega)}^{\frac{1}{p}} = \mu{(\Omega)}^{\frac{1}{p} -
+        \frac{1}{q}}\begin{cases}
+                \mu{(\Omega)}^{\frac{1}{q}} & \text{se } q < \infty \\
+                1 & \text{se } q = \infty
+            \end{cases}
+    \]
+\end{example}
+\begin{example}
+    Sia \(T : L^{\infty}{(\mathbb{R})} \to L^{1}{(\mathbb{R})}\), \(f \mapsto
+    \rchi_{[-1, 1]}f \). Allora
+    \[
+        \|Tf\|_1 = \int_{[-1, 1]}  |f| d\mu \le 2 \|f\|_{\infty} 
+    \]
+    e quindi \(\|T\| \le 2\) 
+\end{example}
+\begin{example}
+    \(T : L^{1}{(\mathbb{R})} \to L^{\infty}{(\mathbb{R})}\) con \(T{(f)} =
+    \int_{\mathbb{R}} f d\mu\). Allora
+    \[
+        \|Tf\|_{\infty} \le \|f\|_1 \implies \|T\| \le 1
+    \]
+    Similmente possiamo prendere \(g \in L^{\infty}{(\Omega)}\) e considerare
+    l'operatore
+    \[
+        Tf{(x)} = \int_{(-\infty, x)} f{(t)}g{(t)}dt
+    \]
+    e allora
+    \[
+        \|Tf\|_{\infty} \le \|f\|_1 \|g\|_\infty \implies \|T\| \le \|g\|_\infty
+    \]
+\end{example}
+\textbf{Importante!} Se lo spazio di arrivo è \(\mathbb{K}\), allora si parla di
+funzionali lineari e continui su \(X\), e lo spazio \(\mathcal{L}{(X,
+\mathbb{K})}\) viene detto \textbf{spazio duale} e viene denotato con \(X'\)
+oppure \(X^{*}\) 
+\begin{theorem}
+    Se \(X\) è normato e \(Y\) è Banach, allora \(\mathcal{L}{(X, Y)}\) è uno
+    spazio di Banach
+\end{theorem}
+\begin{proof}
+    Sia \(T_{n}\) una successione di Cauchy in \(\mathcal{L}{(X, Y)}\), quindi
+    \[
+        \forall \varepsilon > 0 \quad \exists \overline{n} \in \mathbb{N} :
+        \forall n ,m \ge \overline{n} \quad \|T_{n} - T_{m}\| \le \varepsilon
+    \]
+    che a sua volta significa
+    \[
+        \|(T_{n} - T_{m}){(x)}\|_Y = \|T_{n}{(x)} - T_{m}{(x)}\|_Y \le
+        \varepsilon \|x\|_X \quad \forall x \in X
+    \]
+    Fissiamo ora \(x \in X\), allora \(T_{n}{(x)}\) è una successione di Cauchy
+    in \(Y\). Poiché \(Y\) è Banach, tale successione converge, quindi esiste un
+    elemento \(y \in Y\) tale che \(T_{n}{(x)} \to y\) in \(Y\). 
+
+    Definiamo ora l'applicazione \(T : X \to Y\) tale che \(T{(x)} = \lim_{n \to
+    \infty} T_{n}{(x)}\), che vogliamo mostrare essere lineare e continua.
+    Allora \(\forall u,v \in X\) e \(\forall \alpha, \beta \in \mathbb{K}\) 
+    \[
+        T{(\alpha u + \beta v)} = \lim_{n \to \infty} T_{n}{(\alpha u + \beta
+        v)} \overset{\star}{=} \alpha \lim_{n \to \infty} T_{n}{(u)} + \beta \lim_{n \to \infty}
+        T_{n}{(v)} = \alpha T{(u)} + \beta T{(v)} 
+    \]
+    dove in \(\star\) si è usata contemporaneamente la linearità di \(T_{n}\) e
+    la linearità del limite. Quindi \(T\) è lineare.
+    Dalla diseguaglianza della successione di Cauchy abbiamo
+    \[
+        \|T_{\overline{n}} x - T_{m}x\|_Y \le \varepsilon\|x\|_X
+        \overset{m \to \infty}{\longrightarrow} \|T_{\overline{n}} x - T x\|_Y
+        \le \varepsilon \|x\|_X
+    \]
+    e quindi
+    \[
+        \|Tx\|_Y \le \|Tx - T_{\overline{n}}x\| + \|T_{\overline{n}}x\| \le
+        \varepsilon \|x\|_X + \|T_{\overline{n}} \|\|x\|_X \le (\varepsilon +
+        \|T_{\overline{n}} \|)\|x_X\|
+    \]
+    da cui \(T\) è limitata e \(\|T\|<\varepsilon + \|T_{\overline{n}} \|\), per
+    cui \(T \in \mathcal{L}{(X, Y)}\).
+
+    Ci rimane solo da controllare che \(T_{n} \to T\) in \(\mathcal{L}{(X,
+    Y)}\). 
+    Sappiamo che
+    \[
+        \|T_{n}x - Tx\|_Y \le \varepsilon\|x\|_X \quad \forall x \in X,\,\, \forall
+        n \ge \overline{n}
+    \]
+    ma allora 
+    \[
+        \|{(T_{n} -T)}{(x)}\|_Y \le \varepsilon \|x\|_X \implies \|T_{n} - T\|
+        \le \varepsilon \quad \forall n \ge \overline{n}
+    \]
+\end{proof}
+\begin{corollary}
+    Se \(X\) è normato, \(X'\) è sempre Banach
+\end{corollary}
+\begin{proof}
+    Sia \(\mathbb{R}\) che \(\mathbb{C}\) sono completi
+\end{proof}
+\subsection{Spazi di successioni \(\ell^{p}\) }
+\begin{definition}{Spazi \(\ell^{p}\)}
+    Gli spazi di successioni \(\ell^{p}\) sono definiti come
+    \begin{align*}
+        \ell^{p} &= \{x = {(x_{n})}_{n \in \mathbb{N}} : \sum_{n=1}^{\infty}
+        |x_{n}|^{p} < +\infty \} \text{ se } 1 \le p < \infty \\
+            \ell^{\infty} &= \{x = {(x_{n})}_{n \in \mathbb{N}} : \sup_{n \in
+        \mathbb{N}} |x_{n}| < +\infty\} 
+    \end{align*}
+    con \(x_{n} \in \mathbb{K}\), e \(\mathbb{K}= \mathbb{C}\) o \(\mathbb{R}\).
+    Altrimenti detto, 
+    \[
+        \ell^{p} := L^{p}{\left( \mathbb{N}, 2^{\mathbb{N}}, \# \right)} 
+    \]
+\end{definition}
+Sono tutti spazi di Banach, in quanto spazi \(L^{p}\). La norma, se \(1 \le p <
+\infty\), è
+\[
+    \|x\|_p = {\left( \int_{\Omega} |x|^{p} d\#  \right)} ^{\frac{1}{p}} =
+    {\left( \sum_{n=1}^{\infty} |x_{n}|^{p}  \right)} ^{\frac{1}{p}} 
+\]
+e se \(p = \infty\) 
+\[
+    \|x\|_{\infty} = \sup_{n \in \mathbb{N}} |x_{n}|
+\]
+\begin{proposition}[Inclusioni fra spazi \(\ell^{p}\)]
+    Se \(1 \le p < q \le \infty\), allora \(\ell^{p} \subseteq \ell^{q}\) e
+    inoltre \(\|x\|_q \le \|x\|_p\), \(\forall x \in \ell^{p}\) 
+\end{proposition}
+\begin{proof}
+    Chiaramente
+    \[
+       |x_{n}|^{p} \le \sum_{i=1}^{\infty} |x_{i}|^{p} \implies |x_{n}| \le
+       {\left( \sum_{i=1}^{\infty} |x_{i}|^{p}  \right)}^{\frac{1}{p}} = \|x\|_p
+    \]
+    Se \(q = \infty\) allora 
+    \[
+        \|x\|_{\infty} = \sup_{n \in \mathbb{N}} |x_{n}| \le \|x\|_p
+    \]
+    Per \(q < \infty\) allora
+    \begin{align*}
+        \|x\|_q^{q} &= \sum_{n=1}^{\infty} |x_{n}|^{q} = \sum_{n=1}^{\infty}
+        |x_{n}|^{q-p}|x_{n}|^{p} \overset{\ell^{q} \subseteq \ell^{\infty} }{\le
+        } \sum_{n=1}^{\infty} \|x\|_{\infty} ^{q-p} = \|x\|_{\infty} ^{q-p}
+        \|x\|_p^{p} \le \\
+        &\overset{\ell^{p} \subseteq\ell^{\infty} }{\le } \|x\|_{p} ^{q-p}
+        \|x\|^{p}_p = \|x\|_p^{q} 
+    \end{align*}
+    da cui la tesi
+\end{proof}
+
 \end{document}
