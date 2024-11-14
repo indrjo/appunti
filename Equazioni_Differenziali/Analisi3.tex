@@ -1823,10 +1823,34 @@ Dato \(x_{0} \in \Omega\) diciamo \textbf{orbita} per \(x_{0}\) l'insieme
         \left| \frac{x-t^2}{x^2 + t^2} \right| \le \frac{1}{\delta} {\left(
         |x|+t^2 \right)} 
     \]
-    e quindi per crescita sottolineare \(\omega_+ = +\infty\) 
+    e quindi per crescita sottolineare \(\omega_- = -\infty\). 
     Ora l'obiettivo è trovare una funzione \(u\) tale che \(x' \le u'\) e \(u\)
-    taglia \(x = t^2\) 
+    taglia \(x = t^2\). Se fosse ora che \(x{(t)} \ge t^2\) per \(t \in [0,
+    \omega_+]\) allora necessariamente da un certo tempo in poi \(x {(t)} \ge
+    1\), per tali \(t\) allora \(x{(t)}\le x{(t)}^2\) da cui
+    \[
+        x'{(t)} \le \frac{x{(t)}^2 - t^2}{x{(t)}^2 + t ^2} \le  1
+    \]
+    ma allora \(x{(t)}\le x{(0)} + t = a +t\) assurdo. Alternativamente si può
+    mostrare che taglia la parabola anche dicendo che
+    \[
+        x' \le \frac{x}{x^2 + t ^2} \le \frac{x}{x^2} = \frac{1}{x}
+    \]
+    allora \(u' = \frac{1}{u}\) ha soluzione \(u{(t)} = \sqrt{2{(t+c)}}\) e
+    poiché \(x{(t)} \le u{(t)}\) che taglia \(x=t^2\) allora necessariamente
+    anche \(x\) taglia tale parabola. Quindi \(\omega_+ = +\infty\) 
+    Ora sia \( l = \lim_{t \to \infty} x{(t)}\). Se \( l \in \mathbb{R}\) allora
+    \[
+        x'{(t)} \to -1 \text{ escluso dal teorema dell'asintoto }
+    \]
+    allora \(\lim_{t \to \infty} x{(t)} = - \infty\) 
 \end{eser}
+\begin{figure}[ht]
+    \centering
+    \incfig[.3]{esercizio2-1}
+    \caption{esercizio2-1}
+    \label{fig:esercizio2-1}
+\end{figure}
 \begin{eser}
     Si risolva il problema di Cauchy
     \[
@@ -1845,13 +1869,6 @@ Dato \(x_{0} \in \Omega\) diciamo \textbf{orbita} per \(x_{0}\) l'insieme
     dove \(g{(x)}\) ha lo stesso segno di \(x {(1-x)}\) 
 \end{eser}
 
-\begin{figure}[ht]
-    \centering
-    \incfig[.6]{esercizio2-1}
-    \caption{esercizio2-1}
-    \label{fig:esercizio2-1}
-\end{figure}
-
 
 \section{Tecniche elementari di Integrazione}
 Ne conosciamo già diverse, come le equazioni a variabili separabili, le
@@ -1865,4 +1882,119 @@ po' meh. E allora a cosa servono le tecniche esplicite di risoluzione? Boh
 diciamo che quelle facili sono utili perché dai, servono (cit.) mentre altre più
 complicate si fanno solo per vedere quanto è difficile risolvere equazioni
 differenziali ma è simpatico quindi vederle come esempi.
+
+\subsection{Equazioni di tipo omogeneo}
+Si tratta di equazioni della forma
+\[
+    x ' = g{\left( \frac{x}{t} \right)}  \text{ con \(g\) continua } 
+\]
+Si ponga \(z{(t)} = {\frac{x{(t)}}{t}}\) cioè \(x{(t)} = tz{(t)}\) da cui
+\(x'{(t)} = z{(t)} + tz'{(t)}\) e quindi l'equazione diventa
+\[
+    z + tz' = g{(z)} \iff z' = \frac{g{(z)} - z}{t}
+\]
+che è a variabili separabili
+\begin{example}
+    \[
+        x' = \frac{t + x}{t - x} = \frac{1 + \frac{x}{t}}{1 - \frac{x}{t}} =:
+        g{\left( \frac{x}{t} \right)} 
+    \]
+    e quindi ponendo \(z = \frac{x}{t}\) abbiamo \(x' = z + tz'\) e quindi
+    \[
+        z + tz' = \frac{1 + z}{1 - z} \iff tz' = \frac{1+z}{1-z} - z = \frac{1+
+        z - z + z^2}{1 - z} = \frac{1 + z^2}{1 -z}
+    \]
+    che diventa
+    \[
+        z' = \frac{1}{t}\frac{1 + z^2}{1-z} \implies  \int \frac{1-z}{1 + z^2} dz =
+        \log|t| + c \implies  \arctan z - \frac{1}{2}\log{(1+z^2)} = \log|t| + c
+    \]
+    e quindi
+    \[
+        \arctan \frac{x}{t} - \log{\sqrt{1+{\left( \frac{x}{t} \right)} ^2}} =
+        \log|t| + c
+    \]
+    e poiché \(\log{\sqrt{1 + {\left( \frac{x}{t} \right)}^2 }} = \log
+    \frac{\sqrt{t^2+x^2}}{|t|} = \log \sqrt{t^2+x^2} - \log|t|\) abbiamo che le
+    soluzioni sono definite esplicitamente da
+    \[
+        \arctan \frac{x}{t} - \log \sqrt{t^2+x^2} = c
+    \]
+    Allora per \(t > 0\) se chiamiamo \(\theta = \arctan \frac{x}{t}\) e \(\rho
+    = \sqrt{x^2 + t^2}\) significa \(\theta - \log \rho = c\) da cui
+    \[
+        \rho = C e^{\theta}
+    \]
+    che è un pezzo di una spirale logaritmica
+    Similmente per \(t < 0\) abbiamo che \(\alpha = \arctan{\left( \frac{x}{-t}
+    \right)} = - \arctan \frac{x}{t}\) e allora se \(\theta = \pi - \alpha\)
+    otteniamo di nuovo una spirale logaritmica.
+
+    Questa però non è il modo più ``bello'' di risolvere questa equazione:
+    vedremo un modo per risolvere questa equazione attraverso il formalismo
+    delle forme differenziali, e trovando soluzioni più chiare. In questo caso
+    ad esempio
+    \[
+        x' = \frac{t + x}{ t- x } \mapsto \omega := {(t + x)}dt - {(t - x)}dx = 0 
+    \]
+\end{example}
+
+Le equazioni di tipo omogeneo ammettono una avvia generalizzazione. Premessa:
+\(x'= g{(at + bx)}\) si ponga \(z{(t)} = at + bx{(t)}\), allora \(z'= a+bx'\) e
+quindi \(z' = a + bg{(z)}\) che è a variabili separabili.
+Ora possiamo generalizzare le precedenti equazioni di tipo omogeneo in 
+\[
+    x' = g{\left( \frac{at + bx + c}{a't + b'x + c'} \right)} 
+\]
+che ha come caso particolare il precedente \(x' = g{\left( \frac{x}{t} \right)}
+\) se \(a = a' = 1\) e \(b = c= b'= c'= 0\) e anche \(x' = g{(at + bx)}\) per
+\(c'=1\) e \(c = a'=b'=0\). Distinguiamo ora due casi
+\begin{itemize}[label = --]
+    \item \(\text{det} \begin{bmatrix}
+        a & b  \\
+        a' & b'
+    \end{bmatrix} = 0\) ad esempio \({(a', b')} = \gamma{(a, b)}\). Allora
+    l'equazione diventa
+    \[
+        x' = g{\left( \frac{at + bx +c}{\gamma{(at + bx)} + c'} \right)} =
+        \tilde{g}{(at+ bx)}
+    \]
+    e ricadiamo nel caso precedente
+    \item \(\text{det}\begin{bmatrix}
+        a & b \\
+        a' & b'
+    \end{bmatrix} \neq 0\) allora nel piano \(x-t\) le due rette \(at + bx + c =
+    0\) e \(a't + b'x + c'= 0\) sono incidenti in un punto \({(t_{0}, x_{0})}\).
+    Applichiamo quindi il cambiamento di variabili \(u = x - x_{0}\) e \(\tau =
+    t -t_{0}\) cioè considero \(u{(\tau)} = x{(\tau + t_{0})}- x_{0}\). Allora
+    l'equazione 
+    \begin{align*}
+        u'{(\tau)} &= x'{(\tau + t_{0})} = g{\left( \frac{a{(\tau + t_{0})} +
+        b{(u{(\tau)} + x_{0})} + c}{a'{(\tau + t_{0})} + b'{(u{(\tau)} + x_{0})}
++ c'} \right)} = \\
+                   &= g{\left( \frac{a\tau + bu + \overbrace{at_{0} + bx_{0} +
+                           c}^{=0}}{a'\tau + b'u +
+               \underbrace{a't_{0} + b'x_{0} + c'}_{=0} } \right)} = g{\left(
+       \frac{a\tau + bu}{a'\tau + b'u} = g{\left( \frac{a + b{\left(
+\frac{u}{\tau} \right)} }{a' + b'{\left( \frac{u}{\tau} \right)} } \right)}
+\right)} = \\
+    &= \tilde{g}{\left( \frac{u}{\tau} \right)} 
+    \end{align*}
+    che è del primissimo tipo visto.
+\end{itemize}
+\subsection{\(F{(t, x, x')} = 0\) }
+\begin{example}[Brachistocrona]
+    \(curva di minima discesa\) 
+    Siano \(p_{1} = {(x_{1}, y_{1})}\) e \(p_{2} = {(x_{2}, y_{2})}\) con
+    \(x_{1} < x_{2}\) e \(y_{1} > y_{2}\) 
+\begin{figure}[ht]
+    \centering
+    \incfig[.5]{brachistocrona}
+    \caption{brachistocrona}
+    \label{fig:brachistocrona}
+\end{figure}
+    Problema: Qual è la funzione su per la quale il tempo di discesa sotto
+    l'azione della sola forza peso è minimo?
+\end{example}
+
 \end{document}

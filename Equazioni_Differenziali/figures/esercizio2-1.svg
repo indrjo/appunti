@@ -132,6 +132,57 @@
            id="path1-7" />
       </g>
     </marker>
+    <marker
+       id="marker-arrow-0.5308"
+       orient="auto-start-reverse"
+       refY="0"
+       refX="0"
+       markerHeight="1.690"
+       markerWidth="0.911">
+      <g
+         transform="scale(2.153529264004019)"
+         id="g1-3">
+        <path
+           d="M -1.55415,2.0722 C -1.42464,1.29512 0,0.1295 0.38852,0 0,-0.1295 -1.42464,-1.29512 -1.55415,-2.0722"
+           style="fill:none;stroke:#000000;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+           inkscape:connector-curvature="0"
+           id="path1-6" />
+      </g>
+    </marker>
+    <marker
+       id="marker-arrow-0.5308-7"
+       orient="auto-start-reverse"
+       refY="0"
+       refX="0"
+       markerHeight="1.690"
+       markerWidth="0.911">
+      <g
+         transform="scale(2.153529264004019)"
+         id="g1-5">
+        <path
+           d="M -1.55415,2.0722 C -1.42464,1.29512 0,0.1295 0.38852,0 0,-0.1295 -1.42464,-1.29512 -1.55415,-2.0722"
+           style="fill:none;stroke:#000000;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+           inkscape:connector-curvature="0"
+           id="path1-35" />
+      </g>
+    </marker>
+    <marker
+       id="marker-arrow-0.5308-6"
+       orient="auto-start-reverse"
+       refY="0"
+       refX="0"
+       markerHeight="1.690"
+       markerWidth="0.911">
+      <g
+         transform="scale(2.153529264004019)"
+         id="g1-2">
+        <path
+           d="M -1.55415,2.0722 C -1.42464,1.29512 0,0.1295 0.38852,0 0,-0.1295 -1.42464,-1.29512 -1.55415,-2.0722"
+           style="fill:none;stroke:#000000;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+           inkscape:connector-curvature="0"
+           id="path1-9" />
+      </g>
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -141,7 +192,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.406257"
-     inkscape:cx="371.5537"
+     inkscape:cx="371.19815"
      inkscape:cy="228.26553"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -231,22 +282,26 @@
        id="path4"
        sodipodi:nodetypes="ccc" />
     <path
-       style="fill:none;fill-opacity:1;stroke:black;stroke-width:0.4213225;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:url(#marker-arrow-1.5923999999999998)"
+       style="fill:none;fill-opacity:1;stroke:black;stroke-width:0.14044083;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:url(#marker-arrow-0.5308)"
        d="m 45.054234,209.42604 c 0,0 11.629469,13.29081 11.629469,13.29081"
        id="path5"
        inkscape:path-effect="#path-effect5"
        inkscape:original-d="m 45.054234,209.42604 11.629469,13.29081" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.421322;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:url(#marker-arrow-1.5923999999999998)"
+       style="fill:none;fill-opacity:1;stroke:black;stroke-width:0.14044083;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:url(#marker-arrow-0.5308)"
        d="m 87.221194,218.50612 c 0,0 13.925996,-11.58848 13.925996,-11.58848"
        id="path6"
        inkscape:path-effect="#path-effect6"
        inkscape:original-d="M 87.221194,218.50612 101.14719,206.91764" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.421322;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:url(#marker-arrow-1.5923999999999998)"
+       style="fill:none;fill-opacity:1;stroke:black;stroke-width:0.14044083;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:url(#marker-arrow-0.5308)"
        d="m 135.19646,216.10006 c 0,0 14.35855,9.2566 14.35855,9.2566"
        id="path7"
        inkscape:path-effect="#path-effect7"
        inkscape:original-d="m 135.19646,216.10006 14.35855,9.2566" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.421322;stroke-linecap:round;stroke-linejoin:round"
+       d="m 49.7308,207.79264 c 5.866132,10.92414 13.330308,20.53883 26.972463,20.57926 13.642155,0.0404 31.920637,-21.86071 48.814717,-21.86071 16.89409,0 31.5389,27.87238 31.5389,27.87238"
+       id="path8" />
   </g>
 </svg>
