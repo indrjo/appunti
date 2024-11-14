@@ -1658,7 +1658,7 @@ Ora usando il Teorema~\ref{thm:2_forme} vale l'invarianza per omotopia. Allora
 Risultato analogo vale per curve omotope rispetto a un'omotopia che fissa gli
 estremi.
 \begin{corollary}
-    Sia \(f \in \mathcal{H}{(\Omega)}\), con \(\om\) semplicemente connesso. Allora \(f\) ammette primitiva in \(\Omega\)
+    Sia \(f \in \mathcal{H}{(\Omega)}\), con \(\Omega\) semplicemente connesso. Allora \(f\) ammette primitiva in \(\Omega\)
 \end{corollary}
 \begin{remark}
     Segue che \(f \in \mathcal{H}{(\Omega)}\) ammette sempre una primitiva
@@ -1852,7 +1852,7 @@ D_r{(a)} \sminus \{a\} \)
     Sia \(f \in \mathcal{H}{(\Omega)}\). Allora esiste unica una successione
     \(c_{n}\) tale che 
     \[
-        f{(z)} = \sum_{m=-\infty}^{\infty} c_{m} {(z-a)}^{m} quad z \in \Omega
+        f{(z)} = \sum_{m=-\infty}^{\infty} c_{m} {(z-a)}^{m} \quad z \in \Omega
     \]
     Tale serie converge assolutamente in modo uniforme sui compatti di
     \(\Omega\).
@@ -1913,12 +1913,12 @@ e quindi ora per il secondo passo usiamo la rappresentazione
     \frac{f{(\zeta)}}{\zeta -z} d \zeta - \int_{D_{\rho_{1}} {(a)}}
 \frac{f{(\zeta)}}{\zeta - z} d \zeta \right)} 
 \]
-Sia ora \(\zeta in \partial D_{\rho_{1}} {(a)}\) e allora
+Sia ora \(\zeta \in \partial D_{\rho_{1}} {(a)}\) e allora
 \[
     \frac{1}{\zeta -z} = \frac{1}{\zeta -a - {(z- a)}} = - \frac{1}{{(z-a)} -
     {(\zeta -a)}} = -\frac{1}{{(z-a)}{\left( 1 - \frac{\zeta-a}{z -a} \right)} }
 \]
-e poiché \(\left| \frac{\zeta -a}{z-a} = \frac{\rho_{1}}{z-a} \right| < 1 \)
+e poiché \(\left| \frac{\zeta -a}{z-a} \right|= \frac{\rho_{1}}{z-a}  < 1 \)
 abbiamo che la precedente
 \[
     \frac{1}{ \zeta -z } = -\frac{1}{z-a} \sum_{n=0}^{\infty} {\left(
@@ -1935,11 +1935,11 @@ da cui
     -\frac{1}{2\pi i} \int_{\partial D_{\rho_{1}} } \frac{f{(\zeta)}}{\zeta -
     z}d \zeta = \sum_{n=0}^{\infty} {\left( \frac{1}{2\pi i}\int_{\partial
     D_{\rho_{1}} } \frac{f{(\zeta)}}{{(\zeta -a)}^{-n}}d \zeta \right)}
-    {(z-a)}^{-{(n-1)}} 
+    {(z-a)}^{-{(n-1)}} = \cdots
 \]
 se ora \( m := -{(n+1)}\) si ha che
 \[
-    = \sum_{m=-1}^{\infty} \underbrace{\left(\frac{1}{2 \pi i } \int_{\partial
+    \dots = \sum_{m=-1}^{\infty} \underbrace{\left(\frac{1}{2 \pi i } \int_{\partial
         D_{\rho_{1}}{\left( a \right)} } \frac{f{(\zeta)}}{{(\zeta -a)}^{m+1}}d
 \zeta \right)}_{c_m}{(z-a)}^{m}
 \]
@@ -1950,8 +1950,8 @@ Consideriamo ora invece \(\zeta \in \partial D_{\rho_{2}} {(a)}\) e allora
     \frac{1}{\zeta -z} = \frac{1}{\zeta - a - {(z-a)}} = \frac{1}{{(\zeta
     -a)}{\left( 1 - \frac{z -a}{\zeta -a} \right)} }
 \]
-e come prima poiché \(\left| \frac{z -a}{\zeta -a} \le \frac{|z-a|}{\rho_{2}} <
-1\right| \)  la precedente 
+e come prima poiché \(\left| \frac{z -a}{\zeta -a} \right|\le \frac{|z-a|}{\rho_{2}} <
+1 \)  la precedente 
 \[
     \frac{1}{\zeta -z} = \frac{1}{\zeta -a} \sum_{n=0}^{\infty} {\left( \frac{z
     -a}{\zeta -a} \right)} ^{n} 
@@ -1979,6 +1979,7 @@ per \(\rho\) arbitrario con \(r_{1} < \rho < r_{2}\) e allora
 \[
     f{(z)} = \sum_{m=-\infty}^{\infty} c_{m} {(z-a)}^{m}
 \]
+
 \end{proof}
 
 
@@ -1994,9 +1995,10 @@ con \(A, B \in C^{0}(\Omega)\). Più precisamente \(\omega\) è una funzione
 continua \(\omega: \Omega \to (\mathbb{R}^{2})'\). Se \(\gamma\) è una curva
 \(C^{1}\) a tratti in \(\Omega\), \(\gamma : [a,b] \to \Omega\), allora
 \[
-    \int_{\gamma}\omega \overset{\text{def}}{=} \int_{a}^{b} 
+    \int_{\gamma}\omega \overset{\text{def}}{=} \int_{a}^{b} A{(x(t), y(t))}
+    x'{(t)} + B{(x(t), y(t))} y'{(t)} dt \quad \gamma{(t)} = (x(t), y(t))
 \]
-\begin{definition}
+\begin{definition}{Forma esatta}
     La forma differenziale \(\omega\) si dice \textbf{esatta} se esiste \(F \in
     C^{1}(\Omega)\) tale che \(\omega = dF\), e \(F\) è detta \emph{primitiva}
     di \(\omega\) 
@@ -2009,7 +2011,7 @@ B\) risulta
     \frac{\partial A}{\partial y} = \frac{\partial B}{\partial x}
 \end{equation}
 
-\begin{definition}
+\begin{definition}{Forma chiusa}
     Se \(\omega\) è una forma differenziale \(C^{1}\) e
     soddisfa~\eqref{eq:forma-chiusa} allora si dice \textbf{chiusa} 
 \end{definition}
