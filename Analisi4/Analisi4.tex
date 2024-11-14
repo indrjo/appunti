@@ -5213,5 +5213,75 @@ e se \(p = \infty\)
     \end{align*}
     da cui la tesi
 \end{proof}
+\begin{example}
+    Consideriamo la successione \(x_{n} = \frac{1}{n}\). Allora \(\{x_{n}\} \in
+    \ell^{p}\), \(\forall p \in (1, \infty]\), ma \(p \not\in \ell^{1}\).
+\end{example}
+\begin{example}
+    \(i : \ell^{p} \xhookrightarrow \ell^{q} \) è lineare e limitato con norma
+    \(\|i\| \le 1\). È proprio \(\|i\| = 1\): Consideriamo la successione
+    canonica
+    \[
+        e^{k} = {(0, 0, 0, \dots, \overset{{(k)}}{1}, 0, \dots )}
+    \]
+    allora la successione \(\{e^{k}\}_k \) è detta successione canonica,
+    \(\{e^{k}\} \in \ell^{p}\) per ogni \(p \in [1, \infty]\) e inoltre
+    \[
+        \|e^{k}\|_p = 1 \quad \forall p \in [1, \infty]   
+    \]
+    dunque \(\|e^{k}\|_p = \|e^{k}\|_q\) per \(1 \le p < q \le \infty\) e allora
+    \[
+        \|i\| = \sup_{x \neq 0} \frac{\|i{(x)}\|_q}{\|x\|_p} = 1
+    \]
+\end{example}
+Consideriamo i seguenti spazi
+\begin{align*}
+    c &= \{x = {(x_{n})} : \text{ la successione \(x_{n}\) è convergente }\} \\
+    c_{0} &= \{x = {(x_{n})} : \text{ la successione \(x_{n}\) è infinitesima }
+    \} \\
+    c_{00}  &= \{x = {(x_{n})}: \exists k \in \mathbb{N} : x_{n} = 0 \forall n >
+    k\} 
+\end{align*}
+allora se \(p < \infty\) e \(x \in \ell^{p}\) allora \(\sum_{n=1}^{\infty}
+|x_{n}|^{p} \) converge e quindi \(\lim_{n \to \infty} |x_{n}|^{p} = 0\) e
+allora \(x = {(x_{n})} \in c_{0}\). Ne consegue che
+\[
+    c_{00} \subseteq \ell^{1} \subseteq \ell^{p} \subseteq c_{0} \subseteq c
+    \subseteq \ell^{\infty}  
+\]
+\(c_{00} \) è un sottospazio di \(\ell^{1}\) \textbf{denso}: infatti se \(x
+= {(x_{n})} \in \ell^{1}\) allora posso costruire la successione
+\[
+    x^{k} = (x_{1}, x_{2}, \dots, x_{k}, 0, 0, \dots) \in c_{00}
+\]
+e chiaramente 
+\[
+    \|x^{k} - x\|_1 = \sum_{n=1}^{\infty} |x_{n}^{k} - x_{n}| =
+    \sum_{n=k+1}^{\infty} |0 - x_{n}| \overset{k \to \infty}{\longrightarrow} 0
+\]
+in quanto resto \(k+1\)-esimo di serie convergente. Se ora \(p \in 1 < p <
+\infty\), con analoga dimostrazione provo anche che \(c_{00} \) è denso in
+\(\ell^{p}\).
 
+Ovviamente invece \(c_{00} \) non è denso in \(\ell^{\infty}\), è allora chiuso?
+
+\(c_{0}\) e \(c\) sono invece sottospazi di \(\ell^{\infty}\) 
+Sia \(x^{k} = {(x^{k}_n)}\) una successione di elementi \(x^{k} \in c_{0} \,
+\forall k\) tale che \(\exists x \in \ell^{\infty}\) con 
+\[
+    \lim_{k \to \infty} \|x^{k} - x\|_\infty = 0
+\]
+Ora dobbiamo mostrare che \(\lim_{n \to \infty} x_{n} = 0\), ossia
+\[
+    \forall \varepsilon > 0\, \,  \exists n\varepsilon \in \mathbb{N} : \forall
+    n\ge n_\varepsilon \quad |x_{n}| \le \varepsilon
+\]
+ma noi sappiamo che
+\[
+    |x_n| \le |x_n^{k}| + |x_{n} - x_{n}^{k}| \le \frac{\varepsilon}{2} +
+    \frac{\varepsilon}{2} = \varepsilon
+\]
+questo perché ogni \(x^{k}\) è una successione infinitesima e per la convergenza
+uniforme di \(x_{n}^{k}\) a \(x_{n}\).
+Quindi \(c_{0}\) è \textbf{chiuso} in \(\ell^{\infty}\). 
 \end{document}

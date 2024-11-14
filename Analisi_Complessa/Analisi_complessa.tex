@@ -1829,6 +1829,159 @@ qualsiasi \(a \in D \subseteq \overline{D} \subseteq \Omega  \)  si ottiene il s
     = 0\).
     Ma allora per il teorema di Liouville \(f\) è costante, assurdo.
 \end{proof}
+
+\subsection{Sviluppo di \textbf{Laurent}}
+Con
+\begin{equation}\label{eq:serie-bilatera}
+    \sum_{m=-\infty}^{\infty} c_m {(z-a)}^{m}
+\end{equation}
+intendiamo
+\begin{equation}\label{eq:serie-bilatera-2}
+    \sum_{m=-1}^{-\infty} c_m {(z-a)}^{m} + \sum_{m=0}^{\infty} c_m {(z-a)}^{m}
+\end{equation}
+cioè diremo che la serie~\eqref{eq:serie-bilatera} converge (uniformemente,
+assolutamente, ecc) se tali sono le serie~\eqref{eq:serie-bilatera-2}.
+
+Siano \(0 \le r_{1} < r_{2} < +\infty\) e \(a \in \mathbb{C}\). Consideriamo
+\[
+    \Omega = \{z \in \mathbb{C}: r_{1} < |z-a| < r_{2}\} 
+\]
+Nel caso di \(r_{1} = 0, r_{2}= r\) allora si indica anche \(D^{*}_r{(a)} =
+D_r{(a)} \sminus \{a\} \) 
+\begin{theorem}
+    Sia \(f \in \mathcal{H}{(\Omega)}\). Allora esiste unica una successione
+    \(c_{n}\) tale che 
+    \[
+        f{(z)} = \sum_{m=-\infty}^{\infty} c_{m} {(z-a)}^{m} quad z \in \Omega
+    \]
+    Tale serie converge assolutamente in modo uniforme sui compatti di
+    \(\Omega\).
+    Inoltre si ha che
+    \[
+        c_m = \frac{1}{2\pi i} \int_{\partial D_\rho} \frac{f{(\zeta)}}{{(\zeta
+        - a)}^{m+1}} d \zeta
+    \]
+\end{theorem}
+\begin{proof}
+\begin{figure}[ht]
+    \centering
+    \incfig[.4]{disegno_laurent}
+\end{figure}
+    Siano \(r_{1} < \rho_{1} < \rho_{2} < r_{2}\) come in figura. Rappresentiamo \(f\) in forma
+    integrale in \(\{z : \rho_{1} < |z-a| < \rho_{2}\} \). Sia 
+    \[
+        g{(\zeta)} = \begin{cases}
+            \frac{f{(\zeta)} - f{(z)}}{\zeta - z} & \zeta \neq z \\
+            f'{(z)} & \zeta = z
+        \end{cases}
+    \]
+    Allora \(g\) è olomorfa in \(\Omega\), infatti se \(\zeta \neq z\), poiché
+    \(\displaystyle f{(\zeta)} = \sum_{n=0}^{\infty} a_{n} {(\zeta - z)}^{n} \),
+    con \(a_{0} = f{(z)}\),
+    \[
+        \frac{f{(\zeta)} - f{(z)}}{\zeta -z} = \frac{1}{\zeta-
+        z}\sum_{n=1}^{\infty} a_{n} {(\zeta -z)}^{n} = \sum_{n=1}^{\infty}
+        a_{n}{(\zeta - z)}^{n-1} 
+    \]
+    che è una funzione olomorfa anche in un intorno di \(z\) e vale
+    \(a_{1} = f'{(z)}\) in \(\zeta = z\).
+
+    Ne consegue che per il teorema di Cauchy
+    \[
+        \partial D_{\rho_{1}} \sim \partial D_{\rho_{2}} \implies \int_{\partial
+        D_{\rho_{1}}{(a)}} g = \int_{\partial D_{\rho_{2}}{(a)}} g
+    \]
+    ma allora
+    \[
+        \int_{\partial D_{\rho_{1}}{(a)}} \frac{f{(\zeta)}}{\zeta- z} d\zeta -
+        f{(z)} \int_{\partial D_{\rho_{1}}{(a)}} \frac{d\zeta}{\zeta - z} = 
+        \int_{\partial D_{\rho_{2}}{(a)}} \frac{f{(z)}}{\zeta - z} d\zeta -
+        f{(z)} \int_{\partial D_{\rho_{2}}{(a)}} \frac{d\zeta}{\zeta - z} = 0
+    \]
+ma \(\displaystyle \int_{\partial D_{\rho_{1}}} \frac{1}{\zeta -z} d\zeta = 0\)
+poiché la funzione \(\zeta \mapsto \frac{1}{\zeta -z}\) è olomorfa in un
+disco contenente \(\partial D_{\rho_{1}} \) e non contenente \(z\) e in tale
+disco \(D_{\rho_{1}} \sim 0\). Allora 
+\[
+- f{(z)} \int_{\partial D_{\rho_{2}}} \frac{d \zeta}{\zeta - z} d \zeta = -f{(z)} 2 \pi i = \int_{\partial D_{\rho_{1}}{(a)}} \frac{f{(\zeta)}}{\zeta
+    - z} d\zeta - \int_{\partial D_{\rho_{2}}{(a)}} \frac{f{(\zeta)}}{\zeta - z}
+    d \zeta
+\]
+e quindi ora per il secondo passo usiamo la rappresentazione
+\[
+    f{(z)} = \frac{1}{2\pi i} {\left( \int_{\partial D_{\rho_{2}} {(a)}}
+    \frac{f{(\zeta)}}{\zeta -z} d \zeta - \int_{D_{\rho_{1}} {(a)}}
+\frac{f{(\zeta)}}{\zeta - z} d \zeta \right)} 
+\]
+Sia ora \(\zeta in \partial D_{\rho_{1}} {(a)}\) e allora
+\[
+    \frac{1}{\zeta -z} = \frac{1}{\zeta -a - {(z- a)}} = - \frac{1}{{(z-a)} -
+    {(\zeta -a)}} = -\frac{1}{{(z-a)}{\left( 1 - \frac{\zeta-a}{z -a} \right)} }
+\]
+e poiché \(\left| \frac{\zeta -a}{z-a} = \frac{\rho_{1}}{z-a} \right| < 1 \)
+abbiamo che la precedente
+\[
+    \frac{1}{ \zeta -z } = -\frac{1}{z-a} \sum_{n=0}^{\infty} {\left(
+    \frac{\zeta -a}{z- a} \right)} ^{n} 
+\]
+converge uniformemente per \(\zeta \in \partial D_{\rho_{1}} \) e quindi
+\[
+    - \int_{\partial D_{\rho_{1}}{(a)}} \frac{f{(\zeta)}}{\zeta - z} d \zeta =
+    \sum_{n=0}^{\infty} {\left( \int_{\partial D_{\rho_{1}} }
+    f{(\zeta)}{(\zeta-a)}^{n}d \zeta \right)}  \frac{1}{{(z-a)}^{n+1}}
+\]
+da cui
+\[
+    -\frac{1}{2\pi i} \int_{\partial D_{\rho_{1}} } \frac{f{(\zeta)}}{\zeta -
+    z}d \zeta = \sum_{n=0}^{\infty} {\left( \frac{1}{2\pi i}\int_{\partial
+    D_{\rho_{1}} } \frac{f{(\zeta)}}{{(\zeta -a)}^{-n}}d \zeta \right)}
+    {(z-a)}^{-{(n-1)}} 
+\]
+se ora \( m := -{(n+1)}\) si ha che
+\[
+    = \sum_{m=-1}^{\infty} \underbrace{\left(\frac{1}{2 \pi i } \int_{\partial
+        D_{\rho_{1}}{\left( a \right)} } \frac{f{(\zeta)}}{{(\zeta -a)}^{m+1}}d
+\zeta \right)}_{c_m}{(z-a)}^{m}
+\]
+che è esattamente la forma promessa dal teorema per le potenze negative.
+
+Consideriamo ora invece \(\zeta \in \partial D_{\rho_{2}} {(a)}\) e allora
+\[
+    \frac{1}{\zeta -z} = \frac{1}{\zeta - a - {(z-a)}} = \frac{1}{{(\zeta
+    -a)}{\left( 1 - \frac{z -a}{\zeta -a} \right)} }
+\]
+e come prima poiché \(\left| \frac{z -a}{\zeta -a} \le \frac{|z-a|}{\rho_{2}} <
+1\right| \)  la precedente 
+\[
+    \frac{1}{\zeta -z} = \frac{1}{\zeta -a} \sum_{n=0}^{\infty} {\left( \frac{z
+    -a}{\zeta -a} \right)} ^{n} 
+\]
+converge uniformemente per \(\zeta \in \partial D_{\rho_{2}} \) e quindi
+\[
+    \int_{\partial D_{\rho_{2}}{(a)}} \frac{f{(\zeta)}}{\zeta - z} d \zeta =
+    \sum_{n=0}^{\infty} {\left( \int_{\partial D_{\rho_{2}} }
+            \frac{f{(z)}}{{(\zeta -a)}^{n+1}}d \zeta \right)} {(z -a)}^{n}
+\]
+da cui
+\[
+    \frac{1}{2\pi i} \int_{\partial D_{\rho_{2}} } \frac{f{(\zeta)}}{\zeta - z}
+    d \zeta = \sum_{n=0}^{\infty} \underbrace{\left( \frac{1}{2 \pi i} \int_{\partial
+    D_{\rho_{2}} } \frac{f{(\zeta)}}{{(\zeta - a)}^{n+1}}d \zeta \right)}_{c_{n}}  {(z-
+a)}^{n}
+\]
+Infine poiché \(\zeta \mapsto \frac{f{(z)}}{{(\zeta-a)}^{n+1}}\) è olomorfa in
+\(\Omega\) l'espressione dei coefficienti coincide con
+\[
+    c_{m} = \frac{1}{2\pi i} \int_{\partial D_\rho {(a)}}
+    \frac{f{(\zeta)}}{{(\zeta -a)}^{m+1}} d \zeta
+\]
+per \(\rho\) arbitrario con \(r_{1} < \rho < r_{2}\) e allora
+\[
+    f{(z)} = \sum_{m=-\infty}^{\infty} c_{m} {(z-a)}^{m}
+\]
+\end{proof}
+
+
 \newpage
 \section{Richiamo delle forme differenziali}
 
