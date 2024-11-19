@@ -1861,6 +1861,7 @@ D_r{(a)} \sminus \{a\} \)
         c_m = \frac{1}{2\pi i} \int_{\partial D_\rho} \frac{f{(\zeta)}}{{(\zeta
         - a)}^{m+1}} d \zeta
     \]
+    per un qualunque \(\rho \in (r_{1}, r_{2})\) 
 \end{theorem}
 \begin{proof}
 \begin{figure}[ht]
@@ -1979,8 +1980,205 @@ per \(\rho\) arbitrario con \(r_{1} < \rho < r_{2}\) e allora
 \[
     f{(z)} = \sum_{m=-\infty}^{\infty} c_{m} {(z-a)}^{m}
 \]
-
 \end{proof}
+\begin{proof}[Convergenza assoluta uniforme]
+    La validità della convergenza dimostrata assicura automaticamente la
+    convergenza assoluta uniforme sui compatti di \(\Omega\). Infatti:
+    Per ipotesi
+    \[
+        \sum_{m=0}^{\infty} c_{m} {(z-a)}^{m}
+    \]
+    converge per \(|z-a| \in (r_{1},r_{2})\). Ne segue che il raggio di
+    convergenza è almeno \(r_{2}\); pertanto la serie converge assolutamente in
+    modo uniforme nei compatti di \(D_{r_{2}} {(a)}\) e quindi in particolare
+    sui compatti di \(\Omega\). 
+
+    Si ha inoltre che
+    \[
+        \sum_{m=-1}^{-\infty} c_{m} {(z-a)}^{m} = \sum_{n=-1}^{\infty} c_{-n}
+        {(z-a)}^{-n} = \sum_{n=1}^{\infty} c_{-n} \zeta^{n}
+    \]
+    con \(\zeta - \frac{1}{z-a}\). L'ultima serie è una serie di potenze e
+    converge per \(|\zeta| \in (\frac{1}{r_{2}}, \frac{1}{r_{1}})\) con la
+    convenzione \(\frac{1}{0} = \infty\) e \(\frac{1}{\infty} = 0\) e quindi il
+    raggio di convergenza è \(R \ge \frac{1}{r_{1}}\) per cui converge in modo
+    assoluto uniforme sui dischi \(\overline{D_{\rho} }{(0)}\) con \(\rho <
+    \frac{1}{r_{1}}\) cioè sugli insiemi
+\[
+    \{z \in \mathbb{C} : |\zeta| \le \rho\} 
+\]
+    e quindi la serie \(\sum_{m=-1}^{-\infty} c_{m} {(z-a)}^{m} \) converge in
+    modo assoluto uniforme sugli insiemi
+\[
+    \{z \in \mathbb{C} : \frac{1}{|z-a|} \le \rho\} = \{z \in \mathbb{C} : |z-a|
+    \ge \frac{1}{\rho}\}
+\]
+    con \(\frac{1}{\rho}\) un qualunque valore maggiore di \(r_{1}\). Quindi la
+    convergenza è assoluta uniforme sugli insiemi
+\[
+    \{z \in \mathbb{C}: |z-a| \ge \gamma\} \quad \gamma > r_{1}
+\]
+    in particolare si ha convergenza assoluta uniforme sui compatti di
+    \(\Omega\).
+\end{proof}
+\begin{proof}[Unicità dei \(c_{m}\) ]
+    Mostriamo che se \({(c_{m})}_{m \in \mathbb{Z}}  \) sono tali che 
+\[
+    f{(z)} = \sum_{m=-\infty}^{\infty} c_{m} {(z-a)}^{m}, \quad z \in \Omega 
+\]
+    allora, necessariamente sono dati dalla formula dell'enunciato. Fissiamo
+    \(\overline{m} \in \mathbb{Z}\) e calcoliamo
+\[
+    \int_{\partial D_{\rho} {(a)}} \frac{f{(z)}}{{(z-a)}^{\overline{m}+1}} dz
+\overset{\text{conv. unif.}}{=} \sum_{m=-\infty}^{\infty} c_{m} \int_{\partial
+D_{\rho} {(a)}} \frac{{(z-a)}^{m}}{{(z-a)}^{\overline{m}+1}} dz 
+\]
+    l'argomento dell'integrale è una potenza. Ha primitiva se \(m -\overline{m}
+    - 1 \neq -1\) e quindi tutti gli integrali della serie sono nulli tranne per
+    \(m - \overline{m} - 1 = -1\) ossia \(m = \overline{m}\). Allora
+\[
+    \int_{\partial D_{\rho} {(a)}} \frac{f{(z)}}{{(z-a)}^{\overline{m}-1}}dz =
+    c_{\overline{m}} \int_{\partial D_{\rho} {(a)}} \frac{1}{z-a} dz = 2\pi i
+    c_{\overline{m}} 
+\]
+    e quindi
+\[
+    c_{\overline{m}} = \frac{1}{2\pi i} \int_{\partial D_{\rho} {(a)}}
+    \frac{f{(z)}}{{(z-a)}^{\overline{m}+1}} dz
+\]
+\end{proof}
+
+\begin{example}
+    Sia \(\displaystyle f{(z)} = \frac{1}{z{(z-1)}}\). Allora \(z\neq 0\) e
+    \(z\neq 1\). Consideriamo i seguenti \(\Omega_{1}\) e \(\Omega_{2}\) 
+    \begin{align*}
+        \Omega_{1} &= \{z \in \mathbb{C} : 0 < |z| < 1\}  \\
+        \Omega_{2} &= \{z \in \mathbb{C} : |z| > 1\}
+    \end{align*}
+    Consideriamo prima \(\Omega_{1}\). Allora
+\[
+    -\frac{1}{z} \frac{1}{1-z} = -\frac{1}{z} {(1 + z + z^2 + z^3 + \dots)} =
+    -\frac{1}{z} - 1 - z - z^2 - \dots
+\]
+che è lo sviluppo di Laurent di \(f\) in \(\Omega_{1}\)
+
+    In \(\Omega_{2}\) si ha che
+\[
+    \frac{1}{z{(z-a)}} = \frac{1}{z^2 {\left(1 - \frac{1}{z}\right)}} =
+    \frac{1}{z^2} \sum_{n=0}^{\infty} \frac{1}{z^{n}} = \frac{1}{z^2} +
+    \frac{1}{z^3} + \frac{1}{z^{4}} + \dots
+\]
+    Che è lo sviluppo di Laurent di \(f\)  in \(\Omega_{2}\) 
+\end{example}
+
+\begin{definition}{Sviluppo di Laurent relativo a un punto}
+    Sia \(f \in \mathcal{H}{(D_{r}^{*} {(a)})}\) con \(D_{r}^{*} {(a)} =
+    D_r{(a)} \sminus \{a\} \). Lo sviluppo di cui al teorema precedente è detto
+    \textbf{sviluppo in serie di Laurent} relativo al punto \(z=a\) (non dipende
+    da \(r\))
+\end{definition}
+
+\begin{eser}
+    Sia \(\displaystyle f{(z)} = \frac{3}{iz^2 - z + 2i}\). Si calcoli:
+\begin{itemize}[label = --]
+    \item La serie di Laurent centrata in entrambi i punti in cui \(f\) non è
+        definita.
+    \item La serie di Taylor centrata in \(z=0\) 
+\end{itemize}
+\end{eser}
+
+\begin{eser}
+    Sia \(f \in \mathcal{H}{(D_{r} {(a)})}\) e \(N \in \mathbb{N}\). Allora
+    esiste unico \(P_N{(z-a)}\) polinomio di grado al più \(N\) tale che 
+\[
+    \lim_{z \to a} \frac{f{(z)} - P_N{(z-a)}}{{(z-a)}^{N}} =0
+\]
+    Infatti il polinomio di Taylor di grado \(N\) soddisfa questa condizione
+\begin{proof}
+    \(f\) è olomorfa, quindi
+\[
+    f{(z)} = \sum_{n=0}^{\infty} c_{n} {(z-a)}^{n}, \quad c_{n} =
+    \frac{f^{{(n)}}{(a)}}{n!}
+\]
+    e quindi
+\[
+    f{(z)} = P_N{(z-a)} + R_N{(z-a)} = P_N{(z-a)} + \sum_{n=N+1}^{\infty}
+    c_{n}{(z-a)}^{n}
+\]
+\[
+    R_N{(z-a)} = {(z-a)}^{N+1}\sum_{n=N+1}^{\infty} c_{n}{(z-a)}^{n-N-1} 
+\]
+    per cui la serie dà luogo ad una funzione olomorfa \(g\); quindi
+\[
+    \frac{f{(z)} - P_N{(z-a)}}{{(z-a)}^{N}} = {(z-a)}g{(z)} \to 0 \quad \text{
+    per } z \to a
+\] 
+    e \(P_N\) è l'unico con tale proprietà. Infatti se \(Q_N\) avesse la stessa
+    proprietà, allora
+\[
+    \frac{P_N{(z-a)} - Q_N{(z-a)}}{{(z-a)}^{N}} = \frac{P_N - f + f -
+    Q_N}{{(z-a)}^{N}}
+\]
+    Sia ad esempio \(N = 2\), allora questo significa
+    \begin{align*}
+        P_N{(z-a)} &= a_{0} + a_{1}{(z-a)} + a_{2}{(z-a)}^2 \\
+        Q_N{(z-a)} &= b_{0} + b_{1}{(z-a)} + b_{2}{(z-a)}^2
+    \end{align*}
+    Se ora \(\frac{P_N - Q_N}{{(z-a)}^{N}} \to 0\) allora \(P_N{(0)} =
+    Q_N{(0)}\) da cui \(a_{0} = b_{0}\). Si può proseguire mostrando che allora
+    \(a_{1} = b_{1}\), \(a_{2} = b_{2}\) e così via.
+\end{proof}
+\end{eser}
+\begin{eser}
+    Calcolare il Polinomio di Taylor di grado 4 di
+\[
+    f{(z)} = e^{z} \sin{(z)}
+\]
+    relativamente a \(z=0\) 
+\end{eser}
+
+Sia \(f \in \mathcal{H}{(D^{*}_{r} {(a)})}\) e \(f{(z)} =
+\sum_{m=-\infty}^{\infty} c_{m} {(z-a)}^{m} \). Sia inoltre \(\zeta =
+\frac{1}{z-a}\) e quindi
+\[
+    \sum_{m=-1}^{-\infty} c_{m} {(z-a)}^{m} = \sum_{n=1}^{\infty} c_{-n}
+    \zeta^{n}
+\]
+Sappiamo che (vedasi dimostrazione teorema sopra) tale serie ha raggio di
+convergenza \(R \ge  \frac{1}{r_{1}}\) e definisce pertanto una funzione
+\(\varphi \in \mathcal{H}{(\mathbb{C})}\). Dunque
+\[
+    \sum_{m=-1}^{-\infty} c_{m} {(z-a)}^{m} = \varphi {\left( \frac{1}{z-a}
+    \right)} \text{ è olomorfa in \(\mathbb{C} - \{a\}\)} 
+\]
+Che motiva la seguente definizione
+\begin{definition}{Parte principale}
+    La funzione olomorfa in \(\mathbb{C} \sminus  \{a\} \) 
+\[
+    \sum_{m=-1}^{-\infty} c_{m} {(z-a)}^{m} 
+\]
+    è detta parte principale dello sviluppo di Laurent di \(f\) relativo a \(z=a\) 
+\end{definition}
+Sappiamo che tale serie converge assolutamente in modo uniforme sui compatti di
+\(\mathbb{C} \sminus \{a\} \). 
+
+\begin{proposition}
+    La parte principale è l'unica funzione \(g\) tale che
+\begin{itemize}
+    \item \(g \in \mathcal{H}{(\mathbb{C} \sminus \{a\} )}\) 
+    \item \(g{(z)} \to 0\) per \(|z| \to \infty\) 
+    \item \(f-g\) è estendibile in modo olomorfo in un intorno di \(a\) 
+\end{itemize}
+\end{proposition}
+\begin{proof}[pezzettino di dim]
+    Sappiamo che \(g{(z)} = \varphi {\left( \frac{1}{z-a} \right)} \) è olomorfa
+    in \(\mathbb{C} \sminus \{a\} \). Inoltre \(\lim_{|z|\to \infty} g{(z)} =
+    \varphi {(0)} = 0\). Infine \((f-g){(z)} = c_{0}+c_{1}{(z-a)} +
+    c_{2}{(z-a)}^2 + \dots\) e il secondo membro definisce una funzione olomorfa
+    in un intorno di \(a\).
+\end{proof}
+
+
 
 
 \newpage
