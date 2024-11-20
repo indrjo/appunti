@@ -5284,4 +5284,151 @@ ma noi sappiamo che
 questo perché ogni \(x^{k}\) è una successione infinitesima e per la convergenza
 uniforme di \(x_{n}^{k}\) a \(x_{n}\).
 Quindi \(c_{0}\) è \textbf{chiuso} in \(\ell^{\infty}\). 
+
+\section{TODO} % TODO recuperare
+Sia 
+\[
+    f_{n}{(x)} = {\left( \frac{3}{2} \right)} ^{n} \int_{0} ^{x}\rchi_n{(t)}dt
+\]
+dove \(\rchi_n\) è la funzione caratteristica di \(C_{n}\), dove ricordiamo che
+\(C = \bigcap_{n=1}^{\infty} C_{n} \) è l'insieme di Cantor
+\begin{figure}[ht]
+    \centering
+    \incfig[.4]{funzione-cantor}
+    \caption{Funzione di Vitali}\label{fig:funzione-cantor}
+\end{figure}
+Abbiamo quindi che la funzione \(f_{n}\) assume valori costanti sul
+complementare di \(C_{n}\). Se \(I\) è uno degli intervalli chiusi la cui unione
+è \(C_{n}\) allora
+\begin{align*}
+    {\left( \frac{3}{2} \right)} ^{n} \int_I \rchi_n{(t)}dt = {\left(
+    \frac{3}{2} \right)} ^{n} \cdot \frac{1}{3^{n}} = \frac{1}{2^{n}} = \\
+    = {\left( \frac{3}{2} \right)}^{n+1} \int_{I}  \rchi_{n+1}{(t)}dt = {\left(
+    \frac{3}{2}\right)}^{n+1} \cdot 2 \frac{1}{3^{n+1}} = \frac{1}{2^{n}}
+\end{align*}
+perché allora \(I\) viene suddiviso in 3 intervalli di cui il primo e il terzo vanno
+a comporre \(C_{n+1}\).
+Abbiamo inoltre che \(f_{n+1} = f_{n}{(x)} \,\,\forall x \not\in C_{n}\) e che
+\[
+    |f_{n}{(x)} - f_{n+1} {(x)}| \le  \int_I \left| {\left( \frac{3}{2} \right)}
+    ^{n} \rchi_n {(t)}  - {\left( \frac{3}{2} \right)} ^{n+1} \rchi_{n+1}
+    {(t)}\right| dt \le \frac{1}{2^{n-1}}
+\]
+
+Ora vediamo che
+\[
+    f_{n+1} {(x)} = f_{0} {(x)} + \sum_{k=1}^{n+1} {\left( f_k{(x)} - f_{k-1}
+    {(x)} \right)}  
+\]
+e poiché gli elementi di ogni ridotta sono maggiorati di \(\frac{1}{2^{k-2}}\)
+allora la serie \(f_{n}\) converge uniformemente a una funzione limite \(f{(x)}\) 
+che è la funzione di Vitali.
+
+Tale \(f\) limite è costante su ogni connesso del complementare di \(C\)
+l'insieme di Cantor. Inoltre \(f\) di Vitali è sicuramente continua in quanto
+limite uniforme di funzioni continue, non decrescente perché tutte le \(f_{n}\)
+lo sono, dunque \(f\) è a variazione limitata.~\(f\) ammette derivata prima \(f'
+= 0\) quasi ovunque (vale 0 sui punti del complementare di  \(C\)). Viene anche
+detta ``Scala del diavolo''. Una funzione di questo tipo (\(f'=0\) q.o.~ma \(f\)
+continua e non costante) viene detta \textbf{singolare}.
+\begin{note}
+    anche la funzione di Vitali non verifica la formula \(f{(x)} - f{(a)} =
+    \int_{[a,x]} f'{(t)} dt\) 
+\end{note}
+
+La classe di funzioni che invece vogliamo noi è quella delle funzioni
+\emph{assolutamente continue}.  
+\begin{definition}{Assoluta continuità}
+    \(f : [a, b] \to \mathbb{R}\)  è assolutamente continua se per ogni
+    \(\varepsilon > 0\) esiste \(\delta > 0\) tale che per ogni sequenza finita
+    di intervalli \({(a_{i}, b_{i})} \subseteq [a, b] \) per \(i = 1,\dots, n\)
+    disgiunti e tali che se \(\displaystyle\sum_{i=1}^{n} {(b_{i} - a_{i})} \le
+    \delta  \), allora
+\[
+    \sum_{i=1}^{n} \left| f{(b_{1})} - f{(a_{1})} \right| \le \varepsilon 
+\]
+\end{definition}
+È evidentemente una richiesta più forte dell'uniforme continuità, infatti su un
+compatto uniforme continuità e continuità sono equivalenti. Vale infatti
+chiaramente che se \(f\) è assolutamente continua allora è uniformemente
+continua, ma non il viceversa, infatti
+\begin{proposition}[Assoluta continuità \(\implies \) variazione limitata]
+    Se \(f\) è assolutamente continua allora è a variazione limitata
+\end{proposition}
+\begin{proof}
+Se prendo \(\varepsilon = 1\) e mi arriva un \(\delta > 0\). Se prendo
+l'intervallino \([a, a+ \delta]\) allora \(f\) è a variazione limitata in \([a,
+a+\delta]\). Infatti presa una suddivisione \(S\) qualunque di \([a,
+a+\delta]\) e considero gli intervallini \({(a_{i}, b_{i})}\) di questa
+suddivisione osservo allora
+\[
+    \sum_{i=1}^{n} {(b_{i} - a_{i})} = \delta \implies \sum_{i=1}^{n} \left|
+    f{(b_{i})} - f{(a_{i})} \right| < 1
+\]
+Con questa idea in mente possiamo semplicemente dividere \([a,b]\) in intervalli
+di misura al più \(\delta\) e in ognuno di questi intervalli la funzione è a
+variazione limitata.
+\end{proof}
+\begin{proposition}[Assoluta continuità \(\implies \) esistenza derivata prima
+    q.o.]
+    Se \(f\) è assolutamente continua, allora esiste la derivata prima \(f'\) di
+    \(f\) e inoltre \(f' \in L^{1}(a, b)\) 
+\end{proposition}
+\begin{proposition}[Lipschitziana \(\implies \) Assolutamente continua]
+\end{proposition}
+\begin{proof}
+    Abbiamo che
+\[
+    \sum_{i=1}^{n} \left| f{(b_{i})} - f{(a_{i})} \right| \le \sum_{i=1}^{n} L
+    |b_{i} - a_{i}|  
+\]
+    prendendo \(\delta = \frac{\varepsilon}{L}\) allora abbiamo la condizione
+    richiesta
+\end{proof}
+
+Ricordando che una funzione è Hölderiana di esponente \(\alpha \in (0,1)\)
+se esiste una costante \(H > 0\) tale che per ogni \(x,y \in [a,b]\) si ha
+\[
+|f{(x)} - f{(y)}| \le H |x-y|^{\alpha}
+\]
+Allora se \(f\) è Hölderiana non necessariamente è assolutamente continua. Un
+esempio è la stessa funzione di Vitali, che non è assolutamente continua (come
+vedremo a breve) è hölderiana di esponente \(\alpha = \log_3 2 \approx 0,631\) 
+\begin{remark}
+    Le funzioni hölderiane non sono necessariamente lipschitziane, infatti ad
+    esempio \(x \mapsto \sqrt[3]{x}\) in \([-1, 1]\) è hölderiana di esponente
+    \(\frac{1}{3}\) ma non è lipschitziana.
+\end{remark}
+\begin{theorem}[Caratterizzazione funzioni assolutamente continue]
+    \(f : [a, b] \to \mathbb{R}\) è assolutamente continua se e solo se è a
+    variazione limitata e verifica la formula fondamentale del calcolo.
+\end{theorem}
+ne consegue che la funzione di Vitali non è assolutamente continua.
+\begin{remark}
+    La caratterizzazione ha un parallelo con la caratterizzazione delle misure
+    relative assolutamente continua, ossia che esiste una derivata di
+    Radon-Nikodym e vale la ``formula fondamentale del calcolo''.
+
+    In effetti se gli insiemi \(E\) del teorema di Radon-Nikodym sono intervalli
+    ne esce proprio la formula fondamentale del calcolo.
+\end{remark}
+
+\begin{theorem}[Decomposizione (simile a Radon-Nikodym-Lebesgue)]
+Se \(f: [a,b] \to \mathbb{R}\) è a variazione limitata, allora \(f\) si può
+scomporre nella somma di 3 funzioni 
+\begin{align*}
+    f{(x)} = g{(x)} + h{(x)} + s{(x)} 
+\end{align*}
+dove \(g\) è assolutamente continua in \([a,b]\), \(h\) è singolare oppure
+nulla, \(s\) è la funzione dei salti (cioè costante a tratti oppure nulla). 
+\end{theorem}
+\begin{remark}
+    \(g' = f'\) quasi ovunque in \([a,b]\), perché le altre hanno \(h'=s'=0\)
+    q.o.~Inoltre possiamo richiedere \(f{(a)} = g{(a)}\) 
+\end{remark}
+\begin{note}
+    Sia \(h\) che \(s\) possono essere nulle, ad esempio \(s=0\) se \(f\) è
+    continua in \([a,b]\) 
+\end{note}
+
 \end{document}
