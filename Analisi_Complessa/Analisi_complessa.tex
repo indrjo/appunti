@@ -2177,8 +2177,100 @@ Sappiamo che tale serie converge assolutamente in modo uniforme sui compatti di
     c_{2}{(z-a)}^2 + \dots\) e il secondo membro definisce una funzione olomorfa
     in un intorno di \(a\).
 \end{proof}
+\begin{proof}[Unicità]
+    % TODO
+\end{proof}
+\begin{definition}[Residuo]
+    Sia \(f \in \mathcal{H}{(D^{*}_r{(a)})}\) e sia \(f{(z)} =
+    \sum_{m=-\infty}^{\infty} c_{m} {(z-a)}^{m}\) lo sviluppo di Laurent. Il
+    valore \(c_{-1} \) è detto \textbf{residuo} di \(f\)  in \(z=a\) 
+\end{definition}
 
+\begin{definition}{Funzioni meromorfe}
+    Sia \(\Omega \subseteq  \mathbb{C}\) aperto ed \(E \subseteq  \Omega\) un
+    insieme chiuso e discreto (tutti i punti di \(E\) sono isolati).
 
+    Una funzione \(f\) si dice \textbf{meromorfa} in E se \(f \in
+    \mathcal{H}{(\Omega \sminus  E)}\) e per ogni \(a \in E\) esiste \(r > 0\) e
+    due funzioni \(h, g \in \mathcal{H}{(D_r{(a)})}\) con \(h \not\equiv 0\)
+    tali che 
+    \[
+        h \cdot f = g \quad \text{ in } D_r{(a)}
+    \]
+\end{definition}
+\begin{remark}
+    Vorrei dire che \(f\) è rapporto di due funzioni olomorfe, ma non volendomi
+    preoccupare della definizione dò invece dale definizione.
+\end{remark}
+Sia \(f\) meromorfa in \(\Omega\) come da definizione. Sia \(a \in E\); poiché
+\(h \not\equiv 0\) 
+\[
+    h{(z)} = c_N{(z-a)}^{N} + c_{N+1}{(z-a)}^{N+1} + \dots
+\]
+con \(c_N \neq 0\) e allora da \(hf = g\) si ha
+\[
+    {(z-a)}^{N}\underbrace{(c_N + c_{N+1}{(z-a)} + \dots)}_{:= \psi {(z)}}
+    f{(z)} = g{(z)}
+\]
+con \(\psi {(a)} = c_N\). In un intorno \(U\) di \(a\) si ha \(\psi \neq 0\) e
+quindi
+\begin{equation}\label{eq:meromorfa}
+    f{(z)} = \frac{g{(z)}}{{(z-a)}^{N}\psi {(z)}} \quad z \in U, z \neq a
+\end{equation}
+Possiamo quindi dire che la condizione che \(f\) sia meromorfa in \(\Omega\) è
+che nell'intorno di ogni \(a \in E\) la funzione \(f\) è quoziente di due
+funzioni olomorfe, con denominatore nullo al più in \(a\).
+\begin{remark}
+    Ovviamente \(f \in \mathcal{H}{(\Omega)}\) allora \(f\) è meromorfa con \(h
+    \equiv 1\) 
+\end{remark}
+
+\begin{proposition}
+    Sia \(\Omega \subseteq  \mathbb{C}\) aperto ed \(E \subseteq \Omega \)
+    chiuso e discreto. Sia \(f \in \mathcal{H}{(\Omega - E)}\). Allora \(f\) è
+    meromorfa in \(\Omega\) se e solo se per ogni \(a \in E\) lo sviluppo di
+    Laurent di \(f\) in\(a\) è ``troncato a sinistra''.
+\end{proposition}
+\begin{proof}
+In \(\eqref{eq:meromorfa}\) la funzione \(g / \psi\) è olomorfa in \(U\) e
+quindi la possiamo sviluppare in serie di Taylor di centro \(z=a\) ottenendo
+\[
+    \frac{g{(z)}}{\psi {(z)}} = \sum_{n=0}^{\infty} a_{n} {(z-a)}^{n} \implies
+    f{(z)} = \frac{a_{0}}{{(z-a)}^{N}} + \frac{a_{1}}{{(z-a)}^{N-1}} +
+    \frac{a_{2}}{{(z-a)}^{N-2}} + \dots
+\]
+in un opportuno intorno bucato di \(a\). Per l'unicità dello sviluppo di Laurent
+di \(f\) in \(a\), il precedente è lo sviluppo di Laurent di \(f\) in \(a\).
+Evidentemente è ``troncato a sinistra''.
+
+Viceversa se \(f\) ha uno sviluppo come sopra allora
+\[
+    f{(z)} = \underbrace{\frac{1}{{(z-a)}^{N}}}_{:= \frac{1}{\tilde{h}{(z)}}}
+    \underbrace{\left( a_{0} + a_{1}{(z-a)} + a_{2}{(z-a)}^2 +
+    \dots\right)}_{:=\tilde{g}{(z)}} 
+\]
+con \(\tilde{h}, \tilde{g}\) olomorfe. Allora \(f\) è meromorfa.
+\end{proof}
+\begin{theorem}[Estensione di Riemann]\label{thm:estensione-riemann}
+    Sia \(f \in \mathcal{H}{(D^{*}_r{(a)})}\) tale che 
+\[
+    \lim_{z \to a} {(z-a)}f{(z)} = 0
+\]
+    Allora \(f\) è estendibile in modo olomorfo a tutto \(D_r{(a)}\) 
+\end{theorem}
+\begin{corollary}
+    Dal teorema si ricava che se \(f \in \mathcal{H}{(D^{*}_r{(a)})}\) allora
+    \(f\) è estendibile in modo olomorfo a \(D_r{(a)}\) se e solo se \(f\)
+    è limitata in un intorno di \(a\) 
+\end{corollary}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] ovvio perché l'estensione è continua in \(z=a\) 
+    \item[\(\impliedby \)] Se \(f\) è limitata in un intorno di \(a\) allora
+        \({(z-a)}f{(z)} \to 0\) per \(z-a\) e quindi per il teorema \(f\) è
+        estendibile
+\end{itemize}
+\end{proof}
 
 
 \newpage

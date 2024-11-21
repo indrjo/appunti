@@ -4215,7 +4215,7 @@ equivalenti \(\mu\)-q.o.
     \infty \) e \(p' = 1\), allora si dicono \textbf{esponenti coniugati}.
 \end{definition}
 
-\begin{theorem}[Diseguaglianza di Hölder]
+\begin{theorem}[Diseguaglianza di Hölder]\label{thm:Holder}
     Siano \(p, p' \in [1, \infty]\) esponenti coniugati. Allora se \(f \in
     L^{1}{(\Omega)}\), \(g \in L^{p'}{(\Omega)}\) allora \(f\cdot g \in
     L^{1}{(\Omega)}\) e vale
@@ -5413,7 +5413,7 @@ ne consegue che la funzione di Vitali non è assolutamente continua.
     ne esce proprio la formula fondamentale del calcolo.
 \end{remark}
 
-\begin{theorem}[Decomposizione (simile a Radon-Nikodym-Lebesgue)]
+\begin{theorem}[Decomposizione (tipo Radon-Nikodym-Lebesgue)]
 Se \(f: [a,b] \to \mathbb{R}\) è a variazione limitata, allora \(f\) si può
 scomporre nella somma di 3 funzioni 
 \begin{align*}
@@ -5423,12 +5423,143 @@ dove \(g\) è assolutamente continua in \([a,b]\), \(h\) è singolare oppure
 nulla, \(s\) è la funzione dei salti (cioè costante a tratti oppure nulla). 
 \end{theorem}
 \begin{remark}
-    \(g' = f'\) quasi ovunque in \([a,b]\), perché le altre hanno \(h'=s'=0\)
+    \(g' = f'\) quasi ovunque in \([a,b]\), perché le altre hanno \\ \(h'=s'=0\)
     q.o.~Inoltre possiamo richiedere \(f{(a)} = g{(a)}\) 
 \end{remark}
 \begin{note}
     Sia \(h\) che \(s\) possono essere nulle, ad esempio \(s=0\) se \(f\) è
     continua in \([a,b]\) 
 \end{note}
+D'ora in poi chiameremo \(AC(\Omega)\) lo spazio di funzioni assolutamente
+continue a dominio in \(\Omega\) 
+
+\subsection{Estensione di altre formule di integrazione}
+\begin{itemize}[label = --]
+    \item \textbf{Integrazione per parti} La formula di integrazione per parti
+\[
+    \int_{a} ^{b} f{(x)} g'{(x)}dx = f{(b)}g{(b)} - f{(a)}g{(a)} - \int_{a} ^{b}
+    f'{(x)}g{(x)}dx
+\]
+    è vera se \(f, g \in AC([a,b])\) 
+    \item \textbf{Integrazione per sostituzione} La formula di sostizuione
+\[
+    \int_a^{b} f{(x)} dx = \int_\alpha ^{\beta} f{(\varphi{(t)})}
+    \varphi'{(t)}dt
+\]
+è vera se (ad esempio) f è misurabile e limitata in \([a,b]\) e \(\varphi :
+[\alpha, \beta] \to [a,b]\) è assolutamente continua
+\end{itemize}
+\subsection{Spazi di Sobolev}
+Considereremo gli spazi di Sobolev in dimensione 1 usando le funzioni di
+\(AC([a,b])\) (non è l'approccio canonico) su un intervallo limitato \([a,b]\).
+Consideriamo lo spazio
+\[
+    W^{1,p}(a,b) = \{f \in AC([a,b]): f' \in L^{p}(a,b)\} 
+\]
+chiaramente quindi \(W^{1,1}{(a,b)} = AC{([a,b])}\) e succede che se \(1 \le p <
+p \le \infty\) allora \(W^{1,q}{(a,b)} \subseteq W^{1,p}{(a,b)} \) per le
+inclusioni tra spazi \(L^{p}\) quando \(\mu{(\Omega)} < \infty\). Ne segue che
+il più piccolo è \(W^{1, \infty}\).
+
+Gli spazi \(W^{1,p}\) sono tutti spazi vettoriali. Inoltre ci possiamo
+mettere una norma sopra, di solito si prende
+\[
+    \|f\|_{W^{1,p}{(a,b)}}  = \|f\|_p + \|f'\|_p
+\]
+in generale questa norma è presa negli spazi \(W^{1,p}{(\Omega)}\) con \(\Omega\)
+aperto di \(\mathbb{R}^{N}\) (con aggiustamenti dovuti al caso
+\(N\)-dimensionale). Un'altra norma comune è
+\[
+    |\|f\||_{W^{1,p}{(a,b)}} = {\left( \int_a^{b}|f{(x)}|^{p}dx +
+    \int_a^{b}|f'{(x)}|^{p}dx \right)}^{\frac{1}{p}} = {\left( \|f\|_p^{p} +
+\|f'\|_p^{p} \right)}^{\frac{1}{p}}
+\]
+\begin{eser}
+    Verificare che entrambe le norme presentate sono effettivamente delle norme.
+    Inoltre mostrare che se \(1 \le p < \infty\) le norme \(\|\cdot
+    \|_{W^{1,p}{(a,b)}} \) e \(|\| \cdot \| |_{W^{1,p}{(a,b)}}\) sono
+    equivalenti.
+\end{eser}
+% TODO fare in modo che la norma tripla sia facile da fare e sia bella da vedere
+Sono spazi di Banach? È vero che \(W^{1,2}{(a,b)}\) è uno spazio di Hilbert?
+Chiaramente quello che guessiamo essere il prodotto scalare su \(W^{1,2}{(a,b)}\)
+sarebbe
+\[
+    \langle f, g \rangle = \int_a^{b} f{(x)}g{(x)}dx + \int_a^{b} f'{(x)}g'{(x)}dx
+\]
+che avrebbe come norma associata la norma \(|\| \cdot \| |_{W^{1,2}{(a,b)}}\).
+\begin{proposition}
+    Per ogni \(p \in [1,\infty]\) esiste una costante \(C_p > 0\) tale che
+    \[\underbrace{\|f\|_{C^{0}{([a,b])}}}_{{\left( \|f\|_{\infty}  \right)} }  \le C_p \|f\|_{W^{1, p}{(a,b)}} \] per ogni \(f \in
+W^{1,p}{(a,b)}\) 
+\end{proposition}
+\begin{note}
+    Questo significa che l'operatore di immersione \(i : W^{1,p}{(a,b)} \to
+    C^{0}{([a,b])}\) è limitato dunque continuo
+\end{note}
+\begin{proof}
+    Per \(p = \infty\) il risultato è banale: basta prendere \(C_\infty = 1\).
+
+    Consideriamo ora il caso \(1 \le p < \infty\) 
+    Usiamo l'assoluta continuità della \(f \in W^{1,p}{(a,b)}\) per scrivere la
+    formula
+\[
+    f{(x)} - f{(y)} = \int_{y} ^{x} f'{(t)}dt \quad \forall x, y \in [a,b]
+\]
+    allora \(f{(x)} = f{(y)} + \int_y^{x}f'{(t)}dt\) e quindi
+\[
+    |f{(x)}| \le  |f{(y)}| +\int_y^{x} |f'{(t)}| dt
+\]
+    ora integro rispetto a \(y\) entrambi i termini ottenendo
+\[
+    {(b-a)}|f{(x)}| \le \\int_a^{b} |f{(y)}|dy + (b-a)\int_a^{b} |f'{(t)}|dt
+\]
+    Ora usiamo la disuguaglianza di Hölder~\ref{thm:Holder}
+\[
+    {(b-a)}|f{(x)}| \le \|f\|_p \|1\|_{p'} + {(b-a)}\|f'\|_p \|1\|_{p'} 
+\]
+    e poiché \(\|1\|_p = {\left( \int_a^{b}dt \right)}^{\frac{1}{p}} =
+    {(b-a)}^{\frac{1}{p}} \)  abbiamo
+\[
+    |f{(x)}| \le \underbrace{{(b-a)}^{\frac{1}{p'} - 1}}_{=
+    \frac{1}{{(b-a)}^{\frac{1}{p}}}}  \|f\|_p +
+    {(b-a)}^{\frac{1}{p'}} \|f\|_p
+\]
+    Ora prendendo
+\[
+    C_p = \max \left\{ \frac{1}{{(b-a)}^{\frac{1}{p}}}, {(b-a)}^{\frac{1}{p'}}\right\} 
+\]
+    abbiamo che finalmente
+\[
+    \|f\|_\infty = \sup_{x \in [a,b]} |f{(x)}| \le C_p {\left( \|f\|_p + \|f'\|_p \right)} 
+\]
+\end{proof}
+\begin{theorem}[Completezza di \(W^{1,p}(a,b)\)]\label{th:w1p-banach}
+    \(W^{1,p}{(a,b)}\) è uno spazio di Banach. In particolare \(W^{1,2}{(a,b)}\)
+    è uno spazio di Hilbert, con la norma \(|\|\cdot \||_{W^{1,2}{(a,b)}} \) 
+\end{theorem}
+\begin{proof}
+    Sia \(\{f_{n}\} \) di Cauchy in \(W^{1,p}{(a,b)}\), dunque
+    \(\|f_{n}-f_{m}\|_{W^{1,p}{(a,b)}} \to 0\) per \(n,m \to \infty\). Ma allora
+    abbiamo
+    \begin{align*}
+        \|f_{n}-f_{m}\|_p &\to 0 \\
+        \|f'_n - f'_m\|_p &\to 0 \\
+        \|f_n - f_m\|_{C^{0}{(a,b)}} &\to 0
+    \end{align*}
+    per \(n,m \to \infty\) dove per la terza si è usata la proposizione
+    precedente. Ne consegue che \(f_{n}\) e \(f'_n\) sono di Cauchy in
+    \(L^{p}{(a,b)}\), essendo \(L^{p}\) completo allora esistono \(f,g \in
+    L^{p}{(a,b)}\) tali che \(f_{n} \to f\) e \(f'_{n} \to g\) in
+    \(L^{p}{(a,b)}\). Inoltre \(f_{n}\) è di Cauchy in \(C^{0}{(a,b)}\) e quindi
+    esiste \(h \in C^{0}{([a,b])}\) tale che \(f_{n} \to h\) in
+    \(C^{0}{([a,b])}\). Siccome la convergenza in \(C^{0}\) è uniforme allora
+    implica la convergenza in \(L^{p}{(a,b)}\) e allora \(h = f\) q.o. 
+
+    Sappiamo che \[f_{n}{(x)} = f_{n}{(a)} + \int_a^{x}{(f'_n{(t)})}dt\] per
+    ogni \(x \in [a,b]\). Passando al limite per \(n \to \infty\) abbiamo
+    % TODO finire la dimostrazione
+    
+\end{proof}
 
 \end{document}
