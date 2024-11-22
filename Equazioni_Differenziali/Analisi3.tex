@@ -1997,4 +1997,118 @@ che ha come caso particolare il precedente \(x' = g{\left( \frac{x}{t} \right)}
     l'azione della sola forza peso è minimo?
 \end{example}
 
+% 22 / 11
+\begin{eser}
+    Si studino le curve soluzione del problema del pendolo
+\[
+    \ddot{\theta} + \omega^2  \sin\theta = 0   
+\]
+    considerando le curve soluzione sul piano \((\theta, \dot{\theta})\) 
+\end{eser}
+\begin{example}[Lotka-Volterra]
+    consideriamo \(x_{1}, x_{2} > 0\) e il sistema
+\[
+    \begin{cases}
+        x_{1}' = x_{1}{(\alpha - \beta x_{2})} \\
+        x_{2}' = x_{2}{(-\gamma + \delta x_{1})}
+    \end{cases}
+\]
+    che dà origine alla forma differenziale
+\[
+    \omega = x_{2} {(-\gamma + \delta x_{1})} dx_{1} - x_{1}{(\alpha - \beta
+    x_{2})}dx_{2} = 0
+\]
+    sfortunatamente non è esatta, infatti non è chiusa
+\[
+    \frac{\partial A}{\partial x_{2}} = -\gamma + \delta x \neq -\alpha + \beta
+    x_{2} = \frac{\partial B}{\partial x_{2}}
+\]
+    ma possiamo cercare un fattore integrante \(\mu{(x_{1}, x_{2})}\) \emph{mai
+    nullo} tale che \(\mu \omega\) sia esatta. L'idea è che se esiste allora
+    \(\omega = 0 \iff \mu \omega = 0\). L'equazione diventa
+\[
+    \mu{(x_{1}, x_{2})}x_{2} {(-\gamma + \delta x_{1})}dx_{1} - \mu{(x_{1},
+    x_{2})}x_{1}{(\alpha - \beta x_{2})}dx_{2} = 0
+\]
+    e vogliamo che
+\[
+    \frac{\partial }{\partial x_{2}} {\left( \mu{(x_{1}, x_{2})} x_{2}{(-\gamma
+    + \delta x_{1})} \right)} = \frac{\partial }{\partial x_{1}} {\left(
+\mu{(x_{1}, x_{2})} x_{1}{(\alpha - \beta x_{2})} \right)}
+\]
+    e cerchiamo \(\mu\) nella forma \(\mu{(x_{1}, x_{2})} = \varphi {(x_{1})}
+    \psi {(x_{2})}\). La precedente diventa quindi
+\begin{align*}
+    \varphi {(x_{1})} \psi'{(x_{2})} x_{2}{(-\gamma + \delta x_{1})} + \varphi
+    {(x_{1})}\psi {(x_{2})} {(- \gamma + \delta x_{1})} = \\
+    = \varphi'{(x_{1})}\psi {(x_{2})} x_{1}{(\alpha - \beta x_{2})} + \varphi
+    {(x_{1})}\psi {(x_{2})} {(-\alpha + \beta x_{2})}
+\end{align*}
+    cioè
+\[
+    \varphi {(x_{1})}{(-\gamma + \delta x_{1})} \underbrace{\left( \psi'{(x_{2})}x_{2} +
+    \psi {(x_{2})} \right)}_{\overset{\text{set}}{=}0}  = \psi {(x_{2})} {(\alpha - \beta x_{2})}
+    \underbrace{\left(
+\varphi'{(x_{1})} x_{1} + \varphi {(x_{1})} \right)}_{ \overset{\text{set}}{=}0} 
+\]
+    e come \(\varphi \) e \(\psi\) possiamo considerare una soluzione di
+    \begin{align*}
+        u'{(x)} x + u{(x)} &= 0 \\
+        \frac{u'}{u} &= -\frac{1}{x} \\
+        \log |u| &= -\log x + c \\
+        u{(x)} &= \frac{c}{x}
+    \end{align*}
+    e quindi \(\varphi {(x_{1})} = \frac{1}{x_{1}}\) e \(\psi{(x_{2})} =
+    \frac{1}{x_{2}}\) da cui \(\mu{(x_{1}, x_{2})} = \frac{1}{x_{1} x_{2}}\). La
+    nostra forma differenziale diventa
+\[
+    \tilde{\omega} = {\left( - \frac{\gamma}{x_{1}} + \delta \right)} dx_{1} - {\left(
+    \frac{\alpha}{x_{2}} - \beta \right)} dx_{2} = 0
+\]
+    e una possibile \(H{(x_{1}, x_{2})}\) tale che \(dH = \tilde{\omega} \) è 
+\[
+    H{(x_{1}, x_{2})} = -\gamma \log x_{1} + \delta x_{1} - \alpha \log x_{2} +
+    \beta x_{2} \quad \text{ è costante}
+\]
+    quindi ora se rappresentiamo le curve nel piano \((x_{1}, x_{2})\) otteniamo
+    la figura~\ref{fig:lotka-volterra} % TODO fig lotka-volterra
+\end{example}
+\begin{example}
+    Consideriamo il problema \(\displaystyle x' = \frac{t + x}{t-x}\).
+    volendo calcolare le curve soluzione nel piano \((t, x)\) studiamo la forma
+    differenziale
+\[
+    \omega = {(t - x)}dx - {(t + x)}dx = 0
+\]
+    ossia
+    \begin{equation}\label{eq:ex34}
+        {(x_{1} + x_{2})}dx_{1} - {(x_{1} - x_{2})}dx_{2} = 0
+    \end{equation}
+    non è esatta e non si riesce (facilmente?) a trovare un fattore integrante.
+    Tuttavia possiamo studiarlo in coordinate polari. In particolare poniamo
+\[
+    \begin{cases}
+        x_{1} = x_{1}{(t)} = \rho{(t)} \cos \theta{(t)} \\
+        x_{2} = x_{2}{(t)} = \rho{(t)} \sin\theta{(t)}
+    \end{cases}
+\]
+    La~\eqref{eq:ex34} diventa
+\[
+    \cancel{\rho}{(\cos \theta + \sin \theta)} {(\rho' \cos \theta - \rho
+    \theta'\sin\theta)} - \cancel{\rho}{(\cos \theta - \sin \theta)} {(\rho' \sin \theta
+    + \rho \theta' \cos \theta)} = 0
+\]
+    svolgendo i calcoli abbiamo 
+\[
+    \rho' - \rho \theta' = 0 \implies d\rho - \rho d\theta = 0  \implies
+    \frac{1}{\rho} d\rho - d\theta = 0
+\]
+    e quindi \(H{(\rho, \theta)} = \log \rho - \theta\) è costante e quindi le
+    curve espresse in forma polare hanno equazione
+\[
+    \log \rho = \theta + c \implies \rho = e^{\theta + c} = C e^{\theta} \quad
+    C > 0
+\]
+\end{example}
+
 \end{document}
