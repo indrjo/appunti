@@ -2059,7 +2059,6 @@ y{(x)}\)
       {(H - u)}{(1 + u'^2)} = c^2 \quad (\text{\(c^2\) costante})
     \end{equation}
 \end{example}
-
 \paragraph{\(F{(y, y')} = 0\)} Prima di procedere nella risoluzione della
 brachistocrona, consideriamo il caso generale di un'equazione differenziale del
 tipo \(F{(y, y')} = 0\). In particolare sia \(\mathcal{C}\) la curva nel piano
@@ -2308,4 +2307,140 @@ esiste una funzione \(H \in C^{1}{(\Omega)}\) tale che \(dH = \omega\)
     ossia \(x\) è contenuta in un insieme di livello di \(H\); l'ultimo termine
     invece è nullo quando \(x\) è curva soluzione.
 \end{proof}
+\begin{eser}
+    Si studino le curve soluzione del problema del pendolo
+\[
+    \ddot{\theta} + \omega^2  \sin\theta = 0   
+\]
+    considerando le curve soluzione sul piano \((\theta, \dot{\theta})\) 
+\end{eser}
+\begin{example}[Lotka-Volterra]
+    consideriamo \(x_{1}, x_{2} > 0\) e il sistema
+\[
+    \begin{cases}
+        x_{1}' = x_{1}{(\alpha - \beta x_{2})} \\
+        x_{2}' = x_{2}{(-\gamma + \delta x_{1})}
+    \end{cases}
+\]
+    che dà origine alla forma differenziale
+\[
+    \omega = x_{2} {(-\gamma + \delta x_{1})} dx_{1} - x_{1}{(\alpha - \beta
+    x_{2})}dx_{2} = 0
+\]
+    sfortunatamente non è esatta, infatti non è chiusa
+\[
+    \frac{\partial A}{\partial x_{2}} = -\gamma + \delta x \neq -\alpha + \beta
+    x_{2} = \frac{\partial B}{\partial x_{2}}
+\]
+    ma possiamo cercare un fattore integrante \(\mu{(x_{1}, x_{2})}\) \emph{mai
+    nullo} tale che \(\mu \omega\) sia esatta. L'idea è che se esiste allora
+    \(\omega = 0 \iff \mu \omega = 0\). L'equazione diventa
+\[
+    \mu{(x_{1}, x_{2})}x_{2} {(-\gamma + \delta x_{1})}dx_{1} - \mu{(x_{1},
+    x_{2})}x_{1}{(\alpha - \beta x_{2})}dx_{2} = 0
+\]
+    e vogliamo che
+\[
+    \frac{\partial }{\partial x_{2}} {\left( \mu{(x_{1}, x_{2})} x_{2}{(-\gamma
+    + \delta x_{1})} \right)} = \frac{\partial }{\partial x_{1}} {\left(
+\mu{(x_{1}, x_{2})} x_{1}{(\alpha - \beta x_{2})} \right)}
+\]
+    e cerchiamo \(\mu\) nella forma \(\mu{(x_{1}, x_{2})} = \varphi {(x_{1})}
+    \psi {(x_{2})}\). La precedente diventa quindi
+\begin{align*}
+    \varphi {(x_{1})} \psi'{(x_{2})} x_{2}{(-\gamma + \delta x_{1})} + \varphi
+    {(x_{1})}\psi {(x_{2})} {(- \gamma + \delta x_{1})} = \\
+    = \varphi'{(x_{1})}\psi {(x_{2})} x_{1}{(\alpha - \beta x_{2})} + \varphi
+    {(x_{1})}\psi {(x_{2})} {(-\alpha + \beta x_{2})}
+\end{align*}
+    cioè
+\[
+    \varphi {(x_{1})}{(-\gamma + \delta x_{1})} \underbrace{\left( \psi'{(x_{2})}x_{2} +
+    \psi {(x_{2})} \right)}_{\overset{\text{set}}{=}0}  = \psi {(x_{2})} {(\alpha - \beta x_{2})}
+    \underbrace{\left(
+\varphi'{(x_{1})} x_{1} + \varphi {(x_{1})} \right)}_{ \overset{\text{set}}{=}0} 
+\]
+    e come \(\varphi \) e \(\psi\) possiamo considerare una soluzione di
+    \begin{align*}
+        u'{(x)} x + u{(x)} &= 0 \\
+        \frac{u'}{u} &= -\frac{1}{x} \\
+        \log |u| &= -\log x + c \\
+        u{(x)} &= \frac{c}{x}
+    \end{align*}
+    e quindi \(\varphi {(x_{1})} = \frac{1}{x_{1}}\) e \(\psi{(x_{2})} =
+    \frac{1}{x_{2}}\) da cui \(\mu{(x_{1}, x_{2})} = \frac{1}{x_{1} x_{2}}\). La
+    nostra forma differenziale diventa
+\[
+    \tilde{\omega} = {\left( - \frac{\gamma}{x_{1}} + \delta \right)} dx_{1} - {\left(
+    \frac{\alpha}{x_{2}} - \beta \right)} dx_{2} = 0
+\]
+    e una possibile \(H{(x_{1}, x_{2})}\) tale che \(dH = \tilde{\omega} \) è 
+\[
+    H{(x_{1}, x_{2})} = -\gamma \log x_{1} + \delta x_{1} - \alpha \log x_{2} +
+    \beta x_{2} \quad \text{ è costante}
+\]
+    quindi ora se rappresentiamo le curve nel piano \((x_{1}, x_{2})\) otteniamo
+    la figura~\ref{fig:lotka-volterra}
+    \begin{figure}[ht]
+        \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xmin=0, xmax=5,
+        ymin=0, ymax=5,
+        enlargelimits,
+        view={0}{90},
+        xlabel=\(x_{1}\),
+        ylabel=\(x_{2}\),
+        ]
+        \addplot3 [
+        contour gnuplot={levels={1,1.1,1.25,1.5,2,3}},
+        thick,
+        samples=100,
+        ] {- 2 *ln(x) + x - ln(y) + y / 2};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Le curve soluzione del sistema di
+    Lotka-Volterra con \(\gamma = 2, \delta = \alpha = 1\) e \(\beta =
+\frac{1}{2}\), i valori assunti da \(H\) sono indicati}\label{fig:lotka-volterra} 
+    \end{figure}
+    
+\end{example}
+\begin{example}
+    Consideriamo il problema \(\displaystyle x' = \frac{t + x}{t-x}\).
+    volendo calcolare le curve soluzione nel piano \((t, x)\) studiamo la forma
+    differenziale
+\[
+    \omega = {(t - x)}dx - {(t + x)}dx = 0
+\]
+    ossia
+    \begin{equation}\label{eq:ex34}
+        {(x_{1} + x_{2})}dx_{1} - {(x_{1} - x_{2})}dx_{2} = 0
+    \end{equation}
+    non è esatta e non si riesce (facilmente?) a trovare un fattore integrante.
+    Tuttavia possiamo studiarlo in coordinate polari. In particolare poniamo
+\[
+    \begin{cases}
+        x_{1} = x_{1}{(t)} = \rho{(t)} \cos \theta{(t)} \\
+        x_{2} = x_{2}{(t)} = \rho{(t)} \sin\theta{(t)}
+    \end{cases}
+\]
+    La~\eqref{eq:ex34} diventa
+\[
+    \cancel{\rho}{(\cos \theta + \sin \theta)} {(\rho' \cos \theta - \rho
+    \theta'\sin\theta)} - \cancel{\rho}{(\cos \theta - \sin \theta)} {(\rho' \sin \theta
+    + \rho \theta' \cos \theta)} = 0
+\]
+    svolgendo i calcoli abbiamo 
+\[
+    \rho' - \rho \theta' = 0 \implies d\rho - \rho d\theta = 0  \implies
+    \frac{1}{\rho} d\rho - d\theta = 0
+\]
+    e quindi \(H{(\rho, \theta)} = \log \rho - \theta\) è costante e quindi le
+    curve espresse in forma polare hanno equazione
+\[
+    \log \rho = \theta + c \implies \rho = e^{\theta + c} = C e^{\theta} \quad
+    C > 0
+\]
+\end{example}
 \end{document}
