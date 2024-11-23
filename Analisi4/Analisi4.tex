@@ -3353,11 +3353,11 @@ dobbiamo prima mostrare tre lemmi.
     segue la tesi.
 \end{proof}
 
-\begin{definition}[label=def:rad_nik_2]{Derivata di Radon-Nykodim con \(\mu\)
+\begin{definition}[label=def:rad_nik_2]{Derivata di Radon-Nikodym con \(\mu\)
     \(\sigma\)-finita}
     Sia \(\Omega, \mathcal{M}\) lo spazio misurabile del
     lemma~\ref{lem:rad_nik_3}. Allora \(f\) come definita sopra è la
-    \textbf{derivata di Radon-Nykodim} di \(\varphi \) misura finita rispetto a
+    \textbf{derivata di Radon-Nikodym} di \(\varphi \) misura finita rispetto a
     \(\mu\) misura \(\sigma\)-finita, ossia
     \[
         \frac{\partial \varphi }{\partial \mu} = \sum_{n=1}^{\infty}
@@ -3371,10 +3371,10 @@ dobbiamo prima mostrare tre lemmi.
 Procedendo con la generalizzazione, vogliamo ora definire la derivata di una
 generica misura relativa \(\varphi \) rispetto a una misura \(\sigma\)-finita
 
-\begin{definition}[label=def:rad_nik]{Derivata di Radon-Nykodim}
+\begin{definition}[label=def:rad_nik]{Derivata di Radon-Nikodym}
     Sia \(\Omega, \mathcal{M}\) uno spazio misurabile, sia \(\mu\) una misura
     \(\sigma\)-finita e sia \(\varphi \) una misura relativa. Allora \(\varphi =
-    \varphi^{+} - \varphi^{-}\) e definiamo la \textbf{derivata di Radon-Nykodim}
+    \varphi^{+} - \varphi^{-}\) e definiamo la \textbf{derivata di Radon-Nikodym}
     \[
         \frac{\partial \varphi }{\partial \mu} = \frac{\partial \varphi^{+}}{\partial \mu} - \frac{\partial \varphi^{-}}{\partial \mu}
     \]
@@ -3433,7 +3433,7 @@ e \(\varphi_n {(B_{n})} \le \varphi {(B)} = 0\) per cui ogni \(\varphi _n\) e
 
 \end{proof}
 
-\begin{theorem}[Teorema di Radon-Nykodym più bello]
+\begin{theorem}[Teorema di Radon-Nikodym più bello]
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. Siano \(\mu\) e
     \(\varphi\) rispettivamente una misura \(\sigma\)-finita e una misura
     relativa. Sia \(\varphi \) \(\mu\)-assolutamente continua. Allora
@@ -3445,9 +3445,8 @@ e \(\varphi_n {(B_{n})} \le \varphi {(B)} = 0\) per cui ogni \(\varphi _n\) e
 \begin{proof}[Dimostrazione per \(\varphi , \mu\) misure finite]
     Supponiamo per assurdo che esista un insieme \(E_{0} \in \mathcal{M}\) tale
     che \(\int_{E_{0}} \frac{\partial \varphi }{\partial \mu} d\mu \neq \varphi
-    (E_{0})\), e quindi essendo \(\frac{\partial \varphi }{\partial \mu} \ge 0\)
-    q.o.~possiamo assumere che \(\int_{E_{0}} \frac{\partial \varphi }{\partial
-    \mu} d\mu > \varphi (E_{0})\). Ne segue che \(\varphi (E_{0}) >0\) e per
+    (E_{0})\), e quindi per definizione di derivata di Radon-Nikodym come \(\sup\) di \(\mathcal{F}\) che abbiamo dimostrato essere in \(\mathcal{F}\) possiamo assumere che \(\int_{E_{0}} \frac{\partial \varphi }{\partial
+    \mu} d\mu < \varphi (E_{0})\). Ne segue che \(\varphi (E_{0}) >0\) e per
     \(\mu\)-a.c.~anche \(\mu(E_{0}) > 0\).
 
     Siccome \(\mu\) è finita 
