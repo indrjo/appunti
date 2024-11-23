@@ -1360,7 +1360,7 @@ usarlo.
     Dove i due integrali su \(E \cap F\) sono uguali in quanto entrambi
     integrali su un trascurabile quindi uguali a 0
 \end{proof}
-\begin{proposition}
+\begin{proposition}\label{help:cau_sch_int}
     Sia \(f \in L^{1}(E)\). Allora \(|f| \in L^{1}(E)\) e
     \[
         \left| \int_{E} f d\mu \right| \le \int_{E} |f| d\mu
@@ -5155,12 +5155,11 @@ h_{\overline{n}} \|^{p-1} \|v - h_{\overline{n}} \|_1 \right)}^{\frac{1}{p}} =\\
 \end{example}
 Possiamo anche pensare a operatori lineari tra spazi a dimensione infinita di
 funzioni. Ad esempio tra funzioni continue possiamo considerare l'operatore 
-\[
   \begin{align*}
       T: C^{0}{([0, 1])} &\longrightarrow C^{0}{([0,1])} \\
       f &\longmapsto T(f) = hf
   \end{align*}
-\] dove \(h \in C^{0}{([0, 1])}\) è una funzione fissata. Questo è un operatore
+dove \(h \in C^{0}{([0, 1])}\) è una funzione fissata. Questo è un operatore
 lineare, infatti
 \[
     T{(\alpha f + \beta g)} = h{(\alpha f + \beta g)} = \alpha hf + \beta hg =
@@ -5593,12 +5592,10 @@ questo perché ogni \(x^{k}\) è una successione infinitesima e per la convergen
 uniforme di \(x_{n}^{k}\) a \(x_{n}\).
 Quindi \(c_{0}\) è \textbf{chiuso} in \(\ell^{\infty}\). Si può dire lo stesso
 osservando che l'operatore 
-\[
-    \begin{align}\label{eq:operatore_lim}
-      L: c &\longrightarrow \mathbb{R} \\
-      x = {(x_{n})} &\longmapsto L(x) = \lim_{n \to \infty} x_{n}
-  \end{align}
-\]
+\begin{align}\label{eq:operatore_lim}
+  L: c &\longrightarrow \mathbb{R} \\
+  x = {(x_{n})} &\longmapsto L(x) = \lim_{n \to \infty} x_{n}
+\end{align}
 è un funzionale lineare e continuo perché il limite è lineare e inoltre
 \[
   |Lx| \le \sup_{n} |x_{n}| = \|x\|_\infty 
@@ -5704,7 +5701,7 @@ denso in \(\ell^{p}\) poiché è denso in \(c_{00}\)
     Scegliamo ora \(x_{i} = |u_{i}|^{p'-2}\) e \(x_{i} = 0\) se \(u_{i} =
     0\). Allora nella~\eqref{help:thmduali} abbiamo
     \begin{align*}
-        \sum_{i=1}^{k} |u_{i}|^{p'} &\le \|\varphi \|_{(\ell^{p})'} \left(
+        \sum_{i=1}^{k} |u_{i}|^{p'} &\le \|\varphi \|_{(\ell^{p})'} 
             {\left(  \sum_{i=1}^{k} {\left(  |u_{i}|^{p'-1} \right)}^{p}
             \right)}^{\frac{1}{p}} = {\left( \sum_{i=1}^{k} |u_{i}|^{p'p -
             p = p'}  \right)} ^{\frac{1}{p}} \\
@@ -6101,9 +6098,9 @@ W^{1,p}{(a,b)}\)
     Consideriamo ora il caso \(1 \le p < \infty\) 
     Usiamo l'assoluta continuità della \(f \in W^{1,p}{(a,b)}\) per scrivere la
     formula
-\[
+    \begin{equation}\label{help:fond_calcolo_xy}
     f{(x)} - f{(y)} = \int_{y} ^{x} f'{(t)}dt \quad \forall x, y \in [a,b]
-\]
+    \end{equation}
     allora \(f{(x)} = f{(y)} + \int_y^{x}f'{(t)}dt\) e quindi
 \[
     |f{(x)}| \le  |f{(y)}| +\int_y^{x} |f'{(t)}| dt
@@ -6120,7 +6117,7 @@ W^{1,p}{(a,b)}\)
     {(b-a)}^{\frac{1}{p}} \)  abbiamo
 \[
     |f{(x)}| \le \underbrace{{(b-a)}^{\frac{1}{p'} - 1}}_{=
-    \frac{1}{{(b-a)}^{\frac{1}{p}}}}  \|f\|_p +
+    \frac{1}{{(b-a)}^{1 / p}}}  \|f\|_p +
     {(b-a)}^{\frac{1}{p'}} \|f\|_p
 \]
     Ora prendendo
@@ -6153,12 +6150,70 @@ W^{1,p}{(a,b)}\)
     \(L^{p}{(a,b)}\). Inoltre \(f_{n}\) è di Cauchy in \(C^{0}{(a,b)}\) e quindi
     esiste \(h \in C^{0}{([a,b])}\) tale che \(f_{n} \to h\) in
     \(C^{0}{([a,b])}\). Siccome la convergenza in \(C^{0}\) è uniforme allora
-    implica la convergenza in \(L^{p}{(a,b)}\) e allora \(h = f\) q.o. 
+    implica la convergenza in \(L^{p}{(a,b)}\) e allora \(h = f\) q.o.~e
+    vogliamo mostrare che vale anche \(f' = g\) q.o.
 
     Sappiamo che \[f_{n}{(x)} = f_{n}{(a)} + \int_a^{x}{f'_n{(t)}}\,dt\] per
     ogni \(x \in [a,b]\). Passando al limite per \(n \to \infty\) abbiamo
-    
-    
+    \begin{equation}\label{eq:limite-fond}
+        f{(x)} = f{(a)} + \int_a^{x}{g{(t)}}\,dt \quad \forall x \in [a,b]
+    \end{equation}
+    dove le prime due sono per la convergenza in \(C^{0}\) e l'ultima poiché
+    \(\int_a^{b} f'_n{(t)} dt = \int_{[a,b]} \rchi_{[a, x]} f'_n \) e poiché
+    \(f'_n \to g\) in \(L^{p}\) e chiaramente \(\rchi_{[a,x]} \to \rchi_{[a,x]}
+    \) in \(L^{p'}\). Da~\eqref{eq:limite-fond} otteniamo che necessariamente
+    \(f' =g\). Quindi poiché vale la formula fondamentale del calcolo, \(f\) è
+    assolutamente continua, e abbiamo già detto \(f' \in L^{1}{([a,b])}\),
+    quindi \(f \in W^{1, p}{(a,b)}\) 
 \end{proof}
 
+\begin{proposition}[\(f \in W^{1, p}{(a, b)}\), allora \(f\) hölderiana]
+    Se \(f \in W^{1, p}{(a, b)}\), dove \(1 < p \le \infty\), allora \(f\) è
+    Hölderiana di esponente \(\alpha = 1 - \frac{1}{p} = \frac{1}{p'}\)
+\end{proposition}
+\begin{proof}
+    Da~\eqref{help:fond_calcolo_xy} e dalla proposizione~\ref{help:cau_sch_int}
+    otteniamo che, \\ supponendo WLOG \(x > y\)
+    \[
+      |f{(x)} - f{(y)}| = \left| \int_{y}^{x} f'{(t)}dt \right| \le \int_y^{x}
+      |f'{(t)}|dt = \|f'\|_1
+    \]
+    Allora per la diseguaglianza di Hölder~\ref{thm:Holder} otteniamo
+    \[
+      \left| f{(x)} - f{(y)} \right| \le \|1 \cdot  f'\|_1 \le 
+      \|1\|_{p'}\,  \|f'\|_p= |x-y|^{\frac{1}{p'}} \|f'\|_p 
+    \]
+    per ogni \(x, y \in [a,b]\) 
+\end{proof}
+\begin{remark}
+    Per \( p = 1\) la proposizione non vale, e in effetti nella dimostrazione si
+    avrebbe \(\|1\|_{p'} = \|1\|_{\infty}= 1\). In effetti possiamo vedere il
+    controesempio 
+    \[
+      f{(x)} = \begin{cases}
+          \frac{1}{\log x} & x \in \left(0, \frac{1}{2}\right] \\
+          0 & x = 0
+      \end{cases}
+    \]
+    che è assolutamente continua, quindi \(f \in W^{1,1}{(0,1)}\) ma non è
+    Hölderiana in 0, infatti per ogni \(\alpha > 0\) si ha che
+    \[
+        \frac{f{(x)}}{x^{\alpha}} = \frac{1}{x^{\alpha} \log x} =
+        \frac{x^{-\alpha}}{\log x} \underset{x \to 0}{\overset{L'H}{\sim}} \frac{-\alpha x^{-\alpha -
+        1}}{x^{-1}}= -\frac{\alpha}{x^{\alpha}}\to \infty \text{ per } x \to 0
+    \]
+    eppure è assolutamente continua in quanto \(C^{1}\) in ogni intervallo
+    \([\delta, 1 /2]\) con \(\delta > 0\).
+\end{remark}
+\begin{note}
+    Per \(p = \infty\) si ottiene che \(f\) è 1-Hölderiana, cioè lipschitziana.
+\end{note}
+
+Lo spazio \(C^{0, 1}{([a,b])}\) delle funzioni lipschitziane su \([a,b]\)
+coincide con lo spazio \(W^{1, \infty}{(a,b)}\) cioè la derivata quasi ovunque
+di una funzione lipschitziana non solo è integrabile ma è anche essenzialmente
+limitata, cioè è in \(L^{\infty}{([a, b])}\).
+
+Per \(N > 1\) le cose sono più complicate, bisogna guardare come si comportano i
+gradienti invece che le derivate, ad esempio.
 \end{document}

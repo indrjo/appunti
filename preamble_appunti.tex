@@ -27,7 +27,7 @@
 \newcommand*{\transp}[2][-3mu]{\ensuremath{\mskip1mu\prescript{\smash{\mathrm t\mkern#1}}{}{\mathstrut#2}}}%
 
 % newcommand for span with langle and rangle around
-\newcommand{\Span}[1]{\left\langle#1\right\rangle}
+\newcommand{\Span}[1]{{\left\langle#1\right\rangle}}
 
 \newcommand{\incfig}[2][1]{%
     \def\svgwidth{#1\columnwidth}
@@ -41,6 +41,8 @@
 
 \newcounter{excounter}[section]\setcounter{excounter}{0}
 \renewcommand{\theexcounter}{\arabic{section}.\arabic{excounter}}
+
+\numberwithin{equation}{section}
 
 \newenvironment{theorem}[1][]{
     \refstepcounter{theo}
