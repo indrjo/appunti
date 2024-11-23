@@ -618,9 +618,9 @@ ovvia, ci serve per poter dimostrare il problema di esistenza e unicità delle
 soluzioni, poiché permette di trasformare il problema di trovare una soluzione
 in un problema del punto fisso.
 
-\begin{definition}
+\begin{definition}{Funzione Lipschitziana}
 Una funzione \(g: G \subseteq \mathbb{R}^{m} \to \mathbb{R}^{k} \) è detta
-\textbf{lipschiitziana} se esiste una costante \(L > 0\) tale che 
+\textbf{lipschitziana} se esiste una costante \(L > 0\) tale che 
 \[
     \|g(x) - g(y)\| \le L \|x - y\| \quad \forall x, y \in G
 \]
@@ -658,7 +658,7 @@ Una funzione \(g: G \subseteq \mathbb{R}^{m} \to \mathbb{R}^{k} \) è detta
     \]
 \end{example}
 
-\begin{definition}
+\begin{definition}{Funzione l.l.2u.1}
     Sia \(D \subseteq \mathbb{R}^{N + 1} \) aperto e \(f : D \to
     \mathbb{R}^{N}\) (con \(f(t, \mathbf{x})\)). Diciamo che \(f\) è localmente lipschitziana nella seconda
     variabile, uniformemente rispetto alla prima se per ogni compatto \(K
@@ -1086,7 +1086,7 @@ prendere \(a\) arbitrariamente grande (\(f\) è definito su tutto \(\mathbb{R}^2
 Sia in seguito \(f : D\subseteq \mathbb{R}^{N+1} \to \mathbb{R}^{N} \) continua
 e \(x : J \to \mathbb{R}^{N}\) soluzione di \(x' = f(t, x)\).
 
-\begin{definition}
+\begin{definition}{Prolungamento}
     Diciamo \textbf{prolungamento} di \(x\) ogni soluzione
     \[
         \hat{x} : \hat{J} \to \mathbb{R}^{N} \quad \hat{J} \not\supseteq J,
@@ -1722,7 +1722,7 @@ che per unicità coincidono.
 Ne consegue che posso sempre ricondurre un problema di Cauchy autonomo a uno in
 cui \(t_{0} = 0\). È una cosa così comune che motiva la seguente definizione
 
-\begin{definition}
+\begin{definition}{Flusso}
     Diciamo \textbf{flusso} associato all'equazione differenziale \(x' = f
     {(x)}\) la funzione
     \[
@@ -1769,7 +1769,7 @@ cui \(t_{0} = 0\). È una cosa così comune che motiva la seguente definizione
     allora \(\varphi \) è anche detta ``sistema dinamico''
 \end{remark}
 
-\begin{definition}
+\begin{definition}{Orbita}
 
 Dato \(x_{0} \in \Omega\) diciamo \textbf{orbita} per \(x_{0}\) l'insieme 
 \[
@@ -1982,19 +1982,330 @@ che ha come caso particolare il precedente \(x' = g{\left( \frac{x}{t} \right)}
     \end{align*}
     che è del primissimo tipo visto.
 \end{itemize}
-\subsection{\(F{(t, x, x')} = 0\) }
+\subsection{Equazioni del tipo \(F{(y, y')} = 0\) oppure \(F{(x, y')} = 0\) }
+In questa sezione e nelle prossime, per via del significato geometrico
+sottostante alle equazioni e ai metodi esposti, preferiamo chiamare \(x\) la
+``variabile indipendente'' e \(y\) la ``variabile dipendente'', quindi \(y =
+y{(x)}\) 
 \begin{example}[Brachistocrona]
-    \(curva di minima discesa\) 
+    (curva di minima discesa) 
     Siano \(p_{1} = {(x_{1}, y_{1})}\) e \(p_{2} = {(x_{2}, y_{2})}\) con
-    \(x_{1} < x_{2}\) e \(y_{1} > y_{2}\) 
+    \(x_{1} < x_{2}\) e \(y_{1} > y_{2}\) (figura~\ref{fig:brachistocrona}).
 \begin{figure}[ht]
     \centering
     \incfig[.5]{brachistocrona}
-    \caption{brachistocrona}
-    \label{fig:brachistocrona}
+    \caption{brachistocrona}\label{fig:brachistocrona}
 \end{figure}
-    Problema: Qual è la funzione su per la quale il tempo di discesa sotto
-    l'azione della sola forza peso è minimo?
+
+    Qual è la funzione su per la quale il tempo di discesa sotto
+    l'azione della sola forza peso è minimo? Sia 
+    \[
+      \begin{cases}
+          x = x{(t)} \\
+          y = y{(y)}
+      \end{cases}
+    \]
+    la legge oraria del moto del punto. Supporremo che la curva descritta sia il
+    grafico di funzione \(u : [x_{1},x_{2}] \to \mathbb{R}\). Pertanto, per ogni
+    \(t\) risulta \(y{(t)} = u{(x{(t)})}\). 
+
+    Se assumiamo che il tempo \(t=0\) corrisponda alla posizione iniziale
+    \(p_{1}\), lo spazio percorso fino all'istante \(t\) è
+    \[
+        s{(t)} = \int_{x_{1}}^{x{(t)}}\sqrt{1 + u'{(x)}^2}dx
+    \]
+    e la velocità (scalare) è data da
+    \begin{equation}\label{eq:v_met1}
+        v{(t)} = \sqrt{1 + u'{{(x{(t)})}^2} } x'{(t)}
+    \end{equation}
+    D'altronde possiamo anche calcolare \(v\) utilizzando la conservazione
+    dell'energia: se \(m\) è la massa del punto, \(g\) l'accelerazione di
+    gravità e \(v_{0} = v{(0)}\) la velocità iniziale, allora
+    \[
+        \frac{1}{2} m v_{0}^2 + mgy_{1} = \frac{1}{2} m v{(t)}^2 + mgy{(t)}
+    \]
+    da cui
+    \begin{align*}
+        v{(t)}^2 &= v_{0}^2 + 2g(y_{1} - y{(t)}) \\
+         &= 2g{(H - u{(x{(t)})})}, \quad \text{ con } H = \frac{v_{0}^2}{2g} +
+         y_{1}
+    \end{align*}
+    Per confronto con la~\eqref{eq:v_met1} otteniamo 
+    \[
+      x'{(t)} = \frac{\sqrt{2g{{\left( H - {(u \circ x)}{(t)}
+      \right)}}}}{\sqrt{1 + u'{(x{(t)})^2}}}
+    \]
+    Possiamo assumere che \(x{(t)}\) sia invertibile; per l'inversa \(t'{(x)}\)
+    risulta
+    \[
+        t'{(x)} = \frac{1}{x'{(t)}} = \frac{\sqrt{1 + u'{{(x)}^2}}}{\sqrt{2g{(H -
+        u{(x)})}}}
+    \]
+    Il tempo impiegato per percorrere l'arco fra \(p_{1}\) e \(p_{2}\) si
+    ottiene ora per integrazione:
+    \[
+        T{(u)} = \frac{1}{\sqrt{2g}} \int_{x_{1}}^{x_{2}} \frac{\sqrt{1 +
+        {u'{(x)}}^2}}{H - u{(x)}} dx
+    \]
+    Come verrà maggiormente dettagliato in appendice, le \emph{eventuali}
+    soluzioni del problema di minimo per il funzionale 
+    \[
+      T{(u)} = \int_{x_{1}}^{x_{2}} f{(u{(x)}, u'{(x)})} dx \quad \text{  con  } f{(u,
+      u')} = \frac{1}{\sqrt{2g}} \frac{\sqrt{1+ {u'{(x)}}^2}}{H - u{(x)}}
+    \]
+    rendono costante la funzione \(f{(u, u')} - u'f_{u'} {(u, u')}\). Un calcolo
+    diretto porta quindi alla condizione
+    \begin{equation}\label{eq:brachistocrona_diff}
+      {(H - u)}{(1 + u'^2)} = c^2 \quad (\text{\(c^2\) costante})
+    \end{equation}
 \end{example}
 
+\paragraph{\(F{(y, y')} = 0\)} Prima di procedere nella risoluzione della
+brachistocrona, consideriamo il caso generale di un'equazione differenziale del
+tipo \(F{(y, y')} = 0\). In particolare sia \(\mathcal{C}\) la curva nel piano
+\(y, y'\) di tale equazione. Sia allora
+\[
+  \mathcal{C} = \begin{cases}
+      y = A{(s)} \\
+      y' = B{(s)}
+  \end{cases}
+\]
+una rappresentazione parametrica di \(\mathcal{C}\). Cerchiamo allora una
+rappresentazione parametrica del grafico \(y = y{(x)}\) di una soluzione di
+\(F{(y, y')} =0\) nella forma 
+\[
+  \begin{cases}
+      x = x{(s)} \\
+      y = y{(x{(s)})}
+  \end{cases}
+\]
+Poniamo \(y{(s)} = y{(x{(s)})}\) e poiché vale
+\[
+    \frac{dy}{ds} = y'{(x{(s)})} x'{(s)} \implies A'{(s)} = B{(s)} x'{(s)}
+\]
+da cui
+\begin{equation}\label{eq:diff_Fyyp}
+    x'{(s)} = \frac{A'{(s)}}{B{(s)}} \quad x{(s)} = \int \frac{A'(s)}{B(s)} ds
+    \implies \text{ soluzione: } \begin{cases}
+        x = \int \frac{A'(s)}{B(s)} ds \\
+        y = A{(s)}
+    \end{cases}
+\end{equation}
+\setcounter{excounter}{\value{excounter}-1}
+\begin{example}[Brachistocrona]
+    Tornando all'esempio precedente vogliamo risolvere l'equazione~\eqref{eq:brachistocrona_diff}, ossia
+    \[
+    F{(y, u')} = {(H - u)}{\left( 1 + {u'}^2 \right)} = c^2 \implies
+    \begin{cases}
+        H - u = \frac{c^2}{1 + \xi^2} \iff u = H - \frac{c^2}{1 + \xi^2} \\
+        u' = \xi
+    \end{cases}
+    \]
+    da cui, operando la sostituzione \(\xi = \tan \frac{s}{2}\) abbiamo
+    \[
+      \begin{cases}
+          u = H - c^2 \cos^2 \frac{s}{2} = H - \frac{c^2}{2} {(1 + \cos s )} &=:
+          A{(s)} \\
+          u' = \tan \frac{s}{2} &=: B{(s)}
+      \end{cases}
+    \]
+    e ora risolvendo secondo la~\eqref{eq:diff_Fyyp} otteniamo \(\displaystyle
+    x{(s)} = \int \frac{A'{(s)}}{B{(s)}} ds = \frac{c^2}{2} \int \frac{\sin
+    s}{\tan \frac{s}{2}} = \frac{c^2}{2} 2 \int \frac{\cancel{\sin \frac{s}{2}}
+    \cos \frac{s}{2}}{\cancel{\sin \frac{s}{2}} / \cos \frac{s}{2}} ds =
+    c^2 \int \cos^2 \frac{s}{2} ds = \frac{c^2}{2} \int {(1 + \cos s)} ds\) e
+    quindi una rappresentazione parametrica del grafico della soluzione è
+    \[
+        \begin{cases}
+            x = \frac{c^2}{2} {(s + \sin s)} \\
+            y = H - \frac{c^2}{2} {(1 + \cos s)}
+        \end{cases}
+        \implies 
+        \begin{cases}
+            x = \frac{c^2}{s} {(\theta + \pi - \sin \theta)} =
+            K + r{(\theta - \sin \theta)} \\
+            y = H - \frac{c^2}{2} {(1 - \cos \theta)} =
+            H - r{(1 - \cos \theta)}
+        \end{cases}
+    \]
+    con \(s = \theta + \pi\), \(\frac{c^2}{2} = r\) e \(K = \frac{c^2}{2} \pi\) 
+    che è l'equazione di un arco di cicloide, ossia la curva descritta da un
+    punto di una circonferenza lungo la sua rotazione senza slittamento su una
+    retta, come in figura~\ref{fig:cicloide}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{cicloide}
+    \caption{La cicloide ha equazione \(x = r{(\theta - \sin \theta)}\) e \(y =
+    r{(1 - \cos \theta)}\)}\label{fig:cicloide} \end{figure}
+\end{example}
+
+\paragraph{\(F{(x, y')} = 0\)} Questo caso si affronta in modo analogo al
+precedente. Sia infatti \(\mathcal{C}\) una curva nel piano \(x, y'\) descritta
+da \(F{(x, y')} = 0\) e rappresentata parametricamente da
+\[
+  \mathcal{C} : \begin{cases}
+      x = A{(s)} \\
+      y' = B{(s)}
+  \end{cases}
+\]
+allora \(\frac{dy}{ds} = y'{(x{(s)})}x'{(s)}\) e quindi similmente a prima
+otteniamo
+\[
+  \mathcal{C} : \begin{cases}
+      x = A{(s)} \\
+      y = \int A'{(s)} B{(s)} ds
+  \end{cases}
+\]
+\section{Sistemi lineari}
+\subsection{Equazioni differenziali e forme differenziali in due dimensioni} 
+Sia \(\Omega \subseteq \mathbb{R}^2 \) aperto, \(f: \Omega \to \mathbb{R}^2\)
+una funzione \(C^{1}\) e \(x' = f{(x)}\). Allora se \(f = {(f_{1}, f_{2})}\) e
+\(x = {(x_{1}, x_{2})}\) allora
+\begin{equation}\label{eq:diff_2}
+  x' = f{(x)} \iff \begin{cases}
+      x_{1}' = f_{1}{(x_{1}, x_{2})} \\
+      x_{2}' = f_{2}{(x_{1}, x_{2})}
+    \end{cases}
+\end{equation}
+Sia ora \(x : J \to \Omega\) una soluzione, \(J = {(a, b)}\) e sia \(\gamma\)
+l'orbita corrispondente. Allora \(x{(\cdot )}\) è una rappresentazione
+parametrica di \(\gamma\) e possiamo individuare \(\gamma\) mediante una
+qualunque altra rappresentazione parametrica. In particolare sia \(\psi :
+{(\alpha,\beta)} \to (a, b)\) è \(C^{1}\), biettiva con \(\psi'\) mai nulla e
+con inversa \(C_{1}\). Se allora \(u = x \circ \psi\) allora
+\[
+    u'{(\tau)} = x'{(\psi {(\tau)})}\psi'{(\tau)} =
+    f{(x{(\psi{(\tau)})})}\psi'{(\tau)} = f{(u{(\tau)})}\psi'{(\tau)}
+\]
+allora rinominando \(\psi'{(\tau)} = \lambda{(\tau)}\) abbiamo che \(u\)
+soddisfa la proprietà
+\begin{definition}{\(u' \parallel f{(u)}\) }
+    Diciamo che \(u\) soddisfa la proprietà \(u' \parallel f{(u)}\) se esiste una
+    funzione \(\lambda : J \to \mathbb{R}\) continua e mai nulla tale che \[u'{(\tau)} = f{(u{(\tau)})}\lambda{(\tau)}\]
+\end{definition}
+Viceversa, se \(u : (\alpha, \beta) \to \Omega\) soddisfa \(u' \parallel
+f{(u)}\) allora è la riparametrizzazione di una soluzione di \(x' = f{(x)}\).
+Infatti sia \(\psi\) una primitiva di \(\lambda\), ossia \(\psi' = \lambda\).
+Definiamo \(x = u \circ \psi^{-1}\) che è soluzione, infatti\footnote{dirò per
+comodità che \(h = fg = f \cdot g\) quando \(h{(t)} = f{(t)}g{(t)}\)}
+\[
+x' = {(u'\circ \psi^{-1})}\cdot {\psi^{-1}}' = {(\lambda \circ
+\psi^{-1})}{(f \circ u \circ \psi^{-1})} \frac{1}{{(\psi' \circ
+\psi^{-1})}} = f \circ x = f{(x)}
+\]
+Quindi la determinazione delle orbite si riduce all'individuazione di funzioni
+\(u\) soddisfacenti \(u'\parallel f{(u)}\). Da qui in poi useremo la notazione
+\(x{(\cdot )}\) anziché \(u{(\cdot )}\).
+\begin{proposition}\label{prop:41}
+    Sia \(x: J \to \Omega\) una curva \emph{regolare} su cui \(f\) non si
+    annulla. Allora sono equivalenti:
+\begin{enumerate}[label = \roman*)]
+    \item \(\exists \lambda \in C^{0}{(J)}\) mai nulla tale che \(x'=
+        \lambda{(f{(x)})}\) 
+    \item \(\det \begin{bmatrix}
+        x_{1}'{(t)} & x_{2}'{(t)} \\
+        f_{1}{(x{(t)})} & f_{2}{(x{(t)})}
+    \end{bmatrix} = 0\) per ogni \(t \in J\) 
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+    L'implicazione \({(i)} \implies {(ii)}\) è ovvia. Se \(x'= \lambda f\)
+    allora
+    \begin{equation}\label{eq:prop41}
+\begin{pmatrix}
+        x_{1}' \\
+        x_{2}'
+    \end{pmatrix} = \lambda \begin{pmatrix}
+        f_{1}\circ x \\
+        f_{2}\circ x
+    \end{pmatrix}
+    \end{equation}
+
+    Per \({(ii)} \implies {(i)}\) abbiamo per ipotesi che la seconda riga non è
+    mai nulla (\(f\) non si annulla) e la prima non è mai nulla (\(x\) è
+    regolare). Necessariamente quindi vale la~\eqref{eq:prop41} con un
+    \(\lambda{(t)}\) mai nullo. Inoltre \(\forall t \in J\) almeno una fra
+    \(f_{1}\) e \(f_{2}\) è non nulla, e quindi \(\lambda{(t)} =
+    \frac{x_{1}'{(t)}}{f_{1}{(x{(t)})}}\) oppure l'altra localmente, e quindi è
+    continua.
+\end{proof}
+
+La condizione \({(ii)}\) della proposizione~\ref{prop:41} si può scrivere come 
+\[
+  f_{2}{(x{(t)})}x_{1}'{(t)} - f_{1}{(x{(t)})}x_{2}'{(t)} = 0
+\]
+ossia posto
+\begin{equation}\label{eq:diff_associata}
+  \omega{(x_{1},x_{2})} = f_{2}{(x_{1}, x_{2})}dx_{1} - f_{1}{(x_{1},
+  x_{2})}dx_{2}
+\end{equation}
+l'uguaglianza diventa semplicemente \(\langle \omega{(x{(t)})}, x'{(t)} \rangle
+= 0\) 
+
+In generale data una forma differenziale \(\omega{(x_{1},x_{2})} = A{(x_{1},
+x_{2})}dx_{1} + B{(x_{1}, x_{2})}dx_{2}\) su \(\Omega\) si pone
+\begin{definition}{Curva soluzione}
+    Una curva regolare \(x:J\to \Omega\) si dice \textbf{curva soluzione}
+    dell'equazione \(\omega{(x_{1}, x_{2})} = 0\) se per ogni \(t \in J\)
+    soddisfa
+    \[
+        A{(x{(t)})}x'{(t)} + B{(x{(t)})}y'{(t)} = 0 \,\,\big(= \langle \omega{(x{(t)})},
+        x'{(t)}\rangle\big)
+    \]
+\end{definition}
+Il problema della determinazione delle orbite di~\eqref{eq:diff_2} equivale ad
+individuare le curve soluzione di~\eqref{eq:diff_associata}.
+\begin{remark}[Formalmente]
+    La notazione è bella, ed ha una sua motivazione, per cui essendo una bella
+    notazione si ottengono risultati sensati:
+    \[
+      \begin{cases}
+          \frac{dx_{1}}{dt} = f_{1}{(x_{1}, x_{2})} \\
+          \frac{dx_{2}}{dt} = f_{2}{(x_{1}, x_{2})}
+      \end{cases}
+      \implies \frac{dx_{1}}{dx_{2}} = \frac{f_{1}}{f_{2}} \implies f_{2}dx_{1} -
+      f_{1}dx_{2} = 0
+    \]
+\end{remark}
+Sinora abbiamo osservato solo sistemi autonomi con \(N = 2\). Possiamo anche
+considerare problemi \(N=1\) non autonomi, ossia \(x' = f{(t, x)}\), riducendoli
+ad un sistema autonomo in \(N = 2\) con
+\[
+  \begin{cases}
+      x_{1} := t \\
+      x_{2} := x
+  \end{cases}
+    \implies  
+\begin{cases}
+    x_{1}' = 1 \\
+    x_{2}' = f{(x_{1}, x_{2})}
+\end{cases}
+\]
+le cui orbite sono date da \(f{(x_{1}, x_{2})}dx_{1} - dx_{2} = 0\), ossia
+\[
+  f{(t, x)}dt - dx = 0 \quad \text{ che può essere trovato formalmente da }
+  {\frac{dx}{dt} = f}
+\]
+Un caso rilevante è quello in cui~\eqref{eq:diff_associata} è esatta, ossia
+esiste una funzione \(H \in C^{1}{(\Omega)}\) tale che \(dH = \omega\) 
+\begin{proposition}
+    Sia \(\omega = dH\). Allora
+\begin{itemize}[label = --]
+    \item su ogni curva soluzione la funzione \(H\) è costante
+    \item una curva regolare contenuta in un insieme di livello di \(H\) è una
+        curva soluzione
+\end{itemize}
+\end{proposition}
+\begin{proof}
+    Sia \(x : J \to \Omega\) una curva \(C^{1}\). Abbiamo che
+    \[
+      \frac{d}{dt} H {(x{(t)})} = \frac{\partial H}{\partial x_{1}} x_{1}'{(t)}
+      + \frac{\partial H}{\partial x_{2}} x_{2}'{(t)} = \langle
+      \omega{(x{(t)})}, x'{(t)} \rangle
+    \]
+    dove il primo termine è nullo se \(H\) è costante sul supporto di \(H\),
+    ossia \(x\) è contenuta in un insieme di livello di \(H\); l'ultimo termine
+    invece è nullo quando \(x\) è curva soluzione.
+\end{proof}
 \end{document}
