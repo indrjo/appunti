@@ -802,7 +802,7 @@ Allora \(d = 0\) quasi ovunque in \(\mathbb{R}\).
     con \(q \in \mathbb{Q}\) 
 \end{example}
 
-\begin{example}[Insieme di Cantor]
+\begin{example}[Insieme di Cantor]\label{ex:cantor}
     L'insieme di Cantor è un trascurabile che ha la cardinalità del continuo.
     Si costruisce prendendo una successione di insiemi chiusi in \(\mathbb{R}\). 
     \begin{align*}
@@ -819,9 +819,9 @@ Allora \(d = 0\) quasi ovunque in \(\mathbb{R}\).
     \(C_{n}\) è composto da \(2^{n}\) intervallini ciascuno di lunghezza
     \(\frac{1}{3}^{n}\) 
     L'insieme di Cantor è definito come
-    \[
+    \begin{equation}\label{eq:cantor}
         C = \bigcap_{n \in \mathbb{N}} C_{n}
-    \]
+    \end{equation}
     Allora \(C\) è chiuso perché ogni \(C_{n}\) è chiuso, e \(C\) è non vuoto
     perché ad esempio \(0 \in C\).
 
@@ -2518,7 +2518,7 @@ Notiamo che
     \]
     viene detto \textbf{prodotto di convoluzione} di \(f\) e \(g\).
 \end{definition}
-\begin{proposition}
+\begin{proposition}\label{prp:convoluzione_l1}
     Se \(f, g \in L^{1}(\mathbb{R}^{N})\) allora \(f \star g \in
     L^{1}(\mathbb{R}^{N})\) (ed è ben definita).
 \end{proposition}
@@ -3589,6 +3589,156 @@ finita] Sia \({\{\Omega_{n}\}}_{n \in \mathbb{N}}\) una partizione di
     quindi \(\varphi_0 = 0\) e di conseguenza \(\varphi_s = \varphi'_s\) e
     \(\varphi_a = \varphi'_a\).
 \end{proof}
+
+\subsection{Misure di Lebesgue-Stieltjes}
+Sia \(F : \mathbb{R} \to \mathbb{R}\) una funzione monotona non decrescente e
+continua da sinistra, cioè 
+\[
+    \forall x_{0} \in \mathbb{R} \quad \lim_{x \to x_{0}^{-}} F{(x)} = F{(x_{0})}
+\]
+Allora \(F\) ha al più un'infinità numerabile di punti di discontinuità, poiché
+è monotona. Infatti una funzione monotona ha solo tipi di discontinuità di tipo
+salto, e si riescono a ``contare'', infatti ogni intervallino corrispondente a
+un salto contiene almeno un numero razionale e quindi gli si può associare un
+numero razionale ivi contenuto.
+
+Ora consideriamo la seguente famiglia di sottoinsiemi di \(\mathbb{R}\) 
+\[
+    \mathcal{R} = \{[a, b); a, b \in  \mathbb{R}, a < b\} \cup \{\varnothing\} 
+\]
+su tale famiglia definiamo una misura elementare 
+\[
+    m_F{([a,b))} = F{(b)} - F{(a)} \quad m_F{(\varnothing)} = 0
+\]
+Notare che \(\mathcal{R}\) non è nemmeno un'algebra lol. Tuttavia vale un
+risultatino
+\begin{proposition}
+    Se \([a, b) = \bigcup_{n=1}^{\infty}[a_{n}, b_{n})\) dove \([a_{i}, b_{i})
+    \cap [a_{j}, b_{j}) = \varnothing\) per ogni \(i \neq j\); allora
+    \[
+        m_F{([a, b))} = \sum_{n=1}^{\infty} m_F{([a_{n}, b_{n}))}
+    \]
+\end{proposition}
+\begin{proof} \( \) 
+\begin{enumerate}[label = \arabic*.]
+    \item[\(\le \)] La ridotta \(\sum_{n=1}^{k} m_F{([a_{n}, b_{n}))} \) della
+        serie dà la somma delle lunghezze \(F{(b_{n})} - F{(a_{n})} \ge 0\) per
+        \(n=1,\dots,k\) e danno la variazione di \(F\) sugli intervallini.
+        Allora poiché \(F\) è monotona, 
+        \[
+            \sum_{n=1}^{k} m_F{([a_{n}, b_{n}))} \le m_F{([a, b))} \quad \forall
+            k \in \mathbb{N}
+        \]
+        e quindi la serie converge e la sua somma è minore o eguale di
+        \(m_F{([a,b))}\) 
+    \item[\(\ge \)] Sia \(\varepsilon>0\). Allora esiste \(\overline{b} < b\)
+        tale che \(F{(\overline{b})}\ge F{(b)}-\varepsilon\). Per ogni \(n \in
+        \mathbb{N}\) esistono \(\overline{a}_n < a_{n}\) tali che 
+        \[
+          F{(\overline{a}_n)} \ge F{(a_{n})} - \frac{\varepsilon}{2^{n}}
+        \]
+        osserviamo che \([a, \overline{b}] \subseteq [a, b)\)  e invece \([a_{n},
+        b_{n}) \subseteq (\overline{a}_{n}, b_{n}) \) per ogni \(n \in \mathbb{N}\). Allora
+        \[
+            [a, \overline{b}] \subseteq \bigcup_{n=1}^{\infty}(\overline{a}_{n}, b_{n})
+        \]
+        poiché \([a, \overline{b}]\) è un compatto, ne possiamo estrarre un
+        sottoricoprimento finito, quindi esistono \(n_1, \dots, n_k\) tali che
+        \[
+            [a, \overline{b}] \subseteq \bigcup_{i=1}^{k}(\overline{a}_{n_i}, b_{n_i})
+        \]
+        e quindi abbiamo
+        \[
+          F{(\overline{b})} - F{(a)} \le  \sum_{n=1}^{k} {\left( F{(b_{n})} -
+          F{(\overline{a}_n)} \right)}  
+        \]
+        e quindi
+        \begin{align*}
+            F{(b)} - \varepsilon - F{(a)} &\le F{(\overline{b})} - F{(a)} \le \\
+            &\le 
+          \sum_{n=1}^{k} {\left( F{(b_{n})} - F{(\overline{a}_n)} \right)} \le
+          \sum_{n=1}^{k} {\left( F{(b_{n})} - F{(a_{n})} \right)} +
+          \sum_{n=1}^{k} \frac{\varepsilon}{2^{n}}
+        \end{align*}
+        da cui riarrangiando i termini segue la tesi
+\end{enumerate}
+\end{proof}
+Possiamo ora definire una misura esterna \(\mu^\star_F : 2^{\mathbb{R}} \to [0,
++\infty]\) definita come
+\[
+    \mu^\star_F{(E)} = \inf \left\{ \sum_{n=1}^{\infty} m_F{(I_{n})} : E
+    \subseteq \bigcup_{n=1}^{\infty} I_{n} \,\,;\,\, I_{n} \in \mathcal{R}
+\,\,\forall n \right\} 
+\]
+Tale insieme non è mai vuoto, infatti \(\mathbb{R} \subseteq \bigcup_{k \in
+\mathbb{Z}} [k, k+1) \) ricopre ogni insieme \(E \subseteq \mathbb{R} \).
+\begin{proposition}
+    \(\mu^\star_F\) è una misura esterna.
+\end{proposition}
+\begin{proof}
+\begin{itemize}[label = --]
+    \item \(\mu^\star_F{(\varnothing)} = 0\) in quanto posso ricoprire l'insieme
+        vuoto con un'unione numerabile di insiemi vuoti che hanno misura nulla
+    \item  Se \(A \subseteq B \) allora ogni ricoprimento di \(B\) è anche
+        ricoprimento di \(A\), per cui \(\mu^\star_F{(A)} \le \mu^\star_F{(B)}\)
+    \item Sia \(E \subseteq \bigcup_{n \in \mathbb{N}} E_{n} \) allora
+        \(\mu^\star_F{(E)} \le \sum_{n=1}^{\infty} \mu^\star_F{(E_{n})} \).
+        Infatti (dimostrandolo sono nel caso in cui la serie converge, perché
+        altrimenti è ovvio), esiste \(\bigcup_{k \in \mathbb{N}} I_{n, k} \),
+        con \(I_{n, k}  \in \mathcal{R}\) e \(\sum_{k=1}^{\infty} m_F{(I_{n, k}
+        )} \le \mu^\star_F{(E_{n})} + \frac{\varepsilon}{2^{n}}\). Tale unione
+        ricopre tutto \(E\) e allora necessariamente
+        \[
+            \mu^\star_F{(E)} \le \sum_{k, n \in \mathbb{N}} m_F{(I_{n, k})} =
+            \sum_{n=1}^{\infty} \sum_{k=1}^{\infty} I_{n, k} \le
+            \sum_{n=1}^{\infty}  \mu^\star_F{(E_{n})} + \varepsilon
+        \]
+        da cui \(\mu^\star_F{(E)} \le \sum_{i=1}^{\infty} \mu^\star_F{(E_n)} \)
+        per l'arbitrarietà di \(\varepsilon\) 
+\end{itemize}
+\end{proof}
+Ora a partire da questa misura esterna passiamo a considerare insiemi misurabili
+e misura di questi. Chiaramente misurabili e misura associata dipendono da
+\(F\). 
+\begin{theorem}[Teorema di Caratheodory]
+    Se \(\mu^\star\) è una misura esterna su un insieme \(\Omega\), allora la
+    famiglia 
+    \[
+      \mathcal{M} = \left\{ A \subseteq \Omega : \forall E \subseteq
+          \Omega\,,\,\, \mu^\star{(E)} = \mu^\star{(E \cap A)} + \mu^\star{(E
+      \sminus A)} \right\}
+    \]
+    è una \(\sigma\)-algebra e la restrizione di \(\mu^\star\) a \(\mathcal{M}\)
+    è una misura. In particolare \((\Omega, \mathcal{M},
+    \mu^\star|_{\mathcal{M}} )\) è uno spazio di misura.
+\end{theorem}
+Applichiamo quindi il teorema di Caratheodory alla misura esterna
+\(\mu^\star_F\) e otteniamo che esiste una \(\sigma\)-algebra \(\mathcal{M}_F\).
+Quindi in particolare la famiglia dei borelliani \(\mathcal{B}(\mathbb{R})
+\subseteq \mathcal{M}_F\). Inoltre la misura \(\mu_F =
+\mu^\star_F|_{\mathcal{M}_F}\) è un'estensione della misura elementare \(m_F\).
+Perdipiù \(\mu_F{(x_{0})} = 0\) se e solo se \(F\) è continua in \(x_{0} \in
+\mathbb{R}\); infatti \(\{x_{0}\} = \bigcap_{n \in \mathbb{N}} [x_{0}, x_{0} +
+\frac{1}{n})\) che è una successione decrescente di insiemi tutti di misura
+finita \(F{(x_{0} + \frac{1}{n})} - F{(x_{0})}\) e allora la loro intersezione è  
+\[
+    \mu_F{(x_{0})} = \lim_{n \to \infty} \mu_F{\left(\left[x_{0}, x_{0} +
+        \frac{1}{n}\right)\right)} =
+    F{\left(x_{0} + \frac{1}{n}\right)} - F{(x_{0})} = \lim_{x \to x_{0}^{+}} F{(x)} -
+    F{(x_{0})}
+\]
+che è nulla se e solo se \(F\) è continua anche da destra in \(x_{0}\).
+
+Se prendo \(F{(x)}\) costante allora ottengo la misura nulla. Se invece
+considero \(F{(x)} = x\) ottengo la misura 1-dimensionale di Lebesgue e i misurabili di
+Lebesgue. Se prendo \(F{(x)} = \rchi_{(0, \infty)} \) funzione Heaviside allora
+\(\mu_F\) coincide con la misura di Dirac centrata in \(0\) e \(\mathcal{M}_F =
+2^{\mathbb{R}}\).
+
+Le misure che così costruiamo, ossia le misure di Lebesgue-Stieltjes, sono
+misure \(\sigma\)-finite. In particolare \(\mu_F\) è finita se \(F\) è limitata,
+perché \(\mu_F{(\mathbb{R})} = \lim_{x \to \infty} F{(x)} - \lim_{x \to -\infty}
+F{(x)}\) e se \(F\) è limitata allora i due limiti esistono e sono finiti.
 
 \newpage
 \section{Analisi Funzionale}
@@ -4984,20 +5134,133 @@ h_{\overline{n}} \|^{p-1} \|v - h_{\overline{n}} \|_1 \right)}^{\frac{1}{p}} =\\
 \end{proof}
 
 \subsection{Operatori lineari e continui tra spazi normati}
-% intro
-% norma
-\begin{align*}
-    \|T\| &= \inf \{C \ge 0: \|Tx\|_Y \le C \|x\|_X \quad \forall x \in X\} = \\
-          &= \sup \left\{\frac{\|Tx\|_Y}{\|x\|_X}, \quad x \in X \sminus
-          \{0_X\} \right\} 
-\end{align*}
-\begin{note}
-    Nella definizione con l'inf, l'inf è in realtà un minimo \(\|T\|\), infatti
+\begin{definition}{Operatore lineare}
+    Siano \(X, Y\) spazi normati. Sia \(T : X \to Y\) un operatore. Allora è
+    lineare se 
     \[
-        \|Tx\|_Y \le \|T\|\|x\|_X \quad \forall x \in X
+      T{(\alpha x + \beta x )} = \alpha T{(x)} + \beta T{(x)} \quad \forall x, y
+      \in X \quad \forall \alpha, \beta \in \mathbb{K}
     \]
+\end{definition}
+\begin{example}
+    Se \(X = \mathbb{R}^{n}\) e \(Y = \mathbb{R}^{m}\), un'applicazione o
+    operatore lineare viene tipicamente rappresentato da un sistema lineare 
+    \begin{equation}\label{eq:sistema_lineare}
+        \begin{cases}
+            y_1 = a_{11}x_1 + \ldots + a_{1n}x_n \\
+            \vdots \\
+            y_m = a_{m1}x_1 + \ldots + a_{mn}x_n
+        \end{cases}
+    \end{equation}
+\end{example}
+Possiamo anche pensare a operatori lineari tra spazi a dimensione infinita di
+funzioni. Ad esempio tra funzioni continue possiamo considerare l'operatore 
+\[
+  \begin{align*}
+      T: C^{0}{([0, 1])} &\longrightarrow C^{0}{([0,1])} \\
+      f &\longmapsto T(f) = hf
+  \end{align*}
+\] dove \(h \in C^{0}{([0, 1])}\) è una funzione fissata. Questo è un operatore
+lineare, infatti
+\[
+    T{(\alpha f + \beta g)} = h{(\alpha f + \beta g)} = \alpha hf + \beta hg =
+    \alpha T{(f)} + \beta T{(g)}
+\]
+
+\begin{definition}{Operatore continuo}
+    Siano \(X, Y\) spazi normati. Sia \(T : X \to Y\) un operatore. Allora è
+    continuo se la funzione individuata da \(T\) è continua da \(X\) a \(Y\) 
+\end{definition}
+\begin{definition}{Operatore limitato}
+    Un operatore \(T : X \to Y\) si dice \textbf{limitato} se esista una
+    costante \(C > 0\) tale che
+    \[
+      \|Tx\|_Y \le C\|x\|_X \quad \forall x \in X
+    \]
+\end{definition}
+\begin{remark}
+    Niente a che vedere col concetto di \emph{funzione} limitata.
+\end{remark}
+\begin{theorem}
+    Siano \(X, Y\) spazi normati e \(T : X \to Y\) un operatore lineare. Allora
+    \(T\) è continuo se e solo se \(T\) è limitato.
+\end{theorem}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Supponiamo \(T\) continuo, dunque continuo in \(0_X\). Allora
+        \begin{equation}\label{eq:continuita123}
+          \forall \varepsilon > 0 \quad \exists \delta > 0 : \|x\|_X \le  \delta
+          \implies \|Tx\|_Y \le  \varepsilon
+        \end{equation}
+        preso ora \(0_X \neq z \in X\) allora \(\displaystyle \frac{\delta
+        z}{\|z\|_X} =: x\) deve soddisfare~\ref{eq:continuita123}, allora poiché
+        \[
+            \|x\|_X = \left\| \frac{\delta z}{\|z\|_X} \right\|_X =
+            \frac{\delta}{\|z\|_X} \|z\|_X = \delta
+        \]
+        ne segue che \(\|Tx\|_Y \le \varepsilon\), in particolare
+        \[
+            \|Tx\|_Y = \left\| \frac{\delta Tx}{\|z\|_X} \right\|_Y =
+            \frac{\delta}{\|z\|_X} \|Tz\|_Y \le \varepsilon
+        \]
+        deduco allora che 
+        \[
+          \|Tz\|_Y \le \frac{\varepsilon}{\delta} \|z\|_X \quad \forall z \in X
+        \]
+        infatti vale anche chiaramente per \(z = 0_X\).
+    \item[\(\impliedby \)] Sia \(T\) limitato, dunque esiste \(C > 0\) tale che 
+        \[
+          \| Tx\|_Y \le C \|x\|_X \quad \forall x \in X
+        \]
+        e dobbiamo provare che per ogni successione \(\{x_{n}\} \) convergente a
+        \(x\) in \(X\)  si ha che \(T{(x_{n})} \to Tx\) in \(Y\). Si ha che
+        \[
+            \|T{(x_{n})} - T{(x)}\|_Y = \|T{(x_{n} - x)}\|_Y \le C \|x_{n} -
+            x\|_X \to 0
+        \]
+\end{itemize}
+\end{proof}
+\begin{note}
+    Notare che abbiamo usato solo la continuità in \(0_X\) per dimostrare \(\implies\) 
 \end{note}
 
+Osserviamo dunque che l'insieme degli operatori lineari e continui tra \(X\)  e
+\(Y\)  costituisce uno spazio vettoriale. Infatti se \(T, S : X \to Y\) e sono
+lineari e continui, e \(\alpha, \beta \in \mathbb{K}\) allora l'operatore
+\(\alpha T + \beta S\) è ancora lineare e continuo (e anche limitato). Infatti
+se \(\|Tx\|_Y \le C_T\|x\|_X\) e \(\|Sx\|_Y \le C_S\|x\|_X\) allora
+\[
+  \|(\alpha T + \beta S){(x)}\|_Y \le \alpha\|Tx\|_Y + \beta\|Sx\|_Y \le
+  (\alpha C_T + \beta C_S)\|x\|_X
+\]
+Indichiamo ora con \(\mathcal{L}{(X, Y)}\) lo spazio vettoriale degli operatori
+lineari e limitati (o lineari e continui) tra \(X\) e \(Y\) munito della norma
+\begin{equation}\label{eq:opnorm_inf}
+    \|T\| = \inf \{C \ge 0: \|Tx\|_Y \le C\|x\|_X \quad \forall x \in X\}
+\end{equation}
+tale norma ha senso e utilizza la limitatezza dell'operatore, assomiglia inoltre
+alla norma \(L^{\infty}\).
+
+Se ora considero 
+\[
+    S_T = \sup \left\{ \frac{\|Tx\|_Y}{\|x\|_X} : x \in X \sminus \{0_X\} \right\}
+\]
+ottengo una definizione equivalente di norma. Succede infatti che \(\|T\| =
+S_T\). Infatti rinominati \(A\) e \(B\) rispettivamente gli insiemi usati nella
+definizione di \(\|T\|\) e di \(S_T\) abbiamo che \(b \le a\) per ogni \(b \in
+B\) e \(a \in A\), infatti presa una costante dell'insieme \(A\), sicuramente
+maggiora il rapporto \(\frac{\|Tx\|_Y}{\|x\|_X}\) proprio perché tale costante è
+in \(A\). Passando al sup in \(b \le a\) otteniamo \(S_T \le a\), \(\forall a
+\in A\) e passando ora all'inf sugli \(a\) otteniamo \(S_T \le \|T\|\). Sappiamo
+ora che \(S_T\) è il sup di \(B\), quindi 
+\[
+    \frac{\|Tx\|_Y}{\|x\|_X} \le S_T \quad \forall x \in X \sminus \{0_X\}
+    \implies S_T \in A
+\]
+infatti chiaramente \(\|Tx\|_Y \le S_T \|x\|_X\) anche per \(x = 0_X\). Ma
+allora necessariamente \(\|T\| \le S_T\) poiché ne è l'inf.
+
+Da questo deduciamo che \(\|T\| = S_T\) e che \(\|T\| = \min A\) 
 tale norma è una norma, infatti
 \begin{enumerate}[label = \arabic*.]
     \item \(\|T\| \ge 0\) per ogni \(T \in \mathcal{L}{(X, Y)}\) 
@@ -5024,14 +5287,8 @@ tale norma è una norma, infatti
     \]
 \end{eser}
 \begin{example}
-    I sistemi lineari da \(\mathbb{R}^{N}\) in \(\mathbb{R}^{M}\)
-    \[
-        \begin{cases}
-            y_1 = a_{11}x_1 + \ldots + a_{1N}x_N \\
-            \vdots \\
-            y_M = a_{M1}x_1 + \ldots + a_{MN}x_N
-        \end{cases}
-    \]
+    I sistemi lineari da \(\mathbb{R}^{N}\) in \(\mathbb{R}^{M}\) del
+    tipo~\eqref{eq:sistema_lineare}, 
     anche scritto \(\vec{y} = A \vec{x}\), con \(\vec{x} = {(x1, \dots, x_N)}\),
     \(\vec{y} = {(y_{1}, \dots, y_M)}\) e \(A = {(a_{ij})}\) 
     sono operatori lineari \({(x_{1}, \dots, x_N) \mapsto {(y_{1}, \dots,
@@ -5163,6 +5420,49 @@ oppure \(X^{*}\)
 \begin{proof}
     Sia \(\mathbb{R}\) che \(\mathbb{C}\) sono completi
 \end{proof}
+\begin{example}[Prodotto di convoluzione]
+    Fissiamo una funzione \(g \in L^{\infty}{(\mathbb{R})}\) e consideriamo
+    l'operatore 
+    \[
+        (Tf)(x)= \int_{\mathbb{R}} f{(x - y)}g{(y)}dy
+    \]
+    Sappiamo già dalla proposizione~\ref{prp:convoluzione_l1} che \(f, g \in
+    L^{1}{(\mathbb{R})}\) allora \(Tf \in L^{1}{(\mathbb{R})}\) e inoltre 
+    \[
+      \|Tf\|_1 \le  \|f\|_1\|g\|_1
+    \]
+    Se invece \(g \in L^{\infty}{(\mathbb{R})}\) allora \(Tf \in
+    L^{\infty}{(\mathbb{R})}\)? Sì, infatti 
+    \[
+      |(Tf){(x)}| \le \int_{\mathbb{R}} |f{(x-y)}| \|g\|_{\infty} dy = \|f\|_1
+      \|g\|_{\infty} 
+    \]
+    quindi \(Tf \in L^{\infty}{(\mathbb{R})}\) e \(\|Tf\|_\infty \le \|f\|_1
+    \|g\|_\infty\) e quindi \(\|T\| \le \|g\|_\infty\) 
+\end{example}
+\begin{example}[Spazio Duale]
+    Lo spazio duale di \(\mathbb{K}^{n}\) è isomorfo a \(\mathbb{K}^{n}\). Ma
+    come è fatto lo spazio duale di \(L^{1}{(\Omega)}\)? Ad esempio per \(\Omega
+    = \mathbb{R}\) necessariamente contenere funzionali del tipo \(L :
+    L^{1}{(\mathbb{R})} \to \mathbb{R}\). Ad esempio 
+    \[
+      Lf = \int_{\Omega} f d\mu
+    \]
+    è un tale funzionale. Ma anche fissata \(g \in L^{\infty}{(\Omega)}\), il
+    funzionale
+    \[
+      L_g{(f)} = \int_{\Omega} fg d\mu
+    \]
+    è lineare ed è limitato in quanto
+    \[
+        |L_g{(f)}| \overset{\text{Hölder~\ref{thm:Holder}}}{\le } \|f\|_1 \|g\|_\infty \implies
+      \|f\|_{{\left( L^{1}{(\Omega)} \right)}'}  \le \|g\|_\infty
+    \]
+    allora per ogni \(g \in L^{\infty}{(\Omega)}\) esiste un funzionale lineare
+    e continuo \(L_g\). Risulta (spoiler di analisi funzionale) che non ve ne
+    sono altri, quindi in particolare \({\left( L^{1}{(\Omega)} \right)}'
+    \cong L^{\infty}{(\Omega)}\)
+\end{example}
 \subsection{Spazi di successioni \(\ell^{p}\) }
 \begin{definition}{Spazi \(\ell^{p}\)}
     Gli spazi di successioni \(\ell^{p}\) sono definiti come
@@ -5285,13 +5585,130 @@ questo perché ogni \(x^{k}\) è una successione infinitesima e per la convergen
 uniforme di \(x_{n}^{k}\) a \(x_{n}\).
 Quindi \(c_{0}\) è \textbf{chiuso} in \(\ell^{\infty}\). 
 
-\section{TODO} % TODO recuperare
-Sia 
+\subsection{Funzioni a variazione limitata}
+Ci interessiamo ora a funzioni \(f : [a, b] \to \mathbb{R}\) 
+\begin{definition}{funzione a variazione limitata}
+    Una funzione \(f: [a,b] \to \mathbb{R}\) si dice \textbf{a variazione
+    limitata} se presa comunque una suddivisione
+    \[
+      S = \{a = x_{0} < x_{1} < x_{2} < \dots < x_{n-1} < x_{n} = b\} 
+    \]
+    dell'intervallo \([a,b]\) la quantità
+    \[
+      v_s = \sum_{i=1}^{n} |f{(x_{i+1} -f{(x_{i})})} 
+    \]
+    (somma delle variazioni relative ai punti di suddivisione)
+    l'insieme dei valori \(v_s\) così ottenuti ammette un estremo superiore
+    finito, cioè 
+    \[
+        \sup \{v_s : S \text{ suddivisione di \([a,b]\) in un numero finito di
+        punti  }\} 
+    \]
+    viene detto \textbf{variazione totale} di \(f\) in \([a,b]\) e si indica con
+    \(V_f{([a,b])}\)
+\end{definition}
+\begin{example}[Funzioni monotone]
+    Tutte le funzioni monotone sono a variazione limitata e inoltre
+    \[
+        v_s = V_f{([a,b])} = |f{(b)} - f{(a)}|
+    \]
+\end{example}
+\begin{example}[Funzioni continue?]
+    In generale non è detto. Ad esempio la funzione \(f : [0, \frac{2}{\pi}] \to
+    \mathbb{R}\) 
+    \[
+      f{(x)} = \begin{cases}
+          x \sin \frac{1}{x} & x \neq 0 \\
+          0 & x = 0
+      \end{cases}
+    \]
+    ci interessa considerare i punti del tipo \(\frac{1}{x} = \frac{\pi}{2} = k
+    \pi\) quindi \(x_k = \frac{1}{\frac{\pi}{2} + k \pi} = \frac{2}{\pi + 2k\pi}\) per \(k = 0, \dots,
+    n\) e la mia suddivisione è
+    \[
+        S_{n} = \left\{0, \frac{2}{\pi + 2\pi}, \frac{2}{\pi + 4\pi}, \dots,
+        \frac{2}{\pi + 2(n-1)\pi}, \frac{2}{\pi}\right\}
+    \]
+    e quindi
+    \begin{align*}
+        v_{S_{n}}  &= \sum_{k=0}^{n} |f{(x_k)} - f{(x_{k+1})}| + \left|f{\left(\frac{2}{\pi
+        + 2n \pi}\right)} - 0\right| = \sum_{k=0}^{n} \\
+                   &= \sum_{k=0}^{n-1} \left| \frac{2}{\pi + 2k\pi}{(-1)}^{k} -
+                   \frac{2}{\pi + 2(k+1)\pi}{(-1)}^{k+1} \right| + \frac{2}{\pi
+                   + 2n \pi} = \\
+        &= {\left( \frac{2}{\pi + 2k\pi} + \frac{2}{\pi + 2{(k+1)}\pi} \right)}
+        + \frac{2}{\pi + 2n \pi} = \frac{2}{\pi} = \frac{2}{\pi} +
+        \sum_{k=1}^{n} \frac{4}{\pi + 2k\pi} \to \infty 
+    \end{align*}
+    quindi l'estremo superiore non può essere finito.
+
+\end{example}
+\begin{proposition}[Le funzioni lipschitziane sono a variazione limitata]
+    Sia \(f : [a,b] \to \mathbb{R}\) lipschitziana, ossia esiste una costante
+    \(L \in \mathbb{R}\) tale per cui
+    \[
+        |f{(x) - f{(y)}}| \le L|x-y| \quad \forall x, y \in [a,b]   
+    \]
+    allora \(f\) è a variazione limitata e inoltre
+    \[
+        V_f{([a,b])} \le L(b-a)
+    \]
+\end{proposition}
+\begin{proof}
+    \(v_s = \sum_{i=1}^{n} |f{(x_{i})} -f{(x_{i-1} )}| \le \sum_{i=1}^{n} L |
+    x_{i} - x_{i-1} | \le L{(b-a)} \) 
+\end{proof}
+\begin{theorem}[Caratterizzazione]\label{thm:carat_var_lim}
+    Una funzione \(f : [a,b] \to \mathbb{R}\) è a variazione limitata se e solo
+    se può essere rappresentata come differenza di funzioni monotone non
+    decrescenti
+\end{theorem}
+\begin{remark}
+    non decrescenti può essere ovviamente sostituito da non crescenti cambiando
+    i segni.
+\end{remark}
+\begin{remark}
+    Segue che le funzioni a variazione limitata possono avere un'infinità
+    numerabile di discontinuità.
+\end{remark}
+
+\begin{theorem}[(ennesimo) Teorema di Lebesgue]\label{thm:lebesgue_derivata}
+    Se \(f: [a,b] \to \mathbb{R}\) è a variazione limitata, allora \(f\) è
+    derivabile quasi ovunque in \([a,b]\) e la derivata q.o.~\(f'\) è sommabile
+    in \([a,b]\) 
+\end{theorem}
+\begin{remark}
+    sommabile significa integrabile, in altre parole \(f' \in L^{1}{([a,b])}\) 
+\end{remark}
+\begin{proof}
+    È difficile e laboriosa e non la faremo.
+\end{proof}
+Negli esempi precedenti in effetti ad esempio le funzioni lipschitziane sono
+derivabili ovunque e pure le funzioni costanti.
+Siamo interessati all'estensione della formula fondamentale del calcolo
+\begin{equation}\label{eq:fond_calcolo}
+    f{(x)} - f{(a)} = \int_{[a,x]} f'{(t)} dt \quad \forall x \in [a,b]
+\end{equation}
+dove l'integrale possa essere inteso come integrale di Lebesgue.
+\begin{note}
+    La formula~\eqref{eq:fond_calcolo} è valida per funzioni continue \(C^{1}\),
+    ma vogliamo vedere se possiamo alleggerire tale ipotesi.
+\end{note}
+Dunque le funzioni a variazione limitata potrebbero essere esattamente quelle
+che stiamo cercando. In realtà no. Ad esempio la funzione di Heaviside
+considerata in \([-1, 1]\) e a variazione limitata, \(H'\) esiste e vale 0
+q.o.~ma chiaramente non vale la formula~\eqref{eq:fond_calcolo}, perché 
+\[
+    H{(1)} - H{(-1)} = 1 \neq 0 = \int_{[-1, 1]} H'{(t)} dt 
+\]
+
+Consideriamo ora la \textbf{funzione di Vitali} che è continua e a variazione
+limitata, ma non verifica la formula~\eqref{eq:fond_calcolo}. Ricordiamo
+l'insieme di cantor definito come nell'esempio~\ref{ex:cantor} e sia \(\rchi_n\)
+la funzione caratteristica di \(C_n\), ora sia
 \[
     f_{n}{(x)} = {\left( \frac{3}{2} \right)} ^{n} \int_{0} ^{x}\rchi_n{(t)}dt
 \]
-dove \(\rchi_n\) è la funzione caratteristica di \(C_{n}\), dove ricordiamo che
-\(C = \bigcap_{n=1}^{\infty} C_{n} \) è l'insieme di Cantor
 \begin{figure}[ht]
     \centering
     \incfig[.4]{funzione-cantor}
@@ -5470,17 +5887,16 @@ in generale questa norma è presa negli spazi \(W^{1,p}{(\Omega)}\) con \(\Omega
 aperto di \(\mathbb{R}^{N}\) (con aggiustamenti dovuti al caso
 \(N\)-dimensionale). Un'altra norma comune è
 \[
-    |\|f\||_{W^{1,p}{(a,b)}} = {\left( \int_a^{b}|f{(x)}|^{p}dx +
+    \seminorm{f}_{W^{1,p}{(a,b)}} = {\left( \int_a^{b}|f{(x)}|^{p}dx +
     \int_a^{b}|f'{(x)}|^{p}dx \right)}^{\frac{1}{p}} = {\left( \|f\|_p^{p} +
 \|f'\|_p^{p} \right)}^{\frac{1}{p}}
 \]
 \begin{eser}
     Verificare che entrambe le norme presentate sono effettivamente delle norme.
     Inoltre mostrare che se \(1 \le p < \infty\) le norme \(\|\cdot
-    \|_{W^{1,p}{(a,b)}} \) e \(|\| \cdot \| |_{W^{1,p}{(a,b)}}\) sono
+    \|_{W^{1,p}{(a,b)}} \) e \(\seminorm{\cdot }_{W^{1,p}{(a,b)}}\) sono
     equivalenti.
 \end{eser}
-% TODO fare in modo che la norma tripla sia facile da fare e sia bella da vedere
 Sono spazi di Banach? È vero che \(W^{1,2}{(a,b)}\) è uno spazio di Hilbert?
 Chiaramente quello che guessiamo essere il prodotto scalare su \(W^{1,2}{(a,b)}\)
 sarebbe
@@ -5512,7 +5928,7 @@ W^{1,p}{(a,b)}\)
 \]
     ora integro rispetto a \(y\) entrambi i termini ottenendo
 \[
-    {(b-a)}|f{(x)}| \le \\int_a^{b} |f{(y)}|dy + (b-a)\int_a^{b} |f'{(t)}|dt
+    {(b-a)}|f{(x)}| \le \int_a^{b} |f{(y)}|dy + (b-a)\int_a^{b} |f'{(t)}|dt
 \]
     Ora usiamo la disuguaglianza di Hölder~\ref{thm:Holder}
 \[
@@ -5536,7 +5952,7 @@ W^{1,p}{(a,b)}\)
 \end{proof}
 \begin{theorem}[Completezza di \(W^{1,p}(a,b)\)]\label{th:w1p-banach}
     \(W^{1,p}{(a,b)}\) è uno spazio di Banach. In particolare \(W^{1,2}{(a,b)}\)
-    è uno spazio di Hilbert, con la norma \(|\|\cdot \||_{W^{1,2}{(a,b)}} \) 
+    è uno spazio di Hilbert, con la norma \(\seminorm{\cdot }_{W^{1,2}{(a,b)}} \) 
 \end{theorem}
 \begin{proof}
     Sia \(\{f_{n}\} \) di Cauchy in \(W^{1,p}{(a,b)}\), dunque
@@ -5558,7 +5974,7 @@ W^{1,p}{(a,b)}\)
 
     Sappiamo che \[f_{n}{(x)} = f_{n}{(a)} + \int_a^{x}{(f'_n{(t)})}dt\] per
     ogni \(x \in [a,b]\). Passando al limite per \(n \to \infty\) abbiamo
-    % TODO finire la dimostrazione così che è finita
+    % TODO finire la dimostrazione
     
 \end{proof}
 
