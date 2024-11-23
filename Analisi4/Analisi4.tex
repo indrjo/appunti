@@ -5518,7 +5518,7 @@ e se \(p = \infty\)
     \ell^{p}\), \(\forall p \in (1, \infty]\), ma \(p \not\in \ell^{1}\).
 \end{example}
 \begin{example}
-    \(i : \ell^{p} \xhookrightarrow \ell^{q} \) è lineare e limitato con norma
+    \(i : \ell^{p} \to \ell^{q} \) inclusione è lineare e limitato con norma
     \(\|i\| \le 1\). È proprio \(\|i\| = 1\): Consideriamo la successione
     canonica
     \[
@@ -5535,13 +5535,13 @@ e se \(p = \infty\)
     \]
 \end{example}
 Consideriamo i seguenti spazi
-\begin{align*}
+\hypertarget{spazi_c}{\begin{align*}
     c &= \{x = {(x_{n})} : \text{ la successione \(x_{n}\) è convergente }\} \\
     c_{0} &= \{x = {(x_{n})} : \text{ la successione \(x_{n}\) è infinitesima }
     \} \\
     c_{00}  &= \{x = {(x_{n})}: \exists k \in \mathbb{N} : x_{n} = 0 \forall n >
     k\} 
-\end{align*}
+\end{align*}}
 allora se \(p < \infty\) e \(x \in \ell^{p}\) allora \(\sum_{n=1}^{\infty}
 |x_{n}|^{p} \) converge e quindi \(\lim_{n \to \infty} |x_{n}|^{p} = 0\) e
 allora \(x = {(x_{n})} \in c_{0}\). Ne consegue che
@@ -5551,9 +5551,9 @@ allora \(x = {(x_{n})} \in c_{0}\). Ne consegue che
 \]
 \(c_{00} \) è un sottospazio di \(\ell^{1}\) \textbf{denso}: infatti se \(x
 = {(x_{n})} \in \ell^{1}\) allora posso costruire la successione
-\[
+\begin{equation}\label{eq:successione_c00}
     x^{k} = (x_{1}, x_{2}, \dots, x_{k}, 0, 0, \dots) \in c_{00}
-\]
+\end{equation}
 e chiaramente 
 \[
     \|x^{k} - x\|_1 = \sum_{n=1}^{\infty} |x_{n}^{k} - x_{n}| =
@@ -5563,7 +5563,15 @@ in quanto resto \(k+1\)-esimo di serie convergente. Se ora \(p \in 1 < p <
 \infty\), con analoga dimostrazione provo anche che \(c_{00} \) è denso in
 \(\ell^{p}\).
 
-Ovviamente invece \(c_{00} \) non è denso in \(\ell^{\infty}\), è allora chiuso?
+Ora studiamo se \(c_{00}\) è denso in \(c_{0}\), che è \textbf{sì}, infatti
+preso un elemento \(x = {(x_{n})} \in c_{0} \) allora \(\lim_{n \to \infty}
+x_{n} = 0\). Esiste una successione \(x^{k} = {(x_{n}^{k})}\) tale che \(x^{k} \in
+c_{00} \) per ogni \(k\) e \(\|x^{k} - x\|_\infty \to 0\), ed è di nuovo
+definita come in~\eqref{eq:successione_c00}. Allora
+\[
+    \|x^{k} - x\|_\infty = \sup_{n \in \mathbb{N}} |x_{n}^{k} - x_{n}| = \sup_{n
+    > k} |x_{n}| \to 0 \quad \text{ per } k \to \infty
+\]
 
 \(c_{0}\) e \(c\) sono invece sottospazi di \(\ell^{\infty}\) 
 Sia \(x^{k} = {(x^{k}_n)}\) una successione di elementi \(x^{k} \in c_{0} \,
@@ -5583,7 +5591,181 @@ ma noi sappiamo che
 \]
 questo perché ogni \(x^{k}\) è una successione infinitesima e per la convergenza
 uniforme di \(x_{n}^{k}\) a \(x_{n}\).
-Quindi \(c_{0}\) è \textbf{chiuso} in \(\ell^{\infty}\). 
+Quindi \(c_{0}\) è \textbf{chiuso} in \(\ell^{\infty}\). Si può dire lo stesso
+osservando che l'operatore 
+\[
+    \begin{align}\label{eq:operatore_lim}
+      L: c &\longrightarrow \mathbb{R} \\
+      x = {(x_{n})} &\longmapsto L(x) = \lim_{n \to \infty} x_{n}
+  \end{align}
+\]
+è un funzionale lineare e continuo perché il limite è lineare e inoltre
+\[
+  |Lx| \le \sup_{n} |x_{n}| = \|x\|_\infty 
+\]
+e in particolare \(\|L\|_{c'} = 1\) (basti prendere una successione con limite
+uguale al sup). Allora
+\[
+  |L{(x^{k})} - L{(x)}| \le \|x^{k} - x\|_\infty \to 0
+\]
+ma poiché \(L{(x^{k})}\) è sempre uguale a \(0\) allora lo è anche \(L{(x)}\).
+Infine si può anche osservare che \(c_{0}\) è la controimmagine di \(\{0\} \)
+tramite l'operatore continuo \(L\) e quindi è chiuso in \(c\).
+
+\(c\) è chiuso in \(\ell^{\infty}\) in quanto se \(x{(k)} \to x\) in
+\(\ell^{\infty}\) allora \(L{(x^{k})} \to L{(x)}\) in quanto \(L\) è continuo,
+quindi in particolare \(L{(x)}\) esiste ed è finito.
+
+\begin{proposition} Ricapitolando quanto mostrato finora abbiamo la seguente
+    catena di inclusioni e chiusure
+    \[
+      c_{00} \subset \overline{c_{00} }^{\ell^{1}}  =  \ell^{1} \subset
+      \overline{c_{00} }^{\ell^{p}} = \ell^{p} \subset
+      \overline{c_{00}}^{c_{0}} = c_{0} = \overline{c_{0}}^{c, \ell^{\infty}}
+      \subset c = \overline{c}^{\ell^{\infty}} \subset \ell^{\infty} 
+    \]
+\end{proposition}
+
+\begin{remark}
+    \(L\) non è ben definito in \(\ell^{\infty}\) 
+\end{remark}
+
+Possiamo adattare agli \(\ell^{p}\) la diseguaglianza di Hölder~\ref{thm:Holder}
+ottenendo che se abbiamo \(x \in \ell^{p}, y \in \ell^{p'}\) con \(p, p'\)
+coniugati, allora
+\[
+  xy = {(x_{1}y_{1}, x_{2}y_{2}, \dots, x_{n}y_{n}, \dots)} \in \ell^{1} 
+\]
+e inoltre
+\[
+  \|xy\|_1 = \sum_{n=1}^{\infty} x_{n}y_{n} \le \sum_{n=1}^{\infty} |x_{n}y_{n}| \le
+  \|x\|_p \|y\|_{p'} 
+\]
+
+Gli spazi \(\ell^{p}\) con \(1 \le p < \infty\) sono spazi \textbf{separabili},
+ossia ammettono un denso sottospazio numerabile. Infatti sappiamo che \(c_{00}
+\) è denso in \(\ell^{p}\) se \(p < \infty\) e consideriamo ora \(q_{00} \) il
+sottoinsieme di \(c_{00}\) delle successioni a componenti (oppure a parti reali
+e immaginarie delle componenti) razionali. Allora \(q_{00} \) è numerabile ed è
+denso in \(\ell^{p}\) poiché è denso in \(c_{00}\) 
+
+\begin{proposition}
+    \(\ell^{\infty}\) \textbf{non} è separabile
+\end{proposition}
+\begin{proof}
+    Se così fosse, allora esisterebbe una successione \(x^{k}\) che è densa in
+    \(\ell^{\infty}\). Allora considero la seguente successione
+    \[
+      z = {(z_k)} = \begin{cases}
+          0 & \text{se } |x^{k}_{k}| \ge 1 \\
+          1 + x^{k}_k & \text{se } |x^{k}_{k}| < 1
+      \end{cases}
+    \]
+    quindi sicuramente \(z \in \ell^{\infty}\) in quanto è limitata da \(2\), ma
+    \[\|z - x^{k}\|_{\infty} = \sup_n |z_{n} - x^{k}_n| \ge |z_k - x^{k}_k| \ge
+    1\] 
+    che è una contraddizione in quanto quindi la successione \(x= {(x^{k})}\)
+    non è densa
+\end{proof}
+\begin{theorem}[Spazi duali di \(\ell^p\) ]
+    Sia \(1 \le p < \infty\). Allora per ogni \(\varphi  \in {(\ell^{p})}'\)
+    esiste unico \(u \in \ell^{p'}\) tale che 
+    \[
+      \varphi {(x)} = \sum_{n=1}^{\infty} u_{n} x_{n} \quad \forall x \in
+      \ell^{p} 
+    \]
+    Inoltre si ha che \(\|\varphi \|_{(\ell^{p})'} = \|u\|_{p'} \) 
+\end{theorem}
+\begin{remark}
+    In soldoni ne consegue che \((\ell^{p})' \cong \ell^{p'}\). Sarà un
+    risultato valido anche per spazi \(L^{p}\) ma è più difficile dimostrarlo
+    quindi non se ne parla in questo corso
+\end{remark}
+\begin{proof}
+    Consideriamo la successione \(e^{k} = {(0, \dots, 0,  \overset{(k)}{1}, 0,
+    \dots, 0, \dots)}\) che è la successione canonica. A partire da queste
+    consideriamo \(u_k = \varphi {(e^{k})}\) per ogni \(k \in \mathbb{N}\) e
+    consideriamo la successione \(u = {(u_k)}\). Vorremmo ora provare che \(u
+    \in \ell^{p'}\) e \(\|u\|_{p'} \le \|\varphi \|_{{(\ell^{p})}'} \). A tal
+    scopo cominciamo da \(p =1\).
+    \[
+      |u_k| = |\varphi {(e^{k})}| \le \|\varphi\|_{{(\ell^{1})}'}
+      \|e^{k}\|_{\infty} \le \|\varphi \|_{{(\ell^{1})}'} \implies \|u\|_\infty
+      = \sup_k |u_k| \le \|\varphi \|_{{(\ell^{1})}'}
+    \]
+    Consideriamo ora \(1 < p < \infty\) e consideriamo \(x \in
+    \hyperlink{spazi_c}{c_{00}}\) tale che \(x_{n} = 0\) per ogni \(n > k\) 
+    allora 
+    \begin{equation}\label{help:thmduali}
+      |\varphi {(x)}| = \left|  \varphi {\left( \sum_{i=1}^{k} x_{i} e^{i}  \right)}  \right|=
+      \left| \sum_{i=1}^{k} x_{i} \varphi {(e_{i})}   \right|=\left|   \sum_{i=1}^{k} x_{i} u_{i}  \right|\le
+      \|\varphi \|_{(\ell^{p})'} \|x\|_p
+    \end{equation}
+    Scegliamo ora \(x_{i} = |u_{i}|^{p'-2}\) e \(x_{i} = 0\) se \(u_{i} =
+    0\). Allora nella~\eqref{help:thmduali} abbiamo
+    \begin{align*}
+        \sum_{i=1}^{k} |u_{i}|^{p'} &\le \|\varphi \|_{(\ell^{p})'} \left(
+            {\left(  \sum_{i=1}^{k} {\left(  |u_{i}|^{p'-1} \right)}^{p}
+            \right)}^{\frac{1}{p}} = {\left( \sum_{i=1}^{k} |u_{i}|^{p'p -
+            p = p'}  \right)} ^{\frac{1}{p}} \\
+            {\left( \sum_{i=1}^{k} |u_{i}|^{p'}  \right)}^{1 - \frac{1}{p}} &=
+            {\left( \sum_{i=1}^{k} |u_{i}|^{p'}  \right)} ^{\frac{1}{p'}} \le
+            \|\varphi \|_{{(\ell^{p})}'} 
+    \end{align*}
+    che vale per ogni \(k \in \mathbb{N}\) e quindi in particolare tutte le
+    ridotte sono dominate da \(\|\varphi \|_{{(\ell^{p})}'} \) e quindi anche la
+    serie 
+    \begin{equation}\label{help:duali3}
+        \sum_{i=1}^{\infty} |u_{i}|^{p'} < +\infty \implies u \in \ell^{p'}
+        \text{ e } \|u\|_{p'} \le \|\varphi \|_{{(\ell^{p})}'}
+    \end{equation}
+    Ci resta da provare che \(\varphi {(x)} = \sum_{i=1}^{\infty} u_{i} x_{i} \)
+    per ogni \(x \in \ell^{p}\) e sappiamo che vale per ogni \(x \in c_{00} \).
+    Usando la densità di \(c_{00} \) in \(\ell^{p}\), quindi per ogni \(x \in
+    \ell^{p}\) esiste una successione \(x^{k} \in  c_{00} \) tale che \(x^{k}
+    \to x\) in \(\ell^{p}\). Allora 
+    \[
+        \varphi {(x^{k})} = \sum_{i=1}^{\infty} u_{i} x_{i}^{k}
+        \overset{k \to \infty}{\longrightarrow} \varphi {(x)} =
+        \sum_{i=1}^{\infty} u_{i} x_{i}
+    \]
+    dove il secondo termine ha tale limite per la diseguaglianza di Hölder,
+    infatti 
+    \begin{equation}\label{help:duali2}
+      \varphi {(x^{k})} = \left| \sum_{i=1}^{\infty} u_{i} x_{i}^{k}  \right| < \|u\|_{p'}
+      \|x^{k}\|_p \implies \varphi {(x)} = \left| \sum_{i=1}^{\infty} u_{i} x_{i}  \right| \le
+      \|u\|_{p'} \|x\|_p
+    \end{equation}
+    e ne consegue che
+    \[
+      \left| \sum_{i=1}^{\infty} u_{i}x_{i}^{k} - \sum_{i=1}^{\infty} u_{i}x_{i}
+      \right| \le \|u\|_{p'} \|x^{k} - x\|_p \to 0
+    \]
+    Ora dalla~\eqref{help:duali2} otteniamo che \(\|\varphi \|_{{(\ell^{p})}'}
+    \le \|u\|_{p'} \)  che insieme a~\eqref{help:duali3} ci dà l'ultima parte
+    della tesi \(\|\varphi \|_{{(\ell^{p})}'} = \|u\|_{p'}\) 
+\end{proof}
+\begin{theorem}
+    Se \(\varphi \in {(c_{0})}'\) allora esiste un \(u = {(u_k)} \in \ell^{1}\)
+    tale che 
+    \[
+        \varphi {(x)} = \sum_{i=1}^{\infty} u_{i} x_{i} \quad \forall x \in c_{0} 
+    \]
+    e inoltre \(\|\varphi \|_{{(c_{0})}'} = \|u\|_1\)
+\end{theorem}
+\begin{remark}
+Il precedente significa che \({(c_{0})}' \cong \ell^{1}\) 
+\end{remark}
+\begin{theorem}
+    Se \(\varphi \in c'\) allora esiste unica una coppia \({(u, \lambda)} \in
+    \ell^{1} \times \mathbb{R}\) tali che
+    \[
+      \varphi {(x)} = \sum_{i=1}^{\infty} u_{i}x_{i} + \lambda \lim_{n \to
+      \infty} x_{n} \quad \forall x \in c 
+    \]
+    e inoltre \(\|\varphi \|_{c'} = \|u\|_1 + |\lambda|\) 
+\end{theorem}
+
 
 \subsection{Funzioni a variazione limitata}
 Ci interessiamo ora a funzioni \(f : [a, b] \to \mathbb{R}\) 
@@ -5886,11 +6068,11 @@ mettere una norma sopra, di solito si prende
 in generale questa norma è presa negli spazi \(W^{1,p}{(\Omega)}\) con \(\Omega\)
 aperto di \(\mathbb{R}^{N}\) (con aggiustamenti dovuti al caso
 \(N\)-dimensionale). Un'altra norma comune è
-\[
+\hypertarget{3norm}{\[
     \seminorm{f}_{W^{1,p}{(a,b)}} = {\left( \int_a^{b}|f{(x)}|^{p}dx +
     \int_a^{b}|f'{(x)}|^{p}dx \right)}^{\frac{1}{p}} = {\left( \|f\|_p^{p} +
 \|f'\|_p^{p} \right)}^{\frac{1}{p}}
-\]
+\]}
 \begin{eser}
     Verificare che entrambe le norme presentate sono effettivamente delle norme.
     Inoltre mostrare che se \(1 \le p < \infty\) le norme \(\|\cdot
@@ -5900,11 +6082,11 @@ aperto di \(\mathbb{R}^{N}\) (con aggiustamenti dovuti al caso
 Sono spazi di Banach? È vero che \(W^{1,2}{(a,b)}\) è uno spazio di Hilbert?
 Chiaramente quello che guessiamo essere il prodotto scalare su \(W^{1,2}{(a,b)}\)
 sarebbe
-\[
+\begin{equation}\label{eq:prod_scalare_W}
     \langle f, g \rangle = \int_a^{b} f{(x)}g{(x)}dx + \int_a^{b} f'{(x)}g'{(x)}dx
-\]
-che avrebbe come norma associata la norma \(|\| \cdot \| |_{W^{1,2}{(a,b)}}\).
-\begin{proposition}
+\end{equation}
+che avrebbe come norma associata la norma \(\seminorm{\cdot}_{W^{1,2}{(a,b)}}\).
+\begin{proposition}\label{prop:immersione_continua}
     Per ogni \(p \in [1,\infty]\) esiste una costante \(C_p > 0\) tale che
     \[\underbrace{\|f\|_{C^{0}{([a,b])}}}_{{\left( \|f\|_{\infty}  \right)} }  \le C_p \|f\|_{W^{1, p}{(a,b)}} \] per ogni \(f \in
 W^{1,p}{(a,b)}\) 
@@ -5952,7 +6134,8 @@ W^{1,p}{(a,b)}\)
 \end{proof}
 \begin{theorem}[Completezza di \(W^{1,p}(a,b)\)]\label{th:w1p-banach}
     \(W^{1,p}{(a,b)}\) è uno spazio di Banach. In particolare \(W^{1,2}{(a,b)}\)
-    è uno spazio di Hilbert, con la norma \(\seminorm{\cdot }_{W^{1,2}{(a,b)}} \) 
+    è uno spazio di Hilbert, con il prodotto scalare~\eqref{eq:prod_scalare_W} e
+    la norma \hyperlink{3norm}{\(\seminorm{\cdot }_{W^{1,2}{(a,b)}}\)}.
 \end{theorem}
 \begin{proof}
     Sia \(\{f_{n}\} \) di Cauchy in \(W^{1,p}{(a,b)}\), dunque
@@ -5963,8 +6146,8 @@ W^{1,p}{(a,b)}\)
         \|f'_n - f'_m\|_p &\to 0 \\
         \|f_n - f_m\|_{C^{0}{(a,b)}} &\to 0
     \end{align*}
-    per \(n,m \to \infty\) dove per la terza si è usata la proposizione
-    precedente. Ne consegue che \(f_{n}\) e \(f'_n\) sono di Cauchy in
+    per \(n,m \to \infty\) dove per la terza si è usata la
+    proposizione~\eqref{prop:immersione_continua}. Ne consegue che \(f_{n}\) e \(f'_n\) sono di Cauchy in
     \(L^{p}{(a,b)}\), essendo \(L^{p}\) completo allora esistono \(f,g \in
     L^{p}{(a,b)}\) tali che \(f_{n} \to f\) e \(f'_{n} \to g\) in
     \(L^{p}{(a,b)}\). Inoltre \(f_{n}\) è di Cauchy in \(C^{0}{(a,b)}\) e quindi
@@ -5972,9 +6155,9 @@ W^{1,p}{(a,b)}\)
     \(C^{0}{([a,b])}\). Siccome la convergenza in \(C^{0}\) è uniforme allora
     implica la convergenza in \(L^{p}{(a,b)}\) e allora \(h = f\) q.o. 
 
-    Sappiamo che \[f_{n}{(x)} = f_{n}{(a)} + \int_a^{x}{(f'_n{(t)})}dt\] per
+    Sappiamo che \[f_{n}{(x)} = f_{n}{(a)} + \int_a^{x}{f'_n{(t)}}\,dt\] per
     ogni \(x \in [a,b]\). Passando al limite per \(n \to \infty\) abbiamo
-    % TODO finire la dimostrazione
+    
     
 \end{proof}
 
