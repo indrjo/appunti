@@ -3445,7 +3445,8 @@ e \(\varphi_n {(B_{n})} \le \varphi {(B)} = 0\) per cui ogni \(\varphi _n\) e
 \begin{proof}[Dimostrazione per \(\varphi , \mu\) misure finite]
     Supponiamo per assurdo che esista un insieme \(E_{0} \in \mathcal{M}\) tale
     che \(\int_{E_{0}} \frac{\partial \varphi }{\partial \mu} d\mu \neq \varphi
-    (E_{0})\), per definizione di derivata di Radon-Nikodym attraverso l'insieme \(\mathcal{F}\) e relative estensioni possiamo assumere che \(\int_{E_{0}} \frac{\partial \varphi }{\partial
+    (E_{0})\), segue dalla definizione~\ref{def:rad_nik_1} che necessariamente
+    \(\int_{E_{0}} \frac{\partial \varphi }{\partial
     \mu} d\mu < \varphi (E_{0})\). Ne segue che \(\varphi (E_{0}) >0\) e per
     \(\mu\)-a.c.~anche \(\mu(E_{0}) > 0\).
 
@@ -4557,20 +4558,20 @@ in~\eqref{eq:cauchy_lp_pf1} otteniamo
     |f(x)| \le |u_{n}{(x)}| + g{(x)} 
 \]
 e quindi \(f \in L^{p}\) perché è dominata da una funzione \(L^{p}\), in quanto
-somma di due tali funzioni. D'altra parte per la stessa equazione, portando
+somma di due tali funzioni. D'altra parte, sempre da~\eqref{eq:cauchy_lp_pf1}, portando
 anche \(m\to \infty\) otteniamo che il secondo membro tende a 0, e quindi
 \(u_{m}\to f\) q.o.~in \(\Omega\). Inoltre
 \[
-    \left| f(x) - u_{m}{(x)} \right|^{p} \le \left| g{(x)} \right|^{p} = g{(x)}
+    \left| f(x) - u_{m}{(x)} \right|^{p} \le \left| g{(x)} \right|^{p}
     \in L^{1}{(\Omega)}
 \]
 e possiamo applicare il teorema~\ref{thm:Lebesgue_conv_dom} di convergenza
 dominata di Lebesgue per cui
 \[
     \lim_{m\to \infty} \int_{\Omega} \left| f(x) - u_{m}(x) \right|^{p} d\mu = 0
-    \iff \|f-u_{m}\|_p^{p} \longrightarrow 0
+    \iff u_{m} := f_{n_{m}} \to f \text{ in } L^{p}{(\Omega)}
 \]
-\end{proof}
+\end{proof} % TODO STRANO
 \begin{corollary}\label{cor:conv_lp_sottosucc}
     Sia \(\{f_{n}\} \) una successione convergente a \(f \in L^{p}{(\Omega)}\).
     Allora esistono una sottosuccessione \(\{f_{n_k}\} \) e una funzione \(w \in
@@ -4604,7 +4605,7 @@ Per \(p=+\infty\) la tesi vale più banalmente.
 \end{remark}
 
 Il corollario~\ref{cor:conv_lp_sottosucc} si può espandere a dire che tutta la funzione converge quasi
-ovunque? No. Consideriamo ad esempio la successione
+ovunque? \textbf{No.} Consideriamo ad esempio la successione
 \begin{align*}
     f_{1} &= \rchi_{[0, 1]}, \quad f_{2} = \rchi_{[0, \frac{1}{2}]}, \quad f_{3} =
     \rchi_{[\frac{1}{2}, 1]} \\
@@ -4620,7 +4621,7 @@ Questa successione converge a \(0\) in \(L^{p}(0,1)\) per ogni \(1 \le p <
 \]
 tuttavia non converge quasi ovunque a \(0\), infatti per ogni \(x \in (0, 1)\)
 la successione \(f_{n}{(x)}\) non ha limite perché non smette mai di assumere
-anche il valore \(1\). [L: ma nel corollario si parla di un'estratta. Rivedere enunciati] 
+anche il valore \(1\).
 \begin{proposition}[Convergenze] \( \) 
 \begin{enumerate}[label = \arabic*.]
     \item \[
@@ -4635,7 +4636,8 @@ anche il valore \(1\). [L: ma nel corollario si parla di un'estratta. Rivedere e
     \item Conv.~in \(L^{p}{(\Omega)}\) per \(1 \le p < \infty\) \(\implies\)
         Conv.~in misura
     \item Se \(\mu{(\Omega)} < +\infty\) e \(1 \le p < q \le \infty\) allora
-        \(L^{q}{(\Omega)} \subseteq L^{p}{(\Omega)}\) e si ha che esiste una costante \(C\) per cui
+        \(L^{q}{(\Omega)} \subseteq L^{p}{(\Omega)}\) e si ha che esiste una
+        costante \(C > 0\) per cui
         \[
             \|f\|_p \le C \|f\|_q \quad \forall f \in L^{q}{(\Omega)}
         \]
@@ -4939,12 +4941,13 @@ In questa parte \(\Omega\) sarà un aperto di \(\mathbb{R}^{N}\) con la misura
     \(s_{n} \to f^{+}\) e \(t_{n} \to f^{-}\) in \(L^{1}{(\mathbb{R}^{N})}\).
     Sappiamo che \(s_{n} \nearrow f^{+}\) e \(t_{n} \nearrow f^{-}\). Allora
     \[
-        \int_{\mathbb{R}^{N}} |s_{n} - f^{+}| d\mu = \int_{\mathbb{R}^{N}} (f^{+}
-        - s_{n}) d\mu \to 0
+        \int_{\mathbb{R}^{N}} |s_{n} - f^{+}| d\mu = \int_{\mathbb{R}^{N}}
+        \left(f^{+}
+        - s_{n}\right) d\mu \to 0
     \]
     dove si è usato BL~\ref{thm:beppo-levi} perché la successione integranda è
     monotona decrescente e gli integrali sono tutti maggiorati da quello di
-    \(f^{+}\) che è finito [L: a che serve che siano maggiorati, mi basta che f^+ - s_n è positivo]. Altrimenti si può anche usare il teorema di
+    \(f^{+}\) che è finito. Altrimenti si può anche usare il teorema di
     convergenza dominata di Lebesgue perché tutte le funzioni sono dominate da
     \(f^{+}\). Lo stesso vale per \(t_{n}\) e \(f^{-}\). 
 
@@ -5067,7 +5070,7 @@ h_{\overline{n}} \|_{\infty}^{p-1} \|v - h_{\overline{n}} \|_1 \right)}^{\frac{1
         h_{\overline{n}} \|_1^{1 / p} \le {(2\overline{n})}^{1 / p'} \delta^{1 /
         p} \overset{?}{\le} \frac{\varepsilon}{2}
     \end{align*}
-    dove al posto di ? intendiamo che \(\displaystyle \delta^{1 / p} =
+    dove al posto di~? intendiamo che \(\displaystyle \delta^{1 / p} =
     \frac{\varepsilon}{2 {(2\overline{n})}^{1 / p'}}\) 
     dunque posso prendere \(g = v\) e la tesi è dimostrata.
 \end{proof}
@@ -5321,7 +5324,7 @@ tale norma è una norma, infatti
     e quindi effettivamente
     \[
         \|f\|_p = \mu{(\Omega)}^{\frac{1}{p}} = \mu{(\Omega)}^{\frac{1}{p} -
-        \frac{1}{q}}\begin{cases}
+        \frac{1}{q}} \cdot \begin{cases}
                 \mu{(\Omega)}^{\frac{1}{q}} & \text{se } q < \infty \\
                 1 & \text{se } q = \infty
             \end{cases}
