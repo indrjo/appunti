@@ -3280,7 +3280,7 @@ dobbiamo prima mostrare tre lemmi.
     \(\varphi \) due misure finite. Allora \(\forall g \in \mathcal{F}\) si ha
     che
     \[
-        \frac{\partial f}{\partial \mu} \ge g \quad \mu-q.o.
+        \frac{\partial \varphi}{\partial \mu} \ge g \quad \mu-q.o.
     \]
 \end{lemma}
 \begin{proof}
@@ -4264,7 +4264,7 @@ e quindi abbiamo \(N\) successioni \({\{\alpha_{i,k}\}}_{k \in \mathbb{N}}\)
 \end{note}
 \begin{note}
     Vedremo che, per \(1 \le p \le p' < +\infty\) si ha che che \(f \in L^{p'}
-    \implies f \in L^{p}\). Questo non vale evidentemente per \(p = \infty\).
+    \implies f \in L^{p}\). Questo non vale evidentemente per \(p' = \infty\).
     Infatti ad esempio per \(f = 1\) su \(\Omega = \mathbb{R}^{N}\) abbiamo che
     evidentemente \(f\) è limitata quindi \(f \in L^{+\infty}\), ma \(f \notin
     L^{p}\) per ogni \(p \in [1, +\infty)\) 
@@ -4277,7 +4277,7 @@ equivalenti \(\mu\)-q.o.
     Infatti se \(p = +\infty\) allora è ovvio che \(f+g\) è limitata
     \(\mu\)-q.o.~Se \(p < +\infty\) allora 
     \[
-    |f+g|^{p} d\mu \le {(|f| + |g|)}^{p} d\mu \le 2^{p}
+    |f+g|^{p} \le {(|f| + |g|)}^{p} \le 2^{p}
     \max \left\{ |f|^{p}, |g|^{p} \right\} \le 2^{p} (|f|^{p} + |g|^{p})
     \]
     Ne consegue che \(f+g \in L^{p}\), infatti
@@ -4366,7 +4366,7 @@ equivalenti \(\mu\)-q.o.
 
 \begin{theorem}[Diseguaglianza di Hölder]\label{thm:Holder}
     Siano \(p, p' \in [1, \infty]\) esponenti coniugati. Allora se \(f \in
-    L^{1}{(\Omega)}\), \(g \in L^{p'}{(\Omega)}\) allora \(f\cdot g \in
+    L^{p}{(\Omega)}\), \(g \in L^{p'}{(\Omega)}\) allora \(f\cdot g \in
     L^{1}{(\Omega)}\) e vale
     \[
         \|fg\|_1 \le \|f\|_p \cdot \|g\|_{p'}
@@ -4398,7 +4398,7 @@ equivalenti \(\mu\)-q.o.
         quindi \(uv \in L^{1}(\Omega)\) in quanto dominata da funzione somma di
         funzioni integrabili. Allora abbiamo
         \[
-            \|uv\|_1 = \int_\Omega |uv| d\mu \le \frac{1}{p} int_\Omega |u|^{p} d\mu +
+            \|uv\|_1 = \int_\Omega |uv| d\mu \le \frac{1}{p} \int_\Omega |u|^{p} d\mu +
             \frac{1}{p'} \int_\Omega |v|^{p'} d\mu = \frac{1}{p} + \frac{1}{p'}
             = 1 = \|u\|_p \|v\|_{p'}
         \]
@@ -4505,7 +4505,7 @@ normato.
     Vogliamo dimostrare che esiste un'estratta convergente. Consideriamo
     l'\(n_{1} \) dato dalla~\eqref{eq:cauchy_lp} per \(\varepsilon = \frac{1}{2}\), e
     consideriamo \(f_{n_{1} } \). Prendiamo ora \(n_{2} =
-    \max{n_{\varepsilon = \frac{1}{2^2}}, n_{1}+1}\) e consideriamo \(f_{n_{2}}\), dove il primo argomento è dato dal valore restituito
+    \max\{n_{\varepsilon = \frac{1}{2^2}}, n_{1}+1\}\) e consideriamo \(f_{n_{2}}\), dove il primo argomento è dato dal valore restituito
     dall'equazione~\ref{eq:cauchy_lp}. Procediamo in questo modo, ogni volta
     prendendo
     \[
@@ -4559,7 +4559,7 @@ in~\eqref{eq:cauchy_lp_pf1} otteniamo
 e quindi \(f \in L^{p}\) perché è dominata da una funzione \(L^{p}\), in quanto
 somma di due tali funzioni. D'altra parte per la stessa equazione, portando
 anche \(m\to \infty\) otteniamo che il secondo membro tende a 0, e quindi
-\(u_{m}\to f\) q.o.~in \(\Omega\). Inoltre
+\(u_{m}\to f\) q.o.~in \(\Omega\) [L:NMT]. Inoltre
 \[
     \left| f(x) - u_{m}{(x)} \right|^{p} \le \left| g{(x)} \right|^{p} = g{(x)}
     \in L^{1}{(\Omega)}
@@ -4577,11 +4577,11 @@ dominata di Lebesgue per cui
     L^{p}{(\Omega)}\) tali che 
 \begin{enumerate}[label = \arabic*.]
     \item \(f_{n_k} \to f\) q.o.~in \(\Omega\)
-    \item \(\left| f_{n_k} {(x)} \right| \le w{(x)} \) per q.o.~\(x \in \Omega\)
+    \item \(\left| f_{n_k} {(x)} \right| \le w{(x)} \) q.o.~ per \(x \in \Omega\)
 \end{enumerate}
 \end{corollary}
 \begin{proof}
-    Se \(f_{n}\to f\) in \(L^{p}{(\Omega)}\) allora è di Cauchy in \(L^{p}\) e
+    [L:correggere la notazione, g] Se \(f_{n}\to f\) in \(L^{p}{(\Omega)}\) allora è di Cauchy in \(L^{p}\) e
     quindi esiste sicuramente un'estratta \(u_k := f_{n_k} \) tale che \(u_k\)
     converge q.o.~a una funzione \(\tilde{f}\) e inoltre
 \[
@@ -4620,7 +4620,7 @@ Questa successione converge a \(0\) in \(L^{p}(0,1)\) per ogni \(1 \le p <
 \]
 tuttavia non converge quasi ovunque a \(0\), infatti per ogni \(x \in (0, 1)\)
 la successione \(f_{n}{(x)}\) non ha limite perché non smette mai di assumere
-anche il valore \(1\).
+anche il valore \(1\). [L: ma nel corollario si parla di un'estratta. Rivedere enunciati] 
 \begin{proposition}[Convergenze] \( \) 
 \begin{enumerate}[label = \arabic*.]
     \item \[
@@ -4635,7 +4635,7 @@ anche il valore \(1\).
     \item Conv.~in \(L^{p}{(\Omega)}\) per \(1 \le p < \infty\) \(\implies\)
         Conv.~in misura
     \item Se \(\mu{(\Omega)} < +\infty\) e \(1 \le p < q \le \infty\) allora
-        \(L^{q}{(\Omega)} \subseteq L^{p}{(\Omega)}\) e si ha che
+        \(L^{q}{(\Omega)} \subseteq L^{p}{(\Omega)}\) e si ha che esiste una costante \(C\) per cui
         \[
             \|f\|_p \le C \|f\|_q \quad \forall f \in L^{q}{(\Omega)}
         \]
@@ -4666,7 +4666,7 @@ f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \)
     \]
     Se \(q = \infty\) invece abbiamo 
     \[
-        \int_\Omega |f|^{p} d\mu \le \int_{\Omega} \|f\|^{p}_{\infty} d\mu \le
+        \int_\Omega |f|^{p} d\mu \le \int_{\Omega} \|f\|^{p}_{\infty} d\mu =
         \mu(\Omega) \|f\|_{\infty}^{p} \implies \|f\|_p \le
         {\mu(\Omega)}^{\frac{1}{p}} \|f\|_{\infty}
     \]
@@ -4681,7 +4681,7 @@ f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \)
     \frac{1}{|x|^{\alpha}} \rchi_{[-1,1]}{(x)} \) per \(\alpha < 1\) è
     integrabile ma non è limitata, quindi \(f \in L^{1}\) ma \(f\not\in L^{\infty}\) 
 \end{example}
-\begin{proof}
+\begin{proposition}
     Se \(\mu{(\Omega)} = +\infty\) e \(f \in L^{1}{(\Omega)} \cap
     L^{\infty}{(\Omega)}\) allora \(f \in L^{p}{(\Omega)}\) per ogni \(1 \le p
     \le +\infty\) e
@@ -4689,9 +4689,9 @@ f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \)
         \|f\|_p \le \|f\|_1^{\theta} \|f\|_{\infty}^{1-\theta} 
     \]
     per un certo \(\theta \in {(0,1)}\).
-\end{proof}
+\end{proposition}
 \begin{proof}
-    Notiamo che \(|f|^{p} \le |f||f|^{p-1} \le |f| \|f\|_\infty^{p-1}\). Ne
+    Notiamo che \(|f|^{p} = |f||f|^{p-1} \le |f| \|f\|_\infty^{p-1}\). Ne
     consegue che \(|f|^{p }\) è integrabile e inoltre
     \[
         \int_\Omega |f|^{p} d\mu \le \|f\|_\infty^{p-1} \int_\Omega |f| d\mu =
@@ -4939,12 +4939,12 @@ In questa parte \(\Omega\) sarà un aperto di \(\mathbb{R}^{N}\) con la misura
     \(s_{n} \to f^{+}\) e \(t_{n} \to f^{-}\) in \(L^{1}{(\mathbb{R}^{N})}\).
     Sappiamo che \(s_{n} \nearrow f^{+}\) e \(t_{n} \nearrow f^{-}\). Allora
     \[
-        \int_{\mathbb{R}^{N}} |s_{n} - f^{+}| d\mu = \int_{\mathbb{R}^{N}} f^{+}
-        - s_{n} d\mu \to 0
+        \int_{\mathbb{R}^{N}} |s_{n} - f^{+}| d\mu = \int_{\mathbb{R}^{N}} (f^{+}
+        - s_{n}) d\mu \to 0
     \]
     dove si è usato BL~\ref{thm:beppo-levi} perché la successione integranda è
     monotona decrescente e gli integrali sono tutti maggiorati da quello di
-    \(f^{+}\) che è finito. Altrimenti si può anche usare il teorema di
+    \(f^{+}\) che è finito [L: a che serve che siano maggiorati, mi basta che f^+ - s_n è positivo]. Altrimenti si può anche usare il teorema di
     convergenza dominata di Lebesgue perché tutte le funzioni sono dominate da
     \(f^{+}\). Lo stesso vale per \(t_{n}\) e \(f^{-}\). 
 
@@ -4972,7 +4972,7 @@ compatto
     insiemi limitati. Dico allora che basta controllare che 
     \[
         \forall E \in \mathcal{M} \text{ limitato } \quad \forall \delta > 0
-        \quad \exists g \in C_C^{0}{(\mathbb{R}^{N})} \quad \|\rchi_E - u\|_1 < \delta
+        \quad \exists g \in C_C^{0}{(\mathbb{R}^{N})} \quad \|\rchi_E - g\|_1 < \delta
     \]
     \(E\)  è un misurabile limitato, quindi \(\forall \delta\) esistono un
     chiuso \(F\) e un aperto limitato \(G\) tali che \(F \subseteq E \subseteq G \) e
@@ -5061,9 +5061,9 @@ compatto
     2\overline{n}\). Allora
     \begin{align*}
         \|v - h_{\overline{n}} \|_p &= {\left(\int |v-h_{\overline{n}}|^{p-1}|v -
-        h_{\overline{n}}| d\mu \le \right)}^{\frac{1}{p}} \le {\left( \|v -
-h_{\overline{n}} \|^{p-1} \|v - h_{\overline{n}} \|_1 \right)}^{\frac{1}{p}} =\\
-        &= \|v - h_{\overline{}} \|_{\infty}^{1 / p'} \|v -
+        h_{\overline{n}}| d\mu \right)}^{\frac{1}{p}} \le {\left( \|v -
+h_{\overline{n}} \|_{\infty}^{p-1} \|v - h_{\overline{n}} \|_1 \right)}^{\frac{1}{p}} =\\
+        &= \|v - h_{\overline{n}} \|_{\infty}^{1 / p'} \|v -
         h_{\overline{n}} \|_1^{1 / p} \le {(2\overline{n})}^{1 / p'} \delta^{1 /
         p} \overset{?}{\le} \frac{\varepsilon}{2}
     \end{align*}
@@ -5095,7 +5095,7 @@ h_{\overline{n}} \|^{p-1} \|v - h_{\overline{n}} \|_1 \right)}^{\frac{1}{p}} =\\
         \frac{1}{n} \, ; \, |x| < n\right\} 
     \]
     \(A_{n}\) sono sottoinsiemi aperti e limitati di \(\Omega\). Per ogni \(n\)
-    posso considerare una funzione \(\varphi_n\) tale che
+    posso considerare una funzione \(\varphi_n\) continua tale che
     \[
         \varphi_n{(x)} = \begin{cases}
             1 & x \in \overline{A_{n}} \\
@@ -5313,7 +5313,7 @@ tale norma è una norma, infatti
     \begin{align*}
         \|f\|_p &= {\left( \int_\Omega 1^{p}d\mu \right)} ^{\frac{1}{p}} =
         \mu{(\Omega)}^{\frac{1}{p}} \\
-        \|f\|_p &= \begin{cases}
+        \|f\|_q &= \begin{cases}
             \mu{(\Omega)}^{\frac{1}{q}} & \text{se } q <
             \infty \\
             1 & \text{se } q = \infty
