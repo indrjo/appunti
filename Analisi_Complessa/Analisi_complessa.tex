@@ -427,7 +427,7 @@ non abbiamo neanche convergenza puntuale.
     \]
 \end{example}
 
-\section{Richiami su limiti e serie}
+\subsection{Richiami su limiti e serie}
 \begin{proposition}
     Sia \(a_{n}\) una successione di numeri reali positivi. Allora 
     \[
@@ -704,7 +704,10 @@ bordo del cerchio varia da caso a caso.
     \]
 \end{proof}
 
-\begin{definition}
+\section{Analisi complessa}
+
+\subsection{Funzioni analitiche su \(\mathbb{R}\) }
+\begin{definition}{Funzione analitica}
     Sia \(I\) un intervallo aperto. Diciamo che una funzione \(f: I \to
     \mathbb{R}\) è analitica se per ogni \(x_{0} \in I\) esiste \(\delta > 0\)
     tale che su \((x_{0} - \delta, x_{0} + \delta)\) la funzione sia esprimibile
@@ -1857,10 +1860,10 @@ D_r{(a)} \sminus \{a\} \)
     Tale serie converge assolutamente in modo uniforme sui compatti di
     \(\Omega\).
     Inoltre si ha che
-    \[
+    \begin{equation}\label{eq:coeff-laurent}
         c_m = \frac{1}{2\pi i} \int_{\partial D_\rho} \frac{f{(\zeta)}}{{(\zeta
         - a)}^{m+1}} d \zeta
-    \]
+    \end{equation}
     per un qualunque \(\rho \in (r_{1}, r_{2})\) 
 \end{theorem}
 \begin{proof}
@@ -2180,7 +2183,7 @@ Sappiamo che tale serie converge assolutamente in modo uniforme sui compatti di
 \begin{proof}[Unicità]
     % TODO
 \end{proof}
-\begin{definition}[Residuo]
+\begin{definition}{Residuo}
     Sia \(f \in \mathcal{H}{(D^{*}_r{(a)})}\) e sia \(f{(z)} =
     \sum_{m=-\infty}^{\infty} c_{m} {(z-a)}^{m}\) lo sviluppo di Laurent. Il
     valore \(c_{-1} \) è detto \textbf{residuo} di \(f\)  in \(z=a\) 
@@ -2225,7 +2228,7 @@ funzioni olomorfe, con denominatore nullo al più in \(a\).
     \equiv 1\) 
 \end{remark}
 
-\begin{proposition}
+\begin{proposition}\label{prp:meromorfa-troncato-sinistra}
     Sia \(\Omega \subseteq  \mathbb{C}\) aperto ed \(E \subseteq \Omega \)
     chiuso e discreto. Sia \(f \in \mathcal{H}{(\Omega - E)}\). Allora \(f\) è
     meromorfa in \(\Omega\) se e solo se per ogni \(a \in E\) lo sviluppo di
@@ -2271,6 +2274,161 @@ con \(\tilde{h}, \tilde{g}\) olomorfe. Allora \(f\) è meromorfa.
         estendibile
 \end{itemize}
 \end{proof}
+\begin{proof}[Dimostrazione del Teorema~\ref{thm:estensione-riemann}]
+    Sia
+\[
+    f{(z)} = \sum_{m=-\infty}^{\infty} c_{m} {(z-a)}^{m} 
+\]  Dimostriamo che \(c_{m} = 0\) per \(m < 0\). Ricordando che \(c_{m}\) è dato
+da~\eqref{eq:coeff-laurent} si ha, prendendo \(\rho\) aribtrario, con \(\rho \in
+(0, z)\) 
+\begin{equation}\label{help:est_riemann}
+    |c_{m}| \le \frac{1}{2\pi} \max_{z \in \partial D_\rho {(a)}}
+    \frac{|f{(z)}|}{|{(z-a)}|^{m+1}} \cdot 2\pi \rho =
+    \frac{1}{\rho^{m}}\max_{\partial D_\rho{(a)}} |f|
+\end{equation}
+Per ipotesi fissato \(\varepsilon > 0\) esiste un \(\rho_{\varepsilon} > 0\)
+tale che 
+\[
+    \forall \eta < \rho_\varepsilon, \quad \forall z \in D_\eta^*{(a)} \quad
+    |{(z-a)}f{(z)}| < \varepsilon
+\]
+in particolare per ogni \(\rho < \rho_\varepsilon\) e per ogni \(z \in
+\partial D^{*}_\rho {(a)}\) 
+\[
+    |{(z-a)}f{(z)}| < \varepsilon \implies \rho|f{(z)}| < \varepsilon \implies
+    |f{(z)}| < \frac{\varepsilon}{\rho}
+\]
+Allora, fissato \(\varepsilon>0\) e posto \(\rho_\varepsilon\) come sopra, si ha
+\(\forall \rho < \rho_\varepsilon\), da \eqref{help:est_riemann} otteniamo
+\[
+    |c_m| \le \frac{\varepsilon}{\rho^{m}} \frac{1}{\rho}
+\]
+e quindi per \(m < 0\) si ha
+\begin{align*}
+    m &= -1 \implies |c_{-1} | \le \varepsilon \text{ quindi per arbitrarietà di
+    \(\varepsilon\) } c_{-1} = 0 \\
+        m &< -1 \implies |c_{m}| \le \varepsilon \rho^{-{(m+1)}} \to 0 \text{
+        per } \rho \to 0 \implies c_{m} = 0
+\end{align*}
+\end{proof}
+\begin{definition}{Singolarità eliminabile}
+    Se \(f \in \mathcal{H}{(D^{*}_r{(a)})}\) è estendibile in modo olomorfo a
+    tutto \(D_r{(a)}\), si dice che \(z=a\) è una singolarità
+    \textbf{eliminabile}
+\end{definition}
+\begin{proposition}
+    Sia \(\Omega \subseteq \mathbb{C} \) aperto e \(E \subseteq \Omega \) chiuso
+    e discreto. Sia \(f \in \mathcal{H}{(\Omega - E)}\). Allora la funzione
+    \(f\) è meromorfa se e solo se per ogni \(a \in E\) vale una delle seguenti
+    proprietà:
+\begin{enumerate}[label = \alph*)]
+    \item \(f\) è limitata in un intorno di \(a\) \emph{(singolarità
+        eliminabile)}
+    \item \(\lim_{z \to a} |f{(z)}| = +\infty\) \emph{(polo)}
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+    Sia \(a \in E\). Se \(f\) è meromorfa, per la
+    proposizione~\ref{prp:meromorfa-troncato-sinistra} in un intorno di \(a\)
+    sia ha \[
+    f{(z)} = c_{m_{0}} {(z-a)}^{m_{0}} + c_{m_{0}+1}{(z-a)}^{m_{0}+1} + \dots
+    \quad m_{0} \in \mathbb{Z},\,\, c_{m_{0}} \neq 0
+\]
+    ossia lo sviluppo è troncato a sinistra. 
+
+    Se \(m_{0} \ge 0\) allora lo sviluppo dà una funzione olomorfa in un intorno
+    di \(a\), e quindi è verificato il caso \((a)\), altrimenti \(m_{0} =: -N
+    <0\) e quindi
+\begin{equation}\label{eq:meromorfa2}
+    f{(z)} = \frac{c_{-N} }{{(z-a)}^{N}} + \frac{c_{-N + 1} }{{(z-a)}^{N-1}} +
+    \dots = \frac{1}{{(z-a)}^{N}}\underbrace{\left( c_{-N} + c_{-N+1} {(z-a)} +
+    \dots \right)}_{:= g{(z)}}  
+\end{equation}
+    dove \(g \in \mathcal{H}{(U)}\), con \(U\) intorno di \(a\), e quindi
+    necessariamente \(\lim_{z \to a} |f{(z)}| = +\infty\) che è la \((b)\).
+    
+    Viceversa, se \({(a)}\) \(f\) è limitata in un intorno di \(a\) allora per il
+    teorema~\ref{thm:estensione-riemann} è estendibile in modo olomorfo anche in
+    \(a\) ed è quindi olomorfa (dunque anche meromorfa) in un intorno di \(a\).
+    Se invece \({(b)}\) \(\lim_{z \to a} |f{(z)}| = +\infty\) allora \(\frac{1}{f}\) è
+    definito in un intorno \(U\) di \(a\) ed è limitato in tale intorno. Allora per
+    il teorema~\ref{thm:estensione-riemann} esiste \(\tilde{\varphi } \in
+    \mathcal{H}{(U)}\) con \(\tilde{\varphi} = \frac{1}{f}\) in \(U \sminus
+    \{a\} \) e dunque \(\tilde{\varphi} f = 1\) in \(U \sminus \{a\} \) ossia
+    \(f\) è meromorfa.
+
+\end{proof}
+\begin{definition}{Polo}\label{def:polo}
+    Sia \(f \in \mathcal{H}{(D^*_r{(a)})}\) Si dice che \(z = a\) è un
+    \textbf{polo} se 
+\[
+    \lim_{z \to a} |f{(z)}| = + \infty
+\]
+\end{definition}
+In tal caso \(f{(z)}\) è del tipo~\eqref{eq:meromorfa2}. Se \(c_{-N} \neq 0\) si
+dice che \(z=a\) è un polo di \textbf{ordine} \(N\)
+
+\begin{definition}{Singolarità essenziale}\label{def:sing-essenziale}
+    Se \(f \in \mathcal{H}{(D^{*}_r{(a)})}\) ha sviluppo di Laurent con infiniti
+    termini \(c_m\) con \(m < 0\) si dice che \(z=a\) è una singolarità
+    \textbf{essenziale}
+\end{definition}
+\begin{eser}
+    Mostrare che \(f{(z)} = e^{\frac{1}{z}}\) ha una singolarità essenziale in
+    \(z=0\) 
+\end{eser}
+\begin{theorem}[Casorata-Weierstrass]\label{thm:casorata-weierstrass}
+    Sia \(f \in \mathcal{H}{(D^*_r{(a)})}\) con \(z=a\) singolarità essenziale.
+    Allora l'immagine di \(f\) è densa in \(\mathbb{C}\) 
+\end{theorem}
+\begin{proof}
+    Per assurdo supponiamo che esista un \(w \in \mathbb{C}\) e \(\rho > 0\)
+    tali che
+\[
+    D_\rho{(w)} \cap f{(D^{*}_r{(a)})} = \varnothing
+\]
+    Allora \(\displaystyle \frac{1}{f-w}\) è ben definita in tutto \(D^{*}_r{(a)}\) ed è
+    limitata, dunque per il teorema~\ref{thm:estensione-riemann} di estensione
+    di Riemann, esiste \(\varphi  \in \mathcal{H}{(D_r{(a)})}\) con
+    \(\displaystyle \varphi = \frac{1}{f - w}\) se \(z\neq a\). Ne segue che
+    \(f-w\) è meromorfa che è assurdo, perché \(f\) ha una singolarità
+    essenziale
+\end{proof}
+In realtà in particolare esiste un risultato ancora più sorprendente
+\begin{theorem}[Grande Teorema di Picard]\label{thm:lol-1eccezione}
+    Sia \(f \in \mathcal{H}{(D^{*}_r{(a)})}\) con \(a\) singolarità essenziale.
+    Allora \(f\) assume ogni valore di \(\mathbb{C}\), con al più un'eccezione,
+    un numero infinito di volte.
+\end{theorem}
+Da questo teorema ne possiamo dedurre la versione ``piccola'', ossia
+\begin{theorem}[Piccolo Toerema di Picard]
+    Una funzione olomorfa su \(\mathbb{C}\) che non sia un polinomio assume
+    tutti i valori complessi con al più un eccezione un numero infinito di
+    volte.
+\end{theorem}
+\begin{proof}
+    Se \(f\) è olomorfa su tutto \(\mathbb{C}\) allora \(f{(z)} = c_{0} + c_{1}
+    z + c_{2}z^2 + \dots\). Sia ora 
+\[
+    \tilde{f}{(\zeta)} = f{\left(\frac{1}{\zeta}\right)} = c_{0}+ \frac{c_{1}}{\zeta} +
+    \frac{c_{2}}{\zeta^2} + \dots
+\]
+    allora \(\zeta=0\) è una singolarità essenziale perché \(f\) non è un
+    polinomio. Si applica dunque il teorema precedente.
+\end{proof}
+
+\paragraph{\(\mathbb{C}\) esteso.} Indichiamo con \(\hat{\mathbb{C}}\)
+l'estensione \(\mathbb{C} \cup \{\infty\} \) in cui gli intorni aperti di
+\(\infty\) sono i complementari dei compatti di \(\mathbb{C}\) (\(\infty\) è
+visto come una sorta di ``punto ad infinito''). È la compattificazione 1-punto.
+Geometricamente \(\hat{\mathbb{C}}\) può essere visto come una sfera (detta
+\textbf{sfera di Riemann}) mediante la \emph{proiezione stereografica}.
+\begin{figure}[ht]
+    \centering
+    \incfig[.5]{sfera-di-riemann}
+    \caption{Sfera di Riemann}
+    \label{fig:sfera-di-riemann}
+\end{figure}
 
 
 \newpage
