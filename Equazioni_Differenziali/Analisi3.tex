@@ -7,6 +7,8 @@
 \maketitle
 Libro suggerito: \emph{Hirsch, Smale, Devaney}
 
+\tableofcontents
+\newpage
 
 \setcounter{section}{-1}
 \section{Esempi}
@@ -1110,7 +1112,7 @@ e \(x : J \to \mathbb{R}^{N}\) soluzione di \(x' = f(t, x)\).
         \[
             (t, x(t)) \to \partial D \quad \text{per } t \to \omega_{\pm} 
         \]
-    \item Ogni soluzione ammete un prolungamento a un itervallo massimale
+    \item Ogni soluzione ammette un prolungamento a un intervallo massimale
 
 \end{enumerate}
 \end{theorem}
@@ -2443,4 +2445,353 @@ esiste una funzione \(H \in C^{1}{(\Omega)}\) tale che \(dH = \omega\)
     C > 0
 \]
 \end{example}
+
+\subsection{Sistemi lineari}
+Consideriamo il sistema lineare
+\begin{equation}\label{eq:sist_lin}
+    x' = A{(t)}x + b{(t)} \quad
+    A \in C^{0}{(I, M^{N \times N}{(\mathbb{R})})} \quad b \in C^{0}{(I,
+    \mathbb{R}^{N})}
+\end{equation}
+dove \(I \subseteq \mathbb{R} \) è un intervallo aperto.
+Se \(N = 2\)  abbiamo
+\begin{equation}\label{eq:sist_lin_2}
+    \begin{cases}
+    x'_1 = a_{11}{(t)}x_{1} + a_{12}{(t)}x_{2} + b_{1}{(t)} \\
+    x_{2}' = a_{21}{(t)}x_{1} + a_{22}{(t)}x_{2} + b_{2}{(t)}
+    \end{cases}
+\end{equation}
+Allora abbiamo \(f{(t, x)} = A{(t)}x + b{(t)}\) per cui per crescita
+sottolineare abbiamo esistenza globale, e quindi \(I\) è intervallo massimale.
+
+In aggiunta se \(A, b \in C^{k}\) allora \(x{(\cdot )} \in C^{k+1}{(I,
+\mathbb{R}^{N})}\). 
+
+Sia ora \(L: C^{1}{(I, \mathbb{R}^{N})} \to C^{0}{(I, \mathbb{R}^{N})}\)
+definito come \(x \mapsto x' - A{(t)}x\). L'equazione è
+\begin{equation}
+    Lx = b
+\end{equation}
+e \(L\) è lineare, per cui
+\begin{proposition}
+    Sia \(\overline{x}\) una soluzione di~\eqref{eq:sist_lin}. Allora tutte e
+    sole le soluzioni di tale equazione si ottengono con \(x = x_{0} +
+    \overline{x}\) al variare di \(x_{0}\) fra le soluzioni di 
+    \begin{equation}\label{eq:sist_lin_omog}
+        x' = A{(t)}x
+    \end{equation}
+    che è l'equazione omogenea associata
+\end{proposition}
+\begin{proof}
+    \(L^{-1}{(b)} = \overline{x} + L^{-1}{(0)}\) 
+\end{proof}
+
+\paragraph{Equazione omogenea} Consideriamo ora
+l'equazione~\eqref{eq:sist_lin_omog} omogenea associata a
+un sistema lineare~\eqref{eq:sist_lin}. Sia \(V = L^{-1}{(0)}\) lo spazio delle
+soluzioni. Allora se \(x{(\cdot , t_{0}, x_{0})}\) è la soluzione del problema
+di Cauchy con dato iniziale \(x{(t_{0})} = x_{0}\).
+
+\begin{proposition}
+    Fissiamo \(t_{0} \in I\) e sia 
+    \begin{align*}
+        \varphi^{t_{0}}: \mathbb{R}^{N} &\longrightarrow V \\
+        \xi &\longmapsto \varphi^{t_{0}}(\xi) = x{(\cdot , t_{0}, \xi)}
+    \end{align*}
+    Allora \(\varphi ^{t_{0}}\) è un isomorfismo di spazi vettoriali
+\end{proposition}
+\begin{proof}
+    Siano \(\xi_{1}, \xi_{2} \in \mathbb{R}^{N}\) e \(\alpha, \beta \in
+    \mathbb{R}\), inoltre sia \(u_{1} = \varphi ^{t_{0}}{(\xi_{1})}\) e \(u_{2}
+    = \varphi ^{t_{0}}{(\xi_{2})}\). Allora chiamato
+    \[
+      \xi = \alpha \xi_{1} + \beta\xi_{2}
+    \]
+    vogliamo mostrare che \(\varphi ^{t_{0}}{(\xi)} = \alpha u_{1} + \beta
+    u_{2}\). La funzione \(u := \alpha u_{1} + \beta u_{2}\) è soluzione e
+    inoltre
+    \[
+      u{(t_{0})} = \alpha u_{1}{(t_{0})} + \beta u_{2}{(t_{0})} = \alpha
+      \xi_{1} + \beta \xi_{2} = \xi
+    \]
+    Per unicità segue che \(u{(\cdot )} = x{(\cdot , t_{0}, \xi)} = \varphi
+    ^{t_{0}}{(\xi)}\) 
+
+    Quindi \(\varphi ^{t_{0}}\) è un omomorfismo. Del resto
+    \[
+      \varphi ^{t_{0}}{(\xi)} = 0 \implies \xi = x{(t_{0}, t_{0}, \xi)} =
+      \varphi ^{t_{0}}{(\xi)}|_{t = t_{0}} = 0
+    \]
+    quindi \(\varphi \) è iniettiva.
+
+    Infine data \(u \in V\)  risulta \(u =
+    \varphi ^{t_{0}}{(\xi)}\) con \(\xi = u{(t_{0})}\) e quindi \(\varphi \) è
+    suriettiva
+\end{proof}
+Ne consegue direttamente che \(\dim V = N\) e anche il seguente
+\begin{corollary}
+    Sia \(t_{0} \in I\) fissato, siano \(x^{{(1)}}, \dots, x^{{(N)}}\) elementi
+    di \(V\). Allora \(x^{{(1)}}, \dots, x^{{(N)}}\) sono linearmente
+    indipendenti in \(V\) se e solo se tali sono i vettori di \(\mathbb{R}^{N}\)
+    \(x^{{(1)}}{(t_{0})}, \dots, x^{{(N)}}{(t_{0})}\) 
+\end{corollary}
+
+\begin{definition}{Wronskiana}
+    Dati \(N\) elementi di \(V\) (soluzioni di~\eqref{eq:sist_lin_omog})
+    \[
+      x^{{(1)}}, \dots, x^{{(N)}}
+    \] diciamo matrice \textbf{Wronskiana} di tali soluzioni la matrice che ha
+    come colonne
+    \[
+        \mathbf{X}{(t)} = {(x^{{(1)}}{(t)} | x^{{(2)}}{(t)} | \dots |
+        x^{{(N)}}{(t)})}
+    \]
+    Il determinante
+    \[
+      W^{t} = \det \mathbf{X}{(t)}
+    \]
+    è il (determinante) \textbf{wronskiano}
+\end{definition}
+
+Quindi, fissato \(t_{0} \in I\), le soluzioni \(x^{{(1)}}, \dots, x^{{(N)}}\)
+sono linearmente indipendenti se e solo se \(\det \mathbf{X} {(t_{0})} = 0\). In
+tal caso abbiamo che \(\forall t \in I\) risulta \(\det \mathbf{X}{(t)} = 0\)
+\begin{example}
+    Consideriamo il sistema
+    \[
+      \begin{cases}
+          x_{1}' = 2x_{1} + x_{2} \\
+          x_{2}' = -4x_{1} - 3x_{2}
+      \end{cases}
+      \quad
+      A = \begin{pmatrix}
+          2 & 1 \\
+          -4 & -3
+      \end{pmatrix}
+    \]
+    allora \(\dim V = 2\) e una base di \(V\) è data da
+    \[
+      x^{{(1)}}{(t)} = e^{t} \begin{pmatrix}
+          1 \\
+          -1
+      \end{pmatrix} \quad x^{( 2 )}{(t)} = e^{-2t} \begin{pmatrix}
+          1 \\
+          -4
+      \end{pmatrix}
+    \]
+    Verifichiamo che sono soluzioni:
+    \begin{align*}
+        {\left(x^{{(1)}}_1\right)}' = e^{t} = 2e^{t} - e^{t} = 2x^{{(1)}}_{1} +
+        x^{{(1)}}_{2} \\
+    {\left(x_{2}^{{(1)}}\right)}' = -e^{t} = -4e^{t} -(- 3e^{t}) = -4x^{{(1)}}_{1} -
+        3x^{{(1)}}_2
+    \end{align*}
+    e analogamente per \(x^{(2)}\). La matrice wronskiana è
+    \[
+      \mathbf{X}{(t)} = \begin{pmatrix}
+          e^{t} & e^{-2t} \\
+          -e^{t} & -4e^{-2t}
+      \end{pmatrix}
+    \]
+    che ha determinante \(\det \mathbf{X} = -4e^{-t} + e^{-t} = -3 e^{-t} \neq 0\) 
+\end{example}
+\begin{theorem}[Liouville]\label{thm:liouville_wronskiano}
+    Siano \(x^{{(1)}}, \dots, x^{{(N)}}\) soluzioni. Sia \(W{(t)} = \det
+    \mathbf{X} {(t)}\). Allora \(W\) risolve 
+    \[
+        W'{(t)} = {(\text{tr} A{(t)})} W{(t)}
+    \]
+    cioè 
+    \[
+        W{(t)} = W{(t_{0})} e^{\int_{t_{0}}^{t} \text{tr} A{(s)} ds} \quad t, t_{0}
+        \in I
+    \]
+\end{theorem}
+Ciò conferma che \(W{(t)} \equiv 0\) oppure \(W^{t}\) non si annulla mai.
+
+\paragraph{Matrice risolvente} Prendiamo le soluzioni con dati iniziali \(e_{1},
+e_{2}, \dots, e_N\) cioè per ogni \(\tau \in I\) e \(i = 1, \dots, N\) sia 
+\[
+  u^{{(i)}}{(\cdot, \tau)} = x{(\cdot , \tau, e_{i})}
+\]
+Allora la matrice \(\mathbf{X} \) wronskiana corrispondente agli \(u^{{(i)}}\) è
+\[
+  \mathbf{X} {(\tau)} = {\left( u^{{(1)}}{(\tau, tau)} | \dots | u^{N}{(\tau,
+  tau)}\right)} = {\left( e_{1}, e_{2}, \dots, e_N \right)} = I
+\]
+sono linearmente indipendenti
+\begin{definition}{Matrice risolvente}
+    Diciamo \textbf{matrice risolvente} dell'equazione~\eqref{eq:sist_lin_omog}
+    la matrice (funzione di \(t\) e \(\tau\) )
+    \[
+      R{(t, \tau)} = {\left( u^{{(1)}}{(t, \tau)} | \dots | u^{{(N)}}{(t, \tau)} \right)} 
+    \]
+\end{definition}
+Allora la soluzione di (\(t \in I\) e \(\xi \in \mathbb{R}^{N}\))
+\[
+  \begin{cases}
+      x' = A{(t)}x \\
+      x{(\tau)} = \xi
+  \end{cases}
+\]
+è data da
+\[
+    x{(t)} = R{(t, \tau)} \xi = \xi_{1} u^{{(1)}}{(t, \tau)} +~\dots + \xi_{N}
+    u^{N}{( t, \tau)}
+\]
+così che \(x{(\tau)} = R{(\tau, \tau)}\xi = \mathbf{X} {(\tau)} \xi= I\xi =
+\xi\). Enunciato in altra forma: se \(x{(\cdot )}\) è soluzione
+di~\eqref{eq:sist_lin_omog} allora per ogni \(t, \tau \in I\) 
+\[
+    x{(t)} = R{(t, \tau)} x{(\tau)}
+\]
+Da qui scende che se \(\mathbf{X}{(\cdot )}\) è la matrice wronskiana di \(N\)
+soluzioni del tipo \(x^{{(i)}}\) per \(i = 1, \dots, N\) allora
+\[
+    x^{{(i)}}{(t)} = R{(t, \tau)} x^{{(i)}}{(\tau)} \quad i = 1, \dots, N
+\]
+quindi
+\[
+    \mathbf{X} {(t)} = R{(t, \tau)} \mathbf{X} {(\tau)}
+\]
+Se in particolare le \(x^{{(i)}}\) sono linearmente indipendenti allora
+\[
+    R{(t, \tau)} = \mathbf{X} {(t)} \mathbf{X} {(\tau)}^{-1}
+\]
+\addtocounter{excounter}{-1}
+\begin{example}[Nell'esempio precedente]
+    \begin{align*}
+        \mathbf{X}{(t)}^{-1} &= -\frac{1}{3}e^{t} \begin{pmatrix}
+          -4e^{-2t} & e^{t} \\
+          -e^{-2t} & e^{t}
+      \end{pmatrix}^{T} = -\frac{1}{3}e^{t} \begin{pmatrix}
+          -4e^{-2t} & -e^{-2t} \\
+          e^{t} & e^{t}
+          \end{pmatrix} = \\ &= -\frac{1}{3} \begin{pmatrix}
+          -4e^{-t} & -e^{-t} \\
+          e^{2t} & e^{2t}
+      \end{pmatrix}
+    \end{align*}
+    e dunque
+    \begin{align*}
+        R{(t, \tau)} &= -\frac{1}{3} \begin{pmatrix}
+          e^{t} & e^{-2t} \\
+          -e^{t} & -4e^{-2t}
+          \end{pmatrix} \begin{pmatrix}
+          -4e^{-\tau} & -e^{-\tau} \\
+          e^{2\tau} & e^{2\tau}
+          \end{pmatrix} = \\ &= -\frac{1}{3} \begin{pmatrix}
+          -4e^{t-\tau}+e^{-2{(t-\tau)}} & -e^{t-\tau} + e^{-2{(t-\tau)}} \\
+          4e^{t-\tau} - 4e^{-2{(t-\tau)}} & e^{t-\tau} - 4e^{-2{(t-\tau)}}
+      \end{pmatrix}
+    \end{align*}
+    e in effetti abbiamo che
+    \[
+      R{(\tau, \tau)} = -\frac{1}{3} \begin{pmatrix}
+          -3 & 0 \\
+          0 & -3
+      \end{pmatrix} = I
+    \]
+    \begin{remark}
+        In questo caso \(R{(t, \tau)}\) è funzione di \(t - \tau\), in effetti
+        in generale se \(A\) non dipende da \(t\)  (sistema autonomo) abbiamo
+        che \(u^{{(i)}}{(t)} = x{(t, \tau, e_{i})} = x{(t-\tau, 0, e_{i})}\) e
+        quindi
+        \(R{(t, \tau)} = R{(t-\tau, 0)}\) ed è dunque sufficiente conoscere
+        \(R{(t, 0)}\) 
+    \end{remark}
+\end{example}
+
+Sappiamo ora che dato un sistema lineare~\eqref{eq:sist_lin}, noi consideriamo
+il sistema omogeneo associato~\eqref{eq:sist_lin_omog} e cerchiamo le soluzioni
+calcolando \(R{(t, \tau)}\), oppure \(R{(t, 0)}\) nel caso di \(A\) non
+dipendente da \(t\). Infine cerchiamo una soluzione particolare
+\(\overline{x}{(\cdot )}\). Come possiamo fare per tale scopo?
+
+\paragraph{Metodo di variazione delle costanti}
+\begin{proposition}
+    La funzione
+    \[
+        \overline{x}{(t)} = \int_{t_{0}}^{t} R{(t, s)}b{(s)}\,ds
+  \]
+  è soluzione dell'equazione~\eqref{eq:sist_lin} 
+\end{proposition}
+\begin{proof}
+Supponiamo di conoscere una \(N\)-upla di soluzioni linearmente indipendenti
+dell'omogenea~\eqref{eq:sist_lin_omog} \(x^{{(1)}}, \dots, x^{{(N)}}\). Allora
+cerchiamo \(\overline{x}{(\cdot )}\) della forma
+\[
+  \overline{x}{(t)} = \mathbf{X} {(t)}\xi{(t)}
+\]
+Si ha \(\overline{x}'{(t)} = \mathbf{X}'{(t)}\xi {(t)} + \mathbf{X} {(t)}
+\xi'{(t)}\) e quindi \(\overline{x}\) è soluzione se e solo se
+\begin{align*}
+    \mathbf{X}'\xi + \mathbf{X} \xi' &= A{(\mathbf{X} \xi)} + b \\
+    \cancel{A\mathbf{X} \xi} + \mathbf{X} \xi' &= \cancel{A\mathbf{X} \xi}+ b \\
+    \implies \mathbf{X} \xi' &= b \iff \xi' = \mathbf{X}^{-1} b
+\end{align*}
+dunque
+\(\xi\) è primitiva di \(\mathbf{X}^{-1}b\), ossia 
+\[
+    \xi{(t)} = \int \mathbf{X}^{-1}{(t)} b{(t)} dt \text{ ad esempio } \xi{(t)} =
+    \int_{t_{0}}^{t} \mathbf{X}^{-1}{(s)}b{(s)}ds
+\]
+Allora otteniamo
+\[
+    \overline{x}{(t)} = \mathbf{X} \int_{t_{0}}^{t} \mathbf{X}^{-1}{(s)}b{(s)}ds
+    = \int_{t_{0}}^{t} R{(t, s)}b{(s)}ds
+\]
+\end{proof}
+
+\begin{example}[Esempio precedente, plus] 
+    Consideriamo il sistema
+    \begin{equation}\label{eq:ex44}
+      \begin{cases}
+          x_{1}' = 2x_{1} + x_{2} &- 2t\\
+          x_{2}' = -4x_{1} - 3x_{2} &+ 4t + 3
+      \end{cases}
+    \end{equation}
+    e abbiamo
+    \[
+      \mathbf{X}^{-1} {(t)} = -\frac{1}{3} \begin{pmatrix}
+          -4e^{-t} & -e^{-t} \\
+          e^{2t} & e^{2t}
+      \end{pmatrix}
+      \quad 
+      b{(t)} = \begin{pmatrix}
+          -2t \\
+          4t + 3
+      \end{pmatrix}
+    \]
+    da cui
+    \[
+      \mathbf{X}^{-1}{(t)} b{(t)} = -\frac{1}{3} \begin{pmatrix}
+          8te^{-t}-{(4t+3)}e^{-t} \\
+          -2te^{2t} + {(4t+3)}e^{2t}
+      \end{pmatrix}
+      = -\frac{1}{3}
+      \begin{pmatrix}
+          4te^{-t}-3e^{-3}  \\
+          2te^{2t}+3e^{2t}
+      \end{pmatrix}
+    \]
+    da cui
+    \[
+        \xi {(t)} = \int_{t_{0}}^{t} \mathbf{X} {(t)} b{(t)} dt = -\frac{1}{3}
+        \begin{pmatrix}
+            {(-4t-1)}e^{-t} \\
+            {(t+1)}e^{2t}
+        \end{pmatrix}
+    \]
+    infine
+    \[
+      \overline{x} = \mathbf{X} {(t)}\xi {(t)} = \begin{pmatrix}
+          t \\
+          1
+      \end{pmatrix}
+    \] che si può verificare velocemente essere effettivamente soluzione
+    di~\eqref{eq:ex44}
+    
+\end{example}
+
 \end{document}
