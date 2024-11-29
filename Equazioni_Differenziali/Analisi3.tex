@@ -2492,7 +2492,7 @@ un sistema lineare~\eqref{eq:sist_lin}. Sia \(V = L^{-1}{(0)}\) lo spazio delle
 soluzioni. Allora se \(x{(\cdot , t_{0}, x_{0})}\) è la soluzione del problema
 di Cauchy con dato iniziale \(x{(t_{0})} = x_{0}\).
 
-\begin{proposition}
+\begin{proposition}\label{prop:44}
     Fissiamo \(t_{0} \in I\) e sia 
     \begin{align*}
         \varphi^{t_{0}}: \mathbb{R}^{N} &\longrightarrow V \\
@@ -2793,5 +2793,258 @@ Allora otteniamo
     di~\eqref{eq:ex44}
     
 \end{example}
+
+\paragraph{ Sistemi omogenei autonomi } Come detto prima, nel caso di sistemi
+autonomi \(x' = Ax\) con \(A \in M^{N \times N}{(\mathbb{R})}\) sappiamo che
+\(R{(t, \tau)} = R{(t-\tau, 0)}\) e dunque è sufficiente calcolare \(R{(t, 0)}\)
+per \(t \in \mathbb{R}\).
+
+Le colonne di \(\mathbf{X} {(t)}\) sono soluzioni di \(x' = Ax\) e inoltre
+\(\mathbf{X} {(0)} = I\) identità, ne consegue che vogliamo risolvere il
+problema di Cauchy
+\begin{equation}\label{eq:cauchy_autonomo_omoglin}
+    \begin{cases}
+        \mathbf{X}'{(t)} = A\mathbf{X} {(t)} \\
+        \mathbf{X} {(0)} = I 
+    \end{cases}
+    \text{ o equivalentemente }
+    \mathbf{X} {(t)} = I + \int_{0}^{t} A\mathbf{X} {(s)}\,ds
+\end{equation}
+In analogia con la dimostrazione del teorema del teorema di esistenza e unicità
+introduciamo \(T : C^{0} \to C^{0}\) definito come
+\[
+    (T\mathbf{X}){(t)} = I + \int_{0}^{t} A\mathbf{X} {(s)}\,ds \quad \mathbf{X}
+    \in C^{0}{(\mathbb{R}, M^{N \times N}{(\mathbb{R})})}
+\]
+e ne cerchiamo i punti fissi. Definiamo ora la successione
+\begin{align*}
+    \mathbf{X}_0{(t)} &\equiv I \\
+    \mathbf{X}_1 &= T\mathbf{X}_0 = I = tA \\
+    \mathbf{X}_2 &= T\mathbf{X}_1 = I + tA + \frac{1}{2}t^2A^2 \\
+    \vdots \\
+    \mathbf{X}_{m+1} &= Tx_{m} = I + A \int_{0}^{t} X_{m} {(s)}\,ds = \\ &= I + tA +
+    \frac{1}{2}t^2 A^2 + \frac{1}{3!}t^3 A^3 +~\dots + \frac{1}{m!}t^m A^m
+\end{align*}
+Il problema è la convergenza di tale successione. È naturale quindi ora
+pensare che la soluzione sia una sorta di \(e^{tA}\), ma è ben definita?
+Converge uniformemente? (Saltare a pagina~\pagref{ritorniamo_a_noi_dopo_exp_matr})
+
+\paragraph{Esponenziale di una matrice} Sia \(A \in M^{N \times
+N}{(\mathbb{K})}\), con \(\mathbb{K} = \mathbb{R}, \mathbb{C}\). Prendiamo 
+\[
+    \|A\| \left\{ |Ax| : x \in \mathbb{K}^{N}, |x| \le 1 \right\} 
+\]
+e l'operatore lineare \(T\) associato alla matrice \(A\). Allora
+\begin{itemize}[label = --]
+    \item \(|Ax| \le \|A\||x|\) per ogni \(x \in \mathbb{K}^{N}\)
+    \item \(\|AB\| \le \|A\|\|B\|\) infatti \(|ABx| \le |A\cdot Bx| \le
+        \|A\||Bx| \le \|A\|\|B\||x|\), basta ora osservare che prendiamo per la
+        norma \(|x| \le 1\).
+    \item \(\|A^{k}\| \le \|A\|^{k}\) 
+\end{itemize}
+
+Se \({(M_k)}_k\) è una successione di matrici, la convergenza è quella usuale in
+\(\mathbb{K}^{N \times N}\). Consideriamo ora una serie in \(M^{N \times N}{(\mathbb{K})}\) 
+\[
+  \sum_{k=0}^{\infty} A_{k} 
+\] allora la serie converge se converge la successione delle somme parziali, e
+converge assolutamente se converge la serie \(\sum_{k=0}^{\infty} \|A_{k}\|\).
+Vale che convergenza assoluta implica convergenza.
+
+\begin{proposition}
+    Siano \(\sum_{j=1}^{\infty} A_{j} \) e \(\sum_{k=0}^{\infty} B_{k} \) serie
+    in \(M^{N \times N}{(\mathbb{K})}\). Sia inoltre
+    \[
+      \sum_{k=0}^{\infty} C_{k} \, , \quad C_{k} = \sum_{j=0}^{\infty}
+      A_{j}B_{k-j}   
+    \]
+    (serie prodotto). Se le serie date sono assolutamente convergenti, tale è la
+    serie prodotto, e vale
+    \[
+      \sum_{k=0}^{\infty} C_{k} = {\left( \sum_{j=0}^{\infty} A_{j}  \right)}
+      \cdot {\left( \sum_{k=0}^{\infty} B_{k}  \right)}  
+    \]
+\end{proposition}
+\begin{proof}
+    \begin{equation*}
+        \|C_{k}\| \le \sum_{j=0}^{k} \|A_{j}B_{k-j} \| \le \sum_{j=0}^{k}
+        \|A_{j}\|\|B_{k-j} \| =: \sum_{j=0}^{k} \alpha_j \beta_{k-j}  
+    \end{equation*}
+    dove l'ultimo è il termine generale della serie prodotto \({\left( \sum
+    \alpha_{j} \right)} {\left( \sum \beta_{k} \right)}  \) che è convergente
+    per ipotesi. Per confronto concludiamo
+    \[
+        \sum_{k=0}^{\infty} \|C_{k}\| < +\infty 
+    \]
+    Calcoliamo ora 
+    \[
+      \lim_{m \to \infty} \sum_{k=0}^{2m}C_{k}
+    \]
+    e si ha 
+    \begin{align*}
+        \sum_{k=0}^{2m} C_{k} &= \sum_{k=0}^{2m} \sum_{j+h=k} A_{j} B_h \\
+                              &= \sum_{j=0}^{m} \sum_{k=0}^{m} A_{j}B_{k} +
+                              R^{1}_m + R^{2}_m 
+    \end{align*}
+    con
+    \[
+      R^{1}_m = \sum_{j=m+1}^{2m} \sum_{h=0}^{2m-j} A_{j}B_h \quad R^2_m =
+      \sum_{h=m+1}^{2m} \sum_{j=0}^{2m - h} A_{j} B_h 
+    \]
+    Risulta dunque 
+    \[
+      \sum_{j=0}^{m} \sum_{h=0}^{m} A_{j}B_h = {\left( \sum_{j=0}^{m} A_{j}
+      \right)} {\left( \sum_{h=0}^{m} B_h \right)} \to {\left(
+              \sum_{j=0}^{\infty} A_{j} \right)} {\left( \sum_{h=0}^{\infty}
+      B_{h} \right)}
+    \]
+    inoltre
+    \begin{align*}
+        \|R_{m}^{1}\| &\le \sum_{j=m+1}^{2m} \sum_{h=0}^{2m-j} \|A_{j}\|\|B_h\|
+        \le \sum_{j=m+1}^{2m} {\left( \|A_{j}\| \sum_{h=0}^{2m-j} \|B_h\|
+\right)} \le  \\ &\le \sum_{h=0}^{\infty} \|B_h\| \le {\left( \sum_{h=0}^\infty
+\|B_h\|\right)} \cdot {\left( \sum_{j=m+1}^{\infty} \|A_{j}\|  \right)} \to 0
+    \end{align*}
+    per \(m \to \infty\) e analogamente per \(R^2_m\) 
+\end{proof}
+
+Ora data \(A \in M^{N\times N}\) consideriamo la serie
+\[
+  \sum_{k=0}^{\infty} \frac{A^{k}}{k!} 
+\] e risulta
+\[
+  \left\| \frac{A^{k}}{k!}\right\| \le \frac{\|A\|^{k}}{k!} \quad
+  \sum_{k=0}^{\infty} \frac{\|A\|^{k}}{k!} < +\infty 
+\] 
+\begin{definition}{Esponenziale di una matrice}
+    \[
+        e^{A} := \sum_{k=0}^{\infty} \frac{A^{k}}{k!}
+    \]
+\end{definition}
+
+\begin{proposition}
+    La serie esponenziale converge assolutamente e
+    \[
+      \left\|e^{A}\right\| \le e^{\|A\|}
+    \]
+\end{proposition}
+\begin{proposition}\label{prop:prop_exp_mat_comm}
+    Se \(AB = BA\) allora
+    \[
+      e^{A + B} = e^{A}e^{B}
+    \]
+\end{proposition}
+\begin{eser}
+    Dimostrare la proposizione~\ref{prop:prop_exp_mat_comm} 
+\end{eser}
+\begin{corollary}
+    \(e^{A}\) è invertibile e 
+    \[
+      {\left( e^{A} \right)} ^{-1} = e^{-A}
+    \]
+\end{corollary}
+\begin{proof}
+    \(A\) e \(-A\) commutano e quindi
+    \[
+      e^{A}e^{-A} = e^{A-A} = e^{0} = I
+    \]
+\end{proof}
+
+\begin{remark}
+    Sia \(A\) una matrice, e \(\tilde{A} = P^{-1}AP\) una matrice simile ad
+    \(A\), con \(P\) invertibile. Allora poiché \(\tilde{A}^2 =
+    \tilde{A}*\tilde{A} = P^{-1} A \cancel{P P^{-1}} A P\) e in generale risulta
+    sempre similmente \(\tilde{A}^{k} = P^{-1}A^{k}P\) otteniamo
+    \[
+      e^{\tilde{A}} = \sum_{k=0}^{\infty} \frac{\tilde{A}^{k}}{k!} =
+      \sum_{k=0}^{\infty} \frac{P^{-1}A^{k} P}{k!} = P^{-1}e^{A}P
+    \] 
+\end{remark}
+
+\paragraph{Ritornando a \(x'= Ax\) }\label{ritorniamo_a_noi_dopo_exp_matr}
+Abbiamo che
+\[
+  \mathbf{X}_{m} {(t)} = \sum_{k=0}^{m} \frac{{\left( tA \right)} ^{k}}{k!} \to
+  e^{tA} \text{ per } m \to \infty
+\]
+e si ha che
+\[
+  \left\|\frac{{(tA)}^{k}}{k!}\right\| \le \frac{\|tA\|^{k}}{k!} \le
+  \frac{{\left( |t|\|A\| \right)}^{k} }{ k! } \le \frac{{\left( M\|A\| \right)}
+  ^{k}}{k!}
+\]
+per \(|t| \le M\). Poiché l'ultima serie è convergente, abbiamo convergenza
+totale (quindi uniforme) sui limitati di \(\mathbb{R}\). Abbiamo dunque
+mostrato che la matrice risolvente \(R {(t, 0)} = e^{tA}\), infatti è facile
+vedere che il limite di \(\mathbf{X}_m\), se esiste, è punto fisso di \(T\).
+
+Abbiamo dimostrato
+\begin{theorem}
+    In un sistema autonomo lineare omogeneo del tipo \(x' = Ax\) con \(A \in
+    M^{N \times N}{(\mathbb{R})}\) la matrice risolvente è data da
+    \[
+        R{(t, 0)} = e^{tA}
+    \]
+    e quindi la soluzione di 
+    \[
+      \begin{cases}
+          x' = Ax \\
+          x{(\tau)} = \xi
+      \end{cases}
+    \]
+    è data da \(x^{t} = e^{(t-\tau)A}\xi\) 
+\end{theorem}
+
+Come calcolare \(e^{A}\)? È utile il passaggio a matrice simile. Abbiamo detto
+che se \(\tilde{A} = P^{-1}AP\) allora \(e^{\tilde{A}} = P^{-1}e^{A}P\).
+Interpretiamo ciò nel quadro delle equazioni differenziali \(x'= Ax\) con il
+cambiamento di variabile \(\tilde{x}{(t)}\) tale che \(x {(t)} =
+P\tilde{x}{(t)}\), con \(P\) invertibile. Allora
+\[
+  AP\tilde{x} = Ax = x' = P\tilde{x}' \implies \tilde{x}' = \tilde{A}\tilde{x}
+\]
+che ha matrice risolvente \(e^{t\tilde{A}}\). 
+\begin{remark}
+    Avevamo \(x'=Ax\) con \(A \in M^{N \times N}{(\mathbb{R})}\). Più in
+    generale possiamo considerare il problema \(z' = Az\) con \(z :
+    \mathbb{R}\to \mathbb{C}^{N}\) o anche \(z' = \mathcal{A}z\) con
+    \(\mathcal{A} \in M^{N \times N}{(\mathbb{C})}\) e \(\mathcal{A} = A + iB\).
+    Allora se \(z {(t)} = x {(t)} + iy {(t)}\) abbiamo che
+    \begin{equation}\label{eq:obs_complex}
+      z'= \mathcal{A}z \implies \begin{cases}
+          x' = Ax - By \\
+          y' = Bx + Ay
+      \end{cases}
+    \end{equation}
+    che è un sistema di dimensione \(2N\). La proposizione~\ref{prop:44} rimane
+    valida quindi lo spazio delle soluzioni \(V^{\mathbb{C}}\) ha dimensione
+    (complessa) \(N\), se \(\mathcal{A} = A\) e \(B = 0\)
+    allora~\eqref{eq:obs_complex} diventa 
+    \[
+      \begin{cases}
+          x' = Ax & \in V^{\mathbb{R}}\\
+          y' = Ay & \in V^{\mathbb{R}}
+      \end{cases}
+    \]
+    e quindi \(V^{\mathbb{C}} = V^{\mathbb{R}} + iV^{\mathbb{R}}\). Da tutto ciò
+    discende che
+    \begin{proposition}
+        Se \(x^{{(1)}}, \dots, x^{{(N)}}\) sono \(N\) soluzioni \textbf{reali} e
+        linearmente indipendenti in \(\mathbb{R}\) allora sono anche una base di
+        \(V^{\mathbb{C}}\) 
+    \end{proposition}
+\end{remark}
+
+\paragraph{Calcolo di \(e^{A}\)} Vi sono alcuni casi particolari:
+\begin{itemize}[label = --]
+    \item \(A\) diagonale allora \(e^{A}\) diagonale con entrate
+        \(e^{\lambda_{i}}\) dove \(\lambda_{i}\) sono le entrate di \(A\).
+    \item \(A\) blocco nilpotente elementare di ordine \(s\), ossia \(A\) è una
+        matrice \(s \times  s\) che ha solo entrate di valore 1 sulla
+        sopradiagonale. Allora poiché \(A^{s} = 0\) abbiamo
+        \[
+          e^{A} = I + A + \frac{A^2}{2} +~\dots + \frac{A^{s-1}}{(s-1)!}
+        \]
+\end{itemize}
 
 \end{document}
