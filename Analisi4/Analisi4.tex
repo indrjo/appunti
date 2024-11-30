@@ -5330,7 +5330,7 @@ tale norma è una norma, infatti
             \end{cases}
     \]
 \end{example}
-\begin{example}
+\begin{example}\label{ex:int_continuo}
     Sia \(T : L^{\infty}{(\mathbb{R})} \to L^{1}{(\mathbb{R})}\), \(f \mapsto
     \rchi_{[-1, 1]}f \). Allora
     \[
@@ -6503,18 +6503,63 @@ ottenere qualcosa in più
     \[
       \Span{u-f,v} = \Span{u,v}  -\Span{f, v}  = 0 \quad \forall v \in K 
     \]
-    
-    \[
-      
-    \]
 \end{proof}
-
-\begin{example}
-    Consideriamo la proiezione di una funzione \(L^2\) su un sottospazio di
-    \(L^2\), dunque \(H = L^2\) e prendiamo
+\begin{remark}
+    Se \(K \subseteq H \) è un sottospazio chiuso, allora l'operatore \(P_K\) di
+    proiezione è \textbf{lineare}, infatti sappiamo che, date \(f, g \in H\) 
     \[
-      K = \left\{v \in L^2{(\mathbb{R})} : \int_{(-1, 1)} v d\mu = 0\right\} 
+      \Span{P_K{(f)},v} = \Span{f, v} \quad \Span{P_K{(g)}, v} = \Span{g, v}
+      \quad \forall v \in K
     \]
+    dalle quali otteniamo, per \(\alpha, \beta \in \mathbb{K}\) 
+    \[
+        \Span{\alpha P_K{(f)} + \beta P_K{(g)}, v} = \Span{\alpha f + \beta g,
+        v} \quad \forall v \in K
+    \]
+    ma poiché l'unico elemento di \(K\) che replica tutti i prodotti scalari di
+    di \(\alpha f + \beta g\) con gli elementi di \(K\) è \(P_K{(\alpha f +
+    \beta g)}\) otteniamo 
+    \[
+        P_K{(\alpha f + \beta g)} = \alpha P_K{(f)} + \beta P_K{(g)}
+    \]
+    ossia \(P_K\) è lineare.
+\end{remark}
+\begin{remark}
+    Se \(K\) è sottospazio chiuso allora \(P_K \in \mathcal{L}{(H, H)} \) e
+    inoltre \(\|P_K\| = 1\) se \(K\) contiene almeno un elemento \(z \neq 0\)
+    (basta osservare che \(P_K{(z)} = z\)) \(\|P_K\| = 0\) se \(K = \{0_H\} \) 
+\end{remark}
 
-\end{example}
+\begin{eser}[Es. 4 del 13 gennaio 2020]
+    \[
+      C = \left\{v \in L^2{(\mathbb{R})} : \int_{(-1, 1)} v d\mu = 0\right\} 
+    \]
+\begin{enumerate}[label = \alph*)]
+    \item Mostrare che \(C\) è sottoinsieme di \(L^{1}{(0, 1)}\). Dimostrare che
+        \(C\) è sottospazio chiuso di \(L^2{(0, 1)}\). 
+
+        Siccome \((0, 1)\) ha misura finita, allora \(L^2{(0, 1)} \subseteq
+        L^1{(0, 1)}\). 
+
+        Presi \(v, w \in C\) e \(\alpha, \beta \in \mathbb{R}\) allora
+        \[
+            \int_{(0,1)} \alpha v + \beta w d\mu = \alpha \int_{(0,1)} v d\mu +
+            \beta \int_{(0,1)} w d\mu = 0
+        \]
+        e quindi \(\alpha v + \beta w \in C\). Inoltre poiché \(M : v \mapsto
+        \int_{(0, 1)} v d\mu \) è un operatore continuo
+        (esempio~\ref{ex:int_continuo}) e \(C = M^{-1}{\{0\}}\) è la
+        controimmagine del chiuso \(\{0\}\) e quindi è chiuso.
+
+    \item Con \(f{(x)} = \ln \frac{1}{x}\), \(x \in (0, 1)\). Mostrare
+        che \(f \in L^{2}{(0, 1)}\) e trovare \(P_C{(f)}\). 
+
+        \(f{(x)} = -\ln x = |\ln x|\). Abbiamo che \(\left| \ln {(x)} \right| ^2
+        \le c / \sqrt{x}\) infatti se \(h{(x)} = \sqrt{x} \left| \ln x
+        \right|^2\) allora \(\lim_{x \to 0^{+}} h{(x)} = 0\) e \(h{(1)} = 0\)
+        quindi \(\left| \ln x \right| ^2 \le \|h\|_{\infty}  / \sqrt{x}\) che
+        sta in \(L^{1}{(0, 1)}\) e quindi \(f \in L^{2}{(0, 1)}\).
+\end{enumerate}
+
+\end{eser}
 \end{document}
