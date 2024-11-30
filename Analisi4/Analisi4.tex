@@ -4853,7 +4853,7 @@ funzione \(x \mapsto \left<x, x \right>\) è una norma.
     dove il coniugio è rilevante solo nel caso complesso. La norma associata a
     questo prodotto scalare è proprio la norma 2.
 \end{example}
-\begin{proposition}[Regola del Parallelogramma]
+\begin{proposition}[Regola del Parallelogramma]\label{prop:parallelogramma}
     Se \(H\) è uno spazio prehilbertiano allora vale l'identità
     \[
         \|x + y\|^2 + \|x - y\|^2 = 2\|x\|^2 + 2\|y\|^2 \quad \forall x, y \in H
@@ -6218,4 +6218,303 @@ limitata, cioè è in \(L^{\infty}{([a, b])}\).
 
 Per \(N > 1\) le cose sono più complicate, bisogna guardare come si comportano i
 gradienti invece che le derivate, ad esempio.
+
+\subsection{Proiezioni in spazi di Hilbert}
+
+Sul piano euclideo \(H = \mathbb{R}^2\) possiamo considerare la proiezione intuitiva
+di un punto \(z\) su un insieme convesso e chiuso \(K\) come il punto di \(K\) più
+vicino a \(z\), come in figura~\ref{fig:teorema-delle-proiezioni}
+\begin{figure}[ht]
+    \centering
+    \incfig[.5]{teorema-delle-proiezioni}
+    \caption{Proiezioni su spazi \(K\) convessi e chiusi}
+    \label{fig:teorema-delle-proiezioni}
+\end{figure}
+È importante notare che abbiamo preso \(z \not\in  K\) altrimenti, la proiezione
+sarebbe lo stesso punto \(z\) 
+
+\begin{theorem}[delle Proiezioni]\label{thm:proiezioni}
+    Sia \(H\) uno spazio di Hilbert e sia \(K \subseteq H \) un sottoinsieme non
+    vuoto, convesso e chiuso di \(H\). Allora per ogni \(f \in H\) esiste unico
+    un punto \(u \in K\) tale che 
+    \begin{equation}\label{eq:PM}
+      \|u - f\| = \min_{v \in K} \|v - f\|
+    \end{equation}
+    inoltre tale \(u\) è anche l'unica soluzione della disuguaglianza
+    variazionale 
+    \begin{equation}\label{eq:DV}
+      \Re(\Span{u-f, u-v}) \le 0 \quad \forall v \in K
+    \end{equation}
+\end{theorem}
+\begin{definition}{Proiezione}
+    Il punto \(u\) del teorema~\ref{thm:proiezioni} è detto proiezione di \(f\)
+    su \(K\) e si indica con \(P_{K}{(f)}\)
+\end{definition}
+Per la dimostrazione, riassumiamo il teorema~\ref{thm:proiezioni} come esistenza
+e unicità della soluzione di~\eqref{eq:PM} e~\eqref{eq:DV} e uguaglianza di tali
+soluzioni, e a tale scopo articoliamo la dimostrazione nei seguenti passaggi
+\begin{enumerate}[label = \arabic*.]
+    \item Esistenza della soluzione di~\eqref{eq:PM}
+    \item \(u\) soluzione di~\eqref{eq:PM} risolve anche~\eqref{eq:DV}
+    \item \(u\) soluzione di~\eqref{eq:DV} risolve anche~\eqref{eq:PM}
+    \item La soluzione di~\eqref{eq:DV} è unica
+\end{enumerate}
+\begin{proof}[Passo 1: Esistenza della soluzione di~\eqref{eq:PM}]
+    Costruiamo una successione minimizzante.
+    \[
+      \lambda = \inf_{v \in K} \|f-v\| \text{ esiste ed è } \ge 0
+    \]
+    Ora \(\forall n \in \mathbb{N}\) esiste \(v_{n} \in K\) tale che 
+    \[
+      \lambda \le \| f- v_{n}\| \le \lambda + \frac{1}{n}
+    \] e vogliamo provare che \(v_{n}\) è di Cauchy in \(H\). Infatti prendendo
+    \(x = f - v_{n}\) e \(y = f - v_{m}\) possiamo applicare la regola del
+    parallelogramma~\ref{prop:parallelogramma} ottenendo
+    \begin{align*}
+        \|2f - v_{n} - v_{m}\|^2 + \|v_{n} - v_{m}\|^2 = 2\|f - v_{n}\|^2 + 2\|f
+        - v_{m}\|^2 \\
+        4\left\|f - \frac{v_{n} + v_{m}}{2}\right\|^2 + \|v_{n} - v_{m}\|^2 = 2\|f -
+        v_{n}\|^2 + 2\|f - v_{m}\|^2
+    \end{align*}
+    dove \(\frac{v_{n} + v_{m}}{2}\) è il punto medio del segmento di estremi
+    \(v_{n}\) e \(v_{m}\) e poiché \(K\) è convesso, \(\frac{v_{n}+v_{m}}{2} \in
+    K\) e quindi \(\|f - \frac{v_{n} + v_{m}}{2}\| \ge \lambda\). Allora la
+    precedente uguaglianza diventa
+    \begin{align*}
+        \frac{1}{4}\|v_{n} - v_{m}\| &= \frac{1}{2}\|f - v_{n}\|^2 +
+      \frac{1}{2}\|f - v_{m}\|^2 - \left\|f - \frac{v_{n} + v_{m}}{2}\right\|^2
+      \le 
+      \\ &\le \frac{1}{2}{\left( \lambda + \frac{1}{n} \right)} ^2 +
+        \frac{1}{2}{\left( \lambda + \frac{1}{m} \right)}^2 - \lambda^2 = \\ &=
+      \frac{\lambda}{n} + \frac{\lambda}{m} + \frac{1}{2n^2} + \frac{1}{2m^2}
+      \longrightarrow 0 \text{ per } n, m \to \infty
+    \end{align*}
+    quindi \(v_{n}\) è di Cauchy, e siccome \(H\) è
+    completo, \(v_{n}\) converge a \(u \in H\) e siccome \(K\) è chiuso, \(u \in
+    K\) 
+    Abbiamo ora che \(\|f-v_{n}\| \to \|f - u\|\) per continuità della norma e
+    d'altra parte la norma di \(\|f - v_{n}\| \to \lambda\) per costruzione, e
+    per l'unicità del limite ne concludiamo che \(\|f - u\| = \lambda\) che
+    quindi è il minimo cercato.
+\end{proof}
+\begin{proof}[Passo 2: \(u\) sol.~\eqref{eq:PM} \(\implies u \) sol.~\eqref{eq:DV}]
+    Sappiamo per ipotesi che \(\|u -f\| \le \|w - f\|\) per ogni \(w \in K\), e
+    prendo \(w = tv + {(1-t)}u\) per \(t \in [0, 1]\) e \(v \in K\), allora
+    \(w\) è la combinazione convessa di \(u\) e \(v\) che siccome \(K\) è
+    convesso sta in \(K\). Allora
+    \begin{align*}
+        \cancel{\|u -f\|^2} &\le \|w - f\|^2 = \|tv + {(1-t)}u - f\|^2 = \|t{(v- u)} + u -
+        f\|^2 \\ &= \Span{t(v-u) + u - f, t(v-u) + u - f} = \\ &= t^2\|v-u\|^2 +
+        2t\Re(\Span{v-u, u-f}) + \cancel{\|u-f\|^2} \\
+        \implies 0 &\le t^2{(v-u)}^2 + 2t \Re{(\Span{u - f, v-u} )} \quad \forall
+        t \in (0, 1]
+    \end{align*}
+    dove abbiamo specificato che vale per \(t \in (0, 1]\) in modo da poter
+    dividere per \(t\) ottenendo
+    \[
+        0 \le t\|v-u\|^2 + 2\Re(\Span{u-f, v-u})
+    \]
+    e passando al limite per \(t \to 0^{+}\) otteniamo la diseguaglianza
+    \[
+        0 \le 2\Re {(\Span{u -f, v-u} )} \iff \Re{(\Span{u-f, u - v})} \le 0
+    \]
+    che è esattamente la~\eqref{eq:DV}
+\end{proof}
+\begin{proof}[Passo 3: \(u\) sol.~\eqref{eq:DV} \(\implies u\) sol.~\eqref{eq:PM}]
+    Vogliamo provare la seguente uguaglianza:
+    \[
+      \|u-f\|^2 - \|v-f\|^2 = 2\Re{(\Span{f-u, v-u} )} - \|u-v\|^2 \quad \forall
+      v \in K
+    \]
+    e da qui concludiamo facilmente in quanto il secondo membro è sempre non
+    positivo essendo \(u\) soluzione di~\eqref{eq:DV}. Allora anche il primo
+    membro è \(\le 0\) e dunque \(u\) risolve~\eqref{eq:PM}.
+
+    Abbiamo che
+    \begin{equation*}
+        \|v-f\|^2 = \|(u-f) - (u-v)\|^2 = \|u-f\|^2 + \|u-v\|^2 -
+        2\Re{(\Span{u-f, u-v} )}
+    \end{equation*}
+    che è esattamente l'eguaglianza richiesta
+\end{proof}
+\begin{proof}[Passo 4: unicità sol.~\eqref{eq:DV}]
+    Siano \(u_{1}, u_{2}\) due soluzioni di~\eqref{eq:DV}:
+    \[
+      \Re{(\Span{u_{1} - f, u_{1} - v})} \le 0 \quad \text{ e } \quad
+      \Re{(\Span{u_{2} - f, u_{2} - v})} \le 0 \quad \forall v \in K
+    \]
+    Allora poniamo nella prima \(v = u_{2}\) e nella seconda \(v = u_{1}\)
+    ottenendo 
+    \[
+      \Re(\Span{u_{1} - f, u_{1} - u_{2}}) \le 0 \quad \text{ e } \quad
+      \Re(\Span{f - u_{2}, u_{1} - u_{2}}) \le 0
+    \]
+    da cui per linearità del prodotto scalare nel primo termine
+    otteniamo \(\|u_{1} - u_{2}\| \le 0\) e quindi \(u_{1} = u_{2}\) 
+\end{proof}
+\begin{remark}
+    Se \(K\) non fosse chiuso, allora la proiezione potrebbe
+    non esistere. Sia ad esempio \(K = x^2 + y^2 < 1\) sul piano \(Oxy\) e un
+    punto \(f\) al di fuori di \(K\), allora qualunque \(u\) io prenda in \(K\),
+    esiste sempre \(\overline{u} \in K\) tale che \(\|\overline{u} - f\| < \|u
+    -f\|\).
+
+    Se \(K\) non fosse convesso, allora la proiezione potrebbe non essere unica.
+    Sempre in \(\mathbb{R}^2\) prendiamo come \(K = x^2 + y^2 = 1\) ossia la
+    circonferenza unitaria. Allora se prendiamo \(f = (0, 0)\) abbiamo che ogni
+    punto di \(K\) è proiezione.
+\end{remark}
+
+Nello spazio \(H\), con \(K\) chiuso e non vuoto, posso considerare l'operatore
+\(P_K : f \mapsto P_K{(f)}\). Allora \(P_K|_K = \text{Id}\) e in generale
+\(P_K{(H)} = K\). L'operatore \(P_K\) non è lineare, infatti se \(K = \{z\} \),
+con \(z \in H \sminus \{0_H\} \) abbiamo che \(P_K{(f)}= z\) è costante e
+diverso da \(0_H\) quindi non è lineare. \(P_K\) è però continuo, infatti è
+lipschitziano di costante 1: siano \(f_{1}, f_{2} \in H\), sia \(u_{1} =
+P_K{(f_{1})}\) e \(u_{2} = P_K{(f_{2})}\). Allora, procedendo in modo simile
+al passo 4 della dimostrazione del teorema~\ref{thm:proiezioni} otteniamo
+\begin{align*}
+    \Re{(\Span{u_{1} - f_{1} + f_{2} - u_{2}, u_{1} - u_{2}})} &\le 0  \iff \\
+    \iff \Re{(\Span{u_{1} - u_{2}, u_{1}, u_{2}} )} + \Re{(\Span{f_{2} - f_{1},
+u_{1} - u_{2}})} &\le 0 \iff \\
+    \iff \|u_{1}-u_{2}\|^2 \le \left| \left<f_{1}-f_{2}, u_{1}-u_{2} \right>
+\right| &= \|f_{1} -f_{2}\|\|u_{1} - u_{2}\| 
+\end{align*}
+da cui otteniamo che, se \(u_{1} \neq u_{2}\), \(\|u_{1} - u_{2}\| \le \|f_{1}
+- f_{2}\|\) e quindi \(P_K\) è lipschitziano di costante 1.
+
+Ne concludiamo che \(P_K\) è \textbf{non espansivo}, ossia o contrae oppure
+lascia inalterate le distanze. Non è una contrazione, si consideri l'esempio
+della figura~\ref{fig:quadrato}
+
+\begin{figure}[ht]
+    \centering
+    \incfig[.3]{quadrato}
+    \caption{\(K\) è un quadrato chiuso nel piano \(H\)}\label{fig:quadrato}
+\end{figure}
+
+\begin{eser}[Es. 2 del 10 marzo 2020]
+    Posto \(\varphi {(x)} = x^2\) e \(\psi {(x)} = x\) per \(x \in [0, 1]\)
+    andiamo a considerare
+    \[
+    C = \left\{ v \in L^2{([0,1])} : \varphi {(x)} \le v{(x)} \le \psi {(x)}
+\quad \text{ q.o.~in } [0,1] \right\}
+    \]
+\begin{enumerate}[label = \alph*.]
+    \item Mostrare che \(C\) è un convesso chiuso e non vuoto di \(L^2\) 
+
+        \(C\) è non vuoto perché ad esempio \(\varphi, \psi \in C \). 
+
+        Siano \(u, v \in C\) e \(t \in [0, 1]\) allora 
+        \[
+          \varphi  = t\varphi  + {(1-t)}\varphi  \le tu + {(1-t)}v  \le t
+          \psi + {(1-t)}\psi  = \psi 
+        \]
+        e quindi \(tu + {(1-t)}v \in C\).
+
+        Inoltre \(C\) è chiuso in \(L^2\) in quanto se \(\{v_{n}\} \subseteq C\)
+        è una successione convergente in \(L^2\) a \(v\) allora esiste una
+        sottosuccessione \(\{v_{n_{k}}\}\) che converge q.o.~a \(v\) e quindi
+        sapendo \(\varphi \le v_{n_k} \le \psi\) q.o.~otteniamo che \(\varphi
+        \le v \le \psi\) q.o.~e quindi \(v \in C\).
+    \item Se \(f{(x)} = 1-x\), con \(x \in [0,1]\) allora determinare
+        \(P_C{(f)}\) e giustificare la risposta.
+
+    \begin{minipage}{0.5\textwidth}
+        \vspace*{0pt}
+        La proiezione \(u = P_C{(f)}\) è l'elemento di \(C\) che realizza la
+        minima distanza da \(f\) in norma \(L^2\). In particolare verifica la
+        disuguaglianza variazionale
+        \begin{align*}
+            \Span{u-f, u-v} &= \\ = \int_{0}^{1} (u-f)(u-v)dx &\le 0 \quad \forall v
+            \in C
+        \end{align*}
+    \end{minipage}\hfill
+    \begin{minipage}{0.4\textwidth}
+        \vspace*{0pt}
+        \incfig{proiezione-esercizio-2.7}
+    \end{minipage}
+
+    Volendo provare a fare un guess di possibile proiezione, notiamo che un
+    tratto della funzione \(f\) è contenuto in \(C\) (detto malissimo), quindi
+    un buon tentativo di soluzione è la funzione \(u : [0,1] \to [0,1]\) data da
+    \[
+      u{(x)} = \begin{cases}
+          \psi {(x)} & f{(x)} > \psi {(x)} \\
+          f{(x)} & \varphi {(x)} \le f{(x)} \le \psi {(x)} \\
+          \varphi {(x)} & f{(x)} < \varphi  {(x)}
+      \end{cases} = 
+      \begin{cases}
+          \psi {(x)} & x \in (0, \frac{1}{2}) \\
+          f{(x)} & x \in [\frac{1}{2}, \frac{-1 + \sqrt{5}}{2}] \\
+          \varphi {(x)} & x \in (\frac{-1 + \sqrt{5}}{2}, 1)
+      \end{cases}
+    \]
+    poiché \(f{(x)} = \varphi {(x)} \iff x = 1 / 2\) e \(f{(x)} = \psi {(x)}
+    \iff x = (-1 + \sqrt{5}) / 2\). Vogliamo vedere se la funzione \(g\)
+    soddisfa la disuguaglianza variazionale~\eqref{eq:DV}:
+    \begin{align*}
+        \int_{0}^{1}{(u - f)}{(u - v)}dx = \int_0^{1 /2} \underbrace{(\psi -
+        f)}_{< 0} \underbrace{(\psi - v)}_{\ge 0} dx  + \\ + \cancel{\int_{1
+        /2}^{(-1 + \sqrt{5}) / 2} \underbrace{(f - f)}_{=0} {(f - v)}}dx +
+        \int_{(-1 + \sqrt{5}) / 2}^{1} \underbrace{(\varphi - f)}_{> 0}
+        \underbrace{(\varphi - v)}_{\le 0} dx
+    \end{align*}
+    quindi tutti gli addendi sono non positivi e dunque la diseguaglianza è
+    verificata e per unicità \(P_C{(f)} = u\) 
+\end{enumerate}
+\end{eser}
+
+In particolare fra i convessi vi sono anche i sottospazi, e possiamo in tal caso
+ottenere qualcosa in più
+
+\begin{theorem}[Proiezioni per sottospazi]\label{thm:proiezioni_sottospazi}
+    Sia \(H\) uno spazio di Hilbert e \(K \subseteq H \) un sottospazio chiuso.
+    Allora per ogni \(f \in H\) esiste unica \(u \in K\) tale che 
+    \[
+      \| f- u\|\le \|f - v\| \quad \forall v \in K
+    \]
+    Inoltre tale \(u\) è anche l'unica soluzione dell'\textbf{uguaglianza}
+    variazionale
+    \begin{equation}\label{eq:UV}
+        \Span{u, v} = \Span{f, v} \quad \forall v \in K
+    \end{equation}
+\end{theorem}
+\begin{remark}
+    La \(u\) è quell'elemento di \(K\) che replica tutti i prodotti scalari di
+    \(f\) con gli elementi di \(K\) 
+\end{remark}
+\begin{proof}
+    So già che vale~\eqref{eq:PM} e~\eqref{eq:DV}, allora in~\eqref{eq:DV}
+    poniamo \(w = u \pm v\), con \(v \in K\) e sappiamo \(w \in K\) poiché è un
+    sottospazio. Allora otteniamo
+    \[
+      \Re{(\Span{u -f, \mp v} )} \le 0 \iff \mp \Re {(\Span{u-f, v} )} \iff
+      \Re{(\Span{u- f, v} )} = 0 \forall v \in K
+    \]
+    supponendo di essere in ambito complesso, prendiamo ora \(w = u \pm iv\),
+    allora
+    \[
+        \Re{(\Span{u-f, \mp iv} )} \le 0 \iff \Re{(\pm i\Span{u-f, v} )} =
+        \mp \Im{(\Span{u-f, v} )} \le 0
+    \]
+    e di nuovo quindi otteniamo \(\Im{(\Span{u-f, v} )} = 0\) per ogni \(v \in
+    K\) e quindi anche la parte immaginaria è nulla. Ne consegue
+    \[
+      \Span{u-f,v} = \Span{u,v}  -\Span{f, v}  = 0 \quad \forall v \in K 
+    \]
+    
+    \[
+      
+    \]
+\end{proof}
+
+\begin{example}
+    Consideriamo la proiezione di una funzione \(L^2\) su un sottospazio di
+    \(L^2\), dunque \(H = L^2\) e prendiamo
+    \[
+      K = \left\{v \in L^2{(\mathbb{R})} : \int_{(-1, 1)} v d\mu = 0\right\} 
+    \]
+
+\end{example}
 \end{document}
