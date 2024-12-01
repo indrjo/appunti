@@ -4758,7 +4758,7 @@ funzione \(x \mapsto \left<x, x \right>\) è una norma.
         \right> + \overline{\beta} \left<x, z \right>
     \]
 \end{remark}
-\begin{theorem}[Diseguaglianza di Schwarz]
+\begin{theorem}[Diseguaglianza di Schwarz]\label{thm:schwarz}
     Se \(H\) è uno spazio prehilbertiano allora per ogni \(x, y \in H\) vale la
     diseguaglianza
     \[
@@ -5640,9 +5640,13 @@ e inoltre
   \|xy\|_1 = \sum_{n=1}^{\infty} x_{n}y_{n} \le \sum_{n=1}^{\infty} |x_{n}y_{n}| \le
   \|x\|_p \|y\|_{p'} 
 \]
+\begin{definition}{Spazio normato separabile}\label{def:separabile}
+    Uno spazio normato \(X\) si dice \textbf{separabile} se esiste un sottoinsieme
+    denso e numerabile di \(X\)
+\end{definition}
 
-Gli spazi \(\ell^{p}\) con \(1 \le p < \infty\) sono spazi \textbf{separabili},
-ossia ammettono un denso sottospazio numerabile. Infatti sappiamo che \(c_{00}
+Gli spazi \(\ell^{p}\) con \(1 \le p < \infty\) sono spazi \textbf{separabili}.
+Infatti sappiamo che \(c_{00}
 \) è denso in \(\ell^{p}\) se \(p < \infty\) e consideriamo ora \(q_{00} \) il
 sottoinsieme di \(c_{00}\) delle successioni a componenti (oppure a parti reali
 e immaginarie delle componenti) razionali. Allora \(q_{00} \) è numerabile ed è
@@ -6561,8 +6565,513 @@ ottenere qualcosa in più
         sta in \(L^{1}{(0, 1)}\) e quindi \(f \in L^{2}{(0, 1)}\). Per la
         proiezione \(P_C{(f)}\) come nell'esercizio precedente ipotizziamo un
         risultato plausibile e poi la controlliamo con l'uguaglianza
-        variazionale. % TODO finire
+        variazionale. In particolare quindi vogliamo trovare \(u \in C\) tale
+        che
+        \[
+            \int_{(0, 1)} uv \, d\mu = \int_{(0,1)} fv\,d\mu  \quad \forall v \in C
+        \]
+        notando che \(\int _{(0,1)} -\ln x \,d \mu = 1\) possiamo provare a
+        prendere \(u{(x)} = f{(x)} - 1 = -\ln x - 1 \in C\) e otteniamo
+        \begin{align*}
+            \cancel{\int _{(0,1)} -\ln x \cdot v \,d \mu} - \int _{(0, 1)} v \,d
+            \mu &= \cancel{\int_{(0,1)} -\ln x \cdot v \,d \mu}  \\
+            \iff \int_{{(0,1)}} v \,d \mu &= 0 \quad \text{ vero } \forall v \in C
+        \end{align*}
+        quindi \(P_C{(f)} = u\)
 \end{enumerate}
-
 \end{eser}
+
+\subsection{Sottospazi ortogonali}
+Sia \(H\) uno spazio di Hilbert, \(S \subseteq H \) un sottoinsieme non vuoto.
+Allora definiamo
+\[
+    S^\perp = \{x \in H : \Span{x, y} = 0 \quad \forall y \in S\} 
+\]
+ovviamente \(0_H \in S^\perp \) ma inoltre \(S^\perp \) è sottospazio di \(H\),
+infatti presi \(u, v \in S^\perp \) e \(\alpha, \beta \in \mathbb{K}\) allora
+\[
+    \Span{\alpha u + \beta v, y} = \alpha \Span{u, y} + \beta \Span{v, y} = 0 +
+    0 = 0 \quad \forall y \in S
+\]
+Inoltre \(S^\perp \) è chiuso in \(H\) in quanto intersezione di chiusi (le
+controimmagini di 0 tramite \(x \mapsto \Span{x, y} \) che è continuo al variare
+di \(y \in S\)).
+
+Partendo da un sottoinsieme \(S\) qualunque di \(H\) abbiamo quindi che
+\(S^\perp \) è un sottospazio chiuso.
+
+\begin{theorem}[Decomposizione ortogonale]\label{thm:dec_orto}
+    Sia \(H\) uno spazio di \(Hilbert\) e sia \(K \subseteq H \) un sottospazio
+    chiuso. Allora per ogni \(f \in H\) esistono \(u \in K, v \in K^\perp \)
+    tale che \(f = u + v\) e tale rappresentazione è unica.
+\end{theorem}
+\begin{remark}
+    Si scrive allora \(H = K \oplus K^\perp\) e si dice che \(H\) è la
+    \textbf{somma diretta} di \(K\) e \(K^\perp\)
+\end{remark}
+\begin{remark}
+    Partendo da un sottoinsieme \(S \subseteq H \) qualsiasi, abbiamo che
+    \(S^\perp \ni 0_H\). Se però ora parto da \(K\) sottospazio chiuso, allora
+    anche \(0_H \in K\) allora in realtà \(K \cap K^\perp = \{0\}\), infatti se
+    \(z \in K \cap K^\perp \) allora \(\Span{z, z} = 0\) e quindi \(z = 0_H\)
+\end{remark}
+\begin{proof}
+    Dato \(f \in H\) prendiamo \(u = P_K{(f)} \in K\). Ora posto \(v = f - u\)
+    controllo che \(v \in K^\perp \). In effetti
+    \[
+        \Span{v, y} = \Span{f - u, y} = \Span{f, y} - \Span{u, y} = 0 \quad\eqref{eq:UV}
+    \]
+    e quindi \(v \in K^\perp \), quindi \(H = K + K^\perp \).
+
+    Per l'unicità, supponiamo che esistano \(u_1, u_{2} \in K, v_{1}, v_{2} \in
+    K^\perp\) tali che 
+    \begin{align*}
+        H \ni f &= u_{1} + v_{1} = u_{2} + v_{2}
+        \implies \underbrace{u_{1} - u_{2}}_{\in K}  = \underbrace{v_{2} -
+        v_{1}}_{\in K^\perp}
+    \end{align*}
+    ma allora \(u_{1} - u_{2} = v_{1} - v_{2} = 0_H\) e quindi \(u_{1} = u_{2},
+    v_{1} = v_{2}\)
+\end{proof}
+\begin{remark}
+    Data \(f \in H\), abbiamo \(f = P_K{(f)} + P_{K^\perp } {(f)}\) perché \(K =
+    {(K^\perp )}^\perp\) (se e solo se \(K\) è \textbf{sottospazio chiuso})
+\end{remark}
+
+\begin{example}
+    In \(\mathbb{R}^2\) i sottospazi chiusi sono \(\{0\} , \mathbb{R}^2\) e le
+    rette passanti per l'origine. Se ora \(K = \{{(x, y)} \in \mathbb{R}^2 : 2x
+        + 3y = 0\}\) allora \(K^\perp = \{{(x, y)} \in \mathbb{R}^2 : 3x - 2y =
+        0\}\) è la retta perpendicolare.
+\end{example}
+
+\begin{example}
+    Preso \(H = L^2{(0, 1)}\) e \(C = \{v \in L^2{(0, 1)}: \int _{{(0,1)}} v \,d
+    \mu = 0\} \). Allora \(C^\perp \) consiste di tutte le funzioni \(u \in
+    L^2{(0, 1)}\) tali che \(\int _{{(0,1)}} u \cdot v \,d \mu = 0 \) per ogni
+    \(v \in C\). Se \(u\) è una funzione costante, allora chiaramente \(u \in
+    C^\perp \). Allora \(C^\perp \) è costituito solo dalle costanti? Sì perché
+    presa una \(f \in L^2{(0, 1)}\) la si può scomporre in \(f_{0} + k\), con
+    \(k = \int _{{(0,1)}} f \,d \mu\) (\(L^2 \subseteq L^{1}\) perché
+    \(\mu{(0,1)} < +\infty\)) e \(f_{0} = f - k\). Allora \(k\) è
+    costante e \(f_{0} \in C\) e quindi se \(K\) è il sottospazio delle costanti
+    \( L^2{(0,1)}\) abbiamo che \(H = C \oplus K\) e \(K \subseteq C^\perp  \),
+    dunque \(K = C^\perp\).
+\end{example}
+
+\begin{lemma}
+    Se \(H\) è uno spazio prehilbertiano e fissiamo \(y \in H\), allora
+    l'applicazione
+    \[
+        L_y = H \ni x \mapsto \Span{x, y} \in \mathbb{K}
+    \]
+    è un funzionale lineare e continuo su \(H\).
+
+    Inoltre \(\|L_y\|_{H'} \le \|y\|\) 
+\end{lemma}
+\begin{proof}
+    È lineare perché il prodotto scalare è lineare, ed è continuo per la
+    diseguaglianza di Schwarz (Teorema~\ref{thm:schwarz}). Diretta conseguenza è
+    che la norma di \(L_y\) è minore o uguale a \(\|y\|\)
+\end{proof}
+
+Quindi per ogni elemento \(y \in H\) si costruisce un elemento \(L_y \in H'\).
+Il seguente teorema ci dice che vale anche il viceversa.
+
+\begin{theorem}[di Riesz]\label{thm:riesz}
+    Sia \(H\) uno spazio di Hilbert. Allora per ogni \(L \in H'\) esiste unico
+    un elemento \(y \in H\) tale che \(L{(x)} = \Span{x, y} \) per ogni \(x \in
+    H\). Inoltre vale l'uguaglianza
+    \[
+      \|L\|_{H'} = \|y\|_H
+    \]
+\end{theorem}
+\begin{remark}
+    Grazie a questo teorema possiamo dire che in uno spazio di Hilbert, abbiamo
+    che \(H \cong H'\) 
+\end{remark}
+\begin{note}
+    Abbiamo già incontrato un risultato simile negli spazi \(\ell^{p}\),
+    trovando che \({(\ell^{p})}' = {(\ell^{p'})}\) per \(p < +\infty\). In
+    particolare avevamo trovato che \({(l^2)}' = l^2\), che potrebbe essere
+    provato anche con il teorema di Riesz, in quanto \(l^2\) è uno spazio di
+    Hilbert.
+\end{note}
+\begin{proof}
+    Per l'\textbf{unicità}, supponiamo esistano \(y_{1}, y_{2} \in H\) tali che
+    \[
+        L{(x)} = \Span{x, y_{1}} = \Span{x, y_{2}} \quad \forall x \in H
+    \]
+    e allora sottraendo troviamo \(\Span{x, y_{1} - y_{2}} = 0\) per ogni \(x
+    \in H\). Prendendo ora \(x = y_{1} - y_{2}\) otteniamo che \(\|y_{1} -
+    y_{2}\| = 0\) e quindi \(y_{1} = y_{2}\).
+
+    Per l'\textbf{esistenza}, definiamo 
+    \[
+      N = \{x \in H : L{(x)} = 0\} = \ker L
+    \]
+    Allora \(N\) è non vuoto, in quanto chiaramente \(0_H \in N\) ed è un
+    sottospazio chiuso di \(H\). Infatti è chiuso in quanto controimmagine di
+    \(\{0\} \) tramite \(L\) che è continuo ed è sottospazio perché \(L\) è
+    lineare. Si presentano due casi allora
+\begin{enumerate}[label = \arabic*.]
+    \item \(N = H \implies L\) è il funzionale nullo e quindi \(y = 0_H\) 
+    \item \(N \neq H \implies \) esiste uno \(z \in N^\perp \) e tale che
+        \(\|z\| = 1\). Infatti se \(N \not\ni g \in H \) allora consideriamo
+        \(P_N{(g)} \neq g\) e possiamo allora fissare \(z = \frac{g -
+        P_N{(g)}}{\|g - P_N{(g)}\|}\). È chiaramente vero che \(z \in N^\perp \)
+        per il teorema~\ref{thm:dec_orto} e inoltre \(\|z\| = 1\). Ora mostriamo
+        che \(y = \overline{L{(z)}} z\) è l'elemento cercato, ossia vogliamo
+        mostrare che
+        \begin{equation}\label{help:riesz}
+        L{(x)} = \Span{x, y} = \Span{x, \overline{L{(z)}}z}  \quad \forall x \in H
+        \end{equation}
+        Se \(x \in N\) allora~\eqref{help:riesz} è banalmente vera in quanto
+        \(L{(x)} = 0 = \Span{x, z}\) perché \(z \in N^\perp\).
+
+        Se invece \(x = \lambda z\), con \(\lambda \in \mathbb{K}\) allora
+        \[
+          L{(\lambda z)} = \lambda L{(z)} = \lambda L{(z)} \|z\|^2 =
+          \Span{\lambda z, \overline{L{(z)}}z} 
+        \]
+        e quindi anche in questo caso vale~\eqref{help:riesz}. Ora mostriamo che
+        \(H = N \oplus \Span{z} \) e ne conseguirà la tesi per linearità.
+        Infatti per ogni \(x \in H\) abbiamo
+        \[
+          x = \underbrace{\left( x - \frac{L{(x)}}{L{(z)}}z \right)}_{ =: x_N}  +
+          \underbrace{\frac{L{(x)}}{L{(z)}}}_{=: \lambda}  z
+        \]
+        e \(L{(x_N)} = L{(x)} - \frac{L{(x)}}{L{(z)}} L{(z)} = 0\), quindi \(x
+        \in N\). Poiché \(\Span{z} \subseteq N^\perp  \) allora \(N^\perp  =
+        \Span{z} \) e quindi \(H = N \oplus \Span{z} \). 
+\end{enumerate}
+    Per l'\textbf{uguaglianza delle norme}, abbiamo che 
+    \[
+        \|L\|_{H'}  = \sup_{x \neq 0} \frac{\left| L{(x)} \right| }{\|x\|} =
+    \sup_{x \neq 0} \frac{\left| \Span{x, y}  \right|} {\|x\|} \le \sup_{x \neq
+    0} \frac{\|x\|_H \|y\|_H}{\|x\|_H} = \|y\|_H
+    \]
+    per l'altra disuguaglianza, prendiamo \(x = y\) ottenendo
+    \[
+        \|y\|^2 = \left| \Span{y, y}  \right| = \left| L{(y)} \right| \le
+        \|L\|_{H'} \|y\| \implies \|y\| \le \|L\|_{H'}
+    \]
+\end{proof}
+
+\subsection{Serie di Fourier}
+\begin{definition}{Sistema ortonormale}
+    Sia \(H\) uno spazio prehilbertiano. Una successione \(\{e_{n}\} \) di
+    elementi di \(H\) si dice sistema \textbf{ortonormale} (o successione
+    ortonormale) se \(\Span{e_{i}, e_{j}} = \delta_{ij}\) per ogni \(i, j \in
+    \mathbb{N}\), con \(\delta_{ij}\) la delta di Kronecker.
+\end{definition}
+Quindi la precedente definizione significa che gli \(e_{n}\) sono tutti di norma
+unitaria e sono tutti ortogonali tra loro.
+\begin{example}
+    In \(\ell^2\) gli elementi della base canonica 
+    \[
+        e^{k} = (0, \ldots, 0, \overset{(k)}{1}, 0, \ldots)
+    \]
+    costituiscono un sistema ortonormale.
+\end{example}
+\begin{remark}
+    Se il mio spazio \(H\) ha dimensione finita, allora i sistemi ortonormali di
+    questo spazio saranno formati al più da una sequenza di \(n\) elementi, con
+    \(n = \dim H\) e in tal caso formano una base di \(H\). In \(H\) con
+    dimensione infinita si possono invece prendere successioni ortonormali.
+\end{remark}
+\begin{definition}{Serie di Fourier}\label{def:fourier}
+    Dato un sistema ortonormale \(\{e_{n}\} \subseteq H \) allora per ogni \(x
+    \in H\) si potranno considerare i valori \[\Span{x, e_{k}}, \quad k \in
+    \mathbb{N}\quad \text{\textbf{coefficienti di Fourier}}\] e la serie
+    \[
+      \sum_{k=1}^{\infty} \Span{x, e_{k}} e_{k} \quad \text{\textbf{serie di
+      Fourier di }} x \in H
+    \]
+\end{definition}
+
+Vi sono almeno due problemi di interesse: la serie di Fourier converge? Se
+converge, qual è la sua somma? Tenteremo di rispondere a queste domande.
+\begin{proposition}[Diseguaglianza di Bessel]\label{prop:bessel}
+    Sia \(H\) uno spazio di Hilbert, \(\{e_{n}\} \subseteq H \) un sistema
+    ortonormale. Allora
+\begin{enumerate}[label = \arabic*.]
+    \item Per ogni \(x \in H\) e per ogni \(n \in \mathbb{N}\) si ha
+        \begin{equation}\label{eq:bessel1}
+          \left\|x - \sum_{k=1}^{n} \Span{x, e_{k}} e_{k} \right\|^2 =
+          \|x\|^2 - \sum_{k=1}^{n} \left| \Span{x, e_{k}}  \right|^2 
+        \end{equation}
+    \item Vale la diseguaglianza di Bessel
+        \begin{equation}\label{eq:bessel}
+          \sum_{k=1}^{\infty} |\Span{x, e_{k}} |^2 \le \|x\|^2 
+        \end{equation}
+    \item Per ogni elemento c = \({(c_{k})}\) successione di scalari vale
+        \begin{equation}\label{eq:bessel3}
+            \sum_{k=1}^{\infty} c_{k} e_{k} \text{ converge in } H \iff c \in
+            \ell^2
+        \end{equation}
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+    La 2.~discende in modo immediato da 1.~in quanto tutte le ridotte della
+    serie differiscono da \(\|x\|^2\) per una quantità non negativa.
+    Proviamo dunque 1.
+    \begin{align*}
+        \left\|x - \sum_{k=1}^{n} \Span{x, e_{k}} e_{k} \right\|^2 &= \Span{x -
+          \sum_{k=1}^{n} \Span{x, e_{k}} e_{k}, x - \sum_{j=1}^{n} \Span{x,
+    e_{j}} e_{j}} = \\ = \Span{x, x} - \sum_{j=1}^{n} \overline{\Span{x, e_{j}}
+        }\Span{x, e_{j}} &- \sum_{k=1}^{n} \Span{x, e_{k}} \Span{e_{k}, x} +
+\sum_{k,j=1}^{n} \Span{x, e_{k}} \overline{\Span{x, e_{j}}}\Span{e_{k}, e_{j}} =
+\\
+= \|x\|^2 - \sum_{j=1}^{n} |\Span{x, e_{j}} |^2 &- \sum_{k=1}^{n} |\Span{x,
+e_{k}}|^2 + \sum_{(k=i)=1}^{n} \Span{x, e_{k}} \overline{\Span{x, e_{j}}} = \\ &=
+\|x\|^2 - \sum_{k=1}^{n} |\Span{x, e_{k}} |^2
+    \end{align*}
+
+    Ci rimane dunque da provare 3. 
+    \(\sum_{k=1}^{\infty} c_{k} e_{k} \) converge in \(H\) se e solo se la serie
+    è di Cauchy in \(H\) cioè se
+    \[
+      \forall \varepsilon > 0 \quad \exists \overline{k} \in \mathbb{N} :
+      \forall n \ge \overline{k},\,\,j \ge 0 \text{ si ha } \underbrace{\left\|
+      \sum_{k=n}^{n+j} c_{k} e_{k} \right\|^2}_{\text{differenza di due ridotte}}  < \varepsilon
+    \]
+    Allora poiché
+    \[
+      \left\|\sum_{k=n}^{n+j} c_{k} e_{k} \right\|^2 = \Span{\sum_{k=n}^{n+j}
+      c_{k} e_{k}, \sum_{i=n}^{n+j} c_{i} e_{i }} = \sum_{k=n}^{n+j} |c_{k}|^2
+    \]
+    abbiamo che la precedente condizione di Cauchy richiede che la serie
+    \(\sum_{k=1}^{\infty} |c_k|^2 \) sia di Cauchy, e questa converge se e solo
+    se \(c \in \ell^2\) 
+\end{proof}
+\begin{remark}
+    Questa proposizione ci dice già che la serie di Fourier~\ref{def:fourier}
+    converge in \(H\) siccome la successione numerica data da \(\Span{x,
+    e_{k}}\) è in \(\ell^2\) (per la diseguaglianza di Bessel~\eqref{eq:bessel})
+\end{remark}
+
+\begin{proposition}\label{prop:2-45}
+    Sia \(H\) uno spazio di Hilbert e sia \(\{e_{n}\} \) un sistema ortonormale
+    in \(H\). Allora posto \(V_{n} = \mathrm{span}\{e_{1}, e_{2}, \dots, e_{n}\}\), con
+    \(n \in \mathbb{N}\) si ha che 
+    \[
+      P_{V_{n}} {(x)} = \sum_{k=1}^{n} \Span{x, e_{k}} e_{k}, \quad \forall x
+      \in H 
+    \]
+\end{proposition}
+\begin{remark}
+    Questa proposizione ci dice che la migliore approssimazione di \(x \in
+    V_{n}\) è proprio la ridotta \(n\)-esima della serie di Fourier.
+\end{remark}
+\begin{proof}
+    Se ora \(c_{1}, c_{2}, \dots, c_{n}\) sono scalari arbitrari, abbiamo
+    \begin{align*}
+        \left\|x - \sum_{k=1}^{n} c_{k} e_{k} \right\|^2 = \Span{x -
+        \sum_{k=1}^{n} c_{k} e_{k}, x - \sum_{j=1}^{n} c_{j} e_{j}} = \\ =
+        \|x\|^2 - \sum_{j=1}^{n} \overline{c_{j}}\Span{x, e_{j}} -
+        \sum_{k=1}^{n} c_{k} \Span{e_{k}, x} + \sum_{k,j=1}^{n}
+        c_{k}\overline{c_{j}}\Span{e_{k}, e_{j}} = \\ = \|x\|^2 - 2
+        \sum_{k=1}^{n}\Re \left(\overline{c_{k}}\Span{x, e_{k}}\right) +
+        \sum_{k=1}^{n} + \sum_{k=1}^{n} |\Span{x, e_{k}} |^2 - \sum_{k=1}^{n}
+        |c_{k}|^2 |\Span{x, e_{k}} |^2 = \\ = \|x\|^2 - \sum_{k=1}^{n} |\Span{x, e_{k}}
+        |^2 + \sum_{k=1}^{n} {\left( |\Span{x, k}|^2 - 2 \Re{\left(
+        \overline{c_{k}}\Span{x, c_{k}} + |c_{k}|^2 \right)}  \right)} = \\
+        \overset{\eqref{eq:bessel1}}{=}
+        \left\|x - \sum_{k=1}^{n} \Span{x, e_{k}}  \right\|^2 + \sum_{k=1}^{n}
+        \underbrace{|\Span{x, e_{k}} - c_{k}|^2}_{> 0} > \left\| x - \sum_{k=1}^{n} \Span{x, e_{k}}
+        e_{k}\right\|^2
+    \end{align*}
+    Dunque la ridotta della serie di Fourier è proprio l'elemento di minima
+    distanza da \(x\) in \(V_{n}\) e quindi è la proiezione di \(x\) su
+    \(V_{n}\)
+\end{proof}
+
+\begin{theorem}[Caratt.~convergenza della serie di Fourier]\label{thm:conv_Fourier}
+    Sia \(H\) uno spazio di Hilbert e sia \(\{e_{k}\} \) un sistema ortonormale.
+    Allora sono equivalenti:
+    \begin{enumerate}[label = \textit{\roman*)}]
+    \item \(\mathrm{span} \{e_{k}, k \in \mathbb{N}\} \) è denso in \(H\) 
+    \item La serie di Fourier di \(x\) converge a \(x\) per ogni \(x \in H\)
+    \item \(\displaystyle \|x\|^2 = \sum_{k=1}^{\infty} |\Span{x, e_{k}} |^2 \)
+        per ogni \(x \in H\) (identità di Bessel-Parseval)
+    \item Se \(x \in H\) è tale che \(\Span{x, e_{k}} = 0\) per ogni \(k \in
+        \mathbb{N}\), allora \(x = 0_H\) 
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+    Dimostriamo che \textit{(i)} implica \textit{(ii)}. Se \(\mathrm{span}
+    \{e_{k}, k \in \mathbb{N}\} \) è denso in \(H\) allora 
+    \[
+      \forall \varepsilon > 0 \quad \forall x \in H \quad \exists z \in
+      \mathrm{span}\{e_{k}\} : \|x - z\| \le \varepsilon
+    \]
+    e dunque esiste un \(\overline{k}\) tale che \(z \in V_{\overline{k}} =
+    \mathrm{span}\{e_{1}, \dots, e_{k}\}  \)
+    essendo \(z \in \mathrm{span}\{e_{k}\}\). Per la
+    proposizione~\ref{prop:2-45} allora \(\sum_{j=1}^{\overline{k}} \Span{x,
+    e_{j}} e_{j}\) è la migliore approssimazione di \(x\) in \(V_{\overline{k}}
+    \), quindi 
+    \[
+      \left\|x - \sum_{j=1}^{\overline{k}} \Span{x, e_{j}} e_{j} \right\|^2 \le
+      \|x - z\|^2 \le \varepsilon^2
+    \]
+    se ora prendo \(n > \overline{k}\), dico che
+    \begin{align*}
+        \|x\|^2 - \sum_{k=1}^{n} |\Span{x, e_{k}}|^2 &\le \|x\|^2 -
+        \sum_{k=1}^{\overline{k}} |\Span{x, e_{k}}|^2 \iff \\ \iff
+        \left\|x - \sum_{j=1}^{n} \Span{x, e_{j}}e_{j}  \right\|^2 &\le \left\| x
+        - \sum_{j=1}^{\overline{k}} \Span{x, e_{j}} e_{j} \right\|^2 \le
+        \varepsilon^2
+    \end{align*} dove si è usata la~\eqref{eq:bessel1} della
+    proposizione~\ref{prop:bessel}. Ne viene fuori che 
+    \[
+      \forall \varepsilon > 0 \quad \exists \overline{k} \in \mathbb{N} :
+      \forall n \ge \overline{k} \quad \left\|x - \sum_{j=1}^{n} \Span{x,
+      e_{j}}\right\|^2 \le \varepsilon^2
+    \]
+    ossia \textit{(ii)}. D'altronde però \textit{(ii)} implica \textit{(i)}
+    banalmente in quanto la convergenza della serie di Fourier per ogni \(x \in
+    H\) dice che necessariamente \(\overline{\mathrm{span}\{e_{k}\}} = H\). Ne
+    segue che \textit{(i)} \(\iff\) \textit{(ii)}.
+
+    Ora mostriamo che \textit{(ii)} implica \textit{(iii)}.
+    Di nuovo usando la~\eqref{eq:bessel1} abbiamo
+    \[
+        \underbrace{\left\| x - \sum_{k=1}^{n} \Span{x, e_{k}} e_{k}
+        \right\|^2}_{\to 0 \iff (ii)}  =
+      \underbrace{\|x\|^2 - \sum_{k=1}^{n} |\Span{x, e_{k}} |^2}_{\to 0 \iff
+      (iii)} 
+    \]
+    e quindi ne consegue \textit{(ii)} \(\iff\) \textit{(iii)}. 
+
+    Ora se \(x\) ha i coefficienti di Fourier tutti nulli, allora per la
+    \textit{(iii)} abbiamo
+    \[
+      \|x\|^2 = \sum_{k=1}^{\infty} |\Span{x, e_{k}} |^2 = \sum_{k=1}^{\infty} 0
+      = 0 \implies x = 0_H
+    \]
+    e quindi \textit{(iii)} \(\implies\) \textit{(iv)}. 
+
+    Infine, sia \(x \in H\) e \(y = \sum_{k=1}^{\infty} \Span{x, e_{k}} e_{k} \)
+    la somma della serie di Fourier, che converge sempre in \(H\). Allora
+    succede che l'elemento \(x - y\) ha tutti i coefficienti di Fourier nulli.
+    Infatti 
+    \begin{align*}
+        \Span{x - y, e_{j}} &= \lim_{n \to \infty} \Span{x, e_{j}} -
+      \Span{\sum_{k=1}^{n} \Span{x, e_{k}} e_{k}, e_{j} } = \lim_{n \to \infty}
+      \Span{x, e_{j}} - \sum_{k=1}^{n} \Span{x, e_{k}} \Span{e_{k}, e_{j}} = \\
+                            &= \lim_{n \to \infty} \Span{x, e_{j}} - \Span{x,
+                            e_{j}} = \lim_{n \to \infty} 0 = 0
+    \end{align*}
+    dove si è usata la continuità del prodotto scalare e si è assunto \(n > j\),
+    cosa definitivamente vera. Ora dunque per \textit{(iv)} abbiamo che \(x - y
+    = 0\) e dunque la serie di Fourier converge a \(x\). Abbiamo quindi mostrato
+    che \textit{(iv)} \(\implies\) \textit{(ii)} e quindi la tesi è dimostrata.
+\end{proof}
+\begin{remark}
+    Al teorema~\ref{thm:conv_Fourier} si potrebbe inserire una
+    quinta condizione equivalente, ossia
+    \[
+        \Span{x, y} = \sum_{k=1}^{\infty} \Span{x, e_{k}} \overline{\Span{y,
+        e_{k}}}  \quad \forall x, y \in H
+    \]
+    dunque il prodotto scalare di due elementi di \(H\) qualsiasi si può
+    scrivere come prodotto scalare in \(\ell^2\) delle successioni date dai
+    coefficienti di Fourier. Questa condizione è esattamente
+    \textit{(iii)} per \(x = y\) e inoltre è implicata da \textit{(ii)} poiché
+    \[
+      \Span{\sum_{k=1}^{n} \Span{x, e_{k}} e_{k} , \sum_{j=1}^{n} \Span{x,
+              e_{j}} e_{j} } = \sum_{k=1}^{n} \Span{x, e_{k}} \overline{\Span{x,
+      e_{k}}}
+    \]
+    e il limite per \(n \to \infty\) è proprio l'identità che si cerca, infatti
+    assumendo \textit{(ii)} abbiamo che le serie di Fourier nel primo membro
+    convergono rispettivamente a \(x\) e a \(y\), e per la continuità del
+    prodotto scalare si ha il risultato.
+\end{remark}
+
+\begin{definition}{Sistema ortonormale completo}
+    Un sistema ortonormale \(\{e_{k}\} \subseteq H \) si dice \textbf{completo}
+    se vale la condizione \textit{(iv)} del teorema~\ref{thm:conv_Fourier}, cioè
+    se l'unico elemento \(x \in H\) ortogonale a tutti gli \(e_{k}\) è
+    l'elemento nullo di \(H\) 
+\end{definition}
+Ovviamente basta che valga una qualunque delle condizioni, ma la definizione è
+associata alla \textit{(iv)} per qualche motivo. Un sistema ortonormale completo
+viene anche detto \textbf{base ortonormale} di \(H\).
+\begin{proposition}\label{prop:basorto-separabile}
+Se lo spazio di Hilbert \(H\) possiede una base ortonormale allora \(H\) è
+\textbf{separabile}
+\end{proposition}
+\begin{proof}
+Ricordando la definizione~\def{def:separabile} di spazio separabile, ossia
+avente un sottoinsieme denso e numerabile, se \(H\) è reale posso considerare
+l'insieme delle combinazioni lineari finite di \(\{e_{k}, k \in \mathbb{N}\} \)
+a coefficienti razionali. Se \(H\) è complesso posso considerare le combinazioni
+lineari finite a coefficienti con parte reale e parte immaginaria razionali.
+Tale insieme è denso in \(H\) e numerabile, dunque \(H\) è separabile anche
+nella vecchia definizione. % Ma allora tale insieme può anche essere preso e messo
+% in corrispondenza con la successione canonica in \(\ell^2\), ne segue la
+% seguente:
+\end{proof}
+
+\begin{proposition}\label{prop:isomorfol2}
+    Ogni spazio di Hilbert di dimensione infinita che possieda una base ortonormale
+    è isomorfo a \(\ell^2\). 
+\end{proposition}
+\begin{proof}
+    Ogni elemento dello spazio risulta identificato
+    alla successione dei suoi coefficienti di Fourier. C'è una corrispondenza
+    biunivoca tra \(x \in H\) e \(\{\Span{x, e_{k}}\} \in \ell^2\) che conserva
+    le norme.
+\end{proof}
+
+Mi chiedo ora Se valga il viceversa della
+proposizione~\ref{prop:basorto-separabile}, ossia se uno spazio di Hilbert
+separabile necessariamente abbia una base ortonormale. La risposta è sì.
+
+\begin{lemma}[Procedura di Gram-Schmidt]
+    Sia \(H\) uno spazio di Hilbert e \(\{x_{n}\} \) una successione di elementi
+    linearmente indipendenti. Allora esiste una successione \(\{e_{n}\} \) di
+    elementi ortonormali tali che \(\mathrm{span}\{x_{1}, \dots, x_{n}\} =
+    \mathrm{span}\{e_{1}, \dots, e_{n}\} \) per ogni \(n \in \mathbb{N}\)
+\end{lemma}
+\begin{proof}
+    Per ogni \(n \in \mathbb{N}\) definiamo \(e_{n}\) come
+    \[
+      e_{n} = \frac{x_{n} - \sum_{k=1}^{n-1} \Span{x_{n}, e_{k}} e_{k}}{\|x_{n} -
+      \sum_{k=1}^{n-1} \Span{x_{n}, e_{k}} e_{k}\|}
+    \]
+    e si può verificare che \(\{e_{n}\} \) è una successione ortonormale che
+    soddisfa la tesi.
+\end{proof}
+
+\begin{theorem}[Separabile \(\iff\) base ortonormale]\label{thm:basorto-separabile}
+    Sia \(H\) uno spazio di Hilbert a dimensione infinita. Allora \(H\) è
+    separabile se e solo se \(H\) possiede una base ortonormale.
+\end{theorem}
+\begin{proof}
+    Un'implicazione è data dalla proposizione~\ref{prop:basorto-separabile}.
+
+    Se \(H\) è separabile, allora esiste una successione \(\{y_{k}\} \) densa in
+    \(H\). Allora possiamo costruire un'altra successione \(\{x_{n}\}\) tale che
+    per ogni \(n \in \mathbb{N}\), \(x_{1}, \dots, x_{n}\) sono linearmente
+    indipendenti e inoltre \(\mathrm{span}\{x_{n}, n \in \mathbb{N}\} \) è denso
+    in \(H\). A tal scopo prendiamo infatti \(y_{1}\) e se \(y_{1} \neq 0\)
+    pongo \(x_{1} = y_{1}\), altrimenti procedo su \(y_{2}\) allo stesso modo
+    (butto \(y_{1}\)). Poi (assumendo \(y_{1} \neq 0\)) guardo \(y_{2}\) e se è
+    combinazione lineare di \(x_{1}\) allora lo butto, altrimenti lo prendo come
+    \(x_{2}\), e così via. Costruisco dunque \(\{x_{n}\}\) come sottosuccessione
+    di elementi di \(\{y_{n}\} \). Abbiamo quindi che per ogni \(k \in
+    \mathbb{N}\) esiste \(n \le k\) tale che 
+    \[
+        \mathrm{span}\{y_{1}, \dots, y_{k}\} = \mathrm{span}\{x_{1}, \dots,
+        x_{n}\}
+    \]
+    e quindi \(\mathrm{span}\{x_{n}, n \in \mathbb{N}\} = \mathrm{span}\{y_{n},
+    n \in \mathbb{N}\} \) e dunque anche \(\{x_{n}\} \) ha span denso in \(H\).
+    Da \(\{x_{n}\} \) possiamo costruire una base ortonormale con la procedura
+    di Gram-Schmidt.
+\end{proof}
 \end{document}
