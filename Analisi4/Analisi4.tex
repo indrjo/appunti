@@ -6867,27 +6867,28 @@ e_{k}}|^2 + \sum_{(k=i)=1}^{n} \Span{x, e_{k}} \overline{\Span{x, e_{j}}} = \\ &
 \begin{proof}
     Se ora \(c_{1}, c_{2}, \dots, c_{n}\) sono scalari arbitrari, abbiamo
     \begin{align*}
-        \left\|x - \sum_{k=1}^{n} c_{k} e_{k} \right\|^2 = \Span{x -
+        \left\|x - \sum_{k=1}^{n} c_{k} e_{k} \right\|^2 &= \Span{x -
         \sum_{k=1}^{n} c_{k} e_{k}, x - \sum_{j=1}^{n} c_{j} e_{j}} = \\ =
-        \|x\|^2 - \sum_{j=1}^{n} \overline{c_{j}}\Span{x, e_{j}} -
-        \sum_{k=1}^{n} c_{k} \Span{e_{k}, x} + \sum_{k,j=1}^{n}
+            \|x\|^2 - &\sum_{j=1}^{n} \overline{c_{j}}\Span{x, e_{j}} -
+        \sum_{k=1}^{n} c_{k} \underbrace{\Span{e_{k}, x}}_{= \overline{\Span{x,
+        e_{k}} }}  + \sum_{k,j=1}^{n}
         c_{k}\overline{c_{j}}\Span{e_{k}, e_{j}} = \\ = \|x\|^2 - 2
-        \sum_{k=1}^{n}\Re \left(\overline{c_{k}}\Span{x, e_{k}}\right) +
-        \sum_{k=1}^{n} + \sum_{k=1}^{n} |\Span{x, e_{k}} |^2 - \sum_{k=1}^{n}
-        |c_{k}|^2 |\Span{x, e_{k}} |^2 = \\ = \|x\|^2 - \sum_{k=1}^{n} |\Span{x, e_{k}}
-        |^2 + \sum_{k=1}^{n} {\left( |\Span{x, k}|^2 - 2 \Re{\left(
+        \sum_{k=1}^{n}&\Re \left(\overline{c_{k}}\Span{x, e_{k}}\right) +
+        \sum_{k=1}^{n} |c_{k}|^2 \color{Sepia} + \sum_{k=1}^{n} |\Span{x, e_{k}} |^2 - \sum_{k=1}^{n}
+        |\Span{x, e_{k}} |^2 = \\ = \|x\|^2 - &\sum_{k=1}^{n} |\Span{x, e_{k}}
+        |^2 + \sum_{k=1}^{n} {\left( |\Span{x, e_k}|^2 - 2 \Re{\left(
         \overline{c_{k}}\Span{x, c_{k}} + |c_{k}|^2 \right)}  \right)} = \\
-        \overset{\eqref{eq:bessel1}}{=}
-        \left\|x - \sum_{k=1}^{n} \Span{x, e_{k}}  \right\|^2 + \sum_{k=1}^{n}
-        \underbrace{|\Span{x, e_{k}} - c_{k}|^2}_{> 0} > \left\| x - \sum_{k=1}^{n} \Span{x, e_{k}}
-        e_{k}\right\|^2
+        \overset{\eqref{eq:bessel1}}{=} 
+        \left\|x - &\sum_{k=1}^{n} \Span{x, e_{k}}  \right\|^2 + \sum_{k=1}^{n}
+        \underbrace{\left|\Span{x, e_{k}} - c_{k}\right|^2}_{> 0} > \left\| x -
+        \sum_{k=1}^{n} \Span{x, e_{k}} e_{k}\right\|^2
     \end{align*}
     Dunque la ridotta della serie di Fourier è proprio l'elemento di minima
     distanza da \(x\) in \(V_{n}\) e quindi è la proiezione di \(x\) su
     \(V_{n}\)
 \end{proof}
 
-\begin{theorem}[Caratt.~convergenza della serie di Fourier]\label{thm:conv_Fourier}
+\begin{theorem}[Caratterizzazione convergenza della serie di Fourier]\label{thm:conv_Fourier}
     Sia \(H\) uno spazio di Hilbert e sia \(\{e_{k}\} \) un sistema ortonormale.
     Allora sono equivalenti:
     \begin{enumerate}[label = \textit{\roman*)}]
