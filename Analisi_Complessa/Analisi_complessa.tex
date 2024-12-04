@@ -2430,6 +2430,147 @@ Geometricamente \(\hat{\mathbb{C}}\) può essere visto come una sfera (detta
     \label{fig:sfera-di-riemann}
 \end{figure}
 
+\subsection{Residui}
+\begin{proposition}\label{prop:residuo-1frac}
+    Sia \(f \in \mathcal{H}{(D^{*}_r{(a)})}\) della forma
+    \[
+      f{(z)} = \frac{g{(z)}}{h{(z)}} \quad {(z \neq a)}
+    \]
+    con \(g, h \in \mathcal{H}{(D_r{(a)})}\), \(g{(a)} \neq 0\), \(h{(a)} =
+    0\) e \(h'{(a)} \neq 0\).
+    Allora \(z = a\) è un polo del primo ordine per \(f\) e 
+    \[
+        \mathrm{Res} (f, a) = \frac{g{(a)}}{h'{(a)}}
+    \]
+\end{proposition}
+\begin{proof}
+    Lo sviluppo di \(h\) in \(a\) è 
+    \begin{align*}
+        h{(z)} &= h'{(a)}{(z-a)} + a_{2}{(z-a)}^2+~\dots = \\
+               &= {(z-a)}\underbrace{(h'{(a)} + a_{2}{(z-a)} + \dots)}_{=: \varphi {(z)}} 
+    \end{align*}
+    allora \(\displaystyle f{(z)} = \frac{g{(z)}}{{(z-a)}\varphi {(z)}} =
+    \frac{\psi{(z)}}{z-a}\) con \(\psi\) olomorfa in un intorno di \(z=a\) e
+    \(\psi{(a)} = g{(a)} / h'{(a)}\). Se ora
+    \begin{align*}
+        \varphi {(z)} &= \varphi {(a)} + \varphi '{(a)}{(z-a)} + \dots \implies
+        \\
+        \implies f{(z)} &= \frac{\varphi {(a)}}{z-a} + \varphi '{(a)} + \dots
+    \end{align*}
+    e quindi \(z=a\) è un polo del primo ordine per \(f\) con residuo \(\psi{(a)}\) 
+\end{proof}
+\begin{eser}
+    Sia \(\displaystyle f{(z)} = \frac{z}{z^2 + 1}\) per \(z \in \mathbb{C}
+    \sminus \{\pm i\}\). Calcolare il residuo in \(z=i\)
+
+    Operando come nella proposizione~\ref{prop:residuo-1frac} si ha \(g{(z)} =
+    z\), \(h{(z)} = z^2 + 1\) e effettivamente abbiamo \(g{(i)} = i \neq 0\),
+    \(h{(i)} = i^2 + 1 = 0\) e \(h'{(i)} = 2i \neq 0\) e quindi il residuo è 
+    \[
+        \mathrm{Res} (f, i) = \frac{i}{2i} = \frac{1}{2}
+    \]
+\end{eser}
+Il risultato della proposizione~\ref{prop:residuo-1frac} si può generalizzare a
+poli di ordine superiore
+\begin{proposition}\label{prop:residuo-kfrac}
+    Sia \(f \in \mathcal{H}{(D^{*}_r{(a)})}\). Allora \(z = a\) è polo di ordine
+    \(k\) se e solo se
+    \[
+      \lim_{z \to a} {(z-a)}^{k}f{(z)} = l \neq 0
+    \] e in tal caso il residuo è
+    \[
+        \mathrm{Res} (f, a) = \frac{\phi^{{(k-1)}}{(a)}}{(k-1)!} \quad \varphi
+        {(z)} := {(z-a)}^{k}f{(z)}
+    \]
+\end{proposition}
+\begin{proof}
+    Ripercorriamo la dimostrazione del caso \(k = 1\): se \(z = a\) è un
+    polo di ordine \(k\) allora
+    \[
+        f{(z)} = \frac{c_{-k} }{{(z-a)}^{k}} + \frac{c_{-k+1} }{{(z-a)}^{k-1}} +
+        \dots + \frac{c_{-1} }{z-a} + c_{0} + c_{1}{(z-a)} + \dots
+    \]
+    con \(c_{-k} \neq 0 \) e quindi \(\displaystyle {(z-a)}^{k}f{(z)} \to c_{-k}
+    \neq 0\). In tal caso allora
+    \[
+        \phi{(z)} := {(z-a)}^{k}f{(z)} = c_{-k} + c_{-k+1}{(z-a)} +~\dots +
+        c_{-1} {(z-a)}^{k-1} + \dots
+    \]
+    e quindi il residuo \(\mathrm{Res} (f, a) \) è il coefficiente dello
+    sviluppo di Taylor di \(\phi\) in \(a\), ossi
+    \[
+        \mathrm{Res} (f, a) = c_{-1} = \frac{\phi^{{(k-1)}}{(a)}}{(k-1)!}
+    \]
+    Viceversa se \(\displaystyle \lim_{z \to a} {(z-a)}^{k}f{(z)} = l \neq 0\)
+    allora \({(z-a)}\phi{(z)} \to 0 \) per \(z\to a\) allora è estensibile, con
+    \(\phi {(a)} \neq 0\) e quindi
+    \[
+        f{(z)} = \frac{\phi{(z)}}{{(z-a)}^{k}} \quad \text{ e quindi } z=a
+        \text{ è un polo di ordine } k
+    \]
+\end{proof}
+\begin{eser}
+    Sia \(\displaystyle f{(z)} = \frac{1}{z^3 - z^{5}}\) per \(z \in \mathbb{C}
+    \sminus \{0, 1, -1\}\). Calcolare il residuo in \(z=0\)
+\end{eser}
+
+\begin{eser}
+    Calcolare i residui di \(f\) nei poli, nel caso delle funzioni
+    \[
+      f{(z)} = \frac{e^{\frac{1}{z}} - e^{z}}{z^2-1} \quad , \quad
+      \frac{1}{\sin^3 z}
+    \]
+\end{eser}
+\subsection{Indice di avvolgimento}
+\paragraph{Logatitmo} non è una funzione di per se su \(\mathbb{C}\), infatti la
+funzione esponenziale \(z |> e^{z}\) è suriettiva ma non iniettiva. Infatti dato
+\(w \in \mathbb{C}\sminus \{0\} \) cerchiamo un \(z \in \mathbb{C}\) tale che
+\(e^{z} = w\). Se \(w = re^{i\theta}\) e \(z = x + i y\) allora
+\[
+      e^{x + iy} = r e ^{i\theta} \implies \begin{cases}
+          e^{x} = r \\
+          e^{iy} = e^{i\theta}
+      \end{cases}
+      \implies 
+      \begin{cases}
+          x = \log z\\
+          y = \theta + 2k \pi
+      \end{cases}
+\]
+quindi abbiamo \(\mathrm{exp}^{-1}{(r e^{i\theta})} = \{\log r + i{(\theta +
+2k\pi)} : k \in \mathbb{Z}\}\). Evidentemente quindi risulta difficile definire
+una funzione logaritmo. Possiamo dunque limitarne il dominio
+\begin{definition}{Logaritmo principale}
+    Diciamo \textbf{logaritmo principale} la funzione \(\log : \mathbb{C}
+    \sminus (-\infty, 0] \to \mathbb{C}\) definita da
+    \[
+        z = r e ^{i\theta} \mapsto \log r + i\theta \quad \theta \in (-\pi,
+        \pi)
+    \]
+\end{definition}
+Il motivo per cui non si definisce sul semiasse negativo è per evitare la
+discontinuità. Vorremmo infatti che tale funzione fosse olomorfa. Lo è.
+Mostriamo infatti che \(\log z\) è una primitiva di \(\frac{1}{z}\) in
+\(\mathbb{C} - (-\infty, 0]\). \(\frac{1}{z}\) è olomorfa su \(\Omega =
+\mathbb{C} \sminus (-\infty, 0]\) che è semplicemente connesso, dunque ha
+primitiva, data da:
+\[
+  F{(z)} = \int _{\gamma_{z} } \frac{1}{\zeta} \,d \zeta
+\]
+dove \(\gamma_z\) è una curva da \(z_{0}\) a \(z\). In particolare, la definiamo
+come in figura~\ref{fig:log-primitiva} e allora
+\[
+  F{(z)} = \int _{\gamma_z} \frac{1}{\zeta} \,d \zeta = \int_{1}^{r}
+  \frac{1}{\rho} \,d \rho + r\int_{0}^{\theta} e^{i\theta} \,d \theta
+\]
+
+\begin{figure}[ht]
+    \centering
+    \incfig[.5]{log-primitiva}
+    \caption{log primitiva}
+    \label{fig:log-primitiva}
+\end{figure}
+
 
 \newpage
 \section{Richiamo delle forme differenziali}
