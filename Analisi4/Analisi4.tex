@@ -7081,7 +7081,8 @@ infatti se \(x = (x_{k}) \in \ell^2\) è tale che \(\Span{x, e^{k}} = x_{k} = 0\
 per ogni \(k \in \mathbb{N}\), allora necessariamente \(x\) è la successione
 nulla.
 
-\begin{eser}[IMPORTANTE]
+\begin{eser}[\(\star\) base ortonormale di \(L^2(-\pi,
+    \pi)\)]\label{eser:baseL2_periodiche}
     
 Consideriamo ora \(L^2{(-\pi, \pi)}\) e lavoriamo su funzioni \(f : \mathbb{R}
 \to \mathbb{R}\) misurabili e periodiche di periodo \(2\pi\) tali che
@@ -7090,6 +7091,104 @@ Consideriamo ora \(L^2{(-\pi, \pi)}\) e lavoriamo su funzioni \(f : \mathbb{R}
   \frac{1}{\sqrt{2\pi}}, \quad \frac{\sin{(kt)}}{\sqrt{\pi}}, \quad
   \frac{\cos{(kt)}}{\sqrt{\pi}}, \quad k \in \mathbb{N}
 \]
-formano una base ortonormale di \(L^2{(-\pi, \pi)}\) 
+formano una base ortonormale di \(L^2{(-\pi, \pi)}\).
 \end{eser}
+\begin{remark}
+    Chiaramente non c'è nulla di particolare nell'intervallo \((-\pi, \pi)\)
+    eccetto che è particolarmente facile definire le funzioni \(f\). Questo
+    esercizio mostra che esiste (e la presenta) una base ortonormale su uno
+    spazio di funzioni periodiche. Basta infatti stretchare le funzioni e
+    traslarle e trovi il periodo che vuoi, dove vuoi.
+\end{remark}
+\begin{remark}
+    In ambito complesso si può anche prendere (oltre alle funzioni sopra, che
+    pure funzionano), le funzioni \(\frac{1}{\sqrt{2\pi}}e^{int}\), con \(n \in
+    \mathbb{Z}\) che pure formano una base ortonormale.
+\end{remark}
+
+\begin{definition}{Polinomio trigonometrico}\label{def:polinomio_trig}
+Una funzione del tipo
+\[
+    p{(t)} = a_{0} + \sum_{k=1}^{n} {(a_{k} \cos{(kt)} + b_{k} \sin{(kt)})} \quad
+    \text{con } a_{k}, b_{k} \in \mathbb{R}
+\]
+viene detta \textbf{polinomio trigonometrico} di grado \(n\) in ambito reale.
+In modo analogo 
+\[
+    q{(t)} = \sum_{k=-n}^{n} c_{k} e ^{ikt} \quad \text{con } c_{k} \in \mathbb{C}
+\]
+è un \textbf{polinomio trigonometrico} di grado \(n\) in ambito complesso.
+\end{definition}
+\begin{theorem}[Weierstrass]\label{thm:weierstrass}
+     Sia \(f : \mathbb{R} \to  \mathbb{R}\) continua e periodica di periodo
+     \(2\pi\). Allora esiste una successione di polinomi trigonometrici
+     \(\{p_{n}\} \) tale che \(\|f - p_{n}\|_{\infty} \to 0\) per \(n \to 0\),
+     ossia \(p_{n}\) converge a \(f\) uniformemente in \(\mathbb{R}\).
+\end{theorem}
+\begin{lemma}
+    Esiste una successione di polinomi trigonometrici \(q_{n}\) tali che 
+\begin{enumerate}[label = \alph*.]
+    \item \(q_{n}{(t)} \ge 0\) per ogni \(t \in \mathbb{R}\), \(n \in
+        \mathbb{N}\)
+    \item \(\frac{1}{2\pi}\int_{-\pi}^{\pi} q_{n}{(t)} \,dt = 1\) per ogni \(n
+        \in \mathbb{N}\)
+    \item Per ogni \(\delta \in {(0, \pi)}\) si ha 
+        \[
+          \lim_{n \to \infty} {\left( \sup_{\delta \le |t| \le \pi} q_{n}{(t)} \right)} 
+        \]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+    Definiamo
+    \[
+      q_{n}{(t)} = c_{n}{\left( \frac{1 + \cos t}{2} \right)} ^{n}, \quad t \in
+      \mathbb{R}
+    \]
+    dove i coefficienti \(c_{n}\) sono fissati in modo che valga la condizione
+    \(b.\), ossia tali che
+    \[
+        \frac{c_{n}}{2\pi} \int_{-\pi}^{\pi} \underbrace{{\left( \frac{1 + \cos t}{2}
+    \right)}^{n}}_{\text{sempre non negativa e si annulla in \(-\pi\) e \(\pi\)}} \,dt = 1
+    \]
+    Notiamo che \(c_{n} > 0\) per ogni \(n \in \mathbb{N}\) e quindi vale \(a.\)
+
+    Perché \(q_{n}\) è un polinomio trigonometrico?
+    \begin{equation}\label{eq:polinomio_trig_binom}
+        q_{n}{(t)} = \frac{c_{n}}{2^{n}} \sum_{k=0}^{n} \binom{n}{k} \cos^{k}{t} 
+    \end{equation}
+     notiamo però la seguente:
+     \[
+       \cos{(mt)}\cos t = \frac{1}{2}{\left( \cos{{({(m+1)}t)}} +
+       \cos{({(m-1)}t)} \right)} , \quad m \in \mathbb{N}
+     \]
+     e per l'equazione~\ref{eq:polinomio_trig_binom} possiamo scrivere ad esempio
+     \(\cos^2{(t)} = \frac{1}{2}{(\cos 2t + 1)}\), se ho \(\cos^3 t = \cos ^2 t
+     \cos t\) dove si può sostituire \(\cos^2 t\) con la formula appena data
+     eccetera. Per induzione si può mostrare che \(q_{n}\) è effettivamente un
+     polinomio trigonometrico.
+
+     Ora, per \(c.\):
+     \begin{align*}
+         1 &= \frac{c_{n}}{2\pi} \int_{-\pi}^{\pi} {\left( \frac{1 + \cos t}{2}
+       \right)}^2  \,d t = \cancel{2} \frac{c_{n}}{\cancel{2}\pi} \int_{0}^{\pi}
+                 {\left( \frac{1+\cos t}{2} \right)}^2 \,d t  \ge \\
+    &\ge \frac{c_{n}}{\pi}\int_{0}^{\pi} {\left( {\frac{1 + \cos t}{2}}
+    \right)}^{n} \sin t  \,d t = -2 \frac{c_{n}}{\pi} \frac{1}{n+1} {\left(
+    \frac{1 + \cos t}{2} \right)}^{n+1} \Big|_{0}^{\pi} = \frac{2 c_{n}}{\pi{(n+1)}}
+     \end{align*}
+     da cui ne scende che
+     \[
+       c_{n} \le \frac{\pi}{2}{(n+1)}
+     \]
+     e se ora prendiamo \(\delta \in {(0, \pi)}\) abbiamo che
+     \[
+         \sup_{\delta \le  |t| \le \pi} q_{n} \overset{pari}{=} \sup_{t \in
+         [\delta, \pi]} q_{n} = q_{n}{(\delta)} = c_{n}{\left( \frac{1 + \cos
+         \delta}{2} \right)}^{n} \le \frac{\pi}{2}{(n+1)}{\underbrace{\left( \frac{1 + \cos
+ \delta}{2} \right)}_{<1}} ^{n} \to 0
+     \]
+     dove la seconda eguaglianza è data da come è definita \(q_{n}\), che è
+     decrescente in \({[0, \pi]}\) 
+
+\end{proof}
 \end{document}
