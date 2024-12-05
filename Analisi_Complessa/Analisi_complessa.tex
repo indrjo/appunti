@@ -2561,16 +2561,165 @@ dove \(\gamma_z\) è una curva da \(z_{0}\) a \(z\). In particolare, la definiam
 come in figura~\ref{fig:log-primitiva} e allora
 \[
   F{(z)} = \int _{\gamma_z} \frac{1}{\zeta} \,d \zeta = \int_{1}^{r}
-  \frac{1}{\rho} \,d \rho + r\int_{0}^{\theta} e^{i\theta} \,d \theta
+  \frac{1}{\rho} \,d \rho + r\int_{0}^{\theta} e^{i\theta} \,d \theta = \log z +
+  c % TODO: adj
 \]
-
 \begin{figure}[ht]
     \centering
     \incfig[.5]{log-primitiva}
-    \caption{log primitiva}
+    \caption{Curva \(\gamma\) usata per mostrare che \(\log z\) è primitiva di
+    \(\frac{1}{z}\), in questa figura \(z = re^{i\theta}\)} 
     \label{fig:log-primitiva}
 \end{figure}
+Quindi la funzione \(f{(z)} = \log{(1 + z)}\) è definita in \(\mathbb{C} \sminus
+(-\infty, 1]\}\) e quindi in particolare è definita in 0. Consideriamo dunque lo
+sviluppo di \(f\) in \(z = 0\). Per determinare i coefficienti abbiamo due modi:
+facendo come al solito e calcolando tutte le derivate \(f^{{(n)}}{(0)}\) oppure
+oppure sfruttando la primitiva trovata sopra. Infatti
+\[
+  f'{(z)} = \frac{1}{1 + z} \overset{|z| < 1}{=} 1 - z + z^2 - z^3 + \dots
+\]
+e sappiamo però che, se \(f{(z)} = c_{0} + c_{1}{(z)} + c_{2}z^2 +\dots\) allora
+la serie derivata \(f'{(z)} = c_{1} + 2c_{2}z +3c_{3}z^2 +\dots\) e per confronto
+abbiamo quindi (poiché \(c_{0} = f{(0)} = \log{(1)} = 0\))
+\[
+    f{(z)} = \log{(1 + z)} = z - \frac{z^2}{2} + \frac{z^3}{3} - \dots
+\]
+\begin{remark}
+    Notare che abbiamo usato l'accortezza di confrontare con la serie derivata,
+    invece che ``integrare''. Infatti in \(\mathbb{C}\) dovremmo specificare
+    una curva ecc è un po' strano dire ``integrando la serie''. Tuttavia così ha
+    senso.
+\end{remark}
+Risulta, in particolare
+\[
+  \lim_{z \to 0} \frac{\log{(1 + z)}}{z} = 1
+\]
+Quanto abbiamo detto sul logaritmo principale diventa problematico se abbiamo un
+\(\Omega \not\subseteq \mathbb{C}^2 \sminus (-\infty, 0]\). Si consideri
+l'esempio della figura~\ref{fig:omega-brutto}
+\begin{figure}[ht]
+    \centering
+    \incfig[.3]{omega-brutto}
+    \caption{Omega brutto}
+    \label{fig:omega-brutto}
+\end{figure} % TODO: chiarire
+e anche nel caso di \(\Omega\) brutto siamo riusciti a trovare una funzione
+\(\log\) che è inversa di \(e^{z}\) in \(\Omega\). Questo è più generale:
+\begin{theorem}
+    Sia \(\Omega \subseteq \mathbb{C} \) semplicemente connesso. Sia \(f \in
+    \mathcal{H}{(\Omega)}\) mai nulla. Allora esiste \(g \in
+    \mathcal{H}{(\Omega)}\) tale che
+    \[
+      e^{g} = f
+    \]
+    Tale \(g\) è univocamente individuata a meno di una costante additiva della
+    forma \(2k\pi i\) 
+\end{theorem}
+Idea (illuminazione) (intuito): \(g = \log f\) allora \(g' = f' / f\)
+\begin{proof}
+    \(f' / f \in \mathcal{H}{(\Omega)}\), \(\Omega\) semplicemente connesso, e
+    allora ammette primitiva \(\phi\), con \(\phi' = f' / f\). Consideriamo
+    \[
+        \frac{d}{dz}{(f e ^{-\phi})} = f' e^{-\phi} - f e^{-\phi} \phi' =0
+    \]
+    quindi \(f e^{-\phi} =: e^{c}\) è costante su \(\Omega\) e mai nulla. Ma
+    allora \(f = e^{\phi + c}\) e dunque \(\phi + c\) è la funzione \(g\) di cui
+    nell'enunciato.
 
+    Per l'unicità, se \(g_{1}\) e \(g_{2}\) sono tali che
+    \[
+      e^{g_{1}} = f = e^{g_{2}}
+    \] allora \(e^{g_{1} - g_{2}} = 1\) e dunque \(g_{1}{(z)} - g_{2}{(z)} \in
+    2\pi i \mathbb{Z}\) ma poiché \(g_{1} - g_{2}\) è continua e \(\Omega\) è
+    connesso, deve essere costante, esiste dunque un \(k \in \mathbb{Z}\) tale
+    che
+    \[
+      \forall  z \in \Omega, \quad g_{1}{(z)} - g_{2}{(z)} = 2k\pi i 
+    \]
+\end{proof}
+\begin{definition}{Ramo del logaritmo}
+    Ogni \(g\) di cui al teorema precedente è detta \textbf{determinazione} o
+    \textbf{ramo} di \(\log f\) in \(\Omega\) 
+\end{definition}
+    Siano \(\Omega\) e \(f\) come sopra; sia \(\gamma\) una curva in \(\Omega\)
+    con punto iniziale \(z_{0}\) e terminale \(z_1\). Vogliamo calcolare
+    l'integrale 
+    \[
+      \int_{\gamma} \frac{f'{(z)}}{f{(z)}} \,dz \overset{\star}{=} g{(z_{1})} -
+      g{(z_{0})}
+    \]
+    dove in \(\star\) abbiamo preso \(g\) una determinazione di \(\log f\) in
+    \(\Omega\). Allora ne segue
+    \[
+      \exp{\left( \int _{\gamma} \frac{f'{(z)}}{f{(z)}} \,dz \right)} =
+      e^{g{(z_{1})} - g{(z_{0})}} = \frac{e^{g{(z_{1})}}}{e^{g{(z_{0})}}} =
+      \frac{f{(z_{1})}}{f{(z_{0})}}
+    \]
+Tale risultato continua a sussistere anche se \(\Omega\) \textbf{non} è
+semplicemente connesso, ossia vale il teorema
+\begin{theorem}
+    Sia \(\Omega \subseteq \mathbb{C} \) aperto e \(f \in
+    \mathcal{H}{(\Omega)}\) mai nulla. Sia \(\gamma\) una curva in
+    \(\mathbb{C}\) con punto iniziale \(z_{0}\) e punto terminale \(z_{1}\).
+    Allora
+    \[
+      \exp {\left( \int_{\gamma} \frac{f'{(z)}}{f{(z)}} \,dz \right)} =
+      \frac{f{(z_{1})}}{f{(z_{0})}}
+    \]
+\end{theorem}
+
+\begin{corollary}
+    Siano \(\Omega, f\) come sopra, sia \(\gamma\) una curva chiusa in
+    \(\Omega\). Allora
+    \[
+      \int _{g} \frac{f'{(z)}}{f{(z)}} \,dz \in 2\pi i \mathbb{Z}
+    \]
+\end{corollary}
+\begin{proof}
+    Se \(\gamma\) è chiusa nel teorema si ha 
+    \[
+        \exp{\left( \int_{\gamma} \frac{f'{(z)}}{f{(z)}} \,dz \right)} = 1
+    \]
+\end{proof}
+\textbf{Caso particolare:} Sia \(a \in \mathbb{C}\) e sia \(\gamma\) una curva
+chiusa che non passa per \(a\). Sia \(f{(z)} = z-a\), con \(z \in \mathbb{C}
+\sminus \{a\} =: \Omega\) (notare \(\Omega\) non semplicemente connesso). Allora
+dal corollario
+\[
+    \int _{\gamma} \frac{1}{z-a} \,dz = 2\pi i k \quad k \in \mathbb{Z}
+\]
+e quindi 
+\[
+    \frac{1}{2\pi i} \int_{\gamma} \frac{1}{z-a} \,dz = k \in \mathbb{Z}
+\]
+\begin{definition}{Indice di avvolgimento}
+    Siano \(\gamma\) e \(a\) come sopra. Il valore (intero) 
+    \[
+      n{(\gamma; a)} = \frac{1}{2\pi i} \int _{\gamma} \frac{1}{z-a} \,dz
+    \] è detto \textbf{indice di avvolgimento} di \(\gamma\) rispetto al punto
+    \(a\) 
+\end{definition}
+Valgono alcune proprietà:
+\begin{itemize}[label = --]
+    \item \(n{(\gamma; \cdot )}\) è costante sulle componenti connesse di
+        \(\mathbb{C} - \gamma\), infatti la funzione \(a \to n{(\gamma; a)}\)  è
+        continua ed ha valori in \(\mathbb{Z}\). 
+    \item \(n{(\gamma; \cdot )}\) è nullo su \(\Omega_\infty\), infatti sia
+        \(D\) un disco contenente \(\gamma\) e sia \(a \not\in \overline{D}\).
+        Allora
+        \[
+          \int _{\gamma} \frac{1}{z-a} \,dz = 0 \text{ perché } z \mapsto
+          \frac{1}{z-a} \in \mathcal{H}{(D)}
+        \]
+\end{itemize}
+
+\begin{figure}[ht]
+    \centering
+    \incfig[.4]{indice-di-avvolgimento}
+    \caption{Indice di avvolgimento}
+    \label{fig:indice-di-avvolgimento}
+\end{figure}
 
 \newpage
 \section{Richiamo delle forme differenziali}

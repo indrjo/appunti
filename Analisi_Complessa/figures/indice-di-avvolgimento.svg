@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="240mm"
+   height="120mm"
+   viewBox="0 0 240 120"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="indice-di-avvolgimento.svg"
+   inkscape:export-filename="indice-di-avvolgimento.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.70312851"
+     inkscape:cx="397.50912"
+     inkscape:cy="255.28761"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showborder="true"
+     width="200mm"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="2520"
+     inkscape:window-height="995"
+     inkscape:window-x="20"
+     inkscape:window-y="65"
+     inkscape:window-maximized="1"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815"
+       units="mm"
+       spacingx="10"
+       spacingy="10"
+       empspacing="4"
+       dotted="false"
+       originx="0"
+       originy="0" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-177)">
+    <path
+       style="fill:black;stroke:black;stroke-width:0.28088167;stroke-linecap:round;stroke-linejoin:round;fill-opacity:0.12;marker-end:none;marker-start:none;stroke-dasharray:none;stroke-opacity:1"
+       d="m 103.85726,199.20137 c -19.943606,-5.26812 -49.670864,-6.02071 -39.510917,22.57767 10.15995,28.59837 17.309544,71.49593 -11.288831,56.82045 -28.598375,-14.67548 33.490203,-22.20137 49.294568,-33.4902 15.80437,-11.28883 24.08284,-36.12427 1.50518,-45.90792 z"
+       id="path1" />
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1"
+       y="194.09824"
+       x="102.52892"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="102.52892"
+         y="194.09824"
+         style="stroke-width:0.264583">$\gamma$</tspan></text>
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1-3"
+       y="218.181"
+       x="77.270287"><tspan
+         sodipodi:role="line"
+         id="tspan1-6"
+         x="77.270287"
+         y="218.181"
+         style="stroke-width:0.264583">$\Omega_{1}$</tspan></text>
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1-7"
+       y="273.62576"
+       x="60.148838"><tspan
+         sodipodi:role="line"
+         id="tspan1-5"
+         x="60.148838"
+         y="273.62576"
+         style="stroke-width:0.264583">$\Omega_{2}$</tspan></text>
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1-35"
+       y="267.09943"
+       x="94.520866"><tspan
+         sodipodi:role="line"
+         id="tspan1-62"
+         x="94.520866"
+         y="267.09943"
+         style="stroke-width:0.264583">$\Omega_{\infty} $</tspan></text>
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:black;stroke-width:0.4213225;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:none"
+       id="path2"
+       cx="89.18177"
+       cy="237.77155"
+       rx="63.217461"
+       ry="57.761189" />
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1-9"
+       y="190.44133"
+       x="134.8788"><tspan
+         sodipodi:role="line"
+         id="tspan1-1"
+         x="134.8788"
+         y="190.44133"
+         style="stroke-width:0.264583">$D$</tspan></text>
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1-2"
+       y="185.92546"
+       x="40.41671"><tspan
+         sodipodi:role="line"
+         id="tspan1-7"
+         x="40.41671"
+         y="185.92546"
+         style="stroke-width:0.264583">$a$</tspan></text>
+  </g>
+</svg>
