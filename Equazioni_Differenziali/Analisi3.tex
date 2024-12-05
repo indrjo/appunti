@@ -2827,7 +2827,8 @@ e ne cerchiamo i punti fissi. Definiamo ora la successione
 \end{align*}
 Il problema è la convergenza di tale successione. È naturale quindi ora
 pensare che la soluzione sia una sorta di \(e^{tA}\), ma è ben definita?
-Converge uniformemente? (Saltare a pagina~\pagref{ritorniamo_a_noi_dopo_exp_matr})
+% Converge uniformemente? (Saltare a pagina~\pagref{ritorniamo_a_noi_dopo_exp_matr})
+% TODO ERR
 
 \paragraph{Esponenziale di una matrice} Sia \(A \in M^{N \times
 N}{(\mathbb{K})}\), con \(\mathbb{K} = \mathbb{R}, \mathbb{C}\). Prendiamo 
@@ -3043,8 +3044,111 @@ che ha matrice risolvente \(e^{t\tilde{A}}\).
         matrice \(s \times  s\) che ha solo entrate di valore 1 sulla
         sopradiagonale. Allora poiché \(A^{s} = 0\) abbiamo
         \[
-          e^{A} = I + A + \frac{A^2}{2} +~\dots + \frac{A^{s-1}}{(s-1)!}
+          e^{tA} = I + A + \frac{t^2A^2}{2} +~\dots + \frac{t
+          ^{s-1}A^{s-1}}{(s-1)!} = \begin{pmatrix}
+              1 & t & \frac{t^2}{2} & \dots & \frac{t^{s-1}}{(s-1)!} \\
+              0 & 1 & t & \dots & \frac{t^{s-2}}{(s-2)!} \\
+              \vdots & \vdots & \ddots & \ddots & \vdots \\
+              0 & 0 & \dots & 1 & t \\
+              0 & 0 & \dots & 0 & 1
+          \end{pmatrix}
+        \]
+    \item \(A\) diagonalizzabile allora \(A = P\tilde{A}P^{-1}\) se \(A\) è
+        associata a \(T\) nella base canonica allora \(P\) ha come colonne gli
+        autovettori di \(T\), e \(\tilde{A}\) è diagonale con gli autovalori di
+        \(T\). Allora
+        \[
+            e^{tA} = e^{Pt\tilde{A}P^{-1}} = Pe^{t\tilde{A}}P^{-1} = \begin{pmatrix}
+                v_{1} &~\dots & v_{N}
+            \end{pmatrix} \begin{pmatrix}
+                e^{\lambda_{1}t} & & 0 \\
+                & \ddots & \\
+                0 & & e^{\lambda_{N}t}
+                \end{pmatrix} {\begin{pmatrix}
+                v_{1} &~\dots & v_N
+        \end{pmatrix}}^{-1}
         \]
 \end{itemize}
+Da ciò abbiamo che nel problema \(x' = Ax\) con \(A\) diagonalizzabile, allora 
+\(x{(t)} = e^{tA}\xi\) al variare di \(\xi \in \mathbb{C}^{N}\), ossia \(x{(t)}
+= Pe^{t\tilde{A}}P^{-1}\xi = Pe^{t\tilde{A}}C\), con \(C \in \mathbb{C}^{N}\)
+arbitrario è soluzione.
+\begin{example}
+    Sia \(A = \begin{pmatrix}
+        -4 & 3 & 6 \\
+        6 & -1 & -6 \\
+        -6 & 3 & 8
+    \end{pmatrix}\) allora (con qualche calcolo che skippo) otteniamo
+    \[
+      \det {(A -  \lambda I)} = {(2 - \lambda)}{(\lambda^2 - \lambda - 2)}
+    \]
+    e quindi gli autovalori sono \(\lambda_{2} = 2\) doppio e \(\lambda_{1} = -1\)
+    semplice.
+    Allora 
+    \begin{align*}
+        \ker {(A - \lambda_{1}I)} &= \mathrm{span}\left\{ v_{1} := \begin{pmatrix}
+          1 \\
+          -1 \\
+          1
+  \end{pmatrix} \right\} \\
+                \ker {(A - \lambda_{2}I)} &= \mathrm{span}\left\{
+  v_{2} := \begin{pmatrix}
+      1 \\
+      0 \\
+      1
+      \end{pmatrix},v_{3} := \begin{pmatrix} 
+      1 \\
+      2 \\
+      0
+\end{pmatrix} \right\}
+\end{align*}
+
+e dunque \(P = \begin{pmatrix} v_{1} & v_{2} & v_{3} \end{pmatrix}\) e le soluzioni del sistema sono del tipo
+    \[
+     x{(t)} = Pe^{t\tilde{A}}C = \begin{pmatrix}
+         1 & 1 & 1 \\
+         -1 & 0 & 2 \\
+         1 & 1 & 0 
+         \end{pmatrix} \begin{pmatrix}
+         e^{-t} &  &  \\
+         & e^{2t} &  \\
+         &  & e^{2t}
+         \end{pmatrix} \begin{pmatrix}
+         c_{1} \\
+         c_{2} \\
+         c_{3}
+     \end{pmatrix}
+    \]
+in altre parole i vettori \(v_{1}e^{-t}, v_{2}e^{2t}, v_{3}e^{3t}\) formano una
+base dello spazio vettoriale \(V\) delle soluzioni di \(x' = Ax\) 
+\end{example}
+Dal precedente esempio concludiamo che se \(A\) è \emph{diagonalizzabile} e
+\(v_{1}, \dots, v_{N}\) sono una base di autovettori di \(A\) allora \(x{(t)}
+\in \mathrm{span}_{i \in 1, \dots, N} \{e^{\lambda_{i}t}v_{i}\} \) 
+\begin{remark}
+    Ciò può essere verificato direttamente, infatti
+\begin{itemize}[label = --]
+    \item \(u{(t)} = e^{\lambda_{k}t} v_{k}\) è soluzione di \(x' = Ax\):
+        \(u'{(t)} = \lambda_{k}e^{\lambda_{k}t}v_{k} = A(e^{\lambda_{k}t}v_{k})
+        = Au{(t)}\) 
+    \item sono \(N\) vettori linearmente indipendenti, infatti la matrice
+        wronskiana in \(t= 0\) è \(P\) invertibile.
+\end{itemize}
+
+\subsection{Caso generale}
+Se \(A\) avesse un solo autovalore \(\lambda\) con molteplicità \(N\) allora
+\[
+  A = \lambda I + (A - \lambda I )
+\]
+dove \(A - \lambda I\) è necessariamente nilpotente.
+
+e poiché \(\alpha I\) commuta con ogni altra matrice per \(\alpha \in \mathbb{K}\) 
+\[
+    e^{tA} = e^{t \lambda I + t{(A- \lambda I)}} = e^{t\lambda I}e^{t(A-\lambda
+    I)}
+\]
+\end{remark}
+
+
 
 \end{document}
