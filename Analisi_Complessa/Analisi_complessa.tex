@@ -2721,6 +2721,244 @@ Valgono alcune proprietà:
     \label{fig:indice-di-avvolgimento}
 \end{figure}
 
+% TODO : MANCA UN SACCO DI ROBA
+
+\begin{theorem}
+    Sia \(g\) olomorfa ad eccezione di un numero finito di punti, su un aperto
+    contenente 
+    \[
+      H = \{z \in \mathbb{C} : \Im(z)\ge  0\} 
+    \]
+    Nessuna delle singolarità sia sull'asse reale. Sia 
+    \[
+      f{(z)} = e^{i\omega z}g{(z)}
+    \]
+    con \(\omega \in \mathbb{R}\). Supponiamo inoltre che
+    \[
+      \lim_{|z| \to \infty} g{(z)} = 0 ; \quad \omega > 0
+    \]
+
+    Allora \(f\) è integrabile su \(\mathbb{R}\) e 
+    \[
+      \int _{-\infty} ^{+\infty}e^{i\omega x}g{(x)} \,dx = 2\pi i \sum_{\Im(a) >
+      0} \mathrm{Res} (f, a)
+    \]
+\end{theorem}
+\begin{proof}
+    Sappiamo che
+    \[
+        \int_{-\infty}^{\infty} = \lim_{R, S \to +\infty} \int_{-S}^{R}
+    \]
+    Fissiamo \(R, S > 0\). Fissato poi \(M > 0\) consideriamo la curva \(\gamma
+    = \gamma_{1} + \gamma_{2} + \gamma_{3} + \gamma_{4}\) in
+    figura~\ref{fig:curva-della-dim}
+\begin{figure}[ht]
+    \centering
+    \incfig[.5]{curva-della-dim}
+    \caption{Costruzione della curva \(\gamma\) }\label{fig:curva-della-dim}
+\end{figure}
+
+    Fissato \(\varepsilon>0\) sia \(R_\varepsilon\) tale che 
+    \[
+      \forall R, S, M \ge R_\varepsilon, \quad |g{(z)}| \le \varepsilon
+    \]
+    e le singolarità di \(g\) siano all'interno del rettangolo.
+    Allora 
+    \[
+        \int _{\gamma} e^{i\omega z}g{(z)} \,dz = 2\pi i \sum_{\Im(a) > 0}
+        \mathrm{Res} (f, a)
+    \]
+    Il primo membro è uguale a 
+    \[
+        \int_{-S}^{R} e^{i\omega z}g{(x)} \,dx + \int _{\gamma_{2}} + \int
+        _{\gamma_{3}} + \int _{\gamma_{4} }
+    \]
+    Consideriamo 
+    \[
+      \int _{\gamma_{2}} e^{i\omega z}g{(z)} \,dz \overset{z = R + it}{=}
+      \int_{0}^{M}e^{i\omega{(R+it)}}g{(R+it)}  \,d t =: I_{2}
+    \]
+    \[
+      |I_{2}| \le \varepsilon \int_{0}^{M} \left| e^{i\omega R} \right|
+      e^{-\omega t} \,dt = \varepsilon \left[ -\frac{1}{\omega}e^{-\omega t}
+      \right]_0^{M} = \frac{\varepsilon}{\omega} {\left( 1 - e^{-\omega M}
+      \right)} \le \frac{\varepsilon}{\omega}
+    \]
+    qualunque sia \(M> 0\). Analogamente abbiamo anche che \(\left| \int
+    _{\gamma_{4}} \right| \le \frac{\varepsilon}{\omega} \) 
+
+    Per \(\gamma_{3}\) abbiamo invece
+    \begin{align*}
+      \int _{\gamma_{3}} e^{i\omega z}g{(z)} \,dz \overset{z=t+Mi}{=} \int _{R}
+      ^{-S}e^{i\omega(t+Mi)}g{(t+Mi)}\,dt =: I_{3} \\
+      |I_3| \le \varepsilon \int_{-S}^{R} e^{i\omega M} \,dt = \varepsilon
+      e^{-\omega M}{(R+S)} 
+    \end{align*}
+    Fissati \(R\) e \(S\) si prenda quindi \(M\) tale che
+    \[
+      \left| \int _{\gamma_{3}} \right| \le \varepsilon
+    \]
+    Allora possiamo concludere perché
+    \[
+      \forall \varepsilon > 0,\quad \exists R_\varepsilon : \forall R, S \ge
+      R_\varepsilon \quad \left| \int_{-S}^{R} e^{i\omega x}g{(x)} \,dx - 2\pi i
+      \sum_{\Im(a) > 0} \mathrm{Res}{(f, a)} \right| \le 2\cdot
+      \frac{\varepsilon}{w} + \varepsilon
+    \]
+\end{proof}
+\begin{eser}
+    Si calcoli l'integrale
+    \[
+      \frac{1}{\pi} \int_{-\infty}^{\infty} e^{i\omega x} \frac{\gamma}{x^2 +
+      \gamma^2} \,dx \quad \gamma, \omega > 0 
+    \]
+    e poi per \(\omega < 0\) 
+\end{eser}
+
+\begin{eser}
+    Si calcoli l'integrale
+    \[
+      I = \int_{-\infty}^{\infty} \frac{x^3\sin x}{{(x^2 + 1)}^2} \,dx 
+    \]
+    Si osserva che
+    \[
+        I = \Im {(J)}, \quad J = \int_{-\infty}^{\infty} e^{ix}
+      \frac{x^3}{{(x^2+1)}^2} \,dx 
+    \]
+    \[
+    g{(z)} = \frac{z^3}{{(z^2+1)}^2}\quad z_{0} = i, \quad z_{1} = -i
+    \]
+    Allora \(z_{0}\) e \(z_{1}\) sono poli del secondo ordine poiché
+    \[
+        \varphi {(z)} = {(z-i)}^2 f{(z)} = e^{iz} \frac{z^3}{{(z+i)}^2} \to
+        e^{-1}\frac{-i}{-4}\neq 0
+    \]
+    e quindi il residuo è
+    \[
+      \mathrm{Res}{(f,i)} = \varphi '{(i)} = \frac{1}{4e} \implies J = 2\pi i
+      \cdot \frac{1}{4e} \implies I = \Im(J) = \frac{\pi}{2e}
+    \]
+\end{eser}
+
+\paragraph{Singolarità sull'asse reale} 
+Per gli integrali impropri richiamiamo che se \(\xi \in {(a, b)}\), con \(a, b
+\in \mathbb{R}\) e \(f : [a, b] \sminus \{\xi\} \to \mathbb{R}\) è continua
+allora si dice che l'integrale \(\int_{a}^{b} f \,dx \) è convergente se esiste
+finito
+\[
+    \lim_{\varepsilon, \sigma \to 0} \int _{[a, b] \sminus {(\xi - \varepsilon,
+    \xi + \sigma)}} f{(x)} \,dx
+\]
+(Analogamente per per gli integrali impropri verso \(\pm \infty\) con gli intorni
+di \(\pm \infty\) e con \(f : \mathbb{R} \sminus {(-\infty, \infty)} \to
+\mathbb{R}\))
+
+\begin{definition}{Valor principale}
+    Si dice che \(f\) è \textbf{integrabile in valor principale} su \([a,b]\) se
+    esiste finito
+    \[
+        \lim_{\varepsilon \to 0} \int _{[a,b] \sminus {(\xi - \varepsilon,
+        \xi+\varepsilon)}} f{(x)} \,dx =: p.v. \int_{a}^{b} f{(x)} \,dx
+    \]
+\end{definition}
+\begin{example}
+    Per \(f{(x)} = \frac{1}{x}\), con \(x \in [-1, 1] \sminus \{0\} \) allora
+    \[
+      p.v. \int_{-1}^{1} \frac{1}{x} \,d x = \int_{-1}^{-\varepsilon}
+      \frac{1}{x} \,dx + \int_{\varepsilon}^{1} \frac{1}{x} \,dx = 0 
+    \]
+\end{example}
+Scriveremo anche
+\[
+  p.v. \int_{-\infty}^{\infty} f{(x)} \,dx 
+\] se \(f\) è integrabile in un intorno di \(\pm \infty\) e presenta singolarità
+al finito considerate in valor principale.
+
+\begin{theorem}\label{thm:valor-principale}
+    Sia \(f\) olomorfa, ad eccezione di un numero finito di singolarità, in un
+    intorno di \(H\). Le singolarità sull'asse reale siano poli semplici.
+    Supponiamo che valga una o l'altra delle seguenti condizioni (vedi teoremi
+    precedenti)
+\begin{itemize}[label = --]
+    \item Esista \(p > 1\) tale che \[\limsup_{|z| \to +\infty \above z \in
+        M}|z|^{p} |f{(z)}| < +\infty \] 
+    \item Esistano \(\omega > 0\) e \(g\) (con le stesse singolarità di \(f\) )
+        tali che
+        \[
+          \lim_{|z| \to \infty \above z \in H} g{(z)} = 0, \quad f{(z)} = e^{i
+          \omega z}g{(z)}
+        \]
+\end{itemize}
+Allora \(f\) è integrabile (in valor principale) su \(R\) e 
+\[
+    p.v. \int_{-\infty}^{\infty} f{(x)} \,dx = 2\pi i \sum_{\Im {(a)} > 0}
+    \mathrm{Res}{(f, a)} + \pi i \sum_{\Im {(a)} = 0} \mathrm{Res}{(f, a)}
+\]
+\end{theorem}
+\begin{proof}
+    La dimostrazione ripercorre ciascuna delle due precedenti, ``isolando'' le
+    singolarità sull'asse reale. Siano ad esempio valide le prime ipotesi.
+    Allora Sia \(R > \max_{z \text{sing.}}  |z|\) e consideriamo la curva
+    \(\gamma = \eta_{1} + \gamma_\varepsilon + \eta_{2} + \gamma_R\). Allora
+    come nella dimostrazione precedente abbiamo
+    \[
+      \left| \int _{\gamma_R} f{(z)} \,dz \right| \le \frac{M}{R^p}\pi R \to 0
+      \text{,  per } R \to \infty
+    \]
+\begin{figure}[ht]
+    \centering
+    \incfig[.6]{curva-dim-teo3}
+    \caption{curva dim teo3}
+    \label{fig:curva-dim-teo3}
+\end{figure}
+    Per quanto riguarda \(\gamma_\varepsilon\) abbiamo
+    \[
+      -\gamma_\varepsilon {(\theta)} = a + \varepsilon e ^{i\theta}, \quad
+      \theta \in [0, \pi]
+    \]
+    Consideriamo lo sviluppo di Laurent di \(f\) relativo a \(a\):
+    \[
+      f{(z)} = \frac{c_{-1}}{z-a} + h{(z)} \quad \text{(polo semplice)}
+    \]
+    dove \(h\) è olomorfa in un intorno di \(a\). Allora
+    \begin{align*}
+        \int_{\gamma_\varepsilon}f{(z)}  \,dz &=
+      \int_{\gamma_\varepsilon}\frac{c_{-1}}{z-a}  \,d z +
+      \underbrace{\int_{\gamma_\varepsilon} h{(z)} \,d z}_{\to  0 \text{ per }
+      \varepsilon \to 0 \text{ (\(h\) limitato in un intorno di \(a\))}} \\
+      &= -\int_{0}^{\pi} \frac{c_{-1} }{\varepsilon e^{i\theta}}\varepsilon i
+      e^{i\theta} \,d \theta = -i \pi \mathrm{Res} {(f,a)}
+    \end{align*}
+    
+    Abbiamo dunque
+    \[
+      \int _{\gamma} f{(z)} \,dz = \int_{-R}^{a-\varepsilon} f{(x)} \,dx +
+      \int_{a+\varepsilon}^{R} f{(x)}  \,dx + \int_{\gamma_\varepsilon} f{(z)}
+      \,dz + \underbrace{\int_{\gamma_R}  \,dz}_{\to 0 } 
+    \]
+    Infine possiamo concludere
+    \begin{align*}
+        \left| \int_{[-R, R] \sminus {(a-\varepsilon, a+\varepsilon)}} f{(x)}
+        \,dx  - 2\pi i \sum_{\Im {(\xi)}> 0} \mathrm{Res}{(f, \xi)} - \pi i
+        \mathrm{Res} {(f, a)}\right|\le \\ \le  \left| \int _{\gamma_R}\right| +
+        \left| \int _{\gamma_\varepsilon} f + \pi i \mathrm{Res}{(f, a)}\right|
+        \to 0
+    \end{align*}
+\end{proof}
+
+\begin{eser}
+    Calcolare 
+    \[
+        \int_{-\infty}^{\infty} \frac{1-e^{iz}}{z^2} \,dz 
+        \quad \text{   e   }\quad
+        \int_{-\infty}^{\infty} \frac{1-\cos x}{x^2} \,dx \tag*{[\pi
+        entrambi]}
+    \]
+\end{eser}
+
+
+
+
 \newpage
 \section{Richiamo delle forme differenziali}
 

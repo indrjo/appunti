@@ -1737,7 +1737,7 @@ sarebbero non limitate
     poiché \(\displaystyle \liminf_{n \to \infty} f_{n} = \limsup_{n \to \infty}
     f_{n} = f\) segue la tesi.
 \end{proof}
-\begin{corollary}[Beppo Levi per le serie]
+\begin{corollary}[Beppo Levi per le serie]\label{cor:beppo-levi-serie}
     Sia \(f_{n}\) una successione di funzioni misurabili e non negative. Allora
     la serie \(\sum_{n=1}^{\infty} f_{n}{(x)} \) converge a una funzione \(s:
     \Omega \to [0, +\infty]\) tale che
@@ -3590,6 +3590,21 @@ finita] Sia \({\{\Omega_{n}\}}_{n \in \mathbb{N}}\) una partizione di
     \(\varphi_a = \varphi'_a\).
 \end{proof}
 
+\begin{eser}[Es. 2 del 23\--01\--2019]
+    Indicata con \(\lambda\) la misura di Lebesgue in \(\mathbb{R}\) e con
+    \(\mathcal{L}\) la \(\sigma\)-algebra degli insiemi misurabili secondo
+    Lebesgue, si consideri 
+    \[
+        \varphi {(A)} = 2\lambda {(A \cap [0, 2])} - 3 \int _{A \cap (-\infty,
+        0)} e^{x} \,d\lambda + \int _A \frac{\sin x}{1 + x^2} \,d\lambda \quad A
+        \in \mathcal{L}
+    \]
+\begin{enumerate}[label = \alph*.]
+    \item Provare che \(\varphi \) è una misura relativa su \(\mathbb{R}\) 
+    \item Dire se \(\varphi \) è \(\lambda\)-a.c.~e/o è \(\lambda\)-singolare
+    \item Scrivere la derivata di Radon-Nikodym di \(\varphi \) rispetto a \(\lambda\) 
+\end{enumerate}
+\end{eser}
 \subsection{Misure di Lebesgue-Stieltjes}
 Sia \(F : \mathbb{R} \to \mathbb{R}\) una funzione monotona non decrescente e
 continua da sinistra, cioè 
@@ -7189,6 +7204,263 @@ In modo analogo
      \]
      dove la seconda eguaglianza è data da come è definita \(q_{n}\), che è
      decrescente in \({[0, \pi]}\) 
-
 \end{proof}
+
+\section{Esercizi}
+Alcuni sono risolti, alcuni parzialmente e alcuni no. (Questa frase è inutile
+perché basterebbe guardare gli esercizi, ma era bello aggiungere una frase qui)
+
+\begin{eser}
+\begin{enumerate}[label = \alph*.]
+    \item Sia \(K = \{f \in L^2{(-\pi, \pi)}: f \text{ ha una rappresentazione
+        pari }\}\). Mostrare che \(K\) è un sottospazio chiuso di \(L^2{(-\pi,
+        \pi)}\)
+    \item Mostrare che \(P_K{(\omega)}  = \frac{w{(x)} + w{(-x)}}{2}\), per ogni
+        \(\omega \in L^2{(-\pi, \pi)}\) 
+      Mostrare che \(K^{\perp}\) è costituito dalle funzioni dispari.
+      Inoltre 
+      \[
+          \left\{ \frac{1}{\sqrt{2\pi}}, \frac{1}{\sqrt{\pi}} \cos{(kx)}
+              \right\} \subseteq K, \quad \left\{ \frac{1}{\sqrt{\pi}}
+              \sin{(kx)} \right\} \subseteq K^{\perp}
+      \]
+        e che quindi \(w{(x)} = P_K{(w)} + P_{K^{\perp}}{(w)} \) è una
+        decomposizione unica
+    \item Sia \(J : L^2{(-\pi, \pi)} \to \mathbb{R}\) definito come
+        \[
+          J{(v)} = \int _{{(-\pi, \pi)}} {\left( {\left( v{(x)}-\sin x \right)}
+          ^2 + \cos x\right)}  \,dx
+        \]
+        dire se \(J\) ammette minimo in \(K\) e ricavarlo esplicitamente
+
+        Abbiamo che 
+        \[
+          J{(v)} = \|v - \sin\|_{2} + \int _{\{-\pi, \pi\} } \cos x \,dx
+        \]
+        e per il teorema delle proiezioni sui sottospazi la soluzione del
+        problema di minimo è la proiezione di \(\sin\) su \(K\), ossia 0, poiché
+        \(\sin \in K^{\perp}\).
+\end{enumerate}
+\end{eser}
+\begin{eser}[Es. 3 del 4\--12\--2020]
+    Sia \(f \in L^2{(0, 2\pi)}\) 
+\begin{enumerate}[label = \alph*.]
+    \item Dato \(\varepsilon > 0\), è possibile approssimare \(f\) con una
+        funzione \(g_{\varepsilon} \in C^{0}{([0, 2\pi])}\) tale che 
+        \[
+          \|f - g_{\varepsilon}  \|_2 \le \varepsilon
+        \]
+
+        Sì, e in particolare possiamo usare la densità di \(C^{0}_C{(0, 2\pi)}\)
+        in \(L^2{(-\pi, \pi)}\) e scegliere dunque \(g_\varepsilon \in
+        C_C^{0}{(0, 2\pi)}\). 
+    \item Calcolare il valore del limite per \(n \to \infty\) della successione
+        integrale di \(f{(x)} \sin{(nx)}\) 
+
+        \[
+          \lim_{n \to \infty} \int _{{(0, 2\pi)}} f{(x)}\sin {(nx)} \,dx = 0
+        \] (Fourier)
+    \item e se \(f \in L^{1}{(0, 2\pi)}\)? 
+        
+        Abbiamo che \(C_C^{0}{(0, 2\pi)}\) è denso anche in \(L^{1}{(0, 2\pi)}\)
+        dunque per ogni \(\varepsilon > 0\) esiste \(h_\varepsilon \in
+        C^{0}_C{(0, 2\pi)}\) tale che \(\|f - h_\varepsilon\|_1 \le
+        \varepsilon\). Ci piacerebbe provare che
+        \[
+          \forall \varepsilon > 0 \quad \exists \overline{n} \in \mathbb{N} :
+          \forall n \ge \overline{n} \quad \left| \int _{{(0, 2\pi)}} f{(x)}\sin
+          nx\,dx \right| \le 2\varepsilon
+        \]
+        e abbiamo che
+\begin{align*}
+    \left| \int_{0}^{2\pi} f{(x)}\sin nx  \,dx  \right| &\le \left|
+    \int_{0}^{2\pi} {\left( f{(x)} - h_\varepsilon {(x)} \right)} \sin
+    nx \,dx \right| + \left| \int_{0}^{2\pi} h_\varepsilon {(x)} \sin nx \,dx \right| \\
+    &\le \|f - h_\varepsilon\|_1 \|\sin nx\|_{\infty} + \left|
+    \int_{0}^{2\pi} h_\varepsilon {(x)} \sin nx \,dx  \right| \le 2\varepsilon
+\end{align*}
+        e poiché \(h_\varepsilon \in L^2{(0, 2\pi)}\) allora per il punto
+        precedente esiste un \(\overline{n}\) tale che per ogni \(n \ge
+        \overline{n}\) il secondo addendo è \(\le  \varepsilon\). 
+\end{enumerate}
+\end{eser}
+
+\begin{eser}[Es. 3 del 23\--01\--2019]
+    Sia \(X\) lo spazio di tutte le \(u : {(-1, 1)} \to \mathbb{R}\) misurabili
+    e tali che
+    \[
+      N{(u)} = \int _{{(-1, 1)}} \sqrt{|u{(x)}|}  \,dx < +\infty
+    \]
+\begin{enumerate}[label = \alph*.]
+    \item Provare che \(X\) è uno spazio vettoriale e che \(N\) \textbf{non} definisce
+        una norma in \(X\) 
+
+        Facile vedere che \(X\) è uno spazio vettoriale. \(N{(\cdot )}\) non è
+        una norma perché \textbf{non} soddisfa l'omogeneità, infatti
+        \(N{(\lambda u)} = \sqrt{|\lambda|} N{(u)}\), per ogni \(\lambda \in
+        \mathbb{K}\) e \(u \in X\).
+    \item Posto \(d{(u, v)} = N{(u -v)}\) per ogni \(u, v  \in  X\) provare che
+        \(d\) è una distanza in \(X\).
+
+        \begin{itemize}[label = --]
+            \item \(d {(u, v)} \ge 0\) alla grande
+            \item \(d{(u, v )} = 0\) allora
+                \begin{align*}
+                    \int_{{(-1, 1)}} \sqrt{|u{(x)} - v{(x)}|} \,dx = 0 &\implies
+                  \sqrt{|(u-v){(x)}|} = 0 \quad q.o. \\ &\implies u = v \quad q.o.
+                \end{align*}
+            \item \(d{(u, v)} = d{(v, u)}\) alla grande
+            \item \(d{(u, v)} \le d{(u, z)} + d{(z, v)}\), \(\forall u, v, z \in
+                X\) vero perché
+                \[
+                    \sqrt{|{(u-v)}{(x)}|} \le \sqrt{|{(u-z)}{(x)}|} +
+                    \sqrt{|{(z-v)}{(x)}}
+                \]
+        \end{itemize}
+    \item Provare che \(L^{p}{(-1, 1)} \subseteq X \) per ogni \(p \in [1, \infty]\) 
+
+        Se \(1 \le p < \infty\) allora
+        \[
+            \sqrt{|u{(x)|}} = |u{(x)}|^{\frac{1}{2}} \overset{\ref{prp:Young}}{\le } \frac{1}{2p}
+            |u{(x)}|^{p} + \frac{2p-1}{2p}1^{\frac{2p}{2p-1}} \in L^{1{(-1, 1)}}
+        \]
+        Se invece \(p = \infty\) allora
+        \[
+          \sqrt{|u{(x)}|} \le \sqrt{\|u\|_{\infty} } \in L^{1{(-1, 1)}}
+        \]
+    \item Se \(u_{n} \to u\) in \(L^{1}{(-1, 1)}\) allora \(d{(u_{n}, u)} \to
+        0\) per \(n \to \infty\) 
+
+        \[
+          d{(u_{n}, n)} = \int _{{(-1, 1)}} \sqrt{|{(u_{n} - u)}|} \,dx
+          \overset{\ref{thm:Holder}}{\le } {\left( \int _{{(-1, 1)}} |{(u_{n}
+          -u)}{(x)}| \,dx \right)}^{\frac{1}{2}} {\left( \int _{{(-1, 1)}} 1^{2}
+  \,dx \right)}^{\frac{1}{2}} \le \sqrt{2}\|u_{n} -u\|_1^{\frac{1}{2}} \to 0
+        \]
+\end{enumerate}
+\end{eser}
+\begin{eser}[Es. 3 del 15\--01\--2024]
+    Consideriamo \(\ell^{1}, \ell^{\infty}\) e \(c_{0}\). Consideriamo
+    l'operatore \(T : \ell^{1 \to \ell^{\infty}}\) definito come
+    \[
+      {(Ta)}_n = \sum_{k=n}^{\infty} a_{k} \quad n \in \mathbb{N}, \quad a \in
+      \ell^{1}
+    \]
+\begin{enumerate}[label = \alph*.]
+    \item Mostrare che \(T\) è ben definito, ossia \(Ta \in \ell^{\infty}\) per
+        ogni \(a \in \ell^{1}\).
+        
+    \[
+      \left| \sum_{k=n}^{\infty} a_{k} \right| \le \sum_{k=n}^{\infty} |a_{k}|
+      \le \sum_{k=1}^{\infty} |a_{k}| = \|a\|_1  
+    \]
+    \item Mostrare che \(T\) è lineare. (ovvio)
+    \item Mostrare che \(T\) è continuo. (Basta notare che è limitato)
+    \item Calcolare la norma \(\|T\|\).
+
+        Sappiamo già dal punto a.~che \(\|Ta\|_\infty \le 1\|a\|_1\). Per dire
+        che la norma è proprio \(1\) dobbiamo trovare un \(a\) tale che
+        \(\|Ta\|_\infty = \|a\|_1\). Possiamo prendere un elemento qualsiasi
+        della successione canonica, ad esempio \(a = e^{1} = {(1, 0, 0,
+        \dots)}\).
+    \item Mostrare che \(T\) è iniettivo.
+
+        Sia \(Ta = b\).
+        Sia \(b = 0\) allora \(b_{n} - b_{n}+1 = a_{n}\) per ogni \(n\), e
+        dunque \(a = 0\) 
+    \item Mostrare che \(l_{1} \subsetneq  T{(l^{1})} \subsetneq c_{0}\) 
+
+    Chiaramente \(Ta\) è una successione infinitesima per ogni \(a \in
+    \ell^{1}\) perché successione dei resti \(k\)-esimi di una serie
+    convergente. 
+
+    Come elemento di \(c_{0}\) che non sta in \(T{(\ell^{1})}\) possiamo
+    prendere \(b = {(1, 0, \frac{1}{2}, 0, \frac{1}{3}, 0, \dots)}\) 
+\end{enumerate}
+\end{eser}
+
+\begin{eser}[Es. 1 del 27 \-- 11 \-- 2018]
+    Si consideri la successione di funzioni
+    \[
+      f_{n}{(x)} = \frac{n}{2}e^{-n|x|}, \quad x \in \mathbb{R}, n \in \mathbb{N}
+    \]
+\begin{enumerate}[label = \alph*.]
+    \item Studiare la convergenza quasi ovunque, quasi uniforme e in misura di
+        \(\{f_{n}\} \) in \(\mathbb{R}\) 
+
+        Converge puntualmente a \(0\) per ogni \(x \in \mathbb{R} \sminus \{0\}
+        \) quindi converge q.o.~a \(0\). Inoltre converge uniformemente in ogni
+        \(\mathbb{R} \sminus B_{\varepsilon} {(0)}\) quindi converge anche
+        q.u.~(altrimenti si può spezzare in \(\mathbb{R} = {(-\infty, -1)} \cup
+        [-1, 1] \cup {(1, \infty)}\)). Di conseguenza converge anche in misura.
+    \item Discutere l'integrabilità delle funzioni \(f_{n}\) in \(\mathbb{R}\),
+        per \(n \in \mathbb{N}\) fissato, rispetto alla misura \(\mu\) di
+        Lebesgue su \(\mathbb{R}\) 
+
+        L'esponenziale è integrabile, si può anche calcolare l'integrale
+        (inoltre \(ne^{-nx}\) è la pdf di una variabile casuale esponenziale
+        continua, quindi integra 1).
+    \item Indicata con \(f\) la funzione limite delle \(f_{n}\), si chiede se
+        \[
+          \lim_{n \to \infty} \int _{\mathbb{R}} f_{n} \,d \mu \text{ esiste e vale
+          } \int _{\mathbb{R}} f \,d \mu
+        \]
+        No: il limite fa 1, l'integrale di \(f\) fa 0.
+\end{enumerate}
+\end{eser}
+
+\begin{eser}[Es. 1 del 10 \-- 07 \-- 2018]
+    Data la serie di funzioni
+    \[
+      \sum_{n=1}^{\infty} f_{n}{(x)}, \quad \text{ con } f_{n}{(x)} :=
+      \frac{x}{\sqrt{n}{(1+nx^2)}} \quad \text{ per } x \in \mathbb{R}
+    \]
+\begin{enumerate}[label = \alph*.]
+    \item Discuterne la convergenza quasi ovunque, quasi uniforme e in misura
+        della serie di funzioni in \(\mathbb{R}\) 
+
+    Per \(x\neq 0\) fissato, la serie converge assolutamente, infatti
+    \[
+      \frac{x}{\sqrt{n}{(1 + nx^2)}} \le \frac{1}{xn^{\frac{3}{2}}} 
+    \]
+    che ha somma finita, mentre per \(x=0\) fa 0 banalmente.
+
+    Sia \(E = \mathbb{R} \sminus B_{\frac{\varepsilon}{2}} {(0)}\) che ha
+    complementare di misura \(\varepsilon\). Allora denotando gon \(g_{n}\)la
+    successione delle somme parziali e con \(g\) il limite 
+    \[
+        \left| g_{k} - g \right| = \left| \sum_{n=1}^{k} f_{n}{(x)} -
+        \sum_{n=1}^{\infty} f_{n}{(x)}   \right| = \left| \sum_{n=k+1}^{\infty}
+        \frac{x}{\sqrt{n}{(1+nx^2)}}\right| 
+    \]
+    che è resto di serie convergente quindi converge (non è difficile mostrare
+    che si può maggiorare in modo da non dipendere da \(x\))
+    \item Discutere l'integrabilità delle funzioni \(f_{n}\) rispetto alla
+        misura \(\mu\) di Lebesgue per \(\mathbb{R}\) 
+
+    \[
+      \int _{\mathbb{R}} \frac{|x|}{\sqrt{n}{(1+nx^2)}} \,d \mu \ge
+      \frac{1}{\sqrt{n}} \int _{(1, +\infty)} \frac{x}{1+nx^2}  \,d \mu \ge
+      \frac{1}{\sqrt{n}} \int _{{(1, \infty)}} \frac{x}{x^2{(1+n)}} \,d \mu
+    \]
+    che è divergente, quindi \(f_{n}\not\in L^{1}{(\mathbb{R})}\), \(\forall n
+    \in \mathbb{N}\) 
+    \item Indicata con \(s\) la somma della serie laddove è definita, studiare
+        l'integrabilità secondo Lebesgue anche per queste funzioni
+
+    \[
+        \int _{\mathbb{R}} |g{(x)}| \,d \mu \ge \int _{{(1, \infty)}}
+        \sum_{n=1}^{\infty} f_{n} \,d \mu \ge \int _{{(1, \infty)}} f_{1}{(x)}
+        \,d \mu = +\infty
+    \]
+    Altrimenti si può fare con Beppo Levi per serie~\ref{cor:beppo-levi-serie}
+\end{enumerate}
+\end{eser}
+
+\begin{eser}[Es. 1 del 17 \-- 01 \-- 2018]
+    Se \(u : \mathbb{R} \to \mathbb{R}\) è una funzione misurabile e non
+    negativa, consideriamo la successione di funzioni \(f_{n}{(x)}\) 
+\end{eser}
+
+
 \end{document}

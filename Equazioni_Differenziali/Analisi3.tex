@@ -3134,21 +3134,177 @@ Dal precedente esempio concludiamo che se \(A\) è \emph{diagonalizzabile} e
     \item sono \(N\) vettori linearmente indipendenti, infatti la matrice
         wronskiana in \(t= 0\) è \(P\) invertibile.
 \end{itemize}
+\end{remark}
+
+Ricordiamo da algebra lineare che se \(T : V \to  V\) è un operatore lineare su
+\(V\), allora
+\[
+    \ker T^{s} = \ker T^{s+1}, \quad \mathrm{Im} T^{s} = \mathrm{T^{s+1}}, \quad V = \ker T^{s} \oplus \mathrm{Im} T^{s} \quad \text{ per un certo } s \in
+    1\dots n
+\]
+e intendiamo \(s\) come il più piccolo intero tale che valga tale proprietà
+(\(n := \dim V\) è un possibile valore). Inoltre su \(\ker T^{s}\) vi è al più
+(spazio banale allora \(T\) non ha autovalori) l'autovalore nullo. Infatti se
+\(\lambda \in \mathbb{K}, v \in \ker T^{s}\sminus \{0\} \) tali che \(Tv =
+\lambda v\) allora \(0 = T^{s}v = \lambda^{s}v\) e quindi \(\lambda = 0\).
+Mostriamo che invece su \(\mathrm{Im} T^{s}\) \(T\) non può presentare 0 come
+autovalore. Infatti se \(v \in V\)
+con \(Tv = 0\) e quindi \(T^{s}v = 0\) allora \(v \in \ker T^{s}\) e sappiamo
+che \(\ker T^{s} \cap \mathrm{Im} T^{s} = \{0\}\) dunque \(v = 0\). Riassumendo
+abbiamo
+\begin{lemmao}[Separazione degli autovalori o dec.~di Fitting]
+    Se \(T : V \to V\) è un operatore lineare su \(V\) allora esiste \(s \in
+    \mathbb{N}\)
+    tale che
+    \[
+      \ker T^{s} = \ker T^{s+1}
+    \]
+    sia \(s\)  il minimo intero con tale proprietà. Allora
+    \[
+        s \le \dim \ker V, \quad \mathrm{Im} T^{s} = \mathrm{Im} T^{s+1}, \quad
+        V = \ker T^{s} \oplus \mathrm{Im} T^{s}
+    \]
+    Inoltre su \(\ker T^{s}\) non vi sono autovalori di \(T\) diversi da 0, mentre su
+    \(\mathrm{Im} T^{s}\) non vi sono autovalori nulli.
+\end{lemmao}
+Fissimo \(T : V \to V\) e \(\lambda \in \mathbb{K} = \mathbb{C}\).
+L'applicazione \(T = \lambda I\) allora:
+\begin{itemize}[label = --]
+    \item ha 0 come autovalore se e solo se \(T\) ha
+\(\lambda\) come autovalore 
+    \item un sottospazio di \(V\) è \(T-\)invariante se e solo se è \(T -
+        \lambda I\)-invariante
+    \item Sia \(\p{(z)}\) il polinomio caratteristico di \(T\). Allora
+        \(\p{(z+\lambda)}\) è il polinomio caratteristico di \(T - \lambda I\) 
+\end{itemize}
+Sia \(\lambda\) autovalore di \(T\) con molteplicità algebrica \(m
+{(\lambda)}\). Allora 0 è autovalore di \(T - \lambda I\) con molteplicità
+algebrica \(m {(\lambda)}\). Applichiamo ora il lemma~\ref{lemma:fitting} a \(T
+- \lambda I\) ottenendo che 
+\[
+  V = V_\lambda \oplus W, \quad V_\lambda := \ker {(T - \lambda I)}^s, 
+   \quad W := \mathrm{Im} {(T - \lambda I)}^s
+\]
+Inoltre 
+\[
+  s \le \dim \ker T^{s} \quad \text{ e } \quad m {(\lambda)} = \dim V_\lambda =
+  \dim \ker T^{s}
+\]
+e \(T|_{V_\lambda} \) ha solo l'autovalore \(\lambda\) mentre \(T|_{W} \) non ha
+\(\lambda\) come autovalore.
+\begin{definition}
+    Diciamo \textbf{autospazio generalizzato} relativo all'autovalore
+    \(\lambda\) il sottospazio
+    \[
+        G{(\lambda, T)} = \bigcup_{j = 1} ^{\infty} \ker {(T - \lambda I)}^{j} =
+        \ker {(T - \lambda I)}^{n}
+    \]
+    con \(n\) la molteplicità algebrica di \(\lambda\).
+\end{definition}
+Da quanto precede esiste \(s \le m {(\lambda)}\) tale che \(G{(\lambda, T)} =
+\ker {(T - \lambda I)}^{ s }\) 
+
+\begin{theorem}
+    Siano \(\lambda_{1}, \dots, \lambda_q\) gli autovalori distinti di \(T\) ,
+    allora
+    \[
+        V = \bigoplus_{i=1}^{q} G{(\lambda_{i}, T)}
+    \]
+\end{theorem}
+\begin{remark}
+    \(\sum_{k=1}^{q} \dim G {(\lambda_{k})} = \sum_{i=1}^{q} m {(\lambda_{k})} =
+    n\) 
+\end{remark}
 
 \subsection{Caso generale}
 Se \(A\) avesse un solo autovalore \(\lambda\) con molteplicità \(N\) allora
 \[
   A = \lambda I + (A - \lambda I )
 \]
-dove \(A - \lambda I\) è necessariamente nilpotente.
+dove \(A - \lambda I\) è necessariamente nilpotente, infatti poiché 0 è l'unico
+autovalore e \(V = \ker T^{s} \oplus \mathrm{Im}T^{s}\) allora
+\(\mathrm{Im}T^{s} = \{0\} \).
 
-e poiché \(\alpha I\) commuta con ogni altra matrice per \(\alpha \in \mathbb{K}\) 
-\[
+Poiché \(\alpha I\) commuta con ogni altra matrice per \(\alpha \in \mathbb{K}\) 
+\begin{equation}\label{eq:exp-1-eigenval}
     e^{tA} = e^{t \lambda I + t{(A- \lambda I)}} = e^{t\lambda I}e^{t(A-\lambda
     I)}
+\end{equation}
+Sia ora \(x' = Ax\) generica. Siano \(\lambda_{1}, \lambda_{2}, \dots, \lambda_q
+\in \mathbb{C}\) gli autovalori distinti di \(A_{\mathbb{C}} \). Allora
+\[
+    \mathbb{C}^{N} = \bigoplus_{i=1}^{q} G{(\lambda_{i}, T^A_{\mathbb{C}})}
 \]
-\end{remark}
+Sia \(\tilde{\mathcal{B}}_k\) una base di \(G{(\lambda_{k})}\) per ogni \(k =
+1\dots q\) e sia \(\tilde{\mathcal{B}}\) l'unione di tutte le
+\(\tilde{\mathcal{B}}_k\). Allora \(\tilde{\mathcal{B}}\) è una base di
+\(\mathbb{C}^{N}\) rispetto a cui la matrice associata a \(T\) è diagonale a
+blocchi
+\[
+  \tilde{A} = \begin{pmatrix}
+      \tilde{A}_{1} &  &  &  \\
+       & \tilde{A}_2 &  &  \\
+        &  & \ddots &  \\
+         &  &  & \tilde{A}_q
+  \end{pmatrix} \implies e^{t\tilde{A}} =
+  \begin{pmatrix}
+      e^{\tilde{A}_{1}} &  &  &  \\
+       & e^{\tilde{A}_2} &  &  \\
+        &  & \ddots &  \\
+         &  &  & e^{\tilde{A}_q}
+  \end{pmatrix}
+\]
+dove \(\tilde{A}_k\) è la matrice associata a \(T^{A}|_{G{(\lambda_{k})}}\) rispetto
+alla base \(\tilde{\mathcal{B}}_k\). 
+Per ogni \(k = 1\dots q\), \(\tilde{A}_k\) ha solo \(\lambda_{k}\) come
+autovalore, quindi \(\tilde{A}_k = \lambda_{k} I + {(\tilde{A}_k - \lambda_{k}
+I)}\) e ci si può rifare al caso visto~\eqref{eq:exp-1-eigenval}.
 
+\begin{eser}
+    Sia \(A = \begin{pmatrix}
+        1 & -6 & -3 \\
+        -4 & 3 & 4 \\
+        2 & -7 & -4
+    \end{pmatrix}\). 
+    Fornire una base dello spazio delle soluzioni di \(x' = Ax\).
+\end{eser}
+
+\begin{theorem}
+    Una base dello spazio delle soluzioni dell'equazione \(x' = Ax\) è data da
+    \(N\) opportune funzioni della forma
+    \[
+      u{(t)} = e^{\lambda t}p{(t)}
+    \]
+    con \(\lambda \) autovalore di \(A\) e \(p{(t)}\) polinomio a coefficienti
+    in \(\mathbb{C}^{N}\) di grado al più \(m {(\lambda)} - 1\).
+\end{theorem}
+\begin{proof}
+    \[
+      \mathbb{C}^{N} = \bigoplus_{k =1}^{q} G{(\lambda_{k}, T^{A})}
+    \]
+    allora se \(P = \begin{pmatrix}
+        v_{1} & \dots & v_N
+    \end{pmatrix}\) è la matrice costituita dagli autovettori delle basi di
+    \(G{(\lambda_{k})}\), \(\tilde{A} = P^{-1}AP\) e 
+    \[
+      e^{t\tilde{A}} = \begin{pmatrix}
+          e^{t\tilde{A}_1} &  &  \\
+           & \ddots & 
+            &  & e^{t\tilde{A}_q}
+      \end{pmatrix}
+    \] 
+    Una base dello spazio delle soluzioni è data dalle colonne di \(P
+    e^{t\tilde{A}}\).
+
+    Osserviamo che \(\mathcal{N}_k = \tilde{A}_k - \lambda_{k} I\) è nilpotente
+    perché \(\tilde{A}_k\) ha solo l'autovalore \(\lambda_{k}\) e dunque
+    \[
+      e^{t\tilde{A}_k} = e^{\lambda_{k}t} \cdot e^{t \mathcal{N}_k} =
+      e^{\lambda_{k} t}{\left(I + t \mathcal{N}_k + \frac{1}{2}t^2\mathcal{N}^2_k +
+      \dots + \frac{1}{(s-1)!}t ^{s-1}\mathcal{N}_k^{s-1}\right)}
+    \]
+    allora \(x{(t)} = P e ^{t\tilde{A}} C\) è un esponenziale per un polinomio.
+\end{proof}
 
 
 \end{document}
