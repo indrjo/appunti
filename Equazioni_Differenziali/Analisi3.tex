@@ -1734,7 +1734,7 @@ cui \(t_{0} = 0\). È una cosa così comune che motiva la seguente definizione
     \({(\omega_-{(\xi)}, \omega_+{(\xi)})}\) della soluzione \(x{(\cdot , 0, \xi)}\) 
 \end{definition}
 
-\begin{proposition}
+\begin{proposition}\label{prop:flusso}
     \begin{itemize}
     \item \(\omega_+\, [\omega_-]\) è semicontinua inferiormente [superiormente] in
     \(\Omega\)
@@ -3174,8 +3174,8 @@ L'applicazione \(T = \lambda I\) allora:
 \(\lambda\) come autovalore 
     \item un sottospazio di \(V\) è \(T-\)invariante se e solo se è \(T -
         \lambda I\)-invariante
-    \item Sia \(\p{(z)}\) il polinomio caratteristico di \(T\). Allora
-        \(\p{(z+\lambda)}\) è il polinomio caratteristico di \(T - \lambda I\) 
+    \item Sia \(p{(z)}\) il polinomio caratteristico di \(T\). Allora
+        \(p{(z+\lambda)}\) è il polinomio caratteristico di \(T - \lambda I\) 
 \end{itemize}
 Sia \(\lambda\) autovalore di \(T\) con molteplicità algebrica \(m
 {(\lambda)}\). Allora 0 è autovalore di \(T - \lambda I\) con molteplicità
@@ -3306,5 +3306,230 @@ I)}\) e ci si può rifare al caso visto~\eqref{eq:exp-1-eigenval}.
     allora \(x{(t)} = P e ^{t\tilde{A}} C\) è un esponenziale per un polinomio.
 \end{proof}
 
+% TODO : manca un po'
 
+\subsection{Equazioni differenziali lineari omogenee a coefficienti costanti}
+Se \(Ly = f\) abbiamo che se \(f{(t)} = P_m{(t)}e ^{\lambda t}\) si ricerca
+\(\overline{y}\) della forma
+\[
+  \overline{y}{(t)} = t ^{\mu} Q_m {(t)} e^{\lambda t}
+\]
+con \(Q_{m}{(t)}\) polinomio di grado \(\le m\) e \(\mu\) molteplicità di
+\(\lambda\) come radice del polinomio caratteristico. Se \(\lambda = \alpha + i
+\beta\) allora si cerca
+\[
+    \overline{y}{(t)} =t ^{\mu} {(A{(t)}\cos \beta t + B{(t)}\sin \beta t)}e^{\alpha t}
+\] 
+con \(\deg A(t), \det B(t) \le m\) 
+
+\paragraph{Bidimensionale} Se \(N = 2\) abbiamo
+\begin{align*}
+    x_{1}' = a_{11}x_{1} + a_{12}x_{2} \\ x_{2}' = a_{21}x_{1} + a_{22}x_{2}
+\end{align*}
+ossia \(x' = Ax\).
+Se ora \(\lambda= 0\) è autovalore, cioè \(\det A = 0\) allora ad esempio
+\[
+  {(a_{21}, a_{22} )} = \lambda{(a_{11} , a_{12} )}
+\]
+quindi
+\[
+  x_{2} - \lambda x_{1} = \text{ const } \implies \text{ rette }
+\]
+
+Sia ora \(\det A \neq 0\). Allora si presentano 3 casi
+\begin{itemize}[label = --]
+    \item autovalori reali, matrice diagonalizzabile
+    \item autovalori reali, matrice \textbf{non} diagonalizzabile
+    \item autovalori complessi coniugati
+\end{itemize}
+
+\paragraph{Reali, diagonalizzabile } Esiste una base di autovettori tale che la
+matrice sia diagonale. Allora a meno di moltiplicare per matrici costanti è
+equivalente studiare il sistema
+\[
+    x' = \begin{pmatrix}
+        \lambda_{1} & 0 \\
+        0 & \lambda_{2}
+    \end{pmatrix} x \quad \begin{cases}
+    x_{1}' = \lambda_{1}x_{1} \\ x_{2}' = \lambda_{2}x_{2}
+    \end{cases}
+\]
+che ha soluzione
+\[
+  \begin{cases}
+      x_{1}{(t)} = x_{1}^{0} e^{\lambda_{1} t} \\
+      x_{2}{(t)} = x_{2}^{0} e^{\lambda_{2} t}
+  \end{cases}
+\]
+Se \(x_{1}^{0} = 0\) oppure \(x_{2}^{0}= 0 \) l'orbita è il corrispondente
+semiasse (oppure (0,0) se entrambi sono nulli). Se \(x_{1}^{0} \neq 0 \neq
+x_{2}^{0}\) allora dalla seconda equazione possiamo ottenere
+\[
+  e^{\lambda_{2} t} = \frac{x_{2}{(t)}}{x_{2}^{0}}; \quad
+      x_{1} = x_{1}^{0} {\left( e^{\lambda_{2} t}
+      \right)}^{\frac{\lambda_{1}}{\lambda_{2}}} \implies 
+      x_{1} = x_{1}^{0}{\left( \frac{x_{2}}{x_{2}^{0}} \right)}^{
+      \frac{\lambda_{1}}{\lambda_{2}}}
+\]
+che sono curve di potenze. Nella
+figura~\ref{fig:orbite-problema-reali-diagonalizzabile} alcuni possibili casi.
+\begin{figure}[ht]
+    \centering
+    \incfig{orbite-problema-reali-diagonalizzabile}
+    \caption{Se gli autovalori sono positivi abbiamo il caso nero, se gli
+    autovalori sono negativi abbiamo invece il caso rosso. Sulla destra il caso
+in cui il segno degli autovalori non è concorde, in particolare \(\lambda_{2} <
+0 < \lambda_1\) }
+    \label{fig:orbite-problema-reali-diagonalizzabile}
+\end{figure}
+Se invece \(\lambda_{1} = \lambda_{2}\) allora otteniamo \(x_{2} = Cx_{1}\) e
+quindi le orbite sono semirette partenti dall'origine.
+
+\paragraph{Reali coincidenti, non diagonalizzabile} Se la matrice non è diagonalizzabile
+allora possiamo ricondurre alla matrice
+\[
+  A = \begin{pmatrix}
+      \lambda & 1 \\
+      0 & \lambda
+  \end{pmatrix}
+\]
+per la forma di Jordan. Allora abbiamo
+\[
+  x{(t)} = e^{tA}\begin{pmatrix}
+      c_{1} \\
+      c_{2}
+  \end{pmatrix} = e^{\lambda t} e^{t \begin{pmatrix}
+      0 & 1 \\
+      0 & 0
+  \end{pmatrix}} \begin{pmatrix}
+      c_{1} \\
+      c_{2}
+  \end{pmatrix} = e^{\lambda t} \begin{pmatrix}
+      1 & t \\
+      0 & 1
+  \end{pmatrix} \begin{pmatrix}
+      c_{2} \\
+      c_{2}
+  \end{pmatrix} 
+\]
+dunque il sistema è
+\[
+  \begin{cases}
+      x_{1} = {(c_{1} + c_{2} t)} e^{\lambda t} \\
+      x_{2} = c_{2} e^{\lambda t}
+  \end{cases}
+\]
+Se \(c_{2} = 0\) allora l'orbita è sull'asse \(x_{2} = 0\). Altrimenti
+(supponendo \(x_{2}^{0} = c_{2} > 0\)) abbiamo
+\[
+  e^{\lambda t} = \frac{x_{2}}{c_{2}} \implies \lambda t = \log
+  \frac{x_{2}}{c_{2}} \implies t = \frac{1}{\lambda} \log{(\frac{x_{2}}{c_{2}})}
+\]
+\[
+  x_{1} = {\left( c_{1}+\frac{c_{2}}{\lambda} \log \frac{x_{2}}{c_{2}} \right)}
+  \frac{x_{2}}{c_{2}} \overset{x_{2}, c_{2} > 0}{=} x_{2}{\left(
+  \frac{c_{1}}{c_{2}} + \frac{1}{\lambda}{(\log x_{2} - \log c_{2})} \right)} 
+\]
+che è della forma \(\displaystyle x_{1} = x_{2}{\left( \gamma +
+\frac{1}{\lambda}\log x_{2} \right)} \). Studiando tale funzione si ottiene che
+il grafico delle orbite è come in
+figura~\ref{fig:orbite-problema-reali-non-diagonalizzabile}.
+\begin{figure}[ht]
+    \centering
+    \incfig[.7]{orbite-problema-reali-non-diagonalizzabile}
+    \caption{Orbite problema reali non diagonalizzabile, l'origine è un nodo
+    improprio}\label{fig:orbite-problema-reali-non-diagonalizzabile}
+\end{figure}
+
+\paragraph{Autovalori complessi coniugati} Abbiamo che \(\lambda_{1,2} = \alpha
+\pm i \beta\). In un'opportuna base la matrice è
+\[
+  A = \begin{pmatrix}
+      \alpha & \beta \\
+      -\beta & \alpha
+  \end{pmatrix} \implies e^{t A} = e^{\alpha t} \begin{pmatrix}
+      \cos \beta t & \sin \beta t \\  
+      -\sin \beta t & \cos \beta t
+  \end{pmatrix}
+\]
+Se \(c_{1}, c_{2} = {(0, 0)}\) allora \(x{(t)} \equiv 0\). Altrimenti sia
+\[
+  R = \sqrt{c_{1}^2 + c_{2}^2} ,\quad \left\|{\left(\frac{c_{1}}{R},
+      \frac{c_{2}}{R}\right)}\right\| =
+  1
+\]
+e dunque le soluzioni diventano
+\begin{align}\label{eq:compl_conj}
+  \begin{cases}
+      x_{1} = R e^{\alpha t} \cos{(\varphi  - \beta t)} \\
+      x_{2} = R e^{\alpha t} \sin{(\varphi  - \beta t)}
+  \end{cases}
+\end{align}
+cioè in coordinate polari 
+\[
+  \rho = R e^{\alpha t} \quad \theta = \varphi - \beta t \implies \rho = R e
+  ^{\alpha {\left( \frac{\varphi}{\beta} - \frac{\theta}{\beta} \right)} } =
+  Ke^{-\frac{\alpha}{\beta}\theta}
+\]
+che quindi formano spirali logaritmiche, che possono essere sia convergenti che
+divergenti a seconda del segno di \(\alpha\) (ricordare che nella costante \(K\)
+c'entra anche \(\alpha\), per questa osservazione guardare le
+equazioni~\eqref{eq:compl_conj}). Il segno di \(\frac{\alpha}{\beta}\) influenza
+soltanto il verso di rotazione della spirale. Se \(\alpha = 0\) chiaramente si
+ha invece che \(\rho\) è costante e dunque le orbite sono circonferenze.
+
+\subsection{Stabilità}
+Sia \(\Omega \subseteq \mathbb{R}^{N} \) aperto e \(f : \Omega \to
+\mathbb{R}^{N}\) di classe \(C^{1}\). Consideriamo l'equazione differenziale
+\(x'=  f{(x)}\) e consideriamo il flusso \({(t,x)} \mapsto \varphi {(t, x)}\)
+dell'equazione differenziale. Ricordiamo che \(\varphi {(\cdot , x)}\) risolve
+l'equazione con dato iniziale \(t = 0\).
+
+Se \(f{(x)} = Ax\) allora abbiamo
+\[
+    \varphi {(t, x)} = e^{tA}x
+\]
+(a volte l'operatore associato a \(e^{tA}\) viene detto \textbf{flusso lineare}) 
+
+\begin{definition}{Punto di equilibrio}
+    \(\overline{x} \in \Omega\) si dice punto di equilibrio per \(x'= f{(x)}\)
+    (o per il flusso \(\varphi \)) se \(f{(\overline{x})} = 0\), ovvero se
+    \(x{(t)} = \overline{x}\) è soluzione (oppure \(\varphi {(t, \overline{x})}
+    = \overline{x}\))
+\end{definition}
+\begin{remark}
+    È utile specificare la definizione anche per il flusso perché si può anche
+    definire senza equazione differenziale. Ricordando le proprietà del flusso
+    presentate in~\ref{prop:flusso} possiamo costruire il flusso come mappa che
+    rispetti le proprietà del flusso.
+\end{remark}
+\begin{definition}
+    Sia \(\overline{x}\) punto di equilibrio. Allora
+\begin{itemize}[label = --]
+    \item \(\overline{x}\) si dice \textbf{stabile} (secondo Lyapunov) se per
+        ogni \(U\) intorno di \(\overline{x}\) esiste \(V\) intorno di
+        \(\overline{x}\) tale che per ogni \(x \in V\) 
+        \[
+          \omega_+{(x)} = +\infty, \quad \varphi {(t, x)} \in U \quad \forall t
+          \ge 0
+        \]
+    \item \(\overline{x}\) si dice \textbf{attrattivo} se esiste \(V\) intorno
+        di \(\overline{x}\) tale che per ogni \(x \in V\) 
+        \[
+          \omega_+{(x)} = +\infty, \quad \varphi {(t,x)} \to \overline{x} \text{
+          per } t \to +\infty
+      \]
+    \item \(\overline{x}\) si dice \textbf{asintoticamente stabile} se è stabile
+        e attrattivo
+\end{itemize}
+\end{definition}
+\begin{figure}[ht]
+    \centering
+    \incfig{stabilità-e-attrattività}
+    \caption{In ordine, \(\overline{x}\) stabile, \(\overline{x}\) attrattivo e
+    \(\overline{x}\) asintoticamente stabile}\label{fig:stabilità-e-attrattività}
+\end{figure}
+
+Spoilerone: esistono sia punti di equilibrio stabili e non attrattivi che
+attrattivi e non stabili.
 \end{document}
