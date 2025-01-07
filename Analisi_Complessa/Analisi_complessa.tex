@@ -2956,9 +2956,243 @@ Allora \(f\) è integrabile (in valor principale) su \(R\) e
     \]
 \end{eser}
 
+\subsection{Altri risultati}
 
+\begin{theorem}[Prolungamento analitico]\label{thm:prolungamento-analitico}
+    Sia \(\Omega \subseteq \mathbb{C} \) un aperto connesso e \(f\) olomorfa su
+    \(\Omega\). Se esiste \(U \mathbb{C} \Omega\) aperto tale che \(f \equiv 0\)
+    su \(U\) allora \(f \equiv 0\) su \(\Omega\).
+\end{theorem}
+\begin{proof}
+    Consideriamo \(E_{n} = \{f^{{(n)}} = 0\} \) con \(n = 0, 1, \dots\). Allora
+    \(E = \bigcap_{n} E_{n}\). \(E\) è chiuso in quanto intersezione di chiusi.
+    Vogliamo mostrare che è anche aperto. Sia \(a \in E \subseteq \Omega \),
+    sviluppiamo \(f\)  intorno a \(a\) e abbiamo
+    \[
+      f{(z)} = \sum_{n=0}^{\infty} c_{n} {(z-a)}^{n}, \quad z \in D_r{(a)}, quad
+      c_{n} = \frac{f^{{(n)}}{(a)}}{n!}
+    \]
+    per \(r\) opportuno, con \(D_r{(a)} \subseteq \Omega \). Quindi poiché \(a
+    \in E\) risulta \(c_{n}=0\) per ogni \(n\) quindi \(f \equiv 0\) in
+    \(D_r{(a)}\). Allora \(D_r{(a)} \subseteq E\) e quindi \(E\) è aperto.
 
+    Infine poiché \(\Omega\) è connesso e \(E \neq \varnothing\) ne consegue
+    necessariamente che \(E = \Omega\) 
+\end{proof}
+\begin{corollary}\label{cor:zero-isolato}
+    Sia \(0 \not\equiv f \in \mathcal{H}{(\Omega)} con {(\Omega)} connesso. Allora l'insieme
+    degli zeri di {(f)} è un insieme chiuso in {(\Omega)} e discreto\) 
+\end{corollary}
+\begin{proof}
+    Sia \(f{(a)} = 0\): mostriamo che \(z = a\) è uno zero isolato. Sia
+    \(D_r{(a)}\) tale che
+    \[
+      f{(z)} = \sum_{n=0}^{\infty} c_{n} {(z-a)}^{n}, \quad z \in D_r{(a)} 
+    \]
+    Se \(c_{n} = 0\) per ogni \(n\) allora \(f\equiv 0\) su \(D_r{(a)}\): per il
+    teorema~\ref{thm:prolungamento-analitico} quindi \(f \equiv 0\) su \(\Omega\), che è escluso.
 
+    Sia quindi \(N = \min \{ n : c_{n} \neq 0\} \) e si ha che
+    \[
+        f{(z)} = c_N {(z-a)}^{N} + c_{N+1} {(z-a)}^{N+1} +~\dots = {(z-a)}^{N}
+        g{(z)}
+    \]
+    con \(g{(a)} = c_N \neq 0\). Quindi in un opportuno intorno di \(a\), \(f\)
+    si annulla solamente in \(a\).
+\end{proof}
+\begin{corollary}\label{cor:estensione-analitica}
+    Siano \(f, g \in \mathcal{H}{(\Omega)}\) con \(\Omega\) aperto connesso. Se
+    \( \{ f = g\} \) ha un punto di accumulazione in \(\Omega\) allora \(f
+    \equiv g\) in \(\Omega\) 
+\end{corollary}
+\begin{proof}
+    Si applichi il corollario~\ref{cor:zero-isolato} a \(f-g\)
+\end{proof}
+\begin{example}
+    Consideriamo \(f = z \mapsto e^{z} : \mathbb{C}\to \mathbb{C}\). Allora
+    \(f\) è l'unica estensione olomorfa di \(x \mapsto e^{x} : \mathbb{R} \to
+    \mathbb{R}\). Analogamente per le funzioni trigonometriche.
+
+    Così pure si possono estendere a tutto \(C\) alcune formule. Infatti se, ad
+    esempio \(\cos^2 x + \sin^2 x = 1\) su tutto \(\mathbb{R} \subseteq \mathbb{C} \), che ha punti di
+    accumulazione, allora l'uguaglianza vale su tutto \(\mathbb{C}\)
+\end{example}
+
+\begin{theorem}\label{thm:olomorfa-aperta}
+    Ogni funzione olomorfa non costante su un aperto connesso è un'applicazione aperta
+\end{theorem}
+
+Da cui segue il seguente teorema
+\begin{theorem}[del massimo modulo]
+Sia \(\Omega \subseteq \mathbb{C} \) aperto e connesso e \(f \in
+\mathcal{H}{(\Omega)}\). Se \(f\) non è costante allora \(|f|\) non può avere
+punti di massimo in \(\Omega\) 
+\end{theorem}
+
+\begin{proof}
+    Sia \(z \in \Omega\), vogliamo mostrare che non può essere un punto di
+    massimo. Sia \(w = f{(z)}\). Sia \(D_r{(z)} \subseteq \Omega \). Allora
+    \(f{(D_r{(z)})}\) è un aperto contenente \(f{(z)} = w\).
+    Esiste \(w' \in f{(D_r{(z)})}\) (quindi \(w' = f{(z')}\)) tale che \(|w'| >
+    |w|\) cioè \(|f{(z')}| > |f{(z)}|\). Allora \(z\) non può essere punto di
+    massimo per \(|f|\) 
+\end{proof}
+
+\begin{corollary}
+    Sia \(\Omega\) aperto connesso e \textbf{limitato}. Sia \(f :
+    \overline{\Omega} \to \mathbb{C}\) una funzione continue con \(f \in
+    \mathcal{H}{(\Omega)}\). 
+
+    Allora
+    \begin{equation}\label{eq:massimo-modulo}
+      \sup_{\Omega} |f| = \max_{\overline{\Omega}} |f| = \max_{\partial \Omega}
+      |f|
+    \end{equation}
+\end{corollary}
+\begin{remark}
+    Come ricordare il tutto: è chiaro, vogliamo dire che il massimo ``non c'è
+    perché è sul bordo''. Per farlo dobbiamo definire la funzione su
+    \(\overline{\Omega}\), aggiungendo come ipotesi la continuità e per avere il
+    massimo dobbiamo richiedere la limitatezza di \(\Omega\). Infine poiché il
+    massimo non può essere in \(\Omega\) deve essere sul bordo. 
+\end{remark}
+\begin{proof}
+    Se \(f\) è costante valgono le uguaglianze.
+
+    Altrimenti: i punti di massimo di \(|f|\) su \(\overline{\Omega}\)  (che
+    esistono per Weierstrass) devono essere su \(\partial \Omega\), altrimenti
+    sarebbero massimo per \(|f|\) in \(\Omega\). Quindi
+    \[
+        \max_{\overline{\Omega}} |f| = \max_{\partial \Omega} |f|
+    \]
+    Del resto se \(z_M \in \partial \Omega\) è di massimo per \(|f|\) su
+    \(\overline{\Omega}\) e \(z_k \to z_M\) con \(z_k \in \Omega\), allora
+    \[
+        \sup_{\Omega} |f| \ge |f{(z_k)}| \to |f{(z_M)}| = \max_{\partial \Omega}
+        |f|
+    \]
+\end{proof}
+\begin{theorem}
+    Sia \(f \in \mathcal{H}{(\Omega)}\). Allora
+\begin{enumerate}[label = \roman*)]
+    \item Se \(f\) è iniettiva allora \(f'\) non si annulla mai. Quindi posto
+        \(G = f{(\Omega)}\) si ha che \(G\) è aperto, \(f : \Omega \to G\) è
+        biettiva. Allora \(f^{-1} : G \to \Omega\) è olomorfa e 
+        \[
+            {(f^{-1})}'{(w)} = \frac{1}{{f'{(z)}}} \quad \text{ con } w = f{(z)}
+        \]
+    \item Se \(a \in \Omega\) è tale che \(f'{(a)} \neq 0\) allora \(f\) è
+        localmente iniettiva, quindi localmente invertibile.
+\end{enumerate}
+\end{theorem}
+
+Sia \(f \in \mathcal{H}{(\Omega)}\) e prendiamo un punto \(a \in \Omega\).
+Consideriamo la curva \(\gamma : (-1, 1) \to \Omega\) con \(\gamma{(0)} = a\) e
+consideriamo la curva \(\tilde{\gamma} = f \circ \gamma\). Sia \(v =
+\gamma'{(0)}\) allora
+\[
+  \gamma'{(0)} = f'{(\gamma{(0)})} \gamma'{(0)} = f'{(a)} v
+\]
+dove l'ultimo dipende solo da \(f, a\) (e \(v\)) ma non dalla curva.
+
+Sia \(0 \neq f'{(a)} = r e ^{i\theta}\). Allora \(\gamma'{(0)}\) si ottiene da \(v\)
+per rotazione dell'angolo \(\theta\) (e dilatazione di fattore \(r\)). Quindi se
+\(f'{(a)} \neq 0\) e \(\gamma, \eta\) sono curve che si tagliano in \(a\)
+secondo l'angolo \(\alpha\), anche le immagini si tagliano in \(f{(a)}\) con
+secondo \(\alpha\). Tale proprietà geometrica è chiamata \textbf{conformità}.
+
+\begin{definition}{Applicazione conforme}
+    Un'applicazione \(f : \Omega \to G \) con \(\Omega, G \subseteq \mathbb{C}
+    \) aperti che sia olomorfa e biettiva (quindi con anche \(f^{-1}\)
+    olomorfa) è detta applicazione conforme (biolomorfismo)
+\end{definition}
+
+\begin{example}
+    La funzione \(f = z \mapsto e^{z} : \{x + iy : |y| < \pi\} \to G =
+    \mathbb{C} \sminus (-\infty, 0]\) è conforme. In particolare ha inversa il
+    logaritmo principale
+    \[
+        \log z = \log \rho + i \theta \quad \text{ con } z = \rho e^{i\theta}
+    \]
+
+    % se avessi il mouse farei un disegno ma è facile: griglia va in raggiera
+\end{example}
+\begin{example}
+    \(f{(z)} = \frac{i - z}{i + z}\) con \(z \neq -i\). Allora \(f : \mathbb{C}
+    \sminus \{-i\} \to \mathbb{C}\sminus \{-1\} \). Mostriamo che è biettiva.
+    Sia \(\zeta \neq -1\) e cerchiamo \(z\) tale che \(f{(z)} = \zeta\)
+    \[
+      \frac{i - z}{i + z} = \zeta \iff i - z = i \zeta + z \zeta \iff z = i
+      \frac{1 - \zeta}{1 + \zeta} = f^{-1}{(\zeta)}
+    \]
+    Sia \(H ^{+} = \{ z \in \mathbb{C} : \Im {(z)} > 0\} \) e \(D =
+    D_{1}{(0)}\). Allora mostriamo che \(f : H^{+} \to D\) è biettiva. Questo
+    segue da 
+    \[
+      {|f{(z)}|} = \frac{|i-z|}{|i+z|} = \frac{d{(z, i)}}{d{(z, -i)}}
+    \]
+    e dunque \(|f{(z)}| < 1 \iff z \in H^{+}\) 
+\end{example}
+
+\begin{lemmao}[Schwartz]\label{lem:schwartz}
+    Sia \(f : D \to D\) con \(f{(0)} = 0\). Allora 
+\begin{enumerate}[label = \alph*.]
+    \item \(|f{(z)}| \le |z|\) per ogni \(z \in D\); inoltre se esiste \(z_{0}
+        \neq 0\) con \(|f{(z_{0})}| = |z_{0}|\). Allora \(f\) è una rotazione
+    \item \(|f'{(0)}| \le 1\) e se \(f'{(0)}| = 1\) allora \(f\) è una rotazione
+\end{enumerate}
+\end{lemmao}
+\begin{proof}
+\begin{enumerate}[label = \alph*.]
+    \item Sia \(g{(z)} = \frac{f{(z)}}{z}\) con \(z \neq 0\). Allora per il
+        teorema di estensione di Riemann~\ref{thm:estensione-riemann} \(g\) è
+        olomorfa anche in \(z=0\) con \(g{(0)} = \lim_{z \to 0} \frac{f{(z)}}{z}
+        = f'{(0)}\). Dunque \(g \in \mathcal{H}{(D)}\).
+
+        Sia \(r \in {(0, 1)}\) e \(z \in \partial D_r{(0)}\) allora
+        \[
+          |g{(z)}| = \frac{|f{(z)}|}{|z|} \le \frac{1}{r}
+      \]
+      e per il principio del massimo modulo~\ref{thm:massimo-modulo} si ha che
+      \(|g| \le \frac{1}{r}\) su \(D_r{(0)}\). Per \(r\to 1\) si ha \(|g{(z)}|
+      \le 1\) su \(D\) cioè \(|f{(z)}| \le |z|\) su \(D\).
+
+      Se esiste \(z_{0} \neq 0\) con \(|f{(z_0)}| = |z_{0}|\) cioè
+      \(|g{(z_{0})}| = 1\) allora per il principio del massimo modulo si ha che
+      \(|g| = c \) e dunque \(g{(z)} = e^{i\theta}\) per cui \(f{(z)} =
+      e^{i\theta} z\) cioè \(f\) è una rotazione
+    \item \(|f'{(0)}| = |g{(0)}| \le  1\). Se \(|f'{(0)}| = 1\) allora
+        \(|g{(0)}| = 1\), come prima.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Gli automorfismi di \(D\) sono tutte e sole le applicazioni della forma 
+    \[
+        f{(z)} = e^{i\theta} \psi_w{(z)} \quad \text{ con } \psi_w{(z)} =
+        \frac{z-w}{\overline{w}z - 1}
+    \]
+\end{theorem}
+\begin{proof}
+Sia \(f : D \to D\) biettiva e olomorfa. Definiamo \(\psi_w : D\to D\) biettiva
+e olomorfa come una funzione tale che \(\varphi_w {(0)} = w = f^{-1}({0})\) una
+possibile funzione è \(\psi_w{(z)} = \frac{z-w}{\overline{w}z - 1}\) (si
+verifichi). Allora abbiamo che \(h = f \circ \psi_w\) fissa l'origina.
+Applichiamo~\ref{lem:schwartz} a \(h\) e otteniamo che \(h\) è una rotazione.
+Ne consegue la tesi
+\end{proof}
+Le precedenti sono casi particolari delle \textbf{trasformazioni di Möbius} che
+sono della forma
+\[
+  f{(z)} = \frac{az + b}{cz + d}
+\]
+che hanno proprietà interessanti
+
+\begin{theorem}[Mappa conforme di Riemann]
+    Sia \(\Omega \subseteq \mathbb{C} \) un aperto semplicemente connesso e
+    diverso da \(\mathbb{C}\). Fissato \(z_{0} \in\Omega\) esiste \(f : \Omega
+    \to D\) \textbf{conforme} tali che \(f{(z_{0})} = 0\) e \(f'{(z_{0})} \in \mathbb{R}\)
+\end{theorem}
 \newpage
 \section{Richiamo delle forme differenziali}
 
