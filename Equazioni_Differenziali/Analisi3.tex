@@ -3503,7 +3503,7 @@ Se \(f{(x)} = Ax\) allora abbiamo
     presentate in~\ref{prop:flusso} possiamo costruire il flusso come mappa che
     rispetti le proprietà del flusso.
 \end{remark}
-\begin{definition}
+\begin{definition}{Stabilità e attrattività}
     Sia \(\overline{x}\) punto di equilibrio. Allora
 \begin{itemize}[label = --]
     \item \(\overline{x}\) si dice \textbf{stabile} (secondo Lyapunov) se per
@@ -3532,4 +3532,427 @@ Se \(f{(x)} = Ax\) allora abbiamo
 
 Spoilerone: esistono sia punti di equilibrio stabili e non attrattivi che
 attrattivi e non stabili.
+\begin{remark}
+    Nella stabilità, per l'arbitrarietà di \(U\) consideriamo \(U \subseteq
+    \overline{U} \subseteq \Omega  \), allora
+    \[
+        \varphi {(t, x)} \in  \overline{U} \subseteq \Omega \quad t \in [0,
+        \omega_+{(w)}] 
+    \]
+    Ne segue che \(\omega_+{(x)} = +\infty\) 
+\end{remark}
+\paragraph{Stabilità dell'origine per sistemi lineari}
+Riconsideriamo il problema \(x' = AX\) con \(A \in M^{N \times
+N}{(\mathbb{R})}\). Allora
+\begin{definition}{Pozzo e Sorgente}
+    L'origine è detta \textbf{pozzo} se comunque presa \(x{(\cdot )}\) soluzione
+    si ha che
+    \[
+      \lim_{t \to \infty} x{(t)} = 0
+    \]
+    
+    L'origine è detta \textbf{sorgente} se comunque presa \(x{(\cdot )}\)
+    soluzione non nulla, risulta
+    \[
+      \lim_{t \to \infty} |x{(t)}| = + \infty
+    \]
+\end{definition}
+
+\begin{theorem}
+    L'origine è un pozzo se e solo se tutti gli autovalori di \(A\) hanno parte
+    reale negativa.
+
+    L'origine è una sorgente se e solo se tutti gli autovalori di \(A\) hanno
+    parte reale positiva.
+\end{theorem}
+\begin{proof}
+    Sia \(\Re (\lambda) < 0\) per ogni \(\lambda = \alpha + i \beta\). Sappiamo
+    che ogni soluzione è combinazione lineare di funzioni della forma 
+    \[
+      e^{\alpha t} \cos \beta t \, p{(t)} \quad, \quad e^{\alpha t} \sin \beta
+      t \, q{(t)}
+    \]
+    Ne segue che \(x{(t)} \to  0\) per \(t \to \infty\).
+
+    Sia ora \(\Re(\lambda) > 0\) per ogni \(\lambda \). Allora la matrice \(-A\)
+    ha autovalori con parte reale negativa e quindi
+    \[
+      e^{-tA}\xi \overset{t \to \infty}{\longrightarrow} 0 \quad \forall \xi
+      \implies \left| e^{-tA} \xi \right| \to 0
+    \]
+    e quindi in particolare per \(\xi = e_{1}, e_{2}, \dots, e_N\) la base
+    canonica abbiamo
+    \[
+      \|e^{-tA}\| \to 0
+    \]
+    Sia ora \(x_{0} \in \mathbb{R}^{N} \sminus \{0\} \) e \(x{(t)} =
+    e^{tA}x_{0}\) e 
+    \[
+      x{(t)} = e^{tA}x_{0} \implies x_{0} = e^{-tA} x{(t)} 
+    \]
+    Infine
+    \[
+        0 \neq |x_{0}| \le \underbrace{\|e^{-tA}\|}_{\to 0} \underbrace{
+        |x{(t)}|}_{\to +\infty} 
+    \]
+\end{proof}
+Sia \(v\) autovettore relativo a \(\lambda\). Allora
+\[
+  x{(t)} = e^{\lambda t}v \text{ è soluzione }
+\]
+e inoltre
+\[
+  |x{(t)}| = e^{\Re(\lambda) t}|v| \to \begin{cases}
+      0 & \text{ se 0 è pozzo} \\
+      +\infty & \text{ se 0 è sorgente}
+  \end{cases}
+\]
+
+Consideriamo il caso in cui non tutti gli autovalori hanno parte reale dello
+stesso segno (\emph{flussi iperbolici}), in particolare diciamo
+\[
+  \Re \lambda_{k} < 0 \quad k = 1, \dots, r \quad \Re \lambda_{k} > 0 \quad k =
+  r+1, \dots, q
+\]
+dove \(\lambda_{1}, \dots, \lambda_q\) sono gli autovalori distinti di \(A\).
+
+Prendiamo gli autospazi generalizzati \(G{(\lambda_{k})}\) e sappiamo
+\[
+    \mathbb{C}^{N} = \bigoplus_{k=1}^{q} G{(\lambda_{k})} = \bigoplus_{k=1}^{r}
+    G{(\lambda_{k})} \oplus \bigoplus_{k=r+1}^{q} G{(\lambda_{k})} =:
+    \underbrace{E^{\mathbb{C}}_s}_{(stable)}  \oplus
+    \underbrace{E^{\mathbb{C}}_u}_{(unstable)} 
+\]
+Considerando una base reale per ogni sottospazio della forma \(G(\mu) \oplus
+G{(\overline{\mu})}\) si ottiene una base reale sia per \(E^{\mathbb{C}}_s\) che
+per \(E^{\mathbb{C}}_u\). Posto ora
+\[
+    E_s = E^{\mathbb{C}}_s \cap \mathbb{R}^{N}, \quad E_u = E^{\mathbb{C}}_u
+    \cap \mathbb{R}^{N} \implies \mathbb{R}^{N} = E_s \oplus E_u
+\]
+\begin{definition}{Sottospazi stabile e instabile}
+    I precedenti \(E_s\) e \(E_u\) vengono rispettivamente detti sottospazio
+    \textbf{stabile} e sottospazio \textbf{instabile} del
+    problema~\eqref{eq:sist_lin_omog}
+\end{definition}
+\begin{example}
+    Sia \(A = \begin{pmatrix}
+        1 & 4 \\
+        2 & -1
+    \end{pmatrix}\). Allora gli autovalori sono evidentemente \(\lambda_{1} =
+    -3\) e \(\lambda_{2} = 3\). Come autovettori associati possiamo avere
+    \(v_{1} = \begin{pmatrix}
+        1 \\
+        -1
+    \end{pmatrix}\) per \(\lambda_{1}\) e \(v_{2} = \begin{pmatrix}
+        2 \\
+        1
+    \end{pmatrix}\) per \(\lambda_{2}\). Allora \(P = \begin{pmatrix}
+    v_{1} & v_{2}
+    \end{pmatrix}\) e \(\tilde{A} = P^{-1}AP = \begin{pmatrix}
+        -3 & 0 \\
+        0 & 3
+    \end{pmatrix}\). Quindi sapendo \(x = P\tilde{x}\) abbiamo che
+    \[
+      \tilde{x}{(t)} = e^{t\tilde{A}} \begin{pmatrix}
+          c_{1} \\
+          c_{2}
+      \end{pmatrix} \implies \begin{cases}
+      \tilde{x_{1}} {(t)} = c_{1} e^{-3t} \\
+      \tilde{x}_2 {(t)} = c_{2} e^{3t}
+      \end{cases}
+    \]
+    che è un'iperbole di equazione \(\tilde{x}_{1} \tilde{x}_{2} = c_{1} c_{2}
+    \). Infine rimettiamo assieme i pezzi per concludere che 
+    \[
+      x{(t)} = \begin{pmatrix}
+          x_{1}{(t)} \\
+          x_{2}{(t)}
+      \end{pmatrix} = \begin{pmatrix}
+          v_{1} & v_{2}
+      \end{pmatrix} \begin{pmatrix}
+          \tilde{x}_1{(t)} \\
+            \tilde{x}_2{(t)}
+      \end{pmatrix} = c_{1} e^{-3t} \begin{pmatrix}
+          1 \\
+          -1
+          \end{pmatrix} + c_{2} e^{3t} \begin{pmatrix}
+          2 \\
+          1
+      \end{pmatrix}
+    \]
+
+\begin{figure}[ht]
+    \centering
+    \incfig{esempio46}
+    \caption{\(\tilde{x}' = \tilde{A} \tilde{x}\) a sinistra, \(x' = Ax\) a
+    destra}\label{fig:esempio46}
+\end{figure}
+\end{example}
+
+\begin{theorem}
+    L'origine è stabilese e solo se
+\begin{itemize}[label = --]
+    \item \(\Re \lambda \le 0\) per ogni \(\lambda\) 
+    \item per gli autovalori \(\lambda\)  per i quali \(\Re \lambda = 0\) deve
+        essere \(p{(\lambda)} = m {(\lambda)}\) 
+\end{itemize}
+\end{theorem}
+
+\subsection{Stabilità linearizzata}
+Consideriamo \(x'= f{(x)}\), con \(f \in C^{1}\) e \(\overline{x}\) di
+equilibrio. Per semplicità sia \(\overline{x} = 0\), dunque \(f{(0)} = 0\).
+Allora viene naturale chiedersi se uno possa studiare la stabilità di
+\(\overline{x}\) studiando la stabilità del sistema lineare \(x'=
+{(Df{(0)})}x\). 
+\begin{theorem}
+    Se \(Df{(0)}\) ha autovalori con parte reale negativa allora \(\overline{x} =
+    0\) è asintoticamente stabile per \(x'= f{(x)}\) 
+\end{theorem}
+\begin{theorem}
+    Se \(Df{(0)}\) ha un autovalore con parte reale strettamente positiva,
+    allora \(\overline{x} = 0\) è instabile per \(x' = f{(x)}\) 
+\end{theorem}
+
+\begin{example}[Pendolo smorzato]
+    Ricordiamo l'equazione che governa il pendolo smorzato
+    \[
+      \ddot{\theta} + \omega^2 \sin \theta + 2a \dot{\theta} = 0 \iff 
+      \begin{cases}
+          \dot{\theta} = v \\
+          \dot{v} = -\omega^2 \sin\theta -2av
+      \end{cases}
+    \]
+    quindi \(x = \begin{pmatrix}
+        \theta \\
+        v
+    \end{pmatrix}\) e \(f{(\theta, v )} = \begin{pmatrix}
+        v \\
+        -\omega^2 + \sin\theta -2av
+    \end{pmatrix}\). È facile trovare i punti di equilibrio dove \(f{(\theta,
+    v)} = 0\), dunque
+    \[
+      \begin{cases}
+          v = 0\\
+          \sin\theta = 0 \iff \theta = k\pi, k \in \mathbb{Z}
+      \end{cases}
+    \]
+    E per studiare la stabilità dei punti \(k\pi, 0\) studiamo gli autovalori
+    della jacobiana
+    \[
+      Df{(k\pi, 0)} = \begin{pmatrix}
+          0 & 1 \\
+          -\omega^2\cosk\pi & -2a
+      \end{pmatrix}
+    \]
+    e dopo un paio di conti viene fuori che \(\lambda_{1, 2} = -a \pm \sqrt{a^2
+    - \omega^2} \) per \(k\) pari e \(\lambda_{1, 2} = -a \pm \sqrt{a^2 +
+    \omega^2} \) per \(k\) dispari. Dunque per \(k\) pari \(\Re \lambda < 0\)
+    sono
+    asintoticamente stabili, mentre per \(k\) dispari \(\lambda_{1} < 0 <
+    \lambda_{2}\) sono instabili.
+\end{example}
+
+E ora una bomba di teorema (non dimostrato ovviamente)
+\begin{theorem}[Grobman\--Hartman]
+    Supponiamo che \(Df{(0)}\) abbia autovalori con parte reale non nulla.
+    Esistono \(U, V\) intorni di \(\overline{x} = 0\) e \(h : U \to V\)
+    omeomorfismo tali che 
+    \[
+        e^{tDf{(0)}}h{(x)} = h{(\varphi {(t, x)})}
+    \]
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \incfig[.7]{omeomorfismo-linearizzato}
+    \caption{Omeomorfismo linearizzato}
+    \label{fig:omeomorfismo-linearizzato}
+\end{figure}
+
+\subsection{Funzioni di Lyapunov}
+
+Nel caso del pendolo semplice, si può anche pensare di trovare i punti di
+equilibrio stabili come punti di ``minima energia potenziale''. È possibile
+generalizzare e formalizzare tale ragionamento nel seguente modo.
+
+    Sia \(\Omega \subseteq \mathbb{R}^{N} \) aperto e \(f \in C^{1}{(\Omega;
+    \mathbb{R}^{N})}\). Consideriamo il problema \(x' = f{(x)}\). Sia \(U
+    \subseteq \Omega \) aperto e sia \(V :U \to \mathbb{R}\) differenziabile.
+    Sia \(\varphi {(t, x)}\) il flusso associato all'equazione e per ogni \(x
+    \in U\) sia 
+    \[
+        \dot{V}{(x)} := \frac{d}{dt} V{(\varphi{(t, x)})}|_{t=0}
+    \] 
+    Risulta allora 
+    \[
+      \dot{V}{(x)} = \nabla V{(\varphi {(t, x)})} \cdot \frac{d}{dt} \varphi
+      {(t, x)}|_{t=0} = \nabla V{(x)} \cdot f{(x)}
+    \]
+    \begin{definition}{Derivata orbitale}
+    Diciamo \textbf{derivata orbitale} di \(V\) in \(x \in U\) 
+    \[
+        \dot{V}{(x)} = \nabla V{(x)} \cdot f{(x)}
+    \]
+    allora \(\dot{V}{(x)}\) dà la velocità di variazione di \(V\)  in \(x\)
+    lungo il flusso
+\end{definition}
+\begin{remark}
+    Sia \(x\) fissato e valutiamo \(V\) lungo l'orbita per \(x\), cioè
+    \[
+        \frac{d}{dt} V{(\varphi{(t, x)})} = \nabla V{(\varphi{(t, x)})} \cdot
+        \frac{d}{dt} \varphi {(t,x)} = \nabla V{(\varphi{(t, x)})} \cdot
+        f{(\varphi{(t, x)})} = \dot{V}{(\varphi{(t, x)})}
+    \]
+\end{remark}
+
+Supponiamo che \(\overline{x}\) sia un punto di equilibrio per il sistema \(x' =
+f{(x)}\), \(U\) un intorno di \(\overline{x}\) e \(V: U\to \mathbb{R}\)
+differenziabile. Supponiamo che \(\dot{V} \le 0\) in \(U\), \(V> 0\) in \(U
+\sminus \{\overline{x}\}\) e \(V{(\overline{x})} = 0\). Mostriamo che
+\(\overline{x}\) è stabile.
+
+Fissiamo \(\delta > 0\) con \(\overline{B_\delta {(\overline{x})}} \subseteq U
+\). Sia allora
+\[
+  \alpha := \min_{\partial B_\delta {(\overline{x})}} V > 0 \quad W := \{x \in
+  B_\delta {(\overline{x})} : V{(x)} < \alpha\} \ni \overline{x}
+\]
+Sia ora \(x \in W\) e consideriamo \(\varphi {(t,x)}\). Si ha 
+\[
+  \frac{d}{dt} V{(\varphi {(t,x)})} = \dot{V}{(\varphi{(t,x)})} \le 0
+\] finché \(\varphi {(t,x)} \in U\). Poiché \(V{(\varphi{(0, x)})} = V{(x)} <
+\alpha\) allora \(\varphi {(t,x)} \in W \subseteq B_\delta {(\overline{x})} \).
+
+\begin{example}
+    \[
+      \begin{cases}
+          x_{1}' = x_{2}^{4} - x_{1} \\
+          x_{2}' = x_{1}^{4} - x_{2}^{3}
+      \end{cases}
+    \]
+    chiamiamo \(x_{1} = x\) e \(x_{2} = y\) allora abbiamo \(f{(x, y)} = \begin{pmatrix}
+        y^{4}-x \\
+        x^{4}-y^{3}
+\end{pmatrix} \overset{\text{set}}{=} 0\) per i punti \((0, 0)\) e \(1, 1\).
+Allora
+\[
+  Df{(x, y)} = \begin{pmatrix}
+      -1 & 4y^{3} \\
+      4x^{3} & -3y^{2}
+  \end{pmatrix} \quad Df{(0, 0)} = \begin{pmatrix}
+      -1 & 0 \\
+      0 & 0
+  \end{pmatrix} \quad Df{(1, 1)} = \begin{pmatrix}
+      -1 & 4 \\
+      4 & -3
+  \end{pmatrix}
+\]
+Dove il secondo ha determinante -13 e traccia -4 quindi è instabile. Per il
+primo invece non possiamo studiare la stabilità linearizzante in quanto ha
+autovalori \(\lambda_{1} = -1\) e \(\lambda_{2} = 0\). Usiamo però la funzione
+\(V{(x, y)} = \frac{1}{2}{(x^2 + y^2)}\) è sempre positiva e nulla solo in \(0,
+0\). Inoltre
+\begin{align*}
+    \dot{V}{(x,y)} &= \nabla V{(x,y)} \cdot f{(x,y)} = \begin{pmatrix}
+      x \\
+      y
+  \end{pmatrix} \cdot  \begin{pmatrix}
+      y^{4} - x \\
+      x^{4} - y^{3}
+  \end{pmatrix} = xy^{4} - x^2 + yx^{4} - y^{4} = \\
+                   &= -x^2{(1 - yx^2)} - y^{4}{(1 - x)} \overset{\text{in un intorno di \(0,0\) }}{\le } -\frac{1}{2}{(x^2 + y^{4})} \le 0
+\end{align*}
+\end{example}
+\begin{theorem}
+    Sia \(f \in C^1{(\Omega, \mathbb{R}^{N})} \) e \( \overline{x} \in \Omega\)
+    con \(f{(\overline{x})} = 0\).
+
+    Sia \(U\) intorno di \(\overline{x}\) e \(V : U \to \mathbb{R}\) tali che
+\begin{itemize}[label = --]
+    \item \(V\) è differenziabile in \(U \sminus \{\overline{x}\} \) 
+    \item \(V > 0\) in \(U \sminus \{\overline{x}\} \), \(V{(\overline{x})} = 0\) 
+    \item \(\dot{V} \le 0\) in \(U \sminus \{\overline{x}\} \) 
+\end{itemize}
+allora \(\overline{x}\) è \textbf{stabile}.
+
+Se inoltre
+\[
+    \dot{V} < 0 \text{ in } U \sminus \{\overline{x}\}
+\]
+allora \(\overline{x}\) è \textbf{asintoticamente stabile}
+\end{theorem}
+\begin{example}[Punto mobile sotto l'azione di un campo
+    conservativo]\label{ex:campo-conservativo}
+    \[
+      m\ddot{x} = -\nabla \varphi {(x)}
+    \]
+    dove \(\varphi \) è l'energia potenziale. Il sistema del primo ordine
+    equivalente è
+    \[
+      \begin{cases}
+          \overline{x} = v \\
+          \dot{v} = -\frac{1}{m}\nabla \varphi {(x)}
+      \end{cases}
+    \]
+    L'energia totale è \[V{(x, v)} = \frac{1}{2}m |v|^2 + \varphi {(x)}- \varphi {(\overline{x})}\] dove
+    \(\overline{x}\) è punto di minimo stretto di \(\varphi \). Allora
+    \({(\overline{x}, 0)}\) è punto di equilibrio. Abbiamo
+    \[
+      \dot{V}{(x, v)} = \begin{pmatrix}
+           \nabla \varphi {(x)} \\
+           mv
+      \end{pmatrix} \cdot  \begin{pmatrix}
+          v \\
+          -\frac{1}{m}\nabla \varphi {(x)}
+      \end{pmatrix} = 0
+    \]
+    Allora \({(\overline{x}, 0)}\) è stabile.
+    \begin{remark}
+        \(\dot{V}{(x,v)} = 0\) è la condizione di conservazione dell'energia
+    \end{remark}
+\end{example}
+
+L'esempio~\ref{ex:campo-conservativo} rientra nella seguente tipologia:
+\[
+  {(p, q)} \in \mathbb{R}^{N} \times \mathbb{R}^{N} \quad H{(p, q)} \quad
+  \begin{cases}
+      \dot{p} = H_q{(p, q)}\\
+      \dot{q} = -H_p{(p, q)}
+  \end{cases}
+\]
+con \({(x,v)} = {(p, q)}\) e \(H{(p, q)} = \frac{1}{m}{(V{(x,v)})} =
+\frac{1}{2}|v|^2 + \frac{1}{m}{(\varphi {(x)} - \varphi {(\overline{x})})}\).
+Tali sistemi vengono chiamati \textbf{sistemi Hamiltoniani}.
+\begin{remark}
+    \[
+      \frac{d}{dt} H{(p{(t)}, q{(t)})} = H_p \dot{p} + H_q \dot{q} = H_p H_q -
+      H_q H_p = 0
+    \]
+    dunque \(H\) è costante lungo le soluzioni e le orbite soddisfano
+    \(H{(p{(t)}, q{(t)})} = h\) costante.
+\end{remark}
+Nel caso del pendolo si può vedere come
+\[
+  \begin{cases}
+      \dot{\theta} = v &= H_v \\
+      \dot{v} = -\omega^2 \sin\theta &= -H_{\theta} 
+  \end{cases}
+\]
+con \(H{(\theta, v)} = \frac{1}{2}v^2 + \omega^2{(1 - \cos \theta)}\) e inoltre
+\({(0,0)}\) è punto di minimo stretto per \(H\) e quindi è stabile.
+
+``Al contrario'', nei sistemi della forma
+\[
+  x' = -\nabla V{(x)}
+\]
+che sono detti \textbf{sistemi gradiente}, con \(V \in C^2\). Allora se
+\(\overline{x}\) è punto di minimo stretto per \(V\) (sia \(V{(\overline{x})} =
+0\)) si ha che 
+\[
+  \dot{V}{(x)} = \nabla V{(x)} \cdot {(-\nabla V{(x)})} = - \left| \nabla V{(x)}
+  \right| ^2 \le 0
+\]
+se \(\overline{x}\) è isolato come punto critico allora \(\dot{V}{(x)} < 0\) in
+un intorno di \(\overline{x}\) e dunque \(\overline{x}\) è asintoticamente
+stabile.
 \end{document}
