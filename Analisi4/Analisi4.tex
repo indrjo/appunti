@@ -4054,15 +4054,15 @@ al sottospazio.
     per \(\displaystyle M = \max_{1 \le i \le N} \|e_{i}\| \). Ora dobbiamo
     provare che
     \[
-        \exists m > 0 \quad \forall x \in V \text{tale che} \quad \|v\| \ge m \|v\|_1
+        \exists m > 0: \quad \forall x \in V \quad \|x\| \ge m \|x\|_1
     \]
-    e la dimostriamo per assurdo, ossia diciamo che 
+    e la dimostriamo per assurdo. Affermiamo, per assurdo, che 
     \[
         \forall k \in \mathbb{N} \quad \exists x_k \in V \text{ tale che } \|x_k\|_1 > k
         \|x_k\|
     \]
-    Notiamo che \(\|x_k\|_1 > 0\) per ogni \(k\), quindi possiamo definire per
-    ogni \(k\) 
+    Notiamo che, in particolare, \(\|x_k\|_1 > 0\) per ogni \(k\), quindi possiamo normalizzare per
+    ogni \(k\): 
     \[
         u_k = \frac{x_k}{\|x_k\|_1} \implies \|u_k\|_1 = 1 > k \|u_k\|
     \]
@@ -4070,23 +4070,26 @@ al sottospazio.
     \[
         u_k = \sum_{i=1}^{N} \alpha_{i,k}e_{i} 
     \]
-e quindi abbiamo \(N\) successioni \({\{\alpha_{i,k}\}}_{k \in \mathbb{N}}\)
+e quindi, per definizione di \(\| \cdot \|_1\), abbiamo \(N\) successioni \({\{\alpha_{i,k}\}}_{k \in \mathbb{N}}\)
     reali o complesse tali che \(\sum_{i=1}^{N} |\alpha_{i,k}| = 1\) e quindi
     tutte le successioni sono limitate. Allora per compattezza ne esiste
     un'estratta \(\{k_n\} \) tale che \(\alpha_{i, k_n} \to \alpha_{i}\) in
     \(\mathbb{R}\) o \(\mathbb{C}\). Abbiamo ora la successione \(u_{k_n}\) che
-    quindi converge a \(u = \sum_{i=1}^{N} \alpha_{i}e_{i}\) rispetto a entrambe
-    le norme, abbiamo che
+    quindi converge a \(u = \sum_{i=1}^{N} \alpha_{i}e_{i}\) rispetto a \(\|\cdot \|_1\) e quindi anche rispetto a 
+    \(\|\cdot \|\) per la disugaglianza 
+    \[\|\cdot \| \le M \|\cdot \|_1\] 
+    dimostrata nella prima parte. Abbiamo che, per \(\|u_k \| < \frac{1}{k}\) e
+    per convergenza in \(\| \cdot \|\): 
     \[
         \|u\| \le \|u - u_{k_n} \| + \|u_{k_n} \| < \|u - u_{k_n} \| +
         \frac{1}{k_n} \to 0
     \]
-    per cui \(\|u\| = 0\) e quindi \(u = 0\), ma d'altra parte
+    per cui \(\|u\| = 0\) e quindi \(\mathbf{u = 0}\), ma d'altra parte
     \[
         \left| \|u\|_1 - 1 \right| = \left| \|u\|_1 - \|u_{k_n} \|_1 \right| \le
         \|u - u_{k_n} \|_1 = \sum_{i=1}^{N} |\alpha_{i} - \alpha_{i, k_n}| \to 0 
     \]
-    ma allora \(\|u\|_1 = 1\) che è una contraddizione.
+    ma allora \(\mathbf{\|u\|_1 = 1}\) che è una contraddizione.
 \end{proof}
 
 \begin{example}[Norme non equivalenti]
@@ -4170,7 +4173,7 @@ e quindi abbiamo \(N\) successioni \({\{\alpha_{i,k}\}}_{k \in \mathbb{N}}\)
     anche con la norma \(\|\cdot \|'\).
 \end{eser}
 \begin{remark}
-    Se le norme non sono equivalenti, allora non si può dire nulla
+    \textit{Se le norme non sono equivalenti, allora si deve tacere.}
 \end{remark}
 
 \begin{proposition}
@@ -4179,9 +4182,9 @@ e quindi abbiamo \(N\) successioni \({\{\alpha_{i,k}\}}_{k \in \mathbb{N}}\)
     a \(W\). Inoltre
 
 \begin{enumerate}[label = \alph*.]
-    \item Se \(W\) ha dimensione finita allora \(W\) è necessariamente chiuso.
-    \item Se \(V\) è uno spazio di Banach, allora ogni sottospazio \(W \subseteq
-        V\) chiuso risulta esso stesso un Banach rispetto alla norma
+    \item se \(W\) ha dimensione finita allora \(W\) è necessariamente chiuso;
+    \item se \(V\) è uno spazio di Banach, allora ogni sottospazio \(W \subseteq
+        V\) chiuso risulta esso stesso un Banach rispetto alla norma.
 \end{enumerate}
 \end{proposition}
 \begin{proof} \( \) 
@@ -4191,7 +4194,7 @@ e quindi abbiamo \(N\) successioni \({\{\alpha_{i,k}\}}_{k \in \mathbb{N}}\)
     ma questo non cambia nulla. Inoltre
 \begin{enumerate}[label = \alph*.]
     \item Sia \(\{f_{n}\} \subseteq W \), con \(f_{n} \to f\) in \({(V, \|\cdot
-        \|)}\). Allora \(f_{n} \to f\) in \({(W \cup \{f\}, \|\cdot \|)}\). Ma
+        \|)}\). Allora \(f_{n} \to f\) in \({(W \cup \{f\}, \|\cdot \|)}\) (intendendo il minimo spazio vettoriale che contiene \(W\) e \(f\)). Ma
         poiché \(W \cup  \{f\} \) ha dimensione finita, tutte le norme su di
         esso sono equivalenti, allora allora \(f_{n} \to f\)
     anche rispetto ad altre norme. Supponiamo che \({\{e_{i}\}}_{i = 1, \dots, N
@@ -4222,11 +4225,13 @@ e quindi abbiamo \(N\) successioni \({\{\alpha_{i,k}\}}_{k \in \mathbb{N}}\)
     : f{(x)} = \alpha \in \mathbb{R} \} \) il sottospazio delle funzioni
     costanti. È un sottospazio perché se \(a, b \in  W\) allora anche
     \(\alpha a + \beta b\) è una funzione costante. Inoltre \(W\) è completo in
-    quanto omeomorfo a \(\mathbb{R}\) con la norma euclidea, che è completo.
+    quanto omeomorfo a \(\mathbb{R}\) con la norma euclidea, che è completo. 
+    \footnote{In realtà la completezza non è una proprietà topologica, bisognerebbe giustificare meglio, 
+    ma è un ottimo modo per ricordare le sagge parole del Manetti \dots }
 \end{example}
 
 \begin{example}
-    Prendiamo \(V = C^{0}[-1, 1]\) cone la norma \(\|\cdot \|_\infty\) che rende
+    Prendiamo \(V = C^{0}[-1, 1]\) con la norma \(\|\cdot \|_\infty\) che rende
     \(V\) uno spazio di Banach. Consideriamo lo spazio \(W\) dei polinomi che
     non è chiuso in \(V\) perché contiene tutti i polinomi di Taylor di
     \(e^{x}\) ma non la funzione limite \(e^{x}\). In realtà, \(W\) è
@@ -4332,8 +4337,9 @@ equivalenti \(\mu\)-q.o.
         f|^{p} d\mu \right)}^{\frac{1}{p}} = {\left( \int_{\Omega} |\lambda
         |f|^{p} d\mu \right)}^{\frac{1}{p}} = |\lambda| {\left( \int_{\Omega}
         |f|^{p} d\mu \right)}^{\frac{1}{p}} = |\lambda| \|f\|_p\)
-    \item \emph{Diseguaglianza triangolare} Difficile da dimostrare, è chiamata
-        diseguaglianza di Minkowski e la dimostreremo più avanti.
+    \item \emph{Diseguaglianza triangolare} meno banale delle precedenti,
+        dimostrata più avanti come diseguaglianza di
+        Minkowski~\ref{prop:minkowski}.
 \end{itemize}
 \paragraph{Caso \(p = +\infty\):}
 \begin{itemize}[label = --]
@@ -4431,7 +4437,7 @@ equivalenti \(\mu\)-q.o.
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}[Minkovsky o disuguaglianza triangolare]
+\begin{proposition}[Minkowski o disuguaglianza triangolare]\label{prop:minkowski}
     Se \(f, g \in L^{p}{(\Omega)}\) allora \(f + g \in L^{p}{(\Omega)}\) e
     \[
         \|f+g\|_p \le \|f\|_p + \|g\|_p
@@ -4439,11 +4445,11 @@ equivalenti \(\mu\)-q.o.
 \end{proposition}
 \begin{proof}
     Già sappiamo che \(f+g \in L^{p}{(\Omega)}\). Allora
-    \begin{align*}
+    \begin{equation*}
         \int_\Omega |f+g|^{p} d\mu = \int_\Omega |f+g|^{p-1} |f+g| d\mu \le
         \int_\Omega \underbrace{|f+g|^{p-1}}_{:= w} |f| d\mu + \int_\Omega |f+g|^{p-1} |g| d\mu
-    \end{align*}
-    \(w \in L^{p'}{(\Omega)}\)?
+    \end{equation*}
+    Affermiamo che \(w \in L^{p'}{(\Omega)}\), infatti
     \[
         \int_\Omega |w|^{p'} d\mu = \int_\Omega |f+g|^{(p-1)p'} d\mu = \int_\Omega |f+g|^{p} d\mu
     \]
@@ -4453,7 +4459,7 @@ equivalenti \(\mu\)-q.o.
         \|w\|_{p'} = {\left( \int_\Omega |f+g|^{p}d\mu \right)}^{\frac{1}{p'} =
         \frac{p-1}{p}} = \|f + g\|_p^{p-1}
     \]
-    Ora possiamo applicare Hölder e ottenere
+    Ora possiamo applicare Hölder~\ref{thm:Holder} e ottenere
     \[
         \|f+g\|_p^{p} \le \|w\|_{p'} \|f\|_p + \|w\|_{p'} \|g\|_p =
         \|f+g\|^{p-1}{\left( \|f\|_p + \|g\|_p \right)} 
@@ -4461,15 +4467,15 @@ equivalenti \(\mu\)-q.o.
     e infine dividendo per \(\|f+g\|^{p-1}\) otteniamo la diseguaglianza
     triangolare
 \end{proof}
-Con la precedente proposizione abbiamo effettivamente finito di dimostrare la
-proposizione~\ref{prp:spazio-Lp-normato} che diceva che \(L^{p}\) è uno spazio
+Con la precedente proposizione abbiamo concluso la dimostrazione
+di~\ref{prp:spazio-Lp-normato}, ossia che \(L^{p}\) è uno spazio
 normato.
 
 \begin{theorem}[\(L^p\) è Banach ]\label{thm:completezza_Lp}
     Per ogni \(p \in [1, \infty]\), lo spazio \(L^{p}(\Omega, \mathcal{M},
     \mu)\) è uno spazio di Banach
 \end{theorem}
-\begin{proof}[dimostrazione per \(p=+\infty\)]
+\begin{proof}[Dimostrazione per \(p=+\infty\)]
     Sia \(\{f_{n}\} \subseteq L^{\infty}{(\Omega)} \) una successione di Cauchy.
     Quindi 
     \begin{equation}\label{eq:helper_compllp}
@@ -4483,9 +4489,9 @@ normato.
     \[
         N = \bigcup_{k \in \mathbb{N}} \bigcup_{n, m \ge n_k} N_{k, n, m}
     \]
-    perciò \(N\) è unione numerabile di trascurabili e quindi è trascurabile.
-    Allora sappiamo che in~\eqref{eq:helper_compllp} l'ultima diseguaglianza può
-    significare \(|f_{n}{(x)} - f_{m}{(x)}| \le \frac{1}{k}\) per ogni \(x \in
+    \(N\) è unione numerabile di trascurabili e quindi è trascurabile.
+    Allora, per~\eqref{eq:helper_compllp}, si ha \(|f_{n}{(x)} - f_{m}{(x)}| \le
+    \frac{1}{k}\) per ogni \(x \in
     \Omega \sminus N\).
     Questo significa che \(\{f_{n}{(x)}\} \in \mathbb{R}\) è di Cauchy e quindi
     convergente per ogni \(x \in \Omega \sminus N\) e introduciamo la funzione
@@ -4511,54 +4517,62 @@ normato.
     \]
     
 \end{proof}
-\begin{proof}[dimostrazione con \(1 \le p < +\infty\)]
+\begin{proof}[Dimostrazione con \(1 \le p < +\infty\)]
     Sia \(f_{n}\) una successione di Cauchy in \(L^{p}\), ossia
     \begin{equation}\label{eq:cauchy_lp}
         \forall \varepsilon > 0 \quad \exists n_\varepsilon \in \mathbb{N} \quad
         \text{tale che} \quad m, n \ge n_\varepsilon \implies \|f_{m} -
         f_{n}\|_{p} < \varepsilon
     \end{equation}
-    Vogliamo dimostrare che esiste un'estratta convergente. Consideriamo
-    l'\(n_{1} \) dato dalla~\eqref{eq:cauchy_lp} per \(\varepsilon = \frac{1}{2}\), e
-    consideriamo \(f_{n_{1} } \). Prendiamo ora \(n_{2} =
-    \max\{n_{\varepsilon = \frac{1}{2^2}}, n_{1}+1\}\) e consideriamo \(f_{n_{2}}\), dove il primo argomento è dato dal valore restituito
-    dall'equazione~\ref{eq:cauchy_lp}. Procediamo in questo modo, ogni volta
-    prendendo
+    Vogliamo trovare un'estratta convergente. Consideriamo
     \[
-    f_{n_k} = f_{\max\{n_{\varepsilon = \frac{1}{2^k}}, n_{k-1} + 1\}}
+    \begin{aligned}
+        n_1 &:= n_{\varepsilon = \frac{1}{2}} &&\leadsto f_{n_1}, \\
+        n_2 &:= \max\left\{n_{\varepsilon = \frac{1}{2^2}}, n_1 + 1\right\} &&\leadsto f_{n_2}, \\
+        &\vdots \\
+        n_k &:= \max\left\{n_{\varepsilon = \frac{1}{2^k}}, n_{k-1} + 1\right\} &&\leadsto f_{n_k}.
+    \end{aligned}
     \]
-    e abbiamo quindi che si verifica
+    e abbiamo che
     \[
-        \|f_{n_{k+1}} - f_{n_k} \|_p \le \frac{1}{2^{k}} \quad \forall k \in \mathbb{N}
+        \|f_{n_{k+1}} - f_{n_k} \|_p \le \frac{1}{2^{k}} \quad \forall k \in
+        \mathbb{N}
     \]
-    definiamo ora \(u_k := f_{n_k} \) e vogliamo mostrare che \(u_k\) converge
-    in \(L^{p}\) a qualche elemento \(f\). A tale scopo sia
+    Definiamo ora 
+    \[u_k := f_{n_k} \] 
+    vogliamo mostrare che \(u_k\) converge in \(L^{p}\) a qualche elemento
+    \(f\). A tale scopo sia
     \[
         g_k(x) := \sum_{i=1}^{k} \left| u_{i+1} {(x)} - u_{i}{(x)} \right|  
     \]
     che è la ridotta di una serie a termini non negativi e inoltre ogni \(g_k
-    \in L^{p}(\Omega)\). Inoltre
+    \in L^{p}(\Omega)\) per la struttura di spazio vettoriale. Inoltre
     \[
         \|g_k\|_p = \sum_{i=1}^{k} \|u_{i+1} -u_{i}\|_p \le \sum_{i=1}^{k}
         \frac{1}{2^{i}} \le 1 \implies \int_{\Omega} \underbrace{\left| g_k
         \right|^{p}}_{=:h_k} d\mu
         \le 1
     \]
-    Allora \(h_k := |g_k|^{p}\) è una successione monotona crescente e sono
-    tutte non negative. Quindi per Beppo Levi (Teorema~\ref{thm:beppo-levi})
+    Allora \(h_k := |g_k|^{p}\) è una successione monotona crescente a termini
+    non negativi.
+    Quindi per Beppo Levi (Teorema~\ref{thm:beppo-levi})
 possiamo concludere che esiste \(h\) misurabile e non negativa tale
 che 
 \[
     h(x) = \lim_{k\to \infty} h_k(x) \text{ e } \int_{\Omega} h d\mu =
     \lim_{k\to \infty} \int_{\Omega} h_k d\mu \le 1
 \]
-succede quindi che \(g_k(x) \to g(x)\) per ogni \(x \in \Omega\), con \(g \in
-L^{p}\) perché \(\int_{\Omega} |g(x)|^{p} d\mu \le 1 \).
-Abbiamo ora che, se \(n > m\) 
+Siccome \(\int_{\Omega} |g(x)|^{p} d\mu \le 1 \), 
+\[\exists g \in L^p: \quad g_k \overset{\text{q.o.}}{\rightarrow} g\]
+Abbiamo che, se \(n > m\) 
 \begin{equation}\label{eq:cauchy_lp_pf1}
-    \left| u_n(x) - u_{m}{(x)} \right| \le \sum_{i=m}^{n-1} \left| u_{i+1}
-    -u_{i}{(x)} \right| \le g_{n-1} {(x)} - g_{m-1}{(x)} \le g(x) - g_{m-1} {(x)}
-\end{equation}
+    \begin{aligned}
+        \left| u_n(x) - u_m(x) \right| 
+        &\le \sum_{i=m}^{n-1} \left| u_{i+1}(x) - u_i(x) \right| \\
+        &= g_{n-1}(x) - g_{m-1}(x) \\
+        &\le g(x) - g_{m-1}(x).
+    \end{aligned}
+\end{equation}   
 per \(x \in \Omega\) fissato \(\{u_{k} {(x)}\} \) è una successione di Cauchy e
 dunque possiamo definire una funzione
 \[
@@ -4584,22 +4598,24 @@ e possiamo applicare il teorema~\ref{thm:Lebesgue_conv_dom} di convergenza
 dominata di Lebesgue per cui
 \[
     \lim_{m\to \infty} \int_{\Omega} \left| f(x) - u_{m}(x) \right|^{p} d\mu = 0
-    \iff u_{m} := f_{n_{m}} \to f \text{ in } L^{p}{(\Omega)}
+    \iff \|f-u_m\|_p^p \rightarrow 0 \iff u_m \overset{L^p}{\rightarrow} f
 \]
-\end{proof} % TODO STRANO STRANO
+\end{proof}
 \begin{corollary}\label{cor:conv_lp_sottosucc}
     Sia \(\{f_{n}\} \) una successione convergente a \(f \in L^{p}{(\Omega)}\).
     Allora esistono una sottosuccessione \(\{f_{n_k}\} \) e una funzione \(w \in
     L^{p}{(\Omega)}\) tali che 
 \begin{enumerate}[label = \arabic*.]
     \item \(f_{n_k} \to f\) q.o.~in \(\Omega\)
-    \item \(\left| f_{n_k} {(x)} \right| \le w{(x)} \) q.o.~ per \(x \in \Omega\)
+    \item \(\left| f_{n_k} {(x)} \right| \le w{(x)} \) q.o.~per \(x \in \Omega\)
 \end{enumerate}
 \end{corollary}
 \begin{proof}
     Se \(f_{n}\to f\) in \(L^{p}{(\Omega)}\) allora è di Cauchy in \(L^{p}\) e
-    quindi esiste sicuramente un'estratta \(u_k := f_{n_k} \) tale che \(u_k\)
-    converge q.o.~a una funzione \(\tilde{f}\) e inoltre
+    quindi, come si può evincere dalla dimostrazione del teorema, esiste
+    un'estratta \(u_k := f_{n_k} \) tale che \(u_k\) converge q.o.~a una
+    funzione \(\tilde{f}\) e inoltre, per \(g\) definito come nella
+    dimostrazione del teorema,
 \[
     \left| \tilde{f}{(x)} - u_k{(x)} \right| \le g(x) \quad \forall k \in
     \mathbb{N} \implies 
@@ -4619,7 +4635,7 @@ Per \(p=+\infty\) la tesi vale più banalmente.
     Convergenza in \(L^{\infty}\) implica convergenza quasi uniforme
 \end{remark}
 
-Il corollario~\ref{cor:conv_lp_sottosucc} si può espandere a dire che tutta la funzione converge quasi
+Si può rafforzare il corollario~\ref{cor:conv_lp_sottosucc} per dire che tutta la successione converge quasi
 ovunque? \textbf{No.} Consideriamo ad esempio la successione
 \begin{align*}
     f_{1} &= \rchi_{[0, 1]}, \quad f_{2} = \rchi_{[0, \frac{1}{2}]}, \quad f_{3} =
@@ -4659,17 +4675,24 @@ anche il valore \(1\).
 \end{enumerate}
 \end{proposition}
 \begin{proof}
-La terza è vera perché se \(f_{n} \to
-f\) in \(L^{p}{(\Omega)}\) e definiamo \(A_{n} = \{x \in \Omega : \left|
-f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \) 
-\[
-    \varepsilon^{p} \mu(A_{n}) \le \int_{A_{n}} \left| f_{n}{(x)} - f{(x)}
-    \right|^{p} d\mu \le \int_{\Omega} \left| f_{n}{(x)} - f{(x)} \right|^{p}
-    d\mu \overset{n \to \infty}{\longrightarrow} 0
-\]
-
-    Per la quarta, sia \(f \in L^{q}{(\Omega)}\). Allora, usiamo la
-    diseguaglianza di Hölder con esponenti \(\frac{q}{p}\) e \(\frac{q}{q-p}\) 
+\begin{enumerate}[label = \arabic*.]
+    \item Dimostrato nei Teoremi~\ref{thm:qu_qo} e~\ref{thm:2}
+    \item Dimostrato in corollario~\ref{cor:conv_lp_sottosucc}
+    \item Sia \(f_n \rightarrow f\) in \(L^p\). Definiamo
+        \[A_n := \{x \in \Omega: \quad |f_n(x) - f(x)| > \varepsilon\}\]
+        e quindi abbiamo
+        \[
+            \begin{aligned}
+                \varepsilon^p \mu(A_n)
+                &= \int_{A_n} \varepsilon^p \, d\mu
+                \le \int_{A_n} |f_n(x) - f(x)|^p \, d\mu \\
+                &\le \int_{\Omega} |f_n(x) - f(x)|^p \, d\mu
+                = \|f_n - f\|_p^p \to 0.
+            \end{aligned}
+            \]
+        e quindi \(\mu(A_n) \rightarrow 0\) e quindi c'è convergenza in misura.  
+    \item Sia \(f \in L^{q}{(\Omega)}\). Allora, usiamo la
+        diseguaglianza di Hölder~\ref{thm:Holder} con esponenti \(\frac{q}{p}\) e \(\frac{q}{q-p}\) (che chiaramente sono coniugati):
     \[
         \int_{\Omega} \left| f \right|^{p} d\mu = \int_{\Omega} 1 \cdot
         |f|^{p}d\mu \le {\left( \int_{\Omega} 1^{\frac{q}{q-p}}
@@ -4687,6 +4710,7 @@ f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \)
         \mu(\Omega) \|f\|_{\infty}^{p} \implies \|f\|_p \le
         {\mu(\Omega)}^{\frac{1}{p}} \|f\|_{\infty}
     \]
+    \end{enumerate}
 \end{proof}
 \begin{example}
     Nella 4. è importante richiedere \(\mu{(\Omega )} < +\infty\). Ad esempio se
@@ -4694,7 +4718,7 @@ f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \)
     \(f \not\in L^{p}{(\mathbb{R})}\) per ogni \(1 \le p < \infty\) 
 \end{example}
 \begin{example}
-    L'altra implicazione è normalmente falsa. Ad esempio se \(f{(x)} =
+    L'altra inclusione è normalmente falsa. Ad esempio se \(f{(x)} =
     \frac{1}{|x|^{\alpha}} \rchi_{[-1,1]}{(x)} \) per \(\alpha < 1\) è
     integrabile ma non è limitata, quindi \(f \in L^{1}\) ma \(f\not\in L^{\infty}\) 
 \end{example}
@@ -4726,7 +4750,7 @@ f_{n}{(x)}-f{(x)} \right| > \varepsilon\} \)
     per ogni \(p \in (1, \infty)\).
 \end{corollary}
 \begin{proof}
-    Per la preposizione precedente
+    Per la proposizione precedente
     \[
         \|f_{n} -f\|_p \le  \|f_{n} - f\|_1^{\frac{1}{p}} \|f_{n} -
         f\|_{\infty}^{1-\frac{1}{p}}
@@ -4890,8 +4914,8 @@ funzione \(x \mapsto \left<x, x \right>\) è una norma.
         2\|y\|^2
     \end{align*}
 \end{proof}
-    Data una norma, se essa verifica l'identità del parallelogramma allora
-    essa è una norma hilbertiana, cioè associata a un prodotto scalare
+    Data una norma, se  verifica l'identità del parallelogramma allora
+     è una norma hilbertiana, cioè associata a un prodotto scalare
 
 \begin{proposition}
     Una norma \(\|\cdot \|\) definita su uno spazio vettoriale \(V\) è
@@ -4981,17 +5005,20 @@ compatto
     \[
         \forall f \in L^1(\mathbb{R}^{N}) \quad \forall \varepsilon > 0 \quad \exists g \in C_C^{0}{(\mathbb{R}^{N})} \quad \|f - g\|_1 < \varepsilon
     \]
-    Sappiamo per \(\ref{prop:risultato_1}\) già che esiste \(s\) semplice, misurabile e nulla al di fuori di un
-    compatto tale che \(\|f - s\|_1 < \varepsilon/2\). Ora sappiamo che
+    Sappiamo già per \(\ref{prop:risultato_1}\) che esiste \(s\) semplice, misurabile e nulla al di fuori di un
+    compatto tale che \(\|f - s\|_1 < \varepsilon/2\). Scriviamo \(s\) come
     \[
         s = \sum_{i=1}^{n} \alpha_i \rchi_{A_i}
     \]
     dove possiamo prendere \(\alpha_{i} \neq 0\) per ogni \(i\) e \(A_{i}\)
-    insiemi limitati. Dico allora che basta controllare che 
+    insiemi limitati. Affermiamo che basta controllare che 
     \[
         \forall E \in \mathcal{M} \text{ limitato } \quad \forall \delta > 0
-        \quad \exists g \in C_C^{0}{(\mathbb{R}^{N})} \quad \|\rchi_E - g\|_1 < \delta
+        \quad \exists u \in C_C^{0}{(\mathbb{R}^{N})} \quad \|\rchi_E - u\|_1 < \delta
     \]
+    poiché questo implica che \(s\) può essere approssimata in norma \(\|\cdot\|_1\) da funzioni continue a supporto compatto, 
+    e quindi \(\| s - s'\|_1 \le \varepsilon/2\) dove \(s'\) è la combinazione con le funzioni continue a supporto compatto \(u\) 
+    al posto delle caratteristiche. \\
     \(E\)  è un misurabile limitato, quindi \(\forall \delta\) esistono un
     chiuso \(F\) e un aperto limitato \(G\) tali che \(F \subseteq E \subseteq G \) e
     \(\mu {( G \sminus F )} < \delta\). Consideriamo allora la funzione 
@@ -5039,8 +5066,9 @@ compatto
                 -n & r < -n
             \end{cases}
         \]
-        allora \(T_{n}\circ f \in L^{\infty}{(\mathbb{R}^{N})}\). Allora \(h_{n}
-        {(x)} = T_{n}{(f{(x)})}\rchi_{B_{n}} {(x)}\), 
+        allora il troncamento di \(f\) è essenzialmente limitato, \(T_{n}\circ f \in L^{\infty}{(\mathbb{R}^{N})}\). 
+        Limitando il dominio ottengo 
+        una funzione sommabile \(h_{n} {(x)} = T_{n}{(f{(x)})}\rchi_{B_{n}} {(x)}\), 
         con \(B_{n} = \{x \in \mathbb{R}^{N}: |x| \le n\}\). Allora \(h_{n} \in
         L^\infty(\mathbb{R}^{N}) \cap L^1(\mathbb{R}^{N})\). Succede che \(h_{n}
         \to f\) in \(L^p(\mathbb{R}^{N})\), ossia 
@@ -5060,7 +5088,7 @@ compatto
         \delta\).
         Infatti \(v \in C^{0}_C{(\mathbb{R}^{N})}\) e
         \begin{align*}
-            &\int_{\mathbb{R}^{N}} | v- h_{\overline{n}} | d\mu =
+            &\int_{\mathbb{R}^{N}} | v- h_{\overline{n}} | d\mu = 
             \left(\int_{-\overline{n} \le u \le  \overline{n}} + 
             \int_{u > \overline{n}} +
             \int_{u < -\overline{n}} \right) |v - h_{\overline{n}}| d\mu = \\
@@ -5076,7 +5104,7 @@ compatto
     \end{enumerate}
     Osservo che \(v - h_{n} \in L^1(\mathbb{R}^{N}) \cap
     L^{\infty}{(\mathbb{R}^{N})}\) e inoltre \(|v - h_{\overline{n}}| \le
-    2\overline{n}\). Allora
+    2\overline{n}\). Allora, per Hölder~\ref{thm:Holder},
     \begin{align*}
         \|v - h_{\overline{n}} \|_p &= {\left(\int |v-h_{\overline{n}}|^{p-1}|v -
         h_{\overline{n}}| d\mu \right)}^{\frac{1}{p}} \le {\left( \|v -
@@ -5113,7 +5141,7 @@ h_{\overline{n}} \|_{\infty}^{p-1} \|v - h_{\overline{n}} \|_1 \right)}^{\frac{1
         \frac{1}{n} \, ; \, |x| < n\right\} 
     \]
     \(A_{n}\) sono sottoinsiemi aperti e limitati di \(\Omega\). Per ogni \(n\)
-    posso considerare una funzione \(\varphi_n\) continua tale che
+    possiamo considerare una funzione \(\varphi_n\) continua tale che
     \[
         \varphi_n{(x)} = \begin{cases}
             1 & x \in \overline{A_{n}} \\
@@ -5126,7 +5154,7 @@ h_{\overline{n}} \|_{\infty}^{p-1} \|v - h_{\overline{n}} \|_1 \right)}^{\frac{1
     \]
     allora \(\{\varphi _n\} \) è una successione di funzioni in
     \(C_C^{0}{(\mathbb{R}^{N})}\) e hanno supporto compatto contenuto in
-    \(\Omega\). Mi interessa trovare \(n \in \mathbb{N}\) tale che
+    \(\Omega\). Siamo interessati a trovare \(n \in \mathbb{N}\) tale che
     \[
         \|g \varphi_n - f\|_{p, \Omega}  < \varepsilon \text{ (in \(\Omega\),
         indico lo spazio in pedice)}
@@ -5199,7 +5227,7 @@ lineare, infatti
 \end{remark}
 \begin{theorem}
     Siano \(X, Y\) spazi normati e \(T : X \to Y\) un operatore lineare. Allora
-    \(T\) è continuo se e solo se \(T\) è limitato.
+    \(T\) è continuo se e solo se \(T\) è un operatore limitato.
 \end{theorem}
 \begin{proof}\( \)
 \begin{itemize}
@@ -5208,7 +5236,7 @@ lineare, infatti
           \forall \varepsilon > 0 \quad \exists \delta > 0 : \|x\|_X \le  \delta
           \implies \|Tx\|_Y \le  \varepsilon
         \end{equation}
-        preso ora \(0_X \neq z \in X\) allora \(\displaystyle \frac{\delta
+        Quindi fisso \(\varepsilon>0\) e ricavo il relativo \(\delta\). Preso ora \(0_X \neq z \in X\) allora \(\displaystyle \frac{\delta
         z}{\|z\|_X} =: x\) deve soddisfare~\ref{eq:continuita123}, allora poiché
         \[
             \|x\|_X = \left\| \frac{\delta z}{\|z\|_X} \right\|_X =
@@ -5239,6 +5267,21 @@ lineare, infatti
 \begin{note}
     Notare che abbiamo usato solo la continuità in \(0_X\) per dimostrare \(\implies\) 
 \end{note}
+
+\begin{example}[Operatore lineare non continuo]
+
+    Sia \(X = C^{\infty}[0,1]\), con norma infinito, e \(T(f) = f'(0)\). Si consideri la successione
+    \[f_n (x) = \frac{\sin(n^2 x)}{n}\]
+    Questa successione converge uniformemente a \(0\) poiché il modulo è limitato da \(1/n\) sul dominio.
+    Tuttavia 
+    \[T(f_n) = \frac{n^2 \cos (n^2 \cdot 0)}{n} = n \rightarrow \infty\]
+    Ossia 
+    \[T(f_n) \not\rightarrow T(0) = 0\]
+    È chiaro che l'operatore non è limitato. 
+    Un'osservazione rilevante è che il dominio non è uno spazio completo. Per esempi di operatori lineari con dominio completo 
+    non continui è necessario utilizzare l'assioma della scelta, si tratta di esempi non costruttivi.
+    
+\end{example}
 
 Osserviamo dunque che l'insieme degli operatori lineari e continui tra \(X\)  e
 \(Y\)  costituisce uno spazio vettoriale. Infatti se \(T, S : X \to Y\) e sono
@@ -5317,15 +5360,14 @@ tale norma è una norma, infatti
     Sia \({(\Omega, \mathcal{M}, \mu)}\) uno spazio di misura con
     \(\mu{(\Omega)} < +\infty\). Allora l'inclusione \(i : L^{q}{(\Omega)} \to
     L^{p}{(\Omega)}\), con \(1 \le p < q \le \infty\) è un operatore lineare.
-    Sappiamo
+    Sappiamo che
     \[
         \|f\|_p \le {\mu{(\Omega)}}^{\frac{1}{p} - \frac{1}{q}}\|f\|_q \quad \forall
         f \in L^{q}{(\Omega)}
     \]
     e quindi necessariamente \(\|i\| \le \mu{(\Omega)}^{\frac{1}{p} -
-    \frac{1}{q}}\). La domanda ora si volge a capire se vale l'uguale o il
-    minore. Dobbiamo trovare un elemento \(0 \not\equiv f \in L^{p}{(\Omega)}\)
-    che realizza l'uguaglianza per dire che vale l'uguaglianza.
+    \frac{1}{q}}\). Vogliamo capire se c'è l'ugaglianza o meno. Per l'ugaglianza
+    dobbiamo trovare un elemento \(0 \not\equiv f \in L^{p}{(\Omega)}\).
     Sia \(f = 1\), allora
     \begin{align*}
         \|f\|_p &= {\left( \int_\Omega 1^{p}d\mu \right)} ^{\frac{1}{p}} =
@@ -5483,10 +5525,10 @@ oppure \(X^{*}\)
 \begin{definition}{Spazi \(\ell^{p}\)}
     Gli spazi di successioni \(\ell^{p}\) sono definiti come
     \begin{align*}
-        \ell^{p} &= \{x = {(x_{n})}_{n \in \mathbb{N}} : \sum_{n=1}^{\infty}
-        |x_{n}|^{p} < +\infty \} \text{ se } 1 \le p < \infty \\
-            \ell^{\infty} &= \{x = {(x_{n})}_{n \in \mathbb{N}} : \sup_{n \in
-        \mathbb{N}} |x_{n}| < +\infty\} 
+        \ell^{p} &= \left\{x = {(x_{n})}_{n \in \mathbb{N}} : \sum_{n=1}^{\infty}
+        |x_{n}|^{p} < +\infty \right\} \text{ se } 1 \le p < \infty \\
+            \ell^{\infty} &= \left\{x = {(x_{n})}_{n \in \mathbb{N}} : \sup_{n \in
+        \mathbb{N}} |x_{n}| < +\infty\right\} 
     \end{align*}
     con \(x_{n} \in \mathbb{K}\), e \(\mathbb{K}= \mathbb{C}\) o \(\mathbb{R}\).
     Altrimenti detto, 
@@ -5518,7 +5560,7 @@ e se \(p = \infty\)
     \[
         \|x\|_{\infty} = \sup_{n \in \mathbb{N}} |x_{n}| \le \|x\|_p
     \]
-    Per \(q < \infty\) allora
+    Per \(q < \infty\) abbiamo
     \begin{align*}
         \|x\|_q^{q} &= \sum_{n=1}^{\infty} |x_{n}|^{q} = \sum_{n=1}^{\infty}
         |x_{n}|^{q-p}|x_{n}|^{p} \overset{\ell^{q} \subseteq \ell^{\infty} }{\le
@@ -5558,77 +5600,82 @@ Consideriamo i seguenti spazi
     c_{00}  &= \{x = {(x_{n})}: \exists k \in \mathbb{N} : x_{n} = 0 \forall n >
     k\} 
 \end{align*}}
-allora se \(p < \infty\) e \(x \in \ell^{p}\) allora \(\sum_{n=1}^{\infty}
+quindi se \(p < \infty\) e \(x \in \ell^{p}\) allora \(\sum_{n=1}^{\infty}
 |x_{n}|^{p} \) converge e quindi \(\lim_{n \to \infty} |x_{n}|^{p} = 0\) e
 allora \(x = {(x_{n})} \in c_{0}\). Ne consegue che
 \[
     c_{00} \subseteq \ell^{1} \subseteq \ell^{p} \subseteq c_{0} \subseteq c
     \subseteq \ell^{\infty}  
 \]
-\(c_{00} \) è un sottospazio di \(\ell^{1}\) \textbf{denso}: infatti se \(x
-= {(x_{n})} \in \ell^{1}\) allora posso costruire la successione
-\begin{equation}\label{eq:successione_c00}
-    x^{k} = (x_{1}, x_{2}, \dots, x_{k}, 0, 0, \dots) \in c_{00}
-\end{equation}
-e chiaramente 
-\[
-    \|x^{k} - x\|_1 = \sum_{n=1}^{\infty} |x_{n}^{k} - x_{n}| =
-    \sum_{n=k+1}^{\infty} |0 - x_{n}| \overset{k \to \infty}{\longrightarrow} 0
-\]
-in quanto resto \(k+1\)-esimo di serie convergente. Se ora \(p \in 1 < p <
-\infty\), con analoga dimostrazione provo anche che \(c_{00} \) è denso in
-\(\ell^{p}\).
 
-Ora studiamo se \(c_{00}\) è denso in \(c_{0}\), che è \textbf{sì}, infatti
-preso un elemento \(x = {(x_{n})} \in c_{0} \) allora \(\lim_{n \to \infty}
-x_{n} = 0\). Esiste una successione \(x^{k} = {(x_{n}^{k})}\) tale che \(x^{k} \in
-c_{00} \) per ogni \(k\) e \(\|x^{k} - x\|_\infty \to 0\), ed è di nuovo
-definita come in~\eqref{eq:successione_c00}. Allora
-\[
-    \|x^{k} - x\|_\infty = \sup_{n \in \mathbb{N}} |x_{n}^{k} - x_{n}| = \sup_{n
-    > k} |x_{n}| \to 0 \quad \text{ per } k \to \infty
-\]
+\begin{itemize}[label = --]
+    \item \(c_{00} \) è un sottospazio di \(\ell^{1}\) \textbf{denso}: infatti se \(x
+    = {(x_{n})} \in \ell^{1}\) allora posso costruire la successione
+    \begin{equation}\label{eq:successione_c00}
+        x^{k} = (x_{1}, x_{2}, \dots, x_{k}, 0, 0, \dots) \in c_{00}
+    \end{equation}
+    e chiaramente 
+    \[
+        \|x^{k} - x\|_1 = \sum_{n=1}^{\infty} |x_{n}^{k} - x_{n}| =
+        \sum_{n=k+1}^{\infty} |0 - x_{n}| \overset{k \to \infty}{\longrightarrow} 0
+    \]
+    in quanto resto \(k+1\)-esimo di serie convergente. Se ora \(1 < p <
+    \infty\), con analoga dimostrazione provo anche che \(c_{00} \) è denso in
+    \(\ell^{p}\).
 
-\(c_{0}\) e \(c\) sono invece sottospazi di \(\ell^{\infty}\) 
-Sia \(x^{k} = {(x^{k}_n)}\) una successione di elementi \(x^{k} \in c_{0} \,
-\forall k\) tale che \(\exists x \in \ell^{\infty}\) con 
-\[
-    \lim_{k \to \infty} \|x^{k} - x\|_\infty = 0
-\]
-Ora dobbiamo mostrare che \(\lim_{n \to \infty} x_{n} = 0\), ossia
-\[
-    \forall \varepsilon > 0\, \,  \exists n\varepsilon \in \mathbb{N} : \forall
-    n\ge n_\varepsilon \quad |x_{n}| \le \varepsilon
-\]
-ma noi sappiamo che
-\[
-    |x_n| \le |x_n^{k}| + |x_{n} - x_{n}^{k}| \le \frac{\varepsilon}{2} +
-    \frac{\varepsilon}{2} = \varepsilon
-\]
-questo perché ogni \(x^{k}\) è una successione infinitesima e per la convergenza
-uniforme di \(x_{n}^{k}\) a \(x_{n}\).
-Quindi \(c_{0}\) è \textbf{chiuso} in \(\ell^{\infty}\). Si può dire lo stesso
-osservando che l'operatore 
-\begin{align}\label{eq:operatore_lim}
-  L: c &\longrightarrow \mathbb{R} \\
-  x = {(x_{n})} &\longmapsto L(x) = \lim_{n \to \infty} x_{n}
-\end{align}
-è un funzionale lineare e continuo perché il limite è lineare e inoltre
-\[
-  |Lx| \le \sup_{n} |x_{n}| = \|x\|_\infty 
-\]
-e in particolare \(\|L\|_{c'} = 1\) (basti prendere una successione con limite
-uguale al sup). Allora
-\[
-  |L{(x^{k})} - L{(x)}| \le \|x^{k} - x\|_\infty \to 0
-\]
-ma poiché \(L{(x^{k})}\) è sempre uguale a \(0\) allora lo è anche \(L{(x)}\).
-Infine si può anche osservare che \(c_{0}\) è la controimmagine di \(\{0\} \)
-tramite l'operatore continuo \(L\) e quindi è chiuso in \(c\).
+    \item \(c_{00}\) è \textbf{denso} in \(c_{0}\). Infatti
+    preso un elemento \(x = {(x_{n})} \in c_{0} \) allora \(\lim_{n \to \infty}
+    x_{n} = 0\). Esiste una successione \(x^{k} = {(x_{n}^{k})}\) tale che \(x^{k} \in
+    c_{00} \) per ogni \(k\) e \(\|x^{k} - x\|_\infty \to 0\), ed è di nuovo
+    definita come in~\eqref{eq:successione_c00}. Allora
+    \[
+        \|x^{k} - x\|_\infty = \sup_{n \in \mathbb{N}} |x_{n}^{k} - x_{n}| = \sup_{n
+        > k} |x_{n}| \to 0 \quad \text{ per } k \to \infty
+    \]
 
-\(c\) è chiuso in \(\ell^{\infty}\) in quanto se \(x{(k)} \to x\) in
-\(\ell^{\infty}\) allora \(L{(x^{k})} \to L{(x)}\) in quanto \(L\) è continuo,
-quindi in particolare \(L{(x)}\) esiste ed è finito.
+    \item \(\ell^p\) è \textbf{denso} in \(\ell^q\) per \(p \le q < \infty\). Segue dal fatto che \(c_{00}\) è denso in \(\ell^p\) e in \(\ell^q\) e 
+    poi dall'inclusione dei due.  
+
+    \item \(c_0\) è \textbf{chiuso} in \(\ell^\infty \). Sia \(x^{k} = {(x^{k}_n)}\) una successione di elementi \(x^{k} \in c_{0} \,
+    \forall k\) tale che \(\exists x \in \ell^{\infty}\) con 
+    \[
+        \lim_{k \to \infty} \|x^{k} - x\|_\infty = 0
+    \]
+    Ora dobbiamo mostrare che \(\lim_{n \to \infty} x_{n} = 0\), ossia
+    \[
+        \forall \varepsilon > 0\, \,  \exists n_\varepsilon \in \mathbb{N} : \forall
+        n\ge n_\varepsilon \quad |x_{n}| \le \varepsilon
+    \]
+    ma noi sappiamo che
+    \[
+        |x_n| \le |x_n^{k}| + |x_{n} - x_{n}^{k}| \le \frac{\varepsilon}{2} +
+        \frac{\varepsilon}{2} = \varepsilon
+    \]
+    questo perché ogni \(x^{k}\) è una successione infinitesima e per la convergenza
+    uniforme di \(x_{n}^{k}\) a \(x_{n}\).
+    Si può dire lo stesso
+    osservando che l'operatore 
+    \begin{align}\label{eq:operatore_lim}
+      L: c &\longrightarrow \mathbb{R} \\
+      x = {(x_{n})} &\longmapsto L(x) = \lim_{n \to \infty} x_{n}
+    \end{align}
+    è un funzionale lineare e continuo perché il limite è lineare e inoltre
+    \[
+      |Lx| \le \sup_{n} |x_{n}| = \|x\|_\infty 
+    \]
+    e in particolare \(\|L\|_{c'} = 1\) (basti prendere una successione con limite
+    uguale al sup). Allora
+    \[
+      |L{(x^{k})} - L{(x)}| \le \|x^{k} - x\|_\infty \to 0
+    \]
+    ma poiché \(L{(x^{k})}\) è sempre uguale a \(0\) allora lo è anche \(L{(x)}\).
+    Infine si può anche osservare che \(c_{0}\) è la controimmagine di \(\{0\} \)
+    tramite l'operatore continuo \(L\) e quindi è chiuso in \(c\).
+
+    \item \(c\) è \textbf{chiuso} in \(\ell^{\infty}\) in quanto se \(x{(k)} \to x\) in
+    \(\ell^{\infty}\) allora \(L{(x^{k})} \to L{(x)}\) in quanto \(L\) è continuo,
+    quindi in particolare \(L{(x)}\) esiste ed è finito.
+\end{itemize}
 
 \begin{proposition} Ricapitolando quanto mostrato finora abbiamo la seguente
     catena di inclusioni e chiusure
@@ -5661,7 +5708,7 @@ e inoltre
 \end{definition}
 
 Gli spazi \(\ell^{p}\) con \(1 \le p < \infty\) sono spazi \textbf{separabili},
-ossia ammettono un sottospazio denso numerabile. Infatti sappiamo che \(c_{00}
+ossia ammettono un sottospazio denso numerabile. Sappiamo infatti che \(c_{00}
 \) è denso in \(\ell^{p}\) se \(p < \infty\) e consideriamo ora \(q_{00} \) il
 sottoinsieme di \(c_{00}\) delle successioni a componenti (oppure a parti reali
 e immaginarie delle componenti) razionali. Allora \(q_{00} \) è numerabile ed è
@@ -5671,19 +5718,22 @@ denso in \(\ell^{p}\) poiché è denso in \(c_{00}\)
     \(\ell^{\infty}\) \textbf{non} è separabile
 \end{proposition}
 \begin{proof}
-    Se così fosse, allora esisterebbe una successione \(x^{k}\) che è densa in
-    \(\ell^{\infty}\). Allora considero la seguente successione
+    (Riproposizione dell'argomento diagonale di Cantor)
+    Esista, per assurdo, una successione di successioni \(x^{k}\) densa in
+    \(\ell^{\infty}\). Allora consideriamo la seguente successione
     \[
       z = {(z_k)} = \begin{cases}
           0 & \text{se } |x^{k}_{k}| \ge 1 \\
           1 + x^{k}_k & \text{se } |x^{k}_{k}| < 1
       \end{cases}
     \]
-    quindi sicuramente \(z \in \ell^{\infty}\) in quanto è limitata da \(2\), ma
+    che appartiene a \(\ell^{\infty}\) in quanto è limitata da \(2\), ma è
+    staccata dalle altre successioni considerate:
     \[\|z - x^{k}\|_{\infty} = \sup_n |z_{n} - x^{k}_n| \ge |z_k - x^{k}_k| \ge
     1\] 
-    che è una contraddizione in quanto quindi la successione \(x= {(x^{k})}\)
-    non è densa
+    Si ha una contraddizione e quindi la successione \(x= {(x^{k})}\)
+    non è densa in \(\ell^\infty\), segue la non separabilità di
+    \(\ell^\infty\). 
 \end{proof}
 \begin{theorem}[Spazi duali di \(\ell^p\) ]
     Sia \(1 \le p < \infty\). Allora per ogni \(\varphi  \in {(\ell^{p})}'\)
@@ -5695,17 +5745,17 @@ denso in \(\ell^{p}\) poiché è denso in \(c_{00}\)
     Inoltre si ha che \(\|\varphi \|_{(\ell^{p})'} = \|u\|_{p'} \) 
 \end{theorem}
 \begin{remark}
-    In soldoni ne consegue che \((\ell^{p})' \cong \ell^{p'}\). Sarà un
-    risultato valido anche per spazi \(L^{p}\) ma è più difficile dimostrarlo
-    quindi non se ne parla in questo corso
+    In soldoni ne consegue che \((\ell^{p})' \cong \ell^{p'}\). È un
+    risultato valido anche per spazi \(L^{p}\) ma è un risultato più avanzato
+    che non è stato visto in questo corso.
 \end{remark}
 \begin{proof}
     Consideriamo la successione \(e^{k} = {(0, \dots, 0,  \overset{(k)}{1}, 0,
-    \dots, 0, \dots)}\) che è la successione canonica. A partire da queste
-    consideriamo \(u_k = \varphi {(e^{k})}\) per ogni \(k \in \mathbb{N}\) e
-    consideriamo la successione \(u = {(u_k)}\). Vorremmo ora provare che \(u
+    \dots, 0, \dots)}\), ossia la successione canonica. Consideriamo 
+    \[u_k := \varphi {(e^{k})} \quad \forall k \in \mathbb{N}\] 
+    e consideriamo la successione \(u = {(u_k)}\). Vorremmo ora provare che \(u
     \in \ell^{p'}\) e \(\|u\|_{p'} \le \|\varphi \|_{{(\ell^{p})}'} \). A tal
-    scopo cominciamo da \(p =1\).
+    scopo cominciamo da \(p =1 \leadsto p' = \infty\), utilizzando la definizione di norma di un operatore:
     \[
       |u_k| = |\varphi {(e^{k})}| \le \|\varphi\|_{{(\ell^{1})}'}
       \|e^{k}\|_{\infty} \le \|\varphi \|_{{(\ell^{1})}'} \implies \|u\|_\infty
@@ -5719,17 +5769,25 @@ denso in \(\ell^{p}\) poiché è denso in \(c_{00}\)
       \left| \sum_{i=1}^{k} x_{i} \varphi {(e_{i})}   \right|=\left|   \sum_{i=1}^{k} x_{i} u_{i}  \right|\le
       \|\varphi \|_{(\ell^{p})'} \|x\|_p
     \end{equation}
-    Scegliamo ora \(x_{i} = |u_{i}|^{p'-2}\) e \(x_{i} = 0\) se \(u_{i} =
+    Scegliamo ora \(x_{i} = \overline{u_i} |u_{i}|^{p'-2} \) e \(x_{i} = 0\) se \(u_{i} =
     0\). Allora nella~\eqref{help:thmduali} abbiamo
-    \begin{align*}
-        \sum_{i=1}^{k} |u_{i}|^{p'} &\le \|\varphi \|_{(\ell^{p})'} 
-            {\left(  \sum_{i=1}^{k} {\left(  |u_{i}|^{p'-1} \right)}^{p}
-            \right)}^{\frac{1}{p}} = {\left( \sum_{i=1}^{k} |u_{i}|^{p'p -
-            p = p'}  \right)} ^{\frac{1}{p}} \\
-            {\left( \sum_{i=1}^{k} |u_{i}|^{p'}  \right)}^{1 - \frac{1}{p}} &=
-            {\left( \sum_{i=1}^{k} |u_{i}|^{p'}  \right)} ^{\frac{1}{p'}} \le
-            \|\varphi \|_{{(\ell^{p})}'} 
-    \end{align*}
+    \[
+    \begin{aligned}
+        \sum_{i=1}^{k} |u_{i}|^{p'} 
+        &\le \|\varphi\|_{(\ell^{p})'} 
+        \left( \sum_{i=1}^{k} \left( |u_{i}|^{p'-1} \right)^{p}
+        \right)^{\frac{1}{p}} \\
+        &= \|\varphi\|_{(\ell^{p})'} \left( \sum_{i=1}^{k} |u_{i}|^{p'p - p}
+        \right)^{\frac{1}{p}} \\
+        &= \|\varphi\|_{(\ell^{p})'} \left( \sum_{i=1}^{k} |u_{i}|^{p'}
+        \right)^{\frac{1}{p}}
+    \end{aligned} 
+\]
+
+    
+   e quindi 
+   \[\left( \sum_{i = 1}^{k} |u_i|^{p'} \right)^{\left( 1-\frac{1}{p} \right)=
+   \frac{1}{p'}} \le \| \phi\|_{(\ell^p)'}\]
     che vale per ogni \(k \in \mathbb{N}\) e quindi in particolare tutte le
     ridotte sono dominate da \(\|\varphi \|_{{(\ell^{p})}'} \) e quindi anche la
     serie 
@@ -5739,7 +5797,7 @@ denso in \(\ell^{p}\) poiché è denso in \(c_{00}\)
     \end{equation}
     Ci resta da provare che \(\varphi {(x)} = \sum_{i=1}^{\infty} u_{i} x_{i} \)
     per ogni \(x \in \ell^{p}\) e sappiamo che vale per ogni \(x \in c_{00} \).
-    Usando la densità di \(c_{00} \) in \(\ell^{p}\), quindi per ogni \(x \in
+    Usiamo la densità di \(c_{00} \) in \(\ell^{p}\), da cui per ogni \(x \in
     \ell^{p}\) esiste una successione \(x^{k} \in  c_{00} \) tale che \(x^{k}
     \to x\) in \(\ell^{p}\). Allora 
     \[
@@ -5761,7 +5819,7 @@ denso in \(\ell^{p}\) poiché è denso in \(c_{00}\)
     \]
     Ora dalla~\eqref{help:duali2} otteniamo che \(\|\varphi \|_{{(\ell^{p})}'}
     \le \|u\|_{p'} \)  che insieme a~\eqref{help:duali3} ci dà l'ultima parte
-    della tesi \(\|\varphi \|_{{(\ell^{p})}'} = \|u\|_{p'}\) 
+    della tesi \(\|\varphi \|_{{(\ell^{p})}'} = \|u\|_{p'}\).
 \end{proof}
 \begin{theorem}
     Se \(\varphi \in {(c_{0})}'\) allora esiste un \(u = {(u_k)} \in \ell^{1}\)
@@ -5785,27 +5843,29 @@ Il precedente significa che \({(c_{0})}' \cong \ell^{1}\)
 \end{theorem}
 
 
-\subsection{Funzioni a variazione limitata}
-Ci interessiamo ora a funzioni \(f : [a, b] \to \mathbb{R}\) 
+\subsection{Funzioni a variazione limitata e assolutamente continue}
+Ci interessiamo ora a funzioni \(f : [a, b] \to \mathbb{R}\). L'obiettivo di questa sottosezione è 
+descrivere una classe di funzioni su cui valga un'estensione del teorema fondamentale del calcolo integrale.
 \begin{definition}{funzione a variazione limitata}
-    Una funzione \(f: [a,b] \to \mathbb{R}\) si dice \textbf{a variazione
-    limitata} se presa comunque una suddivisione
+    Si consideri funzione \(f: [a,b] \to \mathbb{R}\) e una suddivisione
     \[
-      S = \{a = x_{0} < x_{1} < x_{2} < \dots < x_{n-1} < x_{n} = b\} 
+      S = \{a = x_{0} < x_{1} < x_{2} <~\dots < x_{n-1} < x_{n} = b\} 
     \]
-    dell'intervallo \([a,b]\) la quantità
+    dell'intervallo \([a,b]\). Si definisca
     \[
-      v_s = \sum_{i=1}^{n} |f{(x_{i+1} -f{(x_{i})})} 
+      v_s = \sum_{i=1}^{n} |f{(x_{i+1}) -f{(x_{i})}|} 
     \]
-    (somma delle variazioni relative ai punti di suddivisione)
-    l'insieme dei valori \(v_s\) così ottenuti ammette un estremo superiore
+    (somma delle variazioni relative ai punti di suddivisione).
+    La funzione \(f\) si dice \textbf{a variazione limitata} 
+    se l'insieme dei valori \(v_s\) così ottenuti ammette un estremo superiore
     finito, cioè 
     \[
-        \sup \{v_s : S \text{ suddivisione di \([a,b]\) in un numero finito di
-        punti  }\} 
+        V_f ([a, b]):= \sup \{v_s : S \text{ sudd. di \([a,b]\) in un numero
+                finito di
+        punti  } \} \in \mathbb{R} 
     \]
-    viene detto \textbf{variazione totale} di \(f\) in \([a,b]\) e si indica con
-    \(V_f{([a,b])}\)
+    La quantità \(V_f{([a,b])}\) viene detta \textbf{variazione totale} di \(f\) in \([a,b]\).
+    
 \end{definition}
 \begin{example}[Funzioni monotone]
     Tutte le funzioni monotone sono a variazione limitata e inoltre
@@ -5824,7 +5884,7 @@ Ci interessiamo ora a funzioni \(f : [a, b] \to \mathbb{R}\)
     \]
     ci interessa considerare i punti del tipo \(\frac{1}{x} = \frac{\pi}{2} = k
     \pi\) quindi \(x_k = \frac{1}{\frac{\pi}{2} + k \pi} = \frac{2}{\pi + 2k\pi}\) per \(k = 0, \dots,
-    n\) e la mia suddivisione è
+    n\) e la suddivisione è
     \[
         S_{n} = \left\{0, \frac{2}{\pi + 2\pi}, \frac{2}{\pi + 4\pi}, \dots,
         \frac{2}{\pi + 2(n-1)\pi}, \frac{2}{\pi}\right\}
@@ -5858,15 +5918,34 @@ Ci interessiamo ora a funzioni \(f : [a, b] \to \mathbb{R}\)
     \(v_s = \sum_{i=1}^{n} |f{(x_{i})} -f{(x_{i-1} )}| \le \sum_{i=1}^{n} L |
     x_{i} - x_{i-1} | \le L{(b-a)} \) 
 \end{proof}
-\begin{theorem}[Caratterizzazione]\label{thm:carat_var_lim}
+\begin{theorem}[Caratterizzazione delle funzioni a variazione limitata]\label{thm:carat_var_lim}
     Una funzione \(f : [a,b] \to \mathbb{R}\) è a variazione limitata se e solo
     se può essere rappresentata come differenza di funzioni monotone non
     decrescenti
 \end{theorem}
 \begin{remark}
-    non decrescenti può essere ovviamente sostituito da non crescenti cambiando
+    Non decrescenti può essere ovviamente sostituito da non crescenti cambiando
     i segni.
 \end{remark}
+\begin{proof}
+Il fatto che la differenza di due funzioni monotone non decrescenti sia una funzione a variazione limitata è banale per la disugaglianza triangolare. Per il viceversa, sia \(f\) a variazione limitata, definiamo
+\[
+    g_1 : = V_f[a, x]
+\]
+che è ben definita per ipotesi su \(f\). Sia \(y > x\), quindi
+\[
+ g_1(y) - g_1(x) = V_f[a, y] - V_f[a, x] = V_f [x, y] \ge 0
+\]
+ossia \(g_1\) è monotona non decrescente. Si ha, per definizione di variazione, 
+\[
+ g_1(y) - g_1(x) \ge |f(y) - f(x)| \ge f(y)- f(x)
+\]
+Possiamo dunque definire 
+\[
+g_2 := g_1 - f \leadsto f = g_1 - g_2
+\]
+che si verifica banalmente essere non decrescente. 
+\end{proof}
 \begin{remark}
     Segue che le funzioni a variazione limitata possono avere un'infinità
     numerabile di discontinuità.
@@ -5878,10 +5957,12 @@ Ci interessiamo ora a funzioni \(f : [a, b] \to \mathbb{R}\)
     in \([a,b]\) 
 \end{theorem}
 \begin{remark}
-    sommabile significa integrabile, in altre parole \(f' \in L^{1}{([a,b])}\) 
+    Sommabile significa integrabile, in altre parole \(f' \in L^{1}{([a,b])}\) 
 \end{remark}
 \begin{proof}
-    È difficile e laboriosa e non la faremo.
+    Si riconduce a dimostrare che una funzione monotona su un intervallo è
+    derivabile quasi ovunque a derivata sommabile. La dimostrazione è
+    leggermente laboriosa e viene qui omessa. 
 \end{proof}
 Negli esempi precedenti in effetti ad esempio le funzioni lipschitziane sono
 derivabili ovunque e pure le funzioni costanti.
@@ -5896,15 +5977,16 @@ dove l'integrale possa essere inteso come integrale di Lebesgue.
 \end{note}
 Dunque le funzioni a variazione limitata potrebbero essere esattamente quelle
 che stiamo cercando. In realtà no. Ad esempio la funzione di Heaviside
-considerata in \([-1, 1]\) e a variazione limitata, \(H'\) esiste e vale 0
-q.o.~ma chiaramente non vale la formula~\eqref{eq:fond_calcolo}, perché 
+(l'indicatrice dei positivi) considerata in \([-1, 1]\) è a variazione limitata,
+\(H'\) esiste e vale 0 q.o.~ma chiaramente non vale la
+formula~\eqref{eq:fond_calcolo}, perché 
 \[
     H{(1)} - H{(-1)} = 1 \neq 0 = \int_{[-1, 1]} H'{(t)} dt 
 \]
 
 Consideriamo ora la \textbf{funzione di Vitali} che è continua e a variazione
 limitata, ma non verifica la formula~\eqref{eq:fond_calcolo}. Ricordiamo
-l'insieme di cantor definito come nell'esempio~\ref{ex:cantor} e sia \(\rchi_n\)
+l'insieme di Cantor definito come nell'esempio~\ref{ex:cantor} e sia \(\rchi_n\)
 la funzione caratteristica di \(C_n\), ora sia
 \[
     f_{n}{(x)} = {\left( \frac{3}{2} \right)} ^{n} \int_{0} ^{x}\rchi_n{(t)}dt
@@ -5938,31 +6020,31 @@ Ora vediamo che
     {(x)} \right)}  
 \]
 e poiché gli elementi di ogni ridotta sono maggiorati di \(\frac{1}{2^{k-2}}\)
-allora la serie \(f_{n}\) converge uniformemente a una funzione limite \(f{(x)}\) 
-che è la funzione di Vitali.
+allora la serie \(f_{n}\) converge uniformemente a una funzione limite
+\(f{(x)}\), definita funzione di Vitali.
 
-Tale \(f\) limite è costante su ogni connesso del complementare di \(C\)
+Tale \(f\) limite è costante su ogni componente connessa del complementare di \(C\)
 l'insieme di Cantor. Inoltre \(f\) di Vitali è sicuramente continua in quanto
 limite uniforme di funzioni continue, non decrescente perché tutte le \(f_{n}\)
 lo sono, dunque \(f\) è a variazione limitata.~\(f\) ammette derivata prima \(f'
 = 0\) quasi ovunque (vale 0 sui punti del complementare di  \(C\)). Viene anche
-detta ``Scala del diavolo''. Una funzione di questo tipo (\(f'=0\) q.o.~ma \(f\)
+detta ``scala del diavolo''. Una funzione di questo tipo (\(f'=0\) q.o.~ma \(f\)
 continua e non costante) viene detta \textbf{singolare}.
 \begin{note}
-    anche la funzione di Vitali non verifica la formula \(f{(x)} - f{(a)} =
+    Anche la funzione di Vitali non verifica la formula \(f{(x)} - f{(a)} =
     \int_{[a,x]} f'{(t)} dt\) 
 \end{note}
 
-La classe di funzioni che invece vogliamo noi è quella delle funzioni
-\emph{assolutamente continue}.  
+La classe di funzioni che invece soddisfa le proprietà volute è quella delle 
+funzioni \emph{assolutamente continue}.  
 \begin{definition}{Assoluta continuità}
-    \(f : [a, b] \to \mathbb{R}\)  è assolutamente continua se per ogni
+    \(f : [a, b] \to \mathbb{R}\)  si dice \textbf{assolutamente continua} se per ogni
     \(\varepsilon > 0\) esiste \(\delta > 0\) tale che per ogni sequenza finita
     di intervalli \({(a_{i}, b_{i})} \subseteq [a, b] \) per \(i = 1,\dots, n\)
     disgiunti e tali che se \(\displaystyle\sum_{i=1}^{n} {(b_{i} - a_{i})} \le
     \delta  \), allora
 \[
-    \sum_{i=1}^{n} \left| f{(b_{1})} - f{(a_{1})} \right| \le \varepsilon 
+    \sum_{i=1}^{n} \left| f{(b_{i})} - f{(a_{i})} \right| \le \varepsilon 
 \]
 \end{definition}
 È evidentemente una richiesta più forte dell'uniforme continuità, infatti su un
@@ -5973,7 +6055,7 @@ continua, ma non il viceversa, infatti
     Se \(f\) è assolutamente continua allora è a variazione limitata
 \end{proposition}
 \begin{proof}
-Se prendo \(\varepsilon = 1\) e mi arriva un \(\delta > 0\). Se prendo
+Fissiamo \(\varepsilon = 1\) e otteniamo un \(\delta > 0\). Se prendiamo
 l'intervallino \([a, a+ \delta]\) allora \(f\) è a variazione limitata in \([a,
 a+\delta]\). Infatti presa una suddivisione \(S\) qualunque di \([a,
 a+\delta]\) e considero gli intervallini \({(a_{i}, b_{i})}\) di questa
@@ -5984,7 +6066,10 @@ suddivisione osservo allora
 \]
 Con questa idea in mente possiamo semplicemente dividere \([a,b]\) in intervalli
 di misura al più \(\delta\) e in ognuno di questi intervalli la funzione è a
-variazione limitata.
+variazione limitata. Bisogna solo avere l'accortezza di avere delle
+sovrapposizioni degli intervallini per evitare la perdita di arbitrarietà delle
+suddivisioni (che comunque posso restringere sufficientemente senza perdita di
+generalità). 
 \end{proof}
 \begin{proposition}[Assoluta continuità \(\implies \) esistenza derivata prima
     q.o.]
@@ -6074,7 +6159,7 @@ Consideriamo lo spazio
     W^{1,p}(a,b) = \{f \in AC([a,b]): f' \in L^{p}(a,b)\} 
 \]
 chiaramente quindi \(W^{1,1}{(a,b)} = AC{([a,b])}\) e succede che se \(1 \le p <
-p \le \infty\) allora \(W^{1,q}{(a,b)} \subseteq W^{1,p}{(a,b)} \) per le
+q \le \infty\) allora \(W^{1,q}{(a,b)} \subseteq W^{1,p}{(a,b)} \) per le
 inclusioni tra spazi \(L^{p}\) quando \(\mu{(\Omega)} < \infty\). Ne segue che
 il più piccolo è \(W^{1, \infty}\).
 
@@ -6194,7 +6279,7 @@ W^{1,p}{(a,b)}\)
 \end{proposition}
 \begin{proof}
     Da~\eqref{help:fond_calcolo_xy} e dalla proposizione~\ref{help:cau_sch_int}
-    otteniamo che, \\ supponendo WLOG \(x > y\)
+    otteniamo che, \\ supponendo senza perdita di generalità \(x > y\)
     \[
       |f{(x)} - f{(y)}| = \left| \int_{y}^{x} f'{(t)}dt \right| \le \int_y^{x}
       |f'{(t)}|dt = \|f'\|_1
@@ -6240,17 +6325,18 @@ gradienti invece che le derivate, ad esempio.
 
 \subsection{Proiezioni in spazi di Hilbert}
 
-Sul piano euclideo \(H = \mathbb{R}^2\) possiamo considerare la proiezione intuitiva
-di un punto \(z\) su un insieme convesso e chiuso \(K\) come il punto di \(K\) più
-vicino a \(z\), come in figura~\ref{fig:teorema-delle-proiezioni}
+Sul piano euclideo \(H = \mathbb{R}^2\) è intuitivo il concetto di
+proiezione~\(P_K : \mathbb R^2 \rightarrow K\) che manda un punto \(z\in \mathbb
+R^2\) in un punto di un insieme convesso e chiuso \(K\) che minimizza la
+distanza da \(z\), come in figura~\ref{fig:teorema-delle-proiezioni}.
 \begin{figure}[ht]
     \centering
     \incfig[.5]{teorema-delle-proiezioni}
     \caption{Proiezioni su spazi \(K\) convessi e chiusi}
     \label{fig:teorema-delle-proiezioni}
 \end{figure}
-È importante notare che abbiamo preso \(z \not\in  K\) altrimenti, la proiezione
-sarebbe lo stesso punto \(z\) 
+Nel caso in cui \(z \in K\) la proiezione manda banalmente \(z \mapsto z \quad
+\forall z \in K\). 
 
 \begin{theorem}[delle Proiezioni]\label{thm:proiezioni}
     Sia \(H\) uno spazio di Hilbert e sia \(K \subseteq H \) un sottoinsieme non
@@ -6317,15 +6403,17 @@ soluzioni, e a tale scopo articoliamo la dimostrazione nei seguenti passaggi
     quindi è il minimo cercato.
 \end{proof}
 \begin{proof}[Passo 2: \(u\) sol.~\eqref{eq:PM} \(\implies u \) sol.~\eqref{eq:DV}]
-    Sappiamo per ipotesi che \(\|u -f\| \le \|w - f\|\) per ogni \(w \in K\), e
-    prendo \(w = tv + {(1-t)}u\) per \(t \in [0, 1]\) e \(v \in K\), allora
+    Sappiamo per ipotesi che \(\|u -f\| \le \|w - f\|\) per ogni \(w \in K\).
+    Prendo 
+    \[w := tv + {(1-t)}u \quad \forall t \in [0, 1]\]
+    e \(v \in K\), allora
     \(w\) è la combinazione convessa di \(u\) e \(v\) che siccome \(K\) è
     convesso sta in \(K\). Allora
     \begin{align*}
         \cancel{\|u -f\|^2} &\le \|w - f\|^2 = \|tv + {(1-t)}u - f\|^2 = \|t{(v- u)} + u -
         f\|^2 \\ &= \Span{t(v-u) + u - f, t(v-u) + u - f} = \\ &= t^2\|v-u\|^2 +
         2t\Re(\Span{v-u, u-f}) + \cancel{\|u-f\|^2} \\
-        \implies 0 &\le t^2{(v-u)}^2 + 2t \Re{(\Span{u - f, v-u} )} \quad \forall
+        \implies 0 &\le t^2\|v-u\|^2 + 2t \Re{(\Span{u - f, v-u} )} \quad \forall
         t \in (0, 1]
     \end{align*}
     dove abbiamo specificato che vale per \(t \in (0, 1]\) in modo da poter
@@ -6368,7 +6456,7 @@ soluzioni, e a tale scopo articoliamo la dimostrazione nei seguenti passaggi
       \Re(\Span{u_{1} - f, u_{1} - u_{2}}) \le 0 \quad \text{ e } \quad
       \Re(\Span{f - u_{2}, u_{1} - u_{2}}) \le 0
     \]
-    da cui per linearità del prodotto scalare nel primo termine
+    da cui, per linearità del prodotto scalare, nel primo termine
     otteniamo \(\|u_{1} - u_{2}\| \le 0\) e quindi \(u_{1} = u_{2}\) 
 \end{proof}
 \begin{remark}
@@ -6397,7 +6485,7 @@ al passo 4 della dimostrazione del teorema~\ref{thm:proiezioni} otteniamo
     \iff \Re{(\Span{u_{1} - u_{2}, u_{1}, u_{2}} )} + \Re{(\Span{f_{2} - f_{1},
 u_{1} - u_{2}})} &\le 0 \iff \\
     \iff \|u_{1}-u_{2}\|^2 \le \left| \left<f_{1}-f_{2}, u_{1}-u_{2} \right>
-\right| &= \|f_{1} -f_{2}\|\|u_{1} - u_{2}\| 
+\right| &\overset{\ref{thm:schwarz}}{\le } \|f_{1} -f_{2}\|\|u_{1} - u_{2}\| 
 \end{align*}
 da cui otteniamo che, se \(u_{1} \neq u_{2}\), \(\|u_{1} - u_{2}\| \le \|f_{1}
 - f_{2}\|\) e quindi \(P_K\) è lipschitziano di costante 1.
@@ -6488,7 +6576,7 @@ In particolare fra i convessi vi sono anche i sottospazi, e possiamo in tal caso
 ottenere qualcosa in più
 
 \begin{theorem}[Proiezioni per sottospazi]\label{thm:proiezioni_sottospazi}
-    Sia \(H\) uno spazio di Hilbert e \(K \subseteq H \) un sottospazio chiuso.
+    Sia \(H\) uno spazio di Hilbert e \(K \subseteq H \) un sottospazio \textbf{chiuso}.
     Allora per ogni \(f \in H\) esiste unica \(u \in K\) tale che 
     \[
       \| f- u\|\le \|f - v\| \quad \forall v \in K
@@ -6508,11 +6596,15 @@ ottenere qualcosa in più
     poniamo \(w = u \pm v\), con \(v \in K\) e sappiamo \(w \in K\) poiché è un
     sottospazio. Allora otteniamo
     \[
-      \Re{(\Span{u -f, \mp v} )} \le 0 \iff \mp \Re {(\Span{u-f, v} )} \iff
-      \Re{(\Span{u- f, v} )} = 0 \forall v \in K
+    \aligned
+    \Re{(\Span{u - f, u - (u \pm v)})} 
+        &= \Re{(\Span{u - f, \mp v})} \leq 0 \\
+        &\iff \mp \Re{(\Span{u - f, v})} \leq 0 \\
+        &\iff \Re{(\Span{u - f, v})} = 0 \quad \forall v \in K.
+    \endaligned
     \]
-    supponendo di essere in ambito complesso, prendiamo ora \(w = u \pm iv\),
-    allora
+    poiché la disuguaglianza vale con il \(\mp\), nel complesso consideriamo anche \(w = u \pm iv\),
+    e abbiamo un risultato del tutto analogo:
     \[
         \Re{(\Span{u-f, \mp iv} )} \le 0 \iff \Re{(\pm i\Span{u-f, v} )} =
         \mp \Im{(\Span{u-f, v} )} \le 0
@@ -6602,8 +6694,8 @@ Allora definiamo
 \[
     S^\perp = \{x \in H : \Span{x, y} = 0 \quad \forall y \in S\} 
 \]
-ovviamente \(0_H \in S^\perp \) ma inoltre \(S^\perp \) è sottospazio di \(H\),
-infatti presi \(u, v \in S^\perp \) e \(\alpha, \beta \in \mathbb{K}\) allora
+ovviamente \(0_H \in S^\perp \) e inoltre \(S^\perp \) è sottospazio di \(H\),
+infatti presi \(u, v \in S^\perp \) e \(\alpha, \beta \in \mathbb{K}\) abbiamo che
 \[
     \Span{\alpha u + \beta v, y} = \alpha \Span{u, y} + \beta \Span{v, y} = 0 +
     0 = 0 \quad \forall y \in S
@@ -6618,25 +6710,25 @@ Partendo da un sottoinsieme \(S\) qualunque di \(H\) abbiamo quindi che
 \begin{theorem}[Decomposizione ortogonale]\label{thm:dec_orto}
     Sia \(H\) uno spazio di \(Hilbert\) e sia \(K \subseteq H \) un sottospazio
     chiuso. Allora per ogni \(f \in H\) esistono \(u \in K, v \in K^\perp \)
-    tale che \(f = u + v\) e tale rappresentazione è unica.
+    tali che \[f = u + v\] Questa rappresentazione è unica.
 \end{theorem}
 \begin{remark}
     Si scrive allora \(H = K \oplus K^\perp\) e si dice che \(H\) è la
     \textbf{somma diretta} di \(K\) e \(K^\perp\)
 \end{remark}
 \begin{remark}
-    Partendo da un sottoinsieme \(S \subseteq H \) qualsiasi, abbiamo che
-    \(S^\perp \ni 0_H\). Se però ora parto da \(K\) sottospazio chiuso, allora
-    anche \(0_H \in K\) allora in realtà \(K \cap K^\perp = \{0\}\), infatti se
+    Considerando \(S \subseteq H \) qualsiasi, abbiamo che
+    \(S^\perp \ni 0_H\). Nel caso di \(K\) sottospazio chiuso, allora
+    anche \(0_H \in K\). L'intersezione è proprio \(K \cap K^\perp = \{0\}\): se
     \(z \in K \cap K^\perp \) allora \(\Span{z, z} = 0\) e quindi \(z = 0_H\)
 \end{remark}
 \begin{proof}
     Dato \(f \in H\) prendiamo \(u = P_K{(f)} \in K\). Ora posto \(v = f - u\)
-    controllo che \(v \in K^\perp \). In effetti
+    controlliamo che \(v \in K^\perp \):
     \[
         \Span{v, y} = \Span{f - u, y} = \Span{f, y} - \Span{u, y} = 0 \quad\eqref{eq:UV}
     \]
-    e quindi \(v \in K^\perp \), quindi \(H = K + K^\perp \).
+    e quindi \(v \in K^\perp \), da cui \(H = K + K^\perp \).
 
     Per l'unicità, supponiamo che esistano \(u_1, u_{2} \in K, v_{1}, v_{2} \in
     K^\perp\) tali che 
@@ -6708,9 +6800,10 @@ Il seguente teorema ci dice che vale anche il viceversa.
 \begin{note}
     Abbiamo già incontrato un risultato simile negli spazi \(\ell^{p}\),
     trovando che \({(\ell^{p})}' = {(\ell^{p'})}\) per \(p < +\infty\). In
-    particolare avevamo trovato che \({(l^2)}' = l^2\), che potrebbe essere
+    particolare avevamo trovato che \({(\ell^2)}' \cong \ell^2\), che potrebbe essere
     provato anche con il teorema di Riesz, in quanto \(l^2\) è uno spazio di
-    Hilbert.
+    Hilbert. Un altro risultato, che invece non abbiamo dimostrato, è quello del caso 
+    di \(L^2\).
 \end{note}
 \begin{proof}
     Per l'\textbf{unicità}, supponiamo esistano \(y_{1}, y_{2} \in H\) tali che
@@ -6725,17 +6818,19 @@ Il seguente teorema ci dice che vale anche il viceversa.
     \[
       N = \{x \in H : L{(x)} = 0\} = \ker L
     \]
-    Allora \(N\) è non vuoto, in quanto chiaramente \(0_H \in N\) ed è un
-    sottospazio chiuso di \(H\). Infatti è chiuso in quanto controimmagine di
-    \(\{0\} \) tramite \(L\) che è continuo ed è sottospazio perché \(L\) è
-    lineare. Si presentano due casi allora
+    che è non vuoto (\(0_H \in N\)), è un
+    sottospazio (controimmagine di un operatore lineare) ed è chiuso in \(H\)
+    (controimmagine del chiuso \(\{0\}\) tramite
+    un operatore continuo). Si distinguono due casi:
 \begin{enumerate}[label = \arabic*.]
     \item \(N = H \implies L\) è il funzionale nullo e quindi \(y = 0_H\) 
-    \item \(N \neq H \implies \) esiste uno \(z \in N^\perp \) e tale che
-        \(\|z\| = 1\). Infatti se \(N \not\ni g \in H \) allora consideriamo
-        \(P_N{(g)} \neq g\) e possiamo allora fissare \(z = \frac{g -
-        P_N{(g)}}{\|g - P_N{(g)}\|}\). È chiaramente vero che \(z \in N^\perp \)
-        per il teorema~\ref{thm:dec_orto} e inoltre \(\|z\| = 1\). Ora mostriamo
+    \item \(N \neq H \implies \) esiste uno \(z \in N^\perp \) tale che
+        \(\|z\| = 1\), che posso costruire esplicitamente: sia \(g \in H \sminus N \), consideriamo
+        la proiezione su \(N\),
+        \(P_N{(g)} \neq g\), possiamo definire 
+        \[z := \frac{g - P_N{(g)}}{\|g - P_N{(g)}\|}\]
+        È chiaramente vero che \(z \in N^\perp \)
+        per la dimostrazione del teorema~\ref{thm:dec_orto} e inoltre \(\|z\| = 1\). Ora mostriamo
         che \(y = \overline{L{(z)}} z\) è l'elemento cercato, ossia vogliamo
         mostrare che
         \begin{equation}\label{help:riesz}
@@ -6747,6 +6842,7 @@ Il seguente teorema ci dice che vale anche il viceversa.
         Se invece \(x = \lambda z\), con \(\lambda \in \mathbb{K}\) allora
         \[
           L{(\lambda z)} = \lambda L{(z)} = \lambda L{(z)} \|z\|^2 =
+            \lambda{L{(z)}} \Span{z, z} =  
           \Span{\lambda z, \overline{L{(z)}}z} 
         \]
         e quindi anche in questo caso vale~\eqref{help:riesz}. Ora mostriamo che
@@ -6756,11 +6852,12 @@ Il seguente teorema ci dice che vale anche il viceversa.
           x = \underbrace{\left( x - \frac{L{(x)}}{L{(z)}}z \right)}_{ =: x_N}  +
           \underbrace{\frac{L{(x)}}{L{(z)}}}_{=: \lambda}  z
         \]
-        e \(L{(x_N)} = L{(x)} - \frac{L{(x)}}{L{(z)}} L{(z)} = 0\), quindi \(x
+        e \(L{(x_N)} = L{(x)} - \frac{L{(x)}}{L{(z)}} L{(z)} = 0\), quindi \(x_N
         \in N\). Poiché \(\Span{z} \subseteq N^\perp  \) allora \(N^\perp  =
-        \Span{z} \) e quindi \(H = N \oplus \Span{z} \). 
+        \Span{z} \) avendo la scrittura univoca del teorema~\ref{thm:dec_orto} 
+        e quindi \(H = N \oplus \Span{z} \). 
 \end{enumerate}
-    Per l'\textbf{uguaglianza delle norme}, abbiamo che 
+    Per l'\textbf{uguaglianza delle norme}, abbiamo, per definizioni e Schwarz: 
     \[
         \|L\|_{H'}  = \sup_{x \neq 0} \frac{\left| L{(x)} \right| }{\|x\|} =
     \sup_{x \neq 0} \frac{\left| \Span{x, y}  \right|} {\|x\|} \le \sup_{x \neq
@@ -6780,8 +6877,8 @@ Il seguente teorema ci dice che vale anche il viceversa.
     ortonormale) se \(\Span{e_{i}, e_{j}} = \delta_{ij}\) per ogni \(i, j \in
     \mathbb{N}\), con \(\delta_{ij}\) la delta di Kronecker.
 \end{definition}
-Quindi la precedente definizione significa che gli \(e_{n}\) sono tutti di norma
-unitaria e sono tutti ortogonali tra loro.
+Essenzialmente in un sistema ortonormale gli \(e_{n}\) sono tutti di norma
+unitaria e sono ortogonali tra loro.
 \begin{example}
     In \(\ell^2\) gli elementi della base canonica 
     \[
@@ -6790,14 +6887,14 @@ unitaria e sono tutti ortogonali tra loro.
     costituiscono un sistema ortonormale.
 \end{example}
 \begin{remark}
-    Se il mio spazio \(H\) ha dimensione finita, allora i sistemi ortonormali di
-    questo spazio saranno formati al più da una sequenza di \(n\) elementi, con
-    \(n = \dim H\) e in tal caso formano una base di \(H\). In \(H\) con
+    Nel caso in cui \(H\) ha dimensione finita i sistemi ortonormali 
+    sono formati da una lista di al più  \(\dim H\) elementi, e quando sono esattamente
+    \(\dim H\) formano una base di\(H\). Nel caso in cui \(H\) ha
     dimensione infinita si possono invece prendere successioni ortonormali.
 \end{remark}
 \begin{definition}{Serie di Fourier}\label{def:fourier}
     Dato un sistema ortonormale \(\{e_{n}\} \subseteq H \) allora per ogni \(x
-    \in H\) si potranno considerare i valori \[\Span{x, e_{k}}, \quad k \in
+    \in H\) si possono considerare i valori \[\Span{x, e_{k}}, \quad k \in
     \mathbb{N}\quad \text{\textbf{coefficienti di Fourier}}\] e la serie
     \[
       \sum_{k=1}^{\infty} \Span{x, e_{k}} e_{k} \quad \text{\textbf{serie di
@@ -6805,8 +6902,12 @@ unitaria e sono tutti ortogonali tra loro.
     \]
 \end{definition}
 
-Vi sono almeno due problemi di interesse: la serie di Fourier converge? Se
-converge, qual è la sua somma? Tenteremo di rispondere a queste domande.
+Vi sono almeno due problemi notevoli: 
+\begin{enumerate}[label = --]
+    \item convergenza della serie di Fourier;
+    \item in caso di convergenza, valore a cui converge la serie.
+\end{enumerate}
+In merito si forniranno alcuni risultati.
 \begin{proposition}[Diseguaglianza di Bessel]\label{prop:bessel}
     Sia \(H\) uno spazio di Hilbert, \(\{e_{n}\} \subseteq H \) un sistema
     ortonormale. Allora
@@ -6816,7 +6917,7 @@ converge, qual è la sua somma? Tenteremo di rispondere a queste domande.
           \left\|x - \sum_{k=1}^{n} \Span{x, e_{k}} e_{k} \right\|^2 =
           \|x\|^2 - \sum_{k=1}^{n} \left| \Span{x, e_{k}}  \right|^2 
         \end{equation}
-    \item Vale la diseguaglianza di Bessel
+    \item Per ogni \(x \in H\) vale la diseguaglianza di Bessel
         \begin{equation}\label{eq:bessel}
           \sum_{k=1}^{\infty} |\Span{x, e_{k}} |^2 \le \|x\|^2 
         \end{equation}
@@ -6843,7 +6944,7 @@ e_{k}}|^2 + \sum_{(k=i)=1}^{n} \Span{x, e_{k}} \overline{\Span{x, e_{j}}} = \\ &
 \|x\|^2 - \sum_{k=1}^{n} |\Span{x, e_{k}} |^2
     \end{align*}
 
-    Ci rimane dunque da provare 3. 
+    Rimane da provare 3. 
     \(\sum_{k=1}^{\infty} c_{k} e_{k} \) converge in \(H\) se e solo se la serie
     è di Cauchy in \(H\) cioè se
     \[
@@ -6851,14 +6952,14 @@ e_{k}}|^2 + \sum_{(k=i)=1}^{n} \Span{x, e_{k}} \overline{\Span{x, e_{j}}} = \\ &
       \forall n \ge \overline{k},\,\,j \ge 0 \text{ si ha } \underbrace{\left\|
       \sum_{k=n}^{n+j} c_{k} e_{k} \right\|^2}_{\text{differenza di due ridotte}}  < \varepsilon
     \]
-    Allora poiché
+    Allora, usando l'ortonormalità,
     \[
       \left\|\sum_{k=n}^{n+j} c_{k} e_{k} \right\|^2 = \Span{\sum_{k=n}^{n+j}
       c_{k} e_{k}, \sum_{i=n}^{n+j} c_{i} e_{i }} = \sum_{k=n}^{n+j} |c_{k}|^2
     \]
-    abbiamo che la precedente condizione di Cauchy richiede che la serie
-    \(\sum_{k=1}^{\infty} |c_k|^2 \) sia di Cauchy, e questa converge se e solo
-    se \(c \in \ell^2\) 
+    ossia, per la condizione di Cauchy, la serie
+    \(\sum_{k=1}^{\infty} |c_k|^2 \) converge se e solo
+    \(c \in \ell^2\). Sono tutte equivalenze e quindi si è stabilita l'equivalenza tra le due condizioni. 
 \end{proof}
 \begin{remark}
     Questa proposizione ci dice già che la serie di Fourier~\ref{def:fourier}
@@ -6880,34 +6981,52 @@ e_{k}}|^2 + \sum_{(k=i)=1}^{n} \Span{x, e_{k}} \overline{\Span{x, e_{j}}} = \\ &
     V_{n}\) è proprio la ridotta \(n\)-esima della serie di Fourier.
 \end{remark}
 \begin{proof}
-    Se ora \(c_{1}, c_{2}, \dots, c_{n}\) sono scalari arbitrari, abbiamo
-    \begin{align*}
-        \left\|x - \sum_{k=1}^{n} c_{k} e_{k} \right\|^2 &= \Span{x -
-        \sum_{k=1}^{n} c_{k} e_{k}, x - \sum_{j=1}^{n} c_{j} e_{j}} = \\ =
-            \|x\|^2 - &\sum_{j=1}^{n} \overline{c_{j}}\Span{x, e_{j}} -
-        \sum_{k=1}^{n} c_{k} \underbrace{\Span{e_{k}, x}}_{= \overline{\Span{x,
-        e_{k}} }}  + \sum_{k,j=1}^{n}
-        c_{k}\overline{c_{j}}\Span{e_{k}, e_{j}} = \\ = \|x\|^2 - 2
-        \sum_{k=1}^{n}&\Re \left(\overline{c_{k}}\Span{x, e_{k}}\right) +
-        \sum_{k=1}^{n} |c_{k}|^2 \color{Sepia} + \sum_{k=1}^{n} |\Span{x, e_{k}} |^2 - \sum_{k=1}^{n}
-        |\Span{x, e_{k}} |^2 = \\ = \|x\|^2 - &\sum_{k=1}^{n} |\Span{x, e_{k}}
-        |^2 + \sum_{k=1}^{n} {\left( |\Span{x, e_k}|^2 - 2 \Re{\left(
-        \overline{c_{k}}\Span{x, c_{k}} + |c_{k}|^2 \right)}  \right)} = \\
-        \overset{\eqref{eq:bessel1}}{=} &
-        \left\|x - \sum_{k=1}^{n} \Span{x, e_{k}}  \right\|^2 + \sum_{k=1}^{n}
-        \underbrace{\left|\Span{x, e_{k}} - c_{k}\right|^2}_{> 0} > \left\| x -
-        \sum_{k=1}^{n} \Span{x, e_{k}} e_{k}\right\|^2
-    \end{align*}
+    Siano \(c_{1}, c_{2}, \dots, c_{n}\) scalari arbitrari, abbiamo:
+    \[
+    \begin{aligned}
+        \left\| x - \sum_{k=1}^{n} c_{k} e_{k} \right\|^2 
+        &= \langle x - \sum_{k=1}^{n} c_{k} e_{k}, x - \sum_{j=1}^{n} c_{j} e_{j} \rangle \\
+        &= \|x\|^2 - \sum_{j=1}^{n} \overline{c_{j}} \langle x, e_{j} \rangle 
+           - \sum_{k=1}^{n} c_{k} \underbrace{\langle e_{k}, x \rangle}_{= \overline{\langle x, e_{k} \rangle}} 
+           + \sum_{k,j=1}^{n} c_{k} \overline{c_{j}} \langle e_{k}, e_{j} \rangle \\
+        &= \|x\|^2 - 2 \sum_{k=1}^{n} \Re \left( \overline{c_{k}} \langle x, e_{k} \rangle \right) 
+           + \sum_{k=1}^{n} |c_{k}|^2 + \color{Sepia}  \sum_{k=1}^{n} |\langle x, e_{k} \rangle|^2 
+           - \sum_{k=1}^{n} |\langle x, e_{k} \rangle|^2 \\
+        &= \|x\|^2 - \sum_{k=1}^{n} |\langle x, e_{k} \rangle|^2 
+           + \sum_{k=1}^{n} \left( |\langle x, e_k \rangle|^2 
+           - 2 \Re \left( \overline{c_{k}} \langle x, e_{k} \rangle \right) + |c_{k}|^2 \right) \\
+        &\overset{\eqref{eq:bessel1}}{=} \left\| x - \sum_{k=1}^{n} \langle x, e_{k} \rangle e_{k} \right\|^2 
+           + \sum_{k=1}^{n} \underbrace{\left| \langle x, e_{k} \rangle - c_{k} \right|^2}_{> 0} \\
+        &> \left\| x - \sum_{k=1}^{n} \langle x, e_{k} \rangle e_{k} \right\|^2.
+    \end{aligned}
+    \]
     Dunque la ridotta della serie di Fourier è proprio l'elemento di minima
     distanza da \(x\) in \(V_{n}\) e quindi è la proiezione di \(x\) su
     \(V_{n}\)
+\end{proof}
+
+\begin{proof}[Dimostrazione alternativa]
+
+Dobbiamo controllare, per il teorema~\ref{thm:proiezioni_sottospazi} (\(V_n\) è un sottospazio chiuso), che  
+\[
+\langle v, x \rangle = \Span{v, \sum_{k=1}^n \langle x, e_k \rangle e_k} \quad \forall v \in V_n.
+\]  
+In particolare, controlliamo che valga per gli elementi della base
+\(\{e_j\}_{j=1, \dots, n}\) di \(V_n\):  
+\[
+\begin{aligned}
+  \Span{e_j, \sum_{k=1}^n \langle x, e_k \rangle e_k} &= \langle e_j, x \rangle \|e_j\|^2 \\
+  &= \langle e_j, x \rangle.
+\end{aligned}
+\]
+Siccome, a \(x\) fissato, il prodotto induce un operatore lineare, ottengo la tesi.     
 \end{proof}
 
 \begin{theorem}[Caratterizzazione convergenza della serie di Fourier]\label{thm:conv_Fourier}
     Sia \(H\) uno spazio di Hilbert e sia \(\{e_{k}\} \) un sistema ortonormale.
     Allora sono equivalenti:
     \begin{enumerate}[label = \textit{\roman*)}]
-    \item \(\mathrm{span} \{e_{k}, k \in \mathbb{N}\} \) è denso in \(H\) 
+    \item \(\mathrm{span} \{e_{k} : \, k \in \mathbb{N}\}\) è denso in \(H\);
     \item La serie di Fourier di \(x\) converge a \(x\) per ogni \(x \in H\)
     \item \(\displaystyle \|x\|^2 = \sum_{k=1}^{\infty} |\Span{x, e_{k}} |^2 \)
         per ogni \(x \in H\) (identità di Bessel-Parseval)
@@ -6915,61 +7034,58 @@ e_{k}}|^2 + \sum_{(k=i)=1}^{n} \Span{x, e_{k}} \overline{\Span{x, e_{j}}} = \\ &
         \mathbb{N}\), allora \(x = 0_H\) 
 \end{enumerate}
 \end{theorem}
-\begin{proof}
-    Dimostriamo che \textit{(i)} implica \textit{(ii)}. Se \(\mathrm{span}
-    \{e_{k}, k \in \mathbb{N}\} \) è denso in \(H\) allora 
-    \[
-      \forall \varepsilon > 0 \quad \forall x \in H \quad \exists z \in
-      \mathrm{span}\{e_{k}\} : \|x - z\| \le \varepsilon
-    \]
-    e dunque esiste un \(\overline{k}\) tale che \(z \in V_{\overline{k}} =
-    \mathrm{span}\{e_{1}, \dots, e_{k}\}  \)
-    essendo \(z \in \mathrm{span}\{e_{k}\}\). Per la
-    proposizione~\ref{prop:2-45} allora \(\sum_{j=1}^{\overline{k}} \Span{x,
-    e_{j}} e_{j}\) è la migliore approssimazione di \(x\) in \(V_{\overline{k}}
-    \), quindi 
-    \[
-      \left\|x - \sum_{j=1}^{\overline{k}} \Span{x, e_{j}} e_{j} \right\|^2 \le
-      \|x - z\|^2 \le \varepsilon^2
-    \]
-    se ora prendo \(n > \overline{k}\), dico che
-    \begin{align*}
-        \|x\|^2 - \sum_{k=1}^{n} |\Span{x, e_{k}}|^2 &\le \|x\|^2 -
-        \sum_{k=1}^{\overline{k}} |\Span{x, e_{k}}|^2 \iff \\ \iff
-        \left\|x - \sum_{j=1}^{n} \Span{x, e_{j}}e_{j}  \right\|^2 &\le \left\| x
-        - \sum_{j=1}^{\overline{k}} \Span{x, e_{j}} e_{j} \right\|^2 \le
-        \varepsilon^2
-    \end{align*} dove si è usata la~\eqref{eq:bessel1} della
-    proposizione~\ref{prop:bessel}. Ne viene fuori che 
-    \[
-      \forall \varepsilon > 0 \quad \exists \overline{k} \in \mathbb{N} :
-      \forall n \ge \overline{k} \quad \left\|x - \sum_{j=1}^{n} \Span{x,
-      e_{j}}\right\|^2 \le \varepsilon^2
-    \]
-    ossia \textit{(ii)}. D'altronde però \textit{(ii)} implica \textit{(i)}
-    banalmente in quanto la convergenza della serie di Fourier per ogni \(x \in
-    H\) dice che necessariamente \(\overline{\mathrm{span}\{e_{k}\}} = H\). Ne
-    segue che \textit{(i)} \(\iff\) \textit{(ii)}.
+\begin{proof} \(\)
+    \begin{enumerate}
+        \item [\((i) \implies (ii)\)]
+        Se \(\mathrm{span}
+        \{e_{k} | \, k \in \mathbb{N}\} \) è denso in \(H\) allora 
+        \[
+          \forall \varepsilon > 0 \quad \forall x \in H \quad \exists z \in
+          \mathrm{span}\{e_{k}\} : \|x - z\| \le \varepsilon
+        \]
+        e dunque esiste un \(\overline{k}\) tale che \(z \in V_{\overline{k}} =
+        \mathrm{span}\{e_{1}, \dots, e_{\overline k}\}  \)
+        essendo \(z \in \mathrm{span}\{e_{k}\}\). Per la
+        proposizione~\ref{prop:2-45} \[\sum_{j=1}^{\overline{k}} \Span{x,
+        e_{j}} e_{j}\] è la migliore approssimazione di \(x\) in \(V_{\overline{k}}
+        \), quindi 
+        \[
+          \left\|x - \sum_{j=1}^{\overline{k}} \Span{x, e_{j}} e_{j} \right\|^2 \le
+          \|x - z\|^2 \le \varepsilon^2
+        \]
+        dove la disugaglianza vale applicando il teorema di Pitagora. Se prendiamo \(n > \overline{k}\), diciamo che
+        \begin{align*}
+            \|x\|^2 - \sum_{k=1}^{n} |\Span{x, e_{k}}|^2 &\le \|x\|^2 -
+            \sum_{k=1}^{\overline{k}} |\Span{x, e_{k}}|^2 \iff \\ \iff
+            \left\|x - \sum_{j=1}^{n} \Span{x, e_{j}}e_{j}  \right\|^2 &\le \left\| x
+            - \sum_{j=1}^{\overline{k}} \Span{x, e_{j}} e_{j} \right\|^2 \le
+            \varepsilon^2
+        \end{align*} dove si è usata la~\eqref{eq:bessel1} della
+        proposizione~\ref{prop:bessel}. Ne viene fuori che 
+        \[
+          \forall \varepsilon > 0 \quad \exists \overline{k} \in \mathbb{N} :
+          \forall n \ge \overline{k} \quad \left\|x - \sum_{j=1}^{n} \Span{x,
+          e_{j}}\right\|^2 \le \varepsilon^2
+        \]
+        ossia, per arbitarietà di \(n\), \textit{(ii)}.
 
-    Ora mostriamo che \textit{(ii)} implica \textit{(iii)}.
-    Di nuovo usando la~\eqref{eq:bessel1} abbiamo
+    \item [\((ii) \implies (i)\)] Banale.
+
+    \item [\((ii) \iff (iii)\)] Usando la~\eqref{eq:bessel1} abbiamo
     \[
         \underbrace{\left\| x - \sum_{k=1}^{n} \Span{x, e_{k}} e_{k}
         \right\|^2}_{\to 0 \iff (ii)}  =
       \underbrace{\|x\|^2 - \sum_{k=1}^{n} |\Span{x, e_{k}} |^2}_{\to 0 \iff
       (iii)} 
     \]
-    e quindi ne consegue \textit{(ii)} \(\iff\) \textit{(iii)}. 
-
-    Ora se \(x\) ha i coefficienti di Fourier tutti nulli, allora per la
+    \item [\((iii) \implies (iv)\)] Se \(x\) ha i coefficienti di Fourier tutti nulli, allora per la
     \textit{(iii)} abbiamo
     \[
       \|x\|^2 = \sum_{k=1}^{\infty} |\Span{x, e_{k}} |^2 = \sum_{k=1}^{\infty} 0
       = 0 \implies x = 0_H
     \]
-    e quindi \textit{(iii)} \(\implies\) \textit{(iv)}. 
 
-    Infine, sia \(x \in H\) e \(y = \sum_{k=1}^{\infty} \Span{x, e_{k}} e_{k} \)
+    \item [\((iv) \implies (ii)\)] Sia \(x \in H\) e \(y = \sum_{k=1}^{\infty} \Span{x, e_{k}} e_{k} \)
     la somma della serie di Fourier, che converge sempre in \(H\). Allora
     succede che l'elemento \(x - y\) ha tutti i coefficienti di Fourier nulli.
     Infatti 
@@ -6981,13 +7097,13 @@ e_{k}}|^2 + \sum_{(k=i)=1}^{n} \Span{x, e_{k}} \overline{\Span{x, e_{j}}} = \\ &
                             e_{j}} = \lim_{n \to \infty} 0 = 0
     \end{align*}
     dove si è usata la continuità del prodotto scalare e si è assunto \(n > j\),
-    cosa definitivamente vera. Ora dunque per \textit{(iv)} abbiamo che \(x - y
-    = 0\) e dunque la serie di Fourier converge a \(x\). Abbiamo quindi mostrato
-    che \textit{(iv)} \(\implies\) \textit{(ii)} e quindi la tesi è dimostrata.
+    cosa vera definitivamente. Ora dunque per \textit{(iv)} abbiamo che \(x - y
+    = 0\) e dunque la serie di Fourier converge a \(x\). 
+    \end{enumerate}
 \end{proof}
 \begin{remark}
     Al teorema~\ref{thm:conv_Fourier} si potrebbe inserire una
-    quinta condizione equivalente, ossia
+    \textbf{quinta} condizione equivalente, ossia
     \[
         \Span{x, y} = \sum_{k=1}^{\infty} \Span{x, e_{k}} \overline{\Span{y,
         e_{k}}}  \quad \forall x, y \in H
@@ -7014,7 +7130,8 @@ e_{k}}|^2 + \sum_{(k=i)=1}^{n} \Span{x, e_{k}} \overline{\Span{x, e_{j}}} = \\ &
     l'elemento nullo di \(H\) 
 \end{definition}
 Ovviamente basta che valga una qualunque delle condizioni, ma la definizione è
-associata alla \textit{(iv)} per qualche motivo. Un sistema ortonormale completo
+associata alla \textit{(iv)} per qualche motivo, probabilmente legato all'intuizione 
+che si ha di un sistema ortonormale completo. Un sistema ortonormale completo
 viene anche detto \textbf{base ortonormale} di \(H\).
 \begin{proposition}\label{prop:basorto-separabile}
 Se lo spazio di Hilbert \(H\) possiede una base ortonormale allora \(H\) è
@@ -7043,9 +7160,9 @@ nella vecchia definizione. % Ma allora tale insieme può anche essere preso e me
     le norme.
 \end{proof}
 
-Mi chiedo ora Se valga il viceversa della
+Ci chiediamo se vale il viceversa della
 proposizione~\ref{prop:basorto-separabile}, ossia se uno spazio di Hilbert
-separabile necessariamente abbia una base ortonormale. La risposta è sì.
+separabile ammette sempre una base ortonormale. La risposta è sì, alla grande.
 
 \begin{lemma}[Procedura di Gram-Schmidt]
     Sia \(H\) uno spazio di Hilbert e \(\{x_{n}\} \) una successione di elementi
@@ -7116,9 +7233,8 @@ formano una base ortonormale di \(L^2{(-\pi, \pi)}\).
     traslarle e trovi il periodo che vuoi, dove vuoi.
 \end{remark}
 \begin{remark}
-    In ambito complesso si può anche prendere (oltre alle funzioni sopra, che
-    pure funzionano), le funzioni \(\frac{1}{\sqrt{2\pi}}e^{int}\), con \(n \in
-    \mathbb{Z}\) che pure formano una base ortonormale.
+    In ambito complesso si possono anche prendere le funzioni \(\frac{1}{\sqrt{2\pi}}e^{int}\) con \(n \in
+    \mathbb{Z}\) che formano una base ortonormale.
 \end{remark}
 
 \begin{definition}{Polinomio trigonometrico}\label{def:polinomio_trig}
@@ -7205,6 +7321,71 @@ In modo analogo
      dove la seconda eguaglianza è data da come è definita \(q_{n}\), che è
      decrescente in \({[0, \pi]}\) 
 \end{proof}
+Sia \(\{\varphi_n\}_{n\ge 0}\) una successione di funzioni definita come segue:
+\[
+\begin{cases}
+    \varphi_0 (t) &= \displaystyle \frac{1}{\sqrt{2 \pi}} \\
+    \varphi_{2k-1} (t) &= \displaystyle \frac{1}{\sqrt \pi} \sin(kt) \\
+    \varphi_{2k}(t) &= \displaystyle \frac{1}{\sqrt \pi} \cos(kt)
+\end{cases}
+\]
+per \(k \in \mathbb N\). Si ha il seguente risultato.
+
+%SISTEMA ORTONORMALE DELLE PHI è COMPLETO IN L^2(-PI, PI)
+\begin{proposition}
+    Il sistema ortonormale \(\{\varphi_n\}\) è completo in \(L^2(-\pi, \pi)\).
+\end{proposition}
+
+\begin{remark}
+    Per il teorema~\ref{thm:conv_Fourier} equivale ad affermare che \(\{\varphi_n\}\) è
+    denso in \(L^2(-\pi, \pi)\).
+\end{remark}
+
+\begin{proof}
+    % TODO: inserire dimostrazione
+\end{proof}
+
+\begin{corollary}
+    Data \(f \in L^2(-\pi, \pi)\), la serie di Fourier associata: 
+    \[
+    \frac{a_0}{2\pi} + \sum_{k=1}^{\infty} \left( \frac{a_k}{\sqrt{\pi}} \cos(kt) + \frac{b_k}{\sqrt{\pi}} \sin(kt)\right)
+    \]
+    dove
+    \[
+    \begin{aligned}
+        a_0 &= \langle f, \varphi_0 \rangle   = \frac{1}{\sqrt{2\pi}} \int_{(-\pi, \pi)} f(t) dt \\
+        a_k &= \langle f, \varphi_{2k}\rangle = \frac{1}{\sqrt{\pi}} \int_{(-\pi, \pi)} f(t) \cos(kt) dt \\
+        b_k &= \langle f, \varphi_{2k-1}\rangle = \frac{1}{\sqrt{\pi}} \int_{(-\pi, \pi)} f(t) \sin(kt) dt \\
+    \end{aligned}
+    \]
+    converge a \(f\) in \(L^2(-\pi, \pi)\).
+\end{corollary}
+\begin{corollary}
+    Se \(f \in L^2\) è pari allora i coefficienti \(b_k\) sono nulli, se invece è dispari i coefficienti 
+    \(a_k\) sono nulli.
+\end{corollary}
+\begin{corollary}
+    Vale l'identità di Bessel-Parseval: 
+    \[\|f\|_{L^2(-\pi, \pi)}^2 = |a_0| + \sum_{k=1}^\infty (|a_k|^2+|b_k|^2)\]
+\end{corollary}
+
+
+%STONE-WEIERSTRASS
+\begin{theorem}[Stone-Weierstrass]\label{thm:stone_w}
+
+I polinomi intesi nel senso classico sono densi in \(C^0([a, b])\), ossia, comunque 
+presa \(f \in C^0([a, b])\)
+
+\[\  \forall \varepsilon > 0, \quad \exists p_\varepsilon \in \mathbb R[x]: \quad 
+    \| f - p_\varepsilon \|_{\infty} \le \varepsilon
+\]
+    
+\end{theorem}
+
+\begin{proof}
+    % TODO: inserire dimostrazione
+\end{proof}
+
 
 \section{Esercizi}
 Alcuni sono risolti, alcuni parzialmente e alcuni no. (Questa frase è inutile
