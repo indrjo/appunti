@@ -1138,13 +1138,13 @@ s_{n}^{-}\) è ancora una successione di funzioni semplici che converge a \(f\).
     definitivamente e analogamente per \(f^{-}\).
 \end{remark}
 
-\begin{lemma}\label{le:nulle_fuori_compatti}
+\begin{lemmao}\label{le:nulle_fuori_compatti}
 Sia ora \(\Omega = \mathbb{R}^{N}\) e sia \(\mathcal{L}\) la \(\sigma\)-algebra
 degli insiemi misurabili secondo Lebesgue. Allora valgono tutte le
 considerazioni della proposizione precedente e inoltre la successione
 \(\{s_{n}\} \) può essere scelta in modo che tutte le \(s_{n}\) siano nulle al
 di fuori di un compatto 
-\end{lemma}
+\end{lemmao}
 \begin{proof}
     Posso considerare una successione \(K_{n}\) di compatti che invade tutto
     \(\mathbb{R}^{N}\) (esempio le palle, gli ipercubi, ecc) e operiamo come
@@ -1470,7 +1470,7 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
 \]
 \end{theorem}
 \begin{proof}
-    Sia \(\alpha := \lim_{n \to \infty} f_{n} d\mu\), dove \(\alpha \in [0,
+    Sia \(\alpha := \lim_{n \to \infty} \int_E f_{n} d\mu\), dove \(\alpha \in [0,
     +\infty]\). Abbiamo necessariamente che 
     \[
         \int_E f d\mu \ge \alpha = \lim_{n \to \infty} \int_E f_{n} d\mu
@@ -1498,7 +1498,7 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
         \alpha \ge \delta \int_E s d\mu \quad \forall \delta \in (0, 1)
     \]
     Per definizione di \(\alpha\) e per continuità della misura data da \(s\).
-    Ora poiché vale per ogni \(\delta in (0, 1)\) deve valere anche per \(\delta
+    Ora poiché vale per ogni \(\delta \in (0, 1)\) deve valere anche per \(\delta
     = 1\). Otteniamo quindi
     \[
         \alpha \ge \int_E s d\mu \quad \forall s \text{ semplice, misurabile e }
@@ -1705,7 +1705,7 @@ sarebbero non limitate
 \begin{theorem}[Beppo Levi \-- seconda versione]\label{thm:beppo-levi}
     Sia \({(\Omega, \mathcal{M}, \mu)}\) uno spazio di misura. Sia \(\{f_{n}\}
     \) una successione monotona di funzioni integrabili in \(E \in \mathcal{M}\)  tali che la successione
-    degli integrali \(\displaystyle \{\int_E f_{n} d\mu\} \) sia limitata.
+    degli integrali \(\displaystyle \left\{\int_E f_{n} d\mu\right\} \) sia limitata.
     Allora posto
     \[
         f{(x)} := \lim_{n \to \infty} f_{n}{(x)} \quad \forall x \in \Omega
@@ -4973,7 +4973,8 @@ In questa parte \(\Omega\) sarà un aperto di \(\mathbb{R}^{N}\) con la misura
 \end{proposition}
 \begin{proof}
     Data \(f \in L^1(\mathbb{R}^{N})\) osservo che \(f^{+}, f^{-} \in
-    L^1(\mathbb{R}^{N})\) e sono non negative. Allora esistono 2 successioni
+    L^1(\mathbb{R}^{N})\) e sono non negative. Allora per il
+    Lemma~\ref{le:nulle_fuori_compatti} esistono 2 successioni
     \(s_{n}\) e \(t_{n}\) di funzioni semplici, misurabili, non negative e nulle fuori da un
     compatto che convergono q.o.~rispettivamente a \(f^{+}\) e \(f^{-}\) e
     queste successioni sono monotone crescenti. Ci rimane da controllare che
@@ -5231,7 +5232,8 @@ lineare, infatti
 \end{theorem}
 \begin{proof}\( \)
 \begin{itemize}
-    \item[\(\implies \)] Supponiamo \(T\) continuo, dunque continuo in \(0_X\). Allora
+    \item[\(\implies \)] Supponiamo \(T\) continuo, dunque continuo in \(0_X\).
+        Allora \(T{(0_X)} = 0_Y\) per linearità e
         \begin{equation}\label{eq:continuita123}
           \forall \varepsilon > 0 \quad \exists \delta > 0 : \|x\|_X \le  \delta
           \implies \|Tx\|_Y \le  \varepsilon
@@ -7267,7 +7269,8 @@ In modo analogo
         \in \mathbb{N}\)
     \item Per ogni \(\delta \in {(0, \pi)}\) si ha 
         \[
-          \lim_{n \to \infty} {\left( \sup_{\delta \le |t| \le \pi} q_{n}{(t)} \right)} 
+          \lim_{n \to \infty} {\left( \sup_{\delta \le |t| \le \pi} q_{n}{(t)}
+          \right)} = 0
         \]
 \end{enumerate}
 \end{lemma}
