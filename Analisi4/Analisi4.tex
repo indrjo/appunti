@@ -4718,7 +4718,7 @@ anche il valore \(1\).
     \(f \not\in L^{p}{(\mathbb{R})}\) per ogni \(1 \le p < \infty\) 
 \end{example}
 \begin{example}
-    L'altra inclusione è normalmente falsa. Ad esempio se \(f{(x)} =
+    L'altra inclusione è falsa. Ad esempio se \(f{(x)} =
     \frac{1}{|x|^{\alpha}} \rchi_{[-1,1]}{(x)} \) per \(\alpha < 1\) è
     integrabile ma non è limitata, quindi \(f \in L^{1}\) ma \(f\not\in L^{\infty}\) 
 \end{example}
@@ -4785,8 +4785,6 @@ Per questo capitolo userò la notazione \(\mathbb{K} = \mathbb{R}\) o
         y, x \right>}\), \(\forall x, y \in H\) 
 \end{enumerate}
 \end{definition}
-Ovviamente è giusto osservare che le proprietà \(i)\) \(ii)\) implicano che la
-funzione \(x \mapsto \left<x, x \right>\) è una norma.
 \begin{remark}
     Da \(iii)\) e \(iv)\) otteniamo che, per ogni \(x, y, z \in H\) e \(\alpha,
     \beta \in \mathbb{K}\) 
@@ -6145,7 +6143,7 @@ continue a dominio in \(\Omega\)
     f'{(x)}g{(x)}dx
 \]
     è vera se \(f, g \in AC([a,b])\) 
-    \item \textbf{Integrazione per sostituzione} La formula di sostizuione
+    \item \textbf{Integrazione per sostituzione} La formula di sostituzione
 \[
     \int_a^{b} f{(x)} dx = \int_\alpha ^{\beta} f{(\varphi{(t)})}
     \varphi'{(t)}dt
@@ -6362,12 +6360,13 @@ Per la dimostrazione, riassumiamo il teorema~\ref{thm:proiezioni} come esistenza
 e unicità della soluzione di~\eqref{eq:PM} e~\eqref{eq:DV} e uguaglianza di tali
 soluzioni, e a tale scopo articoliamo la dimostrazione nei seguenti passaggi
 \begin{enumerate}[label = \arabic*.]
-    \item Esistenza della soluzione di~\eqref{eq:PM}
-    \item \(u\) soluzione di~\eqref{eq:PM} risolve anche~\eqref{eq:DV}
-    \item \(u\) soluzione di~\eqref{eq:DV} risolve anche~\eqref{eq:PM}
-    \item La soluzione di~\eqref{eq:DV} è unica
+    \item[] \hyperref[pf:Proiezioni-1]{1}. Esistenza della soluzione di~\eqref{eq:PM}
+    \item[] \hyperref[pf:Proiezioni-2]{2}.~\(u\) soluzione di~\eqref{eq:PM} risolve anche~\eqref{eq:DV}
+    \item[] \hyperref[pf:Proiezioni-3]{3}.~\(u\) soluzione di~\eqref{eq:DV} risolve anche~\eqref{eq:PM}
+    \item[] \hyperref[pf:Proiezioni-4]{4}. La soluzione di~\eqref{eq:DV} è unica
 \end{enumerate}
-\begin{proof}[Passo 1: Esistenza della soluzione di~\eqref{eq:PM}]
+\begin{proof}[Passo 1: Esistenza della soluzione
+    di~\eqref{eq:PM}]\label{pf:Proiezioni-1}
     Costruiamo una successione minimizzante.
     \[
       \lambda = \inf_{v \in K} \|f-v\| \text{ esiste ed è } \ge 0
@@ -6405,7 +6404,8 @@ soluzioni, e a tale scopo articoliamo la dimostrazione nei seguenti passaggi
     per l'unicità del limite ne concludiamo che \(\|f - u\| = \lambda\) che
     quindi è il minimo cercato.
 \end{proof}
-\begin{proof}[Passo 2: \(u\) sol.~\eqref{eq:PM} \(\implies u \) sol.~\eqref{eq:DV}]
+\begin{proof}[Passo 2: \(u\) sol.~\eqref{eq:PM} \(\implies u \)
+    sol.~\eqref{eq:DV}]\label{pf:Proiezioni-2}
     Sappiamo per ipotesi che \(\|u -f\| \le \|w - f\|\) per ogni \(w \in K\).
     Prendo 
     \[w := tv + {(1-t)}u \quad \forall t \in [0, 1]\]
@@ -6430,7 +6430,8 @@ soluzioni, e a tale scopo articoliamo la dimostrazione nei seguenti passaggi
     \]
     che è esattamente la~\eqref{eq:DV}
 \end{proof}
-\begin{proof}[Passo 3: \(u\) sol.~\eqref{eq:DV} \(\implies u\) sol.~\eqref{eq:PM}]
+\begin{proof}[Passo 3: \(u\) sol.~\eqref{eq:DV} \(\implies u\)
+    sol.~\eqref{eq:PM}]\label{pf:Proiezioni-3}
     Vogliamo provare la seguente uguaglianza:
     \[
       \|u-f\|^2 - \|v-f\|^2 = 2\Re{(\Span{f-u, v-u} )} - \|u-v\|^2 \quad \forall
@@ -6447,7 +6448,7 @@ soluzioni, e a tale scopo articoliamo la dimostrazione nei seguenti passaggi
     \end{equation*}
     che è esattamente l'eguaglianza richiesta
 \end{proof}
-\begin{proof}[Passo 4: unicità sol.~\eqref{eq:DV}]
+\begin{proof}[Passo 4: unicità sol.~\eqref{eq:DV}]\label{pf:Proiezioni-4}
     Siano \(u_{1}, u_{2}\) due soluzioni di~\eqref{eq:DV}:
     \[
       \Re{(\Span{u_{1} - f, u_{1} - v})} \le 0 \quad \text{ e } \quad
@@ -7438,7 +7439,7 @@ perché basterebbe guardare gli esercizi, ma era bello aggiungere una frase qui)
         \]
 
         Sì, e in particolare possiamo usare la densità di \(C^{0}_C{(0, 2\pi)}\)
-        in \(L^2{(-\pi, \pi)}\) e scegliere dunque \(g_\varepsilon \in
+        in \(L^2{(0, 2\pi)}\) e scegliere dunque \(g_\varepsilon \in
         C_C^{0}{(0, 2\pi)}\). 
     \item Calcolare il valore del limite per \(n \to \infty\) della successione
         integrale di \(f{(x)} \sin{(nx)}\) 
