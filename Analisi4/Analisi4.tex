@@ -1,6 +1,7 @@
 \input{../preamble_appunti.tex}
 \title{Appunti di Analisi 4}
-\author{Osea}
+\author{Github Repository:
+\href{https://github.com/Oxke/appunti/tree/main/Analisi4}{\texttt{Oxke/appunti/Analisi4}}}
 \date{Primo semestre, 2024 \-- 2025, prof. Pierluigi Colli}
 \begin{document}
 \maketitle
@@ -8,23 +9,19 @@
 Il corso tratterà sostanzialmente due tematiche:
 \begin{itemize}[label = --]
     \item \textbf{Misura e Integrale di Lebesgue}
-    \item Rudimenti di \textbf{Analisi Funzionale}, in particolare spazi di
-        Hilbert e serie di Fourier e qualcosa relativa agli spazi normati.
+    \item Rudimenti di \textbf{Analisi Funzionale}, in particolare spazi di Hilbert e serie di Fourier.
 \end{itemize}
-In particolare legati dagli \textbf{spazi \(L^{p}\)} che rientrano in entrambe
+In particolare i due argomenti sono legati dagli \textbf{spazi \(L^{p}\)} che rientrano in entrambe
 le categorie.
 Purtroppo non c'è un testo che contiene tutti e soli gli argomenti del corso, ma
 sul kiro c'è molto materiale didattico che può essere utilizzato.
-
-
 \tableofcontents
 \newpage
 
 \section{Misura e integrazione di Lebesgue}
-Il libro era di Haim Brezis e si chiamava \emph{Analisi Funzionale e
-Applicazioni}, era la versione in italiano ed era edita da Liguori. Aveva
-un'appendice curata da Carlo Sbordone (?). Di tale libro esiste la versione in
-inglese che è molto più ricca e completa.
+In questa sezione si segue la linea dell'appendice sull'integrazione astratta di
+Sbordone al libro "Analisi Funzionale" di Brezis, edito da Liguori.
+
 \subsection{Algebre, \(\sigma\)-algebre, misure}
 Sia \(\Omega\) un insieme ambiente, e sia \(\mathcal{M}\) una famiglia di
 sottoinsiemi di \(\Omega\), ossia \(\mathcal{M} \subseteq 2^{\Omega} \).
@@ -78,7 +75,7 @@ rispetto alle comuni operazioni di insiemi.
 \end{example}
 
 \begin{definition}{funzione finitamente additiva}
-     Sia \(\Omega\) un'insieme e \(\mathcal{M}\) un'algebra di sottoinsiemi di
+     Sia \(\Omega\) un insieme e \(\mathcal{M}\) un'algebra di sottoinsiemi di
      \(\Omega\).
 
      Una funzione \(\mu : \mathcal{M} \to [0, +\infty]\) si dice
@@ -113,15 +110,13 @@ Va inteso che se per uno dei due \(\mu(A) = +\infty\) allora
 \begin{enumerate}[label = \arabic*.]
     \item \(B = A \cup (B \sminus A)\), quindi \(\mu(B) = \mu(A) + \mu(B
         \sminus A) \ge \mu(A)\) 
-    \item Da sopra, ma necessito di aggiungere l'ipotesi \(\mu(A) < +\infty\)
+    \item Da sopra, ma ho bisogno di aggiungere l'ipotesi \(\mu(A) < +\infty\)
         per evitare di sottrarre \(+\infty\) 
     \item Considero \(B_{1} = A_{1}\), \(B_{2} = A_{2} \sminus A_{1}\)
-        ecc.\ ponendo sempre \(B_{n} = A_{n} \sminus \bigcup_{i=1}^{n}
+        ecc.\ ponendo sempre \(B_{n} = A_{n} \sminus \bigcup_{i=1}^{n-1}
         A_{i}\), per cui \(\bigcup_{i=1}^{n} B_{i} = \bigcup_{i=1}^{n} A_{i}  \)
-        e so che \(\mu(\bigcup_{i=1}^{n} B_{i}) = \sum_{i=1}^{n} B_{i} \le
-        \sum_{i=1}^{n} A_{i}\) dove prima si è usata la finita additività
-        essendo \(B_{i}\) a due a due disgiunti, e la disuguaglianza per la
-        monotonia.
+        e so che \(\mu(\bigcup_{i=1}^{n} B_{i}) = \sum_{i=1}^{n} \mu(B_{i}) \le
+        \sum_{i=1}^{n} \mu(A_{i})\), usando prima l'additività e poi la monotonia.
 \end{enumerate}
 \end{proof}
 
@@ -141,9 +136,12 @@ Va inteso che se per uno dei due \(\mu(A) = +\infty\) allora
     si può prendere \(A_{1} = A\), \(A_{2} = B\) e \(A_{i} = \varnothing\) per
     ogni \(i \ge 3\) 
 \end{remark}
-Il problema delle algebre in questo caso è che bisogna specificare nella
-definizione di misura che l'unione della successione deve essere nell'algebra,
-il che motiva la seguente definizione.
+
+Vedremo nella definizione di misura che richiede la \(\sigma\)-additività.
+Vogliamo dunque poterla definire su uno spazio che permetta di assicurare che
+l'unione di una successione di insiemi sia ancora un insieme. Questo ci porta
+alla seguente definizione.
+
 \begin{definition}{\(\sigma\)-algebra}
     Sia \(\Omega\) un insieme, \(\mathcal{M}\) una famiglia di sottoinsiemi di
     \(\Omega\). Allora \(\mathcal{M}\) si dice \textbf{\(\sigma\)-algebra} se:
@@ -155,12 +153,11 @@ il che motiva la seguente definizione.
 \end{enumerate}
 \end{definition}
 \begin{remark}
-    Di nuovo è evidente che una \(\sigma\)-algebra è un'algebra.
+    È evidente che una \(\sigma\)-algebra è un'algebra.
 \end{remark}
 \begin{remark}
-    Se \(A_{n} \in \mathcal{M} \forall n \in \mathbb{N}\) posso concludere che
-    \(\bigcap_{n \in \mathbb{N}} A_{n} \in \mathcal{M} \), sì, poiché è il
-    complementare dell'unione dei complementari, come prima.
+    Se \(A_{n} \in \mathcal{M} \; \forall n \in \mathbb{N}\) posso concludere che
+    \(\bigcap_{n \in \mathbb{N}} A_{n} \in \mathcal{M} \) (ragionando coi complementari).
 \end{remark}
 
 \begin{example}
@@ -196,6 +193,7 @@ esiste sempre una \(\sigma\)-algebra \(\mathcal{M}\) che contiene
     chiusi e tutte le unioni e intersezioni numerabili di aperti e chiusi.
 \end{example}
 
+\begin{definition}[label=def:def_misura]{Definizioni utili}
     Dato \(\Omega\) un insieme e una \(\sigma\)-algebra \(\mathcal{M}\) su
     \(\Omega\), la coppia \((\Omega, \mathcal{M})\) viene detta \textbf{spazio
     misurabile} e la terna \((\Omega, \mathcal{M}, \mu)\), dove \(\mu\) è una
@@ -208,6 +206,7 @@ esiste sempre una \(\sigma\)-algebra \(\mathcal{M}\) che contiene
     Inoltre se \(\mu(A) = 0\) allora \(A\) si dice \textbf{trascurabile}. Ancora
     una proprietà si dice \textbf{vera quasi ovunque} se vale per ogni \(x \in
     \Omega \sminus A\) dove \(A\) è trascurabile.
+\end{definition}
 
 \begin{example}
     \(\Omega = \mathbb{R}^{N}\), \(\mathcal{M} = 2^{\mathbb{R}^{N}}\), sia
@@ -343,6 +342,7 @@ esiste sempre una \(\sigma\)-algebra \(\mathcal{M}\) che contiene
 \end{enumerate}
 \end{definition}
 
+\paragraph{Misura esterna su \(\mathbb{R}^{N}\)}
 Ora vogliamo introdurre su \(\mathbb{R}^{N}\) una misura esterna, che chiameremo
 \(\mu^\star\). Lavoriamo con intervalli di \(\mathbb{R}^{n}\), ossia prodotti
 cartesiani di intervalli reali di estremi sinistri \(\{a_{1}, \dots, a_{N}\} \)
@@ -387,7 +387,7 @@ Procediamo ora col verificare che questa è una misura esterna.
 \end{enumerate}
 Si può verificare che \(\mu^\star(I) = |I|\) per gli intervalli, infatti
 naturalmente \(\mu^\star(I) \le |I|\) perché il ricoprimento \(\{I\} \) fa parte
-dell'insieme su cui si fa l'inf. Per l'altra disuguaglianza, consideriamo per
+dell'insieme su cui si fa l'estremo inferiore. Per l'altra disuguaglianza, consideriamo per
 ogni \(\varepsilon>0\) una successione \(\{I_{i}\} \) di intervalli tale che 
 \[
     \sum_{i=1}^{\infty} |I_{i}| < \mu^\star(I) + \frac{\varepsilon}{2}
@@ -422,15 +422,15 @@ proposizioni.
     \]
 \end{proposition}
 \begin{proof}
-    Se io prendo un qualunque ricoprimento di \(A\) con intervalli, posso
+    Se prendo un qualunque ricoprimento di \(A\) con intervalli, posso
     costruirne uno analogo dove il diametro di ogni intervallo è \(\le \delta\).
     Questo si può fare eventualmente ``spezzando'' gli intervalli in intervalli
     più piccoli, tenendo la somma della serie uguale.
 \end{proof}
 
 \begin{proposition}\label{prop:prop_2}
-    Se \(F_{1}, \dots, F_{n}\) sono insiemi chiusi, limitati e disgiunti a due a
-    due, allora la \[\mu^\star \left( \bigcup_{i = 1}^{n}F_{i}  \right) = \sum_{i=1}^{n}
+    Siano \(F_{1}, \dots, F_{n}\) insiemi chiusi, limitati e disgiunti a due a
+    due. Allora vale l'additività della misura esterna: \[\mu^\star \left( \bigcup_{i = 1}^{n}F_{i}  \right) = \sum_{i=1}^{n}
     \mu^{\star}(F_{i})\]
 \end{proposition}
 \begin{proof}
@@ -440,9 +440,9 @@ proposizioni.
     \mu^{\star}(F_{2})\). Inoltre, \(\forall \varepsilon > 0\) esiste (per la
     definizione con l'inf) un
     ricoprimento \(\{I_{n}\} \) di \(F_{1}\cup F_{2}\) tale che
-    \(\sum_{i=1}^{\infty} \mu^\star\left( F_{1} \cup F_{2} \right) +
+    \(\sum_{i=1}^{\infty} |I_n| \leq \mu^\star\left( F_{1} \cup F_{2} \right) +
     \varepsilon\), chiediamo inoltre che \(\text{diam}(I_{n}) \le \frac{d}{3}\),
-    con \(d\) la distanza tra \(F_{1}\) e \(F_{2}\).
+    con \(d\) la distanza tra \(F_{1}\) e \(F_{2}\) (sfrutto la chiusura).
 
     Tutti gli \(I_{n}\) tali che \(I_{n} \cap F_{1} \neq \varnothing\) danno un
     ricoprimento di \(F_{1}\), e similmente tutti gli \(I_{m}\) tali che \(I_{m}
@@ -451,14 +451,16 @@ proposizioni.
     F_{1}\neq\varnothing} |I_{n}| + \sum_{I_{m}\cap F_{2}\neq\varnothing}
 |I_{m}| \le \mu^\star(F_{1} \cup F_{2}) + \varepsilon\]
 
-    Infine procedendo per induzione si ottiene il risultato con \(n\) insiemi.
+    Si conclude per induzione.
 \end{proof}
 \begin{proposition}\label{prop:reticolazione}
-    \(\forall \) aperto limitato \(G\) e \(\forall \varepsilon > 0\), esiste \(F
+    Sia \(G\) un aperto limitato e \(\varepsilon\) una costante positiva. Allora esiste \(F
     \subseteq G \) chiuso tale che 
     \[
-        \mu^\star(F) > \mu^\star(G) - \varepsilon
+        \mu^\star(F) > \mu^\star(G) - \varepsilon,
     \]
+
+    ossia si può approssimare un aperto limitato dal basso con insiemi chiusi. 
 \end{proposition}
 \begin{proof}
 \begin{figure}[ht]
@@ -484,20 +486,25 @@ precedente \(\mu^\star(F) = \sum_{i=1}^{\overline{n}} \mu^\star(J_{i}) =
 \end{proof}
 
 \begin{proposition}\label{prop:prop_4}
-\(\forall \) aperto limitato \(G\), \(\forall \) chiuso \(F \subseteq G \),
-allora \(\mu^\star(G \sminus F) = \mu^\star(G) - \mu^\star(F)\).
+Sia \(G\) un aperto \textbf{limitato}, \(F \subseteq G \) chiuso. Allora 
+\[\mu^\star(G \sminus F) = \mu^\star(G) - \mu^\star(F)\]
 \end{proposition}
 \begin{proof}
-Applico la
-proposizione~\ref{prop:reticolazione} a \(G \sminus F\), ottenendo che esiste un
+
+Per la proposizione
+~\ref{prop:reticolazione}, 
+applicata sull'aperto \(G \sminus F\), so che esiste un
 chiuso \(F_{1} \subseteq G \sminus F \) tale che \(\mu^\star(F_{1}) >
-\mu^\star(G \sminus F) - \varepsilon\). Allora \(\mu^\star(F) + \mu^\star(F_{1})
+\mu^\star(G \sminus F) - \varepsilon\). Allora, per la proposizione
+~\ref{prop:prop_2},
+\(\mu^\star(F) + \mu^\star(F_{1})
 = \mu^\star(F \cup F_{1})\), da cui
+
 \[
     \mu^\star(F) + \mu^\star(G\sminus F) < \mu^\star(F) + \mu^\star(F_{1}) +
     \varepsilon = \mu^\star(F \cup F_{1}) + \varepsilon \le \mu^\star(G) + \varepsilon
 \]
-Inoltre \(\mu^\star(G) \le \mu^\star(F) + \mu^\star(G\sminus F)\) da cui
+Inoltre, per subadditività, \(\mu^\star(G) \le \mu^\star(F) + \mu^\star(G\sminus F)\) da cui
 l'uguaglianza. Poiché sono tutti valori finiti, posso sottrarre \(\mu^\star(F)\)
 da ambo i lati ottenendo la tesi.
 \end{proof}
@@ -508,8 +515,9 @@ da ambo i lati ottenendo la tesi.
     \(\mu^\star(G_\varepsilon \sminus F_\varepsilon) \le \varepsilon\) 
 \end{definition}
 \begin{remark}
-    La misura esterna \(\mu^\star\) ristretta alla classe degli insiemi
-    misurabili sarà una misura.
+    Con i seguenti risultati si dimostrerà che la misura esterna \(\mu^\star\),
+    ristretta alla classe degli insiemi misurabili (secondo Lebesgue), è una
+    misura.
 \end{remark}
 \begin{theorem}
     La famiglia \(\mathcal{M}\) degli insiemi misurabili secondo Lebesgue è
@@ -556,36 +564,38 @@ da ambo i lati ottenendo la tesi.
 \end{enumerate}
 \end{proof}
 \begin{proposition}\label{prop:prop_5}
-    Se \(A\subseteq \mathbb{R}^{N} \) è limitato, allora \(A\) è misurabile se e
-    solo se \(\forall \varepsilon > 0, \,\, \exists F_\varepsilon \subseteq A \)
-    chiuso tale che \(\mu^\star(F_\varepsilon) > \mu^\star(A) - \varepsilon\) 
+    Sia \(A\subseteq \mathbb{R}^{N} \) limitato. Allora \(A\) è misurabile se e
+    solo se \[\forall \varepsilon > 0, \,\, \exists F_\varepsilon \subseteq A \, \, 
+    \text{chiuso} \,: \, \mu^\star(F_\varepsilon) > \mu^\star(A) - \varepsilon\]
 \end{proposition}
 \begin{proof}\( \)
 \begin{itemize}
-    \item[\(\implies \)] Se \(A\) è misurabile, allora \(\forall \varepsilon > 0\)
+    \item[\(\implies \)] Se \(A\) è misurabile, fissato \( \varepsilon > 0\),
         esistono \(F_{\varepsilon} \subseteq A \) chiuso e \(G_{\varepsilon}
         \supseteq A \) aperto tali che \(\mu^\star(G_{\varepsilon} \sminus
-        F_{\varepsilon}) \le \varepsilon\). Allora \(\mu^\star(A) \le
+        F_{\varepsilon}) \le \varepsilon\). Allora, per monotonia e subadditività, \(\mu^\star(A) \le
         \mu^\star(F_\varepsilon) + \mu^\star(G_\varepsilon \sminus
         F_\varepsilon) \le \mu^\star(F_\varepsilon) + \varepsilon\) 
-    \item[\(\impliedby \)] Dico che esiste una successione \(I_{n}\) di
-        intervalli aperti e di diametro \(\le  1\) tali che \(A \subseteq
+    \item[\(\impliedby \)] Per~\ref{prop:prop_1} e la definizione di \(\inf\)
+        esiste una successione \(I_{n}\) di intervalli aperti di diametro \(\le
+        1\) tali che \(A \subseteq
         \bigcup_{n \in \mathbb{N}} I_{n}  \) e \(\sum_{i=1}^{\infty} |I_{n}| <
         \mu^\star(A) + \varepsilon \). Prendo come \(G_\varepsilon\) l'unione di
         tutti gli \(I_{n}\) tali che \(I_{n} \cap A \neq \varnothing\). Allora
-        \(G_\varepsilon\) è aperto limitato contenente \(A\), questo perché
+        \(G_\varepsilon\) è aperto limitato contenente \(A\), limitato perché
         avendo diametro minore o eguale a 1 l'unione si ``distacca'' da \(A\) al
         più di 1. Allora \[\mu^\star(G_\varepsilon \sminus F_\varepsilon) =
         \mu^\star(G_\varepsilon) - \mu^\star(F_\varepsilon) \le
         \sum_{i=1}^{\infty} |I_n| - \mu^\star(F_\varepsilon) < \mu^\star(A) +
         \varepsilon - \mu^\star(F_\varepsilon) < 2\varepsilon \] 
-        Dove nell'ultima diseguaglianza si è usata l'ipotesi.
+        La prima uguaglianza per~\ref{prop:prop_4} e l'ultima disuguaglianza per
+        l'ipotesi.
 \end{itemize}
 \end{proof}
 
 \begin{theorem}
     La famiglia \(\mathcal{M}\) degli insiemi misurabili secondo Lebesgue è una
-    \(\sigma\)-algebra e inoltre \(\mu^\star\) è \(\sigma\)-additiva su
+    \(\sigma\)-algebra su \(\mathbb{R}^{N}\) e \(\mu^\star\) è \(\sigma\)-additiva su
     \(\mathcal{M}\). In altre parole, \(\mu^\star\) ristretto a \(\mathcal{M}\)
     è una misura.
 \end{theorem}
@@ -596,21 +606,21 @@ da ambo i lati ottenendo la tesi.
         \varnothing\), \(\forall n \neq m\) e \(\exists I\) intervallo tale che
         \(A_{n} \subseteq I \), \(\forall n \in \mathbb{N}\).
 
-        Allora \(A = \bigcup_{n \in \mathbb{N}} A_{n} \subseteq I \). Ora
-        possiamo usare la proposizione~\ref{prop:prop_5} per dire che, dato
+        Allora \(A = \bigcup_{n \in \mathbb{N}} A_{n} \subseteq I \). Per la
+        proposizione~\ref{prop:prop_5}, dato
         \(\varepsilon > 0\), \(\forall n \in \mathbb{N}\) esiste un \(F_{n} \subseteq A_{n} \) chiuso tale che
         \(\mu^\star(F_{n}) > \mu^\star(A_{n}) - \frac{\varepsilon}{2^{n+1}}\).
-        Inoltre \(\mu^\star(A) \le \sum_{i=1}^{\infty} \mu^\star(A_{i}) \)
-        allora esiste \(k \in \mathbb{N}\) tale che \(\sum_{i=1}^{k}
-        \mu^\star(A_{i}) > \mu^\star(A) - \frac{\varepsilon}{2} \) per il
-        limite. Allora sia \(F = \bigcup_{n = 1}^{k} F_{n} \) chiuso. Allora
+        Per subadditività \(\mu^\star(A) \le \sum_{i=1}^{\infty} \mu^\star(A_{i}) \)
+        quindi, per definizione di limite, esiste \(k \in \mathbb{N}\) tale che \(\sum_{i=1}^{k}
+        \mu^\star(A_{i}) > \mu^\star(A) - \frac{\varepsilon}{2} \). Sia \(F :=
+        \bigcup_{n = 1}^{k} F_{n} \), che è chiuso. Allora
         possiamo dire che \(\mu^\star(F) = \sum_{i=1}^{k} \mu^\star(F_{i}) >
         \sum_{i=1}^{k} \mu^\star(A_{i}) - \frac{\varepsilon}{2} > \mu^\star(A) -
-        \varepsilon\). Ora poiché abbiamo trovato un chiuso contenuto in \(A\)
-        con la proprietà richiesta, allora \(A\) è misurabile, poiché è
-        limitato (proposizione~\ref{prop:prop_5}).
+        \varepsilon\). Abbiamo quindi trovato un chiuso contenuto in \(A\)
+        con la proprietà richiesta in~\ref{prop:prop_5}, sfruttando la
+        limitatezza di \(A\) se ne conclude la misurabilità.
 
-        Ora se \(k\) è generico
+        Per la \(\sigma-\)additività, sia \(k\) generico:
         \[
             \sum_{i=1}^{k} \mu^\star(A_{i}) < \sum_{i=1}^{k} \mu^\star(F_{i})  +
             \frac{\varepsilon}{2} = \mu^\star\left( \bigcup_{i = 1}^{k} F_{i}
@@ -628,26 +638,25 @@ da ambo i lati ottenendo la tesi.
         \varnothing\), \(\forall n \neq m\). Di nuovo sia \(A = \bigcup_{n \in
         \mathbb{N}} A_{n}\).
 
-        Reticoliamo \(\mathbb{R}^{N}\) con intervalli \(\{I_{j}\} \) tali che
-        \(I_{i} \cap  I_{j} = \varnothing\), \(\forall i \neq j\) e
+        Reticoliamo \(\mathbb{R}^{N}\) con intervalli \(\{I_{j}\} \) \textbf{di
+        diametro fissato} (e.g.~1) tali che \(I_{i} \cap  I_{j} = \varnothing\),
+        \(\forall i \neq j\) e
         \(\bigcup_{j=1}^{\infty} I_{j} = \mathbb{R}^{N} \). Ci interessiamo agli
-        insiemi \(B_{j} = \bigcup_{i=1}^{\infty} (A_{i} \cap I_{i}) \). Allora i
-        \(B_{j}\) sono misurabili per il punto 1, infatti \((A_{i} \cap I_{j})
-        \subseteq I_{j} \)  e sono disgiunti a due a due. Ora notiamo che
-        \(B_{j} \cap B_{i} = \varnothing\) \(\forall A j \neq i\). Inoltre
-        \(\bigcup_{j = 1}^{\infty} B_{j} = A \). Ora per \(\varepsilon > 0\)
-        fissato e \( \forall j\) esistono \(F_{j}\) chiuso e \(G_{j}\) aperto
+        insiemi \(B_{j} := \bigcup_{i=1}^{\infty} (A_{i} \cap I_{j}) \) che sono misurabili per il punto (1), infatti \((A_{i} \cap I_{j})
+        \subseteq I_{j} \), sono disgiunti a due a due e
+        \(\bigcup_{j = 1}^{\infty} B_{j} = A \). Per misurabilità e limitatezza dei \(B_j\), fissati \(\varepsilon > 0\)
+     e \( j\) intero, esistono \(F_{j}\) chiuso e \(G_{j}\) aperto
         tali che \(F_{j} \subseteq B_{j} \subseteq G_{j}  \) e \(\mu^\star(G_{j}
-        \sminus F_{j}) \le \frac{\varepsilon}{2^{j}}\). A questo punto abbiamo
+        \sminus F_{j}) \le \frac{\varepsilon}{2^{j}}\). A questo punto definisco \(F, G\):
         \[
             F := \bigcup_{j=1}^{\infty} F_{j} \subseteq A \subseteq
             \bigcup_{j=1}^{\infty} G_{j} =: G
         \]
-        È evidente che \(G\) è aperto. Inoltre \(F\) è chiuso, perché data una
-        successione \(\{x_{n}\} \) convergente in \(\mathbb{R}^{N}\) e a valori
-        in \(F\). Poiché è convergente è limitata, e allora i suoi valori cadono
-        in un numero finito di insiemi \(F_{j}\). Poiché l'unione di quegli
-        \(F_{j}\) è chiusa allora \(x \in F\) è chiuso.
+        È evidente che \(G\) è aperto. Inoltre \(F\) è chiuso. Infatti, data una
+        successione \(\{x_{n}\} \) convergente in \(\mathbb{R}^{N}\) a valori
+        in \(F\), risulta limitata per la convergenza, e allora i suoi valori cadono
+        in un numero finito di insiemi \(F_{j}\) (per come è stato reticolato \(\mathbb{R}^N\)). Poiché l'unione di tali
+        \(F_{j}\) è chiusa, ho che \(x \in F\), e quindi \(F\) è chiuso.
 
         Adesso prendiamo \[G \sminus F = \bigcup_{j=1}^{\infty}(G_{j} - F)
         \subseteq \bigcup_{j = 1}^{\infty} (G_{j} - F_{j}) \] che ha misura
@@ -656,8 +665,8 @@ da ambo i lati ottenendo la tesi.
 
         Ora vogliamo mostrare la \(\sigma\)-additività. Possiamo assumere che
         \(\mu^\star(A_{i}) < +\infty\) per ogni \(i\), altrimenti la tesi è
-        banale. Ora supponiamo che \(\sum_{i=1}^{\infty} \mu^\star(A_{i}) =
-        +\infty \), allora ne deduciamo che 
+        banale. Nel caso in cui \(\sum_{i=1}^{\infty} \mu^\star(A_{i}) =
+        +\infty \), deduciamo che 
         \[
             \sum_{i=1}^{k} \mu^\star(A_{i}) \overset{\mathcal{M} \text{ è
             un'algebra}}{=} \mu^\star \left( \bigcup_{i=1}^{k}A_{i} \right) \le \mu^\star(A) \quad \forall k \in
@@ -665,30 +674,34 @@ da ambo i lati ottenendo la tesi.
         \]
         e quindi \(\mu^\star(A) = +\infty\).
 
-        Supponiamo infine che \(\sum_{i=1}^{\infty} \mu^\star(A_{i}) \)
-        converga, allora poiché \(\mu^\star(A_{i}) \) è minore o eguale a \( \sum_{j=1}^{\infty}
+        Si analizza infine il caso in cui \(\sum_{i=1}^{\infty} \mu^\star(A_{i}) \)
+        converge. Poiché \(\mu^\star(A_{i}) \) è minore o eguale a \( \sum_{j=1}^{\infty}
         \mu^\star(A_{i} \cap I_{j}) \) abbiamo che 
         \[
             \sum_{i=1}^{\infty} \mu^\star(A_{i}) \le \sum_{i=1}^{\infty}
             \sum_{j=1}^{\infty} \mu^\star(A_{i} \cap I_{j}) \overset{1.}{=}
             \sum_{j=1}^{\infty} \mu^\star(B_{j})
         \]
-        Ora analizziamo la ridotta
+        Avendo invertito le serie nell'ultimo passaggio (serie assolutamente
+        convergente). Analizziamo la ridotta
         \[
-            \sum_{j=1}^{n} \mu^\star(B_{j}) \le \sum_{j=1}^{n} \mu^\star(F_{j})
-            + \sum_{j=1}^{n} \mu^\star(G_{j} \sminus F_{j})
-            \le \mu^\star\left(
-        \bigcup_{j = 1}^{n}F_{j}  \right) + \sum_{j=1}^{n}
-        \frac{\varepsilon}{2^{j}} \le \mu^\star(A) + \varepsilon
+                \begin{aligned}
+                \sum_{j=1}^{n} \mu^\star(B_{j}) 
+                &\le \sum_{j=1}^{n} \mu^\star(F_{j}) 
+                    + \sum_{j=1}^{n} \mu^\star(G_{j} \setminus F_{j}) \\
+                &\le \mu^\star\left( \bigcup_{j = 1}^{n} F_{j} \right) 
+                    + \sum_{j=1}^{n} \frac{\varepsilon}{2^{j}} \\
+                &\le \mu^\star(A) + \varepsilon.
+                \end{aligned}
         \]
         Dove nella diseguaglianza centrale si è usata la
-        proposizione~\ref{prop:prop_2}. Mettendo tutto assieme e avendo \(n\to
-        \infty\) e \(\varepsilon \to 0\)  otteniamo che
-        \(\sum_{i=1}^{\infty} \mu^\star(A_{i}) \le \mu^\star(A)\) e naturalmente
+        proposizione~\ref{prop:prop_2}. Assieme alla disuguaglianza precedente,
+        per \(n\to \infty\) e per arbitrarietà di \(\varepsilon\)  otteniamo che
+        \(\sum_{i=1}^{\infty} \mu^\star(A_{i}) \le \mu^\star(A)\), mentre
         l'altra diseguaglianza è data dalla sub-additività.
     \item Sia \(\{A_{n}\} \subseteq   \mathcal{M}\) e \(A = \bigcup_{i \in
-        \mathbb{N}} A_{i} \) e vogliamo provare che \(A \in \mathcal{M}\).
-
+        \mathbb{N}} A_{i} \). Vogliamo provare che \(A \in \mathcal{M}\). La
+        dimostrazione è simile ad alcune già viste.
         Costruisco un'altra successione \(\{B_{n}\} \subseteq \mathcal{M}\) di
         insiemi a due a due disgiunti. Definisco \(B_{1} = A_{1}\), \(B_{2} =
         A_{2} \sminus A_{1}\), \(B_{3} = A_{3} \sminus (A_{1} \cup A_{2})\),
@@ -700,10 +713,10 @@ da ambo i lati ottenendo la tesi.
 \end{enumerate}
 \end{proof}
 Quindi ora possiamo considerare lo spazio di misura di Lebesgue \(\left(
-\mathbb{R}^{N}, \mathcal{M}, \mu \right) \) con \(\mathcal{M}\) gli insiemi
+\mathbb{R}^{N}, \mathcal{M}, \mu \right) \) con \(\mathcal{M}\) i
 misurabili secondo Lebesgue e \(\mu = \mu^\star\) la misura esterna.
 \begin{theorem}[Caratterizzazione degli insiemi misurabili]
-    Un insieme \(A \subseteq \mathbb{R}^{N} \) è misurabile se e solo se \(A\)
+    Un insieme \(A \subseteq \mathbb{R}^{N} \) è misurabile secondo Lebesgue se e solo se \(A\)
     può essere rappresentato come
 \begin{itemize}
     \item Unione numerabile di chiusi e di un insieme trascurabile
@@ -720,9 +733,9 @@ oppure
     := \bigcup_{i=1}^{\infty} I_{i} \) con \(I_{i}\) intervalli aperti e
     \(\sum_{i=1}^{\infty} \mu^\star(I_{i}) < \varepsilon \), a questo punto
     naturalmente quindi \(\mu^\star(G \sminus F) < \varepsilon\).
-    Gli aperti sono misurabili, infatti se è limitato si scrive come unione
-    numerabile di intervalli. Ora se \(A\) è un aperto qualunque \(A =
-    \bigcup_{n=1}^{\infty} \left( A \cap {(-n, n)}^{N} \right)\) e quindi è
+    Gli aperti sono misurabili, infatti un aperto limitato si può scrivere come unione
+    numerabile di intervalli (per II-numerabilità). Nel caso in cui \(A\) sia un aperto qualunque, \(A =
+    \bigcup_{n=1}^{\infty} \left( A \cap {(-n, n)}^{N} \right)\), ciascuna delle intersezioni è unione numerabile di intervalli e l'unione numerabile di un'unione numerabile è numerabile, quindi è
     misurabile. Inoltre tutti i chiusi sono misurabili in quanto complementare
     di aperti. Ne consegue che la \(\sigma\)-algebra \(\mathcal{B}\) di Borel
     generata dalla famiglia \(\tau\) degli aperti di \(\mathbb{R}^{n}\) è
@@ -735,9 +748,9 @@ oppure
     Per il viceversa, supponiamo \(A\) misurabile, allora per ogni \(n \in
     \mathbb{N}\) esistono chiuso \(F_{n}\) e aperto \(G_{n}\) con \(F_{n}
     \subseteq A \subseteq G_{n}  \) e \(\mu^\star(G_{n} \sminus F_{n}) <
-    \frac{1}{n}\). Ora considero \(F = \bigcup_{n=1}^{\infty}F_{n}\) e sia \(N =
-    A \sminus F\). \(N\) è allora trascurabile perché \(\mu^\star(N) =
-    \mu^\star(A \sminus F) \le \mu^\star(G_{n} \sminus F) \le \mu^\star(G_{n} -
+    \frac{1}{n}\). Considero \(F = \bigcup_{n=1}^{\infty}F_{n}\) e sia \(N =
+    A \sminus F\). \(N\) è trascurabile perché \(\mu^\star(N) =
+    \mu^\star(A \sminus F) \le \mu^\star(G_{n} \sminus F) \le \mu^\star(G_{n} \sminus 
     F_{n}) < \frac{1}{n}\) per ogni \(n\) quindi \(\mu^\star(N) = 0\). In
     pratica quindi \(A = \bigcup_{n \in \mathbb{N}} F_{n}  \cup N\) unione
     numerabile di chiusi e di un trascurabile. Il complementare di A quindi si
@@ -774,10 +787,12 @@ che \(\mu(F) > \mu(A_{n}) - \frac{\varepsilon}{2}\), pertanto \(\mu(F) >
 \end{proof}
 
 \subsection{Insiemi Trascurabili}
-Si tratta di insiemi la cui misura esterna è nulla, vediamo alcuni esempi.
+Un concetto molto importante della teoria della misura è quello di insieme
+trascurabile, ovvero di misura nulla.
 \begin{example}
-    In \(\mathbb{R}\) i punti sono trascurabili e le unioni numerabili di trascurabili è trascurabile per \(\sigma\)-additività.
-    In particolare quindi \(\mathbb{Q}\) è trascurabile in \(\mathbb{R}\) 
+    In \(\mathbb{R}\) i punti sono trascurabili e le unioni numerabili di
+    trascurabili sono trascurabili per \(\sigma\)-additività.
+    In particolare, \(\mathbb{Q}\) è trascurabile in \(\mathbb{R}\) 
 \end{example}
 
 La funzione di Dirichlet è un esempio di funzione che non è integrabile secondo
@@ -789,11 +804,12 @@ per ora notiamo che la funzione di Dirichlet è
         0 & x \notin \mathbb{Q} 
     \end{cases}
 \]
-Allora \(d = 0\) quasi ovunque in \(\mathbb{R}\).
+Allora \(d = 0\) quasi ovunque in \(\mathbb{R}\) (quasi ovunque in \(X\)
+significa in \(X \sminus N\) dove \(N\) è un trascurabile, come nella
+definizione~\ref{def:def_misura}).
 
 \begin{example}
-    In \(\mathbb{R}^2\) segmenti e rette sono insiemi trascurabili. Quindi ad
-    esempio l'insieme 
+    In \(\mathbb{R}^2\) segmenti e rette sono insiemi trascurabili. L'insieme
     \[
         A = \{(x, y) \in \mathbb{R}^2 : x \in \mathbb{Q}\} 
     \]
@@ -802,8 +818,8 @@ Allora \(d = 0\) quasi ovunque in \(\mathbb{R}\).
 \end{example}
 
 \begin{example}[Insieme di Cantor]\label{ex:cantor}
-    L'insieme di Cantor è un trascurabile che ha la cardinalità del continuo.
-    Si costruisce prendendo una successione di insiemi chiusi in \(\mathbb{R}\). 
+    L'insieme di Cantor è un trascurabile di \(\mathbb{R}\) che ha la cardinalità del continuo.
+    Si costruisce prendendo la seguente successione di insiemi chiusi in \(\mathbb{R}\): 
     \begin{align*}
         C_{0} &= [0, 1] \\
         C_{1} &= \left[ 0, \frac{1}{3} \right] \cup \left[ \frac{2}{3}, 1 \right] \\
@@ -816,15 +832,15 @@ Allora \(d = 0\) quasi ovunque in \(\mathbb{R}\).
     \caption{Successione la cui intersezione è l'insieme di Cantor}\label{fig:cantor}
 \end{figure}
     \(C_{n}\) è composto da \(2^{n}\) intervallini ciascuno di lunghezza
-    \(\frac{1}{3}^{n}\) 
+    \(\frac{1}{3^n}\) 
     L'insieme di Cantor è definito come
     \begin{equation}\label{eq:cantor}
         C = \bigcap_{n \in \mathbb{N}} C_{n}
     \end{equation}
-    Allora \(C\) è chiuso perché ogni \(C_{n}\) è chiuso, e \(C\) è non vuoto
+    \(C\) è chiuso perché ogni \(C_{n}\) è chiuso, e \(C\) è non vuoto
     perché ad esempio \(0 \in C\).
 
-    \(C_{n}\) è una successione decrescenti di insiemi, di cui \(\mu(C_{0}) = 1
+    \(C_{n}\) è una successione decrescente di insiemi, di cui \(\mu(C_{0}) = 1
     < +\infty\). Allora per continuità della misura esterna
     \[
         \mu(C) = \lim_{n \to \infty} \mu(C_{n}) = \lim_{n \to \infty} {\left( 1 -
@@ -832,23 +848,21 @@ Allora \(d = 0\) quasi ovunque in \(\mathbb{R}\).
     \]
     quindi \(C\) è trascurabile.
 
-    Ora vogliamo dimostrare che ha la cardinalità del continuo. Consideriamo di
-    usare la base ternaria, quindi ogni numero in \([0, 1]\) può essere scritto
-    come \(0.c_{1}c_{2}c_{3}\dots c_{n}\dots_3\) con \(c_{i}\in \{0, 1, 2\}\) ed è
-    equivalente a \(\sum_{n=1}^{\infty} c_n 3^{-n}\). Quindi ad esempio il punto
-    \(\frac{1}{3}\) si può scrivere come \(0.1\) oppure \(0.\overline{2}\) dove
-    la barra indica la periodicità. Notare ora che i punti dell'insieme di
-    Cantor si possono rappresentare in base ternaria utilizzando le sole cifre
+    Ora vogliamo dimostrare che ha la cardinalità del continuo. Scriviamo ogni numero di \([0, 1]\) in base 3
+    come \(0.c_{1}c_{2}c_{3}\dots c_{n}\dots_3\) con \(c_{i}\in \{0, 1, 2\}\), scrittura equivalente a \(\sum_{n=1}^{\infty} c_n 3^{-n}\). La scrittura non è univoca: ad esempio il punto
+    \(\frac{1}{3}\) si può scrivere come \(0.1\) oppure \(0.0\overline{2}\) dove
+    la barra indica la periodicità. Notiamo che i punti dell'insieme di
+    Cantor si \textbf{possono} rappresentare in base ternaria utilizzando le sole cifre
     \(0\) e \(2\).
 
     I punti dell'intervallo \([0, 1]\) si possono rappresentare
-    anche in base binaria, quindi \(y \in [0, 1]\) si può scrivere come
+    anche in base binaria, ossia \(y \in [0, 1]\) si può scrivere come
     \(0.d_{1}d_{2}\dots d_{n} \dots_2\) dove \(d_{i} \in \{0, 1\}\) per ogni
     \(i\) e \(y = \sum_{n=1}^{\infty} d_{n} 2^{-n} \). Ad esempio \(1 =
     0.\overline{1}_2\).
 
-    Adesso possiamo quindi costruire una funzione suriettiva
-    dall'insieme di Cantor ai punti di \([0, 1]\) in questo modo:
+    Possiamo costruire una funzione suriettiva
+    dall'insieme di Cantor ai punti di \([0, 1]\) (ossia determinare che la cardinalità di \(C\) è almeno quella del continuo) come segue. Si consideri \(x\) scritto usando le sole cifre \(0, 2\). 
     \begin{align*}
         x \in C &\longmapsto y \in [0, 1] \\
         x = 0.c_{1}c_{2}\dots c_{n}\dots_3 &\longmapsto y =
@@ -861,10 +875,11 @@ Allora \(d = 0\) quasi ovunque in \(\mathbb{R}\).
     ottenere un \(x \in C\) moltiplicando per due ogni cifra e leggendo il
     numero in base ternaria. Notare che questa funzione non è iniettiva poiché,
     ad esempio, sia \(\frac{1}{3} = 0.0\overline{2}_3\) che \(\frac{2}{3} =
-    0.2_3\) hanno come immagine \(\frac{1}{2} = 0.1_2 = 0.0\overline{1}_2\). Non
-    è difficile comunque trovare una funzione iniettiva, ad esempio
-    l'inclusione da \(C\) a \([0, 1]\) è una funzione iniettiva e quindi abbiamo
-    che \(C\) e \([0, 1]\) hanno la stessa cardinalità.
+    0.2_3\) hanno come immagine \(\frac{1}{2} = 0.1_2 = 0.0\overline{1}_2\). Per
+    determinare che la cardinalità è al più quella del continuo ho bisogno di
+    una funzione iniettiva, ed è sufficiente l'inclusione. Concludo, per il
+    teorema di Schröder–Bernstein, che esiste una biiezione tra \(C\) e \(
+    [0,1]\), ossia \(C\) ha la cardinalità del continuo. 
 \end{example}
 \subsection{Funzioni misurabili}
 Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e sia \(f: \Omega \to
@@ -877,7 +892,7 @@ Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e sia \(f: \Omega \to
 \end{definition}
 La definizione verrà parzialmente motivata dalla seguente proposizione:
 \begin{proposition}
-    Ciascuna delle seguenti affermazioni implica le altre:
+    Le seguenti sono equivalenti:
 \begin{enumerate}[label = \roman*)]
     \item \(f ^{-1}\left((\alpha, +\infty]\right) \in \mathcal{M} \quad \forall \alpha \in \mathbb{R}\)
     \item \(f ^{-1}\left([\alpha, +\infty]\right) \in \mathcal{M} \quad \forall \alpha \in
@@ -917,19 +932,15 @@ La definizione verrà parzialmente motivata dalla seguente proposizione:
 \end{proof}
 
 Grazie alla proposizione so che \(f\) è misurabile se e solo se le
-controimmagini di tutte le semirette sono misurabili. A questo punto però anche
-tutti i segmenti sono misurabili, infatti ad esempio \([a, b] = [a, +\infty]
-\cap [-\infty, b]\) quindi se le controimmagini di \([a, +\infty]\) e di \([-
-\infty, b]\) sono misurabili, allora anche la controimmagine di \([a, b]\) è
-misurabile, in quanto l'intersezione delle due. Ora avendo quindi che le
-controimmagini degli intervalli sono misurabili, abbiamo che anche le
-controimmagini dei borelliani sono misurabili, in quanto i borelliani sono
-unioni numerabili di intervalli.
+controimmagini di tutte le semirette sono misurabili. Ma quindi anche tutti i
+segmenti sono misurabili, siccome \([a, b] = [a, +\infty] \cap [-\infty, b]\).
+Essendo misurabili le controimmagini degli intervalli, abbiamo che anche le
+controimmagini dei boreliani sono misurabili (i boreliani sono unioni numerabili
+di intervalli). 
 
-Praticamente ogni funzione che possa venire in mente a chiunque è misurabile, e
-costruire una funzione non misurabile è un'operazione non banale e richiede
-l'assioma della scelta. Ora procediamo con alcune proprietà della classe delle
-funzioni misurabili.
+Le funzioni tipicamente incontrate sono misurabili, costruire una funzione non
+misurabile non è banale e richiede l'assioma della scelta. Ora procediamo con
+alcune proprietà della classe delle funzioni misurabili.
 \begin{proposition}
     Siano \(f,g\) funzioni misurabili. Allora anche \(\max(f, g)\) e \(\min(f,
     g)\) sono misurabili.
@@ -994,9 +1005,7 @@ funzioni misurabili.
     poiché significa che per ogni \(n\) vale \(f_{n}(x) > \alpha\).
 
     Per quanto riguarda \(u(x) = \sup_n \inf_{k \ge n} f_k(x)\) e \(v(x) =
-    \inf_n \sup_{k \ge n} f_k(x)\) si ha quindi che sono il sup e l'inf di
-    successioni di funzioni misurabili per la prima parte della proposizione, quindi
-    sono misurabili per la prima parte della proposizione.
+    \inf_n \sup_{k \ge n} f_k(x)\) segue dal risultato su inf e sup. 
 
     Il corollario segue ovviamente poiché se la funzione converge allora il
     limite è ad esempio uguale al \(\liminf\) 
@@ -1036,19 +1045,19 @@ funzioni misurabili.
     Siano \(f, g\) misurabili. Allora \(f\cdot g\) è misurabile, purché
     l'operazione sia ben definita.
 \end{proposition}
-\begin{proposition}
+\begin{proof}
     Iniziamo provando che se \(h\) è misurabile allora \(h^{2}\) è misurabile.
     Questo perché \(h^2(x) > \alpha \iff |h(x)| > \sqrt{\alpha}\) se \(\alpha\)
     è positivo (altrimenti la controimmagine è banalmente misurabile). Ma allora
     chiedere che \(h^2\) sia misurabile è equivalente a chiedere che lo sia
     \(|h|\).
 
-    Inoltre se \(h\) è misurabile, allora \(c\, h\), con \(c \in \mathbb{R}\)
+    Inoltre se \(h\) è misurabile, allora \(c\, h\), con \(c \in \mathbb{R}\),
     è misurabile in quanto \(c\cdot h(x) > \alpha \iff h(x) >
     \frac{\alpha}{c}\).
 
-    Notare adesso che \(\displaystyle \frac{{(f+g)}^2 - {(f-g)}^2}{4}\). 
-\end{proposition}
+    Notare adesso che \(\displaystyle \frac{{(f+g)}^2 - {(f-g)}^2}{4} = fg\). 
+\end{proof}
 
 \begin{proposition}
     Siano \(f,g\) misurabili. Allora \(\frac{f}{g}\) è misurabile, purché
@@ -1072,7 +1081,7 @@ Consideriamo uno spazio di misura \((\Omega, \mathcal{M}, \mu)\). Le
 \textbf{funzioni semplici}
 sono le funzioni che assumono un numero finito di valori reali. Quindi
 \(s : \Omega \to  \mathbb{R}\) è semplice se si può scrivere come combinazione
-lineare finita di funzioni caratteristiche. Quindi abbiamo
+lineare finita di funzioni caratteristiche, ossia
 \[
     s = \sum_{i=1}^{n} c_{i} \rchi_{E_{i}}
 \]
@@ -1091,12 +1100,12 @@ nell'approssimare funzioni. Più precisamente
     una successione \(\{s_{n}\} \) di funzioni semplici tali che \(s_{n} \to f\)
     puntualmente. Se \(f\) è misurabile, allora anche le \(s_{n}\) possono
     essere scelte tutte misurabili. Inoltre se \(f \ge 0\) (\(f \le 0\)) in \(\Omega\), allora
-    la successione \(\{s_{n}\} \) può essere presa non decrescente (non
+    la successione \(\{s_{n}\} \) può essere presa monotona non decrescente (non
     crescente).
 \end{proposition}
 \begin{proof}
     Cominciamo da \(f\) non negativa. Per \(n\) fissato scegliamo gli insiemi in
-    base ai valori di \(f\). Quindi scegliamo \(i = 1, \dots, n2^{n}\) e
+    base ai \textbf{valori} di \(f\). Consideriamo \(i = 1, \dots, n2^{n}\) e
     prendiamo \[E_{n, i} = \left\{x \in \Omega : \frac{i-1}{2^{n}} \le f(x) <
     \frac{i}{2^{n}}\right\} \quad \forall n \in \mathbb{N}, \,\, \forall i \in \{1,
 \dots, n2^{n}\}  \] 
@@ -1104,10 +1113,10 @@ Inoltre sia \[ F_{n}=\{x \in \Omega : f(x) \ge n\} \]
 
     Ora possiamo scrivere
     \[
-        s_{n}(x) = \sum_{i=1}^{n{2}^{n}} \frac{i-1}{2^{n}} \rchi_{E_{n, i}}(x) +
+        s_{n}(x) := \sum_{i=1}^{n{2}^{n}} \frac{i-1}{2^{n}} \rchi_{E_{n, i}}(x) +
         n \rchi_{F_{n}}(x)
     \]
-    Ora abbiamo chiaramente per costruzione che \(s_{n} \le f\). Vogliamo
+    Abbiamo \(s_{n} \le f\) per costruzione. Vogliamo
     mostrare che per ogni \(x \in \Omega\) abbiamo \(s_{n}(x) \to f(x)\).
 \begin{itemize}[label = --]
     \item Se \(f(x) = +\infty\) allora \(s_{n}(x) = n \to +\infty\)
@@ -1116,18 +1125,19 @@ Inoltre sia \[ F_{n}=\{x \in \Omega : f(x) \ge n\} \]
         \to 0\) 
 \end{itemize}
 
-È chiaro che se \(f\) è misurabile allora ogni \(s_{n}\) è misurabile, gli insiemi scelti sono controimmagini di segmenti e una retta.
+È chiaro che se \(f\) è misurabile allora ogni \(s_{n}\) è misurabile, gli
+insiemi scelti sono controimmagini di segmenti (gli \(E_{n,i}\)) e una semiretta
+(\(F_n\)).
 
-Ora dobbiamo controllare che la successione \(s_{n}\) che abbiamo costruito sia
-crescente. Infatti passando da \(s_{n}\) a \(s_{n+1}\) abbiamo un intervallo in
-più \([n, n+1)\), inoltre se \(f(x) < n\) allora \(s_{n+1}(x) = s_{n}(x)\)
-oppure \(s_{n+1}(x) = s_{n}(x) + \frac{1}{2^{n+1}}\). In conclusione quindi la
-successione è non decrescente.
+Controlliamo che la successione \(s_{n}\) sia monotona non decrescente. Passando
+da \(s_{n}\) a \(s_{n+1}\) abbiamo un intervallo in più \([n, n+1)\), quindi se
+\(f(x) < n\) allora \(s_{n+1}(x) = s_{n}(x)\) oppure \(s_{n+1}(x) = s_{n}(x) +
+\frac{1}{2^{n+1}}\). Quindi la successione è non decrescente.
 
-Consideriamo ora \(f\) di segno qualsiasi. Abbiamo \(f = f^{+} - f^{-}\) e
-osservo che \(f^{+}\) e \(f^{-}\) sono non negative. Costruisco due successioni
-di funzioni semplici \(s_{n}^{+}\) e \(s_{n}^{-}\) che convergono
-rispettivamente a \(f^{+}\) e \(f^{-}\) e osservo che \(s_{n} = s_{n}^{+} -
+Consideriamo ora \(f\) di segno qualsiasi. Abbiamo \(f = f^{+} - f^{-}\), dove
+\(f^{+}\) e \(f^{-}\) sono non negative. Costruiamo due successioni di funzioni
+semplici \(s_{n}^{+}\) e \(s_{n}^{-}\) che convergono rispettivamente a
+\(f^{+}\) e \(f^{-}\) e osserviamo che \(s_{n} = s_{n}^{+} -
 s_{n}^{-}\) è ancora una successione di funzioni semplici che converge a \(f\).
 \end{proof}
 \begin{remark}
@@ -1185,17 +1195,15 @@ f^{-}\) che noto sono misurabili e non negative, quindi, se almeno uno tra
 \[
     \int_{E} f \, d\mu = \int_{E} f^{+} \, d\mu - \int_{E} f^{-} \, d\mu
 \]
-Se entrambi \(f^{+}\) e \(f^{-}\) hanno integrale finito su \(E\) allora dico
-che \(f\) è \textbf{integrabile} su \(E\) e scrivo \(f \in L^{1}(E)\).
+Se entrambi \(f^{+}\) e \(f^{-}\) hanno integrale finito su \(E\) allora \(f\) 
+è detta \textbf{integrabile} (o sommabile) su \(E\) e si scrive \(f \in L^{1}(E)\). 
 \end{definition}
-Intanto quell'insieme non è vuoto, poiché la funzione \(0 \le f\) è una funzione
-semplice. Inoltre il sup può essere sia finito che \(+\infty\). Se \(f\) è una
+Si tratta di una buona definizione? L'insieme su cui si valuta il sup non è vuoto, poiché la funzione \(0 \le f\) è una funzione
+semplice. Inoltre il sup può essere sia finito che \(+\infty\).Inoltre è consistente con l'integrale elementare: se \(f\) è una
 funzione semplice, allora \(\int_{E} f \, d\mu = I_{E}(f)\), infatti \(f \le f\)
 è semplice e per ogni \(s\) misurabile e tale che \(0 \le s\le f\) in \(E\) avrò
 che \(I_E(s) \le I_E(f)\).
 
-NB:~\emph{Sommabile} è un sinonimo di \emph{integrabile} e capiterà di
-usarlo.
 \paragraph{Proprietà dell'integrale}
 \begin{enumerate}[label = \arabic*.]
     \item Se \(f \in L^{1}(E)\) e \(\alpha \in \mathbb{R}\), allora \(\alpha f
@@ -1207,7 +1215,7 @@ usarlo.
          procedendo con il sup il lato sinistro diventa \(\alpha \int_E f d\mu\)
          e il lato destro notiamo che ogni \(\alpha s\) è una funzione semplice
          \(u\) che rispetta la definizione di integrale per \(\alpha f\), quindi
-         procedendo con il sup otteniamo la proprietà. Similmente otteniamo 
+         procedendo con il sup otteniamo la proprietà. 
 
          Ora possiamo estendere a \(f\) misurabile e \(\alpha \in \mathbb{R}\)
          scrivendo \(f = f^{+} - f^{-}\) e osservando che \(\alpha f =
@@ -1215,7 +1223,7 @@ usarlo.
          f^{-}\) dove se \(\alpha < 0\)  allora \(-\text{sign}(\alpha) f^{-}\) e
      \(- \text{sign}(\alpha) f^{+}\) sono non negative e misurabili.
     \end{proof}
-    \item Se \(f, g\) in \(L^{1}(E)\) e \(f(x) \le g(x)\) per ogni \(x \in E\)
+    \item Se \(f, g \in L^{1}(E)\) e \(f(x) \le g(x)\) per ogni \(x \in E\),
         allora \(\int_{E} f d\mu \le \int_{E} g d\mu\)
     \begin{proof}
         Sia \(f = f^{+} - f^{-}\) e \(g = g^{+} - g^{-}\). Allora naturalmente
@@ -1258,10 +1266,10 @@ usarlo.
     \end{proof}
 
 \end{enumerate}
-\begin{theorem}[Teorema di generazione di misure]
+\begin{theorem}[Teorema di generazione di misure]\label{thm:gen_mis}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura e sia \(f : \Omega
-    -> [0, +\infty]\) una funzione misurabile e non negativa. Allora la funzione
-    di insieme 
+    \rightarrow [0, +\infty]\) una funzione misurabile e non negativa. Allora la
+    funzione di insieme 
     \[
         \nu(E) = \int_E f d\mu \quad \forall E \in \mathcal{M}
     \]
@@ -1284,29 +1292,36 @@ usarlo.
                 \int_A s d\mu = I_A(s) = \sum_{i=1}^{n} c_{i} \mu(A \cap E_{i}) = \sum_{i=1}^{n}
                 c_{i} \sum_{k=1}^{\infty} \mu(A_k \cap E_{i})
             \]
-            Dove si è usata la \(\sigma\)-additività di \(\mu\). Ora scambiando
-            la somma e la serie, che possiamo fare perché se sono tutte
-            convergenti allora ok, se invece anche solo una di quelle con
-            \(c_{i} >0\) dovesse divergere allora necessariamente l'integrale
-            originale è \(+\infty\), ma anche la serie ottenuta scambiando somma
-            e serie diverge, poiché ha termine generale maggiore di quello della
-            serie divergente.
+            Dove si è usata la \(\sigma\)-additività di \(\mu\). Scambiamo
+            la somma e la serie. Lo possiamo fare perché:
+            
+            \begin{enumerate}
+                \item se sono tutte convergenti non c'è problema;
+                \item se una delle serie corrispondenti a un \(c_{i} >0\)
+                    dovesse divergere allora necessariamente l'integrale
+                    originale è \(+\infty\), ma anche la serie ottenuta
+                    scambiando somma e serie diverge, poiché ha termine generale
+                    maggiore di quello della serie divergente.
+            \end{enumerate}
+
+            Quindi 
+
             \[
                 I_A(s) = \sum_{k=1}^{\infty} \sum_{i=1}^{n} c_{i} \mu(A_k \cap
                 E_{i}) = \sum_{k=1}^{\infty} I_{A_k}(s) = \sum_{k=1}^{\infty}
                 \int_{A_k} s d\mu
             \]
-            Ora se \(f\) è misurabile e non negativa e \(0 \le s \le f\) in
-            \(A\) abbiamo che
+            Sia ora \(f\) misurabile e non negativa e \(0 \le s \le f\) in
+            \(A\). Abbiamo che
             \[
                 I_A(s) = \sum_{k=1}^{\infty} I_{A_k}(s) \le  \sum_{k=1}^{\infty}
                 \int_{A_k}  f d\mu
             \]
-            Ora procedendo con il sup otteniamo la diseguaglianza 
+            Usando la definizione col sup otteniamo la diseguaglianza 
             \[
                 \int_{A} f d\mu \le \sum_{k=1}^{\infty} \int_{A_k} f d\mu
             \]
-            Ora vogliamo trovare l'altra diseguaglianza. Per ogni
+            Ora vogliamo dimostrare la diseguaglianza inversa. Per definizione di integrale, per ogni
             \(\varepsilon>0\) e \(k = 1, \dots, m\) esistono \(s_{1}, \dots,
             s_{m}\) semplici, misurabili e \(0 \le s_{i} \le f\) in \(A_{i}\)
             tali che 
@@ -1320,15 +1335,15 @@ usarlo.
             \[
                 \sum_{i=1}^{m} \int_{A_{i}} f d\mu  - m \frac{\varepsilon}{m}
                 \le   \sum_{i=1}^m \int_{A_{i}} s_{i} d\mu =
-                \int_{\bigcup_{i=1}^{m} A_{i} } f d\mu \le \int_{A} f d\mu
+                \int_{\bigcup_{i=1}^{m} A_{i} } s d\mu \le \int_{A} f d\mu
             \]
             Da cui troviamo che 
             \[
                 \varepsilon + \int_{A} f d\mu \ge \sum_{i=1}^{m} \int_{A_{i}} f
                 d\mu \quad \forall \varepsilon >0 \,,\, \forall m \in \mathbb{N}
             \]
-            e con \(\varepsilon \to 0 \) e \(m \to +\infty\) otteniamo l'altra
-            diseguaglianza.
+            per arbitrarietà di \(\varepsilon\) e per \(m \to +\infty\)
+            otteniamo la diseguaglianza desiderata.
     \end{enumerate}
 \end{proof}
 \begin{corollary}[\(\sigma\)-additività dell'integrale]
@@ -1366,9 +1381,9 @@ usarlo.
     \]
 \end{proposition}
 \begin{proof}
-    \(|f|\) è misurabile perché \(f\) è misurabile. Ora sia \(A = \{x \in E:
+    \(|f|\) è misurabile perché \(f\) è misurabile. Gli insiemi \(A = \{x \in E:
     f(x) \ge 0\} \) e \(B = \{x \in E : f(x) < 0\} \) sono entrambi misurabili
-    per la misurabilità di \(f\). Allora abbiamo che
+    per misurabilità di \(f\). Allora abbiamo che
     \[
         \int_E |f| d\mu = \int_{A} |f| d\mu + \int_{B} |f| d\mu = \int_{A} f^{+}
         d\mu + \int_B f^{-} d\mu < +\infty
@@ -1386,7 +1401,8 @@ usarlo.
 \begin{theorem}[CNES per l'integrabilità]\label{th:cnes_L1}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(f : \Omega
     \to  \mathbb{R}\cup \{\pm\infty\} \) misurabile. Allora \(f\) è integrabile
-    se e solo se esiste \(g\) integrabile tale che \(|f| \le g\) quasi ovunque.
+    se e solo se esiste \(g\) integrabile tale che \(|f| \le g\) quasi ovunque,
+    in simboli: 
     \[
         f \in L^{1}(\Omega) \iff \exists g \in L^{1}(\Omega) \quad |f| \le g
         \quad \text{q.o.}
@@ -1415,10 +1431,10 @@ lo è secondo Lebesgue perché \(|f| = 1\) è integrabile.
 
 \paragraph{Integrale di Riemann} L'integrale di Lebesgue che abbiamo introdotto
 è un'estensione dell'integrale di Riemann, cioè \emph{ogni funzione
-R-integrabile è anche L-integrabile e i due integrali coincidono}. Infatti una
+R-integrabile è anche L-integrabile e, quando esistono entrambi gli integrali, questi coincidono}. Infatti una
 funzione \(f\) si dice R-integrabile in \(E\) se per ogni \(\varepsilon>0\)
 esistono una somma inferiore \(S\) e una somma superiore \(T\) tali che \(T-S <
-\varepsilon\). Per ogni somma (superiore e inferiore) io posso considerare la
+\varepsilon\). Per ogni somma (superiore e inferiore) possiamo considerare la
 funzione a scala che su ogni elemento di suddivisione (intervallino, quadratino,
 ecc) prende il valore specifico che appare nella somma.
 \begin{remark}
@@ -1427,14 +1443,14 @@ ecc) prende il valore specifico che appare nella somma.
     mentre per le funzioni semplici si guardano i valori assunti dalla funzione
     e poi si costruiscono gli insiemi su cui la funzione assume quei valori.
 \end{remark}
-ora diciamo 
+Chiamiamo 
 \[
     I_R = \sup_{\substack{s\text{ a scala} \\ s \le f}} \int_{E} s dx = 
     \inf_{\substack{S\text{ a scala} \\ t \ge f}} \int_{E} t dx
 \]
 Invece \(f\) è L-integrabile se \(f^{+}, f^{-} \in L^{1}{(E)}\). Se \(f\) è
 R-integrabile allora anche \(f^{+}\) e \(f^{-}\) lo sono. Basta quindi mostrare
-che se\(g\) è non-negativa e R-integrabile allora è anche L-integrabile e i due
+che se \(g\) è non-negativa e R-integrabile allora è anche L-integrabile e i due
 integrali coincidono. Esiste quindi \(I_R{(g)} = \int_{E} g dx\) integrale di
 Riemann. Per \(g\) tale esiste anche \[I_L{(g)} = \sup \left\{\int_E s d\mu : s
 \text{ semplice, misurabile, e } 0\le s\le g \text{ in E} \right\} \] Dobbiamo
@@ -1461,7 +1477,7 @@ Ne consegue necessariamente che \(I_L{(g)} = I_R{(g)}\)
 \subsection{Teoremi di passaggio al limite sotto il segno di integrale}
 \begin{theorem}[Beppo Levi \-- versione base]\label{th:beppo_levi_base}
 Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(f_{n}\) una
-successione non decrescente di funzioni misurabili e non negative su \(\Omega\).
+successione monotona non decrescente di funzioni misurabili e non negative su \(\Omega\).
 Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
 \(\forall E \in \mathcal{M}\) si ha
 \[
@@ -1470,40 +1486,42 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
 \end{theorem}
 \begin{proof}
     Sia \(\alpha := \lim_{n \to \infty} \int_E f_{n} d\mu\), dove \(\alpha \in [0,
-    +\infty]\). Abbiamo necessariamente che 
+    +\infty]\). Per monotonia dell'integrale e della successione di funzioni si ha 
     \[
-        \int_E f d\mu \ge \alpha = \lim_{n \to \infty} \int_E f_{n} d\mu
+        \int_E f d\mu \ge \int_E f_{n} d\mu \quad \forall n \in \mathbb{N}\,\,
+        \overset{n\to \infty}{\implies }
+        \int_E f d \mu \ge \alpha    
     \]
-    Vogliamo dimostrare l'altra diseguaglianza. Prendo \(s\) semplice,
-    misurabile e tale che \(0 \le s \le f\) in \(E\). Sia poi \(\delta \in (0,
-    1)\). Siano 
+    
+    Vogliamo dimostrare l'altra diseguaglianza. Sia \(s\) semplice,
+    misurabile e tale che \(0 \le s \le f\) in \(E\). Fissiamo \(\delta \in (0,
+    1)\) e definiamo la successione di insiemi
     \[
         E_{n} := \{ x \in E : f_{n}(x) \ge \delta s(x)\} 
     \]
-    Se \(x\) è tale che \(f(x) < +\infty\) allora sicuramente esiste
+    Affermiamo che \(E_{n} \subseteq E_{n+1}\) e che \(\bigcup_{n=1}^{\infty} E_{n}
+    = E\). Infatti, se \(x\) è tale che \(f(x) < +\infty\) allora sicuramente esiste
     \(\overline{n} \in \mathbb{N}\) tale che \(f_{n}(x) \ge \delta s(x)\) per
-    ogni \(n \ge \overline{n}\). Se invece \(f(x) = +\infty\) allora poiché
-    \(s\) assume solo valori finiti vale lo stesso senza bisogno di ricorrere
+    ogni \(n \ge \overline{n}\) (per l'osservazione a~\ref{prop:esistenza_semplici}). Nei punti in cui \(f(x) = +\infty\), per limitatezza di
+    \(s\), vale lo stesso senza bisogno di ricorrere
     all'uso del \(\delta\).
-
-    Osservo quindi che \(E_{n} \subseteq E_{n+1}\) e che \(\bigcup_{n=1}^{\infty} E_{n}
-    = E\). Quindi abbiamo che
+    Quindi:
     \[
         \int_E f_{n} d\mu \ge \int_{E_{n}} f_{n} d\mu \ge \delta \int_{E_{n}} s
         d\mu
     \]
-    Per \(n \to +\infty\) otteniamo quindi
+    Nel limite per \(n \to +\infty\) otteniamo
     \[
         \alpha \ge \delta \int_E s d\mu \quad \forall \delta \in (0, 1)
     \]
     Per definizione di \(\alpha\) e per continuità della misura data da \(s\).
-    Ora poiché vale per ogni \(\delta \in (0, 1)\) deve valere anche per \(\delta
+    Poiché vale per ogni \(\delta \in (0, 1)\) deve valere anche per \(\delta
     = 1\). Otteniamo quindi
     \[
         \alpha \ge \int_E s d\mu \quad \forall s \text{ semplice, misurabile e }
         0 \le s \le f \text{ in } E
     \]
-    Ora procedendo con il sup otteniamo la diseguaglianza desiderata.
+    Prendendo il sup otteniamo la diseguaglianza desiderata.
 \end{proof}
 \begin{lemmao}[Lemma di Fatou \-- versione base]\label{le:fatou_base}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(f_{n}\) una
@@ -1515,7 +1533,7 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
     \]
 \end{lemmao}
 \begin{proof}
-    Sia \(g_{n} = \inf_{k \ge n} f_{k}\). Allora ogni \(g_{n}\) è non negativa e
+    Sia \(g_{n} = \inf_{k \ge n} f_{k}\). La successione \(\{g_{n}\}\) è non negativa e
     di funzioni misurabili, inoltre \(0 \le g_{n} \le f_{n}\) e \(g_{n} \le
     g_{n+1} \). Quindi \(g_{n}\) è una successione non decrescente e
     per il teorema di Beppo Levi abbiamo che
@@ -1523,15 +1541,18 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
         \int_E \lim_{n \to \infty} g_{n} d\mu = \lim_{n \to \infty} \int_E g_{n}
         d\mu
     \]
-    Ora poiché \(g_{n} \le f_{n}\) per ogni \(n\), e poiché \(\lim_{n \to
+    Poiché \(g_{n} \le f_{n}\) per ogni \(n\), e poiché \(\lim_{n \to
     \infty} g_{n}(x) = \sup_{n \in N} g_{n}(x) =\\= \liminf_{n \to \infty} f_{n}(x)\) 
     \[
-        \int_E \liminf_{n \to \infty} f_{n} d\mu = \int_E \lim_{n \to \infty}
-        g_{n} d\mu = \lim_{n \to \infty} \int_E g_{n} d\mu \le \liminf_{n \to
-        \infty} \int_E f_{n} d\mu
+        \begin{aligned}
+            \int_E \liminf_{n \to \infty} f_n \, d\mu 
+            &= \int_E \lim_{n \to \infty} g_n \, d\mu \\
+            &= \lim_{n \to \infty} \int_E g_n \, d\mu \\
+            &= \liminf_{n \to \infty} \int_E g_n \, d\mu \\
+            &\leq \liminf_{n \to \infty} \int_E f_n \, d\mu.
+        \end{aligned}
     \]
-    Dove l'ultima diseguaglianza è data dal fatto che \(\lim =
-    \liminf\) se il limite esiste e il \(\liminf\) conserva le diseguaglianze di
+    Poiché \(\lim = \liminf\) se il limite esiste e il \(\liminf\) conserva le diseguaglianze di
     successioni.
 \end{proof}
 
@@ -1545,24 +1566,23 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
 \begin{proof}
     Siano \(u,v\) misurabili e non negative. Posto \(w = u +v\) si ha 
     \begin{equation}\label{eq:linearita_integrale_1}
-        \int_E w d\mu = \int_{E} u d\mu + \int_v d\mu
+        \int_E w d\mu = \int_{E} u d\mu + \int_E v d\mu
     \end{equation}
     Infatti esistono due successioni \(s_{n}\) e \(t_{n}\) di funzioni semplici
-    tali che \(s_{n} \to u\) e \(t_{n} \to v\) puntualmente e sia \(\{s_{n}\} \)
+    tali che \(s_{n} \to u\) e \(t_{n} \to v\) puntualmente dove sia \(\{s_{n}\} \)
     che \(\{t_{n}\} \) sono crescenti. Definiamo \(h_{n} := s_{n} + t_{n}\)
     ottenendo ancora una successione crescente di funzioni semplici misurabili
     non negative. Notiamo che  
     \[
         \int_E h_{n} d\mu = \int_E s_{n} d\mu + \int_E t_{n} d\mu
     \]
-    perché sono funzioni semplici. Ora portiamo al limite e applichiamo Beppo
+    per linearità degli integrali elementari. Prendendo il limite e applicando Beppo
     Levi, ossia~\ref{th:beppo_levi_base}
-    ottenendo~\eqref{eq:linearita_integrale_1}. 
+    otteniamo~\eqref{eq:linearita_integrale_1}. 
 
-    Ora se siano \(f_{1}, f_{2}\) integrabili, quindi misurabili. Inoltre
+    Siano ora \(f_{1}, f_{2}\) integrabili, quindi misurabili, so che
     \(|f_{1}|, |f_{2}| \in L^{1}{(E)}\). Poiché \(|f| = |f_{1}+f_{2}| \le
-    |f_{1}|+|f_{2}|\) che è integrabile perché ricade nel caso precedente, anche
-    \(|f|\) è integrabile e quindi \(f\), per la CNES~\ref{th:cnes_L1}.
+    |f_{1}|+|f_{2}|\), ho l'integrabilità per la CNES~\ref{th:cnes_L1}.
     Sappiamo che 
     \[
         f^{+}- f^{-} = f_{1}^{+} -f_{1}^{-} + f_{2}^{+} - f_{2}^{-} \iff f^{+} +
@@ -1577,26 +1597,25 @@ Posto \(f(x) = \lim_{n \to \infty} f_{n}(x)\) per ogni \(x \in \Omega\), allora
     da cui, riordinando i termini otteniamo la tesi.
 \end{proof}
 
-Ricordando il lemma di Fatou~\ref{le:fatou_base}, avevamo che la diseguaglianza
-è spesso un'uguaglianza. In particolare ovviamente ogni volta che la successione
-\(f_{n}\) è crescente abbiamo un uguale (Beppo Levi~\ref{th:beppo_levi_base}) e
-i \(\liminf \)  sono dei \(\lim\). Ci sono però anche casi in cui vale la
-diseguaglianza stretta.
+Nel lemma di Fatou~\ref{le:fatou_base} vale la disuguaglianza larga. L'uguaglianza vale, ad esempio, quando
+\(f_{n}\) è crescente in virtù di Beppo Levi~\ref{th:beppo_levi_base}, e
+i \(\liminf \)  sono dei \(\lim\). Ci sono casi l'uguaglianza effettivamente non
+è verificata
 
-\begin{example}
+\begin{example}[Uguaglianza a \(+\infty\)]
     Sia \(\Omega = \mathbb{R}\) con la misura di Lebesgue. Sia \(f_{n}{(x)} =
-    x\rchi_{[-n, n]}\). Allora \(\lim_{n \to \infty} f_{n} = 1\) e
+    \rchi_{[-n, n]}\). Allora \(\lim_{n \to \infty} f_{n} = 1\) e
     \(\int_{\mathbb{R}} f_{n} d\mu = 2n\) otteniamo quindi
     \[
         \int_{\mathbb{R}} \lim_{n \to \infty} f_{n} d\mu = +\infty =
         \lim_{n \to \infty} \int_{\mathbb{R}} f_{n} d\mu
     \]
-    Confermando Beppo Levi
+    In accordo con Beppo Levi. 
 \end{example}
-\begin{example}\label{ex:limite_integrale_NO}
+\begin{example}[Disuguaglianza stretta]\label{ex:limite_integrale_NO}
     Sia \(\Omega = \mathbb{R}\) con la misura di Lebesgue. Sia \(f_{n} =
     \rchi_{[n, n+1]}\). Allora \(\lim_{n \to \infty} f_{n} = 0\) e
-    \(\int_{\mathbb{R}} f_{n} d\mu = +\infty\) otteniamo quindi 
+    \(\int_{\mathbb{R}} f_{n} d\mu \rightarrow +\infty\) otteniamo quindi 
     \[
         \int_{\mathbb{R}} \liminf_{n \to \infty} f_{n} d\mu = 0 \le \liminf_{n
         \to \infty} \int_{\mathbb{R}} f_{n} d\mu = +\infty
@@ -1613,7 +1632,7 @@ Se ho una funzione integrabile su \(E\), questa può prendere i valori
 contrario la funzione non sarebbe integrabile perché \(f^{+}\) oppure \(f^{-}\)
 sarebbero non limitate
 
-\begin{lemma}[Lemma di Fatou \-- versione estesa]\label{th:fatou_esteso}
+\begin{lemma}[Lemma di Fatou \-- versione estesa a successioni di funzioni di segno qualunque]\label{th:fatou_esteso}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(\{f_{n}\}\) una
     successione di funzioni misurabili su \(\Omega\). Allora
 \begin{enumerate}[label = \arabic*.]
@@ -1698,7 +1717,7 @@ sarebbero non limitate
     dove le prime diseguaglianze sono per integrabilità di \(g\) e \(g
     \le f_{n}\) e l'ultima perché la successione degli integrali è limitata.
 
-    Similmente per il caso 2.
+    Analogo il caso 2.
 \end{proof}
 
 \begin{theorem}[Beppo Levi \-- seconda versione]\label{thm:beppo-levi}
@@ -1754,7 +1773,7 @@ sarebbero non limitate
     delle ridotte è limitata e si può applicare Beppo Levi~\ref{thm:beppo-levi}
 \end{proof}
 
-\begin{theorem}[Convergenza Dominata di Legesgue]\label{thm:Lebesgue_conv_dom}
+\begin{theorem}[Convergenza Dominata di Lebesgue]\label{thm:Lebesgue_conv_dom}
     Sia \({(\Omega, \mathcal{M}, \mu)}\) uno spazio di misura. Sia \(f_{n}\) una
     successione di funzioni misurabili tale che \(f_{n} \to f\) puntualmente.
     Inoltre sia \(g\) una funzione integrabile in \(E \in \mathcal{M}\) tale che 
@@ -1804,7 +1823,7 @@ di integrale. Basti pensare all'esempio~\ref{ex:limite_integrale_NO}
 \paragraph{Funzioni \(\frac{1}{x^{\alpha}}\)} Consideriamo le funzioni \(f{(x)}
 = \frac{1}{x^{\alpha}}\), con \(\alpha>0\) sia su \((0,1)\) che in \({(1,
 +\infty)}\). Queste funzioni sono non limitate oppure hanno dominio non
-limitato, e possiamo estendere Riemann per integrarle in senso improprio in
+limitato, e possiamo estendere l'integrale di Riemann per integrarle in senso improprio in
 alcuni casi. In particolare
 
 \begin{itemize}[label = --]
@@ -1821,8 +1840,7 @@ dove l'integrale in senso improprio è definito come
         +\infty & \text{se } \alpha \ge 1
     \end{cases}
 \]
-
-Se io ora vado a considerare le funzioni
+Se consideriamo le funzioni
 \[
     f_{\varepsilon} {(x)} = \begin{cases}
         \frac{1}{x^{\alpha}} & \text{se } \varepsilon \le x\le 1 \\
@@ -1836,8 +1854,8 @@ a \(\varepsilon \to 0^{p}\) ossia \(\forall {(\varepsilon_{1},
     f_{\varepsilon_{1}}{(x)} \ge f_{\varepsilon_{2}}{(x)} \quad \forall x \in
     {(0,1)}
 \]
-se ora passo al limite per \(\varepsilon \to 0^{+}\) per il teorema di Beppo
-Levi concludo che la funzione limite \(f{(x)} = \frac{1}{x^{\alpha}}\) è
+passando al limite per \(\varepsilon \to 0^{+}\), per il teorema di Beppo
+Levi, concludiamo che la funzione limite \(f{(x)} = \frac{1}{x^{\alpha}}\) è
 L-integrabile se e solo se \(\alpha < 1\).
 
 Queste informazioni sono molto utili quando dobbiamo valutare l'integrabilità di
@@ -1849,8 +1867,8 @@ funzione su \({(1, +\infty)}\) tale che \(g{(x)} \ge \frac{1}{\sqrt{x}}\) per
 ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
 
 \begin{example}
-    Consideriamo la funzione \(g{(x)} = \frac{1}{\ln x}\) in \(2,
-    +\infty\). Sappiamo che \(\lim_{x \to \infty} \frac{\ln x}{\sqrt{x}} = 0\) ossia
+    Consideriamo la funzione \(g{(x)} = \frac{1}{\ln x}\) in \((2,
+    +\infty)\). Sappiamo che \(\lim_{x \to \infty} \frac{\ln x}{\sqrt{x}} = 0\) ossia
     \(\forall \varepsilon > 0\) \(\exists \overline{x}\) tale che \(\forall x \ge
     \overline{x}\) si ha che \(\frac{\ln x}{\sqrt{x}} \le \varepsilon\) ossia
     \(\frac{1}{\ln x} \ge \frac{1}{\varepsilon \sqrt{x}}\). Quindi \(g\) non è
@@ -1904,8 +1922,8 @@ ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
 \end{itemize}
 \end{eser}
 \begin{remark}
-    Ci sono funzioni integrabili in senso improprio che non L-integrabili. Il
-    prossimo esempio ne è un esempio (scusate il gioco di parole)
+    Ci sono funzioni integrabili in senso improprio che tuttavia non sono \(\mathcal L\)-integrabili. Il
+    prossimo esempio ne è un esempio (scusate il gioco di parole) (scusato):
 \end{remark}
 \begin{example}
         Sia \(f(x) = \frac{\cos x}{x}\) in \([\frac{\pi}{2}, +\infty]\). Allora
@@ -1952,8 +1970,8 @@ ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
         \int_{\mathbb{R}^{N}} f d\delta_O = \sup \{ I(s) : s \text{ semplice
         tale che } 0\le s\le f\} 
     \]
-    Ora quindi \(s(x) = \sum_{i=1}^{n} c_{i} \rchi_{E_{i}}(x)\) e \(I(s) =
-    \sum_{i=1}^{n} c_{i} \delta_O(E_{i}) \) che diventa quindi
+    Quindi \(s(x) = \sum_{i=1}^{n} c_{i} \rchi_{E_{i}}(x)\) e \(I(s) =
+    \sum_{i=1}^{n} c_{i} \delta_O(E_{i}) \) che quindi
     \[
         I(s) = \sum_{i:O \in E_{i}} c_{i} \le f(O)
     \]
@@ -1969,29 +1987,29 @@ ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
     Dunque \(f\) è integrabile se e solo se \(f(O) \in \mathbb{R}\).
 \end{example}
 
-\begin{example}
+\begin{example}[Serie come integrali con misura del contare]
     Consideriamo ora la misura del contare e lo spazio \((\mathbb{N},
-    2^{\mathbb{N}}, \#)\). Ora le funzioni sono le funzioni sono le successioni
-    \(f : \mathbb{N} \to \mathbb{R} \cup \{\pm \infty\} \). Di nuovo tutte sono
-    misurabili perché tutti gli insiemi sono misurabili. Procediamo a capire
-    quali sono le \(f\) integrabili. Sia ora \(f \ge 0\).
-    Allora
+    2^{\mathbb{N}}, \#)\). Le funzioni considerate sono le successioni
+    \(f : \mathbb{N} \to \mathbb{R} \cup \{\pm \infty\} \). Anche in questo caso sono
+    misurabili perché tutti gli insiemi sono misurabili. Quali sono le funzioni
+    integrabili? Sia \(f \ge 0\).
+    Abbiamo che
     \[
         \int_{\mathbb{N}} f d\# = \sup \{ I(s) : s \text{ semplice tale che } 0
         \le s \le f\}
     \]
     dove \(s(x) = \sum_{i=1}^{n} c_{i} \rchi_{E_{i}}(x) \) dove chiediamo che gli
-    \(E_{i}\) siano a due a due disgiunti. Osservo che \(\sum_{i=1}^{k} c_{i}
-    \rchi_{\{i\} } (x) \) sono particolari funzioni semplici. Deve essere
+    \(E_{i}\) siano a due a due disgiunti. Osserviamo che posso usare una scrittura standard \(\sum_{i=1}^{k} c_{i}
+    \rchi_{\{i\} } (x) \), che sono particolari funzioni semplici. Deve essere
     \(c_{i} \le f(i)\) per \(i = 1, \dots, k\).
-    Ne concludiamo che ha senso che sia
+    Concludiamo che
     \[
         \int_{\mathbb{N}} f d\# = \sum_{i=1}^{+\infty} f(i) \#(\{i\} ) =
         \sum_{i=1}^{+\infty} f(i)
     \]
     Se \(f(i) = +\infty\) per qualche \(i\) oppure la serie diverge allora
     l'integrale è \(+\infty\).
-    Concludiamo \(f\) non negativa, allora \(f \in L^{1(\mathbb{N})}\) se
+    Concludiamo \(f\) non negativa, allora \(f \in L^{1}(\mathbb{N})\) se
     \(\sum_{n=1}^{\infty} f(n) \) converge. Se ora \(f\) è di segno qualunque
     allora \(f \in  L^{1}(\mathbb{N})\) se 
     \[
@@ -2002,7 +2020,7 @@ ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
 \end{example}
 
 \begin{eser}
-    per ogni \(n \in \mathbb{N}\) definiamo \[f_{n}(x) =
+    Per ogni \(n \in \mathbb{N}\) definiamo \[f_{n}(x) =
         \begin{cases}
             \displaystyle
         \frac{|\ln (n^{7} x^2)|}{3 + n^{4}x^2} & \text{ se } x \neq 0 \\
@@ -2010,8 +2028,8 @@ ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
 \end{cases}
 \]
 \begin{enumerate}[label = \alph*)]
-    \item Per quali \(n\) \(f_{n}\) è integrabile su \(\mathbb{R}\)? Succede che
-        esiste \(C_{n}\) tale che 
+    \item Per quali \(n\) \(f_{n}\) è integrabile su \(\mathbb{R}\)? 
+        Esiste \(C_{n}\) tale che 
         \[
             |\ln (n^{7} x^2)| \le \frac{C_{n}}{\sqrt{ |x| }} \quad \forall x \in
             (-1, 1) \sminus \{0\}
@@ -2045,7 +2063,7 @@ ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
         \[
             \int_{C}  s dx = \sum_{n=1}^{\infty} \int_{C} f_{n} dx  \text{ ? }
         \]
-        SÌ alla grande per Beppo Levi, infatti \(f_{n} \ge 0\) e nel nostro caso
+        SÌ \textbf{alla grande} per Beppo Levi, infatti \(f_{n} \ge 0\) e nel nostro caso
         i termini della serie sono tutti finiti.
 
         Vogliamo ora vedere se \(s \in L^{1} (C)\) sfruttando l'uguaglianza.
@@ -2068,6 +2086,8 @@ ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
 \end{eser}
 
 \subsection{Convergenze di funzioni misurabili}
+Di seguito vengono introdotti diversi concetti di convergenza di successioni di funzioni e relative implicazioni, 
+il risultato chiave è il teorema di (Severini)-Egorov (\ref{thm:severini-egorov}).
 \begin{definition}{Convergenza quasi ovunque}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Una successione di
     funzioni misurabili \(f_{n} : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
@@ -2095,12 +2115,12 @@ ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
 \end{definition}
 \begin{example}
     Consideriamo la successione \(f_{n}{(x)} = x^{n}\) in \([0,1]\). Allora
-    \(f_{n} \to 0\) q.o.~in \([0, 1]\), perché per ogni \(x \in (0, 1)\)
-    \(f_{n}{(x)} \to 0\) e chiaramente \(\mu{[0,1] \sminus {(0,1)}} =
-    \mu{(\{0,1\} )} = 0\). Ma anche \(f_{n} \to f\) quasi uniformemente, infatti
-    per ogni \(\varepsilon > 0\) scegliamo \([1-\frac{\varepsilon}{2} , 1]\) e
-    in questo intervallo c'è convergenza uniforme. Infine 
-    \[
+    \(f_{n} \to 0\) q.o.~in \([0, 1]\), perché per ogni \(x \in [0, 1)\)
+    \(f_{n}{(x)} \to 0\) e chiaramente \(\mu{[0,1] \sminus {[0,1)}} =
+    \mu{(\{1\} )} = 0\). Ma anche \(f_{n} \to f\) quasi uniformemente, infatti
+    per ogni \(\varepsilon > 0\) scegliamo \(F=[1-\frac{\varepsilon}{2} , 1]\) e
+    nel complementare c'è convergenza uniforme. Infine, per la convergenza in
+    misura, \[
         \{x \in [0,1] : |x^{n}| > \varepsilon\} = \{x \in
         [0,1] : |x| > \varepsilon^{\frac{1}{n}}\} = (\varepsilon^{\frac{1}{n}},
         1]
@@ -2147,7 +2167,7 @@ valgono.
 
 \begin{theorem}[Severini-Egorov]\label{thm:severini-egorov}
     Sia \({(\Omega, \mathcal{M}, \mu)}\) uno spazio di misura finito, ossia
-    \(\mu{(\Omega)} < +\infty\). Se allora \(f_{n} \to f\) q.o~in \(\Omega\),
+    \(\mu{(\Omega)} < +\infty\). Se \(f_{n} \to f\) q.o.~in \(\Omega\), allora
     \(f_{n} \to f\) q.u.~in \(\Omega\).
 \end{theorem}
 \begin{proof}
@@ -2161,36 +2181,35 @@ valgono.
     Gli insiemi \(A_{m}\) formano una successione crescente e inoltre 
     \(
         \bigcup_{m \in \mathbb{N}} A_{m} = \Omega \sminus N
-    \)
-    infatti se \(x \in A_{m}\) per \(m\) fissato, allora succede che
+    \).
+    Infatti se \(x \in A_{m}\) per \(m\) fissato, si ha che
     \(|f_{n}{(x)} - f{(x)}| \le \frac{1}{k}\) per ogni \(n\ge m\), quindi
-    \(f_{n}{(x)} \to f{(x)}\). Ora per continuità della misura 
+    \(f_{n}{(x)} \to f{(x)}\). Per continuità della misura 
     \[
-        \lim_{n \to \infty} \mu{(A_{m})} = \mu{(\Omega \sminus N)} = \mu{(\Omega)}
+        \lim_{m \to \infty} \mu{(A_{m})} = \mu{(\Omega \sminus N)} = \mu{(\Omega)}
     \]
     dunque esisterà certamente un \(m_k\) tale che \(A_{m_k}\) ha complementare
-    di misura minore di \(\frac{\varepsilon}{2^{k}}\) \((\star)\). In \(A_{m_k}\) succede
+    di misura minore di \(\frac{\varepsilon}{2^{k}}\) \((\star)\). In \(A_{m_k}\) si avrà
     che \(|f_{n}{(x)} - f{(x)}| \le \frac{1}{k}\) per ogni \(n \ge m_k\) e per
     ogni \(x \in A_{m_k} \). Poniamo allora
     \[
-        E = \bigcap_{k \in \mathbb{N}} A_{m_k}
+        E := \bigcap_{k \in \mathbb{N}} A_{m_k}
     \]
     Allora su \(E\) c'è convergenza uniforme di \(f_{n}\) a \(f\) perché
     se \(x \in E\) allora per ogni \(k \in \mathbb{N}\) esiste \(m_k \in
     \mathbb{N}\) tale che per ogni \(n \ge m_k\) si ha che \(|f_{n}{(x)} -
     f{(x)}| \le \frac{1}{k}\). 
 
-    Vogliamo ora mostrare che \(\mu {\left( E^{C} \right)} < \varepsilon\).
-    Abbiamo
+    Per mostrare che \(\mu {\left( E^{C} \right)} < \varepsilon\) usiamo la subadditività:
     \[
         \mu{\left( E^{C} \right)} = \mu {\left( \bigcup_{k \in \mathbb{N}}
-    \left\{ A_{m} \right\} \right)} \le \sum_{k=1}^{\infty} \mu{(A_{m_k}^{C})} <
+    \left\{ A_{m_k}^C \right\} \right)} \le \sum_{k=1}^{\infty} \mu{(A_{m_k}^{C})} <
     \sum_{k=1}^{\infty} \frac{\varepsilon}{2^{k}} = \varepsilon 
     \]
 \end{proof}
 \begin{note}
     L'ipotesi di \(\mu{(\Omega)} < +\infty\) è stata usata in \((\star)\),
-    perché noi sappiamo che
+    infatti sappiamo che
     \[
         \mu{\left( A_{m_k}  \right)} +\mu{\left( A_{m_k} ^{C} \right)} = \mu{(\Omega)}
     \]
@@ -2212,10 +2231,10 @@ valgono.
     \varepsilon\). Proseguendo
     \begin{align*}
         \{x \in \Omega : \left| f_{n}{(x)} - f{(x)} \right| > \varepsilon\} &=
-        \underbrace{\{x \in E : \left| f_{n}{(x)} - f{(x)} > \varepsilon \right|
+        \underbrace{\{x \in E : \left| f_{n}{(x)} - f{(x)} \right| > \varepsilon 
         \}}_{\text{vuoto per } n \ge n_\varepsilon}  \cup \\
-     &\cup \underbrace{\{x \in E^{C} : \left| f_{n}{(x)} - f{(x)} >\varepsilon
-        \right| \}}_{\text{sottoinsieme di \(E^{C}\), quindi di misura \(<
+     &\cup \underbrace{\{x \in E^{C} : \left| f_{n}{(x)} - f{(x)}\right| >\varepsilon
+         \}}_{\text{sottoinsieme di \(E^{C}\), quindi di misura \(<
         \sigma\)}}  
     \end{align*}
     ma allora abbiamo provato che
@@ -2303,7 +2322,7 @@ valgono.
     \item Dimostrare che \(|f_{n}(x)| \le \frac{5}{n}\) per ogni \(x\) con \(|x|
         \ge 1\) 
         \[
-            |f_{n}(x)| \le \frac{2 n |x|^{\frac{1}{3} + 3}}{1 + n^2x^2} \le
+            |f_{n}(x)| \le \frac{2 n |x|^{\frac{1}{3} }+3}{1 + n^2x^2} \le
             \frac{\frac{2}{n}|x|^{\frac{1}{3}} + \frac{3}{n^2}}{\frac{1}{n^2} +
             x^2} \le \frac{2}{n} \frac{|x|^{\frac{1}{3}}}{x^2} +
             \frac{\frac{3}{n^2}}{1} \le \frac{2}{n}\cdot 1 + \frac{3}{n} =
@@ -2350,24 +2369,28 @@ valgono.
 \end{eser}
 
 \subsection{Teoremi di Fubini e Tonelli}
-Vogliamo analizzare gli integrali multipli, considerando gli spazi prodotto.
+Vogliamo analizzare gli integrali multipli, per farlo consideriamo gli spazi
+prodotto. L'insieme ambiente 
+e la \(\sigma\)-algebra sono definiti in maniera naturale, mentre richiede qualche accortezza aggiuntiva
+la definizione della misura prodotto. 
+
 Siano \((X, \mathcal{M}, \mu)\) e \((Y, \mathcal{N}, \nu)\) spazi di misura
-\(\sigma\)-finiti. Vogliamo costruire uno spazio di probabilità prodotto
-Allora l'insieme ambiente è \(X \times Y\) e definiamo \(\mathcal{M} \times
+\(\sigma\)-finiti. Vogliamo costruire uno spazio di misura prodotto.
+L'insieme ambiente è \(X \times Y\) e definiamo \(\mathcal{M} \times
 \mathcal{N}\) come la \(\sigma\)-algebra generata da tutti gli insiemi del tipo
-\(A \times B\), con \(A \in \mathcal{M}\) e \(B \in \mathcal{N}\). Adesso quindi
+\(A \times B\), con \(A \in \mathcal{M}\) e \(B \in \mathcal{N}\). Si ha che
 \((X \times Y, \mathcal{M} \times \mathcal{N})\) è uno spazio misurabile con una 
 misura indotta da \(\mu\) e \(\nu\). A tale scopo introduciamo nuovi insiemi e
 costruzioni.
 Sia \(E \in \mathcal{M} \times \mathcal{N}\). Allora per ogni \((x,y) \in X
 \times Y\) abbiamo i due insiemi  \(E_x := \{y \in Y : (x, y)
-\in E\} \) e \(E_{y} := \{x \in X : (x, y) \in E\} \). Per definire la misura
-prodotto quindi ricorriamo alla seguente proposizione
+\in E\} \) e \(E_{y} := \{x \in X : (x, y) \in E\} \). Introduciamo una proposizione finalizzata alla 
+definizione della misura prodotto: 
 \begin{proposition}\label{prop:def_misura_prodotto}
     Per ogni \(x \in X\) si ha che \(E_x \in \mathcal{N}\) e per ogni \(y
     \in Y\) si ha che \(E_y \in \mathcal{M}\). Inoltre le funzioni \(x \mapsto
-    \nu(E_x)\) e \(y \mapsto \mu(E_y)\) risultano misurabili in \((X,
-    \mathcal{M})\) e \((Y, \mathcal{N})\) rispettivamente. In aggiunta
+    \nu(E_x)\) e \(y \mapsto \mu(E_y)\) sono misurabili in \((X,
+    \mathcal{M})\) e \((Y, \mathcal{N})\) rispettivamente. Si ha che
     \[
         \int_X \nu(E_x) d\mu = \int_Y \mu(E_y) d\nu =: (\mu \times \nu)(E)
     \]
@@ -2386,10 +2409,13 @@ successione \(\{B_{n}\} \) decrescente di insiemi in \(\mathcal{A}\) si ha che
 \end{definition}
 Data una collezione \(\mathcal{F}\) di sottoinsiemi di \(\Omega\), si definisce
 \(\nu(\mathcal{F})\) famiglia monotona generata da \(\mathcal{F}\) come la più
-piccola famiglia monotona di insiemi contenente \(\mathcal{F}\). 
+piccola famiglia monotona di insiemi contenente \(\mathcal{F}\) (attenzione al
+bisticcio di simboli, qui \(\nu\) non c'entra nulla con la misura introdotta
+poc'anzi). 
 \begin{remark}
     Dato \(\mathcal{F}\), si possono definire \(\sigma(\mathcal{F})\) e
-    \(\nu(\mathcal{F})\), con \(\sigma(\mathcal{F})\) 
+    \(\nu(\mathcal{F})\), con \(\sigma(\mathcal{F})\) che rappresenta la
+    minima~\(\sigma\)-algebra contenente \(\mathcal{F}\).
 \end{remark}
 
 \begin{lemma}
@@ -2405,8 +2431,8 @@ Notiamo che
 \begin{align*}
     {\left( \mu \times \nu \right)} (E) &= \int_{X} \nu(E_x) d\mu = \int_{Y}
     \mu(E_y) d\nu = \int_{X \times Y} \rchi_{E}(x, y) d(\mu \times \nu) \\
-        &= \int_X {\left( \int_Y \rchi_E(x, y) d\nu\right)} d\mu = \int_X
-        {\left( \int_Y \rchi_E(x, y) d\nu\right)} d\mu
+        &= \int_X {\left( \int_Y \rchi_E(x, y) d\nu\right)} d\mu = \int_Y
+        {\left( \int_X \rchi_E(x, y) d\mu\right)} d\nu
 \end{align*}
 \begin{theorem}[Tonelli]
     Sia \(F\) una funzione misurabile in \((X \times Y, \mathcal{M} \times
@@ -2432,11 +2458,16 @@ Notiamo che
 \end{theorem}
 \begin{proof}
     Dimostriamo il teorema di Tonelli per funzioni semplici. Sia \(F = \sum_{i=1}^{n}
-    c_{i} \rchi_{A_{i} \times B_{i}}\). Allora
+    c_{i} \rchi_{E_i}\). Allora, per quanto affermato sulla misura prodotto,
     \[
-        \int_{X \times Y} F d(\mu \times \nu) = \sum_{i=1}^{n} c_{i} \mu(A_{i})
-        \nu(B_{i}) = \int_X \left( \int_Y F(x,y) d\nu \right) d\mu
+        \begin{aligned}
+            \int_{X \times Y} F \, d(\mu \times \nu) 
+            &= \sum_{i=1}^{n} c_{i} (\mu \times \nu )(E_i) \\
+            &= \sum_{i=1}^{n} c_{i} \int_X \left( \int_Y \rchi_{E_{i}}(x, y) \, d\nu \right) d\mu \\
+            &= \int_X \left( \int_Y F(x, y) \, d\nu \right) d\mu
+        \end{aligned}
     \]
+
     Ora per passare da funzioni semplici a funzioni non negative, consideriamo
     una successione crescente di funzioni semplici \(F_{n} \nearrow F\). Allora
     per il teorema di Beppo Levi abbiamo che
@@ -2447,31 +2478,34 @@ Notiamo che
     \]
     Ora per il teorema di Beppo Levi abbiamo che
     \[
-        \int_X \left( \int_Y F_{n}(x,y) d\nu \right) d\mu = \int_X \left(
+        \int_X \left( \int_Y F_{n}(x,y) d\nu \right) d\mu \to \int_X \left(
         \int_Y F(x,y) d\nu \right) d\mu
     \]
-    e quindi abbiamo dimostrato il teorema di Tonelli per funzioni non negative.
-    Ora per il caso generale, consideriamo \(F = F^{+} - F^{-}\) e applichiamo
-    il teorema di Tonelli per funzioni non negative.
 \end{proof}
 \begin{remark}
     La non-negatività di \(F\) è essenziale per il teorema di Tonelli. Si
-    consideri come esempio \(\displaystyle f(x, y) = \frac{xy}{{\left( x^2+y^2
-    \right)}^2}\) su \(\mathbb{R}^2 - (0, 0)\), \(f(0, 0) = 0\). Allora \(f\) è
-    L-integrabile su \(\mathbb{R}\) rispetto a \(x\) e a \(y\), e l'integrale
-    vale 0. Otteniamo quindi che
+    consideri come esempio
+    \[
+    f(x, y) =
+    \begin{cases} 
+    \displaystyle \frac{xy}{{\left( x^2 + y^2 \right)}^2} & \text{se } (x, y) \neq (0, 0), \\[10pt]
+    0 & \text{se } (x, y) = (0, 0).
+    \end{cases}
+    \]
+    su \(\mathbb{R}^2\). Allora \(f\) è~\(\mathcal{L}\)-integrabile su \(\mathbb{R}\) rispetto a \(x\) e a \(y\), e l'integrale
+    vale 0 per simmetria, in simboli:
     \[
         \int_{\mathbb{R}} \left( \int_{\mathbb{R}} f(x, y) dx \right) dy = 
         \int_{\mathbb{R}} \left( \int_{\mathbb{R}} f(x, y) dy \right) dx = 0 
     \]
-    eppure \(f\) non è L-integrabile su \(\mathbb{R}^2\), infatti
+    Eppure \(f\) non è \(\mathcal{L}\)-integrabile su \(\mathbb{R}^2\), infatti
     \[
         \int_{\mathbb{R}^2} |f(x, y)| d(x, y) = \int_{\mathbb{R}^2}\left| \frac{xy}{{\left(
         x^2 + y^2 \right)}^2} \right|d(x, y) = \int_{0}^{2\pi} \int_{0}^{+\infty}
         \frac{\cancel{r^2} |\cos \theta \sin \theta|}{r^{\cancel{4}}} \cancel{r}dr d\theta
     \]
-    e rispetto a \(r\) viene l'integrale di \(\frac{1}{r}\) né in un intorno di
-    \(0\) né in un intorno di \(+\infty\).
+    e rispetto a \(r\) viene l'integrale di \(\frac{1}{r}\) che non è
+    integrabile né in un intorno di \(0\) né in un intorno di \(+\infty\).
 \end{remark}
 \begin{theorem}[Fubini]
     Sia \(F \in L^{1}(X \times Y)\). Allora 
@@ -2522,8 +2556,8 @@ Notiamo che
     L^{1}(\mathbb{R}^{N})\) (ed è ben definita).
 \end{proposition}
 \begin{proof}
-    Consideriamo la funzione \(F(x, y) = f(x-y) g(y)\). Allora chiaramente
-    \(|F(x-y)| = |f(x-y)||g(y)|\). Allora abbiamo che
+    Consideriamo la funzione \(F(x, y) = f(x-y) g(y)\), quindi
+    \(|F(x-y)| = |f(x-y)||g(y)|\). Abbiamo che
     \[
 \int_{\mathbb{R}^{N}}
         |f(x-y)||g(y)| dx = |g(y)| \int_{\mathbb{R}^{N}} |f(x-y)| dx = |g(y)|
@@ -2539,7 +2573,7 @@ Notiamo che
     \[
         \int_{\mathbb{R}^{N}} |F(x, y)| d\mu =
          \int_{\mathbb{R}^{N}}
-        \int_{\mathbb{R}^{N}} |f(x-y)||g(y)| dy dx = \int_{\mathbb{R}^{N}}
+        \int_{\mathbb{R}^{N}} |f(x-y)||g(y)| dy dx =
         \int_{\mathbb{R}^{N}}|f|d\mu \int_{\mathbb{R}^{N}} |g|d\mu < +\infty    
     \]
     Quindi ora sapendo che \(F \in L^{1}\), possiamo applicare il teorema di
@@ -2553,8 +2587,11 @@ Notiamo che
 
 \newpage
 \subsection{Misure Relative}
+In questo paragrafo si introduce il concetto di misura relativa, si dimostra il
+teorema di decomposizione di Hahn e si introducono i concetti di misura
+assolutamente continua e di misura singolare.
 \begin{definition}{Misura Relativa}
-Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. Sia \(\phi: \mathcal{M} \to
+Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. \(\varphi: \mathcal{M} \to
 \mathbb{R}\) si dice \textbf{misura relativa} se valgono le seguenti proprietà:
 \begin{enumerate}[label = \arabic*.]
     \item \(\varphi(\varnothing) = 0\)  
@@ -2633,7 +2670,7 @@ Ora procediamo con alcune osservazioni sulle misure relative
     è una misura relativa
 \end{proposition}
 \begin{proof} \(\) 
-La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda.
+La prima parte, \(\varphi_+\) misura finita, è ovvia. Procediamo con la seconda.
 
 \begin{enumerate}[label = \arabic*.]
     \item \((\varphi_{1} - \varphi_{2})(E) = \varphi_{1}(E) - \varphi_{2}(E) \in
@@ -2650,9 +2687,9 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}[Generazione misura relativa]
+\begin{proposition}[Generazione di misure relative]\label{prop:gen_mis_rel}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura e sia \(f : \Omega
-    \to \mathbb{R}\) una funzione, con \(f \in L^{1}\). Allora
+    \to \mathbb{R}\) una funzione, \(f \in L^{1}\). Allora
     \begin{align*}
         \varphi : \mathcal{M} &\longrightarrow \mathbb{R} \\
         E &\longmapsto \varphi (E) = \int_E f d\mu
@@ -2668,7 +2705,7 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
         \[
             \varphi\left( \bigcup_{n \in \mathbb{N}} E_{n} \right) =
             \int_{\bigcup_{n \in \mathbb{N}} E_{n} } f d\mu =
-            \sum_{n=1}^{\infty} \int_{E_{n}} \varphi(E_{n}) =
+            \sum_{n=1}^{\infty} \int_{E_{n}} f d \mu =
             \sum_{n=1}^{\infty} \varphi(E_{n}) 
         \]
 \end{enumerate}
@@ -2693,7 +2730,10 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
 \begin{remark}
     \(\varnothing\) è sia positivo che negativo per ogni misura relativa.
 \end{remark}
-
+\begin{remark}
+    Non è da confondere il concetto di insieme a misura positiva/negativa
+    con quello di insieme positivo/negativo.
+\end{remark}
 \begin{theorem}[Teorema di decomposizione di Hahn]
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e \(\varphi : \mathcal{M
     \to \mathbb{R}}\) una misura relativa. Allora esistono due insiemi \(A, B
@@ -2707,6 +2747,7 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
     Hahn, ma anche \((A, B) = (\mathbb{R} \sminus \{1\}, \{1\} )\) lo è. In
     generale basta prendere \(1 \not\in A \ni 0\) e \(B = A^C\).
 \end{remark}
+Si dimostrano due lemmi strumentali alla dimostrazione del teorema di decomposizione di Hahn.
 \begin{lemma}
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e \(\varphi :
     \mathcal{M} \to \mathbb{R}\) una misura relativa. Allora se esiste \(A \in
@@ -2715,23 +2756,23 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
     \(\varphi(P)>0\).
 \end{lemma}
 \begin{proof}
-    Se \(A\) è positivo ho concluso, supponiamo quindi che \(A\) non sia
-    positivo. Allora esiste un sottoinsieme di \(A\) con misura negativa.
+    Il caso in cui \(A\) sia positivo è banale, supponiamo quindi che \(A\) non sia
+    positivo. Esiste dunque un sottoinsieme di \(A\) con misura negativa. Sia
     \[
-        n_{1} := \min \{n \in \mathbb{N} : \exists A' \in \mathcal{M}, \quad A'
-        \subseteq A, \quad \varphi(A') < - \frac{1}{n} \} 
+        n_{1} := \min \left\{n \in \mathbb{N} : \exists A' \in \mathcal{M}, \quad A'
+        \subseteq A, \quad \varphi(A') < - \frac{1}{n} \right\} 
     \]
-    trovo quindi \(A_{1} \subseteq A \), con \(A_{1} \in \mathcal{M}\) e tale
+    quindi \(A_{1} \subseteq A \), \(A_{1} \in \mathcal{M}\), è tale
     che \(\varphi(A_{1}) < -\frac{1}{n_{1}}\).
 
-    Se \(A\sminus A_{1}\) è positivo ho concluso, infatti \(\varphi(A \sminus
+    Se \(A\sminus A_{1}\) è positivo abbiamo concluso, infatti \(\varphi(A \sminus
     A_{1}) = \varphi(A) - \varphi(A_{1}) > \varphi(A)>0\), supponiamo quindi che
     \(A \sminus A_{1}\) non sia positivo e ripetiamo il procedimento.
     \[
-        n_{2} := \min \{n \in \mathbb{N}: \exists A' \in \mathcal{M}, \quad A'
-        \subseteq A \sminus A_{1}, \quad \varphi(A') < -\frac{1}{n} \} 
+        n_{2} := \min \left\{n \in \mathbb{N}: \exists A' \in \mathcal{M}, \quad A'
+        \subseteq A \sminus A_{1}, \quad \varphi(A') < -\frac{1}{n} \right\} 
     \]
-    trovo quindi \(A_{2} \in \mathcal{M}\) con \(A_{2} \subseteq A - A_{1} \) e
+    quindi \(A_{2} \in \mathcal{M}\), \(A_{2} \subseteq A - A_{1} \) e
     \(\varphi(A_{2}) < -\frac{1}{n_{2}}\).
 
     Ora se \(A \sminus (A_{1} \cup A_{2})\) è positivo concludiamo, altrimenti
@@ -2739,11 +2780,11 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
     Se esiste un \(N \in \mathbb{N}\) tale che \(A \sminus (\bigcup_{i=1}^{N}
     A_{i} )\) è positivo abbiamo concluso, infatti
     \[
-        \varphi(A \sminus \bigcup_{i=1}^{N} A_{i}) = \varphi(A) - \sum_{i=1}^{N}
+        \varphi\left(A \sminus \bigcup_{i=1}^{N} A_{i}\right) = \varphi(A) - \sum_{i=1}^{N}
         \varphi(A_{i}) > \varphi(A) + \sum_{i=1}^{N} \frac{1}{n_{i}} > 0
     \]
     Supponiamo quindi che non esista un tale \(N\). Otteniamo una successione
-    \(\{A_k\} \) di insiemi \(A_k \in \mathcal{M}\) e con
+    \(\{A_k\} \) di insiemi \(A_k \in \mathcal{M}\) con:
     \begin{align*}
         A_{i} \cap A_{j} &= \varnothing \quad \forall i \neq j, \quad
         \varphi(A_k) < -\frac{1}{n_{k}} \quad \forall k \in \mathbb{N} \\
@@ -2752,13 +2793,13 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
     \varphi(A') < -\frac{1}{n} \} 
     \end{align*}
     
-    Allora il claim è che \(P = A \sminus \left( \bigcup_{k \in \mathbb{N}} A_K
+    Allora affermiamo che \(P = A \sminus \left( \bigcup_{k \in \mathbb{N}} A_K
     \right) \in \mathcal{M}\) sia positivo e abbia misura positiva.
     \[
         \varphi(P) = \varphi(A) - \sum_{k=1}^{\infty} \varphi(A_{k}) >
         \varphi(A) > 0
     \]
-    Ci rimane da verificare che \(P\) sia positivo. Suppongo per assurdo che
+    Ci rimane da verificare che \(P\) sia positivo. Supponiamo per assurdo che
     esista un \(E \in \mathcal{M}\) tale che \(E \subseteq P \) e \(\varphi(E) <
     -\varepsilon\). Abbiamo che
     \[
@@ -2771,11 +2812,14 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
         \frac{1}{n_{\overline{k} - 1}} < \varepsilon \implies \varphi(E) <
         -\varepsilon < -\frac{1}{n_{\overline{k} - 1}}
     \]
-    ma ora sappiamo che 
+    ma si era supposto che fosse 
     \[
         E \subseteq A \sminus \left( \bigcup_{k \in \mathbb{N}} A_k \right)
         \subseteq A \sminus \left( \bigcup_{k=1}^{\overline{k}-1} A_k \right)  
     \]
+    che è assurdo poiché in uno dei passi successivi \(E\) dovrebbe venir
+    ``eliminato'' (un certo termine non si può ripetere all'infinito perché la
+    serie \(\sum_{i=1}^{\infty} \frac{1}{n_{i}}\) converge).
 \end{proof}
 \begin{lemma}
     Sia \((\Omega, \mathcal{M})\) con misura relativa \(\varphi : \mathcal{M}
@@ -2786,8 +2830,8 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
     \]
 \end{lemma}
 \begin{proof}
-    Consideriamo la successione \({\tilde{P}_k}\), dove \(\tilde{P}_1 = P_{1}\),
-    \(\tilde{P}_2 = P_{2} \sminus P_{1}\) e in genere
+    Costruiamo la successione \({\tilde{P}_k}\), dove \(\tilde{P}_1 = P_{1}\),
+    \(\tilde{P}_2 = P_{2} \sminus P_{1}\) e in generale
     \[
         \tilde{P}_{k+1}  = P_{k+1} \sminus \left( \bigcup_{i=1}^{k} P_{i}
             \right)
@@ -2799,7 +2843,7 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
     \[
         \bigcup_{k \in \mathbb{N}} P_k = \bigcup_{k \in \mathbb{N}} \tilde{P}_k 
     \]
-    Sia \(E \in \mathcal{M}\) con \(E \in \bigcup_{k \in \mathbb{N}} P_k\).
+    Sia \(E \in \mathcal{M}\) con \(E \subseteq \bigcup_{k \in \mathbb{N}} P_k\).
     Allora
     \[
         \varphi(E) = \varphi\left(E \cap \bigcup_{k \in \mathbb{N}} \tilde{P}_k
@@ -2814,11 +2858,11 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
     \[
         p := \sup \{ \varphi(P) : P \in \mathcal{M}, \quad P \text{ positivo}\} 
     \]
-    dove il \(\sup\) è finito in quanto \(\varphi(\varnothing) = 0\). Sia ora
-    una successione \(\{A_{n}\}_{n \in \mathbb{N}} \) con \(A_{n}\) positivo
-    tale che \(\lim_{n \to \infty} \varphi(A_{n}) = p\). Allora \(A := \bigcup_{n \in
-    \mathbb{N}} A_{n}\)  allora \(A \in \mathcal{M}\) e \(A\) è positivo, per il
-    lemma 2. Per definizione di \(p\) abbiamo che \(\varphi(A) \le p\). Inoltre
+    dove il \(\sup\) è ben definito perché l'insieme è non vuoto in quanto contiene \(\varphi(\varnothing) = 0\). Si consideri
+    una successione \(\{A_{n}\}_{n \in \mathbb{N}} \) di \(A_{n}\) positivi
+    tale che \(\lim_{n \to \infty} \varphi(A_{n}) = p\). Si definisca \(A := \bigcup_{n \in
+    \mathbb{N}} A_{n}\), allora \(A \in \mathcal{M}\) e \(A\) è positivo per il
+    lemma precedente. Per definizione di \(p\) abbiamo che \(\varphi(A) \le p\). Inoltre
     \[
         \varphi(A) = \varphi((A \sminus A_{n}) \cup A_{n}) = \varphi(A \sminus
         A_{n}) + \varphi(A_{n}) \ge \varphi(A_{n}), \quad \forall n \in \mathbb{N}
@@ -2827,14 +2871,14 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
     quindi che \(\varphi(A) = p\).
 
     Ora prendiamo \(B = \Omega \sminus A \implies A \cap B = \varnothing\) e \(A
-    \cup B = \Omega\). Vogliamo mostrare che \(B\) è negativa. Assumiamo per
-    assurdo che esista un insieme a misura positiva, e quindi per il lemma
-    possiamo assumere che esista un insieme positivo \(P \subseteq B \) con \(P
-    \in \mathcal{M}\). Allora \(A \cup P\) è positivo e 
+    \cup B = \Omega\). Vogliamo mostrare che \(B\) è negativo. Assumiamo per
+    assurdo che non lo sia, ossia che ammetta un certo sottoinsieme di misura positiva. 
+    Per il primo lemma questo ammette un sottoinsieme positivo, e quindi esiste un insieme positivo \(P \subseteq B \) con \(P
+    \in \mathcal{M}\). Ma allora \(A \cup P\) è positivo e 
     \[
         \varphi(A \cup P) = \varphi(A) + \varphi(P) = p + \varphi(P) > p
     \]
-    che è assurdo per la massimalità di \(p\). Dunque \(B\) non ha sottoinsiemi
+    che è assurdo per la massimalità di \(p\). Dunque \(B\) non ammette sottoinsiemi
     di misura positiva ed è quindi negativo.
 \end{proof}
 \begin{theorem}[Invarianza della decomposizione di Hahn]
@@ -2850,8 +2894,7 @@ La prima parte, \(\varphi_+\) misura finita, è ovvio. Procediamo con la seconda
 \begin{proof}
 \begin{figure}[ht]
     \centering
-    \incfig{diminvaranza}
-    \label{fig:diminvaranza}
+    \incfig{diminvaranza}\label{fig:diminvaranza}
 \end{figure}
 Partiamo dalla prima:
 \[
@@ -2876,7 +2919,7 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
 \end{itemize}
 \end{definition}
 \begin{remark}
-    La precedente è una buona definizione, per il teorema di invarianza della
+    La precedente è una buona definizione per il teorema di invarianza della
     decomposizione di Hahn.
 \end{remark}
 \begin{example}
@@ -2895,7 +2938,7 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
     da somme di misure di Dirac?
 \end{eser}
 
-\begin{theorem}
+\begin{theorem}\label{thm:misure-relative-osservazioni}
     Sia \((\Omega, \mathcal{M})\) uno spazio di misura con \(\varphi:
     \mathcal{M} \to \mathbb{R}\) una misura relativa. Allora 
 \begin{enumerate}[label = \arabic*)]
@@ -2926,42 +2969,42 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(\varphi\) una
     misura (o misura relativa) su \((\Omega, \mathcal{M})\). Allora \(\varphi\)
     si dice \(\mu\)-\textbf{assolutamente continua} (denotato \(\mu\)-a.c.) se
-    per 
+    vale 
     \[
-        \mu(E) = 0 \implies \varphi(E) = 0, \forall E \in \mathcal{M}
+        \mu(E) = 0 \implies \varphi(E) = 0, \quad \forall E \in \mathcal{M}
     \]
 \end{definition}
 \begin{example}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(f \in
     L^{1}(\Omega)\), con \(\varphi(E) = \int_E f d\mu\) misura relativa. Allora
-    \(\varphi\) è assolutamente continua. Infatti preso un insieme \(E \in
+    \(\varphi\) è \(\mu\)-assolutamente continua. Infatti preso un insieme \(E \in
     \mathcal{M}\) tale che \(\mu(E) = 0\) abbiamo che \(\varphi(E) = 0\) perché
     integra su un insieme trascurabile.
 \end{example}
 \begin{example}
     Sia \((\mathbb{R}, \mathcal{L}(\mathbb{R}))\) lo spazio misurabile di
-    Lebesgue. Allora consideriamo su tale spazio due misure: \(\delta_O\) delta
-    di Dirac in \(x=0\) e \(\mathcal{L}^{1}(\mathbb{R})\) la misura di Lebesgue
-    1-dimensionale.
+    Lebesgue. Consideriamo su tale spazio due misure: \(\delta_O\)
+    di Dirac centrata in \(x=0\) e \(\lambda\) la misura di Lebesgue
+    1-dimensionale. 
 
-    Allora \(\delta_0\) non è assolutamente continua, infatti \(E =\{0\} \)
-    allora \(\mathcal{L}^{1}(E) = 0\) ma \(\delta_0(E) = 1\). Similmente
-    \(\mathcal{L}^{1}\) non è \(\delta_0\)-assolutamente continua, infatti preso
-    \(E = (1, 2)\) abbiamo che \(\mathcal{L}^{1}(E) = 1\) ma \(\delta_0(E) =
-    0\).
+    Allora \(\delta_0\) non è \(\lambda\)-assolutamente continua, infatti, per \(E =\{0\} \)
+    si ha \(\lambda(E) = 0\) ma \(\delta_0(E) = 1\). 
+
+    Similmente \(\lambda\) non è \(\delta_0\)-assolutamente continua, infatti preso
+    \(E = (1, 2)\) abbiamo che \(\delta_0(E) = 0\) ma \(\lambda(E) = 1\).
 \end{example}
 \begin{example}
     Ora sempre su \((\mathbb{R}, \mathcal{L}(\mathbb{R}))\) consideriamo la
-    misura \(\mathcal{L}^{1}_{\star} (\mathbb{R}) : \mathcal{L}(\mathbb{R}) \to
-    \mathbb{R}\) definita come \(E \mapsto \mathcal{L}^{1}(E \cap [0, 1])\).
+    misura \(\lambda_{\star} : \mathcal{L}(\mathbb{R}) \to
+    \mathbb{R}\) che mappa \(E \mapsto \lambda(E \cap [0, 1])\). Si verifica facilmente che \(\lambda_\star\) è una misura (finita).
 
-    Allora \(\mathcal{L}^{1}_\star\) è \(\mathcal{L}^{1}\)-assolutamente
-    continua, infatti preso \(E\) trascurabile per \(\mathcal{L}^{1}\) abbiamo
-    che \(E \cap [0, 1] \subseteq E \) quindi anche \(\mathcal{L}^{1}_{\star}(E)
-    = \mathcal{L}^{1}(E \cap [0,1]) \le \mathcal{L}^{1}(E) = 0\).
-    \(\mathcal{L}^{1}\) non è tuttavia \(\mathcal{L}^{1}_\star\)-assolutamente
-    continua, infatti preso \(E = (1, 2)\) abbiamo che \(\mathcal{L}^{1}(E) =
-    1\) ma \(\mathcal{L}^{1}_\star(E) = \mathcal{L}^{1}(\varnothing)= 0\).
+    Allora \(\lambda_\star\) è \(\lambda\)-assolutamente continua, infatti preso \(E\) trascurabile per \(\mathcal{L}^{1}\) abbiamo
+    che \(E \cap [0, 1] \subseteq E \) quindi anche \(\lambda_{\star}(E)
+    = \lambda(E \cap [0,1]) \le \lambda(E) = 0\).
+
+    \(\lambda\) non è tuttavia \(\lambda_\star\)-assolutamente
+    continua, infatti preso \(E = (1, 2)\) abbiamo che \(\lambda(E) =
+    1\) ma \(\lambda_\star(E) = \lambda(\varnothing)= 0\).
 \end{example}
 \begin{proposition}\label{prop:equivalenti_ac}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(\varphi\) una
@@ -2987,8 +3030,9 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
 
     \(\text{iii)} \implies \text{i)}\). Supponiamo che \(|\varphi|\) sia
     \(\mu\)-assolutamente continua. Sia \(E \in \mathcal{M}\) tale che \(\mu(E) =
-    0\). Allora \(|\varphi (E)| \le |\varphi |(E) = 0\), quindi \(\varphi (E) =
-    0\) 
+    0\). Allora, per la parte 2 del
+    teorema~\ref{thm:misure-relative-osservazioni}, \(|\varphi (E)| \le |\varphi
+    |(E) = 0\), quindi \(\varphi (E) = 0\) 
 \end{proof}
 
 \begin{proposition}
@@ -3004,7 +3048,7 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
     Procediamo per assurdo. Supponiamo quindi che valendo le ipotesi si abbia
     \[
         \exists \varepsilon >0 \quad \forall n \in \mathbb{N} \quad \exists E_{n} \in
-        \mathcal{M} \quad \mu(E_n) < \frac{1}{2^{n}} \text{ e } |\varphi|(E_n) \ge
+        \mathcal{M} \quad \mu(E_n) < \frac{1}{2^{n}} \text{ ma } |\varphi|(E_n) \ge
         \varepsilon
     \]
     Sia 
@@ -3013,15 +3057,15 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
     \]
     Dove la successione interna all'intersezione è una successione decrescente.
     Inoltre abbiamo che \(\mu{\left( \bigcup_{k=1}^{\infty}E_k  \right)}\le
-    \sum_{k=1}^{\infty} < \sum_{k=1}^{\infty} \frac{1}{2^{k}} = 1\) che è
-    finito.
-    Possiamo quindi calcolarne la misura:
+    \sum_{k=1}^{\infty} \mu(E_k) < \sum_{k=1}^{\infty} \frac{1}{2^{k}} = 1\) che è
+    finito, e quindi si può usare la continuità della misura:
     \[
         \mu(E) = \lim_{n \to \infty} \mu\left( \bigcup_{k=n}^{\infty} E_k
         \right) \le \lim_{n \to \infty} \sum_{k=n}^{\infty} \mu(E_k) < \lim_{n
         \to \infty} \sum_{k=n}^{\infty} \frac{1}{2^{k}} = 0 
     \]
-    sicché l'ultimo passaggio è il resto di una successione convergente.
+    dove l'ultima uguaglianza è giustificata dal fatto che la serie geometrica
+    converge. 
 
     Ora per concludere vogliamo mostrare che \(\varphi (E) \neq 0\) mostrando
     quindi che \(\varphi \) non è \(\mu\)-a.c. Sappiamo che \(|\varphi |\) è una
@@ -3032,7 +3076,7 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
         \lim_{n \to \infty} |\varphi |(E_n) \ge \varepsilon >0
     \]
     ora per la proposizione precedente anche \(\varphi \) non è \(\mu\)-a.c.,
-    arriviamo dunque a una contraddizione.
+    ottenendo la contraddizione desiderata.
 \end{proof}
 \begin{corollary}
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura e sia \(f \in
@@ -3080,14 +3124,20 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
     \(\mu\)-assolutamente continua e \(\mu\)-singolare allora \(\varphi = 0\).
 \end{proposition}
 \begin{proof}
-    Sia \(\varphi \) \(\mu\)-assolutamente continua e \(\mu\)-singolare. Allora
-    esistono \\ \(A, B \in \mathcal{M}\) decomposizione di \(\Omega\)  tali che
-    \(\mu(A) = 0\) e \(|\varphi |(B) =
-    0\). Preso ora \(E \in \mathcal{M}\) abbiamo che \(\varphi (E) = \varphi (E
-    \cap A) + \varphi (E \cap B)\). Poiché \(\mu(E\cap B) \le \mu(A) = 0\)
-    allora anche \(\varphi (E \cap B) = 0\). Inoltre \(|\varphi (E \cap B)| \le
-    |\varphi |(E \cap B) \le |\varphi |(B) = 0\). Concludiamo che \(\varphi (E)
-    = 0\) 
+    Sia \(\varphi\) \(\mu\)-assolutamente continua e \(\mu\)-singolare. Per \(\mu\)-singolarità prendiamo
+    la decomposizione di \(\Omega\) in \((A, B)\), dove:
+    \[\mu(A) = 0 \quad \text{e} \quad
+    |\varphi|(B) = 0\]
+    Sia \(E \in \mathcal{M}\). Vogliamo mostrare che \(\varphi(E) = 0\). Per additività della misura relativa si ha:
+    \[\varphi(E) = \varphi(E \cap A) + \varphi(E \cap B).\]
+    Si mostra che entrambi i termini sono nulli. 
+    \begin{itemize}[label = --]
+        \item  \(\mu (E \cap A) \le \mu(A) \stackrel{\text{def di } A}{=} 0
+            \stackrel{\mu-\text{a.c.}}{\implies} \varphi(E \cap A) = 0\); \item
+            \(|\varphi (E \cap B)| \le |\varphi|(E \cap B) \le |\varphi| (B)
+            \stackrel{\text{def di } B}{=} 0 \implies \varphi(E \cap B)=0\).
+    \end{itemize} Pertanto, si conclude che \(\varphi(E) = 0\), che completa la
+    dimostrazione.
 \end{proof}
 \begin{example}
     Sia \((\mathbb{R}, \mathcal{L}(\mathbb{R}), \mu)\) lo spazio di misura di
@@ -3118,7 +3168,8 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
     tale che \(\mu(A) = 0\) e \(\varphi ^{+}(B) = 0\). Siano \((A', B')\)
     partizione di \(\Omega\) con \(\mu(A') = 0\) e \(\varphi ^{-}(B') = 0\).
     Prendiamo \((A \cup A', B \cap B')\) e mostriamo che è una
-    decomposizione che rende \(\varphi \) \(\mu\)-singolare. Infatti 
+    decomposizione che rende \(\varphi \) \(\mu\)-singolare. Intanto è una
+    partizione, infatti 
     \((A \cup A') \cup (B \cap B') = (A \cup A' \cup B) \cap (A \cup A' \cup B')
     = \Omega \cap \Omega = \Omega\) e \((A \cup A') \cap (B \cap B') = ((A \cap
     B) \cup (A' \cap B)) \cap B' = A' \cap B \cap B' = \varnothing \). Ora si ha
@@ -3133,18 +3184,67 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
 Sia \({(\Omega, \mathcal{M})}\) uno spazio misurabile. L'obiettivo di questa
 sottosezione è definire la derivata \(\frac{\partial \varphi }{\partial \mu}\)
 di una misura relativa \(\varphi \) rispetto a una misura \(\sigma\)-finita
-\(\mu\) su \((\Omega, \mathcal{M})\). Il significato di tale derivata è ancora
-sconosciuto a ogni essere mortale. Arriveremo a una definizione tramite 2
+\(\mu\) su \((\Omega, \mathcal{M})\).
+L'idea di base (che mi sono fatto io) è quella che se \(\varphi \) è una misura
+di probabilità (ossia è positiva e \(\varphi (\Omega) = 1\)) e \(\mu\) e la misura di
+Lebesgue allora la derivata \(\frac{\partial \varphi }{\partial \mu}\) è la
+densità di probabilità di \(\varphi\). Poi cosa significhi generalizzare a una
+misura relativa generica non lo sa nessuno, ma si può fare.
+Arriveremo a una definizione tramite 2
 generalizzazioni: prima la definiamo per misure finite, poi per \(\mu\) misura
-\(\sigma\)-finita e infine anche per \(\varphi \) relativa.
+\(\sigma\)-finita e infine anche per \(\varphi \) relativa. 
+
+Per dare un'intuizione, sia \(\Omega=\mathbb R\) coi misurabili secondo Lebesgue
+e la misura \(\mu\) di Lebesgue. Se si ricorda il teorema di generazione di
+misure~\ref{thm:gen_mis} e la relativa generalizzazione per misure relative
+~\ref{prop:gen_mis_rel}, una funzione \(f\in L^1\) genera una misura relativa
+\(\varphi\): 
+\[
+\varphi (E) = \int_E f \, d\mu
+\]
+Nel caso in cui venisse assegnata \(\varphi\) si può invertire il procedimento e
+trovare \(f\) che la genera? Verrà chiamata derivata di Radon-Nikodym quella
+funzione \(\frac{\partial \varphi}{\partial \mu}\) tale per cui
+\[
+\int_E \frac{\partial \varphi}{\partial \mu} \, d\mu = \varphi(E)
+\]
+Si dimostrerà che, in generale, il giusto ambiente per definire una derivata di
+Radon-Nikodym che abbia questa proprietà è il caso in cui la misura \(\mu\) sia
+\(\sigma-\)finita e \(\varphi\) sia \(\mu-\)assolutamente continua
+~\ref{thm:rad_nik_ac}.
+
+Inoltre verrà dimostrato che per \(\varphi\) misura relativa \(\mu-\)singolare,
+ossia per la quale è possibile trovare un insieme \(\mu-\)trascurabile su cui
+questa misura compie l'interezza della sua variazione, la derivata di
+Radon-Nikodym è nulla \(\mu-\)quasi ovunque (\ref{thm:rad_nik_singolari}). Ci si
+può raffigurare il risultato nel caso in cui \(\{x_i\}_{i \in \mathbb N}\) sia
+una successione di valori reali (quindi trascurabile) e \(\{\alpha_i\}\) dei
+coefficienti, per cui
+\[
+\varphi= \sum_{i=0}^\infty \alpha_i \delta_{x_i}
+\]
+che intuitivamente ha una ``sorta'' di derivata Radon-Nikodym
+\[
+\sum_{i=0}^\infty \alpha_i \delta (x-x_i)
+\]
+dove la \(\delta\) è la funzione delta di Dirac. Questa funzione è chiaramente
+nulla \(\mu-\)quasi ovunque.
+
+Il teorema di Lebesgue~\ref{thm:dec_leb} è il risultato che unisce questi due aspetti: si dimostrerà che ogni misura relativa si può scomporre in una parte assolutamente continua e una singolare, così da poter calcolare la derivata di Radon-Nikodym in maniera più generale. 
 
 \begin{theorem}[Decomposizione di Lebesgue-Radon-Nikodym]\label{thm:dec_rad_nik}
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. Siano \(\mu\) e
     \(\varphi\) due misure finite su \((\Omega, \mathcal{M})\). 
-    Sia ora
+    Sia
     \[
-        \mathcal{F} := \{g : \Omega \to \mathbb{R} : g \ge 0 \text{ \(\mu\)-q.o},\,\, g \in L^{1}, \forall E \in \mathcal{M} \,\, \int_E g d\mu \le
-    \varphi(E) \} 
+        \mathcal{F} := \left\{ 
+        g : \Omega \to \mathbb{R} \, \middle| \,
+        \begin{array}{ll}
+            \text{(1)} & g \geq 0 \text{ \(\mu\)-q.o}, \\
+            \text{(2)} & g \in L^1, \\
+            \text{(3)} & \forall E \in \mathcal{M}, \, \,\, \int_E g \, d\mu \leq \varphi(E)
+        \end{array}
+        \right\}
     \]
     Allora esiste unica (a meno di uguaglianza \(\mu\)-q.o.) una funzione \(f
     \in \mathcal{F}\) tale che \[
@@ -3194,8 +3294,9 @@ generalizzazioni: prima la definiamo per misure finite, poi per \(\mu\) misura
     > \int_{E_{1}} f_{2} d\mu + \int_{E_{2} \cup E_{3}} f_{2}
         d\mu = \int_{\Omega} f_{2} d\mu = I
     \]
-    ma la \(f_{2}\) avrebbe dovuto realizzare il \(\sup\), assurdo. Ne consegue
-    che \(f_{1} = f_{2}\,\, \mu-q.o. \).
+    ma la \(f_{2}\) avrebbe dovuto realizzare il \(\sup\), assurdo. Analogo per
+    l'ipotesi assurda che \(\mu(E_2) >0\). Ne consegue che \(f_{1} = f_{2}\,\,
+    \mu-\)q.o.
 
     Ora mostriamo l'esistenza. Chiamiamo 
     \[
@@ -3238,7 +3339,7 @@ generalizzazioni: prima la definiamo per misure finite, poi per \(\mu\) misura
             E_{n} &= \{x \in \Omega : g_{n}{(x)}\ge g_{j} {(x)} \, \forall j = 1,
         \dots, n \} \sminus \left( \bigcup_{i=1}^{n-1} E_{i} \right)
     \end{align*}
-    e quindi formano una partizione di \(\Omega\), ne consegue che 
+    che formano una partizione di \(\Omega\) e sono misurabili, ne consegue che 
     \[
         \int_E f_{n} d\mu = \sum_{i=1}^{n} \int_{E \cap E_{i}}   f_{n} d\mu =
         \sum_{i=1}^{n} \int_{E \cap E_{i}} g_{i} d\mu
@@ -3247,18 +3348,18 @@ generalizzazioni: prima la definiamo per misure finite, poi per \(\mu\) misura
     \]
     quindi \(f_{n} \in \mathcal{F}\) e inoltre 
     \begin{equation}\label{eq:helper_rad_nik}
-        I - \frac{1}{n} \le g_{n} \le f_{n} \implies \int_\Omega g_{n} d\mu \le \int_\Omega f_{n}
+         g_{n} \le f_{n} \implies I - \frac{1}{n} \le \int_\Omega g_{n} d\mu \le \int_\Omega f_{n}
         d\mu \le I
     \end{equation}
     inoltre le \(f_{n}\) formano una successione monotona non decrescente, e
     quindi per il teorema di Beppo Levi~\ref{thm:beppo-levi} abbiamo che \(f_{n}
-    \to f : \Omega \to \mathbb{R}\) q.o.~e tale che 
+    \to f : \Omega \to \mathbb{R}\) q.o.~e tale che per ogni \(E \in \mathcal{M} \) 
     \[
-        \lim_{n \to \infty} \int_\Omega f_{n} d\mu = \int_\Omega f d\mu
+        \lim_{n \to \infty} \int_E f_{n} d\mu = \int_E f d\mu
     \]
-    Per poter finire la dimostrazione, vogliamo che \(f \in \mathcal{F}\), che è
-    vero perché \(f_{n} \ge 0 \to f \le 0\); \(f \in L^{1}\) per Beppo Levi e
-    \(f_{n} \in L^{1}\); infine per ogni \(E \in \mathcal{M}\) abbiamo che
+    Si vuole mostrare che \(f \in \mathcal{F}\), che è
+    vero perché \(f_{n} \ge 0 \implies f \ge 0\). Inoltre \(f \in L^{1}\) perché
+    per ogni \(E \in \mathcal{M}\) (dunque anche \(E = \Omega\)) abbiamo che
     \[
         \int_E f_{n} d\mu \le \varphi {(E)} \overset{n \to
         \infty}{\longrightarrow} \int_E f d\mu \le \varphi {(E)}
@@ -3270,8 +3371,8 @@ generalizzazioni: prima la definiamo per misure finite, poi per \(\mu\) misura
         \overset{n \to \infty}{\longrightarrow}I \le \int_\Omega f d\mu \le I
     \]
 \end{proof}
-Ora vogliamo generalizzare la definizione di derivata di Radon-Nikodym ad avere
-\(\mu\) che sia \(\sigma\)-finita, ossia \(\Omega = \bigcup_{n=1}^{\infty}
+Ora vogliamo generalizzare la definizione di derivata di Radon-Nikodym nel caso in cui
+\(\mu\) che sia \(\sigma\)-finita, ossia si possa scrivere \(\Omega = \bigcup_{n=1}^{\infty}
 E_{n}\) e \(\mu(E_{n}) < +\infty\) per ogni \(n \in \mathbb{N}\). Per farlo
 dobbiamo prima mostrare tre lemmi.
 \begin{lemma}\label{lem:rad_nik_1}
@@ -3283,9 +3384,9 @@ dobbiamo prima mostrare tre lemmi.
     \]
 \end{lemma}
 \begin{proof}
-    Fissiamo \(g \in \mathcal{F}\). Chiamiamo \(E_{\ge } = \{x \in \Omega :
-    \frac{\partial f}{\partial \mu} {(x )} \ge g{(x)}\} \) e \(E_< = \Omega
-    \sminus E_{\ge }  \) similmente caratterizzato. Chiamiamo \(h := \max \{f,
+    Fissiamo \(g \in \mathcal{F}\). Sia \(f = \frac{\partial \varphi}{\partial \mu}\). Chiamiamo \(E_{\ge } = \{x \in \Omega :
+    f {(x )} \ge g{(x)}\} \) e \(E_< = \Omega
+    \sminus E_{\ge }  \). Chiamiamo \(h := \max \{f,
     g\} \). Allora \(h \in \mathcal{F}\) perché \(h \ge f\ge 0\), \(h \in
     L^{1}\) perché \(f, g \in L^{1}\) e \(\forall E \in \mathcal{M}\) abbiamo
     \[
@@ -3323,7 +3424,7 @@ dobbiamo prima mostrare tre lemmi.
 
 \begin{lemma}\label{lem:rad_nik_3}
     Sia \(\Omega, \mathcal{M}\) uno spazio misurabile, sia \(\mu\) una misura
-    \(\sigma\)-finita su di esso e sia \(\varphi \) una misura. Esisterà una
+    \(\sigma\)-finita su di esso e sia \(\varphi \) una misura finita. Esisterà una
     collezione \(\Omega_n\) che soddisfa la tesi del lemma~\ref{lem:rad_nik_2}.
     Allora chiamiamo \(\mu_n = \mu|_{\mathcal{M}_n} \) con \(\mathcal{M}_n =
     2^{\Omega_n} \cap \mathcal{M}\) e similmente \(\varphi_n = \varphi
@@ -3342,13 +3443,13 @@ dobbiamo prima mostrare tre lemmi.
     allora \(f = \hat{f}\) \(\mu\)-q.o.
 \end{lemma}
 \begin{proof}
-    Vogliamo dimostrare che \(f = \hat{f}\) in \(\Omega_{i} \cap
-    \hat{\Omega_{j}}\). Questo è vero perché essendo in \(\Omega_{i}\), per il
+    Vogliamo dimostrare che \(f = \hat{f}\) su ogni \(\Omega_{i} \cap
+    {\Theta_{j}}\). Questo è vero perché essendo in \(\Omega_{i}\), per il
     lemma~\ref{lem:rad_nik_1} abbiamo che \(f \ge \hat{f}\) \(\mu_i\)-q.o. e
-    essendo in \(\hat{\Omega_{j}}\) abbiamo che \(\hat{f} \ge f\)
+    essendo in~\({\Theta_{j}}\) abbiamo che \(\hat{f} \ge f\)
     \(\hat{\mu_{j}}\)-q.o.~ma poiché entrambe le misure sono proiezioni di
     \(\mu\), allora \(f = \hat{f}\) \(\mu\)-q.o.~in \(\Omega_{i} \cap
-    \hat{\Omega_{j}}\). Poiché l'unione di tutti questi insiemi è \(\Omega\),
+    {\Theta_{j}}\). Poiché l'unione di tutti questi insiemi è \(\Omega\),
     segue la tesi.
 \end{proof}
 
@@ -3381,7 +3482,7 @@ generica misura relativa \(\varphi \) rispetto a una misura \(\sigma\)-finita
     la definizione~\ref{def:rad_nik_2}
 \end{definition}
 
-\begin{theorem}[Teorema di Radon-Nyokym meno bello]
+\begin{theorem}[Teorema di Radon-Nikodym meno bello]\label{thm:rad_nik_singolari}
     Sia \({(\Omega, \mathcal{M})}\) uno spazio misurabile. Siano \(\mu\) e
     \(\varphi \) rispettivamente una misura \(\sigma\)-finita e una misura
     relativa su esso. Sia \(\varphi \) \(\mu\)-singolare. Allora
@@ -3400,7 +3501,7 @@ generica misura relativa \(\varphi \) rispetto a una misura \(\sigma\)-finita
         \mathcal{F} \implies \ge 0}  d\mu \overset{\in \mathcal{F}}{\le }
         \varphi (E) \le \varphi {(B)} = 0
     \]
-    e quindi, essendo \(\frac{\partial \varphi }{\partial \mu}\) positiva, vale
+    e quindi, essendo \(\frac{\partial \varphi }{\partial \mu}\) non-negativa, vale
     \(0\) \(\mu\)-q.o.~su \(B\), ed essendo \(A\) \(\mu\)-trascurabile segue la
     tesi.
 
@@ -3432,7 +3533,7 @@ e \(\varphi_n {(B_{n})} \le \varphi {(B)} = 0\) per cui ogni \(\varphi _n\) e
 
 \end{proof}
 
-\begin{theorem}[Teorema di Radon-Nikodym più bello]
+\begin{theorem}[Teorema di Radon-Nikodym più bello]\label{thm:rad_nik_ac}
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. Siano \(\mu\) e
     \(\varphi\) rispettivamente una misura \(\sigma\)-finita e una misura
     relativa. Sia \(\varphi \) \(\mu\)-assolutamente continua. Allora
@@ -3450,7 +3551,7 @@ e \(\varphi_n {(B_{n})} \le \varphi {(B)} = 0\) per cui ogni \(\varphi _n\) e
     \(\mu\)-a.c.~anche \(\mu(E_{0}) > 0\).
 
     Siccome \(\mu\) è finita 
-    \begin{equation}
+    \begin{equation}\label{eq:abs_phi}
         \exists \varepsilon > 0 \quad \text{t.c.} \int_{E_{0}} \frac{\partial
         \varphi }{\partial \mu} d\mu + \varepsilon \mu(E_{0}) = \int_{E_{0}}
         {\left( \frac{\partial \varphi }{\partial \mu} + \varepsilon \right)}
@@ -3464,10 +3565,14 @@ e \(\varphi_n {(B_{n})} \le \varphi {(B)} = 0\) per cui ogni \(\varphi _n\) e
     \]
     che essendo la differenza di due misure finite è una misura relativa. Sia
     quindi \((A, B)\) una decomposizione di Hahn rispetto a \(\tilde{\varphi
-    }\). Abbiamo ora che \(\tilde{\varphi }(E_{0}) > 0\) per \((1)\) e
+    }\). Abbiamo ora che \(\tilde{\varphi }(E_{0}) > 0\) per \eqref{eq:abs_phi} e
     \(\tilde{\varphi}(A) \ge \tilde{\varphi}(A \cap E_{0}) \ge \tilde{\varphi}(A
     \cap E_{0}) + \tilde{\varphi}(B \cap E_{0}) = \tilde{\varphi}(E_{0}) > 0\),
     quindi
+    \[
+        \varphi(A) - \int_A \left( \frac{\partial \varphi}{\partial \mu} + \varepsilon\right) d\mu = \tilde{\varphi}(A) >0  
+    \]
+    da cui
     \[
         \varphi (A) > \int_A {\left( \frac{\partial \varphi }{\partial \mu} +
         \varepsilon \right)} d\mu \ge 0 \overset{\mu-\text{a.c.}}{\implies } \mu(A) > 0
@@ -3484,13 +3589,13 @@ e \(\varphi_n {(B_{n})} \le \varphi {(B)} = 0\) per cui ogni \(\varphi _n\) e
     \]
     quindi abbiamo che \(f \in \mathcal{F}\), ma
     \[
-        \int_\Omega f d\mu = \int_A {\left( \frac{\partial \varphi }{\partial
-        \mu} \right)} d\mu  + \int_B \frac{\partial \varphi }{\partial \mu}d\mu
-        \overset{\varepsilon > 0, \mu(A) > 0}{>} \int_A \frac{\partial \varphi
-        }{\partial \mu} d\mu + \int_B \frac{\partial \varphi }{\partial \mu}
-        d\mu = \int_\Omega \frac{\partial \varphi }{\partial \mu} d\mu
+        \begin{aligned}
+        \int_\Omega f \, d\mu &= \int_A \left( \frac{\partial \varphi}{\partial \mu} + \varepsilon \right) d\mu + \int_B \frac{\partial \varphi}{\partial \mu} \, d\mu \\
+        &> \int_A \frac{\partial \varphi}{\partial \mu} \, d\mu + \int_B \frac{\partial \varphi}{\partial \mu} \, d\mu \\
+        &= \int_\Omega \frac{\partial \varphi}{\partial \mu} \, d\mu.
+        \end{aligned}
     \]
-    che è assurdo perché sappiamo per definizione di \(\frac{\partial \varphi
+    dove la disuguaglianza si ha perché \(\varepsilon > 0, \mu(A) > 0\). Ma è assurdo perché sappiamo per definizione di \(\frac{\partial \varphi
     }{\partial \mu}\) che \(\int_\Omega \frac{\partial \varphi }{\partial \mu}
     d\mu \) è il sup di tutti gli integrali di funzioni in \(\mathcal{F}\).
 \end{proof}
@@ -3509,6 +3614,7 @@ finita] Sia \({\{\Omega_{n}\}}_{n \in \mathbb{N}}\) una partizione di
     \underset{\text{finite}}{\overset{\text{misure}}{=}} \sum_{n=1}^{\infty}
     \varphi_n(E \cap \Omega_{n}) = \\ &= \varphi(E)
     \end{align*}
+
 \end{proof}
 \begin{proof}[Dimostrazione generale: \(\mu\) \(\sigma\)-finita e \(\varphi\)
     misura relativa] Scomponendo \(\varphi = \varphi^{+} - \varphi^{-}\)
@@ -3526,7 +3632,7 @@ finita] Sia \({\{\Omega_{n}\}}_{n \in \mathbb{N}}\) una partizione di
     \(\varphi^{-}\) sono \(\mu\)-a.c.
 \end{proof}
 
-\begin{theorem}[Teorema di Lebesgue]
+\begin{theorem}[Teorema di Lebesgue]\label{thm:dec_leb}
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile, con \(\mu\) misura e
     \(\varphi \) misura relativa. Allora esiste unica una misura \(\varphi_a\)
     \(\mu\)-assolutamente continua e esiste unica una misura \(\varphi_s\)
@@ -3635,7 +3741,7 @@ risultatino
 \end{proposition}
 \begin{proof} \( \) 
 \begin{enumerate}[label = \arabic*.]
-    \item[\(\le \)] La ridotta \(\sum_{n=1}^{k} m_F{([a_{n}, b_{n}))} \) della
+    \item[\(\ge \)] La ridotta \(\sum_{n=1}^{k} m_F{([a_{n}, b_{n}))} \) della
         serie dà la somma delle lunghezze \(F{(b_{n})} - F{(a_{n})} \ge 0\) per
         \(n=1,\dots,k\) e danno la variazione di \(F\) sugli intervallini.
         Allora poiché \(F\) è monotona, 
@@ -3645,7 +3751,7 @@ risultatino
         \]
         e quindi la serie converge e la sua somma è minore o eguale di
         \(m_F{([a,b))}\) 
-    \item[\(\ge \)] Sia \(\varepsilon>0\). Allora esiste \(\overline{b} < b\)
+    \item[\(\le \)] Sia \(\varepsilon>0\). Allora esiste \(\overline{b} < b\)
         tale che \(F{(\overline{b})}\ge F{(b)}-\varepsilon\). Per ogni \(n \in
         \mathbb{N}\) esistono \(\overline{a}_n < a_{n}\) tali che 
         \[
@@ -3674,7 +3780,7 @@ risultatino
           \sum_{n=1}^{k} {\left( F{(b_{n})} - F{(a_{n})} \right)} +
           \sum_{n=1}^{k} \frac{\varepsilon}{2^{n}}
         \end{align*}
-        da cui riarrangiando i termini segue la tesi
+        prendendo il limite per \(k \rightarrow \infty\) si ottiene la tesi. 
 \end{enumerate}
 \end{proof}
 Possiamo ora definire una misura esterna \(\mu^\star_F : 2^{\mathbb{R}} \to [0,
@@ -3708,7 +3814,7 @@ Tale insieme non è mai vuoto, infatti \(\mathbb{R} \subseteq \bigcup_{k \in
             \sum_{n=1}^{\infty}  \mu^\star_F{(E_{n})} + \varepsilon
         \]
         da cui \(\mu^\star_F{(E)} \le \sum_{i=1}^{\infty} \mu^\star_F{(E_n)} \)
-        per l'arbitrarietà di \(\varepsilon\) 
+        per arbitrarietà di \(\varepsilon\) 
 \end{itemize}
 \end{proof}
 Ora a partire da questa misura esterna passiamo a considerare insiemi misurabili
@@ -3728,7 +3834,7 @@ e misura di questi. Chiaramente misurabili e misura associata dipendono da
 \end{theorem}
 Applichiamo quindi il teorema di Caratheodory alla misura esterna
 \(\mu^\star_F\) e otteniamo che esiste una \(\sigma\)-algebra \(\mathcal{M}_F\).
-Quindi in particolare la famiglia dei borelliani \(\mathcal{B}(\mathbb{R})
+Quindi in particolare la famiglia dei boreliani \(\mathcal{B}(\mathbb{R})
 \subseteq \mathcal{M}_F\). Inoltre la misura \(\mu_F =
 \mu^\star_F|_{\mathcal{M}_F}\) è un'estensione della misura elementare \(m_F\).
 Perdipiù \(\mu_F{(x_{0})} = 0\) se e solo se \(F\) è continua in \(x_{0} \in
@@ -3755,6 +3861,7 @@ perché \(\mu_F{(\mathbb{R})} = \lim_{x \to \infty} F{(x)} - \lim_{x \to -\infty
 F{(x)}\) e se \(F\) è limitata allora i due limiti esistono e sono finiti.
 
 \newpage
+
 \section{Analisi Funzionale}
 In tutti gli spazi vettoriali considerati in questa sezione, il campo su cui
 opereremo sarà \(\mathbb{K} = \mathbb{R}\) o \(\mathbb{C}\).
@@ -4075,7 +4182,7 @@ e quindi, per definizione di \(\| \cdot \|_1\), abbiamo \(N\) successioni \({\{\
     un'estratta \(\{k_n\} \) tale che \(\alpha_{i, k_n} \to \alpha_{i}\) in
     \(\mathbb{R}\) o \(\mathbb{C}\). Abbiamo ora la successione \(u_{k_n}\) che
     quindi converge a \(u = \sum_{i=1}^{N} \alpha_{i}e_{i}\) rispetto a \(\|\cdot \|_1\) e quindi anche rispetto a 
-    \(\|\cdot \|\) per la disugaglianza 
+    \(\|\cdot \|\) per la disuguaglianza 
     \[\|\cdot \| \le M \|\cdot \|_1\] 
     dimostrata nella prima parte. Abbiamo che, per \(\|u_k \| < \frac{1}{k}\) e
     per convergenza in \(\| \cdot \|\): 
@@ -4606,7 +4713,7 @@ dominata di Lebesgue per cui
     L^{p}{(\Omega)}\) tali che 
 \begin{enumerate}[label = \arabic*.]
     \item \(f_{n_k} \to f\) q.o.~in \(\Omega\)
-    \item \(\left| f_{n_k} {(x)} \right| \le w{(x)} \) q.o.~per \(x \in \Omega\)
+    \item \(\left| f_{n_k} {(x)} \right| \le w{(x)} \) q.o.~ per \(x \in \Omega\)
 \end{enumerate}
 \end{corollary}
 \begin{proof}
@@ -4652,7 +4759,7 @@ Questa successione converge a \(0\) in \(L^{p}(0,1)\) per ogni \(1 \le p <
 tuttavia non converge quasi ovunque a \(0\), infatti per ogni \(x \in (0, 1)\)
 la successione \(f_{n}{(x)}\) non ha limite perché non smette mai di assumere
 anche il valore \(1\).
-\begin{proposition}[Convergenze] \( \) 
+\begin{proposition}[Convergenze]\label{prop:converenze_Lp} \( \) 
 \begin{enumerate}[label = \arabic*.]
     \item \[
         \text{ Conv.~in \(L^{\infty}\)  } \implies \text{ conv.~q.u } \implies
@@ -4662,7 +4769,7 @@ anche il valore \(1\).
         \end{cases}
     \]
     \item Conv.~in \(L^{p}{(\Omega)}\) per \(1 \le p< \infty\) \(\implies \)
-        conv.~q.o.~per un estratta (come la convergenza in misura)
+        conv.~q.o.~per un'estratta (come la convergenza in misura)
     \item Conv.~in \(L^{p}{(\Omega)}\) per \(1 \le p < \infty\) \(\implies\)
         Conv.~in misura
     \item Se \(\mu{(\Omega)} < +\infty\) e \(1 \le p < q \le \infty\) allora
@@ -5145,7 +5252,7 @@ h_{\overline{n}} \|_{\infty}^{p-1} \|v - h_{\overline{n}} \|_1 \right)}^{\frac{1
             1 & x \in \overline{A_{n}} \\
             0 & x \in \Omega \sminus A_{n+1} \\
             0 \le \varphi_n \le 1 & x \in A_{n+1} \sminus \overline{A_{n}}
-        \end{cases}
+        \end{cases} \]\[
         \text{e.g. }
         \varphi_n{(x)} = \frac{d(x, \mathbb{R}^{n} \sminus A_{n+1})}{d{(x,
         \overline{A_{n}}) + d{(x, \mathbb{R}^{N} \sminus A_{n+1})}}}
@@ -5365,8 +5472,8 @@ tale norma è una norma, infatti
         f \in L^{q}{(\Omega)}
     \]
     e quindi necessariamente \(\|i\| \le \mu{(\Omega)}^{\frac{1}{p} -
-    \frac{1}{q}}\). Vogliamo capire se c'è l'ugaglianza o meno. Per l'ugaglianza
-    dobbiamo trovare un elemento \(0 \not\equiv f \in L^{p}{(\Omega)}\).
+    \frac{1}{q}}\). Vogliamo capire se c'è l'uguaglianza o meno. Per
+    l'uguaglianza dobbiamo trovare un elemento \(0 \not\equiv f \in L^{p}{(\Omega)}\).
     Sia \(f = 1\), allora
     \begin{align*}
         \|f\|_p &= {\left( \int_\Omega 1^{p}d\mu \right)} ^{\frac{1}{p}} =
@@ -5607,6 +5714,7 @@ allora \(x = {(x_{n})} \in c_{0}\). Ne consegue che
     \subseteq \ell^{\infty}  
 \]
 
+
 \begin{itemize}[label = --]
     \item \(c_{00} \) è un sottospazio di \(\ell^{1}\) \textbf{denso}: infatti se \(x
     = {(x_{n})} \in \ell^{1}\) allora posso costruire la successione
@@ -5786,7 +5894,7 @@ denso in \(\ell^{p}\) poiché è denso in \(c_{00}\).
     
    e quindi 
    \[\left( \sum_{i = 1}^{k} |u_i|^{p'} \right)^{\left( 1-\frac{1}{p} \right)=
-   \frac{1}{p'}} \le \| \phi\|_{(\ell^p)'}\]
+   \frac{1}{p'}} \le \| \varphi\|_{(\ell^p)'}\]
     che vale per ogni \(k \in \mathbb{N}\) e quindi in particolare tutte le
     ridotte sono dominate da \(\|\varphi \|_{{(\ell^{p})}'} \) e quindi anche la
     serie 
@@ -5818,7 +5926,7 @@ denso in \(\ell^{p}\) poiché è denso in \(c_{00}\).
     \]
     Ora dalla~\eqref{help:duali2} otteniamo che \(\|\varphi \|_{{(\ell^{p})}'}
     \le \|u\|_{p'} \)  che insieme a~\eqref{help:duali3} ci dà l'ultima parte
-    della tesi \(\|\varphi \|_{{(\ell^{p})}'} = \|u\|_{p'}\).
+    della tesi \(\|\varphi \|_{{(\ell^{p})}'} = \|u\|_{p'}\) .
 \end{proof}
 \begin{theorem}
     Se \(\varphi \in {(c_{0})}'\) allora esiste un \(u = {(u_k)} \in \ell^{1}\)
@@ -5848,7 +5956,7 @@ descrivere una classe di funzioni su cui valga un'estensione del teorema fondame
 \begin{definition}{funzione a variazione limitata}
     Si consideri funzione \(f: [a,b] \to \mathbb{R}\) e una suddivisione
     \[
-      S = \{a = x_{0} < x_{1} < x_{2} <~\dots < x_{n-1} < x_{n} = b\} 
+      S = \{a = x_{0} < x_{1} < x_{2} < \dots < x_{n-1} < x_{n} = b\} 
     \]
     dell'intervallo \([a,b]\). Si definisca
     \[
@@ -5927,7 +6035,9 @@ descrivere una classe di funzioni su cui valga un'estensione del teorema fondame
     i segni.
 \end{remark}
 \begin{proof}
-Il fatto che la differenza di due funzioni monotone non decrescenti sia una funzione a variazione limitata è banale per la disugaglianza triangolare. Per il viceversa, sia \(f\) a variazione limitata, definiamo
+Il fatto che la differenza di due funzioni monotone non decrescenti sia una
+funzione a variazione limitata è banale per la disuguaglianza triangolare. Per il
+viceversa, sia \(f\) a variazione limitata, definiamo
 \[
     g_1 : = V_f[a, x]
 \]
@@ -6034,7 +6144,7 @@ continua e non costante) viene detta \textbf{singolare}.
     \int_{[a,x]} f'{(t)} dt\) 
 \end{note}
 
-La classe di funzioni che invece soddisfa le proprietà volute è quella delle 
+La classe di funzioni che invece soddisfa le proprietà volute è quella delle
 funzioni \emph{assolutamente continue}.  
 \begin{definition}{Assoluta continuità}
     \(f : [a, b] \to \mathbb{R}\)  si dice \textbf{assolutamente continua} se per ogni
@@ -6278,7 +6388,7 @@ W^{1,p}{(a,b)}\)
 \end{proposition}
 \begin{proof}
     Da~\eqref{help:fond_calcolo_xy} e dalla proposizione~\ref{help:cau_sch_int}
-    otteniamo che, \\ supponendo senza perdita di generalità \(x > y\)
+    otteniamo che, \\ supponendo senza perdita di generalità~\(x > y\)
     \[
       |f{(x)} - f{(y)}| = \left| \int_{y}^{x} f'{(t)}dt \right| \le \int_y^{x}
       |f'{(t)}|dt = \|f'\|_1
@@ -6331,8 +6441,7 @@ distanza da \(z\), come in figura~\ref{fig:teorema-delle-proiezioni}.
 \begin{figure}[ht]
     \centering
     \incfig[.5]{teorema-delle-proiezioni}
-    \caption{Proiezioni su spazi \(K\) convessi e chiusi}
-    \label{fig:teorema-delle-proiezioni}
+    \caption{Proiezioni su spazi \(K\) convessi e chiusi}\label{fig:teorema-delle-proiezioni}
 \end{figure}
 Nel caso in cui \(z \in K\) la proiezione manda banalmente \(z \mapsto z \quad
 \forall z \in K\). 
@@ -6355,6 +6464,15 @@ Nel caso in cui \(z \in K\) la proiezione manda banalmente \(z \mapsto z \quad
     Il punto \(u\) del teorema~\ref{thm:proiezioni} è detto proiezione di \(f\)
     su \(K\) e si indica con \(P_{K}{(f)}\)
 \end{definition}
+
+\begin{remark}
+    Una maniera per memorizzare la disuguaglianza variazionale è immaginare il
+    caso di un convesso \(K \subset\mathbb R^2\), in cui se ci si muove da \(f\)
+    alla proiezione \(u\) (quindi lungo il vettore \(u-f\)) e poi da \(u\) a un
+    generico \(v\) in \(K\) (ossia \(v -u\)), l'angolo non orientato che si
+    forma è minore di \(\pi/2\), e quindi il prodotto scalare è positivo, che
+    diventa negativo scambiando il segno del secondo termine.
+\end{remark}
 Per la dimostrazione, riassumiamo il teorema~\ref{thm:proiezioni} come esistenza
 e unicità della soluzione di~\eqref{eq:PM} e~\eqref{eq:DV} e uguaglianza di tali
 soluzioni, e a tale scopo articoliamo la dimostrazione nei seguenti passaggi
@@ -6490,7 +6608,8 @@ u_{1} - u_{2}})} &\le 0 \iff \\
     \iff \|u_{1}-u_{2}\|^2 \le \left| \left<f_{1}-f_{2}, u_{1}-u_{2} \right>
 \right| &\overset{\ref{thm:schwarz}}{\le } \|f_{1} -f_{2}\|\|u_{1} - u_{2}\| 
 \end{align*}
-con l'ultima disugaglianza dovuta a Schwarz, da cui otteniamo che, se \(u_{1} \neq u_{2}\), \(\|u_{1} - u_{2}\| \le \|f_{1}
+con l'ultima disuguaglianza dovuta a Schwarz, da cui otteniamo che, se \(u_{1}
+\neq u_{2}\), \(\|u_{1} - u_{2}\| \le \|f_{1}
 - f_{2}\|\) e quindi \(P_K\) è lipschitziano di costante 1.
 
 Ne concludiamo che \(P_K\) è \textbf{non espansivo}, ossia o contrae oppure
@@ -6804,7 +6923,7 @@ Il seguente teorema ci dice che vale anche il viceversa.
     Abbiamo già incontrato un risultato simile negli spazi \(\ell^{p}\),
     trovando che \({(\ell^{p})}' = {(\ell^{p'})}\) per \(p < +\infty\). In
     particolare avevamo trovato che \({(\ell^2)}' \cong \ell^2\), che potrebbe essere
-    provato anche con il teorema di Riesz, in quanto \(l^2\) è uno spazio di
+    provato anche con il teorema di Riesz, in quanto \(\ell^2\) è uno spazio di
     Hilbert. Un altro risultato, che invece non abbiamo dimostrato, è quello del caso 
     di \(L^2\).
 \end{note}
@@ -7030,8 +7149,8 @@ Siccome, a \(x\) fissato, il prodotto induce un operatore lineare, ottengo la te
     Allora sono equivalenti:
     
     \begin{enumerate}[label = \textit{\roman*)}]
-    \item \(\mathrm{span} \{e_{k} : \, k \in \mathbb{N}\}\) è denso in \(H\);
-    \item La serie di Fourier di \(x\) converge a \(x\) per ogni \(x \in H\)
+    \item \(\mathrm{span} \{e_{k} | \, k \in \mathbb{N}\}\) è denso in \(H\);
+    \item La serie di Fourier di \(x\) converge a \(x\) per ogni \(x \in H\);
     \item \(\displaystyle \|x\|^2 = \sum_{k=1}^{\infty} |\Span{x, e_{k}} |^2 \)
         per ogni \(x \in H\) (identità di Bessel-Parseval);
     \item Se \(x \in H\) è tale che \(\Span{x, e_{k}} = 0\) per ogni \(k \in
@@ -7326,12 +7445,68 @@ In modo analogo
      dove la seconda eguaglianza è data da come è definita \(q_{n}\), che è
      decrescente in \({[0, \pi]}\) 
 \end{proof}
+\begin{proof}[Dimostrazione di Weierstrass]
+    Si scriva il polinomio trigonometrico \(q_n(t)\) definito nel lemma come
+    \[
+        q_n(t) = a_0 + \sum_{k=1}^n (a_k \cos(kt) + b_k \sin (kt))
+    \]
+    per opportuni coefficienti. La funzione \(f\) è continua in \(\mathbb R\) e
+    periodica di periodo \(2\pi\). Si ricorda la definizione del prodotto di
+    convoluzione: 
+    \[
+        p_n(t) = (f \star q_n)(t) := \int_{-\pi}^\pi f(t-s)q_n(s) \, ds = \int_{-\pi}^\pi f(s)q_n(t-s) \, ds = 
+    \]
+    ossia vi è commutatività (si mostra con un cambio di variabile e ricordando
+    la periodicità di \(f\)). In generale si mostra che il prodotto di
+    convoluzione tra una funzione in \(L^2(-\pi, \pi)\) e un polinomio
+    trigonometrico è anch'esso un polinomio trigonometrico, ad esempio con
+    l'identità di Eulero. Nel nostro caso particolare si vede che 
+    \[
+\begin{aligned}
+    p_n{(t)} &= \int_{-\pi}^\pi f(s) q_n(t-s) \, ds = \int_{-\pi}^\pi a_0 f(s) \, ds
+    \,+ \, \\
+        &\quad + \sum_{k=1}^n \bigg[ 
+        \left( \int_{-\pi}^\pi f(s) \big(a_k \cos(ks) - b_k \sin(ks)\big) \, ds \right) \cos(kt)  + \\
+        &\quad\quad\quad\, \,  + \left( \int_{-\pi}^\pi f(s) \big(a_k \sin(ks) + b_k \cos(ks)\big) \, ds \right) \sin(kt) 
+        \bigg]
+\end{aligned}
+\]
+Si ha: 
+\[
+\begin{aligned}
+    |f(t) -p_n(t) | &\overset{(b)}{=} \left| f(t) \frac{1}{2\pi} \int_{-\pi}^\pi
+    q_n(s) \, ds -  \frac{1}{2\pi}\int_{-\pi}^\pi f(t-s)q_n(s) \, ds\right| = \\
+                    &= \frac{1}{2\pi} \left| \int_{-\pi}^\pi (f(t) - f(t-s))
+                    q_n(s) \, ds \right|
+\end{aligned}
+\]
+Usando la continuità su \(\mathbb R\) e la periodicità ci si può ricondurre alla
+continuità su un compatto e quindi \(f\) è continua uniformemente. Per
+concludere, fissato \(\varepsilon\) positivo:
+\[
+\begin{aligned}
+    |f(t) - p_n(t)| 
+    &\leq \frac{1}{2\pi} \int_{(-\delta, \delta)} |f(t) - f(t-s)| q_n(s) \, ds \\
+    &\quad + \int_{[-\pi, -\delta] \cup [\delta, \pi]} |f(t) - f(t-s)| q_n(s) \, ds \, + \\
+    &\leq \varepsilon 
+    \underbrace{\frac{1}{2\pi} \int_{(-\pi, \pi)} q_n(s) \, ds}_{= 1} 
+    + 2 \|f\|_\infty 
+    \sup_{\delta \leq |s| \leq \pi} \{q_n(s)\}.
+\end{aligned}
+\]
+dove
+\[
+\sup_{\delta \leq |s| \leq \pi} \{q_n(s)\} \to 0 \quad \text{per } n \to \infty.
+\]
+Quindi è chiaro che \(p_n \to f\) uniformemente. 
+
+\end{proof}
 Sia \(\{\varphi_n\}_{n\ge 0}\) una successione di funzioni definita come segue:
 \[
 \begin{cases}
-    \varphi_0 (t) &= \displaystyle \frac{1}{\sqrt{2 \pi}} \\
-    \varphi_{2k-1} (t) &= \displaystyle \frac{1}{\sqrt \pi} \sin(kt) \\
-    \varphi_{2k}(t) &= \displaystyle \frac{1}{\sqrt \pi} \cos(kt)
+    \varphi_0 (t) &= \frac{1}{\sqrt{2 \pi}} \\
+    \varphi_{2k-1} (t) &= \frac{1}{\sqrt \pi} \sin(kt) \\
+    \varphi_{2k}(t) &= \frac{1}{\sqrt \pi} \cos(kt)
 \end{cases}
 \]
 per \(k \in \mathbb N\). Si ha il seguente risultato.
@@ -7347,13 +7522,43 @@ per \(k \in \mathbb N\). Si ha il seguente risultato.
 \end{remark}
 
 \begin{proof}
-    % TODO: inserire dimostrazione
+    Si ricorda che l'insieme delle funzioni continue a supporto compatto
+    \(C_C^0(\pi, \pi)\) è denso in \(L^p(-\pi, \pi)\) per ogni \(p\) intero
+    positivo (si veda~\ref{thm:risultato_4}). Nel caso di \(p=2\):
+    \[
+        \forall \varepsilon >0 \quad \exists g \in C_C^0 (-\pi, \pi): \quad \| f-g\|_{L^2(-\pi, \pi) } \leq \varepsilon
+    \]
+    Possiamo prolungare \(g\) per periodicità \(2 \pi\) a tutto \(\mathbb R\), e
+    la chiamiamo ancora \(g\) per semplicità. La funzione \(g\), siccome è a
+    supporto compatto in \((-\pi, \pi)\), si attacca bene e quindi abbiamo
+    continuità in \(\mathbb R\). Per il teorema di Weierstrass
+    (\ref{thm:weierstrass}) esiste un polinomio trigonometrico
+    \(p_\varepsilon\): 
+    \[
+    \| g - p_\varepsilon\| \leq \varepsilon
+    \]
+    Si ha la seguente disuguaglianza: 
+   \[
+    \begin{aligned}
+        \|g - p_\varepsilon\|_{L^2(-\pi, \pi)} 
+        &= \sqrt{\int_{-\pi}^\pi |g(t) - p_\varepsilon|^2 \, dt} \\
+        &\leq \sqrt{\int_{-\pi}^\pi \|g(t) - p_\varepsilon\|_\infty^2 \, dt} \\
+        &= \|g - p_\varepsilon\|_\infty \sqrt{2\pi} \\
+        &\leq \sqrt{2\pi} \varepsilon.
+    \end{aligned}
+    \]
+    e per la disugaglianza triangolare
+    \[
+    \|f-p_\varepsilon\|_{L^2(-\pi, \pi)} \leq \varepsilon(1+\sqrt{2\pi})
+    \]
+    che dimostra la tesi, in virtù dell'osservazione. 
 \end{proof}
-
+I seguenti corollari sono semplici calcoli/conseguenze del teorema sulle quattro
+condizioni equivalenti (\ref{thm:conv_Fourier}). 
 \begin{corollary}
     Data \(f \in L^2(-\pi, \pi)\), la serie di Fourier associata: 
     \[
-    \frac{a_0}{2\pi} + \sum_{k=1}^{\infty} \left( \frac{a_k}{\sqrt{\pi}} \cos(kt) + \frac{b_k}{\sqrt{\pi}} \sin(kt)\right)
+    \frac{a_0}{\sqrt{2\pi}} + \sum_{k=1}^{\infty} \left( \frac{a_k}{\sqrt{\pi}} \cos(kt) + \frac{b_k}{\sqrt{\pi}} \sin(kt)\right)
     \]
     dove
     \[
@@ -7388,9 +7593,84 @@ presa \(f \in C^0([a, b])\)
 \end{theorem}
 
 \begin{proof}
-    % TODO: inserire dimostrazione
+    La funzione \(f \in C^0[a, b]\) può essere prolungata per parità e
+    ridefinita su \([a, 2b-a]\) e poi prolungata per periodicità con periodo di
+    lunghezza \(2(b-a)\). Siamo nelle condizioni del teorema di Weierstrass
+    (\ref{thm:weierstrass}), anche se con un periodo diverso. Sia
+    \(\pi_\varepsilon\) il polinomio tale che 
+    \[
+    \| f- \pi_\varepsilon\| \leq \frac{\varepsilon}{2}
+    \]
+    e, usando la convergenza uniforme dei polinomi di Taylor ai seni e ai coseni, possiamo trovare un polinomio classico \(p_\varepsilon\) tale che
+    \[
+     \|\pi_\varepsilon - p_\varepsilon \| \leq \frac{\varepsilon}{2}
+    \]
+    Per la disuguaglianza triangolare la tesi è dimostrata. 
+    
 \end{proof}
 
+Si è detto che, presa \(f\) in \(L^2(-\pi, \pi)\), la serie di Fourier relativa
+converge a \(f\) in \(L^2(-\pi, \pi)\). Per la proposizione
+\ref{prop:converenze_Lp} la serie ammette un'estratta di ridotte che converge
+quasi ovunque a \(f\). Per il teorema di \textbf{Carleson} (1966) si può dire di
+più: c'è convergenza quasi ovunque dell'intera successione delle ridotte. Tale
+risultato era stato congetturato da Lusin nel 1915. 
+
+Se si aggiunge l'ipotesi di regolarità a tratti si può affermare la convergenza
+della serie di Fourier a \(f\) eccetto nei punti di discontinuità (di tipo
+salto), dove \(f\) converge alla media tra il limite destro e quello sinistro
+(che esistono). 
+
+Se invece si ipotizza \(f\) solo continua e non si introducono ipotesi sulla
+continuità della derivata, non è detto che la serie di Fourier converga in ogni
+punto. Un controesempio è dovuto a \textbf{du Bois-Reymond} (1873), che
+costruì una funzione continua la cui serie di Fourier diverge in un insieme
+denso. Tale risultato viene poi rafforzato con un controesempio di
+\textbf{Kolmogorov} (1923) che trovò una funzione \(L^1\) la cui serie di
+Fourier diverge quasi ovunque, e nel 1926 ovunque. 
+
+Per quel che riguarda la convergenza uniforme si possono trovare delle
+condizioni sufficienti sui coefficienti di \(f\). Una condizione, per il
+criterio di Weierstrass (sulla convergenza totale, detto M-test) è la
+convergenza della serie \(\sum_{k=1}^\infty |a_k| + |b_k|\). Si possono anche
+trovare condizioni più interessanti, come ad esempio \(f_{|[-\pi, \pi]} \in
+W^{1,2}(-\pi, \pi)\), ricordando la notazione degli spazi di Sobolev. La
+dimostrazione si riconduce alla convergenza totale poc'anzi citata: 
+
+\begin{proposition}[Condizione sufficiente convergenza serie di Fourier]
+    Se \(f: \mathbb R \rightarrow \mathbb R\) è periodica di periodo \(2\pi\) e
+    \(f_{|[-\pi, \pi]} \in W^{1, 2}(-\pi, \pi)\) allora la serie di Fourier
+    converge uniformemente a \(f\).
+\end{proposition}
+
+\begin{proof}
+    Scriviamo i coefficienti di Fourier e usiamo l'integrazione per parti: 
+    \[
+     \begin{aligned}
+    a_0 &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi f(t) \, dt \\
+    a_k &=    \frac{1}{\sqrt{\pi}} \int_{(-\pi, \pi)} f(t) \cos(kt) dt  =
+    -\frac{1}{k} \frac{1}{\sqrt{\pi}} \int_{-\pi}^\pi f'(t) \sin(kt) \, dt =
+    -\frac{1}{k}b_k' \\
+    b_k &= (\dots) = \frac{1}{k}a_k'
+    \end{aligned}     
+    \]
+    Siccome siamo in \(W^{1,2}(-\pi, \pi)\), abbiamo che \(f' \in L^2(-\pi,
+    \pi)\) e quindi \(\{a_k'\}, \{b_k'\} \in \ell^2\). Per la diseguaglianza di
+    Young~\ref{prp:Young} si ha che
+    \[
+    \begin{aligned}
+        |a_k| &\leq \frac{1}{2k^2} + \frac{1}{2}|b_k'|^2 \\
+        |b_k| &\leq \frac{1}{2k^2} + \frac{1}{2}|a_k'|^2 \\
+    \end{aligned}
+    \]
+    E quindi 
+    \[
+    \sum_{k=1}^\infty |a_k| + |b_k|
+    \]
+    converge uniformemente, dunque la serie di Fourier converge uniformemente a \(f\).
+\end{proof}
+
+\newpage
 
 \section{Esercizi}
 Alcuni sono risolti, alcuni parzialmente e alcuni no. (Questa frase è inutile
@@ -7642,8 +7922,10 @@ perché basterebbe guardare gli esercizi, ma era bello aggiungere una frase qui)
     Altrimenti si può fare con Beppo Levi per serie~\ref{cor:beppo-levi-serie}
 \end{enumerate}
 \end{eser}
+
 \begin{eser}[Es. 1 del 17 \-- 01 \-- 2018]
     Se \(u : \mathbb{R} \to \mathbb{R}\) è una funzione misurabile e non
     negativa, consideriamo la successione di funzioni \(f_{n}{(x)}\) 
 \end{eser}
+
 \end{document}
