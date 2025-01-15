@@ -5809,7 +5809,7 @@ e inoltre
   \|xy\|_1 = \sum_{n=1}^{\infty} x_{n}y_{n} \le \sum_{n=1}^{\infty} |x_{n}y_{n}| \le
   \|x\|_p \|y\|_{p'} 
 \]
-\begin{definition}{Spazio normato separabile}\label{def:separabile}
+\begin{definition}[label=def:separabile]{Spazio normato separabile}
     Uno spazio normato \(X\) si dice \textbf{separabile} se esiste un sottoinsieme
     denso e numerabile di \(X\)
 \end{definition}
@@ -7010,11 +7010,11 @@ unitaria e sono ortogonali tra loro.
 \end{example}
 \begin{remark}
     Nel caso in cui \(H\) ha dimensione finita i sistemi ortonormali 
-    sono formati da una lista di al più  \(\dim H\) elementi, e quando sono esattamente
-    \(\dim H\) formano una base di\(H\). Nel caso in cui \(H\) ha
+    sono formati da una lista di al più \(\dim H\) elementi, e quando sono esattamente
+    \(\dim H\) formano una base di \(H\). Nel caso in cui \(H\) ha
     dimensione infinita si possono invece prendere successioni ortonormali.
 \end{remark}
-\begin{definition}{Serie di Fourier}\label{def:fourier}
+\begin{definition}[label=def:fourier]{Serie di Fourier}
     Dato un sistema ortonormale \(\{e_{n}\} \subseteq H \) allora per ogni \(x
     \in H\) si possono considerare i valori \[\Span{x, e_{k}}, \quad k \in
     \mathbb{N}\quad \text{\textbf{coefficienti di Fourier}}\] e la serie
@@ -7090,7 +7090,7 @@ e_{k}}|^2 + \sum_{(k=i)=1}^{n} \Span{x, e_{k}} \overline{\Span{x, e_{j}}} = \\ &
 \end{remark}
 
 \begin{proposition}\label{prop:2-45}
-    Sia \(H\) uno spazio di Hilbert e sia \(\{e_{n}\} \) un sistema ortonormale
+    Sia \(H\) uno spazio di Hilbert e sia \(\{e_{k}\} \) un sistema ortonormale
     in \(H\). Allora posto \(V_{n} = \mathrm{span}\{e_{1}, e_{2}, \dots, e_{n}\}\), con
     \(n \in \mathbb{N}\) si ha che 
     \[
@@ -7176,7 +7176,7 @@ Siccome, a \(x\) fissato, il prodotto induce un operatore lineare, ottengo la te
           \left\|x - \sum_{j=1}^{\overline{k}} \Span{x, e_{j}} e_{j} \right\|^2 \le
           \|x - z\|^2 \le \varepsilon^2
         \]
-        dove la disugaglianza vale applicando il teorema di Pitagora. Se prendiamo \(n > \overline{k}\), diciamo che
+        Se prendiamo \(n > \overline{k}\), diciamo che
         \begin{align*}
             \|x\|^2 - \sum_{k=1}^{n} |\Span{x, e_{k}}|^2 &\le \|x\|^2 -
             \sum_{k=1}^{\overline{k}} |\Span{x, e_{k}}|^2 \iff \\ \iff
@@ -7186,11 +7186,12 @@ Siccome, a \(x\) fissato, il prodotto induce un operatore lineare, ottengo la te
         \end{align*} dove si è usata la~\eqref{eq:bessel1} della
         proposizione~\ref{prop:bessel}. Ne viene fuori che 
         \[
-          \forall \varepsilon > 0 \quad \exists \overline{k} \in \mathbb{N} :
+          \forall x \in H \,\,\forall \varepsilon > 0 \quad \exists \overline{k} \in \mathbb{N} :
           \forall n \ge \overline{k} \quad \left\|x - \sum_{j=1}^{n} \Span{x,
           e_{j}}\right\|^2 \le \varepsilon^2
         \]
-        ossia, per arbitarietà di \(n\), \textit{(ii)}.
+        ossia esattamente che \(\displaystyle \lim_{n \to \infty} \sum_{j=1}^{n} \Span{x,
+        e_{j}} e_{j} = x \)  \textit{(ii)}.
 
     \item [\((ii) \implies (i)\)] Banale.
 
@@ -7214,7 +7215,8 @@ Siccome, a \(x\) fissato, il prodotto induce un operatore lineare, ottengo la te
     Infatti 
     \begin{align*}
         \Span{x - y, e_{j}} &= \lim_{n \to \infty} \Span{x, e_{j}} -
-      \Span{\sum_{k=1}^{n} \Span{x, e_{k}} e_{k}, e_{j} } = \lim_{n \to \infty}
+        \Span{\sum_{k=1}^{n} \Span{x, e_{k}} e_{k}, e_{j} } = \\ &= \lim_{n \to
+        \infty}
       \Span{x, e_{j}} - \sum_{k=1}^{n} \Span{x, e_{k}} \Span{e_{k}, e_{j}} = \\
                             &= \lim_{n \to \infty} \Span{x, e_{j}} - \Span{x,
                             e_{j}} = \lim_{n \to \infty} 0 = 0
@@ -7360,7 +7362,7 @@ formano una base ortonormale di \(L^2{(-\pi, \pi)}\).
     \mathbb{Z}\) che formano una base ortonormale.
 \end{remark}
 
-\begin{definition}{Polinomio trigonometrico}\label{def:polinomio_trig}
+\begin{definition}[label=def:polinomio_trig]{Polinomio trigonometrico}
 Una funzione del tipo
 \[
     p{(t)} = a_{0} + \sum_{k=1}^{n} {(a_{k} \cos{(kt)} + b_{k} \sin{(kt)})} \quad
@@ -7547,7 +7549,7 @@ per \(k \in \mathbb N\). Si ha il seguente risultato.
         &\leq \sqrt{2\pi} \varepsilon.
     \end{aligned}
     \]
-    e per la disugaglianza triangolare
+    e per la disuguaglianza triangolare
     \[
     \|f-p_\varepsilon\|_{L^2(-\pi, \pi)} \leq \varepsilon(1+\sqrt{2\pi})
     \]
@@ -7921,11 +7923,6 @@ perché basterebbe guardare gli esercizi, ma era bello aggiungere una frase qui)
     \]
     Altrimenti si può fare con Beppo Levi per serie~\ref{cor:beppo-levi-serie}
 \end{enumerate}
-\end{eser}
-
-\begin{eser}[Es. 1 del 17 \-- 01 \-- 2018]
-    Se \(u : \mathbb{R} \to \mathbb{R}\) è una funzione misurabile e non
-    negativa, consideriamo la successione di funzioni \(f_{n}{(x)}\) 
 \end{eser}
 
 \end{document}
