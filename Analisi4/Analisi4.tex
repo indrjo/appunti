@@ -786,7 +786,7 @@ che \(\mu(F) > \mu(A_{n}) - \frac{\varepsilon}{2}\), pertanto \(\mu(F) >
 
 \end{proof}
 
-\subsection{Insiemi Trascurabili}
+\paragraph{Insiemi Trascurabili}
 Un concetto molto importante della teoria della misura è quello di insieme
 trascurabile, ovvero di misura nulla.
 \begin{example}
@@ -2203,7 +2203,7 @@ valgono.
     Per mostrare che \(\mu {\left( E^{C} \right)} < \varepsilon\) usiamo la subadditività:
     \[
         \mu{\left( E^{C} \right)} = \mu {\left( \bigcup_{k \in \mathbb{N}}
-    \left\{ A_{m_k}^C \right\} \right)} \le \sum_{k=1}^{\infty} \mu{(A_{m_k}^{C})} <
+    A_{m_k}^C \right)} \le \sum_{k=1}^{\infty} \mu{(A_{m_k}^{C})} <
     \sum_{k=1}^{\infty} \frac{\varepsilon}{2^{k}} = \varepsilon 
     \]
 \end{proof}
@@ -2299,11 +2299,12 @@ valgono.
         \(n\to \infty\)}
     \]
     ma non c'è convergenza quasi ovunque, infatti fissato \(x \in [0,1]\), la
-    successione numerica \(f_{n}{(x)}\) non ha limite, perché purché assuma
-    principalmente il valore 0, ogni tanto assume il valore 1, e per ogni \(n\)
-    esiste un \(\overline{n} \ge  n\) tale che \(f_{\overline{n}} {(x)} = 1 \),
-    per cui non può esistere il limite. Poiché questo è vero per ogni \(x \in
-    [0,1]\), non c'è convergenza puntuale in nessun sottoinsieme.
+    successione numerica \(f_{n}{(x)}\) non ha limite perché, benché assuma
+    principalmente il valore 0, ogni tanto assume il valore 1, e più
+    precisamente per ogni \(n\) esiste un \(\overline{n} \ge  n\) tale che
+    \(f_{\overline{n}} {(x)} = 1 \), per cui non può esistere il limite. Poiché
+    questo è vero per ogni \(x \in [0,1]\), non c'è convergenza puntuale in
+    nessun sottoinsieme.
 \end{example}
 \begin{eser}
     Sia
@@ -2748,7 +2749,7 @@ La prima parte, \(\varphi_+\) misura finita, è ovvia. Procediamo con la seconda
     generale basta prendere \(1 \not\in A \ni 0\) e \(B = A^C\).
 \end{remark}
 Si dimostrano due lemmi strumentali alla dimostrazione del teorema di decomposizione di Hahn.
-\begin{lemma}
+\begin{lemma}\label{lem:dec_hahn_1}
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e \(\varphi :
     \mathcal{M} \to \mathbb{R}\) una misura relativa. Allora se esiste \(A \in
     \mathcal{M}\) tale che \(\varphi(A) > 0\) allora esiste \(P \subseteq A \),
@@ -2788,9 +2789,9 @@ Si dimostrano due lemmi strumentali alla dimostrazione del teorema di decomposiz
     \begin{align*}
         A_{i} \cap A_{j} &= \varnothing \quad \forall i \neq j, \quad
         \varphi(A_k) < -\frac{1}{n_{k}} \quad \forall k \in \mathbb{N} \\
-        n_k &:= \min \{n \in \mathbb{N}: \exists A' \in \mathcal{M}, \quad A'
+        n_k &:= \min \left\{n \in \mathbb{N}: \exists A' \in \mathcal{M}, \quad A'
         \subseteq A - \left( \bigcup_{i=1}^{k-1} A_{i}  \right), \quad
-    \varphi(A') < -\frac{1}{n} \} 
+    \varphi(A') < -\frac{1}{n} \right\} 
     \end{align*}
     
     Allora affermiamo che \(P = A \sminus \left( \bigcup_{k \in \mathbb{N}} A_K
@@ -2821,7 +2822,7 @@ Si dimostrano due lemmi strumentali alla dimostrazione del teorema di decomposiz
     ``eliminato'' (un certo termine non si può ripetere all'infinito perché la
     serie \(\sum_{i=1}^{\infty} \frac{1}{n_{i}}\) converge).
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{lem:unione_positivi}
     Sia \((\Omega, \mathcal{M})\) con misura relativa \(\varphi : \mathcal{M}
     \to \mathbb{R}\) e sia \(\{P_k\} \) una successione di insiemi positivi.
     Allora 
@@ -2862,7 +2863,7 @@ Si dimostrano due lemmi strumentali alla dimostrazione del teorema di decomposiz
     una successione \(\{A_{n}\}_{n \in \mathbb{N}} \) di \(A_{n}\) positivi
     tale che \(\lim_{n \to \infty} \varphi(A_{n}) = p\). Si definisca \(A := \bigcup_{n \in
     \mathbb{N}} A_{n}\), allora \(A \in \mathcal{M}\) e \(A\) è positivo per il
-    lemma precedente. Per definizione di \(p\) abbiamo che \(\varphi(A) \le p\). Inoltre
+    lemma~\ref{lem:unione_positivi}. Per definizione di \(p\) abbiamo che \(\varphi(A) \le p\). Inoltre
     \[
         \varphi(A) = \varphi((A \sminus A_{n}) \cup A_{n}) = \varphi(A \sminus
         A_{n}) + \varphi(A_{n}) \ge \varphi(A_{n}), \quad \forall n \in \mathbb{N}
@@ -2873,7 +2874,7 @@ Si dimostrano due lemmi strumentali alla dimostrazione del teorema di decomposiz
     Ora prendiamo \(B = \Omega \sminus A \implies A \cap B = \varnothing\) e \(A
     \cup B = \Omega\). Vogliamo mostrare che \(B\) è negativo. Assumiamo per
     assurdo che non lo sia, ossia che ammetta un certo sottoinsieme di misura positiva. 
-    Per il primo lemma questo ammette un sottoinsieme positivo, e quindi esiste un insieme positivo \(P \subseteq B \) con \(P
+    Per il lemma~\ref{lem:dec_hahn_1} questo ammette un sottoinsieme positivo, e quindi esiste un insieme positivo \(P \subseteq B \) con \(P
     \in \mathcal{M}\). Ma allora \(A \cup P\) è positivo e 
     \[
         \varphi(A \cup P) = \varphi(A) + \varphi(P) = p + \varphi(P) > p
@@ -5371,7 +5372,11 @@ lineare, infatti
 \end{itemize}
 \end{proof}
 \begin{note}
-    Notare che abbiamo usato solo la continuità in \(0_X\) per dimostrare \(\implies\) 
+    Notare che abbiamo usato solo la continuità in \(0_X\) per dimostrare
+    \(\implies\). Dunque nella precedente dimostrazione abbiamo anche detto che
+    se un operatore è lineare allora è continuo se e solo se è continuo in
+    \(0_X\) (dunque se e solo se è continuo in un punto qualsiasi di \(X\)).
+    Questo è vero in generale anche per spazi vettoriali topologici. 
 \end{note}
 
 \begin{example}[Operatore lineare non continuo]
@@ -5776,10 +5781,11 @@ allora \(x = {(x_{n})} \in c_{0}\). Ne consegue che
       |L{(x^{k})} - L{(x)}| \le \|x^{k} - x\|_\infty \to 0
     \]
     ma poiché \(L{(x^{k})}\) è sempre uguale a \(0\) allora lo è anche \(L{(x)}\).
-    Infine si può anche osservare che \(c_{0}\) è la controimmagine di \(\{0\} \)
+
+    Altrimenti si può anche osservare che \(c_{0}\) è la controimmagine di \(\{0\} \)
     tramite l'operatore continuo \(L\) e quindi è chiuso in \(c\).
 
-    \item \(c\) è \textbf{chiuso} in \(\ell^{\infty}\) in quanto se \(x{(k)} \to x\) in
+    \item \(c\) è \textbf{chiuso} in \(\ell^{\infty}\) in quanto se \(x^{k} \to x\) in
     \(\ell^{\infty}\) allora \(L{(x^{k})} \to L{(x)}\) in quanto \(L\) è continuo,
     quindi in particolare \(L{(x)}\) esiste ed è finito.
 \end{itemize}
@@ -5806,7 +5812,7 @@ coniugati, allora
 \]
 e inoltre
 \[
-  \|xy\|_1 = \sum_{n=1}^{\infty} x_{n}y_{n} \le \sum_{n=1}^{\infty} |x_{n}y_{n}| \le
+  \|xy\|_1 = \sum_{n=1}^{\infty} |x_{n}y_{n}| \le
   \|x\|_p \|y\|_{p'} 
 \]
 \begin{definition}[label=def:separabile]{Spazio normato separabile}
@@ -5815,7 +5821,7 @@ e inoltre
 \end{definition}
 
 Gli spazi \(\ell^{p}\) con \(1 \le p < \infty\) sono spazi \textbf{separabili},
-ossia ammettono un sottospazio denso numerabile. Sappiamo infatti che \(c_{00}
+Sappiamo infatti che \(c_{00}
 \) è denso in \(\ell^{p}\) se \(p < \infty\) e consideriamo ora \(q_{00} \) il
 sottoinsieme di \(c_{00}\) delle successioni a componenti (oppure a parti reali
 e immaginarie delle componenti) razionali. Allora \(q_{00} \) è numerabile ed è
@@ -6477,13 +6483,13 @@ Per la dimostrazione, riassumiamo il teorema~\ref{thm:proiezioni} come esistenza
 e unicità della soluzione di~\eqref{eq:PM} e~\eqref{eq:DV} e uguaglianza di tali
 soluzioni, e a tale scopo articoliamo la dimostrazione nei seguenti passaggi
 \begin{enumerate}[label = \arabic*.]
-    \item[] \hyperref[pf:Proiezioni-1]{1}. Esistenza della soluzione di~\eqref{eq:PM}
-    \item[] \hyperref[pf:Proiezioni-2]{2}.~\(u\) soluzione di~\eqref{eq:PM} risolve anche~\eqref{eq:DV}
-    \item[] \hyperref[pf:Proiezioni-3]{3}.~\(u\) soluzione di~\eqref{eq:DV} risolve anche~\eqref{eq:PM}
-    \item[] \hyperref[pf:Proiezioni-4]{4}. La soluzione di~\eqref{eq:DV} è unica
+    \item[] \hyperlink{pf:Proiezioni-1}{1}. Esistenza della soluzione di~\eqref{eq:PM}
+    \item[] \hyperlink{pf:Proiezioni-2}{2}.~\(u\) soluzione di~\eqref{eq:PM} risolve anche~\eqref{eq:DV}
+    \item[] \hyperlink{pf:Proiezioni-3}{3}.~\(u\) soluzione di~\eqref{eq:DV} risolve anche~\eqref{eq:PM}
+    \item[] \hyperlink{pf:Proiezioni-4}{4}. La soluzione di~\eqref{eq:DV} è unica
 \end{enumerate}
-\begin{proof}[Passo 1: Esistenza della soluzione
-    di~\eqref{eq:PM}]\label{pf:Proiezioni-1}
+\begin{proof}[\hypertarget{pf:Proiezioni-1}{Passo 1: Esistenza della soluzione
+    di~\eqref{eq:PM}}]
     Costruiamo una successione minimizzante.
     \[
       \lambda = \inf_{v \in K} \|f-v\| \text{ esiste ed è } \ge 0
@@ -6521,8 +6527,8 @@ soluzioni, e a tale scopo articoliamo la dimostrazione nei seguenti passaggi
     per l'unicità del limite ne concludiamo che \(\|f - u\| = \lambda\) che
     quindi è il minimo cercato.
 \end{proof}
-\begin{proof}[Passo 2: \(u\) sol.~\eqref{eq:PM} \(\implies u \)
-    sol.~\eqref{eq:DV}]\label{pf:Proiezioni-2}
+\begin{proof}[\hypertarget{pf:Proiezioni-2}{Passo 2: \(u\) sol.~\eqref{eq:PM} \(\implies u \)
+    sol.~\eqref{eq:DV}}]
     Sappiamo per ipotesi che \(\|u -f\| \le \|w - f\|\) per ogni \(w \in K\).
     Prendo 
     \[w := tv + {(1-t)}u \quad \forall t \in [0, 1]\]
@@ -6547,8 +6553,8 @@ soluzioni, e a tale scopo articoliamo la dimostrazione nei seguenti passaggi
     \]
     che è esattamente la~\eqref{eq:DV}
 \end{proof}
-\begin{proof}[Passo 3: \(u\) sol.~\eqref{eq:DV} \(\implies u\)
-    sol.~\eqref{eq:PM}]\label{pf:Proiezioni-3}
+\begin{proof}[\hypertarget{pf:Proiezioni-3}{Passo 3: \(u\) sol.~\eqref{eq:DV} \(\implies u\)
+    sol.~\eqref{eq:PM}}]
     Vogliamo provare la seguente uguaglianza:
     \[
       \|u-f\|^2 - \|v-f\|^2 = 2\Re{(\Span{f-u, v-u} )} - \|u-v\|^2 \quad \forall
@@ -6565,7 +6571,8 @@ soluzioni, e a tale scopo articoliamo la dimostrazione nei seguenti passaggi
     \end{equation*}
     che è esattamente l'eguaglianza richiesta
 \end{proof}
-\begin{proof}[Passo 4: unicità sol.~\eqref{eq:DV}]\label{pf:Proiezioni-4}
+\begin{proof}[\hypertarget{pf:Proiezioni-4}{Passo 4: unicità
+sol.~\eqref{eq:DV}}]
     Siano \(u_{1}, u_{2}\) due soluzioni di~\eqref{eq:DV}:
     \[
       \Re{(\Span{u_{1} - f, u_{1} - v})} \le 0 \quad \text{ e } \quad
@@ -7894,7 +7901,7 @@ perché basterebbe guardare gli esercizi, ma era bello aggiungere una frase qui)
     che ha somma finita, mentre per \(x=0\) fa 0 banalmente.
 
     Sia \(E = \mathbb{R} \sminus B_{\frac{\varepsilon}{2}} {(0)}\) che ha
-    complementare di misura \(\varepsilon\). Allora denotando gon \(g_{n}\)la
+    complementare di misura \(\varepsilon\). Allora denotando con \(g_{n}\) la
     successione delle somme parziali e con \(g\) il limite 
     \[
         \left| g_{k} - g \right| = \left| \sum_{n=1}^{k} f_{n}{(x)} -
