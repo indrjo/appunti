@@ -3446,9 +3446,9 @@ dobbiamo prima mostrare tre lemmi.
 \begin{proof}
     Vogliamo dimostrare che \(f = \hat{f}\) su ogni \(\Omega_{i} \cap
     {\Theta_{j}}\). Questo è vero perché essendo in \(\Omega_{i}\), per il
-    lemma~\ref{lem:rad_nik_1} abbiamo che \(f \ge \hat{f}\) \(\mu_i\)-q.o. e
+    lemma~\ref{lem:rad_nik_1} abbiamo che \(f \ge \hat{f}\) \(\mu_i\)-q.o.~e
     essendo in~\({\Theta_{j}}\) abbiamo che \(\hat{f} \ge f\)
-    \(\hat{\mu_{j}}\)-q.o.~ma poiché entrambe le misure sono proiezioni di
+    \(\hat{\mu_{j}}\)-q.o.~ma poiché entrambe le misure sono restrizioni di
     \(\mu\), allora \(f = \hat{f}\) \(\mu\)-q.o.~in \(\Omega_{i} \cap
     {\Theta_{j}}\). Poiché l'unione di tutti questi insiemi è \(\Omega\),
     segue la tesi.
@@ -6584,8 +6584,8 @@ sol.~\eqref{eq:DV}}]
       \Re(\Span{u_{1} - f, u_{1} - u_{2}}) \le 0 \quad \text{ e } \quad
       \Re(\Span{f - u_{2}, u_{1} - u_{2}}) \le 0
     \]
-    da cui, per linearità del prodotto scalare, nel primo termine
-    otteniamo \(\|u_{1} - u_{2}\| \le 0\) e quindi \(u_{1} = u_{2}\) 
+    da cui, sommando le due diseguaglianze, per linearità del prodotto scalare
+    otteniamo \(\|u_{1} - u_{2}\|^2 \le 0\) e quindi \(u_{1} = u_{2}\) 
 \end{proof}
 \begin{remark}
     Se \(K\) non fosse chiuso, allora la proiezione potrebbe
@@ -6610,7 +6610,7 @@ P_K{(f_{1})}\) e \(u_{2} = P_K{(f_{2})}\). Allora, procedendo in modo simile
 al passo 4 della dimostrazione del teorema~\ref{thm:proiezioni} otteniamo
 \begin{align*}
     \Re{(\Span{u_{1} - f_{1} + f_{2} - u_{2}, u_{1} - u_{2}})} &\le 0  \iff \\
-    \iff \Re{(\Span{u_{1} - u_{2}, u_{1}, u_{2}} )} + \Re{(\Span{f_{2} - f_{1},
+    \iff \Re{(\Span{u_{1} - u_{2}, u_{1}- u_{2}} )} + \Re{(\Span{f_{2} - f_{1},
 u_{1} - u_{2}})} &\le 0 \iff \\
     \iff \|u_{1}-u_{2}\|^2 \le \left| \left<f_{1}-f_{2}, u_{1}-u_{2} \right>
 \right| &\overset{\ref{thm:schwarz}}{\le } \|f_{1} -f_{2}\|\|u_{1} - u_{2}\| 
