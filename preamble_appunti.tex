@@ -167,32 +167,13 @@
 \DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}} % beautiful chi
 \newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}} % inner command, used by \rchi
 
-% \newtcolorbox[auto counter, number within=section]{eser}[1][]{
-%     title=Esercizio~\thetcbcounter,
-%     label={eser:\thetcbcounter},
-% 	% skin=bicolor,
-% 	breakable,
-% 	enhanced,
-% 	frame hidden,
-% 	boxrule = 0sp,
-% 	borderline west = {1.5pt}{-5pt}{black},
-% 	sharp corners,
-% 	detach title,
-% 	before upper = \tcbtitle\par\smallskip,
-% 	coltitle = black,
-% 	fonttitle = \bfseries\sffamily,
-% 	description font = \mdseries,
-% 	separator sign none,
-% 	colback = black!0,
-%     colbacktitle=black!5
-% }
 \newtcolorbox[auto counter, number within=section]{eser}[1][]{
     colframe=black!0,
     coltitle=black!70, % Title text color
     fonttitle=\bfseries\sffamily, % Title font
     title={Esercizio~\thetcbcounter~#1}, % Title format
     sharp corners, % Less rounded corners
-    boxrule=0pt, % Line width of the box frame
+    boxrule=0mm, % Line width of the box frame
     toptitle=1mm, % Distance from top to title
     bottomtitle=1mm, % Distance from title to box content
     colbacktitle=black!5, % Background color of the title bar
@@ -202,6 +183,7 @@
     after skip=10pt, % Space after the box
     breakable, % Allow box to split across pages
     colback=black!0,
-    borderline west={1pt}{-5pt}{black!70},
+    borderline west={1pt}{-5pt}{black!70}, 
+    segmentation style={dashed, draw=black!40, line width=1pt} % Dashed dividing line
 }
 \newcommand{\seminorm}[1]{\left\lvert\hspace{-1 pt}\left\lvert\hspace{-1 pt}\left\lvert#1\right\lvert\hspace{-1 pt}\right\lvert\hspace{-1 pt}\right\lvert}
