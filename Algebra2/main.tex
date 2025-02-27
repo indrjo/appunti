@@ -1,4 +1,4 @@
-\input{../preamble_appunti.tex}
+\input{preamble.tex}
 
 \title{Appunti di Algebra 2}
 \author{Github Repository:
@@ -17,7 +17,7 @@ I testi preferiti sono
 
 \section{Azioni di gruppi su insiemi}
 Chiameremo \(G\) un gruppo e \(S\) un insieme
-\begin{definition}
+\begin{definition}{Azione di gruppo}
     Un'azione (sinistra) di \(G\) su \(S\) e un'applicazione
     \[
       F : G\times S \to S
@@ -37,10 +37,12 @@ concisa
 \]
 \begin{proposition}\label{prop:azione_biiezione}
     Per ogni \(g \in G\), l'applicazione \(F_g : S \to S\) definita da
-    \(F_g{(s)} = F{(g, s)} = g{(s)}\) è una biiezione
+    \(F_g{(s)} = F{(g, s)} = g{(s)}\) è una biiezione e in particolare
+    \begin{equation}\label{eq:azione_inversa}
+        F_g^{-1} = F_{g^{-1}}
+    \end{equation}
 \end{proposition}
 \begin{proof}
-    \({(Fg)}^{-1} = F_{g^{-1}}\) infatti 
     \[
       F_g \circ F_{g^{-1}} {(s)} = g{(g^{-1}{(s)})} \overset{(ii)}{=} e{(s)}
       \overset{(i)}{=} s
@@ -81,12 +83,12 @@ L'applicazione \(\psi : G \to S(S) = \{f : S\to S \text{ biunivoche}\}\) dove
 \end{enumerate}
     Inoltre \(m\) è un'azione fedele, infatti 
     \[
-        \psi{(g)}{(h)} = h \forall h \in G \iff gh = h \implies g = e
+        \psi{(g)}{(h)} = h \quad\forall h \in G \iff gh = h \implies g = e
     \]
     \begin{remark}
         Se \(G\) è un gruppo finito, con \(\# G = n\) allora \(S{(G)} \cong S_n\)
-        e poiché \(\psi\) è iniettivo, \(G \cong \psi{(G)} < S{(G)} \cong S_n\)
-        il teorema di Cayley
+        e poiché \(\psi\) è iniettivo, \(G \cong \psi{(G)} <  S{(G)} \cong S_n\)
+        il teorema di Cayley.
     \end{remark}
 \end{example}
 \begin{example}
@@ -137,7 +139,7 @@ L'applicazione \(\psi : G \to S(S) = \{f : S\to S \text{ biunivoche}\}\) dove
     \]
     e si definisce \textbf{stabilizzatore} di \(s\) l'insieme
     \[
-        \text{stab}{(s)} = \{g \in G : g{(s)} = s\}
+        \text{stab}_s = \{g \in G : g{(s)} = s\}
     \]
 \end{definition}
 \begin{example}
@@ -161,7 +163,7 @@ relazione di equivalenza su \(S\) seguente:
 \begin{itemize}[label = --]
     \item \emph{riflessiva}: \(s = e{(s)}\)
     \item \emph{simmetrica}: se \(s' = g{(s)}\) allora \(s = g^{-1}{(s')}\)
-        perché \({(F_g)}^{-1} = F_{g^{-1}} \) 
+        per la proposizione~\ref{prop:azione_biiezione}
     \item \emph{transitiva}: se \(s' = g{(s)}\) e \(s'' = h{(s')}\) allora
         \(s'' = h{(s')} = h{(g{(s)})} \overset{(ii)}{=} {(hg)}{(s)}\)
 \end{itemize}
@@ -176,7 +178,9 @@ O_s\)
     Supponiamo \(g, h \in \text{stab}_s\). Allora \(g{(s)} = h{(s)} = s\), ne
     consegue che
     \[
-      F{(gh, s)} = F{(g, F{(h, s)})} 
+        F_{gh^{-1}} {(s)} = F_{g} {(F_{h^{-1}} {(s)})}
+        \overset{\eqref{eq:azione_inversa}}{=} F_g {(F^{-1}_h{(s)})} =
+        F_g {(s)} = s
     \]
 \end{proof}
 
