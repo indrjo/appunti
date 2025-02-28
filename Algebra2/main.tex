@@ -1,5 +1,5 @@
 %! TeX program = lualatex
-\input{preamble.tex}
+\input{../preamble_appunti.tex}
 
 \title{Appunti di Algebra 2}
 \author{Github Repository:
@@ -67,7 +67,7 @@ L'applicazione \(\psi : G \to S(S) = \{f : S\to S \text{ biunivoche}\}\) dove
     iniettivo
 \end{definition}
 \begin{remark}
-    Ovvero se e solo se \(\text{Ker}\psi = \{e\} \iff (\psi{(g)} = \text{Id}_S
+    Ovvero se e solo se \(\mathrm{Ker}\psi = \{e\} \iff (\psi{(g)} = \mathrm{Id}_S
     \iff g = e)\) 
 \end{remark}
 
@@ -104,15 +104,15 @@ L'applicazione \(\psi : G \to S(S) = \{f : S\to S \text{ biunivoche}\}\) dove
             g^{-1} = g{(\varphi {(g', h)})} g ^{-1} = \varphi {(g, \varphi {(g',
             h)})}\) 
     \end{enumerate}
-    \(\psi : G \to S(G)\) e \(\text{Im} \psi = \text{Inn} {(G)} <
-    \text{Aut}{(G)}\). Non è necessariamente un'azione fedele, infatti
+    \(\psi : G \to S(G)\) e \(\mathrm{Im} \psi = \mathrm{Inn} {(G)} <
+    \mathrm{Aut}{(G)}\). Non è necessariamente un'azione fedele, infatti
     \[
-        \text{Ker}{(\psi)} = \{g \in G : \forall h \in G \quad ghg^{-1} = h\} =
+        \mathrm{Ker}{(\psi)} = \{g \in G : \forall h \in G \quad ghg^{-1} = h\} =
         Z(G)
     \]
     da cui per il primo teorema di isomorfismo
     \[
-      G / Z{(G)} = \text{Inn}{(G)}
+      G / Z{(G)} = \mathrm{Inn}{(G)}
     \]
 \end{example}
 \begin{example}
@@ -140,13 +140,13 @@ L'applicazione \(\psi : G \to S(S) = \{f : S\to S \text{ biunivoche}\}\) dove
     \]
     e si definisce \textbf{stabilizzatore} di \(s\) l'insieme
     \[
-        \text{stab}_s = \{g \in G : g{(s)} = s\}
+        \mathrm{stab}_s = \{g \in G : g{(s)} = s\}
     \]
 \end{definition}
 \begin{example}
     Nell'esempio dell'azione di coniugio lo stabilizzatore di \(h\) è
     \[
-        \text{stab}_h = \{g \in G : ghg^{-1} = h\} = \{g \in G : gh = hg\} =
+        \mathrm{stab}_h = \{g \in G : ghg^{-1} = h\} = \{g \in G : gh = hg\} =
         C_G{(h)}
     \]
 \end{example}
@@ -173,10 +173,10 @@ Ne segue chiaramente che \(O_s = {[s]}_\sim \) e allora \(\displaystyle S = \cop
 O_s\) 
 \end{proof}
 \begin{proposition}
-    \(\text{stab}_s < G\) 
+    \(\mathrm{stab}_s < G\) 
 \end{proposition}
 \begin{proof}
-    Supponiamo \(g, h \in \text{stab}_s\). Allora \(g{(s)} = h{(s)} = s\), ne
+    Supponiamo \(g, h \in \mathrm{stab}_s\). Allora \(g{(s)} = h{(s)} = s\), ne
     consegue che
     \[
         F_{gh^{-1}} {(s)} = F_{g} {(F_{h^{-1}} {(s)})}
