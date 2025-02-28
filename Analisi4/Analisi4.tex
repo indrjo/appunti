@@ -25,7 +25,7 @@ Sbordone al libro "Analisi Funzionale" di Brezis, edito da Liguori.
 \subsection{Algebre, \(\sigma\)-algebre, misure}
 Sia \(\Omega\) un insieme ambiente, e sia \(\mathcal{M}\) una famiglia di
 sottoinsiemi di \(\Omega\), ossia \(\mathcal{M} \subseteq 2^{\Omega} \).
-\begin{definition}{Algebra}
+\begin{definition}[Algebra]
     Una famiglia \(\mathcal{M}\) di sottoinsiemi di \(\Omega\) si dice
     \textbf{algebra} se
 \begin{enumerate}[label = \arabic*.]
@@ -74,7 +74,7 @@ rispetto alle comuni operazioni di insiemi.
     finiti rettangoli.
 \end{example}
 
-\begin{definition}{funzione finitamente additiva}
+\begin{definition}[funzione finitamente additiva]
      Sia \(\Omega\) un insieme e \(\mathcal{M}\) un'algebra di sottoinsiemi di
      \(\Omega\).
 
@@ -120,7 +120,7 @@ Va inteso che se per uno dei due \(\mu(A) = +\infty\) allora
 \end{enumerate}
 \end{proof}
 
-\begin{definition}{Misura}
+\begin{definition}[Misura]
     Sia \(\Omega\) insieme, \(\mathcal{M}\) algebra su \(\Omega\), allora \(\mu
     : \mathcal{M} \to [0, +\infty]\) si dice \textbf{misura} se:
 \begin{enumerate}[label = \arabic*.]
@@ -142,7 +142,7 @@ Vogliamo dunque poterla definire su uno spazio che permetta di assicurare che
 l'unione di una successione di insiemi sia ancora un insieme. Questo ci porta
 alla seguente definizione.
 
-\begin{definition}{\(\sigma\)-algebra}
+\begin{definition}[\(\sigma\)-algebra]
     Sia \(\Omega\) un insieme, \(\mathcal{M}\) una famiglia di sottoinsiemi di
     \(\Omega\). Allora \(\mathcal{M}\) si dice \textbf{\(\sigma\)-algebra} se:
 \begin{enumerate}[label = \arabic*.]
@@ -193,7 +193,8 @@ esiste sempre una \(\sigma\)-algebra \(\mathcal{M}\) che contiene
     chiusi e tutte le unioni e intersezioni numerabili di aperti e chiusi.
 \end{example}
 
-\begin{definition}[label=def:def_misura]{Definizioni utili}
+\begin{definition}[Definizioni utili]
+\label{def:def_misura}
     Dato \(\Omega\) un insieme e una \(\sigma\)-algebra \(\mathcal{M}\) su
     \(\Omega\), la coppia \((\Omega, \mathcal{M})\) viene detta \textbf{spazio
     misurabile} e la terna \((\Omega, \mathcal{M}, \mu)\), dove \(\mu\) è una
@@ -330,7 +331,7 @@ esiste sempre una \(\sigma\)-algebra \(\mathcal{M}\) che contiene
 
 \newpage
 \subsection{Misura esterna}
-\begin{definition}{Misura esterna}
+\begin{definition}[Misura esterna]
     Sia \(\Omega\) un insieme e consideriamo l'algebra \(2^{\Omega}\), allora
     \(\lambda : 2^{\Omega} \to [0, +\infty]\) si dice \textbf{misura esterna} se 
 \begin{enumerate}[label = \arabic*.]
@@ -508,7 +509,7 @@ Inoltre, per subadditività, \(\mu^\star(G) \le \mu^\star(F) + \mu^\star(G\sminu
 l'uguaglianza. Poiché sono tutti valori finiti, posso sottrarre \(\mu^\star(F)\)
 da ambo i lati ottenendo la tesi.
 \end{proof}
-\begin{definition}{Misurabilità secondo Lebesgue}
+\begin{definition}[Misurabilità secondo Lebesgue]
     Un insieme \(A \subseteq \mathbb{R}^{N} \) è \textbf{misurabile secondo
     Lebesgue} se \(\forall \varepsilon > 0\) esistono un chiuso \(F_\varepsilon
     \subseteq A \) e un aperto \(G_\varepsilon \supseteq A \) tali che
@@ -884,7 +885,7 @@ definizione~\ref{def:def_misura}).
 \subsection{Funzioni misurabili}
 Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e sia \(f: \Omega \to
 \mathbb{R} \cup \{-\infty, \infty\}\) 
-\begin{definition}{Funzione misurabile}
+\begin{definition}[Funzione misurabile]
     La funzione \(f : \Omega \to \mathbb{R} \cup \{-\infty, \infty \}\) si dice \textbf{misurabile} se \(\forall \alpha \in \mathbb{R}\) l'insieme
     \[
         f^{-1}((\alpha, +\infty]) = \{x \in \Omega : f(x) > \alpha\} \in \mathcal{M}
@@ -1076,7 +1077,7 @@ alcune proprietà della classe delle funzioni misurabili.
     ipotesi un insieme misurabile.
 \end{proof}
 
-\begin{definition}{Funzione semplice}
+\begin{definition}[Funzione semplice]
 Consideriamo uno spazio di misura \((\Omega, \mathcal{M}, \mu)\). Le
 \textbf{funzioni semplici}
 sono le funzioni che assumono un numero finito di valori reali. Quindi
@@ -1182,7 +1183,7 @@ Dove per convenzione \(c_{i}\mu(E \cap E_{i}) = 0\) se \(c_{i} = 0\) e \(\mu(E
     In \(\mathbb{R}\) con la misura di Lebesgue, se prendo \(s = \rchi_{[0,
     +\infty)}\), allora \(I_{\mathbb{R}}(s) = \mu([0, +\infty)) = +\infty \) 
 \end{example}
-\begin{definition}{Integrale di Lebesgue}
+\begin{definition}[Integrale di Lebesgue]
     Sia \(f: \Omega \to [0, +\infty]\) misurabile e non negativa. Allora per
     ogni \(E \in \mathcal{M}\) definiamo 
     \[
@@ -2088,14 +2089,14 @@ ogni \(x > \overline{x}\) allora necessariamente \(g\) non è integrabile.
 \subsection{Convergenze di funzioni misurabili}
 Di seguito vengono introdotti diversi concetti di convergenza di successioni di funzioni e relative implicazioni, 
 il risultato chiave è il teorema di (Severini)-Egorov (\ref{thm:severini-egorov}).
-\begin{definition}{Convergenza quasi ovunque}
+\begin{definition}[Convergenza quasi ovunque]
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Una successione di
     funzioni misurabili \(f_{n} : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
     converge quasi ovunque a \(f : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
     se esiste un insieme \(F \in \mathcal{M}\) tale che \(\mu(F) = 0\) e
     \(\lim_{n \to \infty} f_{n}(x) = f(x) \quad \forall x \in \Omega \sminus F\)
 \end{definition}
-\begin{definition}{Convergenza quasi uniforme}
+\begin{definition}[Convergenza quasi uniforme]
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Una successione di
     funzioni misurabili \(f_{n} : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
     converge quasi uniformemente a \(f : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
@@ -2103,7 +2104,7 @@ il risultato chiave è il teorema di (Severini)-Egorov (\ref{thm:severini-egorov
     che \(\mu(F) < \varepsilon\) e \(f_{n} \to f\) uniformemente in \(\Omega
     \sminus F\).
 \end{definition}
-\begin{definition}{Convergenza in misura}
+\begin{definition}[Convergenza in misura]
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Una successione di
     funzioni misurabili \(f_{n} : \Omega \to \mathbb{R} \cup \{\pm \infty\} \)
     converge in misura a \(f : \Omega \to \mathbb{R} \cup \{\pm \infty\} \) se
@@ -2397,7 +2398,7 @@ definizione della misura prodotto:
 \end{proposition}
 Per la dimostrazione di questa proposizione si usano le \emph{famiglie
 monotone} di misure.
-\begin{definition}{Famiglia monotona}
+\begin{definition}[Famiglia monotona]
 Una collezione \(\mathcal{A}\) di sottoinsiemi di un
 insieme ambiente \(\Omega\) si dice \emph{famiglia monotona} se per ogni
 successione \(\{A_{n}\} \) crescente di insiemi in \(\mathcal{A}\) e per ogni
@@ -2543,7 +2544,7 @@ Notiamo che
     \(\alpha\) queste funzioni sono integrabili in \(B_{1}(0)\)? E in
     \(\mathbb{R}^2 \sminus B_{1}(0)\)?
 \end{eser}
-\begin{definition}{Convoluzione}
+\begin{definition}[Convoluzione]
     Siano due funzioni \(f, g : \mathbb{R}^{N} \to \mathbb{R}\). Allora la
     funzione
     \[
@@ -2590,7 +2591,7 @@ Notiamo che
 In questo paragrafo si introduce il concetto di misura relativa, si dimostra il
 teorema di decomposizione di Hahn e si introducono i concetti di misura
 assolutamente continua e di misura singolare.
-\begin{definition}{Misura Relativa}
+\begin{definition}[Misura Relativa]
 Sia \((\Omega, \mathcal{M})\) uno spazio misurabile. \(\varphi: \mathcal{M} \to
 \mathbb{R}\) si dice \textbf{misura relativa} se valgono le seguenti proprietà:
 \begin{enumerate}[label = \arabic*.]
@@ -2711,7 +2712,7 @@ La prima parte, \(\varphi_+\) misura finita, è ovvia. Procediamo con la seconda
 \end{enumerate}
 \end{proof}
 
-\begin{definition}{Insiemi positivi e negativi}
+\begin{definition}[Insiemi positivi e negativi]
     Sia \((\Omega, \mathcal{M})\) uno spazio misurabile e sia \(\varphi:
     \mathcal{M} \to  \mathbb{R}\) una misura relativa. Allora 
 \begin{itemize}[label = --]
@@ -2906,7 +2907,7 @@ E)\). Analogamente si dimostra che \(\varphi(A' \cap E) = \varphi(A \cap A \cap
 E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
 \end{proof}
 
-\begin{definition}{Variazione superiore, inferiore, totale}
+\begin{definition}[Variazione superiore, inferiore, totale]
     Sia \((\Omega, \mathcal{M})\) uno spazio di misura e \(\varphi : \mathcal{M}
     \to \mathbb{R}\) una misura relativa. Sia \((A, B)\) una decomposizione di
     \(Hahn\). Allora
@@ -2965,7 +2966,7 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
 \end{enumerate}
 \end{proof}
 
-\begin{definition}{\(\mu\)-Assoluta continuità}
+\begin{definition}[\(\mu\)-Assoluta continuità]
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Sia \(\varphi\) una
     misura (o misura relativa) su \((\Omega, \mathcal{M})\). Allora \(\varphi\)
     si dice \(\mu\)-\textbf{assolutamente continua} (denotato \(\mu\)-a.c.) se
@@ -3098,7 +3099,7 @@ E)\) da cui la tesi. Similmente si dimostra l'altra eguaglianza.
     Il corollario segue semplicemente da \( \left| \int_E f d\mu\right| =
     |\varphi(E)| \le |\varphi |(E) \) 
 \end{proof}
-\begin{definition}{Misura singolare}
+\begin{definition}[Misura singolare]
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura e sia \(\varphi\)
     una misura o misura relativa su \((\Omega, \mathcal{M})\). Allora
     \(\varphi\) è \textbf{\(\mu\)-singolare} se esistono \(A, B \in
@@ -3251,8 +3252,8 @@ Il teorema di Lebesgue~\ref{thm:dec_leb} è il risultato che unisce questi due a
         \int_\Omega f d\mu = \sup_{g \in \mathcal{F}}  \int_\Omega g d\mu
     \]
 \end{theorem}
-\begin{definition}[label=def:rad_nik_1]{Derivata di Radon-Nikodym per misure
-    finite}
+\begin{definition}[Derivata di Radon-Nikodym per misure finite]
+\label{def:rad_nik_1}
     Siano \(\mu\) e \(\varphi \) misure finite su \((\Omega, \mathcal{M})\).
     Chiamiamo \textbf{derivata di Radon-Nikodym} di \(\varphi \) rispetto a
     \(\mu\) la funzione \(f \in \mathcal{F}\) del teorema precedente e viene
@@ -3453,8 +3454,8 @@ dobbiamo prima mostrare tre lemmi.
     segue la tesi.
 \end{proof}
 
-\begin{definition}[label=def:rad_nik_2]{Derivata di Radon-Nikodym con \(\mu\)
-    \(\sigma\)-finita}
+\begin{definition}[Derivata di Radon-Nikodym con \(\mu\) \(\sigma\)-finita]
+\label{def:rad_nik_2}
     Sia \(\Omega, \mathcal{M}\) lo spazio misurabile del
     lemma~\ref{lem:rad_nik_3}. Allora \(f\) come definita sopra è la
     \textbf{derivata di Radon-Nikodym} di \(\varphi \) misura finita rispetto a
@@ -3471,7 +3472,8 @@ dobbiamo prima mostrare tre lemmi.
 Procedendo con la generalizzazione, vogliamo ora definire la derivata di una
 generica misura relativa \(\varphi \) rispetto a una misura \(\sigma\)-finita
 
-\begin{definition}[label=def:rad_nik]{Derivata di Radon-Nikodym}
+\begin{definition}[Derivata di Radon-Nikodym]
+\label{def:rad_nik}
     Sia \(\Omega, \mathcal{M}\) uno spazio misurabile, sia \(\mu\) una misura
     \(\sigma\)-finita e sia \(\varphi \) una misura relativa. Allora \(\varphi =
     \varphi^{+} - \varphi^{-}\) e definiamo la \textbf{derivata di Radon-Nikodym}
@@ -3866,7 +3868,7 @@ F{(x)}\) e se \(F\) è limitata allora i due limiti esistono e sono finiti.
 In tutti gli spazi vettoriali considerati in questa sezione, il campo su cui
 opereremo sarà \(\mathbb{K} = \mathbb{R}\) o \(\mathbb{C}\).
 \subsection{Spazi normati}
-\begin{definition}{Spazio normato}
+\begin{definition}[Spazio normato]
     Uno spazio normato è uno spazio vettoriale \(V\) su un campo \(\mathbb{K}\)
     dotato di una norma \(\| \cdot \| : V \to \mathbb{R}_{\ge 0} \) tale che
     \begin{enumerate}[label = \arabic*.]
@@ -4114,7 +4116,7 @@ al sottospazio.
     uniformemente in \([0, 1]\), ma il limite \(e^{x}\) non è un polinomio.
 \end{example}
 
-\begin{definition}{Norme equivalenti}
+\begin{definition}[Norme equivalenti]
     Date \(\|\cdot \|_a\) e \(\|\cdot \|_b\) norme in \(V\), queste si dicono
     \textbf{equivalenti} se esistono due costanti \(C_{1}, C_{2} >0\) tali che
     \[
@@ -4223,7 +4225,7 @@ e quindi, per definizione di \(\| \cdot \|_1\), abbiamo \(N\) successioni \({\{\
     \]
 \end{example}
 
-\begin{definition}{Spazio di Banach}
+\begin{definition}[Spazio di Banach]
     Uno spazio normato \({(V, \|\cdot \|)}\) si dice \textbf{di Banach} se è
     completo rispetto alla metrica indotta dalla norma
 \end{definition}
@@ -4368,7 +4370,7 @@ e quindi, per definizione di \(\| \cdot \|_1\), abbiamo \(N\) successioni \({\{\
 
 \newpage
 \subsection{Spazi \(L^{p}\) }
-\begin{definition}{Spazio \(L^{p}\)}
+\begin{definition}[Spazio \(L^p\)]
     Sia \((\Omega, \mathcal{M}, \mu)\) uno spazio di misura. Per \(p \in [1,
     +\infty)\) definiamo lo spazio \(L^{p}(\Omega, \mathcal{M}, \mu)\) come lo
     spazio delle funzioni misurabili \(f : \Omega \to \mathbb{K}\) tali che
@@ -4486,7 +4488,8 @@ equivalenti \(\mu\)-q.o.
     dove l'ultima uguaglianza è per la monotonia del logaritmo.
 \end{proof}
 
-\begin{definition}[label=def:coniugati]{Esponenti coniugati}
+\begin{definition}[Esponenti coniugati]
+\label{def:coniugati}
     Se \(1 \le p, p' \le \infty\) verificano \(\frac{1}{p} + \frac{1}{p'} = 1\)
     anche in senso generalizzato, ossia se \(p = 1\) e \(p' = +\infty\) o \(p =
     \infty \) e \(p' = 1\), allora si dicono \textbf{esponenti coniugati}.
@@ -4873,7 +4876,7 @@ anche il valore \(1\).
 \subsection{Spazi di Hilbert}
 Per questo capitolo userò la notazione \(\mathbb{K} = \mathbb{R}\) o
 \(\mathbb{C}\) quando non è importante specificare il campo su cui lavoriamo.
-\begin{definition}{Spazio prehilbertiano}
+\begin{definition}[Spazio prehilbertiano]
     Uno spazio vettoriale \(H\) su \(\mathbb{K}\) dotato di un
     prodotto scalare \(\langle \cdot, \cdot \rangle\) si chiama \textbf{spazio
     prehilbertiano}. In particolare l'applicazione
@@ -4967,7 +4970,7 @@ Per questo capitolo userò la notazione \(\mathbb{K} = \mathbb{R}\) o
 \end{proof}
 
 
-\begin{definition}{Spazio di Hilbert}
+\begin{definition}[Spazio di Hilbert]
     Uno spazio prehilbertiano che sia completo rispetto alla norma indotta dal
     prodotto scalare si chiama \textbf{spazio di Hilbert}.
 \end{definition}
@@ -5055,7 +5058,7 @@ Per questo capitolo userò la notazione \(\mathbb{K} = \mathbb{R}\) o
     \]
 \end{example}
 
-\begin{definition}{Ortogonalità}
+\begin{definition}[Ortogonalità]
     Sia \({(H, \langle \cdot ,\cdot  \rangle)}\) uno spazio prehilbertiano. Due
     vettori \(x, y \in H\) si dicono \textbf{ortogonali} se \(\langle x, y \rangle = 0\).
 \end{definition}
@@ -5284,7 +5287,7 @@ h_{\overline{n}} \|_{\infty}^{p-1} \|v - h_{\overline{n}} \|_1 \right)}^{\frac{1
 \end{proof}
 
 \subsection{Operatori lineari e continui tra spazi normati}
-\begin{definition}{Operatore lineare}
+\begin{definition}[Operatore lineare]
     Siano \(X, Y\) spazi normati. Sia \(T : X \to Y\) un operatore. Allora è
     lineare se 
     \[
@@ -5316,11 +5319,11 @@ lineare, infatti
     \alpha T{(f)} + \beta T{(g)}
 \]
 
-\begin{definition}{Operatore continuo}
+\begin{definition}[Operatore continuo]
     Siano \(X, Y\) spazi normati. Sia \(T : X \to Y\) un operatore. Allora è
     continuo se la funzione individuata da \(T\) è continua da \(X\) a \(Y\) 
 \end{definition}
-\begin{definition}{Operatore limitato}
+\begin{definition}[Operatore limitato]
     Un operatore \(T : X \to Y\) si dice \textbf{limitato} se esista una
     costante \(C > 0\) tale che
     \[
@@ -5628,7 +5631,7 @@ oppure \(X^{*}\)
     \cong L^{\infty}{(\Omega)}\).
 \end{example}
 \subsection{Spazi di successioni \(\ell^{p}\) }
-\begin{definition}{Spazi \(\ell^{p}\)}
+\begin{definition}[Spazi \(\ell^p\)]
     Gli spazi di successioni \(\ell^{p}\) sono definiti come
     \begin{align*}
         \ell^{p} &= \left\{x = {(x_{n})}_{n \in \mathbb{N}} : \sum_{n=1}^{\infty}
@@ -5809,7 +5812,7 @@ e inoltre
   \|xy\|_1 = \sum_{n=1}^{\infty} x_{n}y_{n} \le \sum_{n=1}^{\infty} |x_{n}y_{n}| \le
   \|x\|_p \|y\|_{p'} 
 \]
-\begin{definition}{Spazio normato separabile}\label{def:separabile}
+\begin{definition}[Spazio normato separabile]\label{def:separabile}
     Uno spazio normato \(X\) si dice \textbf{separabile} se esiste un sottoinsieme
     denso e numerabile di \(X\)
 \end{definition}
@@ -5953,7 +5956,7 @@ Il precedente significa che \({(c_{0})}' \cong \ell^{1}\)
 \subsection{Funzioni a variazione limitata e assolutamente continue}
 Ci interessiamo ora a funzioni \(f : [a, b] \to \mathbb{R}\). L'obiettivo di questa sottosezione è 
 descrivere una classe di funzioni su cui valga un'estensione del teorema fondamentale del calcolo integrale.
-\begin{definition}{funzione a variazione limitata}
+\begin{definition}[funzione a variazione limitata]
     Si consideri funzione \(f: [a,b] \to \mathbb{R}\) e una suddivisione
     \[
       S = \{a = x_{0} < x_{1} < x_{2} < \dots < x_{n-1} < x_{n} = b\} 
@@ -6146,7 +6149,7 @@ continua e non costante) viene detta \textbf{singolare}.
 
 La classe di funzioni che invece soddisfa le proprietà volute è quella delle
 funzioni \emph{assolutamente continue}.  
-\begin{definition}{Assoluta continuità}
+\begin{definition}[Assoluta continuità]
     \(f : [a, b] \to \mathbb{R}\)  si dice \textbf{assolutamente continua} se per ogni
     \(\varepsilon > 0\) esiste \(\delta > 0\) tale che per ogni sequenza finita
     di intervalli \({(a_{i}, b_{i})} \subseteq [a, b] \) per \(i = 1,\dots, n\)
@@ -6460,7 +6463,7 @@ Nel caso in cui \(z \in K\) la proiezione manda banalmente \(z \mapsto z \quad
     \end{equation}
 \end{theorem}
 
-\begin{definition}{Proiezione}
+\begin{definition}[Proiezione]
     Il punto \(u\) del teorema~\ref{thm:proiezioni} è detto proiezione di \(f\)
     su \(K\) e si indica con \(P_{K}{(f)}\)
 \end{definition}
@@ -6993,7 +6996,7 @@ Il seguente teorema ci dice che vale anche il viceversa.
 \end{proof}
 
 \subsection{Serie di Fourier}
-\begin{definition}{Sistema ortonormale}
+\begin{definition}[Sistema ortonormale]
     Sia \(H\) uno spazio prehilbertiano. Una successione \(\{e_{n}\} \) di
     elementi di \(H\) si dice sistema \textbf{ortonormale} (o successione
     ortonormale) se \(\Span{e_{i}, e_{j}} = \delta_{ij}\) per ogni \(i, j \in
@@ -7014,7 +7017,7 @@ unitaria e sono ortogonali tra loro.
     \(\dim H\) formano una base di\(H\). Nel caso in cui \(H\) ha
     dimensione infinita si possono invece prendere successioni ortonormali.
 \end{remark}
-\begin{definition}{Serie di Fourier}\label{def:fourier}
+\begin{definition}[Serie di Fourier]\label{def:fourier}
     Dato un sistema ortonormale \(\{e_{n}\} \subseteq H \) allora per ogni \(x
     \in H\) si possono considerare i valori \[\Span{x, e_{k}}, \quad k \in
     \mathbb{N}\quad \text{\textbf{coefficienti di Fourier}}\] e la serie
@@ -7246,7 +7249,7 @@ Siccome, a \(x\) fissato, il prodotto induce un operatore lineare, ottengo la te
     prodotto scalare si ha il risultato.
 \end{remark}
 
-\begin{definition}{Sistema ortonormale completo}
+\begin{definition}[Sistema ortonormale completo]
     Un sistema ortonormale \(\{e_{k}\} \subseteq H \) si dice \textbf{completo}
     se vale la condizione \textit{(iv)} del teorema~\ref{thm:conv_Fourier}, cioè
     se l'unico elemento \(x \in H\) ortogonale a tutti gli \(e_{k}\) è
@@ -7360,7 +7363,7 @@ formano una base ortonormale di \(L^2{(-\pi, \pi)}\).
     \mathbb{Z}\) che formano una base ortonormale.
 \end{remark}
 
-\begin{definition}{Polinomio trigonometrico}\label{def:polinomio_trig}
+\begin{definition}[Polinomio trigonometrico]\label{def:polinomio_trig}
 Una funzione del tipo
 \[
     p{(t)} = a_{0} + \sum_{k=1}^{n} {(a_{k} \cos{(kt)} + b_{k} \sin{(kt)})} \quad

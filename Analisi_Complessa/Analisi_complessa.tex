@@ -8,11 +8,13 @@
 
 \maketitle
 
+\tableofcontents
+
 \section{Convergenza puntuale e uniforme}
 Sia \(E\) un'insieme (non vuoto) e \(\{f_{n}\} \) una successione di funzioni
 \(E \to \mathbb{R}\) (o \(E \to \mathbb{R}^{n}\) o \(E \to \mathbb{C}\)). Sia
 \(f: E \to \mathbb{R}\).
-\begin{definition}{}
+\begin{definition}
     Diciamo che \(\{f_{n}\} \) converge \textbf{puntualmente} ad \(f\) se 
     \[
         \lim_{n \to \infty} f_{n}(x) = f(x) \quad \forall x \in E
@@ -58,7 +60,7 @@ Ma è sempre possibile, per qualsiasi \(\frac{1}{n^2} + \varepsilon\) è
 possibile trovare un \(x\) tale che sia maggiore, quindi non è possibile non
 esprimere \(n_\varepsilon\) anche in funzione di \(x\).
 
-\begin{definition}{}
+\begin{definition}
     Sia \(f\), \(f_{n} : E \to \mathbb{R}\). Diciamo che \(f_{n} \to f\)
     uniformemente in \(E\) se:
     \[
@@ -169,7 +171,7 @@ per \(x \neq 0\) pure, infatti
 \end{example}
 Sia \(E\) un insieme non vuoto e sia \(\mathcal{B}(E)\) l'insieme delle funzioni
 reali e limitate su \(E\).
-\begin{definition}{Norma dell'estremo superiore}
+\begin{definition}[Norma dell'estremo superiore]
     Sia \(f : E \to \mathbb{R}^{n}\) una funzione. Allora
     \[
         \|f \|_{\infty} := \sup_{x \in E} |f(x)| 
@@ -272,7 +274,7 @@ Sia quindi \(E\) un insieme \(f_{n} : E \to \mathbb{R}\) (oppure
     \sum_{n=1}^{\infty} f_{n}(x)\quad x \in E
 \]
 che è una serie di funzioni.
-\begin{definition}{}
+\begin{definition}
     Diciamo che la serie \(\sum_{n=1}^{\infty} f_{n}(x)\) converge puntualmente
     in \(E\) se la successione delle somme parziali converge puntualmente in
     \(E\), ossia se 
@@ -342,7 +344,7 @@ uniformemente in \(E\), usando \((1)\), infatti abbiamo
 dove nell'ultima diseguaglianza si è utilizzato il criterio di Cauchy per le
 serie numeriche.
 \end{example}
-\begin{definition}{Convergenza totale}
+\begin{definition}[Convergenza totale]
     Si dice che la serie \(\sum_{n=1}^{\infty} f_{n}(x)\) converge
     \textbf{totalmente} in \(E\) se esiste \(\{a_{n}\} \) in \(\mathbb{R}\) tale
     che 
@@ -625,7 +627,7 @@ Sappiamo che
 \]
 è il prodtto di polinomi. Quindi formalmente, se \(z = 1\) e \(N, M \to \infty\) otteniamo
 
-\begin{definition}{Serie prodotto alla Cauchy}
+\begin{definition}[Serie prodotto alla Cauchy]
 \[
     \left( \sum_{n=0}^{\infty} a_{n}  \right) \left( \sum_{n=0}^{\infty} b_{n}
     \right) := \sum_{n=0}^{\infty} \sum_{k=0}^{n} a_{k} b_{n-k}  
@@ -707,7 +709,7 @@ bordo del cerchio varia da caso a caso.
 \section{Analisi complessa}
 
 \subsection{Funzioni analitiche su \(\mathbb{R}\) }
-\begin{definition}{Funzione analitica}
+\begin{definition}[Funzione analitica]
     Sia \(I\) un intervallo aperto. Diciamo che una funzione \(f: I \to
     \mathbb{R}\) è analitica se per ogni \(x_{0} \in I\) esiste \(\delta > 0\)
     tale che su \((x_{0} - \delta, x_{0} + \delta)\) la funzione sia esprimibile
@@ -823,7 +825,7 @@ Non è vero che ogni funzione \(C^{\infty}\) sia sviluppabile in serie di Taylor
 
 \subsection{\(\mathbb{C}\)-differenziabilità}
 Sia \(\Omega \subseteq \mathbb{C}\) aperto, \(f : \Omega \to \mathbb{C}\) 
-\begin{definition}{\(\mathbb{C}-\)differenziabilità}
+\begin{definition}[\(\mathbb{C}\)-differenziabilità]
     Sia \(a \in \Omega\). Diciamo che \(f\)  è \(\mathbb{C}-\)differenziabile in
     \(z=a\) se esiste
     \begin{equation}
@@ -956,7 +958,7 @@ spoiler ma dimostreremo che \(\mathbb{C}\)-differenziabile implica analitica,
 quindi \(\mathbb{C}-\)differenziabilità, \(C^{\infty}\), analitica saranno
 nozioni equivalenti e gli assegneremo la dicitura di \textbf{olomorfe}.
 
-\begin{definition}{Derivata complessa}
+\begin{definition}[Derivata complessa]
     \begin{align*}
         \frac{\partial f}{\partial z} &= \frac{1}{2} {\left( \frac{\partial
         f}{\partial x} - i \frac{\partial f}{\partial y} \right)} \\
@@ -1049,7 +1051,7 @@ w^{n-1}\right)}
 \end{proof}
 
 \subsection{Integrazione su Curve}
-\begin{definition}{Curva in \(\mathbb{C}\) }
+\begin{definition}[Curva in \(\mathbb C\)]
     Diremo \textbf{curva} in \(\mathbb{C}\) ogni funzione continua \(\gamma : [a,b] \to
     \mathbb{C}\). Si dice \textbf{chiusa} se \(\gamma(a) = \gamma(b)\). Il
     \textbf{sostegno} di \(\gamma\) è l'immagine di \(\gamma\), cioè
@@ -1089,7 +1091,7 @@ a tratti, biettiva, con \(\varphi'>0\), tale che
 Per convenzione, se non espressamente specificato diversamente considereremo
 curve \(C^{1}\) a tratti.
 
-\begin{definition}{Integrale su curva}
+\begin{definition}[Integrale su curva]
     Sia \(\gamma : [a,b] \to \mathbb{C}\) una curva \(C^{1}\) a tratti e sia
     \(f\) continua a valori in \(\mathbb{C}\) definita (almeno) sul sostegno di
     \(\gamma\). Allora si definisce
@@ -1222,7 +1224,7 @@ purché il contesto chiarisca il tipo di parametrizzazione. Ad esempio
     \]
 \end{remark}
 
-\begin{definition}{Primitiva}
+\begin{definition}[Primitiva]
     Sia \(\Omega \subseteq \mathbb{C}\) aperto e \(f : \Omega \to \mathbb{C}\)
     continua. Una funzione \(F : \Omega \to \mathbb{C}\) si dice \textbf{primitiva} di
     \(f\) se \(F\) è \(\mathbb{C}-\)differenziabile e \(F'(z) = f(z)\) per ogni
@@ -2074,7 +2076,7 @@ che è lo sviluppo di Laurent di \(f\) in \(\Omega_{1}\)
     Che è lo sviluppo di Laurent di \(f\)  in \(\Omega_{2}\) 
 \end{example}
 
-\begin{definition}{Sviluppo di Laurent relativo a un punto}
+\begin{definition}[Sviluppo di Laurent relativo a un punto]
     Sia \(f \in \mathcal{H}{(D_{r}^{*} {(a)})}\) con \(D_{r}^{*} {(a)} =
     D_r{(a)} \sminus \{a\} \). Lo sviluppo di cui al teorema precedente è detto
     \textbf{sviluppo in serie di Laurent} relativo al punto \(z=a\) (non dipende
@@ -2155,7 +2157,7 @@ convergenza \(R \ge  \frac{1}{r_{1}}\) e definisce pertanto una funzione
     \right)} \text{ è olomorfa in \(\mathbb{C} - \{a\}\)} 
 \]
 Che motiva la seguente definizione
-\begin{definition}{Parte principale}
+\begin{definition}[Parte principale]
     La funzione olomorfa in \(\mathbb{C} \sminus  \{a\} \) 
 \[
     \sum_{m=-1}^{-\infty} c_{m} {(z-a)}^{m} 
@@ -2183,13 +2185,13 @@ Sappiamo che tale serie converge assolutamente in modo uniforme sui compatti di
 \begin{proof}[Unicità]
     % TODO
 \end{proof}
-\begin{definition}{Residuo}
+\begin{definition}[Residuo]
     Sia \(f \in \mathcal{H}{(D^{*}_r{(a)})}\) e sia \(f{(z)} =
     \sum_{m=-\infty}^{\infty} c_{m} {(z-a)}^{m}\) lo sviluppo di Laurent. Il
     valore \(c_{-1} \) è detto \textbf{residuo} di \(f\)  in \(z=a\) 
 \end{definition}
 
-\begin{definition}{Funzioni meromorfe}
+\begin{definition}[Funzioni meromorfe]
     Sia \(\Omega \subseteq  \mathbb{C}\) aperto ed \(E \subseteq  \Omega\) un
     insieme chiuso e discreto (tutti i punti di \(E\) sono isolati).
 
@@ -2311,7 +2313,7 @@ e quindi per \(m < 0\) si ha
         per } \rho \to 0 \implies c_{m} = 0
 \end{align*}
 \end{proof}
-\begin{definition}{Singolarità eliminabile}
+\begin{definition}[Singolarità eliminabile]
     Se \(f \in \mathcal{H}{(D^{*}_r{(a)})}\) è estendibile in modo olomorfo a
     tutto \(D_r{(a)}\), si dice che \(z=a\) è una singolarità
     \textbf{eliminabile}
@@ -2358,7 +2360,7 @@ e quindi per \(m < 0\) si ha
     \(f\) è meromorfa.
 
 \end{proof}
-\begin{definition}{Polo}\label{def:polo}
+\begin{definition}[Polo]\label{def:polo}
     Sia \(f \in \mathcal{H}{(D^*_r{(a)})}\) Si dice che \(z = a\) è un
     \textbf{polo} se 
 \[
@@ -2368,7 +2370,7 @@ e quindi per \(m < 0\) si ha
 In tal caso \(f{(z)}\) è del tipo~\eqref{eq:meromorfa2}. Se \(c_{-N} \neq 0\) si
 dice che \(z=a\) è un polo di \textbf{ordine} \(N\)
 
-\begin{definition}{Singolarità essenziale}\label{def:sing-essenziale}
+\begin{definition}[Singolarità essenziale]\label{def:sing-essenziale}
     Se \(f \in \mathcal{H}{(D^{*}_r{(a)})}\) ha sviluppo di Laurent con infiniti
     termini \(c_m\) con \(m < 0\) si dice che \(z=a\) è una singolarità
     \textbf{essenziale}
@@ -2540,7 +2542,7 @@ funzione esponenziale \(z |> e^{z}\) è suriettiva ma non iniettiva. Infatti dat
 quindi abbiamo \(\mathrm{exp}^{-1}{(r e^{i\theta})} = \{\log r + i{(\theta +
 2k\pi)} : k \in \mathbb{Z}\}\). Evidentemente quindi risulta difficile definire
 una funzione logaritmo. Possiamo dunque limitarne il dominio
-\begin{definition}{Logaritmo principale}
+\begin{definition}[Logaritmo principale]
     Diciamo \textbf{logaritmo principale} la funzione \(\log : \mathbb{C}
     \sminus (-\infty, 0] \to \mathbb{C}\) definita da
     \[
@@ -2638,7 +2640,7 @@ Idea (illuminazione) (intuito): \(g = \log f\) allora \(g' = f' / f\)
       \forall  z \in \Omega, \quad g_{1}{(z)} - g_{2}{(z)} = 2k\pi i 
     \]
 \end{proof}
-\begin{definition}{Ramo del logaritmo}
+\begin{definition}[Ramo del logaritmo]
     Ogni \(g\) di cui al teorema precedente è detta \textbf{determinazione} o
     \textbf{ramo} di \(\log f\) in \(\Omega\) 
 \end{definition}
@@ -2693,7 +2695,7 @@ e quindi
 \[
     \frac{1}{2\pi i} \int_{\gamma} \frac{1}{z-a} \,dz = k \in \mathbb{Z}
 \]
-\begin{definition}{Indice di avvolgimento}
+\begin{definition}[Indice di avvolgimento]
     Siano \(\gamma\) e \(a\) come sopra. Il valore (intero) 
     \[
       n{(\gamma; a)} = \frac{1}{2\pi i} \int _{\gamma} \frac{1}{z-a} \,dz
@@ -2853,7 +2855,7 @@ finito
 di \(\pm \infty\) e con \(f : \mathbb{R} \sminus {(-\infty, \infty)} \to
 \mathbb{R}\))
 
-\begin{definition}{Valor principale}
+\begin{definition}[Valor principale]
     Si dice che \(f\) è \textbf{integrabile in valor principale} su \([a,b]\) se
     esiste finito
     \[
@@ -2980,8 +2982,8 @@ Allora \(f\) è integrabile (in valor principale) su \(R\) e
     necessariamente che \(E = \Omega\) 
 \end{proof}
 \begin{corollary}\label{cor:zero-isolato}
-    Sia \(0 \not\equiv f \in \mathcal{H}{(\Omega)} con {(\Omega)} connesso. Allora l'insieme
-    degli zeri di {(f)} è un insieme chiuso in {(\Omega)} e discreto\) 
+    Sia \(0 \not\equiv f \in \mathcal{H}(\Omega)\) con \(\Omega\) connesso. Allora l'insieme
+    degli zeri di \(f\) è un insieme chiuso in \(\Omega\) è discreto.
 \end{corollary}
 \begin{proof}
     Sia \(f{(a)} = 0\): mostriamo che \(z = a\) è uno zero isolato. Sia
@@ -3101,7 +3103,7 @@ per rotazione dell'angolo \(\theta\) (e dilatazione di fattore \(r\)). Quindi se
 secondo l'angolo \(\alpha\), anche le immagini si tagliano in \(f{(a)}\) con
 secondo \(\alpha\). Tale proprietà geometrica è chiamata \textbf{conformità}.
 
-\begin{definition}{Applicazione conforme}
+\begin{definition}[Applicazione conforme]
     Un'applicazione \(f : \Omega \to G \) con \(\Omega, G \subseteq \mathbb{C}
     \) aperti che sia olomorfa e biettiva (quindi con anche \(f^{-1}\)
     olomorfa) è detta applicazione conforme (biolomorfismo)
@@ -3209,7 +3211,7 @@ continua \(\omega: \Omega \to (\mathbb{R}^{2})'\). Se \(\gamma\) è una curva
     \int_{\gamma}\omega \overset{\text{def}}{=} \int_{a}^{b} A{(x(t), y(t))}
     x'{(t)} + B{(x(t), y(t))} y'{(t)} dt \quad \gamma{(t)} = (x(t), y(t))
 \]
-\begin{definition}{Forma esatta}
+\begin{definition}[Forma esatta]
     La forma differenziale \(\omega\) si dice \textbf{esatta} se esiste \(F \in
     C^{1}(\Omega)\) tale che \(\omega = dF\), e \(F\) è detta \emph{primitiva}
     di \(\omega\) 
@@ -3222,7 +3224,7 @@ B\) risulta
     \frac{\partial A}{\partial y} = \frac{\partial B}{\partial x}
 \end{equation}
 
-\begin{definition}{Forma chiusa}
+\begin{definition}[Forma chiusa]
     Se \(\omega\) è una forma differenziale \(C^{1}\) e
     soddisfa~\eqref{eq:forma-chiusa} allora si dice \textbf{chiusa} 
 \end{definition}
@@ -3276,3 +3278,8 @@ B\) risulta
 \end{proof}
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: t
+%%% End:
